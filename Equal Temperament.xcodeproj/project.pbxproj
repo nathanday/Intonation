@@ -1,0 +1,424 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D89543631996345200A091A4 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89543621996345200A091A4 /* main.swift */; };
+		D89543651996345200A091A4 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89543641996345200A091A4 /* Document.swift */; };
+		D89543681996345200A091A4 /* Document.xib in Resources */ = {isa = PBXBuildFile; fileRef = D89543661996345200A091A4 /* Document.xib */; };
+		D895436A1996345200A091A4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D89543691996345200A091A4 /* Images.xcassets */; };
+		D895436D1996345200A091A4 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = D895436B1996345200A091A4 /* MainMenu.xib */; };
+		D89543791996345200A091A4 /* Equal_TemperamentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89543781996345200A091A4 /* Equal_TemperamentTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D89543731996345200A091A4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D89543551996345200A091A4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D895435C1996345200A091A4;
+			remoteInfo = "Equal Temperament";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		D895435D1996345200A091A4 /* Equal Temperament.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Equal Temperament.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D89543611996345200A091A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D89543621996345200A091A4 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		D89543641996345200A091A4 /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
+		D89543671996345200A091A4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Document.xib; sourceTree = "<group>"; };
+		D89543691996345200A091A4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		D895436C1996345200A091A4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		D89543721996345200A091A4 /* Equal TemperamentTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Equal TemperamentTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D89543771996345200A091A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D89543781996345200A091A4 /* Equal_TemperamentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Equal_TemperamentTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D895435A1996345200A091A4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D895436F1996345200A091A4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D89543541996345200A091A4 = {
+			isa = PBXGroup;
+			children = (
+				D895435F1996345200A091A4 /* Equal Temperament */,
+				D89543751996345200A091A4 /* Equal TemperamentTests */,
+				D895435E1996345200A091A4 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D895435E1996345200A091A4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D895435D1996345200A091A4 /* Equal Temperament.app */,
+				D89543721996345200A091A4 /* Equal TemperamentTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D895435F1996345200A091A4 /* Equal Temperament */ = {
+			isa = PBXGroup;
+			children = (
+				D89543641996345200A091A4 /* Document.swift */,
+				D89543661996345200A091A4 /* Document.xib */,
+				D89543691996345200A091A4 /* Images.xcassets */,
+				D895436B1996345200A091A4 /* MainMenu.xib */,
+				D89543601996345200A091A4 /* Supporting Files */,
+			);
+			path = "Equal Temperament";
+			sourceTree = "<group>";
+		};
+		D89543601996345200A091A4 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D89543611996345200A091A4 /* Info.plist */,
+				D89543621996345200A091A4 /* main.swift */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D89543751996345200A091A4 /* Equal TemperamentTests */ = {
+			isa = PBXGroup;
+			children = (
+				D89543781996345200A091A4 /* Equal_TemperamentTests.swift */,
+				D89543761996345200A091A4 /* Supporting Files */,
+			);
+			path = "Equal TemperamentTests";
+			sourceTree = "<group>";
+		};
+		D89543761996345200A091A4 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D89543771996345200A091A4 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D895435C1996345200A091A4 /* Equal Temperament */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D895437C1996345200A091A4 /* Build configuration list for PBXNativeTarget "Equal Temperament" */;
+			buildPhases = (
+				D89543591996345200A091A4 /* Sources */,
+				D895435A1996345200A091A4 /* Frameworks */,
+				D895435B1996345200A091A4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Equal Temperament";
+			productName = "Equal Temperament";
+			productReference = D895435D1996345200A091A4 /* Equal Temperament.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D89543711996345200A091A4 /* Equal TemperamentTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D895437F1996345200A091A4 /* Build configuration list for PBXNativeTarget "Equal TemperamentTests" */;
+			buildPhases = (
+				D895436E1996345200A091A4 /* Sources */,
+				D895436F1996345200A091A4 /* Frameworks */,
+				D89543701996345200A091A4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D89543741996345200A091A4 /* PBXTargetDependency */,
+			);
+			name = "Equal TemperamentTests";
+			productName = "Equal TemperamentTests";
+			productReference = D89543721996345200A091A4 /* Equal TemperamentTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D89543551996345200A091A4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0600;
+				ORGANIZATIONNAME = "Nathan Day";
+				TargetAttributes = {
+					D895435C1996345200A091A4 = {
+						CreatedOnToolsVersion = 6.0;
+					};
+					D89543711996345200A091A4 = {
+						CreatedOnToolsVersion = 6.0;
+						TestTargetID = D895435C1996345200A091A4;
+					};
+				};
+			};
+			buildConfigurationList = D89543581996345200A091A4 /* Build configuration list for PBXProject "Equal Temperament" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D89543541996345200A091A4;
+			productRefGroup = D895435E1996345200A091A4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D895435C1996345200A091A4 /* Equal Temperament */,
+				D89543711996345200A091A4 /* Equal TemperamentTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D895435B1996345200A091A4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D89543681996345200A091A4 /* Document.xib in Resources */,
+				D895436A1996345200A091A4 /* Images.xcassets in Resources */,
+				D895436D1996345200A091A4 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D89543701996345200A091A4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D89543591996345200A091A4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D89543651996345200A091A4 /* Document.swift in Sources */,
+				D89543631996345200A091A4 /* main.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D895436E1996345200A091A4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D89543791996345200A091A4 /* Equal_TemperamentTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D89543741996345200A091A4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D895435C1996345200A091A4 /* Equal Temperament */;
+			targetProxy = D89543731996345200A091A4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		D89543661996345200A091A4 /* Document.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D89543671996345200A091A4 /* Base */,
+			);
+			name = Document.xib;
+			sourceTree = "<group>";
+		};
+		D895436B1996345200A091A4 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D895436C1996345200A091A4 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D895437A1996345200A091A4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		D895437B1996345200A091A4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		D895437D1996345200A091A4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "Equal Temperament/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		D895437E1996345200A091A4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "Equal Temperament/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		D89543801996345200A091A4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Equal TemperamentTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Equal Temperament.app/Contents/MacOS/Equal Temperament";
+			};
+			name = Debug;
+		};
+		D89543811996345200A091A4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Equal TemperamentTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Equal Temperament.app/Contents/MacOS/Equal Temperament";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D89543581996345200A091A4 /* Build configuration list for PBXProject "Equal Temperament" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D895437A1996345200A091A4 /* Debug */,
+				D895437B1996345200A091A4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D895437C1996345200A091A4 /* Build configuration list for PBXNativeTarget "Equal Temperament" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D895437D1996345200A091A4 /* Debug */,
+				D895437E1996345200A091A4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		D895437F1996345200A091A4 /* Build configuration list for PBXNativeTarget "Equal TemperamentTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D89543801996345200A091A4 /* Debug */,
+				D89543811996345200A091A4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D89543551996345200A091A4 /* Project object */;
+}
