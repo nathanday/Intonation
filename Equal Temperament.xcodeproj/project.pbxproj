@@ -7,12 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D8832F8619A0C86B0095B26F /* IntervalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8832F8519A0C86B0095B26F /* IntervalView.swift */; };
 		D89543631996345200A091A4 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89543621996345200A091A4 /* main.swift */; };
-		D89543651996345200A091A4 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89543641996345200A091A4 /* Document.swift */; };
-		D89543681996345200A091A4 /* Document.xib in Resources */ = {isa = PBXBuildFile; fileRef = D89543661996345200A091A4 /* Document.xib */; };
 		D895436A1996345200A091A4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D89543691996345200A091A4 /* Images.xcassets */; };
 		D895436D1996345200A091A4 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = D895436B1996345200A091A4 /* MainMenu.xib */; };
 		D89543791996345200A091A4 /* Equal_TemperamentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89543781996345200A091A4 /* Equal_TemperamentTests.swift */; };
+		D89543861996347F00A091A4 /* EqualTemperamentEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89543831996347F00A091A4 /* EqualTemperamentEntry.swift */; };
+		D89543871996347F00A091A4 /* Rational.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89543841996347F00A091A4 /* Rational.swift */; };
+		D895438A1996354100A091A4 /* Document.xib in Resources */ = {isa = PBXBuildFile; fileRef = D89543881996354100A091A4 /* Document.xib */; };
+		D895438B1996363700A091A4 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89543821996347F00A091A4 /* Document.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,16 +29,19 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D8832F8519A0C86B0095B26F /* IntervalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntervalView.swift; sourceTree = "<group>"; };
 		D895435D1996345200A091A4 /* Equal Temperament.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Equal Temperament.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D89543611996345200A091A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D89543621996345200A091A4 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		D89543641996345200A091A4 /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
-		D89543671996345200A091A4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Document.xib; sourceTree = "<group>"; };
 		D89543691996345200A091A4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D895436C1996345200A091A4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		D89543721996345200A091A4 /* Equal TemperamentTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Equal TemperamentTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D89543771996345200A091A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D89543781996345200A091A4 /* Equal_TemperamentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Equal_TemperamentTests.swift; sourceTree = "<group>"; };
+		D89543821996347F00A091A4 /* Document.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
+		D89543831996347F00A091A4 /* EqualTemperamentEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EqualTemperamentEntry.swift; sourceTree = "<group>"; };
+		D89543841996347F00A091A4 /* Rational.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rational.swift; sourceTree = "<group>"; };
+		D89543891996354100A091A4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Document.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,10 +83,13 @@
 		D895435F1996345200A091A4 /* Equal Temperament */ = {
 			isa = PBXGroup;
 			children = (
-				D89543641996345200A091A4 /* Document.swift */,
-				D89543661996345200A091A4 /* Document.xib */,
+				D89543821996347F00A091A4 /* Document.swift */,
+				D89543831996347F00A091A4 /* EqualTemperamentEntry.swift */,
+				D89543841996347F00A091A4 /* Rational.swift */,
+				D8832F8519A0C86B0095B26F /* IntervalView.swift */,
 				D89543691996345200A091A4 /* Images.xcassets */,
 				D895436B1996345200A091A4 /* MainMenu.xib */,
+				D89543881996354100A091A4 /* Document.xib */,
 				D89543601996345200A091A4 /* Supporting Files */,
 			);
 			path = "Equal Temperament";
@@ -192,9 +201,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D89543681996345200A091A4 /* Document.xib in Resources */,
 				D895436A1996345200A091A4 /* Images.xcassets in Resources */,
 				D895436D1996345200A091A4 /* MainMenu.xib in Resources */,
+				D895438A1996354100A091A4 /* Document.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,7 +221,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D89543651996345200A091A4 /* Document.swift in Sources */,
+				D89543871996347F00A091A4 /* Rational.swift in Sources */,
+				D8832F8619A0C86B0095B26F /* IntervalView.swift in Sources */,
+				D89543861996347F00A091A4 /* EqualTemperamentEntry.swift in Sources */,
+				D895438B1996363700A091A4 /* Document.swift in Sources */,
 				D89543631996345200A091A4 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -236,20 +248,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		D89543661996345200A091A4 /* Document.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D89543671996345200A091A4 /* Base */,
-			);
-			name = Document.xib;
-			sourceTree = "<group>";
-		};
 		D895436B1996345200A091A4 /* MainMenu.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				D895436C1996345200A091A4 /* Base */,
 			);
 			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		D89543881996354100A091A4 /* Document.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D89543891996354100A091A4 /* Base */,
+			);
+			name = Document.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -409,6 +421,7 @@
 				D895437E1996345200A091A4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D895437F1996345200A091A4 /* Build configuration list for PBXNativeTarget "Equal TemperamentTests" */ = {
 			isa = XCConfigurationList;
@@ -417,6 +430,7 @@
 				D89543811996345200A091A4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
