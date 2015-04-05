@@ -8,18 +8,16 @@
 
 import Foundation
 
-struct Rational : ArrayLiteralConvertible, IntegerLiteralConvertible
+struct Rational : ArrayLiteralConvertible, IntegerLiteralConvertible, Printable, DebugPrintable, Hashable
 {
-	let	numerator:		Int64;
-	let	denominator:	Int64;
+	let	numerator:		Int;
+	let	denominator:	Int;
 	var toDouble:		Double { return Double(numerator)/Double(denominator); }
 
-    static func convertFromArrayLiteral( anElements: Int64...) -> Rational
-    {
-        var     theNumerator : Int64! = nil;
-        var     theDenominator : Int64! = nil;
-        for theElement in anElements
-        {
+    static func convertFromArrayLiteral( anElements: Int...) -> Rational {
+        var     theNumerator : Int! = nil;
+        var     theDenominator : Int! = nil;
+        for theElement in anElements {
             if theNumerator == nil { theNumerator = theElement; }
             else if theDenominator == nil { theDenominator = theElement; }
             else { NSException(name: NSRangeException, reason: "Too many arguments", userInfo: nil).raise(); }
@@ -28,40 +26,39 @@ struct Rational : ArrayLiteralConvertible, IntegerLiteralConvertible
         return Rational( theNumerator, theDenominator );
     }
 
-    static func convertFromIntegerLiteral(aValue: IntegerLiteralType) -> Rational { return Rational( Int64(aValue), 1 ); }
+    static func convertFromIntegerLiteral(aValue: IntegerLiteralType) -> Rational { return Rational( Int(aValue), 1 ); }
 
-    init(var _ aNumerator:Int64,var _ aDenominator:Int64)
-    {
-        if( aDenominator < 0 )
-        {
+	init( arrayLiteral elements: Int...) {
+		self.init( elements[0], elements[1] );
+	}
+    init(var _ aNumerator:Int,var _ aDenominator:Int) {
+        if( aDenominator < 0 ) {
             aNumerator = -aNumerator;
             aDenominator = -aDenominator;
         }
-        
+		
         let theCommonDivisor = Rational.greatestCommonDivisor(aNumerator, aDenominator);
         numerator = aNumerator/theCommonDivisor;
         denominator = aDenominator/theCommonDivisor;
     }
-    init(var _ aNumerator:Int64)
-    {
+    init(var integerLiteral aNumerator:Int) {
         numerator = aNumerator;
         denominator = 1;
     }
 	var toString: String { return "\(numerator)\\\(denominator)"; }
-
+	var ratioString: String { return "\(numerator):\(denominator)"; }
+	
 	var hashValue: Int { return Int(numerator)^Int(denominator); }
 	var description: String { return toString; }
 
-	static func greatestCommonDivisor(u: Int64, _ v: Int64) -> Int64
-	{
+	static func greatestCommonDivisor(u: Int, _ v: Int) -> Int {
 		// simple cases (termination)
 		if u == v { return u; }
 		if u == 0 { return v; }
 		if v == 0 { return u; }
 
 		// look for factors of 2
-		if (~u & 0b1) != 0  // u is even
-		{
+		if (~u & 0b1) != 0 {  // u is even
 			if (v & 0b1) != 0 {		// v is odd
 				return greatestCommonDivisor(u >> 1, v);
 			}
@@ -78,6 +75,9 @@ struct Rational : ArrayLiteralConvertible, IntegerLiteralConvertible
 		return greatestCommonDivisor((v - u) >> 1, u);
 	}
 
+	var debugDescription: String {
+		return "\(numerator):\(denominator)";
+	}
 }
 
 func + (a: Rational, b: Rational) -> Rational { return Rational(a.numerator*b.denominator+b.numerator*a.denominator,a.denominator*b.denominator); }
@@ -91,11 +91,11 @@ func / (a: Rational, b: Rational) -> Rational {
 }
 
 prefix func - (a: Rational) -> Rational { return Rational(-a.numerator,a.denominator); }
-func + (a: Rational, b: Int64) -> Rational { return Rational(a.numerator+b*a.denominator,a.denominator); }
-func - (a: Rational, b: Int64) -> Rational { return Rational(a.numerator-b*a.denominator,a.denominator); }
-func * (a: Rational, b: Int64) -> Rational { return Rational(a.numerator*b,a.denominator); }
+func + (a: Rational, b: Int) -> Rational { return Rational(a.numerator+b*a.denominator,a.denominator); }
+func - (a: Rational, b: Int) -> Rational { return Rational(a.numerator-b*a.denominator,a.denominator); }
+func * (a: Rational, b: Int) -> Rational { return Rational(a.numerator*b,a.denominator); }
 
-func / (a: Rational, b: Int64) -> Rational {
+func / (a: Rational, b: Int) -> Rational {
 	return b >= 0
 		? Rational(a.numerator,a.denominator*b)
 		: Rational(-a.numerator,-a.denominator*b);

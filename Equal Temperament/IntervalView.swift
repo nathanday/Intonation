@@ -8,10 +8,8 @@
 
 import Cocoa
 
-class IntervalView: NSView
-{
-    override func drawRect(dirtyRect: NSRect)
-    {
+class IntervalView: NSView {
+    override func drawRect(dirtyRect: NSRect) {
         super.drawRect(dirtyRect)
 
         // Drawing code here.

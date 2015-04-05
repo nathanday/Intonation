@@ -7,7 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D849E7311ACADFD1006E0964 /* PrimeProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D849E7301ACADFD1006E0964 /* PrimeProducts.swift */; };
+		D870F0B91AB5B7F100CFD04F /* Notes in Resources */ = {isa = PBXBuildFile; fileRef = D870F0B81AB5B7F100CFD04F /* Notes */; };
 		D8832F8619A0C86B0095B26F /* IntervalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8832F8519A0C86B0095B26F /* IntervalView.swift */; };
+		D88A62101ACF7F19004CD4C9 /* UInt+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88A620F1ACF7F19004CD4C9 /* UInt+Additions.swift */; };
+		D88A62111AD02167004CD4C9 /* Scale.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8901EBC1ABC226D00A4E071 /* Scale.swift */; };
 		D89543631996345200A091A4 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89543621996345200A091A4 /* main.swift */; };
 		D895436A1996345200A091A4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D89543691996345200A091A4 /* Images.xcassets */; };
 		D895436D1996345200A091A4 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = D895436B1996345200A091A4 /* MainMenu.xib */; };
@@ -29,7 +33,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D849E7301ACADFD1006E0964 /* PrimeProducts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimeProducts.swift; sourceTree = "<group>"; };
+		D870F0B81AB5B7F100CFD04F /* Notes */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Notes; sourceTree = "<group>"; };
 		D8832F8519A0C86B0095B26F /* IntervalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntervalView.swift; sourceTree = "<group>"; };
+		D88A620F1ACF7F19004CD4C9 /* UInt+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UInt+Additions.swift"; sourceTree = "<group>"; };
+		D8901EBC1ABC226D00A4E071 /* Scale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scale.swift; sourceTree = "<group>"; };
 		D895435D1996345200A091A4 /* Equal Temperament.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Equal Temperament.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D89543611996345200A091A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D89543621996345200A091A4 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -68,6 +76,7 @@
 				D895435F1996345200A091A4 /* Equal Temperament */,
 				D89543751996345200A091A4 /* Equal TemperamentTests */,
 				D895435E1996345200A091A4 /* Products */,
+				D870F0B81AB5B7F100CFD04F /* Notes */,
 			);
 			sourceTree = "<group>";
 		};
@@ -85,6 +94,9 @@
 			children = (
 				D89543821996347F00A091A4 /* Document.swift */,
 				D89543831996347F00A091A4 /* EqualTemperamentEntry.swift */,
+				D88A620F1ACF7F19004CD4C9 /* UInt+Additions.swift */,
+				D849E7301ACADFD1006E0964 /* PrimeProducts.swift */,
+				D8901EBC1ABC226D00A4E071 /* Scale.swift */,
 				D89543841996347F00A091A4 /* Rational.swift */,
 				D8832F8519A0C86B0095B26F /* IntervalView.swift */,
 				D89543691996345200A091A4 /* Images.xcassets */,
@@ -203,6 +215,7 @@
 			files = (
 				D895436A1996345200A091A4 /* Images.xcassets in Resources */,
 				D895436D1996345200A091A4 /* MainMenu.xib in Resources */,
+				D870F0B91AB5B7F100CFD04F /* Notes in Resources */,
 				D895438A1996354100A091A4 /* Document.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -222,9 +235,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				D89543871996347F00A091A4 /* Rational.swift in Sources */,
+				D849E7311ACADFD1006E0964 /* PrimeProducts.swift in Sources */,
 				D8832F8619A0C86B0095B26F /* IntervalView.swift in Sources */,
 				D89543861996347F00A091A4 /* EqualTemperamentEntry.swift in Sources */,
 				D895438B1996363700A091A4 /* Document.swift in Sources */,
+				D88A62101ACF7F19004CD4C9 /* UInt+Additions.swift in Sources */,
+				D88A62111AD02167004CD4C9 /* Scale.swift in Sources */,
 				D89543631996345200A091A4 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -348,10 +364,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = "Equal Temperament/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -359,6 +377,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = "Equal Temperament/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
