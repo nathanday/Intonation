@@ -78,13 +78,6 @@ class Document : NSDocument {
 	}
 }
 
-extension Document : NSSplitViewDelegate {
-	func splitView(splitView: NSSplitView, additionalEffectiveRectOfDividerAtIndex aDividerIndex: Int) -> NSRect {
-		let		theFrame = tableParentContainerView!.frame;
-		return NSMakeRect( NSMaxX(theFrame)-kThumbSize.width-6.0, NSMinY(theFrame), kThumbSize.width+6.0, theFrame.height );
-	}
-}
-
 extension Document : NSTableViewDelegate {
 	func tableView( aTableView: NSTableView, willDisplayCell aCell: AnyObject, forTableColumn aTableColumn: NSTableColumn?, row aRowIndex: Int) {
 		if let	theEntry = arrayController!.arrangedObjects[aRowIndex] as? EqualTemperamentEntry, theCell = aCell as? NSTextFieldCell {
