@@ -102,7 +102,7 @@ class EqualTemperamentEntry : NSObject, Printable, Hashable {
 
 func ==(a: EqualTemperamentEntry, b: EqualTemperamentEntry) -> Bool { return a.justIntonationRatio==b.justIntonationRatio; }
 
-class EqualTemperament : Printable {
+class EqualTemperamentCollection : Printable {
 	var	everyEqualTemperamentEntry = Set<EqualTemperamentEntry>();
 	var limits : (numeratorPrime:UInt,denominatorPrime:UInt,numeratorOdd:UInt,denominatorOdd:UInt);
 	var maximumError : Double;
@@ -111,10 +111,11 @@ class EqualTemperament : Printable {
 
 	var averageError : Double {
 		var		theAverageError : Double = 0.0;
+		let		theCount = Double(everyEqualTemperamentEntry.count);
 		for theEntry in everyEqualTemperamentEntry {
 			theAverageError += abs(theEntry.errorCent);
 		}
-		return theAverageError/Double(everyEqualTemperamentEntry.count)
+		return theAverageError/theCount
 	}
 	
 	var smallestError : Set<EqualTemperamentEntry> {
@@ -188,15 +189,16 @@ class EqualTemperament : Printable {
 		}
 	}
 
-	func everyEntry() -> [EqualTemperamentEntry] {
-		var		theResult = Array<EqualTemperamentEntry>();
-		for theEntry in everyEqualTemperamentEntry {
-			theResult.append(theEntry as EqualTemperamentEntry);
+	var everyEntry : [EqualTemperamentEntry] {
+		get {
+			var		theResult = Array<EqualTemperamentEntry>();
+			for theEntry in everyEqualTemperamentEntry {
+				theResult.append(theEntry as EqualTemperamentEntry);
+			}
+			sort( &theResult, { return $0.justIntonationCents < $1.justIntonationCents; } );
+			return theResult;
 		}
-		sort( &theResult, { return $0.justIntonationCents < $1.justIntonationCents; } );
-		return theResult;
 	}
-
 	
 	var description: String {
 		return "entries:\(everyEqualTemperamentEntry.debugDescription)";
