@@ -14,7 +14,12 @@ class Document : NSDocument {
 	@IBOutlet var	tableParentContainerView : NSView?
 	@IBOutlet var	arrayController : NSArrayController?
 	@IBOutlet var	scaleView : ScaleView?;
+	@IBOutlet var	harmonicView : HarmonicView?;
 	@IBOutlet var	tableView : NSTableView?;
+	@IBOutlet var	settingsPanel : NSPanel?;
+	@IBOutlet var	baseFrequencyTextField : NSTextField?;
+	@IBOutlet var	settingsButton : NSButton?;
+	@IBOutlet var	documentWindow : NSWindow?;
 
 	var		primeNumber = UInt.primes(upTo: 100 );
 
@@ -24,7 +29,7 @@ class Document : NSDocument {
 			calculateAllIntervals();
 		}
 	}
-	var		enableInterval : Bool = true {
+	dynamic var		enableInterval : Bool = true {
 		didSet { hideIntervalRelatedColumn(!enableInterval); }
 	}
 	var		numeratorPrimeLimit : UInt { get { return primeNumber[numeratorPrimeLimitIndex]; } }
@@ -53,9 +58,55 @@ class Document : NSDocument {
 	var		maximumError : Double = 0.18 { didSet { calculateAllIntervals(); } }
 	var		filtered : Bool = false { didSet { calculateAllIntervals(); } }
 
-	var		baseFrequency : Double = 261.626;
+	var		selectedIndicies : [Int] {
+		var		theResult : [Int] = [];
+		if let theTableView = tableView {
+			for theIndex in theTableView.selectedRowIndexes {
+				theResult.append(theIndex);
+			}
+		}
+		return theResult;
+	}
+	var		selectedEqualTemperamentEntry : [EqualTemperamentEntry] {
+		var		theResult : [EqualTemperamentEntry] = [];
+		if let theTableView = tableView {
+			for theIndex in theTableView.selectedRowIndexes {
+				theResult.append(everyInterval[theIndex]);
+			}
+		}
+		return theResult;
+	}
+	var		selectedJustIntonationRatio : [Rational] {
+		var		theResult : [Rational] = [];
+		if let theTableView = tableView {
+			for theIndex in theTableView.selectedRowIndexes {
+				theResult.append(everyInterval[theIndex].justIntonationRatio);
+			}
+		}
+		return theResult;
+	}
+
 	var		equalTemperament : Bool = false;
 	
+	var		baseFrequency : Double {
+		get { return soundGenerator.baseFrequency; }
+		set { soundGenerator.baseFrequency = newValue; }
+	}
+	
+	var		allOvertonesAmount : Double {
+		get { return overtones.amount; }
+		set { overtones = HarmonicsDescription(amount: newValue, evenAmount: overtones.evenAmount); }
+	}
+	var		evenOvertonesAmount : Double {
+		get { return overtones.evenAmount; }
+		set { overtones = HarmonicsDescription(amount: overtones.amount, evenAmount: newValue); }
+	}
+	var		overtones : HarmonicsDescription {
+		set { soundGenerator.harmonicsDescription = newValue; }
+		get { return soundGenerator.harmonicsDescription; }
+	}
+	var		soundGenerator = SoundGenerator();
+
 	dynamic var     everyInterval : [EqualTemperamentEntry] = [];
 	dynamic var		smallestError : Double { get { return !smallestErrorEntries.isEmpty ? smallestErrorEntries.first!.errorPercent : 0.0; } }
 	dynamic var     averageError : Double = 0.0
@@ -69,9 +120,30 @@ class Document : NSDocument {
 		willSet { self.willChangeValueForKey("biggestError"); }
 		didSet { self.didChangeValueForKey("biggestError"); }
 	}
+	
 
+	override func awakeFromNib() {
+		if let thePanel = settingsPanel, theDocumentWindow = documentWindow, theSettingsButton = settingsButton  {
+			var		theButtonFrame = theDocumentWindow.convertRectToScreen(theSettingsButton.convertRect(theSettingsButton.bounds, toView: nil));
+			thePanel.parentWindow = theDocumentWindow;
+			theButtonFrame.origin.y -= NSHeight(thePanel.frame);
+			thePanel.setFrameOrigin(theButtonFrame.origin);
+		}
+	}
+
+	@IBAction func showSetting( aSender: AnyObject? ) {
+		if let thePanel = settingsPanel,theDocumentWindow = documentWindow {
+			thePanel.orderFront(aSender);
+			thePanel.makeKeyWindow();
+		}
+	}
+	
 	@IBAction func selectPresetInterval( aSender: NSMenuItem ) {
 		intervalCount = UInt(aSender.tag);
+	}
+	
+	@IBAction func playAction( aSender: NSSegmentedControl ) {
+		soundGenerator.play(ratios: [1.0], chord: aSender.selectedSegment == 0 );
 	}
 	
 	override var windowNibName: String! { return "Document"; }
@@ -93,7 +165,7 @@ class Document : NSDocument {
 		averageError = theEntries.averageError;
 		everyInterval = theEntries.everyEntry;
 		scaleView?.numberOfIntervals = enableInterval ? intervalCount : 0;
-		scaleView?.justIntonationRatio = everyInterval.map { return $0.justIntonationRatio; };
+		scaleView?.justIntonationRatios = everyInterval.map { return $0.justIntonationRatio; };
 	}
 
 	var everyTableColumn : [NSTableColumn] {
@@ -124,6 +196,16 @@ extension Document : NSTableViewDelegate {
 				theCell.backgroundColor = NSColor.clearColor();
 				theCell.textColor = NSColor(calibratedWhite: 0.0, alpha: theExceedsError ? Document.cellColors.maxErrorTextAlpha : 1.0);
 			}
+		}
+	}
+
+	func tableViewSelectionDidChange(notification: NSNotification) {
+		let		theSelectedRatios = selectedJustIntonationRatio;
+		if let theScaleView = scaleView {
+			theScaleView.selectedRatios = theSelectedRatios;
+		}
+		if let theHarmonicView = harmonicView {
+			theHarmonicView.justIntonationRatios = theSelectedRatios;
 		}
 	}
 }

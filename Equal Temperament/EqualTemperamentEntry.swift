@@ -12,10 +12,12 @@ func centsEquivelentForRatio( r : Double, n : UInt ) -> Double { return Double(n
 func rationsForCentsEquivelent( c : Double, n : UInt ) -> Double { return pow(2.0,c/(100.0*Double(n))); }
 
 extension Rational {
-	var oddLimit : Int {
-		if numerator%2 == 1 && denominator%2 == 1 { return numerator > denominator ? numerator : denominator; }
-		else if numerator%2 == 1 { return numerator; }
-		else { return denominator; }
+	var oddLimit : UInt {
+		let	theNum = UInt(numerator);
+		let theDen = UInt(denominator);
+		if theNum%2 == 1 && theDen%2 == 1 { return theNum > theDen ? theNum : theDen; }
+		else if theNum%2 == 1 { return theNum; }
+		else { return theDen; }
 	}
 
 	var primeLimit : UInt? {
@@ -45,7 +47,7 @@ class EqualTemperamentEntry : NSObject, Printable, Hashable {
 	var errorCent : Double {
 		return centsEquivelentForRatio( rationsForCentsEquivelent(100.0*Double(closestIntervalNumber), intervalCount), 12)-centsEquivelentForRatio( self.justIntonationRatio.toDouble, 12 );
 	}
-	var oddLimit : Int { return justIntonationRatio.oddLimit; }
+	var oddLimit : UInt { return justIntonationRatio.oddLimit; }
 	
 	var primeLimit : UInt { return justIntonationRatio.primeLimit ?? 1; }
 	

@@ -48,4 +48,3 @@ extension UInt {
 		return theResult;
 	}
 }
-

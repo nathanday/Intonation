@@ -8,14 +8,18 @@
 
 import Cocoa
 
-class ScaleView : NSControl {
+class ScaleView : ResultView {
 	static let		equalTempBarWidth : CGFloat = 20.0;
 	static var		equalTempGradient: NSGradient? = NSGradient(startingColor: NSColor.lightGrayColor(), endingColor: NSColor(calibratedWhite:0.9, alpha:1.0));
+
+	var		selectedRatios : [Rational] = [] {
+		didSet { setNeedsDisplay(); }
+	}
 
 	var		numberOfIntervals : UInt = 12 {
 		didSet { setNeedsDisplay(); }
 	}
-	var		justIntonationRatio : [Rational] = [] {
+	var		justIntonationRatios : [Rational] = [] {
 		didSet { setNeedsDisplay(); }
 	}
 
@@ -42,22 +46,12 @@ class ScaleView : NSControl {
 				thePath.fill()
 			}
 			NSColor.blackColor().setStroke()
-			thePath.lineWidth = aHilighted ? 2.0 : 0.5;
+			thePath.lineWidth = aHilighted ? 1.0 : 0.5;
 			thePath.stroke()
 
-			let		theTextRect = NSMakeRect(theX1+10.0, theY-7.0, 60.0, 16.0);
-			let		theTextTextContent = NSString(string: aRatio.ratioString );
-			let		theTextStyle = NSMutableParagraphStyle.defaultParagraphStyle().mutableCopy() as! NSMutableParagraphStyle;
-			theTextStyle.alignment = NSTextAlignment.LeftTextAlignment
-			
-			let		theTextFontAttributes = [NSFontAttributeName: NSFont.systemFontOfSize(NSFont.systemFontSizeForControlSize(NSControlSize.MiniControlSize)), NSForegroundColorAttributeName: NSColor.blackColor(), NSParagraphStyleAttributeName: theTextStyle]
-			
-			let		theTextTextHeight: CGFloat = theTextTextContent.boundingRectWithSize(NSMakeSize(theTextRect.width, CGFloat.infinity), options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: theTextFontAttributes).size.height
-			let		theTextTextRect: NSRect = NSMakeRect(theTextRect.minX, theTextRect.minY + (theTextRect.height - theTextTextHeight) / 2.0, theTextRect.width, theTextTextHeight)
-			NSGraphicsContext.saveGraphicsState()
-			NSRectClip(theTextRect)
-			theTextTextContent.drawInRect(NSOffsetRect(theTextTextRect, 0.0, 1.0), withAttributes: theTextFontAttributes)
-			NSGraphicsContext.restoreGraphicsState()
+			let		theSize = NSFont.systemFontSizeForControlSize(NSControlSize.MiniControlSize);
+			drawText(string: aRatio.ratioString, size:theSize, point: NSMakePoint(theX1+10.0, theY-theSize*0.85), selected:aHilighted );
+
 			thePreviousY = theCloseToPrevious ? 0.0 : theY;
 		}
 
@@ -68,23 +62,10 @@ class ScaleView : NSControl {
 			ScaleView.equalTempGradient!.drawInBezierPath(NSBezierPath(rect: NSMakeRect(theX, theY, ScaleView.equalTempBarWidth, theHeights)), angle: -90)
 		}
 
-		func drawCanvase() {
-			let		theBounds = NSInsetRect(self.bounds, 2.0, 2.0);
-			let		thePath = NSBezierPath()
-			thePath.appendBezierPathWithArcWithCenter(NSMakePoint(theBounds.maxX-2.0, theBounds.maxY-2.0), radius: 4.0, startAngle: 90, endAngle: 0, clockwise: true)
-			thePath.appendBezierPathWithArcWithCenter(NSMakePoint(theBounds.maxX-2.0, theBounds.minY+2.0), radius: 4.0, startAngle: 0, endAngle: 270, clockwise: true)
-			thePath.appendBezierPathWithArcWithCenter(NSMakePoint(theBounds.minX+2.0, theBounds.minY+2.0), radius: 4.0, startAngle: 270, endAngle: 180, clockwise: true)
-			thePath.appendBezierPathWithArcWithCenter(NSMakePoint(theBounds.minX+2.0, theBounds.maxY-2.0), radius: 4.0, startAngle: 180, endAngle: 90, clockwise: true)
-			thePath.closePath()
-			NSColor.whiteColor().setFill()
-			thePath.fill()
-		}
- 
 		super.drawRect(dirtyRect);
-		drawCanvase();
 		for i in 0..<numberOfIntervals { drawEqualTemperamentRatio( rationNumber: i ); }
-		for aRatio in justIntonationRatio {
-			drawJustIntonationRatio(ratio: aRatio, hilighted: false );
+		for aRatio in justIntonationRatios {
+			drawJustIntonationRatio(ratio: aRatio, hilighted: contains(selectedRatios, aRatio) );
 		}
 	}
 }
