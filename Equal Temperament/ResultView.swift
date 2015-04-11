@@ -10,6 +10,24 @@ import Cocoa
 
 class ResultView: NSControl {
 
+	var		commonFactor : Int {
+		get {
+			var		theResult = 1;
+			for theValue in selectedRatios {
+				theResult *= theValue.denominator/greatestCommonDivisor(theResult,theValue.denominator);
+			}
+			return theResult;
+		}
+	}
+	var		selectedRatios : [Rational] = [];
+	
+	var		everyRatios : [Rational] = [] {
+		didSet { setNeedsDisplay(); }
+	}
+	
+	func updateCommonFactor() {
+	}
+
 	func drawText(string aString: String, size aSize: CGFloat, point aPoint: CGPoint, selected aSelected: Bool ) {
 		drawText(string: aString, size: aSize, point: aPoint, color:NSColor.blackColor(), selected: aSelected );
 	}

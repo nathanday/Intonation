@@ -12,14 +12,7 @@ class ScaleView : ResultView {
 	static let		equalTempBarWidth : CGFloat = 20.0;
 	static var		equalTempGradient: NSGradient? = NSGradient(startingColor: NSColor.lightGrayColor(), endingColor: NSColor(calibratedWhite:0.9, alpha:1.0));
 
-	var		selectedRatios : [Rational] = [] {
-		didSet { setNeedsDisplay(); }
-	}
-
 	var		numberOfIntervals : UInt = 12 {
-		didSet { setNeedsDisplay(); }
-	}
-	var		justIntonationRatios : [Rational] = [] {
 		didSet { setNeedsDisplay(); }
 	}
 
@@ -45,12 +38,12 @@ class ScaleView : ResultView {
 				NSColor.blackColor().setFill()
 				thePath.fill()
 			}
-			NSColor.blackColor().setStroke()
+			NSColor(white: 0.0, alpha: aHilighted ? 1.0 : 0.5).setStroke();
 			thePath.lineWidth = aHilighted ? 1.0 : 0.5;
 			thePath.stroke()
 
 			let		theSize = NSFont.systemFontSizeForControlSize(NSControlSize.MiniControlSize);
-			drawText(string: aRatio.ratioString, size:theSize, point: NSMakePoint(theX1+10.0, theY-theSize*0.85), selected:aHilighted );
+			drawText(string: aRatio.ratioString, size:theSize, point: NSMakePoint(theX1+10.0, theY-theSize*0.85), color:NSColor(white: 0.0, alpha: aHilighted ? 1.0 : 0.5), selected:aHilighted );
 
 			thePreviousY = theCloseToPrevious ? 0.0 : theY;
 		}
@@ -64,7 +57,7 @@ class ScaleView : ResultView {
 
 		super.drawRect(dirtyRect);
 		for i in 0..<numberOfIntervals { drawEqualTemperamentRatio( rationNumber: i ); }
-		for aRatio in justIntonationRatios {
+		for aRatio in everyRatios {
 			drawJustIntonationRatio(ratio: aRatio, hilighted: contains(selectedRatios, aRatio) );
 		}
 	}

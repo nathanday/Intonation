@@ -41,7 +41,6 @@ func greatestCommonDivisor(u: [Rational] ) -> Int {
 
 class HarmonicView: ResultView {
 	var		octaveRange = UInt(2)...UInt(5);
-	var		commonDenominator : Int = 1;
 	var		showFundamental = false {
 		didSet {
 			updateOctaveRange();
@@ -49,9 +48,8 @@ class HarmonicView: ResultView {
 		}
 	}
 	
-	var		justIntonationRatios : [Rational] = [] {
-		didSet {
-			commonDenominator = greatestCommonDivisor(justIntonationRatios);
+	override var	selectedRatios : [Rational] {
+		didSet(aValue) {
 			updateOctaveRange();
 			setNeedsDisplay();
 		}
@@ -60,17 +58,21 @@ class HarmonicView: ResultView {
 	final private func updateOctaveRange() {
 		var		theOctaveStart : UInt = 1;
 		var		theOctaveEnd : UInt = 1;
-		if let theFirst = justIntonationRatios.first {
-			theOctaveStart = theFirst.denominator > 1 ? HarmonicView.octaveForHarmonic(UInt(theFirst.denominator)) : 0;
-			theOctaveEnd = theFirst.numerator > 1 ? HarmonicView.octaveForHarmonic(UInt(theFirst.numerator-1)) : 1;
-			for theRational in justIntonationRatios {
-				let		theDenominatorOctave = theRational.denominator > 1 ? HarmonicView.octaveForHarmonic(UInt(theRational.denominator)) : 0;
-				let		theNumeratorOctave = theRational.numerator > 1 ? HarmonicView.octaveForHarmonic(UInt(theRational.numerator-1)) : 0;
-				if theNumeratorOctave > theOctaveEnd {
-					theOctaveEnd = theNumeratorOctave;
-				}
-				else if theDenominatorOctave < theOctaveStart {
-					theOctaveStart = theDenominatorOctave;
+		var		theCommonFactor = commonFactor;
+		if let theFirst = selectedRatios.first {
+			theOctaveStart = theCommonFactor > 1 ? HarmonicView.octaveForHarmonic(UInt(theCommonFactor)) : 0;
+			if let theNum = theFirst.numeratorForDenominator(theCommonFactor) {
+				theOctaveEnd = theNum > 0 ? HarmonicView.octaveForHarmonic(UInt(theNum)) : 1;
+			}
+			else {
+				theOctaveEnd = theOctaveStart;
+			}
+			for theRational in selectedRatios {
+				if let theNum = theRational.numeratorForDenominator(theCommonFactor) {
+					let		theNumeratorOctave = theNum > 0 ? HarmonicView.octaveForHarmonic(UInt(theNum)) : 0;
+					if theNumeratorOctave > theOctaveEnd {
+						theOctaveEnd = theNumeratorOctave;
+					}
 				}
 			}
 		}
@@ -121,14 +123,14 @@ class HarmonicView: ResultView {
 		func drawHarmonic( aHarmonic: UInt ) {
 			let		theSubInterval = aHarmonic-(1<<HarmonicView.octaveForHarmonic(aHarmonic));
 			let		theY = yValueForHarmonic(aHarmonic, bounds: theBounds);
-			var		thePath = NSBezierPath()
+			var		thePath = NSBezierPath();
 			if theSubInterval == 0 {
 				let		theColor = NSColor(deviceRed: 0.0, green: 0.0, blue: 0.75, alpha: 1.0);
 				thePath.lineWidth = 1.0;
 				thePath.moveToPoint(NSMakePoint(NSMinX(theBounds)+10.0, floor(theY*2.0)*0.5+0.25));
-				thePath.lineToPoint(NSMakePoint(NSMinX(theBounds)+43.0, floor(theY*2.0)*0.5+0.25))
+				thePath.lineToPoint(NSMakePoint(NSMinX(theBounds)+43.0, floor(theY*2.0)*0.5+0.25));
 				thePath.moveToPoint(NSMakePoint(NSMinX(theBounds)+52.0+6*CGFloat(log10(aHarmonic)), floor(theY*2.0)*0.5+0.25));
-				thePath.lineToPoint(NSMakePoint(NSMinX(theBounds)+72.0, floor(theY*2.0)*0.5+0.25))
+				thePath.lineToPoint(NSMakePoint(NSMinX(theBounds)+72.0, floor(theY*2.0)*0.5+0.25));
 				theColor.setStroke();
 				drawText(string: "\(aHarmonic)", size:NSFont.systemFontSizeForControlSize(NSControlSize.MiniControlSize), point: NSMakePoint(NSMinX(theBounds)+45.0, floor(theY*2.0)*0.5-8.0), color:theColor, selected:false );
 			}
@@ -151,34 +153,43 @@ class HarmonicView: ResultView {
 			thePath.stroke()
 		}
 
-		func drawRatio( aRatio: Rational, index anIndex: Int ) {
-			let		theYNum = yValueForHarmonic( UInt(aRatio.numerator), bounds: theBounds );
-			let		theYDenom = yValueForHarmonic( UInt(aRatio.denominator), bounds: theBounds );
+		func drawRatio( aRatio: Rational, index anIndex: Int, of anOf: Int ) {
+			let		theYDenom = yValueForHarmonic( UInt(commonFactor), bounds: theBounds );
 			let		theSize = NSFont.systemFontSizeForControlSize(NSControlSize.MiniControlSize);
-			var		thePath = NSBezierPath()
-			let		theYDelta = abs(theYNum-theYDenom);
-			let		theX = NSMinX(theBounds)+85.0+CGFloat(anIndex)*15.0
-			thePath.moveToPoint(NSMakePoint(NSMinX(theBounds)+75.0, theYNum ));
-			thePath.lineToPoint(NSMakePoint(theX-10.0, theYNum));
-			thePath.curveToPoint( NSMakePoint(theX, theYNum-theYDelta/2.0+6.0), controlPoint1: NSMakePoint(theX, theYNum), controlPoint2: NSMakePoint(theX, theYNum));
-			thePath.moveToPoint(NSMakePoint(theX, theYDenom+theYDelta/2.0-6.0));
-			thePath.curveToPoint( NSMakePoint(theX-10.0, theYDenom), controlPoint1: NSMakePoint(theX, theYDenom), controlPoint2: NSMakePoint(theX, theYDenom));
-			thePath.lineToPoint(NSMakePoint(NSMinX(theBounds)+75.0, theYDenom));
-			NSColor.redColor().setStroke();
-			thePath.lineWidth = 1.0;
-			thePath.stroke()
-			drawText(string: aRatio.ratioString, size:theSize, point: NSMakePoint(theX-7.0, theYDenom+theYDelta/2.0-8.0), color:NSColor.redColor(), selected:false );
+			if aRatio == 1 {
+				var		thePath = NSBezierPath();
+				let		theX = NSMinX(theBounds)+85.0+CGFloat(anOf)*20.0;
+				thePath.moveToPoint(NSMakePoint(NSMinX(theBounds)+75.0, theYDenom ));
+				thePath.lineToPoint(NSMakePoint(theX-10.0, theYDenom));
+				NSColor.redColor().setStroke();
+				thePath.lineWidth = 1.0;
+				thePath.stroke()
+				drawText(string: aRatio.ratioString, size:theSize, point: NSMakePoint(theX-7.0, theYDenom-8.0), color:NSColor.redColor(), selected:false );
+			}
+			else if let theNum = aRatio.numeratorForDenominator(commonFactor)
+			{
+				let		theYNum = yValueForHarmonic( UInt(theNum), bounds: theBounds );
+				let		theYDelta = abs(theYNum-theYDenom);
+				var		thePath = NSBezierPath();
+				let		theX = NSMinX(theBounds)+85.0+CGFloat(anIndex)*20.0;
+
+				thePath.moveToPoint(NSMakePoint(NSMinX(theBounds)+75.0, theYNum ));
+				thePath.lineToPoint(NSMakePoint(theX-10.0, theYNum));
+				thePath.curveToPoint( NSMakePoint(theX, theYNum-theYDelta/2.0+6.0), controlPoint1: NSMakePoint(theX, theYNum), controlPoint2: NSMakePoint(theX, theYNum));
+				thePath.moveToPoint(NSMakePoint(theX, theYDenom+theYDelta/2.0-6.0));
+				thePath.curveToPoint( NSMakePoint(theX-10.0, theYDenom), controlPoint1: NSMakePoint(theX, theYDenom), controlPoint2: NSMakePoint(theX, theYDenom));
+				thePath.lineToPoint(NSMakePoint(NSMinX(theBounds)+75.0, theYDenom));
+				NSColor.redColor().setStroke();
+				thePath.lineWidth = 1.0;
+				thePath.stroke()
+				drawText(string: aRatio.ratioString, size:theSize, point: NSMakePoint(theX-7.0, theYDenom+theYDelta/2.0-8.0), color:NSColor.redColor(), selected:false );
+			}
 		}
 
-		for i in (1<<octaveRange.startIndex)...(1<<(octaveRange.endIndex)) {
-			drawHarmonic(i);
-		}
-		for i in octaveRange {
-			drawOctave( i );
-		}
-
-		for i in 0..<justIntonationRatios.count {
-			drawRatio( justIntonationRatios[i], index:i );
+		for i in (1<<octaveRange.startIndex)...(1<<(octaveRange.endIndex)) { drawHarmonic(i); }
+		for i in octaveRange { drawOctave( i ); }
+		for i in 0..<selectedRatios.count {
+			drawRatio( selectedRatios[i], index:i, of:selectedRatios.count );
 		}
     }
     

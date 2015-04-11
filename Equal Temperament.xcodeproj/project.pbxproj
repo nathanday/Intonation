@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		D849E7311ACADFD1006E0964 /* PrimeProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D849E7301ACADFD1006E0964 /* PrimeProducts.swift */; };
 		D870F0B91AB5B7F100CFD04F /* Notes in Resources */ = {isa = PBXBuildFile; fileRef = D870F0B81AB5B7F100CFD04F /* Notes */; };
-		D8832F8619A0C86B0095B26F /* IntervalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8832F8519A0C86B0095B26F /* IntervalView.swift */; };
+		D8832F8619A0C86B0095B26F /* WaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8832F8519A0C86B0095B26F /* WaveView.swift */; };
 		D88A62101ACF7F19004CD4C9 /* UInt+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88A620F1ACF7F19004CD4C9 /* UInt+Additions.swift */; };
 		D88A62111AD02167004CD4C9 /* Scale.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8901EBC1ABC226D00A4E071 /* Scale.swift */; };
 		D89074D51AD5373E00FD8A1E /* SoundGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D805352F1AD3F1150034EC7B /* SoundGenerator.swift */; };
@@ -55,7 +55,7 @@
 		D805352F1AD3F1150034EC7B /* SoundGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundGenerator.swift; sourceTree = "<group>"; };
 		D849E7301ACADFD1006E0964 /* PrimeProducts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimeProducts.swift; sourceTree = "<group>"; };
 		D870F0B81AB5B7F100CFD04F /* Notes */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Notes; sourceTree = "<group>"; };
-		D8832F8519A0C86B0095B26F /* IntervalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntervalView.swift; sourceTree = "<group>"; };
+		D8832F8519A0C86B0095B26F /* WaveView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaveView.swift; sourceTree = "<group>"; };
 		D88A620F1ACF7F19004CD4C9 /* UInt+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UInt+Additions.swift"; sourceTree = "<group>"; };
 		D8901EBC1ABC226D00A4E071 /* Scale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scale.swift; sourceTree = "<group>"; };
 		D89074D21AD52D0800FD8A1E /* SoundGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundGenerator.h; sourceTree = "<group>"; };
@@ -173,7 +173,7 @@
 				D89074D71AD5486600FD8A1E /* ResultView.swift */,
 				D8E5E6251AD130DE004DB02D /* ScaleView.swift */,
 				D8E5E6231AD12F7A004DB02D /* HarmonicView.swift */,
-				D8832F8519A0C86B0095B26F /* IntervalView.swift */,
+				D8832F8519A0C86B0095B26F /* WaveView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -298,7 +298,7 @@
 			files = (
 				D89543871996347F00A091A4 /* Rational.swift in Sources */,
 				D849E7311ACADFD1006E0964 /* PrimeProducts.swift in Sources */,
-				D8832F8619A0C86B0095B26F /* IntervalView.swift in Sources */,
+				D8832F8619A0C86B0095B26F /* WaveView.swift in Sources */,
 				D89074D51AD5373E00FD8A1E /* SoundGenerator.swift in Sources */,
 				D8B9020E1AD491E30015B5E2 /* PreferencesWindowController.swift in Sources */,
 				D8E5E6241AD12F7A004DB02D /* HarmonicView.swift in Sources */,

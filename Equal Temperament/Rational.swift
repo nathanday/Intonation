@@ -27,6 +27,10 @@ struct Rational : Printable, DebugPrintable, Hashable
         denominator = aDenominator/theCommonDivisor;
     }
 
+	func numeratorForDenominator( aDenominator: Int ) -> Int? {
+		return aDenominator%denominator == 0 ? numerator*(aDenominator/denominator) : nil;
+	}
+
 	var toString: String { return "\(numerator)\\\(denominator)"; }
 	var ratioString: String { return "\(numerator):\(denominator)"; }
 	

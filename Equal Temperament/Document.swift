@@ -15,6 +15,7 @@ class Document : NSDocument {
 	@IBOutlet var	arrayController : NSArrayController?
 	@IBOutlet var	scaleView : ScaleView?;
 	@IBOutlet var	harmonicView : HarmonicView?;
+	@IBOutlet var	waveView : WaveView?;
 	@IBOutlet var	tableView : NSTableView?;
 	@IBOutlet var	settingsPanel : NSPanel?;
 	@IBOutlet var	baseFrequencyTextField : NSTextField?;
@@ -77,11 +78,7 @@ class Document : NSDocument {
 		return theResult;
 	}
 	var		selectedJustIntonationRatio : [Rational] {
-		var		theResult : [Rational] = [];
-		for theEntry in selectedEqualTemperamentEntry {
-			theResult.append(theEntry.justIntonationRatio);
-		}
-		return theResult;
+		return selectedEqualTemperamentEntry.map { return $0.justIntonationRatio; };
 	}
 
 	var		equalTemperament : Bool = false;
@@ -144,6 +141,17 @@ class Document : NSDocument {
 		soundGenerator.play(ratios: [1.0], chord: aSender.selectedSegment == 0 );
 	}
 	
+	@IBAction func selectWaveViewMode( aSender: NSSegmentedControl ) {
+		if let theWaveView = waveView {
+			switch aSender.selectedSegment {
+			case 1:
+				theWaveView.displayMode = .combined;
+			default:
+				theWaveView.displayMode = .overlayed;
+			}
+		}
+	}
+	
 	override var windowNibName: String! { return "Document"; }
 
 	override func windowControllerDidLoadNib(aWindowController: NSWindowController) {
@@ -163,7 +171,7 @@ class Document : NSDocument {
 		averageError = theEntries.averageError;
 		everyInterval = theEntries.everyEntry;
 		scaleView?.numberOfIntervals = enableInterval ? intervalCount : 0;
-		scaleView?.justIntonationRatios = everyInterval.map { return $0.justIntonationRatio; };
+		scaleView?.everyRatios = everyInterval.map { return $0.justIntonationRatio; };
 	}
 
 	var everyTableColumn : [NSTableColumn] {
@@ -203,7 +211,10 @@ extension Document : NSTableViewDelegate {
 			theScaleView.selectedRatios = theSelectedRatios;
 		}
 		if let theHarmonicView = harmonicView {
-			theHarmonicView.justIntonationRatios = theSelectedRatios;
+			theHarmonicView.selectedRatios = theSelectedRatios;
+		}
+		if let theWaveView = waveView {
+			theWaveView.selectedRatios = theSelectedRatios;
 		}
 	}
 }
