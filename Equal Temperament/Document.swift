@@ -70,18 +70,16 @@ class Document : NSDocument {
 	var		selectedEqualTemperamentEntry : [EqualTemperamentEntry] {
 		var		theResult : [EqualTemperamentEntry] = [];
 		if let theTableView = tableView {
-			for theIndex in theTableView.selectedRowIndexes {
-				theResult.append(everyInterval[theIndex]);
+			if let theArrangedRations = arrayController?.selectedObjects as? [EqualTemperamentEntry] {
+				theResult = theArrangedRations;
 			}
 		}
 		return theResult;
 	}
 	var		selectedJustIntonationRatio : [Rational] {
 		var		theResult : [Rational] = [];
-		if let theTableView = tableView {
-			for theIndex in theTableView.selectedRowIndexes {
-				theResult.append(everyInterval[theIndex].justIntonationRatio);
-			}
+		for theEntry in selectedEqualTemperamentEntry {
+			theResult.append(theEntry.justIntonationRatio);
 		}
 		return theResult;
 	}

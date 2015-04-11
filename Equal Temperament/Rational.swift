@@ -22,7 +22,7 @@ struct Rational : Printable, DebugPrintable, Hashable
             aDenominator = -aDenominator;
         }
 		
-        let theCommonDivisor = Rational.greatestCommonDivisor(aNumerator, aDenominator);
+        let theCommonDivisor = greatestCommonDivisor(aNumerator, aDenominator);
         numerator = aNumerator/theCommonDivisor;
         denominator = aDenominator/theCommonDivisor;
     }
@@ -32,30 +32,6 @@ struct Rational : Printable, DebugPrintable, Hashable
 	
 	var hashValue: Int { return Int(numerator)^Int(denominator); }
 	var description: String { return toString; }
-
-	static func greatestCommonDivisor(u: Int, _ v: Int) -> Int {
-		// simple cases (termination)
-		if u == v { return u; }
-		if u == 0 { return v; }
-		if v == 0 { return u; }
-
-		// look for factors of 2
-		if (~u & 0b1) != 0 {  // u is even
-			if (v & 0b1) != 0 {		// v is odd
-				return greatestCommonDivisor(u >> 1, v);
-			}
-			else { // both u and v are even
-				return greatestCommonDivisor(u >> 1, v >> 1) << 1;
-			}
-		}
-
-		if (~v & 0b1) != 0 { return greatestCommonDivisor(u, v >> 1); } // u is odd, v is even
-
-		// reduce larger argument
-		if u > v { return greatestCommonDivisor((u - v) >> 1, v); }
-
-		return greatestCommonDivisor((v - u) >> 1, u);
-	}
 
 	var debugDescription: String {
 		return "\(numerator):\(denominator)";
