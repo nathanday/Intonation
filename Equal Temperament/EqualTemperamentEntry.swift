@@ -44,8 +44,8 @@ class EqualTemperamentEntry : NSObject, Printable, Hashable {
 	var justIntonationCents : Double { return centsEquivelentForRatio( self.justIntonationRatio.toDouble, 12 ); }
 	var justIntonationPercent : Double { return centsEquivelentForRatio( self.justIntonationRatio.toDouble, self.intervalCount ); }
 	var error : Double { return equalTemperamentRatio-justIntonationRatio.toDouble; }
-	var errorCent : Double {
-		return centsEquivelentForRatio( rationsForCentsEquivelent(100.0*Double(closestIntervalNumber), intervalCount), 12)-centsEquivelentForRatio( self.justIntonationRatio.toDouble, 12 );
+	var error12ETCent : Double {
+		return 100.0*Double(closestEqualTemperamentIntervalNumber)-centsEquivelentForRatio( self.justIntonationRatio.toDouble, 12 );
 	}
 	var oddLimit : UInt { return justIntonationRatio.oddLimit; }
 	
@@ -53,7 +53,7 @@ class EqualTemperamentEntry : NSObject, Printable, Hashable {
 	
 	var degreeName : String = "";
 	
-	var errorPercent : Double {
+	var errorNETCent : Double {
 		return Double(closestIntervalNumber)*100.0-centsEquivelentForRatio( justIntonationRatio.toDouble, intervalCount );
 	}
 	
@@ -66,15 +66,15 @@ class EqualTemperamentEntry : NSObject, Printable, Hashable {
 	var isFirstOctave : Bool { return justIntonationRatio.numerator == 2 && justIntonationRatio.denominator == 1; }
 
 	var absError : Double { return abs(error); }
-	var absErrorCent : Double { return abs(errorCent); }
-	var absErrorPercent : Double { return abs(errorPercent); }
+	var absError12ETCent : Double { return abs(error12ETCent); }
+	var absErrorNETCent : Double { return abs(errorNETCent); }
 
 	init( justIntonationRatio: Rational, intervalCount : UInt, maximumError: Double ) {
 		self.justIntonationRatio = justIntonationRatio
 		self.intervalCount = intervalCount;
 		self.isClose = true;
 		super.init();
-		self.isClose = abs(self.errorPercent) < 100.0*maximumError;
+		self.isClose = abs(self.error12ETCent) < 100.0*maximumError;
 	}
 
 	init( numberator: UInt, denominator: UInt, intervalCount : UInt, maximumError: Double ) {
@@ -90,7 +90,7 @@ class EqualTemperamentEntry : NSObject, Printable, Hashable {
 		self.intervalCount = intervalCount;
 		self.isClose = true;
 		super.init();
-		self.isClose = abs(self.errorCent) < 100.0*maximumError;
+		self.isClose = abs(self.error12ETCent) < 100.0*maximumError;
 	}
 	
 	override var description: String { return "ratio:\(justIntonationRatio), closestIntervalNumber:\(closestIntervalNumber)"; }
@@ -99,6 +99,67 @@ class EqualTemperamentEntry : NSObject, Printable, Hashable {
 	override var hash : Int { return justIntonationRatio.hashValue; }
 	override func isEqual(object: AnyObject?) -> Bool {
 		return self.justIntonationRatio==(object as! EqualTemperamentEntry).justIntonationRatio;
+	}
+}
+
+extension EqualTemperamentEntry {
+	private static let	rationNames : [Rational:[String]] = [Rational(1,1):["unison"],
+		Rational(81,80):["syntonic comma"],
+		Rational(128,125):["diesis", "diminished second"],
+		Rational(25,24):["lesser chromatic semitone", "minor semitone", "augmented unison"],
+		Rational(256,243):["Pythagorean minor second", "Pythagorean limma"],
+		Rational(135,128):["greater chromatic semitone", "wide augmented unison"],
+		Rational(16,15):["major semitone", "limma", "minor second"],
+		Rational(27,25):["large limma", "acute minor second"],
+		Rational(800,729):["grave tone", "grave major second"],
+		Rational(10,9):["minor tone", "lesser major second"],
+		Rational(9,8):["major tone", "Pythagorean major second", "greater major second"],
+		Rational(256,225):["diminished third"],
+		Rational(125,108):["semi-augmented second"],
+		Rational(75,64):["augmented second"],
+		Rational(32,27):["Pythagorean minor third"],
+		Rational(6,5):["minor third"],
+		Rational(243,200):["acute minor third"],
+		Rational(100,81):["grave major third"],
+		Rational(5,4):["major third"],
+		Rational(81,64):["Pythagorean major third"],
+		Rational(32,25):["classic diminished fourth"],
+		Rational(125,96):["classic augmented third"],
+		Rational(675,512):["wide augmented third"],
+		Rational(4,3):["perfect fourth"],
+		Rational(27,20):["acute fourth[1]"],
+		Rational(25,18):["classic augmented fourth"],
+		Rational(45,32):["augmented fourth"],
+		Rational(64,45):["diminished fifth"],
+		Rational(36,25):["classic diminished fifth"],
+		Rational(40,27):["grave fifth[1]"],
+		Rational(3,2):["perfect fifth"],
+		Rational(1024,675):["narrow diminished sixth"],
+		Rational(192,125):["classic diminished sixth"],
+		Rational(25,16):["classic augmented fifth"],
+		Rational(128,81):["Pythagorean minor sixth"],
+		Rational(8,5):["minor sixth"],
+		Rational(81,50):["acute minor sixth"],
+		Rational(5,3):["major sixth"],
+		Rational(27,16):["Pythagorean major sixth"],
+		Rational(128,75):["diminished seventh"],
+		Rational(225,128):["augmented sixth"],
+		Rational(16,9):["Pythagorean minor seventh"],
+		Rational(9,5):["minor seventh"],
+		Rational(729,400):["acute minor seventh"],
+		Rational(50,27):["grave major seventh"],
+		Rational(15,8):["major seventh"],
+		Rational(256,135):["narrow diminished octave"],
+		Rational(243,128):["Pythagorean major seventh"],
+		Rational(48,25):["diminished octave"],
+		Rational(125,64):["augmented seventh"],
+		Rational(160,81):["semi-diminished octave"],
+		Rational(2,1):["octave"]];
+	var everyIntervalName : [String] {
+		get { if let theNameList = EqualTemperamentEntry.rationNames[self.justIntonationRatio] { return theNameList; } else { return []; } }
+	}
+	var intervalName : String {
+		get { if let theName = everyIntervalName.first { return theName; } else { return ""; } }
 	}
 }
 
@@ -115,7 +176,7 @@ class EqualTemperamentCollection : Printable {
 		var		theAverageError : Double = 0.0;
 		let		theCount = Double(everyEqualTemperamentEntry.count);
 		for theEntry in everyEqualTemperamentEntry {
-			theAverageError += abs(theEntry.errorCent);
+			theAverageError += abs(theEntry.error12ETCent);
 		}
 		return theAverageError/theCount
 	}
@@ -126,14 +187,14 @@ class EqualTemperamentCollection : Printable {
 		for theEntry in everyEqualTemperamentEntry {
 			if !theEntry.isOctave && !theEntry.isUnison {
 				if theResult.isEmpty {
-					theError = abs(theEntry.errorCent);
+					theError = abs(theEntry.error12ETCent);
 					theResult = [theEntry];
 				} else {
-					if abs(theError.distanceTo(abs(theEntry.errorCent))) < 0.000001 {
+					if abs(theError.distanceTo(abs(theEntry.error12ETCent))) < 0.000001 {
 						theResult.insert(theEntry);
 					}
-					else if theError > abs(theEntry.errorCent) {
-						theError = abs(theEntry.errorCent);
+					else if theError > abs(theEntry.error12ETCent) {
+						theError = abs(theEntry.error12ETCent);
 						theResult = [theEntry];
 					}
 				}
@@ -148,14 +209,14 @@ class EqualTemperamentCollection : Printable {
 		for theEntry in everyEqualTemperamentEntry {
 			if !theEntry.isOctave && !theEntry.isUnison {
 				if theResult.isEmpty {
-					theError = abs(theEntry.errorCent);
+					theError = abs(theEntry.error12ETCent);
 					theResult = [theEntry];
 				} else {
-					if abs(theError.distanceTo(abs(theEntry.errorCent))) < 0.000001 {
+					if abs(theError.distanceTo(abs(theEntry.error12ETCent))) < 0.000001 {
 						theResult.insert(theEntry);
 					}
-					else if theError < abs(theEntry.errorCent) {
-						theError = abs(theEntry.errorCent);
+					else if theError < abs(theEntry.error12ETCent) {
+						theError = abs(theEntry.error12ETCent);
 						theResult = [theEntry];
 					}
 				}

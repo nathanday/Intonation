@@ -13,22 +13,42 @@ enum WaveDisplayMode {
 	case combined
 }
 
+class BackGround : ResultView {
+	@IBOutlet var		childView : NSView?
+	override func drawRect(dirtyRect: NSRect) {
+		super.drawRect(dirtyRect);
+		var		thePath = NSBezierPath();
+		assert( childView != nil );
+		if let theSubView : NSView = childView {
+			let		theFrame = theSubView.frame;
+			thePath.lineWidth = 1.0;
+			thePath.moveToPoint(NSMakePoint(NSMinX(theFrame), NSMinY(theFrame)-1.0));
+			thePath.lineToPoint(NSMakePoint(NSMaxX(theFrame), NSMinY(theFrame)-1.0));
+			thePath.moveToPoint(NSMakePoint(NSMinX(theFrame), NSMaxY(theFrame)+1.0));
+			thePath.lineToPoint(NSMakePoint(NSMaxX(theFrame), NSMaxY(theFrame)+1.0));
+			NSColor.darkGrayColor().setStroke();
+			thePath.stroke();
+		}
+	}
+}
+
 class WaveView: ResultView {
 
 	var		displayMode:	WaveDisplayMode = .overlayed {
 		didSet { setNeedsDisplay(); }
 	}
 
-	override var	selectedRatios : [Rational] {
-		didSet(aValue) {
+	override var		selectedRatios : [Rational] {
+		didSet {
+			invalidateIntrinsicContentSize();
 			setNeedsDisplay();
 		}
 	}
 
+	override var intrinsicContentSize: NSSize { get { return NSMakeSize(NSViewNoInstrinsicMetric, CGFloat(commonFactor)*200.0); } }
+
 	override func drawRect(dirtyRect: NSRect) {
-        super.drawRect(dirtyRect)
-		
-		let		theBounds = NSInsetRect(self.bounds, 20.0, 20.0);
+		var		theBounds = self.bounds;
 		let		theHeight =  NSHeight(theBounds);
 		let		theWidth =  NSWidth(theBounds);
 		let		theZeroAxis = floor(NSMinX(theBounds)+theWidth*0.6)+0.25;
@@ -42,7 +62,7 @@ class WaveView: ResultView {
 			var		theScalingFactor = pow(1.0/(Double(aFreqs.count)+1.0),0.8);
 			thePath.lineWidth = 1.0;
 			thePath.moveToPoint(NSMakePoint(theZeroAxis, theY0));
-			for theY in 0...Int(theHeight) {
+			for theY in Int(NSMinY(dirtyRect))...Int(NSMaxY(dirtyRect)) {
 				let		thePhase = Double(theY)/Double(theHeight);
 				var		theValue = 0.0;
 				for theFreq in aFreqs {
@@ -50,19 +70,15 @@ class WaveView: ResultView {
 				}
 				thePath.lineToPoint(NSMakePoint(theZeroAxis+CGFloat(theValue*theScalingFactor)*theWidth*0.3333, theY0+CGFloat(theY)));
 			}
-			NSColor(calibratedHue: CGFloat(anIndex+2)*1.0/3.1, saturation: 1.0, brightness: 0.75, alpha: 1.0).setStroke();
+			NSColor(calibratedHue: (CGFloat(anIndex+4)*1.0/5.1)%1.0, saturation: 1.0, brightness: 0.75, alpha: 1.0).setStroke();
 			thePath.stroke();
 		}
 
 		func drawAxises() {
 			var		thePath = NSBezierPath();
 			thePath.lineWidth = 1.0;
-			thePath.moveToPoint(NSMakePoint(theX0, theY0));
-			thePath.lineToPoint(NSMakePoint(theX1, theY0));
 			thePath.moveToPoint(NSMakePoint(theZeroAxis, theY0));
 			thePath.lineToPoint(NSMakePoint(theZeroAxis, theY1));
-			thePath.moveToPoint(NSMakePoint(theX0, theY1));
-			thePath.lineToPoint(NSMakePoint(theX1, theY1));
 			
 			for i in 1..<8*commonFactor {
 				let		theInterval = CGFloat(i)/(8.0*CGFloat(commonFactor));

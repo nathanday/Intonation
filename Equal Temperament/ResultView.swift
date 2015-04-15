@@ -19,28 +19,32 @@ class ResultView: NSControl {
 			return theResult;
 		}
 	}
-	var		selectedRatios : [Rational] = [];
-	
+	var		selectedRatios : [Rational] = [] {
+		didSet { setNeedsDisplay(); }
+	}
 	var		everyRatios : [Rational] = [] {
 		didSet { setNeedsDisplay(); }
 	}
 	
-	func updateCommonFactor() {
+	func drawText(string aString: String, size aSize: CGFloat, point aPoint: CGPoint ) {
+		drawText(string: aString, size: aSize, point: aPoint, color:NSColor.blackColor(), textAlignment: NSTextAlignment.LeftTextAlignment );
 	}
-
-	func drawText(string aString: String, size aSize: CGFloat, point aPoint: CGPoint, selected aSelected: Bool ) {
-		drawText(string: aString, size: aSize, point: aPoint, color:NSColor.blackColor(), selected: aSelected );
+	func drawText(string aString: String, size aSize: CGFloat, point aPoint: CGPoint, color aColor: NSColor ) {
+		drawText(string: aString, size: aSize, point: aPoint, color:aColor, textAlignment: NSTextAlignment.LeftTextAlignment );
 	}
-	func drawText(string aString: String, size aSize: CGFloat, point aPoint: CGPoint, color aColor: NSColor, selected aSelected: Bool ) {
-		let		theTextRect = NSMakeRect(aPoint.x, aPoint.y, 60.0, 16.0);
+	func drawText(string aString: String, size aSize: CGFloat, point aPoint: CGPoint, color aColor: NSColor, textAlignment aTextAlignment: NSTextAlignment ) {
+		var		theTextRect = NSMakeRect(aPoint.x, aPoint.y, 480.0, 16.0);
 		let		theTextTextContent = NSString(string: aString );
 		let		theTextStyle = NSMutableParagraphStyle.defaultParagraphStyle().mutableCopy() as! NSMutableParagraphStyle;
-		theTextStyle.alignment = NSTextAlignment.LeftTextAlignment
+		theTextStyle.alignment = aTextAlignment
+		if aTextAlignment == NSTextAlignment.CenterTextAlignment {
+			theTextRect.origin.x -= NSWidth(theTextRect)*0.5;
+		}
+		else if aTextAlignment == NSTextAlignment.RightTextAlignment {
+			theTextRect.origin.x -= NSWidth(theTextRect);
+		}
 		
 		var		theTextFontAttributes = [NSFontAttributeName: NSFont.systemFontOfSize(aSize), NSForegroundColorAttributeName: aColor, NSParagraphStyleAttributeName: theTextStyle]
-		if aSelected {
-			theTextFontAttributes[NSFontAttributeName] = NSFont.boldSystemFontOfSize(aSize*1.2);
-		}
 		
 		let		theTextTextHeight: CGFloat = theTextTextContent.boundingRectWithSize(NSMakeSize(theTextRect.width, CGFloat.infinity), options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: theTextFontAttributes).size.height
 		let		theTextTextRect: NSRect = NSMakeRect(theTextRect.minX, theTextRect.minY + (theTextRect.height - theTextTextHeight) / 2.0, theTextRect.width, theTextTextHeight)

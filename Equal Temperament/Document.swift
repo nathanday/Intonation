@@ -21,6 +21,7 @@ class Document : NSDocument {
 	@IBOutlet var	baseFrequencyTextField : NSTextField?;
 	@IBOutlet var	settingsButton : NSButton?;
 	@IBOutlet var	documentWindow : NSWindow?;
+	@IBOutlet var	harmonicTitleTextField : NSTextField?;
 
 	var		primeNumber = UInt.primes(upTo: 100 );
 
@@ -103,9 +104,9 @@ class Document : NSDocument {
 	var		soundGenerator = SoundGenerator();
 
 	dynamic var     everyInterval : [EqualTemperamentEntry] = [];
-	dynamic var		smallestError : Double { get { return !smallestErrorEntries.isEmpty ? smallestErrorEntries.first!.errorPercent : 0.0; } }
+	dynamic var		smallestError : Double { get { return !smallestErrorEntries.isEmpty ? smallestErrorEntries.first!.error : 0.0; } }
 	dynamic var     averageError : Double = 0.0
-	dynamic var		biggestError : Double { get { return !biggestErrorEntries.isEmpty ? biggestErrorEntries.first!.errorPercent : 0.0; } }
+	dynamic var		biggestError : Double { get { return !biggestErrorEntries.isEmpty ? biggestErrorEntries.first!.error : 0.0; } }
 
 	dynamic var		smallestErrorEntries : Set<EqualTemperamentEntry> = [] {
 		willSet { self.willChangeValueForKey("smallestError"); }
@@ -115,7 +116,35 @@ class Document : NSDocument {
 		willSet { self.willChangeValueForKey("biggestError"); }
 		didSet { self.didChangeValueForKey("biggestError"); }
 	}
-	
+
+	private func updateChordRatioTitle( ) {
+		if let theHarmonicTitleTextField = harmonicTitleTextField {
+			if selectedJustIntonationRatio.count > 1 {
+				var		theRatiosString : String = "";
+				var		theCommonFactor = 1;
+				for theValue in selectedJustIntonationRatio {
+					theCommonFactor *= theValue.denominator/greatestCommonDivisor(theCommonFactor,theValue.denominator);
+				}
+				for theRatio in selectedJustIntonationRatio {
+					if let theValue = theRatio.numeratorForDenominator(theCommonFactor) {
+						if theRatiosString.startIndex == theRatiosString.endIndex {
+							theRatiosString = "\(theValue)"
+						}
+						else {
+							theRatiosString.write( ":\(theValue)" );
+						}
+					}
+				}
+				theHarmonicTitleTextField.stringValue = theRatiosString;
+			}
+			else if let theSingle = selectedJustIntonationRatio.first {
+				theHarmonicTitleTextField.stringValue = theSingle.ratioString;
+			}
+			else {
+				theHarmonicTitleTextField.stringValue = "";
+			}
+		}
+	}
 
 	override func awakeFromNib() {
 		if let thePanel = settingsPanel, theDocumentWindow = documentWindow, theSettingsButton = settingsButton  {
@@ -126,7 +155,69 @@ class Document : NSDocument {
 		}
 	}
 
-	@IBAction func showSetting( aSender: AnyObject? ) {
+	override func dataOfType( typeName: String, error anError: NSErrorPointer) -> NSData? {
+		let		thePropertyList = [
+			"intervalCount":intervalCount,
+			"limits":[
+				"numeratorPrime":numeratorPrimeLimitIndex,
+				"denominatorPrime":denominatorPrimeLimitIndex,
+				"odd":oddLimit],
+			"enableInterval":enableInterval,
+			"maximumError":maximumError,
+			"filtered":filtered,
+			"tone":[
+				"baseFrequency":baseFrequency,
+				"allOvertonesAmount":evenOvertonesAmount,
+				"evenOvertonesAmount":evenOvertonesAmount]
+		];
+		let		theResult = NSPropertyListSerialization.dataWithPropertyList(thePropertyList, format:.XMLFormat_v1_0, options:0, error: anError);
+		assert( theResult != nil, "Failed to save, error \(anError.memory?.localizedDescription)" );
+		return theResult;
+	}
+
+	override func readFromData( aData: NSData, ofType typeName: String, error anError: NSErrorPointer) -> Bool {
+		var		theErrorString : String? = nil;
+		var		theFormat : UnsafeMutablePointer<NSPropertyListFormat> = nil;
+		if let thePropertList = NSPropertyListSerialization.propertyListWithData(aData, options:0, format:theFormat, error: anError) as? [String:AnyObject] {
+			if let theIntervalCount = thePropertList["intervalCount"] as? UInt,
+				theLimits = thePropertList["limits"] as? [String:Int],
+				theEnableInterval = thePropertList["enableInterval"] as? Bool,
+				themMaximumError = thePropertList["maximumError"] as? Double,
+				theFiltered = thePropertList["filtered"] as? Bool,
+				theTone = thePropertList["tone"] as? [String:AnyObject]
+			{
+				intervalCount = theIntervalCount
+				if let theNumeratorPrimeLimitIndex = theLimits["numeratorPrime"] {
+					numeratorPrimeLimitIndex = theNumeratorPrimeLimitIndex;
+				}
+				if let theDenominatorPrimeLimitIndex = theLimits["denominatorPrime"] {
+					denominatorPrimeLimitIndex = theDenominatorPrimeLimitIndex;
+				}
+				if let theOddLimit : Int = theLimits["odd"] {
+					oddLimit = UInt(theOddLimit);
+				}
+				enableInterval = theEnableInterval;
+				maximumError = themMaximumError;
+				filtered = theFiltered;
+				if let theBaseFrequency = theTone["baseFrequency"] as? Double {
+					baseFrequency = theBaseFrequency;
+				}
+				if let theAllOvertonesAmount = theTone["allOvertonesAmount"] as? Double {
+					allOvertonesAmount = theAllOvertonesAmount;
+				}
+				if let theEvenOvertonesAmount = theTone["evenOvertonesAmount"] as? Double {
+					evenOvertonesAmount = theEvenOvertonesAmount;
+				}
+			}
+		}
+		else {
+			assert( false, "Failed to read, error \(theErrorString)" );
+		}
+		return true;
+		
+	}
+
+	@IBAction func showToneSetting( aSender: AnyObject? ) {
 		if let thePanel = settingsPanel,theDocumentWindow = documentWindow {
 			thePanel.orderFront(aSender);
 			thePanel.makeKeyWindow();
@@ -189,7 +280,7 @@ extension Document : NSTableViewDelegate {
 	static let		cellColors = ( backgroundAlpha:CGFloat(0.1), maxErrorTextAlpha:CGFloat(0.25) );
 	func tableView( aTableView: NSTableView, willDisplayCell aCell: AnyObject, forTableColumn aTableColumn: NSTableColumn?, row aRowIndex: Int) {
 		if let	theEntry = arrayController!.arrangedObjects[aRowIndex] as? EqualTemperamentEntry, theCell = aCell as? NSTextFieldCell {
-			let		theExceedsError = abs(theEntry.errorPercent) > 100.0*self.maximumError;
+			let		theExceedsError = enableInterval && abs(theEntry.error12ETCent) > 100.0*self.maximumError;
 			if smallestErrorEntries.contains(theEntry) {
 				theCell.backgroundColor = NSColor(calibratedRed:0.0, green:0.0, blue:1.0, alpha:Document.cellColors.backgroundAlpha);
 				theCell.textColor = NSColor(calibratedRed:0.0, green:0.0, blue:0.6, alpha:theExceedsError ? Document.cellColors.maxErrorTextAlpha : 1.0);
@@ -207,6 +298,7 @@ extension Document : NSTableViewDelegate {
 
 	func tableViewSelectionDidChange(notification: NSNotification) {
 		let		theSelectedRatios = selectedJustIntonationRatio;
+		updateChordRatioTitle();
 		if let theScaleView = scaleView {
 			theScaleView.selectedRatios = theSelectedRatios;
 		}

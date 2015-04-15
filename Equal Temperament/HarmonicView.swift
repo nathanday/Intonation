@@ -40,6 +40,7 @@ func greatestCommonDivisor(u: [Rational] ) -> Int {
 }
 
 class HarmonicView: ResultView {
+
 	var		octaveRange = UInt(2)...UInt(5);
 	var		showFundamental = false {
 		didSet {
@@ -56,8 +57,8 @@ class HarmonicView: ResultView {
 	}
 	
 	final private func updateOctaveRange() {
-		var		theOctaveStart : UInt = 1;
-		var		theOctaveEnd : UInt = 1;
+		var		theOctaveStart : UInt = 0;
+		var		theOctaveEnd : UInt = 0;
 		var		theCommonFactor = commonFactor;
 		if let theFirst = selectedRatios.first {
 			theOctaveStart = theCommonFactor > 1 ? HarmonicView.octaveForHarmonic(UInt(theCommonFactor)) : 0;
@@ -101,7 +102,8 @@ class HarmonicView: ResultView {
 	}
 
 	override func drawRect(dirtyRect: NSRect) {
-		let		theBounds = NSInsetRect(self.bounds, 20.0, 20.0);
+		var		theBounds = NSInsetRect(self.bounds, 20.0, 25.0);
+		theBounds.origin.y += 10.0;
         super.drawRect(dirtyRect)
 	
 		func drawOctave( anOctave: UInt ) {
@@ -109,7 +111,7 @@ class HarmonicView: ResultView {
 			let		theOctaveHeight = NSHeight(theBounds)/CGFloat(lengthForRange(octaveRange));
 			let		theX = NSMinX(theBounds)+10.0;
 			let		theY = floor((CGFloat(anOctave-octaveRange.startIndex)+0.5) * theOctaveHeight+NSMinY(theBounds));
-			drawText(string: "\(anOctave+1)", size:theSize, point: NSMakePoint(theX, theY-theSize*0.5), selected:false );
+			drawText(string: "\(anOctave+1)", size:theSize, point: NSMakePoint(theX, theY-theSize*0.5) );
 			var		thePath = NSBezierPath();
 			thePath.lineWidth = 0.125;
 			thePath.moveToPoint(NSMakePoint(theX+3.5, theY+theOctaveHeight/2.0-5.0));
@@ -132,7 +134,7 @@ class HarmonicView: ResultView {
 				thePath.moveToPoint(NSMakePoint(NSMinX(theBounds)+52.0+6*CGFloat(log10(aHarmonic)), floor(theY*2.0)*0.5+0.25));
 				thePath.lineToPoint(NSMakePoint(NSMinX(theBounds)+72.0, floor(theY*2.0)*0.5+0.25));
 				theColor.setStroke();
-				drawText(string: "\(aHarmonic)", size:NSFont.systemFontSizeForControlSize(NSControlSize.MiniControlSize), point: NSMakePoint(NSMinX(theBounds)+45.0, floor(theY*2.0)*0.5-8.0), color:theColor, selected:false );
+				drawText(string: "\(aHarmonic)", size:NSFont.systemFontSizeForControlSize(NSControlSize.MiniControlSize), point: NSMakePoint(NSMinX(theBounds)+45.0, floor(theY*2.0)*0.5-8.0), color:theColor );
 			}
 			else {
 				thePath.moveToPoint(NSMakePoint(NSMinX(theBounds)+40.0, floor(theY*2.0)*0.5+0.25));
@@ -164,7 +166,7 @@ class HarmonicView: ResultView {
 				NSColor.redColor().setStroke();
 				thePath.lineWidth = 1.0;
 				thePath.stroke()
-				drawText(string: aRatio.ratioString, size:theSize, point: NSMakePoint(theX-7.0, theYDenom-8.0), color:NSColor.redColor(), selected:false );
+				drawText(string: aRatio.ratioString, size:theSize, point: NSMakePoint(theX-7.0, theYDenom-8.0), color:NSColor.redColor() );
 			}
 			else if let theNum = aRatio.numeratorForDenominator(commonFactor)
 			{
@@ -182,15 +184,13 @@ class HarmonicView: ResultView {
 				NSColor.redColor().setStroke();
 				thePath.lineWidth = 1.0;
 				thePath.stroke()
-				drawText(string: aRatio.ratioString, size:theSize, point: NSMakePoint(theX-7.0, theYDenom+theYDelta/2.0-8.0), color:NSColor.redColor(), selected:false );
+				drawText(string: aRatio.ratioString, size:theSize, point: NSMakePoint(theX-7.0, theYDenom+theYDelta/2.0-8.0), color:NSColor.redColor() );
 			}
 		}
 
 		for i in (1<<octaveRange.startIndex)...(1<<(octaveRange.endIndex)) { drawHarmonic(i); }
 		for i in octaveRange { drawOctave( i ); }
-		for i in 0..<selectedRatios.count {
-			drawRatio( selectedRatios[i], index:i, of:selectedRatios.count );
-		}
+		for i in 0..<selectedRatios.count { drawRatio( selectedRatios[i], index:i, of:selectedRatios.count ); }
     }
     
 }

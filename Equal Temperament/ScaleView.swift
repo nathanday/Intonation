@@ -35,15 +35,18 @@ class ScaleView : ResultView {
 			thePath.lineToPoint(NSMakePoint(theX0-ScaleView.equalTempBarWidth, theY))
 			thePath.lineCapStyle = NSLineCapStyle.RoundLineCapStyle
 			if aHilighted {
-				NSColor.blackColor().setFill()
+				NSColor.blueColor().setFill()
+				NSColor.blueColor().setStroke();
 				thePath.fill()
+			} else {
+				NSColor(white: 0.0, alpha:0.5).setStroke();
 			}
-			NSColor(white: 0.0, alpha: aHilighted ? 1.0 : 0.5).setStroke();
 			thePath.lineWidth = aHilighted ? 1.0 : 0.5;
 			thePath.stroke()
 
 			let		theSize = NSFont.systemFontSizeForControlSize(NSControlSize.MiniControlSize);
-			drawText(string: aRatio.ratioString, size:theSize, point: NSMakePoint(theX1+10.0, theY-theSize*0.85), color:NSColor(white: 0.0, alpha: aHilighted ? 1.0 : 0.5), selected:aHilighted );
+			let		theTextColor = aHilighted ? NSColor.blueColor() : NSColor(white: 0.0, alpha: 0.5);
+			drawText(string: aRatio.ratioString, size:theSize, point: NSMakePoint(theX1+10.0, theY-theSize*0.85), color:theTextColor );
 
 			thePreviousY = theCloseToPrevious ? 0.0 : theY;
 		}
