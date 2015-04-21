@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7531" systemVersion="14E7f" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7531"/>
     </dependencies>
@@ -702,14 +702,8 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <box verticalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="LGf-Y6-gqe">
-                                <rect key="frame" x="0.0" y="522" width="290" height="5"/>
-                                <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                                <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <font key="titleFont" metaFont="system"/>
-                            </box>
                             <tabView controlSize="small" translatesAutoresizingMaskIntoConstraints="NO" id="p1k-Mg-792">
-                                <rect key="frame" x="-7" y="-10" width="304" height="529"/>
+                                <rect key="frame" x="-7" y="-10" width="304" height="534"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="590" id="Qki-nL-4Ys"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="290" id="Upp-1H-haE"/>
@@ -717,11 +711,11 @@
                                 <tabViewItems>
                                     <tabViewItem label="Scale" identifier="1" id="Sit-66-kUI">
                                         <view key="view" id="nho-FR-ofh">
-                                            <rect key="frame" x="10" y="25" width="284" height="491"/>
+                                            <rect key="frame" x="10" y="25" width="284" height="496"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <view misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y6c-Rw-DJR" customClass="ScaleView" customModule="Equal_Temperament" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="71" width="284" height="420"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="284" height="496"/>
                                                 </view>
                                             </subviews>
                                             <constraints>
@@ -734,11 +728,11 @@
                                     </tabViewItem>
                                     <tabViewItem label="Harmonics" identifier="2" id="PGj-sa-iy4">
                                         <view key="view" id="fc9-Uj-ik5">
-                                            <rect key="frame" x="10" y="25" width="284" height="420"/>
+                                            <rect key="frame" x="10" y="25" width="284" height="496"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <view translatesAutoresizingMaskIntoConstraints="NO" id="Ubh-Fu-RsC" customClass="HarmonicView" customModule="Equal_Temperament" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="284" height="420"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="284" height="496"/>
                                                 </view>
                                             </subviews>
                                             <constraints>
@@ -751,11 +745,11 @@
                                     </tabViewItem>
                                     <tabViewItem label="Waves" identifier="3" id="Vj8-AE-UOR">
                                         <view key="view" id="e0X-ZG-vks">
-                                            <rect key="frame" x="10" y="25" width="284" height="432"/>
+                                            <rect key="frame" x="10" y="25" width="284" height="496"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <view translatesAutoresizingMaskIntoConstraints="NO" id="EQp-0k-wwi" customClass="BackGround" customModule="Equal_Temperament" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="284" height="432"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="284" height="496"/>
                                                     <subviews>
                                                         <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3Oy-Pf-Qrw">
                                                             <rect key="frame" x="69" y="6" width="146" height="20"/>
@@ -771,7 +765,7 @@
                                                             </connections>
                                                         </segmentedControl>
                                                         <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" horizontalScrollElasticity="none" verticalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="gfn-18-mIK">
-                                                            <rect key="frame" x="20" y="34" width="244" height="378"/>
+                                                            <rect key="frame" x="20" y="34" width="244" height="442"/>
                                                             <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="8Ds-Zj-zNI">
                                                                 <rect key="frame" x="1" y="1" width="166" height="79"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -820,19 +814,49 @@
                                             </constraints>
                                         </view>
                                     </tabViewItem>
+                                    <tabViewItem label="Spectrum" identifier="" id="BqX-wx-T9U">
+                                        <view key="view" id="f11-Fj-u3P">
+                                            <rect key="frame" x="10" y="25" width="284" height="496"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="7lT-5J-OhE" customClass="SpectrumView" customModule="Equal_Temperament" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="284" height="496"/>
+                                                    <subviews>
+                                                        <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iox-ag-gBK">
+                                                            <rect key="frame" x="87" y="6" width="110" height="20"/>
+                                                            <segmentedCell key="cell" controlSize="small" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="Jy5-QZ-TGm">
+                                                                <font key="font" metaFont="smallSystem"/>
+                                                                <segments>
+                                                                    <segment label="Saw" width="45" selected="YES"/>
+                                                                    <segment label="Square" width="58" tag="1"/>
+                                                                </segments>
+                                                            </segmentedCell>
+                                                        </segmentedControl>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="bottom" secondItem="iox-ag-gBK" secondAttribute="bottom" constant="8" id="3j6-4i-WpV"/>
+                                                        <constraint firstAttribute="centerX" secondItem="iox-ag-gBK" secondAttribute="centerX" id="XEb-J9-ViA"/>
+                                                    </constraints>
+                                                </customView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="7lT-5J-OhE" secondAttribute="bottom" id="2Vp-PS-Per"/>
+                                                <constraint firstItem="7lT-5J-OhE" firstAttribute="leading" secondItem="f11-Fj-u3P" secondAttribute="leading" id="7kR-D8-UWh"/>
+                                                <constraint firstItem="7lT-5J-OhE" firstAttribute="top" secondItem="f11-Fj-u3P" secondAttribute="top" id="JUN-FK-FxB"/>
+                                                <constraint firstAttribute="trailing" secondItem="7lT-5J-OhE" secondAttribute="trailing" id="lXH-Ze-Vgi"/>
+                                            </constraints>
+                                        </view>
+                                    </tabViewItem>
                                 </tabViewItems>
                             </tabView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="p1k-Mg-792" firstAttribute="top" secondItem="LGf-Y6-gqe" secondAttribute="bottom" constant="8" id="9Sd-ur-Fah"/>
                             <constraint firstItem="vvG-6Z-vMY" firstAttribute="top" secondItem="uia-Ns-BW4" secondAttribute="top" constant="8" id="9aj-i1-r3g"/>
-                            <constraint firstItem="LGf-Y6-gqe" firstAttribute="top" secondItem="vvG-6Z-vMY" secondAttribute="bottom" constant="8" id="BvO-dG-ayf"/>
                             <constraint firstAttribute="bottom" secondItem="p1k-Mg-792" secondAttribute="bottom" id="F5M-wG-PYZ"/>
                             <constraint firstItem="p1k-Mg-792" firstAttribute="leading" secondItem="uia-Ns-BW4" secondAttribute="leading" id="FxG-36-y5e"/>
-                            <constraint firstAttribute="trailing" secondItem="LGf-Y6-gqe" secondAttribute="trailing" id="GY5-AQ-Qb3"/>
-                            <constraint firstItem="LGf-Y6-gqe" firstAttribute="leading" secondItem="uia-Ns-BW4" secondAttribute="leading" id="Nwr-pl-iyf"/>
                             <constraint firstAttribute="trailing" secondItem="vvG-6Z-vMY" secondAttribute="trailing" id="WhX-hH-hnR"/>
                             <constraint firstItem="vvG-6Z-vMY" firstAttribute="leading" secondItem="uia-Ns-BW4" secondAttribute="leading" id="qlp-ep-BLg"/>
+                            <constraint firstItem="p1k-Mg-792" firstAttribute="top" secondItem="vvG-6Z-vMY" secondAttribute="bottom" constant="12" id="vTg-EI-xvY"/>
                             <constraint firstAttribute="trailing" secondItem="p1k-Mg-792" secondAttribute="trailing" id="vwv-xj-nD9"/>
                         </constraints>
                     </customView>
@@ -935,7 +959,7 @@
                             <constraint firstAttribute="width" constant="16" id="PW6-fy-5gJ"/>
                             <constraint firstAttribute="height" constant="20" id="gig-V1-H03"/>
                         </constraints>
-                        <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="8407E9A1-0B7F-4D14-871F-69070D4F47C2" imagePosition="only" alignment="center" controlSize="mini" imageScaling="proportionallyDown" inset="2" id="74d-lL-Jtc">
+                        <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="5D3C7633-F75B-4C4F-93BC-A682E017576D" imagePosition="only" alignment="center" controlSize="mini" imageScaling="proportionallyDown" inset="2" id="74d-lL-Jtc">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="miniSystem"/>
                         </buttonCell>
@@ -981,7 +1005,7 @@
         </window>
     </objects>
     <resources>
-        <image name="8407E9A1-0B7F-4D14-871F-69070D4F47C2" width="16" height="16">
+        <image name="5D3C7633-F75B-4C4F-93BC-A682E017576D" width="16" height="16">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOzxYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISksLzU4VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA

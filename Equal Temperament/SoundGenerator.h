@@ -8,26 +8,20 @@
 
 #import <Foundation/Foundation.h>
 
-enum MusicSequenceType {
+typdef enum {
+	kMusicSequenceTypeUnison,
 	kMusicSequenceTypeUp,
 	kMusicSequenceTypeDown,
 	kMusicSequenceTypeBoth
+}	MusicSequenceType;
+
+struct Oscillator {
+	const double		delta;
+	double				theta;
 };
 
-struct HarmonicsDescription {
-	double		amount,
-				evenAmount;
-	double		noteDuration;
-};
 
-
-@interface RatiosPlayler : NSObject
-
-- (instancetype)initWithHarmonicsDescription:(struct HarmonicsDescription)aHarmonicsDescription frequency:(double)aFrequency;
-
-@end
-
-@interface SoundGenerator : NSObject
+@interface TonePlayer : NSObject
 {
 	double							_baseFrequency;
 	struct HarmonicsDescription		_harmonicsDescription;
@@ -44,10 +38,9 @@ struct HarmonicsDescription {
 
 - (void)generateOSC
 {
-	_oscillator = [[RatiosPlayler alloc] initWithHarmonicsDescription:self.harmonicsDescription frequency:self.baseFrequency];
 }
 
-- (void)playRatios:(NSArray *)aRatios chord:(BOOL)aChord {
+- (void)playRatios:(NSArray *)aRatios musicSequenceType:(MusicSequenceType)aChord {
 	
 }
 

@@ -44,7 +44,7 @@ class ScaleView : ResultView {
 			thePath.lineWidth = aHilighted ? 1.0 : 0.5;
 			thePath.stroke()
 
-			let		theSize = NSFont.systemFontSizeForControlSize(NSControlSize.MiniControlSize);
+			let		theSize = aHilighted ?  NSFont.systemFontSizeForControlSize(NSControlSize.RegularControlSize) : NSFont.systemFontSizeForControlSize(NSControlSize.MiniControlSize);
 			let		theTextColor = aHilighted ? NSColor.blueColor() : NSColor(white: 0.0, alpha: 0.5);
 			drawText(string: aRatio.ratioString, size:theSize, point: NSMakePoint(theX1+10.0, theY-theSize*0.85), color:theTextColor );
 

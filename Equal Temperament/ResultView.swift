@@ -46,8 +46,8 @@ class ResultView: NSControl {
 		
 		var		theTextFontAttributes = [NSFontAttributeName: NSFont.systemFontOfSize(aSize), NSForegroundColorAttributeName: aColor, NSParagraphStyleAttributeName: theTextStyle]
 		
-		let		theTextTextHeight: CGFloat = theTextTextContent.boundingRectWithSize(NSMakeSize(theTextRect.width, CGFloat.infinity), options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: theTextFontAttributes).size.height
-		let		theTextTextRect: NSRect = NSMakeRect(theTextRect.minX, theTextRect.minY + (theTextRect.height - theTextTextHeight) / 2.0, theTextRect.width, theTextTextHeight)
+		let		theTextTextSize: CGSize = theTextTextContent.boundingRectWithSize(NSMakeSize(theTextRect.width, CGFloat.infinity), options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: theTextFontAttributes).size
+		var		theTextTextRect: NSRect = NSMakeRect(theTextRect.minX, theTextRect.minY + theTextRect.height*0.25 - theTextTextSize.height*0.1, theTextRect.width, theTextTextSize.height);
 		NSGraphicsContext.saveGraphicsState()
 		NSRectClip(theTextRect)
 		theTextTextContent.drawInRect(NSOffsetRect(theTextTextRect, 0.0, 1.0), withAttributes: theTextFontAttributes)

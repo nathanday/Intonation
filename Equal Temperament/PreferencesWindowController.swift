@@ -10,6 +10,7 @@ import Cocoa
 
 class PreferencesWindowController: NSWindowController {
 
+	override var windowNibName : String { get { return "PreferencesWindowController"; } }
     override func windowDidLoad() {
         super.windowDidLoad()
 

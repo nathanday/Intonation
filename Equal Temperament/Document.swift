@@ -85,8 +85,8 @@ class Document : NSDocument {
 	var		equalTemperament : Bool = false;
 	
 	var		baseFrequency : Double {
-		get { return soundGenerator.baseFrequency; }
-		set { soundGenerator.baseFrequency = newValue; }
+		get { return tonePlayer.baseFrequency; }
+		set { tonePlayer.baseFrequency = newValue; }
 	}
 	
 	var		allOvertonesAmount : Double {
@@ -98,10 +98,10 @@ class Document : NSDocument {
 		set { overtones = HarmonicsDescription(amount: overtones.amount, evenAmount: newValue); }
 	}
 	var		overtones : HarmonicsDescription {
-		set { soundGenerator.harmonicsDescription = newValue; }
-		get { return soundGenerator.harmonicsDescription; }
+		set { tonePlayer.harmonicsDescription = newValue; }
+		get { return tonePlayer.harmonicsDescription; }
 	}
-	var		soundGenerator = SoundGenerator();
+	var		tonePlayer = TonePlayer();
 
 	dynamic var     everyInterval : [EqualTemperamentEntry] = [];
 	dynamic var		smallestError : Double { get { return !smallestErrorEntries.isEmpty ? smallestErrorEntries.first!.error : 0.0; } }
@@ -229,7 +229,7 @@ class Document : NSDocument {
 	}
 	
 	@IBAction func playAction( aSender: NSSegmentedControl ) {
-		soundGenerator.play(ratios: [1.0], chord: aSender.selectedSegment == 0 );
+		tonePlayer.play(ratios: [1.0], chord: aSender.selectedSegment == 0 );
 	}
 	
 	@IBAction func selectWaveViewMode( aSender: NSSegmentedControl ) {

@@ -57,10 +57,10 @@ class WaveView: ResultView {
 		let		theX0 = NSMinX(theBounds)-0.25;
 		let		theX1 = NSMaxX(theBounds)+0.25;
 
-		func drawWave( aFreqs : [Double], index anIndex: Int ) {
+		func drawWave( aFreqs : [Double], lineWidth aLineWidth : CGFloat ) {
 			var		thePath = NSBezierPath();
 			var		theScalingFactor = pow(1.0/(Double(aFreqs.count)+1.0),0.8);
-			thePath.lineWidth = 1.0;
+			thePath.lineWidth = aLineWidth;
 			thePath.moveToPoint(NSMakePoint(theZeroAxis, theY0));
 			for theY in Int(NSMinY(dirtyRect))...Int(NSMaxY(dirtyRect)) {
 				let		thePhase = Double(theY)/Double(theHeight);
@@ -70,7 +70,6 @@ class WaveView: ResultView {
 				}
 				thePath.lineToPoint(NSMakePoint(theZeroAxis+CGFloat(theValue*theScalingFactor)*theWidth*0.3333, theY0+CGFloat(theY)));
 			}
-			NSColor(calibratedHue: (CGFloat(anIndex+4)*1.0/5.1)%1.0, saturation: 1.0, brightness: 0.75, alpha: 1.0).setStroke();
 			thePath.stroke();
 		}
 
@@ -98,10 +97,18 @@ class WaveView: ResultView {
 
 		switch displayMode {
 		case .combined:
-			drawWave( selectedRatios.map({$0.toDouble;}), index:0);
-		case .overlayed:
+			NSColor(calibratedWhite: 0.5, alpha: 1.0).setStroke();
 			for i in 0..<selectedRatios.count {
-				drawWave( [selectedRatios[i].toDouble], index:i);
+				drawWave( [selectedRatios[i].toDouble], lineWidth:0.5 );
+			}
+			NSColor(calibratedRed: 0.0, green: 0.0, blue: 1.0, alpha: 1.0).setStroke();
+			drawWave( selectedRatios.map({$0.toDouble;}), lineWidth:2.0 );
+		case .overlayed:
+			NSColor(calibratedWhite: 0.5, alpha: 1.0).setStroke();
+			drawWave( selectedRatios.map({$0.toDouble;}), lineWidth:0.5 );
+			for i in 0..<selectedRatios.count {
+				NSColor(calibratedHue: (CGFloat(i+4)*1.0/5.1-2.0/15.0)%1.0, saturation: 1.0, brightness: 0.75, alpha: 1.0).setStroke();
+				drawWave( [selectedRatios[i].toDouble], lineWidth:2.0 );
 			}
 		}
 		drawAxises();

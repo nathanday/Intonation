@@ -102,7 +102,7 @@ class HarmonicView: ResultView {
 	}
 
 	override func drawRect(dirtyRect: NSRect) {
-		var		theBounds = NSInsetRect(self.bounds, 20.0, 25.0);
+		var		theBounds = NSInsetRect(self.bounds, 20.0, 20.0);
 		theBounds.origin.y += 10.0;
         super.drawRect(dirtyRect)
 	
