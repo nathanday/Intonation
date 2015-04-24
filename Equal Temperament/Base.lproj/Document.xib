@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7531" systemVersion="14E7f" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7702" systemVersion="14E7f" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7531"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7702"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="Document" customModule="Equal_Temperament">
@@ -14,6 +14,7 @@
                 <outlet property="scaleView" destination="Y6c-Rw-DJR" id="tk9-s7-c8Z"/>
                 <outlet property="settingsButton" destination="MMT-Qv-0rh" id="arD-ta-m95"/>
                 <outlet property="settingsPanel" destination="VEJ-Dt-PNv" id="mGO-X6-cwT"/>
+                <outlet property="spectrumView" destination="SqP-li-X2x" id="Gk2-5Q-Xch"/>
                 <outlet property="tableParentContainerView" destination="lJF-yt-08k" id="aps-bS-vLm"/>
                 <outlet property="tableView" destination="P9I-zu-mcd" id="Hi9-Rs-qr8"/>
                 <outlet property="waveView" destination="K85-It-UOC" id="qk0-X5-Sux"/>
@@ -528,12 +529,12 @@
                                 <font key="titleFont" metaFont="system"/>
                             </box>
                             <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="goV-pD-dBW">
-                                <rect key="frame" x="78" y="308" width="125" height="24"/>
+                                <rect key="frame" x="78" y="308" width="135" height="24"/>
                                 <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="momentary" id="LcI-UM-kNr">
                                     <font key="font" metaFont="system"/>
                                     <segments>
-                                        <segment label="Chord" width="50"/>
-                                        <segment label="Arpeggio" width="68" tag="1"/>
+                                        <segment label="Chord" width="55"/>
+                                        <segment label="Arpeggio" width="73" tag="1"/>
                                     </segments>
                                 </segmentedCell>
                                 <connections>
@@ -558,7 +559,7 @@
                                 </textFieldCell>
                             </textField>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="y0q-mX-76U">
-                                <rect key="frame" x="207" y="311" width="145" height="18"/>
+                                <rect key="frame" x="217" y="311" width="145" height="18"/>
                                 <buttonCell key="cell" type="check" title="Equal Temperament" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="wrq-EH-XxJ">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -575,7 +576,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MMT-Qv-0rh">
-                                <rect key="frame" x="358" y="312" width="16" height="18"/>
+                                <rect key="frame" x="368" y="312" width="16" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="16" id="W1D-yy-Mh6"/>
                                     <constraint firstAttribute="width" constant="16" id="ayh-xC-EhS"/>
@@ -705,7 +706,7 @@
                             <tabView controlSize="small" translatesAutoresizingMaskIntoConstraints="NO" id="p1k-Mg-792">
                                 <rect key="frame" x="-7" y="-10" width="304" height="534"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="590" id="Qki-nL-4Ys"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="700" id="Qki-nL-4Ys"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="290" id="Upp-1H-haE"/>
                                 </constraints>
                                 <tabViewItems>
@@ -714,7 +715,7 @@
                                             <rect key="frame" x="10" y="25" width="284" height="496"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <view misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y6c-Rw-DJR" customClass="ScaleView" customModule="Equal_Temperament" customModuleProvider="target">
+                                                <view translatesAutoresizingMaskIntoConstraints="NO" id="Y6c-Rw-DJR" customClass="ScaleView" customModule="Equal_Temperament" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="284" height="496"/>
                                                 </view>
                                             </subviews>
@@ -819,24 +820,60 @@
                                             <rect key="frame" x="10" y="25" width="284" height="496"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="7lT-5J-OhE" customClass="SpectrumView" customModule="Equal_Temperament" customModuleProvider="target">
+                                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="7lT-5J-OhE" customClass="BackGround" customModule="Equal_Temperament" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="284" height="496"/>
                                                     <subviews>
                                                         <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iox-ag-gBK">
-                                                            <rect key="frame" x="87" y="6" width="110" height="20"/>
+                                                            <rect key="frame" x="68" y="6" width="148" height="20"/>
                                                             <segmentedCell key="cell" controlSize="small" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="Jy5-QZ-TGm">
                                                                 <font key="font" metaFont="smallSystem"/>
                                                                 <segments>
-                                                                    <segment label="Saw" width="45" selected="YES"/>
-                                                                    <segment label="Square" width="58" tag="1"/>
+                                                                    <segment label="Sine" width="42" selected="YES"/>
+                                                                    <segment label="Saw" width="40" tag="1"/>
+                                                                    <segment label="Square" width="58"/>
                                                                 </segments>
                                                             </segmentedCell>
                                                         </segmentedControl>
+                                                        <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" verticalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="jvr-UO-Y8z">
+                                                            <rect key="frame" x="20" y="34" width="244" height="442"/>
+                                                            <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="kzd-tg-ERI">
+                                                                <rect key="frame" x="1" y="1" width="181" height="94"/>
+                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                <subviews>
+                                                                    <view misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SqP-li-X2x" customClass="SpectrumView" customModule="Equal_Temperament" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="346" width="242" height="1200"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="1200" id="37P-sL-8QE"/>
+                                                                        </constraints>
+                                                                    </view>
+                                                                </subviews>
+                                                                <constraints>
+                                                                    <constraint firstItem="SqP-li-X2x" firstAttribute="leading" secondItem="kzd-tg-ERI" secondAttribute="leading" id="9vU-CQ-QOQ"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="SqP-li-X2x" secondAttribute="bottom" id="auA-K4-8Fe"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="SqP-li-X2x" secondAttribute="trailing" id="j7N-GW-hpI"/>
+                                                                </constraints>
+                                                            </clipView>
+                                                            <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" controlSize="small" horizontal="YES" id="7Dj-gq-b9e">
+                                                                <rect key="frame" x="1" y="79" width="181" height="16"/>
+                                                                <autoresizingMask key="autoresizingMask"/>
+                                                            </scroller>
+                                                            <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" controlSize="small" horizontal="NO" id="1Of-4G-kLr">
+                                                                <rect key="frame" x="166" y="1" width="16" height="94"/>
+                                                                <autoresizingMask key="autoresizingMask"/>
+                                                            </scroller>
+                                                        </scrollView>
                                                     </subviews>
                                                     <constraints>
                                                         <constraint firstAttribute="bottom" secondItem="iox-ag-gBK" secondAttribute="bottom" constant="8" id="3j6-4i-WpV"/>
+                                                        <constraint firstItem="jvr-UO-Y8z" firstAttribute="top" secondItem="7lT-5J-OhE" secondAttribute="top" constant="20" id="5FV-Xg-qkB"/>
+                                                        <constraint firstAttribute="trailing" secondItem="jvr-UO-Y8z" secondAttribute="trailing" constant="20" id="6HR-eL-Je0"/>
                                                         <constraint firstAttribute="centerX" secondItem="iox-ag-gBK" secondAttribute="centerX" id="XEb-J9-ViA"/>
+                                                        <constraint firstItem="jvr-UO-Y8z" firstAttribute="leading" secondItem="7lT-5J-OhE" secondAttribute="leading" constant="20" id="rfs-3o-uc3"/>
+                                                        <constraint firstItem="iox-ag-gBK" firstAttribute="top" secondItem="jvr-UO-Y8z" secondAttribute="bottom" constant="8" id="tzh-Hr-ePz"/>
                                                     </constraints>
+                                                    <connections>
+                                                        <outlet property="childView" destination="jvr-UO-Y8z" id="Rce-8n-OQQ"/>
+                                                    </connections>
                                                 </customView>
                                             </subviews>
                                             <constraints>
@@ -959,7 +996,7 @@
                             <constraint firstAttribute="width" constant="16" id="PW6-fy-5gJ"/>
                             <constraint firstAttribute="height" constant="20" id="gig-V1-H03"/>
                         </constraints>
-                        <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="5D3C7633-F75B-4C4F-93BC-A682E017576D" imagePosition="only" alignment="center" controlSize="mini" imageScaling="proportionallyDown" inset="2" id="74d-lL-Jtc">
+                        <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="73FC5C6E-609B-47C4-88C8-3B9772A486C1" imagePosition="only" alignment="center" controlSize="mini" imageScaling="proportionallyDown" inset="2" id="74d-lL-Jtc">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="miniSystem"/>
                         </buttonCell>
@@ -1005,7 +1042,7 @@
         </window>
     </objects>
     <resources>
-        <image name="5D3C7633-F75B-4C4F-93BC-A682E017576D" width="16" height="16">
+        <image name="73FC5C6E-609B-47C4-88C8-3B9772A486C1" width="16" height="16">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOzxYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISksLzU4VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA

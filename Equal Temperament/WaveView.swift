@@ -81,14 +81,18 @@ class WaveView: ResultView {
 			
 			for i in 1..<8*commonFactor {
 				let		theInterval = CGFloat(i)/(8.0*CGFloat(commonFactor));
+				let		theY = theY0+floor(theHeight*CGFloat(theInterval))+0.5;
 				if i%8 == 0 {
-					thePath.moveToPoint(NSMakePoint(theX0, theY0+floor(theHeight*CGFloat(theInterval))+0.5));
-					thePath.lineToPoint(NSMakePoint(theX1, theY0+floor(theHeight*CGFloat(theInterval))+0.5));
+					thePath.moveToPoint(NSMakePoint(theX0, theY));
+					thePath.lineToPoint(NSMakePoint(theX1, theY));
 				}
 				else {
 					let		theLen : CGFloat = i%4 == 0 ? 5.0 : (i%2 == 0 ? 4.0 : 2.0);
-					thePath.moveToPoint(NSMakePoint(theZeroAxis-theLen, theY0+floor(theHeight*CGFloat(theInterval))+0.5));
-					thePath.lineToPoint(NSMakePoint(theZeroAxis+theLen, theY0+floor(theHeight*CGFloat(theInterval))+0.5));
+					thePath.moveToPoint(NSMakePoint(theZeroAxis-theLen, theY));
+					thePath.lineToPoint(NSMakePoint(theZeroAxis+theLen, theY));
+				}
+				if i%8 == 4 {
+					drawText(string: "\(i/8 + 1)", size: NSFont.systemFontSizeForControlSize(NSControlSize.RegularControlSize), point: NSMakePoint(20.0, theY-6.0) );
 				}
 			}
 			NSColor.darkGrayColor().setStroke();
@@ -97,17 +101,18 @@ class WaveView: ResultView {
 
 		switch displayMode {
 		case .combined:
-			NSColor(calibratedWhite: 0.5, alpha: 1.0).setStroke();
 			for i in 0..<selectedRatios.count {
+				NSColor(calibratedHue: (CGFloat(i+4)*1.0/5.1-2.0/15.0)%1.0, saturation: 0.5, brightness: 0.75, alpha: 1.0).setStroke();
 				drawWave( [selectedRatios[i].toDouble], lineWidth:0.5 );
 			}
-			NSColor(calibratedRed: 0.0, green: 0.0, blue: 1.0, alpha: 1.0).setStroke();
+			NSColor(calibratedWhite: 0.0, alpha: 1.0).setStroke();
 			drawWave( selectedRatios.map({$0.toDouble;}), lineWidth:2.0 );
 		case .overlayed:
 			NSColor(calibratedWhite: 0.5, alpha: 1.0).setStroke();
 			drawWave( selectedRatios.map({$0.toDouble;}), lineWidth:0.5 );
 			for i in 0..<selectedRatios.count {
-				NSColor(calibratedHue: (CGFloat(i+4)*1.0/5.1-2.0/15.0)%1.0, saturation: 1.0, brightness: 0.75, alpha: 1.0).setStroke();
+				let		theHue = hueForIndex(i);
+				NSColor(calibratedHue: theHue, saturation: 1.0, brightness: 0.75, alpha: 1.0).setStroke();
 				drawWave( [selectedRatios[i].toDouble], lineWidth:2.0 );
 			}
 		}

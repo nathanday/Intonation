@@ -16,6 +16,7 @@ class Document : NSDocument {
 	@IBOutlet var	scaleView : ScaleView?;
 	@IBOutlet var	harmonicView : HarmonicView?;
 	@IBOutlet var	waveView : WaveView?;
+	@IBOutlet var	spectrumView : SpectrumView?;
 	@IBOutlet var	tableView : NSTableView?;
 	@IBOutlet var	settingsPanel : NSPanel?;
 	@IBOutlet var	baseFrequencyTextField : NSTextField?;
@@ -307,6 +308,9 @@ extension Document : NSTableViewDelegate {
 		}
 		if let theWaveView = waveView {
 			theWaveView.selectedRatios = theSelectedRatios;
+		}
+		if let theSpectrumView = spectrumView {
+			theSpectrumView.selectedRatios = theSelectedRatios;
 		}
 	}
 }

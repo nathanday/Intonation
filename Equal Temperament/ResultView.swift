@@ -25,6 +25,8 @@ class ResultView: NSControl {
 	var		everyRatios : [Rational] = [] {
 		didSet { setNeedsDisplay(); }
 	}
+
+	func hueForIndex( aIndex : Int ) -> CGFloat { return (CGFloat(aIndex+4)*1.0/5.1-2.0/15.0)%1.0; }
 	
 	func drawText(string aString: String, size aSize: CGFloat, point aPoint: CGPoint ) {
 		drawText(string: aString, size: aSize, point: aPoint, color:NSColor.blackColor(), textAlignment: NSTextAlignment.LeftTextAlignment );

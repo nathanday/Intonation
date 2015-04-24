@@ -163,10 +163,10 @@ class HarmonicView: ResultView {
 				let		theX = NSMinX(theBounds)+85.0+CGFloat(anOf)*20.0;
 				thePath.moveToPoint(NSMakePoint(NSMinX(theBounds)+75.0, theYDenom ));
 				thePath.lineToPoint(NSMakePoint(theX-10.0, theYDenom));
-				NSColor.redColor().setStroke();
+				NSColor(calibratedHue: hueForIndex(anIndex), saturation: 1.0, brightness: 0.75, alpha: 1.0).setStroke();
 				thePath.lineWidth = 1.0;
 				thePath.stroke()
-				drawText(string: aRatio.ratioString, size:theSize, point: NSMakePoint(theX-7.0, theYDenom-8.0), color:NSColor.redColor() );
+				drawText(string: aRatio.ratioString, size:theSize, point: NSMakePoint(theX-7.0, theYDenom-8.0), color:NSColor(calibratedHue: hueForIndex(anIndex), saturation: 1.0, brightness: 0.75, alpha: 1.0) );
 			}
 			else if let theNum = aRatio.numeratorForDenominator(commonFactor)
 			{
@@ -181,10 +181,10 @@ class HarmonicView: ResultView {
 				thePath.moveToPoint(NSMakePoint(theX, theYDenom+theYDelta/2.0-6.0));
 				thePath.curveToPoint( NSMakePoint(theX-10.0, theYDenom), controlPoint1: NSMakePoint(theX, theYDenom), controlPoint2: NSMakePoint(theX, theYDenom));
 				thePath.lineToPoint(NSMakePoint(NSMinX(theBounds)+75.0, theYDenom));
-				NSColor.redColor().setStroke();
+				NSColor(calibratedHue: hueForIndex(anIndex), saturation: 1.0, brightness: 0.75, alpha: 1.0).setStroke();
 				thePath.lineWidth = 1.0;
 				thePath.stroke()
-				drawText(string: aRatio.ratioString, size:theSize, point: NSMakePoint(theX-7.0, theYDenom+theYDelta/2.0-8.0), color:NSColor.redColor() );
+				drawText(string: aRatio.ratioString, size:theSize, point: NSMakePoint(theX-7.0, theYDenom+theYDelta/2.0-8.0), color:NSColor(calibratedHue: hueForIndex(anIndex), saturation: 1.0, brightness: 0.75, alpha: 1.0) );
 			}
 		}
 

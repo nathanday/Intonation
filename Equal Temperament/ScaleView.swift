@@ -19,7 +19,7 @@ class ScaleView : ResultView {
 	override func drawRect(dirtyRect: NSRect) {
 		let		theBounds = NSInsetRect(self.bounds, 20.0, 20.0);
 		var		thePreviousY : CGFloat = 0.0;
-		func drawJustIntonationRatio( ratio aRatio : Rational, hilighted aHilighted : Bool ) {
+		func drawJustIntonationRatio( ratio aRatio : Rational, hilighted aHilighted : Bool, index anIndex: Int ) {
 			let		theX0 = floor(NSMidX(theBounds)+ScaleView.equalTempBarWidth/2.0)-20.5;
 			let		theY = CGFloat(log2(aRatio.toDouble)) * NSHeight(theBounds) + NSMinX(theBounds);
 			let		theCloseToPrevious = abs(theY-thePreviousY)<12.0;
@@ -35,8 +35,8 @@ class ScaleView : ResultView {
 			thePath.lineToPoint(NSMakePoint(theX0-ScaleView.equalTempBarWidth, theY))
 			thePath.lineCapStyle = NSLineCapStyle.RoundLineCapStyle
 			if aHilighted {
-				NSColor.blueColor().setFill()
-				NSColor.blueColor().setStroke();
+				NSColor(calibratedHue: hueForIndex(anIndex), saturation: 1.0, brightness: 0.75, alpha: 1.0).setFill()
+				NSColor(calibratedHue: hueForIndex(anIndex), saturation: 1.0, brightness: 0.75, alpha: 1.0).setStroke();
 				thePath.fill()
 			} else {
 				NSColor(white: 0.0, alpha:0.5).setStroke();
@@ -45,7 +45,7 @@ class ScaleView : ResultView {
 			thePath.stroke()
 
 			let		theSize = aHilighted ?  NSFont.systemFontSizeForControlSize(NSControlSize.RegularControlSize) : NSFont.systemFontSizeForControlSize(NSControlSize.MiniControlSize);
-			let		theTextColor = aHilighted ? NSColor.blueColor() : NSColor(white: 0.0, alpha: 0.5);
+			let		theTextColor = aHilighted ? NSColor(calibratedHue: hueForIndex(anIndex), saturation: 1.0, brightness: 0.75, alpha: 1.0) : NSColor(white: 0.0, alpha: 0.5);
 			drawText(string: aRatio.ratioString, size:theSize, point: NSMakePoint(theX1+10.0, theY-theSize*0.85), color:theTextColor );
 
 			thePreviousY = theCloseToPrevious ? 0.0 : theY;
@@ -60,8 +60,9 @@ class ScaleView : ResultView {
 
 		super.drawRect(dirtyRect);
 		for i in 0..<numberOfIntervals { drawEqualTemperamentRatio( rationNumber: i ); }
-		for aRatio in everyRatios {
-			drawJustIntonationRatio(ratio: aRatio, hilighted: contains(selectedRatios, aRatio) );
+		var		theIndex = 0;
+		for i in 0..<everyRatios.count {
+			drawJustIntonationRatio(ratio: everyRatios[i], hilighted: contains(selectedRatios, everyRatios[i]), index:i );
 		}
 	}
 }
