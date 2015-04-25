@@ -73,5 +73,25 @@ class ResultView: NSControl {
 		
 		drawCanvase();
 	}
-    
 }
+
+class BackGround : ResultView {
+	@IBOutlet var		childView : NSView?
+	override func drawRect(dirtyRect: NSRect) {
+		super.drawRect(dirtyRect);
+		var		thePath = NSBezierPath();
+		assert( childView != nil );
+		if let theSubView : NSView = childView {
+			let		theFrame = theSubView.frame;
+			thePath.lineWidth = 1.0;
+			thePath.moveToPoint(NSMakePoint(NSMinX(theFrame), NSMinY(theFrame)-1.0));
+			thePath.lineToPoint(NSMakePoint(NSMaxX(theFrame), NSMinY(theFrame)-1.0));
+			thePath.moveToPoint(NSMakePoint(NSMinX(theFrame), NSMaxY(theFrame)+1.0));
+			thePath.lineToPoint(NSMakePoint(NSMaxX(theFrame), NSMaxY(theFrame)+1.0));
+			NSColor.darkGrayColor().setStroke();
+			thePath.stroke();
+		}
+	}
+}
+
+

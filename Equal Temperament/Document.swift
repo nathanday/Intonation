@@ -243,6 +243,19 @@ class Document : NSDocument {
 			}
 		}
 	}
+
+	@IBAction func selectSpectrumType( aSender: NSSegmentedControl ) {
+		if let theSpectrumView = spectrumView {
+			switch aSender.selectedSegment {
+			case 1:
+				theSpectrumView.spectrumType = .saw;
+			case 2:
+				theSpectrumView.spectrumType = .square;
+			default:
+				theSpectrumView.spectrumType = .sine;
+			}
+		}
+	}
 	
 	override var windowNibName: String! { return "Document"; }
 

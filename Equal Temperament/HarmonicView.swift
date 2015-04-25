@@ -119,6 +119,7 @@ class HarmonicView: ResultView {
 			thePath.moveToPoint(NSMakePoint(theX+3.5, theY-theSize*0.45));
 			thePath.lineToPoint(NSMakePoint(theX+3.5, theY-theOctaveHeight/2.0+5.0));
 			NSColor.lightGrayColor().setStroke();
+			thePath.lineCapStyle = NSLineCapStyle.RoundLineCapStyle
 			thePath.stroke()
 		}
 		
