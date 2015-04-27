@@ -14,19 +14,23 @@ class DisclosureView : NSView {
 		case horizontal
 	}
 
+	@IBOutlet var		complimentaryView : NSView?
+
 	var		orientation : DisclosureView.Orientation = .vertical;
-	var		colapsed = false {
-		didSet {
-			invalidateIntrinsicContentSize();
-		}
+	var		colapsed : Bool {
+		get { return hidden; }
+		set { hidden = newValue; }
 	}
 
 	override var	hidden : Bool {
 		didSet {
-			colapsed = self.hidden;
+			if let theComplimentaryView = complimentaryView {
+				theComplimentaryView.hidden = !hidden;
+			}
+			invalidateIntrinsicContentSize();
 		}
 	}
-
+	
 	private(set) var		expandedSize : NSSize;
 	var						colapsedSize : NSSize {
 		get {
@@ -40,9 +44,16 @@ class DisclosureView : NSView {
 	}
 	override var intrinsicContentSize: NSSize {
 		get {
-			return colapsed ? colapsedSize : expandedSize;
+			switch( orientation ) {
+			case .vertical:
+				return NSMakeSize( NSViewNoInstrinsicMetric, colapsed ? colapsedSize.height : expandedSize.height);
+			case .horizontal:
+				return NSMakeSize(colapsed ? colapsedSize.width : expandedSize.width, NSViewNoInstrinsicMetric );
+			}
 		}
 	}
+
+	override var fittingSize : NSSize { get { return intrinsicContentSize; } }
 
 	override init(frame aFrameRect: NSRect) {
 		expandedSize = aFrameRect.size;
@@ -78,4 +89,9 @@ class DisclosureView : NSView {
 	@IBAction func colapse( aSender : AnyObject? ) { colapsed = true; }
 	@IBAction func expand( aSender : AnyObject? ) { colapsed = false; }
 	@IBAction func toggle( aSender : AnyObject? ) { colapsed = !colapsed; }
+
+//	override func drawRect(aDirtyRect: NSRect) {
+//		NSColor(calibratedRed: 0.5, green: 0.75, blue: 1.0, alpha: 1.0).setFill();
+//		NSRectFill(aDirtyRect);
+//	}
 }
