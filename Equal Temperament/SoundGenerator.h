@@ -41,7 +41,7 @@ struct Oscillator {
 }
 
 - (void)playRatios:(NSArray *)aRatios musicSequenceType:(MusicSequenceType)aChord {
-	
+
 }
 
 @end

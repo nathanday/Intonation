@@ -49,7 +49,7 @@ class WaveView: ResultView {
 				for theFreq in aFreqs {
 					theValue += sin(theFreq*thePhase*2*M_PI*Double(commonFactor));
 				}
-				thePath.lineToPoint(NSMakePoint(theZeroAxis+CGFloat(theValue*theScalingFactor)*theWidth*0.3333, theY0+CGFloat(theY)));
+				thePath.lineToPoint(NSMakePoint(theZeroAxis+CGFloat(theValue*theScalingFactor)*theWidth*0.6, theY0+CGFloat(theY)));
 			}
 			thePath.stroke();
 		}
@@ -59,7 +59,7 @@ class WaveView: ResultView {
 			thePath.lineWidth = 1.0;
 			thePath.moveToPoint(NSMakePoint(theZeroAxis, theY0));
 			thePath.lineToPoint(NSMakePoint(theZeroAxis, theY1));
-			
+
 			for i in 1..<8*commonFactor {
 				let		theInterval = CGFloat(i)/(8.0*CGFloat(commonFactor));
 				let		theY = theY0+floor(theHeight*CGFloat(theInterval))+0.5;
@@ -99,5 +99,5 @@ class WaveView: ResultView {
 		}
 		drawAxises();
     }
-    
+
 }

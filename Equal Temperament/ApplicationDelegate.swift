@@ -9,9 +9,9 @@
 import Cocoa
 
 class ApplicationDelegate: NSObject {
-	
+
 	lazy var		preferencesWindowController = PreferencesWindowController();
-	
+
 	@IBAction func showPreferencesAction( aSender: AnyObject? ) { preferencesWindowController.showWindow(aSender); }
 
 }

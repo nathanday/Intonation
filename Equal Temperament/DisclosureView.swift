@@ -30,7 +30,7 @@ class DisclosureView : NSView {
 			invalidateIntrinsicContentSize();
 		}
 	}
-	
+
 	private(set) var		expandedSize : NSSize;
 	var						colapsedSize : NSSize {
 		get {

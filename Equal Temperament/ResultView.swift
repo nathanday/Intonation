@@ -27,7 +27,7 @@ class ResultView: NSControl {
 	}
 
 	func hueForIndex( aIndex : Int ) -> CGFloat { return (CGFloat(aIndex+4)*1.0/5.1-2.0/15.0)%1.0; }
-	
+
 	func drawText(string aString: String, size aSize: CGFloat, point aPoint: CGPoint ) {
 		drawText(string: aString, size: aSize, point: aPoint, color:NSColor.blackColor(), textAlignment: NSTextAlignment.LeftTextAlignment );
 	}
@@ -35,7 +35,7 @@ class ResultView: NSControl {
 		drawText(string: aString, size: aSize, point: aPoint, color:aColor, textAlignment: NSTextAlignment.LeftTextAlignment );
 	}
 	func drawText(string aString: String, size aSize: CGFloat, point aPoint: CGPoint, color aColor: NSColor, textAlignment aTextAlignment: NSTextAlignment ) {
-		var		theTextRect = NSMakeRect(aPoint.x, aPoint.y, 480.0, 16.0);
+		var		theTextRect = NSMakeRect(aPoint.x, aPoint.y-aSize*0.2, 480.0, aSize*1.6);
 		let		theTextTextContent = NSString(string: aString );
 		let		theTextStyle = NSMutableParagraphStyle.defaultParagraphStyle().mutableCopy() as! NSMutableParagraphStyle;
 		theTextStyle.alignment = aTextAlignment
@@ -45,9 +45,9 @@ class ResultView: NSControl {
 		else if aTextAlignment == NSTextAlignment.RightTextAlignment {
 			theTextRect.origin.x -= NSWidth(theTextRect);
 		}
-		
+
 		var		theTextFontAttributes = [NSFontAttributeName: NSFont.systemFontOfSize(aSize), NSForegroundColorAttributeName: aColor, NSParagraphStyleAttributeName: theTextStyle]
-		
+
 		let		theTextTextSize: CGSize = theTextTextContent.boundingRectWithSize(NSMakeSize(theTextRect.width, CGFloat.infinity), options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: theTextFontAttributes).size
 		var		theTextTextRect: NSRect = NSMakeRect(theTextRect.minX, theTextRect.minY + theTextRect.height*0.25 - theTextTextSize.height*0.1, theTextRect.width, theTextTextSize.height);
 		NSGraphicsContext.saveGraphicsState()
@@ -70,7 +70,7 @@ class ResultView: NSControl {
 			NSColor.whiteColor().setFill()
 			thePath.fill()
 		}
-		
+
 		drawCanvase();
 	}
 }

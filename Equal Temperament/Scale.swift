@@ -11,7 +11,7 @@ import Foundation
 struct Scale : SequenceType {
 	static let major : Scale = Scale(name:"major", element:Rational(1,1), Rational(9,8), Rational(5,4), Rational(4,3), Rational(3,2), Rational(5,3), Rational(15,8));
 	static let minor : Scale = Scale(name:"minor", element:Rational(1,1), Rational(9,8), Rational(6,5), Rational(4,3), Rational(3,2), Rational(8,5), Rational(9,5));
-	
+
 	let		name : String;
 	let		everyDegree : [Rational];
 	var		numberOfDegrees : Int { get { return everyDegree.count; } }
@@ -31,8 +31,7 @@ struct Scale : SequenceType {
 		var		index = 0;
 		return GeneratorOf<Rational> { return index < self.numberOfDegrees ? self[index++] : nil; }
 	}
-	
-	
+
 	func indexOf( aValue : Rational ) -> Int? {
 		var		theResult : Int? = nil;
 		for i in 0..<numberOfDegrees {

@@ -21,7 +21,7 @@ struct Rational : Printable, DebugPrintable, Hashable
             aNumerator = -aNumerator;
             aDenominator = -aDenominator;
         }
-		
+
         let theCommonDivisor = greatestCommonDivisor(aNumerator, aDenominator);
         numerator = aNumerator/theCommonDivisor;
         denominator = aDenominator/theCommonDivisor;
@@ -33,7 +33,7 @@ struct Rational : Printable, DebugPrintable, Hashable
 
 	var toString: String { return "\(numerator)\\\(denominator)"; }
 	var ratioString: String { return "\(numerator):\(denominator)"; }
-	
+
 	var hashValue: Int { return Int(numerator)^Int(denominator); }
 	var description: String { return toString; }
 
@@ -55,9 +55,9 @@ extension Rational : ArrayLiteralConvertible, IntegerLiteralConvertible, FloatLi
 		if( theNumerator == nil || theDenominator == nil ) { NSException(name: NSRangeException, reason: "Too few arguments", userInfo: nil).raise(); }
 		return Rational( theNumerator, theDenominator );
 	}
-	
+
 	static func convertFromIntegerLiteral(aValue: IntegerLiteralType) -> Rational { return Rational( Int(aValue), 1 ); }
-	
+
 	init( arrayLiteral elements: Int...) {
 		self.init( elements[0], elements[1] );
 	}
@@ -74,57 +74,57 @@ extension Rational : FloatingPointType, SignedNumberType
 	typealias _BitsType = (Int,Int);
 	static func _fromBitPattern(aBits: _BitsType) -> Rational { return Rational(aBits.0,aBits.1); }
 	func _toBitPattern() -> _BitsType { return (numerator,denominator); }
-	
+
 	init(_ aValue: UInt8) {
 		numerator = Int(aValue);
 		denominator = 1;
 	}
-	
+
 	init(_ aValue: Int8) {
 		numerator = Int(aValue);
 		denominator = 1;
 	}
-	
+
 	init(_ aValue: UInt16) {
 		numerator = Int(aValue);
 		denominator = 1;
 	}
-	
+
 	init(_ aValue: Int16) {
 		numerator = Int(aValue);
 		denominator = 1;
 	}
-	
+
 	init(_ aValue: UInt32) {
 		numerator = Int(aValue);
 		denominator = 1;
 	}
-	
+
 	init(_ aValue: Int32) {
 		numerator = Int(aValue);
 		denominator = 1;
 	}
-	
+
 	init(_ aValue: UInt64) {
 		numerator = Int(aValue);
 		denominator = 1;
 	}
-	
+
 	init(_ aValue: Int64) {
 		numerator = Int(aValue);
 		denominator = 1;
 	}
-	
+
 	init(_ aValue: UInt) {
 		numerator = Int(aValue);
 		denominator = 1;
 	}
-	
+
 	init(_ aValue: Int) {
 		numerator = Int(aValue);
 		denominator = 1;
 	}
-	
+
 	static var infinity: Rational { get { return Rational(1,0); } }
 
 	static var NaN: Rational { get { return Rational(0,0); } }

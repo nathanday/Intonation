@@ -37,14 +37,14 @@ class TonePlayer
 	}
 	var		noteDuration : Double = 0.6;
 	var		sequenceType = MusicSequenceType.both;
-	
+
 //	var oscillator = RatiosPlayler( harmonicsDescription: HarmonicsDescription( amount:0.25, evenAmount:1.0 ), frequency:220.0 );
-	
+
 	func generateOSC() {
 //		oscillator = RatiosPlayler( harmonicsDescription:harmonicsDescription, frequency:baseFrequency );
     }
 	func play(ratios aRatios: [Rational], chord aChord: Bool) { play(ratios: aRatios, chord: aChord); }
-	
+
 	func play(ratios aRatios: [Double], chord aChord: Bool)
     {
     }

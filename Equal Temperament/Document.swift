@@ -13,7 +13,8 @@ let kThumbSize = NSSize(width:7.0,height:42.0);
 class Document : NSDocument {
 	@IBOutlet var	tableParentContainerView : NSView?
 	@IBOutlet var	arrayController : NSArrayController?
-	@IBOutlet var	scaleView : ScaleView?;
+	@IBOutlet var	linearScaleView : ScaleView?;
+	@IBOutlet var	pitchConstellationView : ScaleView?;
 	@IBOutlet var	harmonicView : HarmonicView?;
 	@IBOutlet var	waveView : WaveView?;
 	@IBOutlet var	spectrumView : SpectrumView?;
@@ -33,7 +34,9 @@ class Document : NSDocument {
 		}
 	}
 	dynamic var		enableInterval : Bool = true {
-		didSet { hideIntervalRelatedColumn(!enableInterval); }
+		didSet {
+			hideIntervalRelatedColumn(!enableInterval);
+		}
 	}
 	var		numeratorPrimeLimit : UInt { get { return primeNumber[numeratorPrimeLimitIndex]; } }
 	var		numeratorPrimeLimitIndex : Int = 2 {
@@ -84,12 +87,12 @@ class Document : NSDocument {
 	}
 
 	var		equalTemperament : Bool = false;
-	
+
 	var		baseFrequency : Double {
 		get { return tonePlayer.baseFrequency; }
 		set { tonePlayer.baseFrequency = newValue; }
 	}
-	
+
 	var		allOvertonesAmount : Double {
 		get { return overtones.amount; }
 		set { overtones = HarmonicsDescription(amount: newValue, evenAmount: overtones.evenAmount); }
@@ -215,7 +218,6 @@ class Document : NSDocument {
 			assert( false, "Failed to read, error \(theErrorString)" );
 		}
 		return true;
-		
 	}
 
 	@IBAction func showToneSetting( aSender: AnyObject? ) {
@@ -224,15 +226,15 @@ class Document : NSDocument {
 			thePanel.makeKeyWindow();
 		}
 	}
-	
+
 	@IBAction func selectPresetInterval( aSender: NSMenuItem ) {
 		intervalCount = UInt(aSender.tag);
 	}
-	
+
 	@IBAction func playAction( aSender: NSSegmentedControl ) {
 		tonePlayer.play(ratios: [1.0], chord: aSender.selectedSegment == 0 );
 	}
-	
+
 	@IBAction func selectWaveViewMode( aSender: NSSegmentedControl ) {
 		if let theWaveView = waveView {
 			switch aSender.selectedSegment {
@@ -256,7 +258,7 @@ class Document : NSDocument {
 			}
 		}
 	}
-	
+
 	override var windowNibName: String! { return "Document"; }
 
 	override func windowControllerDidLoadNib(aWindowController: NSWindowController) {
@@ -275,8 +277,16 @@ class Document : NSDocument {
 		everyInterval.removeAll(keepCapacity: true);
 		averageError = theEntries.averageError;
 		everyInterval = theEntries.everyEntry;
-		scaleView?.numberOfIntervals = enableInterval ? intervalCount : 0;
-		scaleView?.everyRatios = everyInterval.map { return $0.justIntonationRatio; };
+		if let theLinearScaleView = linearScaleView {
+			theLinearScaleView.numberOfIntervals = enableInterval ? intervalCount : 0;
+			theLinearScaleView.everyRatios = everyInterval.map { return $0.justIntonationRatio; };
+			theLinearScaleView.useIntervals = enableInterval;
+		}
+		if let thePitchConstellationView = pitchConstellationView {
+			thePitchConstellationView.numberOfIntervals = enableInterval ? intervalCount : 0;
+			thePitchConstellationView.everyRatios = everyInterval.map { return $0.justIntonationRatio; };
+			thePitchConstellationView.useIntervals = enableInterval;
+		}
 	}
 
 	var everyTableColumn : [NSTableColumn] {
@@ -286,6 +296,12 @@ class Document : NSDocument {
 	func hideIntervalRelatedColumn( aHide : Bool ) {
 		for theTableColumn in everyTableColumn.filter( { return $0.identifier != nil && contains(["interval","percent","error"],$0.identifier);} ) {
 			theTableColumn.hidden = aHide;
+		}
+		if let theLinearScaleView = linearScaleView {
+			theLinearScaleView.useIntervals = !aHide;
+		}
+		if let thePitchConstellationView = pitchConstellationView {
+			thePitchConstellationView.useIntervals = !aHide;
 		}
 	}
 }
@@ -313,8 +329,11 @@ extension Document : NSTableViewDelegate {
 	func tableViewSelectionDidChange(notification: NSNotification) {
 		let		theSelectedRatios = selectedJustIntonationRatio;
 		updateChordRatioTitle();
-		if let theScaleView = scaleView {
-			theScaleView.selectedRatios = theSelectedRatios;
+		if let theLinearScaleView = linearScaleView {
+			theLinearScaleView.selectedRatios = theSelectedRatios;
+		}
+		if let thePitchConstellationView = pitchConstellationView {
+			thePitchConstellationView.selectedRatios = theSelectedRatios;
 		}
 		if let theHarmonicView = harmonicView {
 			theHarmonicView.selectedRatios = theSelectedRatios;

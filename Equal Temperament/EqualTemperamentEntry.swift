@@ -48,15 +48,15 @@ class EqualTemperamentEntry : NSObject, Printable, Hashable {
 		return 100.0*Double(closestEqualTemperamentIntervalNumber)-centsEquivelentForRatio( self.justIntonationRatio.toDouble, 12 );
 	}
 	var oddLimit : UInt { return justIntonationRatio.oddLimit; }
-	
+
 	var primeLimit : UInt { return justIntonationRatio.primeLimit ?? 1; }
-	
+
 	var degreeName : String = "";
-	
+
 	var errorNETCent : Double {
 		return Double(closestIntervalNumber)*100.0-centsEquivelentForRatio( justIntonationRatio.toDouble, intervalCount );
 	}
-	
+
 	var closestIntervalNumberDescription : String { return isClose ? "\(closestIntervalNumber)" : ""; }
 
 	var isUnison : Bool { return justIntonationRatio.numerator == 1 && justIntonationRatio.denominator == 1; }
@@ -92,10 +92,10 @@ class EqualTemperamentEntry : NSObject, Printable, Hashable {
 		super.init();
 		self.isClose = abs(self.error12ETCent) < 100.0*maximumError;
 	}
-	
+
 	override var description: String { return "ratio:\(justIntonationRatio), closestIntervalNumber:\(closestIntervalNumber)"; }
 	override var hashValue: Int { return justIntonationRatio.hashValue; }
-	
+
 	override var hash : Int { return justIntonationRatio.hashValue; }
 	override func isEqual(object: AnyObject?) -> Bool {
 		return self.justIntonationRatio==(object as! EqualTemperamentEntry).justIntonationRatio;
@@ -180,7 +180,7 @@ class EqualTemperamentCollection : Printable {
 		}
 		return theAverageError/theCount
 	}
-	
+
 	var smallestError : Set<EqualTemperamentEntry> {
 		var		theResult = Set<EqualTemperamentEntry>();
 		var		theError = 0.0;
@@ -245,7 +245,7 @@ class EqualTemperamentCollection : Printable {
 			}
 		}
 	}
-	
+
 	func add( anEntry : EqualTemperamentEntry ) {
 		if anEntry.isClose || !filtered {
 			everyEqualTemperamentEntry.insert(anEntry);
@@ -262,7 +262,7 @@ class EqualTemperamentCollection : Printable {
 			return theResult;
 		}
 	}
-	
+
 	var description: String {
 		return "entries:\(everyEqualTemperamentEntry.debugDescription)";
 	}

@@ -22,12 +22,13 @@ class SpectrumView: ResultView {
 		}
 	}
 
-	override var		selectedRatios : [Rational] {
+	override var selectedRatios : [Rational] {
 		didSet {
+			invalidateIntrinsicContentSize();
 			setNeedsDisplay();
 		}
 	}
-	
+
 	var		harmonicSpacing : CGFloat {
 		get {
 			var		theResult : CGFloat = 100.0;
@@ -36,12 +37,31 @@ class SpectrumView: ResultView {
 					theResult = NSHeight(theContentView.documentVisibleRect)-theContentView.contentInsets.top-theContentView.contentInsets.bottom - 20.0;
 				}
 			}
-			
+
 			return theResult;
 		}
 	}
 
-	override var intrinsicContentSize: NSSize { get { return NSMakeSize(NSViewNoInstrinsicMetric, spectrumType == .sine ? harmonicSpacing+20.0 : 1200.0); } }
+	var numeratorPrimes : Set<UInt> {
+		var		theResult = Set<UInt>();
+		for theRatio in selectedRatios {
+			for p in UInt(theRatio.numerator).everyPrimeFactor {
+				theResult.insert(p);
+			}
+		}
+		return theResult;
+	}
+
+	override var intrinsicContentSize: NSSize {
+		get {
+			let		thePrimesProduct = reduce(numeratorPrimes, 1) { (aProd, aPrime) -> UInt in
+				return aProd * aPrime;
+			};
+			return NSMakeSize(NSViewNoInstrinsicMetric, spectrumType == .sine
+				? harmonicSpacing+20.0
+				: CGFloat(thePrimesProduct+1)*harmonicSpacing);
+		}
+	}
 
 	override func drawRect(aDirtyRect: NSRect) {
 		var		theBounds = NSInsetRect(self.bounds, 30.0, 0.0);
@@ -50,19 +70,24 @@ class SpectrumView: ResultView {
 		theBounds.origin.x += 10.0;
 		super.drawRect(aDirtyRect);
 
+		func harmonicForY( y : CGFloat, aBaseFreq: Double, aHarmonicSpacing : CGFloat, aBoundMinY : CGFloat ) -> Int {
+			return Int((y-aBoundMinY+aHarmonicSpacing)/(aHarmonicSpacing*CGFloat(aBaseFreq)));
+		}
+
 		func drawSpectrum( baseFreq aBaseFreq: Double, harmonic aHarmonic: Int ) {
 			let		theHarmonicSpacing = harmonicSpacing;
 			var		thePath = NSBezierPath();
 			let		theX0 = NSMinX(theBounds);
-			let		theMaxHarm = spectrumType == .sine ? 1 : 1000;
+			let		theMinHarm = harmonicForY( NSMinY(aDirtyRect)-theBaseWidthHalf, aBaseFreq, theHarmonicSpacing, NSMinY(theBounds));
+			let		theMaxHarm = spectrumType == .sine ? 1 : harmonicForY( NSMaxY(theBounds)+theBaseWidthHalf, aBaseFreq, theHarmonicSpacing, NSMinY(theBounds));
 			let		theHarmStep = spectrumType == .square ? 2 : 1;
 			thePath.lineWidth = 1.0;
-			for var i = 1; i <= theMaxHarm; i += theHarmStep {
+			for var i = theMinHarm >= 1 ? theMinHarm : 1; i <= theMaxHarm; i += theHarmStep {
 				let		theY = NSMinY(theBounds)+theBaseWidthHalf+theHarmonicSpacing*CGFloat(aBaseFreq)*CGFloat(i)-theHarmonicSpacing;
-				let		theWidth = NSWidth(theBounds)/CGFloat(i);
+				let		theWidth = NSWidth(theBounds)/CGFloat(sqrt(Double(i)));
 
 				thePath.moveToPoint(NSMakePoint(theX0, theY-theBaseWidthHalf));
-				
+
 				thePath.curveToPoint(NSMakePoint(theX0+theWidth, theY-theTopWidthHalf),
 					controlPoint1: NSMakePoint(theX0, theY-(theBaseWidthHalf-theTopWidthHalf)),
 					controlPoint2: NSMakePoint(theX0+theWidth*0.5, theY-theTopWidthHalf));
@@ -70,12 +95,10 @@ class SpectrumView: ResultView {
 				thePath.curveToPoint(NSMakePoint(theX0+theWidth, theY+theTopWidthHalf),
 					controlPoint1: NSMakePoint(theX0+theWidth+theTopWidthHalf, theY-theTopWidthHalf),
 					controlPoint2: NSMakePoint(theX0+theWidth+theTopWidthHalf, theY+theTopWidthHalf));
-	
+
 				thePath.curveToPoint(NSMakePoint(theX0, theY+theBaseWidthHalf),
 					controlPoint1: NSMakePoint(theX0+theWidth*0.5, theY+theTopWidthHalf),
 					controlPoint2: NSMakePoint(theX0, theY+(theBaseWidthHalf-theTopWidthHalf)));
-				if theY > NSMaxY(aDirtyRect) { break; }
-				
 			}
 			NSColor(calibratedHue: hueForIndex(aHarmonic), saturation: 1.0, brightness: 0.75, alpha: 1.0).setStroke();
 			NSColor(calibratedHue: hueForIndex(aHarmonic), saturation: 0.5, brightness: 0.875, alpha: 0.25).setFill();
@@ -94,9 +117,10 @@ class SpectrumView: ResultView {
 			var		theMinorTicks = NSBezierPath();
 			var		theOverPath = NSBezierPath();
 			let		theX0 = NSMinX(theBounds)-10.0;
-			let		theMaxHarm = spectrumType == .sine ? 1 : 1000;
+			var		theMinHarm = harmonicForY( NSMinY(aDirtyRect)-theBaseWidthHalf, 1.0, theHarmonicSpacing, NSMinY(theBounds));
+			let		theMaxHarm = spectrumType == .sine ? 1 : harmonicForY( NSMaxY(theBounds)+theBaseWidthHalf, 1.0, theHarmonicSpacing, NSMinY(theBounds));
 			let		theHarmStep = spectrumType == .square ? 2 : 1;
-			for var i = 1; i <= theMaxHarm; i += theHarmStep {
+			for var i = theMinHarm >= 1 ? theMinHarm : 1; i <= theMaxHarm; i++ {
 				let		theY = NSMinY(theBounds)+theBaseWidthHalf+theHarmonicSpacing*CGFloat(i)-theHarmonicSpacing;
 				let		theFontSize = NSFont.systemFontSizeForControlSize(NSControlSize.SmallControlSize);
 				theTicks.moveToPoint(NSMakePoint(theX0+10.0, theY));
@@ -126,7 +150,7 @@ class SpectrumView: ResultView {
 			theMinorTicks.lineCapStyle = NSLineCapStyle.RoundLineCapStyle
 			theMinorTicks.stroke();
 		}
-	
+
 		for i in 0..<selectedRatios.count {
 			drawSpectrum( baseFreq: selectedRatios[i].toDouble, harmonic:i );
 		}
