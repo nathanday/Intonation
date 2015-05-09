@@ -11,7 +11,11 @@ import Cocoa
 class ApplicationDelegate: NSObject {
 
 	lazy var		preferencesWindowController = PreferencesWindowController();
+	lazy var		chordSelectorWindowController = ChordSelectorWindowController();
 
 	@IBAction func showPreferencesAction( aSender: AnyObject? ) { preferencesWindowController.showWindow(aSender); }
+	@IBAction func showChordSelectorAction( aSender: AnyObject? ) {
+		chordSelectorWindowController.toggleWindow(aSender);
+	}
 
 }

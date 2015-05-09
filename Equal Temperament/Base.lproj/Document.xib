@@ -58,7 +58,7 @@
                                 <font key="titleFont" metaFont="system"/>
                             </box>
                             <box verticalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="060-us-XDf">
-                                <rect key="frame" x="20" y="546" width="469.5" height="5"/>
+                                <rect key="frame" x="20" y="546" width="470" height="5"/>
                                 <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                                 <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <font key="titleFont" metaFont="system"/>
@@ -854,15 +854,15 @@
                                             <rect key="frame" x="10" y="25" width="379" height="523"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <view translatesAutoresizingMaskIntoConstraints="NO" id="Y6c-Rw-DJR" customClass="ResultView" customModule="Equal_Temperament" customModuleProvider="target">
+                                                <view misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y6c-Rw-DJR" customClass="ResultView" customModule="Equal_Temperament" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="379" height="523"/>
                                                     <subviews>
-                                                        <tabView drawsBackground="NO" controlSize="small" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="ZgS-OV-6tB">
+                                                        <tabView misplaced="YES" drawsBackground="NO" controlSize="small" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="ZgS-OV-6tB">
                                                             <rect key="frame" x="20" y="34" width="339" height="477"/>
                                                             <tabViewItems>
                                                                 <tabViewItem label="Linear" identifier="1" id="kry-XU-6OA">
                                                                     <view key="view" id="yM8-Rf-JdN" customClass="LinearScaleView" customModule="Equal_Temperament" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="339" height="478"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="339" height="473"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     </view>
                                                                 </tabViewItem>
@@ -954,7 +954,7 @@
                                                                 <rect key="frame" x="1" y="80" width="166" height="15"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                             </scroller>
-                                                            <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="0.99697885196374625" controlSize="mini" horizontal="NO" id="RuH-Ow-YRN">
+                                                            <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" controlSize="mini" horizontal="NO" id="RuH-Ow-YRN">
                                                                 <rect key="frame" x="167" y="1" width="15" height="79"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                             </scroller>

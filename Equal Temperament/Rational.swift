@@ -16,6 +16,10 @@ struct Rational : Printable, DebugPrintable, Hashable
 	var toFloat:		Float { return Float(numerator)/Float(denominator); }
 	var toInt:			Int { return numerator/denominator; }
 
+	init() {
+		numerator = 0;
+		denominator = 1;
+	}
     init(var _ aNumerator:Int,var _ aDenominator:Int) {
         if( aDenominator < 0 ) {
             aNumerator = -aNumerator;
@@ -143,6 +147,26 @@ extension Rational : FloatingPointType, SignedNumberType
 	typealias Stride = Rational
 	func distanceTo(anOther: Rational) -> Stride { return self - anOther; }
 	func advancedBy(anOther: Stride) -> Rational { return self + anOther; }
+}
+
+extension String {
+	func toRational() -> Rational? {
+		var		theResult : Rational? = nil;
+		let		theComponents = componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: ":/"));
+		switch theComponents.count {
+		case 0:
+			theResult = Rational();
+		case 1:
+			if let theInt = theComponents[0].toInt() {
+				theResult = Rational( theInt );
+			}
+		default:
+			if let theNum = theComponents[0].toInt(), theDenom = theComponents[0].toInt() {
+				theResult = Rational( theNum, theDenom );
+			}
+		}
+		return theResult;
+	}
 }
 
 func + (a: Rational, b: Rational) -> Rational { return Rational(a.numerator*b.denominator+b.numerator*a.denominator,a.denominator*b.denominator); }

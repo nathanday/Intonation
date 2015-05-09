@@ -6,35 +6,88 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="ChordSelectorWindowController" customModule="Equal_Temperament" customModuleProvider="target">
             <connections>
+                <outlet property="browser" destination="NyL-oK-1jT" id="hmv-VC-Rxp"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <window title="Chords" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" animationBehavior="default" id="F0z-JX-Cv5" customClass="NSPanel">
+        <window title="Chords" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="F0z-JX-Cv5" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" utility="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="480" height="376"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+            <value key="minSize" type="size" width="301" height="111"/>
             <view key="contentView" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="480" height="376"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <browser verticalHuggingPriority="750" allowsExpansionToolTips="YES" enabled="YES" allowsEmptySelection="YES" defaultColumnWidth="100" minColumnWidth="100" maxVisibleColumns="3" allowsTypeSelect="YES" columnResizingType="auto" translatesAutoresizingMaskIntoConstraints="NO" id="NyL-oK-1jT">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="354"/>
+                    <browser verticalHuggingPriority="750" allowsExpansionToolTips="YES" enabled="YES" allowsMultipleSelection="YES" allowsEmptySelection="YES" defaultColumnWidth="100" minColumnWidth="100" maxVisibleColumns="3" titled="YES" separatesColumns="YES" allowsTypeSelect="YES" sendsActionOnArrowKeys="YES" columnResizingType="auto" translatesAutoresizingMaskIntoConstraints="NO" id="NyL-oK-1jT">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="398"/>
+                        <connections>
+                            <outlet property="delegate" destination="-2" id="MeS-OW-f6B"/>
+                        </connections>
                     </browser>
                 </subviews>
                 <constraints>
                     <constraint firstItem="NyL-oK-1jT" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="7wt-Ya-q3g"/>
-                    <constraint firstItem="NyL-oK-1jT" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="22" id="iOS-79-CXX"/>
+                    <constraint firstItem="NyL-oK-1jT" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="de0-n2-FVi"/>
                     <constraint firstAttribute="trailing" secondItem="NyL-oK-1jT" secondAttribute="trailing" id="kOj-4b-6Hx"/>
                     <constraint firstAttribute="bottom" secondItem="NyL-oK-1jT" secondAttribute="bottom" id="s9V-uR-Xpk"/>
                 </constraints>
             </view>
+            <toolbar key="toolbar" implicitIdentifier="05C16AD6-2945-4B69-8700-79DBF66A8F84" autosavesConfiguration="NO" allowsUserCustomization="NO" showsBaselineSeparator="NO" displayMode="iconOnly" sizeMode="regular" id="D4R-LG-pbH">
+                <allowedToolbarItems>
+                    <toolbarItem implicitItemIdentifier="5E2115E2-B0F5-4987-9127-C43ACD52BB31" label="Tools" paletteLabel="Tools" image="NSSmartBadgeTemplate" id="E47-bk-gLQ">
+                        <nil key="toolTip"/>
+                        <size key="minSize" width="20" height="28"/>
+                        <size key="maxSize" width="46" height="33"/>
+                        <popUpButton key="view" verticalHuggingPriority="750" id="ikZ-3H-Vj5">
+                            <rect key="frame" x="14" y="14" width="40" height="28"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" id="DG6-9b-lUW">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="menu"/>
+                                <menu key="menu" id="ows-f7-fEl">
+                                    <items>
+                                        <menuItem image="NSSmartBadgeTemplate" hidden="YES" id="BfQ-KI-JlI"/>
+                                        <menuItem title="Add To Favourites" id="a5K-A3-DOF"/>
+                                        <menuItem title="Play Preview" id="sQJ-n8-THz"/>
+                                    </items>
+                                </menu>
+                            </popUpButtonCell>
+                        </popUpButton>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="mTA-p7-Cmp"/>
+                    <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="nB2-XC-qI4"/>
+                    <toolbarItem implicitItemIdentifier="A12BC802-100B-4599-BFD6-97F404D59B27" label="Search" paletteLabel="Search" id="Lrg-3w-5EN">
+                        <nil key="toolTip"/>
+                        <size key="minSize" width="96" height="22"/>
+                        <size key="maxSize" width="140" height="22"/>
+                        <searchField key="view" wantsLayer="YES" verticalHuggingPriority="750" id="fVs-Ff-gcQ">
+                            <rect key="frame" x="0.0" y="14" width="140" height="22"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" id="sxR-ZL-cXm">
+                                <font key="font" metaFont="system"/>
+                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                            </searchFieldCell>
+                        </searchField>
+                    </toolbarItem>
+                </allowedToolbarItems>
+                <defaultToolbarItems>
+                    <toolbarItem reference="E47-bk-gLQ"/>
+                    <toolbarItem reference="nB2-XC-qI4"/>
+                    <toolbarItem reference="Lrg-3w-5EN"/>
+                </defaultToolbarItems>
+            </toolbar>
             <connections>
                 <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
             </connections>
-            <point key="canvasLocation" x="318" y="347"/>
+            <point key="canvasLocation" x="316" y="228"/>
         </window>
     </objects>
+    <resources>
+        <image name="NSSmartBadgeTemplate" width="14" height="14"/>
+    </resources>
 </document>

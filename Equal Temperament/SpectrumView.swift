@@ -54,9 +54,10 @@ class SpectrumView: ResultView {
 
 	override var intrinsicContentSize: NSSize {
 		get {
-			let		thePrimesProduct = reduce(numeratorPrimes, 1) { (aProd, aPrime) -> UInt in
+			var		thePrimesProduct = reduce(numeratorPrimes, 1) { (aProd, aPrime) -> UInt in
 				return aProd * aPrime;
 			};
+			if thePrimesProduct < 8 { thePrimesProduct = 8; }
 			return NSMakeSize(NSViewNoInstrinsicMetric, spectrumType == .sine
 				? harmonicSpacing+20.0
 				: CGFloat(thePrimesProduct+1)*harmonicSpacing);
