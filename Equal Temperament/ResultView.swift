@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class ResultView: NSControl {
+@IBDesignable class ResultView: NSControl {
 
 	var		commonFactor : Int {
 		get {
@@ -75,8 +75,13 @@ class ResultView: NSControl {
 	}
 }
 
-class BackGround : ResultView {
+@IBDesignable class BackGround : ResultView {
+	enum Orientation {
+		case vertical;
+		case horizontal;
+	};
 	@IBOutlet var		childView : NSView?
+	var					orientation = Orientation.vertical;
 	override func drawRect(dirtyRect: NSRect) {
 		super.drawRect(dirtyRect);
 		var		thePath = NSBezierPath();
@@ -84,13 +89,28 @@ class BackGround : ResultView {
 		if let theSubView : NSView = childView {
 			let		theFrame = theSubView.frame;
 			thePath.lineWidth = 1.0;
-			thePath.moveToPoint(NSMakePoint(NSMinX(theFrame), NSMinY(theFrame)-1.0));
-			thePath.lineToPoint(NSMakePoint(NSMaxX(theFrame), NSMinY(theFrame)-1.0));
-			thePath.moveToPoint(NSMakePoint(NSMinX(theFrame), NSMaxY(theFrame)+1.0));
-			thePath.lineToPoint(NSMakePoint(NSMaxX(theFrame), NSMaxY(theFrame)+1.0));
+			switch orientation {
+			case .vertical:
+				thePath.moveToPoint(NSMakePoint(NSMinX(theFrame), NSMinY(theFrame)-1.0));
+				thePath.lineToPoint(NSMakePoint(NSMaxX(theFrame), NSMinY(theFrame)-1.0));
+				thePath.moveToPoint(NSMakePoint(NSMinX(theFrame), NSMaxY(theFrame)+1.0));
+				thePath.lineToPoint(NSMakePoint(NSMaxX(theFrame), NSMaxY(theFrame)+1.0));
+			case .horizontal:
+				thePath.moveToPoint(NSMakePoint(NSMinX(theFrame)-1.0,NSMinY(theFrame)));
+				thePath.lineToPoint(NSMakePoint(NSMinX(theFrame)-1.0,NSMaxY(theFrame)));
+				thePath.moveToPoint(NSMakePoint(NSMaxX(theFrame)+1.0,NSMinY(theFrame)));
+				thePath.lineToPoint(NSMakePoint(NSMaxX(theFrame)+1.0,NSMaxY(theFrame)));
+			}
 			NSColor.darkGrayColor().setStroke();
 			thePath.stroke();
 		}
+	}
+}
+
+extension BackGround {
+	@IBInspectable var horizontal: Bool {
+		get { return orientation == .horizontal; }
+		set { self.orientation = newValue ? .horizontal : .vertical; }
 	}
 }
 

@@ -58,7 +58,7 @@
                                 <font key="titleFont" metaFont="system"/>
                             </box>
                             <box verticalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="060-us-XDf">
-                                <rect key="frame" x="20" y="546" width="470" height="5"/>
+                                <rect key="frame" x="20" y="546" width="469.5" height="5"/>
                                 <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                                 <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <font key="titleFont" metaFont="system"/>
@@ -854,10 +854,10 @@
                                             <rect key="frame" x="10" y="25" width="379" height="523"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <view misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y6c-Rw-DJR" customClass="ResultView" customModule="Equal_Temperament" customModuleProvider="target">
+                                                <view translatesAutoresizingMaskIntoConstraints="NO" id="Y6c-Rw-DJR" customClass="ResultView" customModule="Equal_Temperament" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="379" height="523"/>
                                                     <subviews>
-                                                        <tabView misplaced="YES" drawsBackground="NO" controlSize="small" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="ZgS-OV-6tB">
+                                                        <tabView drawsBackground="NO" controlSize="small" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="ZgS-OV-6tB">
                                                             <rect key="frame" x="20" y="34" width="339" height="477"/>
                                                             <tabViewItems>
                                                                 <tabViewItem label="Linear" identifier="1" id="kry-XU-6OA">
@@ -928,8 +928,8 @@
                                             <rect key="frame" x="10" y="25" width="379" height="523"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <view misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EQp-0k-wwi" customClass="BackGround" customModule="Equal_Temperament" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="1" width="379" height="522"/>
+                                                <view translatesAutoresizingMaskIntoConstraints="NO" id="EQp-0k-wwi" customClass="BackGround" customModule="Equal_Temperament" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="379" height="523"/>
                                                     <subviews>
                                                         <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" horizontalScrollElasticity="none" verticalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="gfn-18-mIK">
                                                             <rect key="frame" x="20" y="34" width="339" height="469"/>
@@ -938,16 +938,16 @@
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                 <subviews>
                                                                     <view misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K85-It-UOC" customClass="WaveView" customModule="Equal_Temperament" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="783" width="339" height="800"/>
+                                                                        <rect key="frame" x="0.0" y="1173" width="339" height="469"/>
                                                                         <constraints>
-                                                                            <constraint firstAttribute="height" constant="800" placeholder="YES" id="wnb-gw-t94"/>
+                                                                            <constraint firstAttribute="width" constant="339" placeholder="YES" id="fV3-OJ-Niy"/>
                                                                         </constraints>
                                                                     </view>
                                                                 </subviews>
                                                                 <constraints>
                                                                     <constraint firstItem="K85-It-UOC" firstAttribute="leading" secondItem="8Ds-Zj-zNI" secondAttribute="leading" id="57Y-rn-ATS"/>
                                                                     <constraint firstAttribute="bottom" secondItem="K85-It-UOC" secondAttribute="bottom" id="hMa-uZ-oAg"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="K85-It-UOC" secondAttribute="trailing" id="xUQ-Ml-x10"/>
+                                                                    <constraint firstItem="K85-It-UOC" firstAttribute="top" secondItem="8Ds-Zj-zNI" secondAttribute="top" id="iy4-Vm-qBJ"/>
                                                                 </constraints>
                                                             </clipView>
                                                             <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" controlSize="mini" horizontal="YES" id="VFz-Ix-YIq">
@@ -981,6 +981,9 @@
                                                         <constraint firstAttribute="centerX" secondItem="3Oy-Pf-Qrw" secondAttribute="centerX" id="gqu-9k-ers"/>
                                                         <constraint firstItem="gfn-18-mIK" firstAttribute="top" secondItem="EQp-0k-wwi" secondAttribute="top" constant="20" id="w7f-nE-LOb"/>
                                                     </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="horizontal" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
                                                     <connections>
                                                         <outlet property="childView" destination="gfn-18-mIK" id="rEy-vp-Aha"/>
                                                     </connections>
@@ -999,8 +1002,8 @@
                                             <rect key="frame" x="10" y="25" width="379" height="523"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <customView misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7lT-5J-OhE" customClass="BackGround" customModule="Equal_Temperament" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="1" width="379" height="523"/>
+                                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="7lT-5J-OhE" customClass="BackGround" customModule="Equal_Temperament" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="379" height="523"/>
                                                     <subviews>
                                                         <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iox-ag-gBK">
                                                             <rect key="frame" x="116" y="6" width="148" height="20"/>
