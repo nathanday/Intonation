@@ -107,6 +107,51 @@ class Document : NSDocument {
 	}
 	var		tonePlayer = TonePlayer();
 
+	dynamic var		selectedScaleDisplayType : Int {
+		set { NSUserDefaults.standardUserDefaults().setInteger(newValue, forKey: "selectedScaleDisplayType"); }
+		get { return NSUserDefaults.standardUserDefaults().integerForKey("selectedScaleDisplayType"); }
+	}
+
+	dynamic var		selectedWaveViewMode : Int {
+		set {
+			NSUserDefaults.standardUserDefaults().setInteger(newValue, forKey: "selectedWaveViewMode");
+			updateWaveViewDisplayMode();
+		}
+		get { return NSUserDefaults.standardUserDefaults().integerForKey("selectedWaveViewMode"); }
+	}
+	
+	dynamic var		selectedSpectrumType : Int {
+		set {
+			NSUserDefaults.standardUserDefaults().setInteger(newValue, forKey: "selectedSpectrumType");
+			updateSelectedSpectrumType();
+		}
+		get { return NSUserDefaults.standardUserDefaults().integerForKey("selectedSpectrumType"); }
+	}
+	
+	private func updateWaveViewDisplayMode() {
+		if let theWaveView = waveView {
+			switch selectedWaveViewMode {
+			case 1:
+				theWaveView.displayMode = .combined;
+			default:
+				theWaveView.displayMode = .overlayed;
+			}
+		}
+	}
+	
+	private func updateSelectedSpectrumType() {
+		if let theSpectrumView = spectrumView {
+			switch selectedSpectrumType {
+			case 1:
+				theSpectrumView.spectrumType = .saw;
+			case 2:
+				theSpectrumView.spectrumType = .square;
+			default:
+				theSpectrumView.spectrumType = .sine;
+			}
+		}
+	}
+	
 	dynamic var     everyInterval : [EqualTemperamentEntry] = [];
 	dynamic var		smallestError : Double { get { return !smallestErrorEntries.isEmpty ? smallestErrorEntries.first!.error : 0.0; } }
 	dynamic var     averageError : Double = 0.0
@@ -157,6 +202,8 @@ class Document : NSDocument {
 			theButtonFrame.origin.y -= NSHeight(thePanel.frame);
 			thePanel.setFrameOrigin(theButtonFrame.origin);
 		}
+		updateWaveViewDisplayMode();
+		updateSelectedSpectrumType();
 	}
 
 	override func dataOfType( typeName: String, error anError: NSErrorPointer) -> NSData? {
@@ -234,19 +281,7 @@ class Document : NSDocument {
 	@IBAction func playAction( aSender: NSSegmentedControl ) {
 		tonePlayer.play(ratios: [1.0], chord: aSender.selectedSegment == 0 );
 	}
-	
-	@IBAction func selectSpectrumType( aSender: NSSegmentedControl ) {
-		if let theSpectrumView = spectrumView {
-			switch aSender.selectedSegment {
-			case 1:
-				theSpectrumView.spectrumType = .saw;
-			case 2:
-				theSpectrumView.spectrumType = .square;
-			default:
-				theSpectrumView.spectrumType = .sine;
-			}
-		}
-	}
+
 
 	override var windowNibName: String! { return "Document"; }
 

@@ -28,6 +28,7 @@
 		D89543871996347F00A091A4 /* Rational.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89543841996347F00A091A4 /* Rational.swift */; };
 		D895438A1996354100A091A4 /* Document.xib in Resources */ = {isa = PBXBuildFile; fileRef = D89543881996354100A091A4 /* Document.xib */; };
 		D895438B1996363700A091A4 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89543821996347F00A091A4 /* Document.swift */; };
+		D8B5E23F1B0386F200F20584 /* InitialUserDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = D8B5E23E1B0386F200F20584 /* InitialUserDefaults.plist */; };
 		D8B9020E1AD491E30015B5E2 /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B9020C1AD491E30015B5E2 /* PreferencesWindowController.swift */; };
 		D8B9020F1AD491E30015B5E2 /* PreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8B9020D1AD491E30015B5E2 /* PreferencesWindowController.xib */; };
 		D8C343C81AE109E200F5494A /* SpectrumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C343C71AE109E200F5494A /* SpectrumView.swift */; };
@@ -86,6 +87,7 @@
 		D89543831996347F00A091A4 /* EqualTemperamentEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EqualTemperamentEntry.swift; sourceTree = "<group>"; };
 		D89543841996347F00A091A4 /* Rational.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rational.swift; sourceTree = "<group>"; };
 		D89543891996354100A091A4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Document.xib; sourceTree = "<group>"; };
+		D8B5E23E1B0386F200F20584 /* InitialUserDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = InitialUserDefaults.plist; sourceTree = "<group>"; };
 		D8B9020C1AD491E30015B5E2 /* PreferencesWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
 		D8B9020D1AD491E30015B5E2 /* PreferencesWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreferencesWindowController.xib; sourceTree = "<group>"; };
 		D8C343C71AE109E200F5494A /* SpectrumView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpectrumView.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				D87C27891AF3A95900C2BF7B /* Chords.plist */,
+				D8B5E23E1B0386F200F20584 /* InitialUserDefaults.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -307,6 +310,7 @@
 				D87356E81ADA0793006DAFEB /* ChordSelectorWindowController.xib in Resources */,
 				D895436A1996345200A091A4 /* Images.xcassets in Resources */,
 				D895436D1996345200A091A4 /* MainMenu.xib in Resources */,
+				D8B5E23F1B0386F200F20584 /* InitialUserDefaults.plist in Resources */,
 				D870F0B91AB5B7F100CFD04F /* Notes in Resources */,
 				D87C278A1AF3A95900C2BF7B /* Chords.plist in Resources */,
 				D895438A1996354100A091A4 /* Document.xib in Resources */,

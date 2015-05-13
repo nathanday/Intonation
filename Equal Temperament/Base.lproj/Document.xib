@@ -879,6 +879,9 @@
                                                                     </view>
                                                                 </tabViewItem>
                                                             </tabViewItems>
+                                                            <connections>
+                                                                <binding destination="-2" name="selectedIndex" keyPath="self.selectedScaleDisplayType" id="fp7-sx-2dz"/>
+                                                            </connections>
                                                         </tabView>
                                                         <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kfm-Tg-uEs">
                                                             <rect key="frame" x="103" y="6" width="172" height="20"/>
@@ -890,7 +893,7 @@
                                                                 </segments>
                                                             </segmentedCell>
                                                             <connections>
-                                                                <action selector="takeSelectedTabViewItemFromSender:" target="ZgS-OV-6tB" id="MAt-27-c40"/>
+                                                                <binding destination="-2" name="selectedTag" keyPath="self.selectedScaleDisplayType" id="3fm-2n-WwV"/>
                                                             </connections>
                                                         </segmentedControl>
                                                     </subviews>
@@ -973,10 +976,10 @@
                                                                     <segment label="Overlayed" width="70" selected="YES"/>
                                                                     <segment label="Summed" width="69" tag="1"/>
                                                                 </segments>
+                                                                <connections>
+                                                                    <binding destination="-2" name="selectedTag" keyPath="self.selectedWaveViewMode" id="dI3-dc-b2m"/>
+                                                                </connections>
                                                             </segmentedCell>
-                                                            <connections>
-                                                                <action selector="selectWaveViewMode:" target="-2" id="d0p-R7-y90"/>
-                                                            </connections>
                                                         </segmentedControl>
                                                     </subviews>
                                                     <constraints>
@@ -1022,7 +1025,7 @@
                                                                 </segments>
                                                             </segmentedCell>
                                                             <connections>
-                                                                <action selector="selectSpectrumType:" target="-2" id="1fb-2b-1Ob"/>
+                                                                <binding destination="-2" name="selectedTag" keyPath="self.selectedSpectrumType" id="laB-L8-khd"/>
                                                             </connections>
                                                         </segmentedControl>
                                                         <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" verticalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="jvr-UO-Y8z">
@@ -1079,6 +1082,9 @@
                                         </view>
                                     </tabViewItem>
                                 </tabViewItems>
+                                <connections>
+                                    <binding destination="tZN-Kl-w5K" name="selectedIndex" keyPath="values.selectedRationsView" id="Eae-jn-tar"/>
+                                </connections>
                             </tabView>
                         </subviews>
                         <constraints>
@@ -1108,7 +1114,7 @@
             <connections>
                 <outlet property="delegate" destination="-2" id="0bl-1N-x8E"/>
             </connections>
-            <point key="canvasLocation" x="-713.5" y="-89.5"/>
+            <point key="canvasLocation" x="-983.5" y="-71.5"/>
         </window>
         <arrayController objectClassName="EqualTemperamentEntry" editable="NO" id="cy8-kx-1Au">
             <declaredKeys>
@@ -1126,5 +1132,6 @@
                 <binding destination="-2" name="contentArray" keyPath="self.everyInterval" id="46l-5F-1Wb"/>
             </connections>
         </arrayController>
+        <userDefaultsController representsSharedInstance="YES" id="tZN-Kl-w5K"/>
     </objects>
 </document>
