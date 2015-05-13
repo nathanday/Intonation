@@ -234,18 +234,7 @@ class Document : NSDocument {
 	@IBAction func playAction( aSender: NSSegmentedControl ) {
 		tonePlayer.play(ratios: [1.0], chord: aSender.selectedSegment == 0 );
 	}
-
-	@IBAction func selectWaveViewMode( aSender: NSSegmentedControl ) {
-		if let theWaveView = waveView {
-			switch aSender.selectedSegment {
-			case 1:
-				theWaveView.displayMode = .combined;
-			default:
-				theWaveView.displayMode = .overlayed;
-			}
-		}
-	}
-
+	
 	@IBAction func selectSpectrumType( aSender: NSSegmentedControl ) {
 		if let theSpectrumView = spectrumView {
 			switch aSender.selectedSegment {

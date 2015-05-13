@@ -100,24 +100,24 @@ class HarmonicView: ResultView {
 
 		return theFractionPoint * NSHeight(aBounds)/CGFloat(lengthForRange(octaveRange)) + NSMinY(aBounds);
 	}
-
 	override func drawRect(dirtyRect: NSRect) {
+		let		theHarmonicSpacing : CGFloat = max(20.0,CGFloat(10-selectedRatios.count)*5.0);
 		var		theBounds = NSInsetRect(self.bounds, 20.0, 20.0);
+		let		theXOrigin = max(NSMidX(theBounds)-CGFloat(max(0,selectedRatios.count))*theHarmonicSpacing*0.55-8.0,NSMinX(self.bounds)+20.0);
 		theBounds.origin.y += 10.0;
         super.drawRect(dirtyRect)
 
 		func drawOctave( anOctave: UInt ) {
 			let		theSize = NSFont.systemFontSizeForControlSize(NSControlSize.RegularControlSize)*1.25;
 			let		theOctaveHeight = NSHeight(theBounds)/CGFloat(lengthForRange(octaveRange));
-			let		theX = NSMinX(theBounds)+10.0;
 			let		theY = floor((CGFloat(anOctave-octaveRange.startIndex)+0.5) * theOctaveHeight+NSMinY(theBounds));
-			drawText(string: "\(anOctave+1)", size:theSize, point: NSMakePoint(theX-2.5, theY-theSize*0.55), color: NSColor.darkGrayColor());
+			drawText(string: "\(anOctave+1)", size:theSize, point: NSMakePoint(theXOrigin-2.5, theY-theSize*0.55), color: NSColor.darkGrayColor());
 			var		thePath = NSBezierPath();
 			thePath.lineWidth = 0.5;
-			thePath.moveToPoint(NSMakePoint(theX+3.5, theY+theOctaveHeight/2.0-5.0));
-			thePath.lineToPoint(NSMakePoint(theX+3.5, theY+theSize*0.75));
-			thePath.moveToPoint(NSMakePoint(theX+3.5, theY-theSize*0.45));
-			thePath.lineToPoint(NSMakePoint(theX+3.5, theY-theOctaveHeight/2.0+5.0));
+			thePath.moveToPoint(NSMakePoint(theXOrigin+3.5, theY+theOctaveHeight/2.0-5.0));
+			thePath.lineToPoint(NSMakePoint(theXOrigin+3.5, theY+theSize*0.75));
+			thePath.moveToPoint(NSMakePoint(theXOrigin+3.5, theY-theSize*0.45));
+			thePath.lineToPoint(NSMakePoint(theXOrigin+3.5, theY-theOctaveHeight/2.0+5.0));
 			NSColor.darkGrayColor().setStroke();
 			thePath.lineCapStyle = NSLineCapStyle.RoundLineCapStyle
 			thePath.stroke()
@@ -130,26 +130,26 @@ class HarmonicView: ResultView {
 			if theSubInterval == 0 {
 				let		theColor = NSColor(deviceRed: 0.0, green: 0.0, blue: 0.75, alpha: 1.0);
 				thePath.lineWidth = 2.0;
-				thePath.moveToPoint(NSMakePoint(NSMinX(theBounds)+10.0, floor(theY*2.0)*0.5+0.25));
-				thePath.lineToPoint(NSMakePoint(NSMinX(theBounds)+38.0, floor(theY*2.0)*0.5+0.25));
-				thePath.moveToPoint(NSMakePoint(NSMinX(theBounds)+48.0+6.5*CGFloat(log10(aHarmonic)), floor(theY*2.0)*0.5+0.25));
-				thePath.lineToPoint(NSMakePoint(NSMinX(theBounds)+72.0, floor(theY*2.0)*0.5+0.25));
+				thePath.moveToPoint(NSMakePoint(theXOrigin, floor(theY*2.0)*0.5+0.25));
+				thePath.lineToPoint(NSMakePoint(theXOrigin+28.0, floor(theY*2.0)*0.5+0.25));
+				thePath.moveToPoint(NSMakePoint(theXOrigin+38.0+6.5*CGFloat(log10(aHarmonic)), floor(theY*2.0)*0.5+0.25));
+				thePath.lineToPoint(NSMakePoint(theXOrigin+62.0, floor(theY*2.0)*0.5+0.25));
 				theColor.setStroke();
-				drawText(string: "\(aHarmonic)", size:NSFont.systemFontSizeForControlSize(NSControlSize.SmallControlSize), point: NSMakePoint(NSMinX(theBounds)+39.5, floor(theY*2.0)*0.5-7.5), color:theColor );
+				drawText(string: "\(aHarmonic)", size:NSFont.systemFontSizeForControlSize(NSControlSize.SmallControlSize), point: NSMakePoint(theXOrigin+29.5, floor(theY*2.0)*0.5-7.5), color:theColor );
 			}
 			else {
-				thePath.moveToPoint(NSMakePoint(NSMinX(theBounds)+40.0, floor(theY*2.0)*0.5+0.25));
+				thePath.moveToPoint(NSMakePoint(theXOrigin+30.0, floor(theY*2.0)*0.5+0.25));
 				thePath.lineWidth = 1.0;
 				if (aHarmonic)%4 == 0 {
-					thePath.lineToPoint(NSMakePoint(NSMinX(theBounds)+68.0, floor(theY*2.0)*0.5+0.25));
+					thePath.lineToPoint(NSMakePoint(theXOrigin+58.0, floor(theY*2.0)*0.5+0.25));
 					NSColor.darkGrayColor().setStroke();
 				}
 				else if (aHarmonic)%2 == 0 {
-					thePath.lineToPoint(NSMakePoint(NSMinX(theBounds)+64.0, floor(theY*2.0)*0.5+0.25));
+					thePath.lineToPoint(NSMakePoint(theXOrigin+54.0, floor(theY*2.0)*0.5+0.25));
 					NSColor.grayColor().setStroke();
 				}
 				else {
-					thePath.lineToPoint(NSMakePoint(NSMinX(theBounds)+60.0, floor(theY*2.0)*0.5+0.25));
+					thePath.lineToPoint(NSMakePoint(theXOrigin+50.0, floor(theY*2.0)*0.5+0.25));
 					NSColor.lightGrayColor().setStroke();
 				}
 			}
@@ -161,9 +161,9 @@ class HarmonicView: ResultView {
 			let		theSize = NSFont.systemFontSizeForControlSize(NSControlSize.SmallControlSize);
 			if aRatio == 1 {
 				var		thePath = NSBezierPath();
-				let		theX = NSMinX(theBounds)+85.0+CGFloat(anOf)*20.0;
-				thePath.moveToPoint(NSMakePoint(NSMinX(theBounds)+75.0, theYDenom ));
-				thePath.lineToPoint(NSMakePoint(theX+3.0, theYDenom));
+				let		theX = theXOrigin+75.0+CGFloat(anOf)*theHarmonicSpacing;
+				thePath.moveToPoint(NSMakePoint(theXOrigin+65.0, theYDenom ));
+				thePath.lineToPoint(NSMakePoint(theX+5.0, theYDenom));
 				NSColor(calibratedHue: hueForIndex(anIndex), saturation: 1.0, brightness: 0.75, alpha: 1.0).setStroke();
 				thePath.lineWidth = 4.0;
 				thePath.stroke()
@@ -174,14 +174,14 @@ class HarmonicView: ResultView {
 				let		theYNum = yValueForHarmonic( UInt(theNum), bounds: theBounds );
 				let		theYDelta = abs(theYNum-theYDenom);
 				var		thePath = NSBezierPath();
-				let		theX = NSMinX(theBounds)+85.0+CGFloat(anIndex)*20.0;
+				let		theX = theXOrigin+75.0+CGFloat(anIndex)*theHarmonicSpacing;
 
-				thePath.moveToPoint(NSMakePoint(NSMinX(theBounds)+75.0, theYNum ));
+				thePath.moveToPoint(NSMakePoint(theXOrigin+65.0, theYNum ));
 				thePath.lineToPoint(NSMakePoint(theX-10.0, theYNum));
 				thePath.curveToPoint( NSMakePoint(theX, theYNum-theYDelta/2.0+6.0), controlPoint1: NSMakePoint(theX, theYNum), controlPoint2: NSMakePoint(theX, theYNum));
 				thePath.moveToPoint(NSMakePoint(theX, theYDenom+theYDelta/2.0-6.0));
 				thePath.curveToPoint( NSMakePoint(theX-10.0, theYDenom), controlPoint1: NSMakePoint(theX, theYDenom), controlPoint2: NSMakePoint(theX, theYDenom));
-				thePath.lineToPoint(NSMakePoint(NSMinX(theBounds)+75.0, theYDenom));
+				thePath.lineToPoint(NSMakePoint(theXOrigin+65.0, theYDenom));
 				NSColor(calibratedHue: hueForIndex(anIndex), saturation: 1.0, brightness: 0.75, alpha: 1.0).setStroke();
 				thePath.lineWidth = 4.0;
 				thePath.stroke()
