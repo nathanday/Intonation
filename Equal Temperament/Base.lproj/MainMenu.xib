@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7702" systemVersion="14E11f" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7702" systemVersion="14E17e" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7702"/>
     </dependencies>
@@ -349,17 +349,17 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Select" id="w3K-r9-U3W">
                         <items>
-                            <menuItem title="Select a Chord…" keyEquivalent="t" id="O7X-7B-xhh">
+                            <menuItem title="Select a Chord or Scale…" keyEquivalent="t" id="O7X-7B-xhh">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                 <connections>
                                     <action selector="showChordSelectorAction:" target="9el-Bn-x7n" id="17B-eo-RZl"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="12j-AV-tsq"/>
-                            <menuItem title="Save Chord" id="7Yy-cg-vmf">
+                            <menuItem title="Save Chord or Scale" id="7Yy-cg-vmf">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Save Chord As…" id="DOI-Kr-CJ5">
+                            <menuItem title="Save Chord or Scale As…" id="DOI-Kr-CJ5">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                         </items>

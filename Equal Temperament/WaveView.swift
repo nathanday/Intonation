@@ -25,8 +25,15 @@ class WaveView: ResultView {
 			setNeedsDisplay();
 		}
 	}
+	
+	var		xScale : Float = 200.0 {
+		didSet {
+			invalidateIntrinsicContentSize();
+			setNeedsDisplay();
+		}
+	}
 
-	override var intrinsicContentSize: NSSize { get { return NSMakeSize(CGFloat(commonFactor)*200.0, NSViewNoInstrinsicMetric); } }
+	override var intrinsicContentSize: NSSize { get { return NSMakeSize(CGFloat(2*commonFactor)*CGFloat(xScale), NSViewNoInstrinsicMetric); } }
 
 	override func drawRect(dirtyRect: NSRect) {
 		var		theBounds = self.bounds;

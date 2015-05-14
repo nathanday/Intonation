@@ -6,5 +6,7 @@
 	<integer>1</integer>
 	<key>selectedSpectrumType</key>
 	<integer>1</integer>
+	<key>selectedWaveViewScale</key>
+	<integer>1</integer>
 </dict>
 </plist>

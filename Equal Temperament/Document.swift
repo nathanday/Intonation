@@ -55,7 +55,7 @@ class Document : NSDocument {
 		}
 	}
 	var		separatePrimeLimit : Bool = false { didSet { calculateAllIntervals(); } }
-	var		oddLimit : UInt = 15 {
+	var		oddLimit : UInt = 17 {
 		didSet {
 			if( oddLimit%2 == 0 ) { oddLimit++; }
 			calculateAllIntervals();
@@ -119,6 +119,14 @@ class Document : NSDocument {
 		}
 		get { return NSUserDefaults.standardUserDefaults().integerForKey("selectedWaveViewMode"); }
 	}
+
+	dynamic var		selectedWaveViewScale : Int {
+		set {
+			NSUserDefaults.standardUserDefaults().setInteger(newValue, forKey: "selectedWaveViewScale");
+			updateWaveViewScale();
+		}
+		get { return NSUserDefaults.standardUserDefaults().integerForKey("selectedWaveViewScale"); }
+	}
 	
 	dynamic var		selectedSpectrumType : Int {
 		set {
@@ -135,6 +143,17 @@ class Document : NSDocument {
 				theWaveView.displayMode = .combined;
 			default:
 				theWaveView.displayMode = .overlayed;
+			}
+		}
+	}
+	
+	private func updateWaveViewScale() {
+		if let theWaveView = waveView {
+			switch selectedWaveViewScale {
+			case 1:
+				theWaveView.xScale = 200.0;
+			default:
+				theWaveView.xScale = 50.0;
 			}
 		}
 	}
@@ -204,6 +223,7 @@ class Document : NSDocument {
 		}
 		updateWaveViewDisplayMode();
 		updateSelectedSpectrumType();
+		updateWaveViewScale();
 	}
 
 	override func dataOfType( typeName: String, error anError: NSErrorPointer) -> NSData? {

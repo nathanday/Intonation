@@ -98,7 +98,7 @@ class LinearScaleView : ScaleView {
 
 class PitchConstellationView : ScaleView {
 	private var		maximumRadius : CGFloat { get { return min(NSWidth(self.bounds), NSHeight(self.bounds))*0.5; } }
-	private var		axisesRadius : CGFloat { get { return maximumRadius < 80.0 ? maximumRadius : 80.0; } }
+	private var		axisesRadius : CGFloat { get { return min(maximumRadius-80.0, 320.0); } }
 	override func drawJustIntonationRatio( ratio aRatio : Rational, hilighted aHilighted : Bool, index anIndex: Int, previousValue aPreviousY : CGFloat ) -> CGFloat {
 		let		theBounds = self.bounds;
 		let		theAngle = CGFloat(log2(aRatio.toDouble) * 2.0*M_PI);

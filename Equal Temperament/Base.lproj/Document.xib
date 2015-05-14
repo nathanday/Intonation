@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14E17e" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7702" systemVersion="14E17e" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7702"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="Document" customModule="Equal_Temperament">
@@ -271,7 +271,7 @@
                                     <action selector="toggle:" target="Q7j-Gh-TTU" id="5g8-Ki-z90"/>
                                 </connections>
                             </button>
-                            <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FZ6-Jb-jU0">
+                            <button horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FZ6-Jb-jU0">
                                 <rect key="frame" x="20" y="400" width="13" height="13"/>
                                 <buttonCell key="cell" type="disclosureTriangle" bezelStyle="disclosure" imagePosition="above" alignment="left" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="v9N-WN-7OS">
                                     <behavior key="behavior" pushIn="YES" changeBackground="YES" changeGray="YES" lightByContents="YES"/>
@@ -843,7 +843,7 @@
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vvG-6Z-vMY">
                                 <rect key="frame" x="-2" y="560" width="389" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="&lt;ratio&gt;" id="ClO-Td-8Da">
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" alignment="center" title="&lt;ratio&gt;" id="ClO-Td-8Da">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -981,13 +981,32 @@
                                                                 </connections>
                                                             </segmentedCell>
                                                         </segmentedControl>
+                                                        <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nhc-Le-5XX">
+                                                            <rect key="frame" x="290" y="5" width="71" height="20"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="67" id="VZh-7R-a1x"/>
+                                                            </constraints>
+                                                            <segmentedCell key="cell" controlSize="small" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="N8Q-1D-Ja3">
+                                                                <font key="font" metaFont="smallSystem"/>
+                                                                <segments>
+                                                                    <segment label="1×" width="32" selected="YES"/>
+                                                                    <segment label="4×" width="32" tag="1"/>
+                                                                </segments>
+                                                            </segmentedCell>
+                                                            <connections>
+                                                                <binding destination="-2" name="selectedTag" keyPath="self.selectedWaveViewScale" id="ITI-18-JHz"/>
+                                                            </connections>
+                                                        </segmentedControl>
                                                     </subviews>
                                                     <constraints>
+                                                        <constraint firstAttribute="bottom" secondItem="nhc-Le-5XX" secondAttribute="bottom" constant="7" id="5kq-8D-6v5"/>
+                                                        <constraint firstAttribute="trailing" secondItem="nhc-Le-5XX" secondAttribute="trailing" constant="20" id="7em-WZ-w58"/>
                                                         <constraint firstAttribute="bottom" secondItem="3Oy-Pf-Qrw" secondAttribute="bottom" constant="8" id="9CQ-xe-0Nh"/>
                                                         <constraint firstAttribute="trailing" secondItem="gfn-18-mIK" secondAttribute="trailing" constant="20" id="F9r-ZO-OGK"/>
                                                         <constraint firstItem="3Oy-Pf-Qrw" firstAttribute="top" secondItem="gfn-18-mIK" secondAttribute="bottom" constant="8" id="Fve-Ur-3Cj"/>
                                                         <constraint firstItem="gfn-18-mIK" firstAttribute="leading" secondItem="EQp-0k-wwi" secondAttribute="leading" constant="20" id="U2D-W2-TQ9"/>
                                                         <constraint firstAttribute="centerX" secondItem="3Oy-Pf-Qrw" secondAttribute="centerX" id="gqu-9k-ers"/>
+                                                        <constraint firstItem="nhc-Le-5XX" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="3Oy-Pf-Qrw" secondAttribute="trailing" constant="8" id="uBO-Gx-jd5"/>
                                                         <constraint firstItem="gfn-18-mIK" firstAttribute="top" secondItem="EQp-0k-wwi" secondAttribute="top" constant="20" id="w7f-nE-LOb"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
@@ -1021,7 +1040,7 @@
                                                                 <segments>
                                                                     <segment label="Sine" width="42"/>
                                                                     <segment label="Saw" width="40" selected="YES" tag="1"/>
-                                                                    <segment label="Square" width="58"/>
+                                                                    <segment label="Square" width="58" tag="2"/>
                                                                 </segments>
                                                             </segmentedCell>
                                                             <connections>
@@ -1114,7 +1133,7 @@
             <connections>
                 <outlet property="delegate" destination="-2" id="0bl-1N-x8E"/>
             </connections>
-            <point key="canvasLocation" x="-983.5" y="-71.5"/>
+            <point key="canvasLocation" x="-774.5" y="-10.5"/>
         </window>
         <arrayController objectClassName="EqualTemperamentEntry" editable="NO" id="cy8-kx-1Au">
             <declaredKeys>
