@@ -21,7 +21,7 @@ extension Rational {
 	}
 
 	var primeLimit : UInt? {
-		var		theResult : UInt? = nil;
+		let		theResult : UInt? = nil;
 		if numerator > 0 && denominator > 0 {
 			let		theNumeratorLargestPrimeFactor = UInt(numerator).largestPrimeFactor;
 			let		theDenominatorLargestPrimeFactor = UInt(denominator).largestPrimeFactor;
@@ -31,7 +31,7 @@ extension Rational {
 	}
 }
 
-class EqualTemperamentEntry : NSObject, Printable, Hashable {
+class EqualTemperamentEntry : NSObject {
 	var justIntonationRatio : Rational
 	var isClose : Bool;
     dynamic var justIntonationRatioToString : String { return justIntonationRatio.ratioString; }
@@ -41,11 +41,11 @@ class EqualTemperamentEntry : NSObject, Printable, Hashable {
 	var closestEqualTemperamentIntervalNumber : UInt { return UInt(12.0*Double(log2(justIntonationRatio.toDouble))+0.5); }
 	var closestIntervalNumber : UInt { return UInt(Double(self.intervalCount)*Double(log2(justIntonationRatio.toDouble))+0.5); }
 	var equalTemperamentRatio : Double { return pow(2.0,Double(self.closestEqualTemperamentIntervalNumber)/Double(self.intervalCount)); }
-	var justIntonationCents : Double { return centsEquivelentForRatio( self.justIntonationRatio.toDouble, 12 ); }
-	var justIntonationPercent : Double { return centsEquivelentForRatio( self.justIntonationRatio.toDouble, self.intervalCount ); }
+	var justIntonationCents : Double { return centsEquivelentForRatio( self.justIntonationRatio.toDouble, n: 12 ); }
+	var justIntonationPercent : Double { return centsEquivelentForRatio( self.justIntonationRatio.toDouble, n: self.intervalCount ); }
 	var error : Double { return equalTemperamentRatio-justIntonationRatio.toDouble; }
 	var error12ETCent : Double {
-		return 100.0*Double(closestEqualTemperamentIntervalNumber)-centsEquivelentForRatio( self.justIntonationRatio.toDouble, 12 );
+		return 100.0*Double(closestEqualTemperamentIntervalNumber)-centsEquivelentForRatio( self.justIntonationRatio.toDouble, n: 12 );
 	}
 	var oddLimit : UInt { return justIntonationRatio.oddLimit; }
 
@@ -54,7 +54,7 @@ class EqualTemperamentEntry : NSObject, Printable, Hashable {
 	var degreeName : String = "";
 
 	var errorNETCent : Double {
-		return Double(closestIntervalNumber)*100.0-centsEquivelentForRatio( justIntonationRatio.toDouble, intervalCount );
+		return Double(closestIntervalNumber)*100.0-centsEquivelentForRatio( justIntonationRatio.toDouble, n: intervalCount );
 	}
 
 	var closestIntervalNumberDescription : String { return isClose ? "\(closestIntervalNumber)" : ""; }
@@ -165,7 +165,7 @@ extension EqualTemperamentEntry {
 
 func ==(a: EqualTemperamentEntry, b: EqualTemperamentEntry) -> Bool { return a.justIntonationRatio==b.justIntonationRatio; }
 
-class EqualTemperamentCollection : Printable {
+class EqualTemperamentCollection : CustomStringConvertible {
 	var	everyEqualTemperamentEntry = Set<EqualTemperamentEntry>();
 	var limits : (numeratorPrime:UInt,denominatorPrime:UInt,numeratorOdd:UInt,denominatorOdd:UInt);
 	var maximumError : Double;
@@ -258,7 +258,7 @@ class EqualTemperamentCollection : Printable {
 			for theEntry in everyEqualTemperamentEntry {
 				theResult.append(theEntry as EqualTemperamentEntry);
 			}
-			sort( &theResult, { return $0.justIntonationCents < $1.justIntonationCents; } );
+			theResult.sortInPlace({ return $0.justIntonationCents < $1.justIntonationCents; } );
 			return theResult;
 		}
 	}

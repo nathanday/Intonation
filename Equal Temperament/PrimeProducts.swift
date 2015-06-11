@@ -18,10 +18,10 @@ struct PrimeProducts : SequenceType {
 		productRange = aRange;
 	}
 
-	func generate() -> GeneratorOf<UInt> {
+	func generate() -> AnyGenerator<UInt> {
 		var		value : UInt = productRange.startIndex - 1;
-		return GeneratorOf<UInt> {
-			do {
+		return anyGenerator {
+			repeat {
 				value += 1;
 				if value > self.productRange.endIndex { return nil; }
 			} while value.largestPrimeFactor > self.maxPrime;

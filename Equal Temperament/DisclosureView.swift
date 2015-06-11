@@ -19,7 +19,7 @@ class DisclosureView : NSView {
 	var		orientation : DisclosureView.Orientation = .vertical;
 	var		colapsed : Bool {
 		get { return hidden; }
-		set { hidden = newValue; }
+		set( aValue ) { hidden = aValue; }
 	}
 
 	override var	hidden : Bool {

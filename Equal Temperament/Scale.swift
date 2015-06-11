@@ -18,7 +18,7 @@ struct Scale : SequenceType {
 
 	init(name aName: String, element anElements: Rational...) {
 		name = aName;
-		everyDegree = anElements.sorted({ (a:Rational, b:Rational) -> Bool in return false; });
+		everyDegree = anElements.sort({ (a:Rational, b:Rational) -> Bool in return false; });
 	}
 
 	subscript(anIndex:Int) -> Rational! {
@@ -27,13 +27,12 @@ struct Scale : SequenceType {
 		}
 	}
 
-	func generate() -> GeneratorOf<Rational> {
+	func generate() -> AnyGenerator<Rational> {
 		var		index = 0;
-		return GeneratorOf<Rational> { return index < self.numberOfDegrees ? self[index++] : nil; }
+		return anyGenerator { return index < self.numberOfDegrees ? self[index++] : nil; }
 	}
 
 	func indexOf( aValue : Rational ) -> Int? {
-		var		theResult : Int? = nil;
 		for i in 0..<numberOfDegrees {
 			if self[i] == aValue {
 				return i;

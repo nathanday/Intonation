@@ -10,14 +10,14 @@ import Cocoa
 
 class ApplicationDelegate: NSObject {
 
-	lazy var		preferencesWindowController = PreferencesWindowController();
-	lazy var		chordSelectorWindowController = ChordSelectorWindowController();
+	lazy var		preferencesWindowController : PreferencesWindowController = PreferencesWindowController();
+	lazy var		chordSelectorWindowController : ChordSelectorWindowController = ChordSelectorWindowController();
 	
 	static var		initialUserDefaultsLoaded = false;
 	override class func initialize() {
 		if initialUserDefaultsLoaded == false {
 			if let theURL = NSBundle.mainBundle().URLForResource("InitialUserDefaults", withExtension: "plist") {
-				if let theInitialUserDefaults = NSDictionary(contentsOfURL:theURL) as? [NSObject:AnyObject] {
+				if let theInitialUserDefaults = NSDictionary(contentsOfURL:theURL) as? [String:AnyObject] {
 					NSUserDefaults.standardUserDefaults().registerDefaults(theInitialUserDefaults);
 				}
 			}

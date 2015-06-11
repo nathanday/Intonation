@@ -10,7 +10,7 @@ import Cocoa
 
 func pow(x: Int, y: UInt) -> Int {
 	var		theResult = 1;
-	for i in 0...y {
+	for _ in 0...y {
 		theResult = theResult * x;
 	}
 	return theResult;
@@ -34,7 +34,7 @@ func log10( var aValue : UInt ) -> UInt {
 func greatestCommonDivisor(u: [Rational] ) -> Int {
 	var		theResult = 1;
 	for theNumber in u {
-		theResult = greatestCommonDivisor(theResult, theNumber.numerator);
+		theResult = greatestCommonDivisor(theResult, v: theNumber.numerator);
 	}
 	return theResult;
 }
@@ -59,7 +59,7 @@ class HarmonicView: ResultView {
 	final private func updateOctaveRange() {
 		var		theOctaveStart : UInt = 0;
 		var		theOctaveEnd : UInt = 0;
-		var		theCommonFactor = commonFactor;
+		let		theCommonFactor = commonFactor;
 		if let theFirst = selectedRatios.first {
 			theOctaveStart = theCommonFactor > 1 ? HarmonicView.octaveForHarmonic(UInt(theCommonFactor)) : 0;
 			if let theNum = theFirst.numeratorForDenominator(theCommonFactor) {
@@ -112,7 +112,7 @@ class HarmonicView: ResultView {
 			let		theOctaveHeight = NSHeight(theBounds)/CGFloat(lengthForRange(octaveRange));
 			let		theY = floor((CGFloat(anOctave-octaveRange.startIndex)+0.5) * theOctaveHeight+NSMinY(theBounds));
 			drawText(string: "\(anOctave+1)", size:theSize, point: NSMakePoint(theXOrigin-2.5, theY-theSize*0.55), color: NSColor.darkGrayColor());
-			var		thePath = NSBezierPath();
+			let		thePath = NSBezierPath();
 			thePath.lineWidth = 0.5;
 			thePath.moveToPoint(NSMakePoint(theXOrigin+3.5, theY+theOctaveHeight/2.0-5.0));
 			thePath.lineToPoint(NSMakePoint(theXOrigin+3.5, theY+theSize*0.75));
@@ -126,7 +126,7 @@ class HarmonicView: ResultView {
 		func drawHarmonic( aHarmonic: UInt ) {
 			let		theSubInterval = aHarmonic-(1<<HarmonicView.octaveForHarmonic(aHarmonic));
 			let		theY = yValueForHarmonic(aHarmonic, bounds: theBounds);
-			var		thePath = NSBezierPath();
+			let		thePath = NSBezierPath();
 			if theSubInterval == 0 {
 				let		theColor = NSColor(deviceRed: 0.0, green: 0.0, blue: 0.75, alpha: 1.0);
 				thePath.lineWidth = 2.0;
@@ -160,7 +160,7 @@ class HarmonicView: ResultView {
 			let		theYDenom = yValueForHarmonic( UInt(commonFactor), bounds: theBounds );
 			let		theSize = NSFont.systemFontSizeForControlSize(NSControlSize.SmallControlSize);
 			if aRatio == 1 {
-				var		thePath = NSBezierPath();
+				let		thePath = NSBezierPath();
 				let		theX = theXOrigin+75.0+CGFloat(anOf)*theHarmonicSpacing;
 				thePath.moveToPoint(NSMakePoint(theXOrigin+65.0, theYDenom ));
 				thePath.lineToPoint(NSMakePoint(theX+5.0, theYDenom));
@@ -173,7 +173,7 @@ class HarmonicView: ResultView {
 			{
 				let		theYNum = yValueForHarmonic( UInt(theNum), bounds: theBounds );
 				let		theYDelta = abs(theYNum-theYDenom);
-				var		thePath = NSBezierPath();
+				let		thePath = NSBezierPath();
 				let		theX = theXOrigin+75.0+CGFloat(anIndex)*theHarmonicSpacing;
 
 				thePath.moveToPoint(NSMakePoint(theXOrigin+65.0, theYNum ));

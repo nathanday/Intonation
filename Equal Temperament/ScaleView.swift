@@ -37,7 +37,7 @@ class ScaleView : ResultView {
 			drawNoEqualTemperament();
 		}
 		for i in 0..<everyRatios.count {
-			thePreviousValue = drawJustIntonationRatio(ratio: everyRatios[i], hilighted: contains(selectedRatios, everyRatios[i]), index:i, previousValue: thePreviousValue );
+			thePreviousValue = drawJustIntonationRatio(ratio: everyRatios[i], hilighted: selectedRatios.contains(everyRatios[i]), index:i, previousValue: thePreviousValue );
 		}
 	}
 }
@@ -55,7 +55,7 @@ class LinearScaleView : ScaleView {
 		let		theY = CGFloat(log2(aRatio.toDouble)) * NSHeight(drawingBounds) + NSMinY(drawingBounds);
 		let		theCloseToPrevious = abs(theY-aPreviousY)<14.0;
 		let		theX1 = theX0 + CGFloat(theCloseToPrevious ? 55.0 : 15.0);
-		var		thePath = NSBezierPath()
+		let		thePath = NSBezierPath()
 		thePath.moveToPoint(NSMakePoint(theX1+4.5, theY))
 		thePath.curveToPoint(NSMakePoint(theX1+2.5, theY+2.0), controlPoint1: NSMakePoint(theX1+4.5, theY+1.1), controlPoint2: NSMakePoint(theX1+3.6, theY+2.0))
 		thePath.curveToPoint(NSMakePoint(theX1+0.5, theY), controlPoint1: NSMakePoint(theX1+1.4, theY+2.0), controlPoint2: NSMakePoint(theX1+0.5, theY+1.1))
@@ -103,7 +103,7 @@ class PitchConstellationView : ScaleView {
 		let		theBounds = self.bounds;
 		let		theAngle = CGFloat(log2(aRatio.toDouble) * 2.0*M_PI);
 		let		theRadius = aHilighted ? maximumRadius - 40.0 : axisesRadius;
-		var		thePath = NSBezierPath()
+		let		thePath = NSBezierPath()
 		thePath.moveToPoint(NSMakePoint(NSMidX(theBounds), NSMidY(theBounds)));
 		thePath.lineToPoint(NSMakePoint(NSMidX(theBounds)+sin(theAngle)*theRadius, NSMidY(theBounds)+cos(theAngle)*theRadius));
 		thePath.lineCapStyle = NSLineCapStyle.RoundLineCapStyle
@@ -118,7 +118,7 @@ class PitchConstellationView : ScaleView {
 
 		let		theSize = (aHilighted ?  NSFont.systemFontSizeForControlSize(NSControlSize.RegularControlSize) : NSFont.systemFontSizeForControlSize(NSControlSize.MiniControlSize)) + 2.0;
 		let		theTextColor = aHilighted ? NSColor(calibratedHue: hueForIndex(anIndex), saturation: 1.0, brightness: 0.75, alpha: 1.0) : NSColor(white: 0.0, alpha: 0.25);
-		let		theTextAlignment : NSTextAlignment = abs(sin(theAngle)) < 0.707 ? .CenterTextAlignment : sin(theAngle) < 0.0 ? .RightTextAlignment :  .LeftTextAlignment;
+		let		theTextAlignment : NSTextAlignment = abs(sin(theAngle)) < 0.707 ? .Center : sin(theAngle) < 0.0 ? .Right :  .Left;
 		drawText(string: aRatio.ratioString, size:theSize, point: NSMakePoint(NSMidX(theBounds)+sin(theAngle)*(theRadius+5.0), NSMidY(theBounds)+cos(theAngle)*(theRadius+11.0)-theSize*0.8), color:theTextColor, textAlignment: theTextAlignment );
 		
 		return 0.0;
@@ -129,7 +129,7 @@ class PitchConstellationView : ScaleView {
 		let		theArcLength = 360.0/CGFloat(numberOfIntervals);
 		let		theStart = CGFloat(aRatioNumber)*theArcLength;
 		let		theEnd	= CGFloat(aRatioNumber+1)*theArcLength;
-		var		thePath = NSBezierPath();
+		let		thePath = NSBezierPath();
 		thePath.appendBezierPathWithArcWithCenter(NSMakePoint(NSMidX(theBounds), NSMidY(theBounds)), radius:axisesRadius, startAngle: theStart, endAngle: theEnd);
 		thePath.appendBezierPathWithArcWithCenter(NSMakePoint(NSMidX(theBounds), NSMidY(theBounds)), radius:axisesRadius-equalTempBarWidth, startAngle: theEnd, endAngle: theStart, clockwise: true);
 		thePath.closePath();
@@ -137,7 +137,7 @@ class PitchConstellationView : ScaleView {
 	}
 
 	override func drawNoEqualTemperament( ) {
-		var		thePath = NSBezierPath();
+		let		thePath = NSBezierPath();
 		thePath.appendBezierPathWithOvalInRect(NSMakeRect( NSMidX(self.bounds)-axisesRadius+(equalTempBarWidth*0.5), NSMidY(self.bounds)-axisesRadius+(equalTempBarWidth*0.5), 2.0*axisesRadius-equalTempBarWidth, 2.0*axisesRadius-equalTempBarWidth ) );
 		thePath.lineWidth = equalTempBarWidth;
 		NSColor(calibratedWhite: 0.875, alpha: 1.0).setStroke();

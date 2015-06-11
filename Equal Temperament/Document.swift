@@ -75,10 +75,8 @@ class Document : NSDocument {
 	}
 	var		selectedEqualTemperamentEntry : [EqualTemperamentEntry] {
 		var		theResult : [EqualTemperamentEntry] = [];
-		if let theTableView = tableView {
-			if let theArrangedRations = arrayController?.selectedObjects as? [EqualTemperamentEntry] {
-				theResult = theArrangedRations;
-			}
+		if let theArrangedRations = arrayController?.selectedObjects as? [EqualTemperamentEntry] {
+			theResult = theArrangedRations;
 		}
 		return theResult;
 	}
@@ -90,50 +88,57 @@ class Document : NSDocument {
 
 	var		baseFrequency : Double {
 		get { return tonePlayer.baseFrequency; }
-		set { tonePlayer.baseFrequency = newValue; }
+		set( aValue ) { tonePlayer.baseFrequency = aValue; }
 	}
 
 	var		allOvertonesAmount : Double {
 		get { return overtones.amount; }
-		set { overtones = HarmonicsDescription(amount: newValue, evenAmount: overtones.evenAmount); }
+		set( aValue ) { overtones = HarmonicsDescription(amount: aValue, evenAmount: overtones.evenAmount); }
 	}
 	var		evenOvertonesAmount : Double {
 		get { return overtones.evenAmount; }
-		set { overtones = HarmonicsDescription(amount: overtones.amount, evenAmount: newValue); }
+		set( aValue ) { overtones = HarmonicsDescription(amount: overtones.amount, evenAmount: aValue); }
 	}
 	var		overtones : HarmonicsDescription {
-		set { tonePlayer.harmonicsDescription = newValue; }
-		get { return tonePlayer.harmonicsDescription; }
+		set( aValue ) { tonePlayer.harmonics = aValue; }
+		get { return tonePlayer.harmonics; }
 	}
 	var		tonePlayer = TonePlayer();
 
 	dynamic var		selectedScaleDisplayType : Int {
-		set { NSUserDefaults.standardUserDefaults().setInteger(newValue, forKey: "selectedScaleDisplayType"); }
+		set( aValue ) { NSUserDefaults.standardUserDefaults().setInteger(aValue, forKey: "selectedScaleDisplayType"); }
 		get { return NSUserDefaults.standardUserDefaults().integerForKey("selectedScaleDisplayType"); }
 	}
 
 	dynamic var		selectedWaveViewMode : Int {
-		set {
-			NSUserDefaults.standardUserDefaults().setInteger(newValue, forKey: "selectedWaveViewMode");
+		set(aValue) {
+			NSUserDefaults.standardUserDefaults().setInteger(aValue, forKey: "selectedWaveViewMode");
 			updateWaveViewDisplayMode();
 		}
 		get { return NSUserDefaults.standardUserDefaults().integerForKey("selectedWaveViewMode"); }
 	}
 
 	dynamic var		selectedWaveViewScale : Int {
-		set {
-			NSUserDefaults.standardUserDefaults().setInteger(newValue, forKey: "selectedWaveViewScale");
+		set( aValue ) {
+			NSUserDefaults.standardUserDefaults().setInteger(aValue, forKey: "selectedWaveViewScale");
 			updateWaveViewScale();
 		}
 		get { return NSUserDefaults.standardUserDefaults().integerForKey("selectedWaveViewScale"); }
 	}
 	
 	dynamic var		selectedSpectrumType : Int {
-		set {
-			NSUserDefaults.standardUserDefaults().setInteger(newValue, forKey: "selectedSpectrumType");
+		set( aValue ) {
+			NSUserDefaults.standardUserDefaults().setInteger( aValue, forKey: "selectedSpectrumType");
 			updateSelectedSpectrumType();
 		}
 		get { return NSUserDefaults.standardUserDefaults().integerForKey("selectedSpectrumType"); }
+	}
+	
+	dynamic var		selectedPlaybackType : Int {
+		set( aValue ) {
+			NSUserDefaults.standardUserDefaults().setInteger( aValue, forKey: "selectedPlaybackType");
+		}
+		get { return NSUserDefaults.standardUserDefaults().integerForKey("selectedPlaybackType"); }
 	}
 	
 	private func updateWaveViewDisplayMode() {
@@ -151,9 +156,11 @@ class Document : NSDocument {
 		if let theWaveView = waveView {
 			switch selectedWaveViewScale {
 			case 1:
-				theWaveView.xScale = 200.0;
-			default:
 				theWaveView.xScale = 50.0;
+			case 2:
+				theWaveView.xScale = 100.0;
+			default:
+				theWaveView.xScale = 25.0;
 			}
 		}
 	}
@@ -170,7 +177,7 @@ class Document : NSDocument {
 			}
 		}
 	}
-	
+
 	dynamic var     everyInterval : [EqualTemperamentEntry] = [];
 	dynamic var		smallestError : Double { get { return !smallestErrorEntries.isEmpty ? smallestErrorEntries.first!.error : 0.0; } }
 	dynamic var     averageError : Double = 0.0
@@ -191,7 +198,7 @@ class Document : NSDocument {
 				var		theRatiosString : String = "";
 				var		theCommonFactor = 1;
 				for theValue in selectedJustIntonationRatio {
-					theCommonFactor *= theValue.denominator/greatestCommonDivisor(theCommonFactor,theValue.denominator);
+					theCommonFactor *= theValue.denominator/greatestCommonDivisor(theCommonFactor,v: theValue.denominator);
 				}
 				for theRatio in selectedJustIntonationRatio {
 					if let theValue = theRatio.numeratorForDenominator(theCommonFactor) {
@@ -226,7 +233,8 @@ class Document : NSDocument {
 		updateWaveViewScale();
 	}
 
-	override func dataOfType( typeName: String, error anError: NSErrorPointer) -> NSData? {
+	override func dataOfType( typeName: String) throws -> NSData {
+		var anError: NSError! = NSError(domain: "Migrator", code: 0, userInfo: nil)
 		let		thePropertyList = [
 			"intervalCount":intervalCount,
 			"limits":[
@@ -241,54 +249,65 @@ class Document : NSDocument {
 				"allOvertonesAmount":evenOvertonesAmount,
 				"evenOvertonesAmount":evenOvertonesAmount]
 		];
-		let		theResult = NSPropertyListSerialization.dataWithPropertyList(thePropertyList, format:.XMLFormat_v1_0, options:0, error: anError);
-		assert( theResult != nil, "Failed to save, error \(anError.memory?.localizedDescription)" );
-		return theResult;
+		let		theResult: NSData?
+		do {
+			theResult = try NSPropertyListSerialization.dataWithPropertyList(thePropertyList, format:.XMLFormat_v1_0, options:0)
+		} catch let error as NSError {
+			anError = error
+			theResult = nil
+		};
+		if let value = theResult {
+			return value
+		}
+		throw anError;
 	}
 
-	override func readFromData( aData: NSData, ofType typeName: String, error anError: NSErrorPointer) -> Bool {
-		var		theErrorString : String? = nil;
-		var		theFormat : UnsafeMutablePointer<NSPropertyListFormat> = nil;
-		if let thePropertList = NSPropertyListSerialization.propertyListWithData(aData, options:0, format:theFormat, error: anError) as? [String:AnyObject] {
-			if let theIntervalCount = thePropertList["intervalCount"] as? UInt,
-				theLimits = thePropertList["limits"] as? [String:Int],
-				theEnableInterval = thePropertList["enableInterval"] as? Bool,
-				themMaximumError = thePropertList["maximumError"] as? Double,
-				theFiltered = thePropertList["filtered"] as? Bool,
-				theTone = thePropertList["tone"] as? [String:AnyObject]
-			{
-				intervalCount = theIntervalCount
-				if let theNumeratorPrimeLimitIndex = theLimits["numeratorPrime"] {
-					numeratorPrimeLimitIndex = theNumeratorPrimeLimitIndex;
-				}
-				if let theDenominatorPrimeLimitIndex = theLimits["denominatorPrime"] {
-					denominatorPrimeLimitIndex = theDenominatorPrimeLimitIndex;
-				}
-				if let theOddLimit : Int = theLimits["odd"] {
-					oddLimit = UInt(theOddLimit);
-				}
-				enableInterval = theEnableInterval;
-				maximumError = themMaximumError;
-				filtered = theFiltered;
-				if let theBaseFrequency = theTone["baseFrequency"] as? Double {
-					baseFrequency = theBaseFrequency;
-				}
-				if let theAllOvertonesAmount = theTone["allOvertonesAmount"] as? Double {
-					allOvertonesAmount = theAllOvertonesAmount;
-				}
-				if let theEvenOvertonesAmount = theTone["evenOvertonesAmount"] as? Double {
-					evenOvertonesAmount = theEvenOvertonesAmount;
+	override func readFromData( aData: NSData, ofType typeName: String) throws {
+		let		theFormat : UnsafeMutablePointer<NSPropertyListFormat> = nil;
+		do {
+			if let thePropertList = try NSPropertyListSerialization.propertyListWithData(aData, options:.Immutable, format:theFormat) as? [String:AnyObject] {
+				if let theIntervalCount = thePropertList["intervalCount"] as? UInt,
+					theLimits = thePropertList["limits"] as? [String:Int],
+					theEnableInterval = thePropertList["enableInterval"] as? Bool,
+					themMaximumError = thePropertList["maximumError"] as? Double,
+					theFiltered = thePropertList["filtered"] as? Bool,
+					theTone = thePropertList["tone"] as? [String:AnyObject]
+				{
+					intervalCount = theIntervalCount
+					if let theNumeratorPrimeLimitIndex = theLimits["numeratorPrime"] {
+						numeratorPrimeLimitIndex = theNumeratorPrimeLimitIndex;
+					}
+					if let theDenominatorPrimeLimitIndex = theLimits["denominatorPrime"] {
+						denominatorPrimeLimitIndex = theDenominatorPrimeLimitIndex;
+					}
+					if let theOddLimit : Int = theLimits["odd"] {
+						oddLimit = UInt(theOddLimit);
+					}
+					enableInterval = theEnableInterval;
+					maximumError = themMaximumError;
+					filtered = theFiltered;
+					if let theBaseFrequency = theTone["baseFrequency"] as? Double {
+						baseFrequency = theBaseFrequency;
+					}
+					if let theAllOvertonesAmount = theTone["allOvertonesAmount"] as? Double {
+						allOvertonesAmount = theAllOvertonesAmount;
+					}
+					if let theEvenOvertonesAmount = theTone["evenOvertonesAmount"] as? Double {
+						evenOvertonesAmount = theEvenOvertonesAmount;
+					}
 				}
 			}
+			else {
+				NSLog( "Failed to cast property list elements" );
+			}
 		}
-		else {
-			assert( false, "Failed to read, error \(theErrorString)" );
+		catch {
+			NSLog( "Failed to parse property list" );
 		}
-		return true;
 	}
 
 	@IBAction func showToneSetting( aSender: AnyObject? ) {
-		if let thePanel = settingsPanel,theDocumentWindow = documentWindow {
+		if let thePanel = settingsPanel {
 			thePanel.orderFront(aSender);
 			thePanel.makeKeyWindow();
 		}
@@ -299,7 +318,7 @@ class Document : NSDocument {
 	}
 
 	@IBAction func playAction( aSender: NSSegmentedControl ) {
-		tonePlayer.play(ratios: [1.0], chord: aSender.selectedSegment == 0 );
+		tonePlayer.playType( selectedPlaybackType == 0 ? kPlaybackUnison : kPlaybackUp );
 	}
 
 
@@ -314,7 +333,7 @@ class Document : NSDocument {
 
 	func calculateAllIntervals() {
 		let		theDenominator = separatePrimeLimit ? denominatorPrimeLimit : numeratorPrimeLimit;
-		var		theEntries = EqualTemperamentCollection(limits: (numeratorPrime:numeratorPrimeLimit,denominatorPrime:theDenominator,numeratorOdd:oddLimit,denominatorOdd:oddLimit), intervalCount: enableInterval ? intervalCount : 0, maximumError: maximumError, filtered: filtered );
+		let		theEntries = EqualTemperamentCollection(limits: (numeratorPrime:numeratorPrimeLimit,denominatorPrime:theDenominator,numeratorOdd:oddLimit,denominatorOdd:oddLimit), intervalCount: enableInterval ? intervalCount : 0, maximumError: maximumError, filtered: filtered );
 
 		smallestErrorEntries = theEntries.smallestError;
 		biggestErrorEntries = theEntries.biggestError;
@@ -334,12 +353,14 @@ class Document : NSDocument {
 	}
 
 	var everyTableColumn : [NSTableColumn] {
-		return tableView != nil ? tableView!.tableColumns as! [NSTableColumn] : [];
+		return tableView != nil ? tableView!.tableColumns as [NSTableColumn] : [];
 	}
 
 	func hideIntervalRelatedColumn( aHide : Bool ) {
-		for theTableColumn in everyTableColumn.filter( { return $0.identifier != nil && contains(["interval","percent","error"],$0.identifier);} ) {
-			theTableColumn.hidden = aHide;
+		for theTableColumn in everyTableColumn {
+			if ["interval","percent","error"].contains(theTableColumn.identifier) {
+				theTableColumn.hidden = aHide;
+			}
 		}
 		if let theLinearScaleView = linearScaleView {
 			theLinearScaleView.useIntervals = !aHide;
@@ -353,7 +374,7 @@ class Document : NSDocument {
 extension Document : NSTableViewDelegate {
 	static let		cellColors = ( backgroundAlpha:CGFloat(0.1), maxErrorTextAlpha:CGFloat(0.25) );
 	func tableView( aTableView: NSTableView, willDisplayCell aCell: AnyObject, forTableColumn aTableColumn: NSTableColumn?, row aRowIndex: Int) {
-		if let	theEntry = arrayController!.arrangedObjects[aRowIndex] as? EqualTemperamentEntry, theCell = aCell as? NSTextFieldCell {
+		if let	theEntry = arrayController!.arrangedObjects[UInt(aRowIndex)] as? EqualTemperamentEntry, theCell = aCell as? NSTextFieldCell {
 			let		theExceedsError = enableInterval && abs(theEntry.error12ETCent) > 100.0*self.maximumError;
 			if smallestErrorEntries.contains(theEntry) {
 				theCell.backgroundColor = NSColor(calibratedRed:0.0, green:0.0, blue:1.0, alpha:Document.cellColors.backgroundAlpha);

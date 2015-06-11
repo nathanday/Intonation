@@ -14,7 +14,7 @@ import Cocoa
 		get {
 			var		theResult = 1;
 			for theValue in selectedRatios {
-				theResult *= theValue.denominator/greatestCommonDivisor(theResult,theValue.denominator);
+				theResult *= theValue.denominator/greatestCommonDivisor(theResult,v: theValue.denominator);
 			}
 			return theResult;
 		}
@@ -29,27 +29,27 @@ import Cocoa
 	func hueForIndex( aIndex : Int ) -> CGFloat { return (CGFloat(aIndex+4)*1.0/5.1-2.0/15.0)%1.0; }
 
 	func drawText(string aString: String, size aSize: CGFloat, point aPoint: CGPoint ) {
-		drawText(string: aString, size: aSize, point: aPoint, color:NSColor.blackColor(), textAlignment: NSTextAlignment.LeftTextAlignment );
+		drawText(string: aString, size: aSize, point: aPoint, color:NSColor.blackColor(), textAlignment: .Left );
 	}
 	func drawText(string aString: String, size aSize: CGFloat, point aPoint: CGPoint, color aColor: NSColor ) {
-		drawText(string: aString, size: aSize, point: aPoint, color:aColor, textAlignment: NSTextAlignment.LeftTextAlignment );
+		drawText(string: aString, size: aSize, point: aPoint, color:aColor, textAlignment: .Left );
 	}
 	func drawText(string aString: String, size aSize: CGFloat, point aPoint: CGPoint, color aColor: NSColor, textAlignment aTextAlignment: NSTextAlignment ) {
 		var		theTextRect = NSMakeRect(aPoint.x, aPoint.y-aSize*0.2, 480.0, aSize*1.6);
 		let		theTextTextContent = NSString(string: aString );
 		let		theTextStyle = NSMutableParagraphStyle.defaultParagraphStyle().mutableCopy() as! NSMutableParagraphStyle;
 		theTextStyle.alignment = aTextAlignment
-		if aTextAlignment == NSTextAlignment.CenterTextAlignment {
+		if aTextAlignment == .Center {
 			theTextRect.origin.x -= NSWidth(theTextRect)*0.5;
 		}
-		else if aTextAlignment == NSTextAlignment.RightTextAlignment {
+		else if aTextAlignment == .Right {
 			theTextRect.origin.x -= NSWidth(theTextRect);
 		}
 
-		var		theTextFontAttributes = [NSFontAttributeName: NSFont.systemFontOfSize(aSize), NSForegroundColorAttributeName: aColor, NSParagraphStyleAttributeName: theTextStyle]
+		let		theTextFontAttributes = [NSFontAttributeName: NSFont.systemFontOfSize(aSize), NSForegroundColorAttributeName: aColor, NSParagraphStyleAttributeName: theTextStyle]
 
 		let		theTextTextSize: CGSize = theTextTextContent.boundingRectWithSize(NSMakeSize(theTextRect.width, CGFloat.infinity), options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: theTextFontAttributes).size
-		var		theTextTextRect: NSRect = NSMakeRect(theTextRect.minX, theTextRect.minY + theTextRect.height*0.25 - theTextTextSize.height*0.1, theTextRect.width, theTextTextSize.height);
+		let		theTextTextRect: NSRect = NSMakeRect(theTextRect.minX, theTextRect.minY + theTextRect.height*0.25 - theTextTextSize.height*0.1, theTextRect.width, theTextTextSize.height);
 		NSGraphicsContext.saveGraphicsState()
 		NSRectClip(theTextRect)
 		theTextTextContent.drawInRect(NSOffsetRect(theTextTextRect, 0.0, 1.0), withAttributes: theTextFontAttributes)
@@ -84,7 +84,7 @@ import Cocoa
 	var					orientation = Orientation.vertical;
 	override func drawRect(dirtyRect: NSRect) {
 		super.drawRect(dirtyRect);
-		var		thePath = NSBezierPath();
+		let		thePath = NSBezierPath();
 		assert( childView != nil );
 		if let theSubView : NSView = childView {
 			let		theFrame = theSubView.frame;
@@ -110,7 +110,7 @@ import Cocoa
 extension BackGround {
 	@IBInspectable var horizontal: Bool {
 		get { return orientation == .horizontal; }
-		set { self.orientation = newValue ? .horizontal : .vertical; }
+		set( aValue ) { self.orientation = aValue ? .horizontal : .vertical; }
 	}
 }
 

@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Rational : Printable, DebugPrintable, Hashable
+struct Rational : CustomStringConvertible, CustomDebugStringConvertible, Hashable
 {
 	let	numerator:		Int;
 	let	denominator:	Int;
@@ -26,7 +26,7 @@ struct Rational : Printable, DebugPrintable, Hashable
             aDenominator = -aDenominator;
         }
 
-        let theCommonDivisor = greatestCommonDivisor(aNumerator, aDenominator);
+        let theCommonDivisor = greatestCommonDivisor(aNumerator, v: aDenominator);
         numerator = aNumerator/theCommonDivisor;
         denominator = aDenominator/theCommonDivisor;
     }
@@ -65,7 +65,7 @@ extension Rational : ArrayLiteralConvertible, IntegerLiteralConvertible, FloatLi
 	init( arrayLiteral elements: Int...) {
 		self.init( elements[0], elements[1] );
 	}
-	init(var integerLiteral aNumerator:Int) {
+	init(integerLiteral aNumerator:Int) {
 		numerator = aNumerator;
 		denominator = 1;
 	}
@@ -73,7 +73,7 @@ extension Rational : ArrayLiteralConvertible, IntegerLiteralConvertible, FloatLi
 	static func convertFromFloatLiteral(aValue: FloatLiteralType) -> Rational { return Rational( Int(aValue), 1 ); }
 }
 
-extension Rational : FloatingPointType, SignedNumberType
+extension Rational : FloatingPointType, Equatable, SignedNumberType
 {
 	typealias _BitsType = (Int,Int);
 	static func _fromBitPattern(aBits: _BitsType) -> Rational { return Rational(aBits.0,aBits.1); }
@@ -157,11 +157,11 @@ extension String {
 		case 0:
 			theResult = Rational();
 		case 1:
-			if let theInt = theComponents[0].toInt() {
+			if let theInt = Int(theComponents[0]) {
 				theResult = Rational( theInt );
 			}
 		default:
-			if let theNum = theComponents[0].toInt(), theDenom = theComponents[0].toInt() {
+			if let theNum = Int(theComponents[0]), theDenom = Int(theComponents[0]) {
 				theResult = Rational( theNum, theDenom );
 			}
 		}

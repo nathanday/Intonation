@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class ChordSelectorWindowController: NSWindowController, NSBrowserDelegate {
+class ChordSelectorWindowController: NSWindowController {
 	@IBOutlet var	treeController : NSTreeController?;
 	@IBOutlet var	browser : NSBrowser?;
 
@@ -85,7 +85,7 @@ class ChordSelectorItem : NSObject {
 		var		theResult : ChordSelectorItem? = nil;
 		if let theName = aPropertyList["name"] as? String {
 			if let theChildren = aPropertyList["everyChild"] as? [[String:AnyObject]] {
-				var		theChordSelectorGroup = ChordSelectorGroup(name:theName);
+				let		theChordSelectorGroup = ChordSelectorGroup(name:theName);
 				theChordSelectorGroup.everyChild = chordSelectorItemsForPropertyList(theChildren);
 				theResult = theChordSelectorGroup;
 			}
@@ -124,9 +124,9 @@ class ChordSelectorGroup : ChordSelectorItem, MutableCollectionType {
 	dynamic var			count : Int { get { return everyChild.endIndex-everyChild.startIndex; } }
 	subscript (anIndex: Int) -> ChordSelectorItem {
 		get { return everyChild[anIndex]; }
-		set {
-			everyChild[anIndex] = newValue;
-			newValue.parent = self;
+		set( aValue ) {
+			everyChild[anIndex] = aValue;
+			aValue.parent = self;
 		}
 	}
 	func generate() -> IndexingGenerator<[ChordSelectorItem]> { return everyChild.generate(); }

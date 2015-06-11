@@ -34,7 +34,6 @@ extension UInt {
 		var		theResult = [UInt(2)];
 		if anUpTo > 2 {
 			for a in 3...anUpTo {
-				var		theIsPrime = true;
 				for p in theResult {
 					if( p*p > a ) {
 						theResult.append(a);
@@ -62,7 +61,7 @@ extension UInt {
 func greatestCommonDivisor(u: [Int] ) -> Int {
 	var		theResult = 1;
 	for theNumber in u {
-		theResult = greatestCommonDivisor(theResult, theNumber);
+		theResult = greatestCommonDivisor(theResult, v: theNumber);
 	}
 	return theResult;
 }
@@ -76,19 +75,19 @@ func greatestCommonDivisor(u: Int, v: Int) -> Int {
 	// look for factors of 2
 	if (~u & 0b1) != 0 {  // u is even
 		if (v & 0b1) != 0 {		// v is odd
-			return greatestCommonDivisor(u >> 1, v);
+			return greatestCommonDivisor(u >> 1, v: v);
 		}
 		else { // both u and v are even
-			return greatestCommonDivisor(u >> 1, v >> 1) << 1;
+			return greatestCommonDivisor(u >> 1, v: v >> 1) << 1;
 		}
 	}
 
-	if (~v & 0b1) != 0 { return greatestCommonDivisor(u, v >> 1); } // u is odd, v is even
+	if (~v & 0b1) != 0 { return greatestCommonDivisor(u, v: v >> 1); } // u is odd, v is even
 
 	// reduce larger argument
-	if u > v { return greatestCommonDivisor((u - v) >> 1, v); }
+	if u > v { return greatestCommonDivisor((u - v) >> 1, v: v); }
 
-	return greatestCommonDivisor((v - u) >> 1, u);
+	return greatestCommonDivisor((v - u) >> 1, v: u);
 }
 
 extension UInt {

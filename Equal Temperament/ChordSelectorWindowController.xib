@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7702" systemVersion="14E17e" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="8121.17" systemVersion="15A178w" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7702"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8121.17"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="ChordSelectorWindowController" customModule="Equal_Temperament" customModuleProvider="target">
@@ -24,6 +24,7 @@
                 <subviews>
                     <browser verticalHuggingPriority="750" allowsExpansionToolTips="YES" enabled="YES" allowsMultipleSelection="YES" allowsEmptySelection="YES" defaultColumnWidth="100" minColumnWidth="100" maxVisibleColumns="3" titled="YES" separatesColumns="YES" allowsTypeSelect="YES" sendsActionOnArrowKeys="YES" columnResizingType="auto" translatesAutoresizingMaskIntoConstraints="NO" id="NyL-oK-1jT">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="398"/>
+                        <animations/>
                         <connections>
                             <outlet property="delegate" destination="-2" id="MeS-OW-f6B"/>
                         </connections>
@@ -35,16 +36,18 @@
                     <constraint firstAttribute="trailing" secondItem="NyL-oK-1jT" secondAttribute="trailing" id="kOj-4b-6Hx"/>
                     <constraint firstAttribute="bottom" secondItem="NyL-oK-1jT" secondAttribute="bottom" id="s9V-uR-Xpk"/>
                 </constraints>
+                <animations/>
             </view>
             <toolbar key="toolbar" implicitIdentifier="05C16AD6-2945-4B69-8700-79DBF66A8F84" autosavesConfiguration="NO" allowsUserCustomization="NO" showsBaselineSeparator="NO" displayMode="iconOnly" sizeMode="regular" id="D4R-LG-pbH">
                 <allowedToolbarItems>
                     <toolbarItem implicitItemIdentifier="5E2115E2-B0F5-4987-9127-C43ACD52BB31" label="Tools" paletteLabel="Tools" image="NSSmartBadgeTemplate" id="E47-bk-gLQ">
                         <nil key="toolTip"/>
                         <size key="minSize" width="20" height="28"/>
-                        <size key="maxSize" width="46" height="33"/>
+                        <size key="maxSize" width="40" height="33"/>
                         <popUpButton key="view" verticalHuggingPriority="750" id="ikZ-3H-Vj5">
-                            <rect key="frame" x="14" y="14" width="40" height="28"/>
+                            <rect key="frame" x="0.0" y="14" width="40" height="28"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <animations/>
                             <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" id="DG6-9b-lUW">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="menu"/>
@@ -67,6 +70,7 @@
                         <searchField key="view" wantsLayer="YES" verticalHuggingPriority="750" id="fVs-Ff-gcQ">
                             <rect key="frame" x="0.0" y="14" width="140" height="22"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <animations/>
                             <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" id="sxR-ZL-cXm">
                                 <font key="font" metaFont="system"/>
                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
