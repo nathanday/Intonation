@@ -19,9 +19,7 @@ class Document : NSDocument {
 	@IBOutlet var	waveView : WaveView?;
 	@IBOutlet var	spectrumView : SpectrumView?;
 	@IBOutlet var	tableView : NSTableView?;
-	@IBOutlet var	settingsPanel : NSPanel?;
 	@IBOutlet var	baseFrequencyTextField : NSTextField?;
-	@IBOutlet var	settingsButton : NSButton?;
 	@IBOutlet var	documentWindow : NSWindow?;
 	@IBOutlet var	harmonicTitleTextField : NSTextField?;
 
@@ -238,12 +236,6 @@ class Document : NSDocument {
 	}
 
 	override func awakeFromNib() {
-		if let thePanel = settingsPanel, theDocumentWindow = documentWindow, theSettingsButton = settingsButton  {
-			var		theButtonFrame = theDocumentWindow.convertRectToScreen(theSettingsButton.convertRect(theSettingsButton.bounds, toView: nil));
-			thePanel.parentWindow = theDocumentWindow;
-			theButtonFrame.origin.y -= NSHeight(thePanel.frame);
-			thePanel.setFrameOrigin(theButtonFrame.origin);
-		}
 		updateWaveViewDisplayMode();
 		updateSelectedSpectrumType();
 		updateWaveViewScale();
@@ -262,7 +254,7 @@ class Document : NSDocument {
 			"filtered":filtered,
 			"tone":[
 				"baseFrequency":baseFrequency,
-				"allOvertonesAmount":evenOvertonesAmount,
+				"allOvertonesAmount":allOvertonesAmount,
 				"evenOvertonesAmount":evenOvertonesAmount]
 		];
 		let		theResult: NSData?
@@ -319,13 +311,6 @@ class Document : NSDocument {
 		}
 		catch {
 			NSLog( "Failed to parse property list" );
-		}
-	}
-
-	@IBAction func showToneSetting( aSender: AnyObject? ) {
-		if let thePanel = settingsPanel {
-			thePanel.orderFront(aSender);
-			thePanel.makeKeyWindow();
 		}
 	}
 

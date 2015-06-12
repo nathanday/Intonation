@@ -2,18 +2,33 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "Close_16.png"
+      "filename" : "Close_16.png",
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "scale" : "2x",
-      "filename" : "Close_32.png"
+      "filename" : "Close_32.png",
+      "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x",
-      "filename" : "Close_48.png"
+      "filename" : "Close_48.png",
+      "scale" : "3x"
+    },
+    {
+      "idiom" : "mac",
+      "filename" : "Close_16.png",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "mac",
+      "filename" : "Close_32.png",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "mac",
+      "filename" : "Close_48.png",
+      "scale" : "3x"
     }
   ],
   "info" : {

@@ -267,7 +267,7 @@
                                     <constraint firstAttribute="width" constant="23" id="gU9-Yn-o2Y"/>
                                 </constraints>
                                 <animations/>
-                                <buttonCell key="cell" type="disclosureTriangle" bezelStyle="disclosure" image="4EEC55C5-D3C6-4799-B526-1979708C69A5" imagePosition="above" alignment="left" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Wn8-MD-dFW">
+                                <buttonCell key="cell" type="disclosureTriangle" bezelStyle="disclosure" image="0DBC40FC-3202-4C00-B3AE-AA4DA8E25CF4" imagePosition="above" alignment="left" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Wn8-MD-dFW">
                                     <behavior key="behavior" pushIn="YES" changeBackground="YES" changeGray="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -359,7 +359,10 @@
                                             <constraint firstAttribute="width" constant="142" id="xiw-Tp-qMi"/>
                                         </constraints>
                                         <animations/>
-                                        <sliderCell key="cell" controlSize="small" state="on" alignment="left" maxValue="1" doubleValue="0.5" tickMarkPosition="above" numberOfTickMarks="5" sliderType="linear" id="3Vo-zH-EzS"/>
+                                        <sliderCell key="cell" controlSize="small" continuous="YES" state="on" alignment="left" maxValue="1" doubleValue="0.5" tickMarkPosition="above" numberOfTickMarks="11" sliderType="linear" id="3Vo-zH-EzS"/>
+                                        <connections>
+                                            <binding destination="-2" name="value" keyPath="self.allOvertonesAmount" id="2xL-hj-Bdz"/>
+                                        </connections>
                                     </slider>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ilf-cu-Q9g">
                                         <rect key="frame" x="176" y="8" width="104" height="17"/>
@@ -376,25 +379,36 @@
                                             <constraint firstAttribute="width" constant="142" id="epc-CN-eOo"/>
                                         </constraints>
                                         <animations/>
-                                        <sliderCell key="cell" controlSize="small" state="on" alignment="left" maxValue="1" doubleValue="1" tickMarkPosition="above" numberOfTickMarks="5" sliderType="linear" id="Xl4-rU-hFQ"/>
+                                        <sliderCell key="cell" controlSize="small" continuous="YES" state="on" alignment="left" maxValue="1" doubleValue="1" tickMarkPosition="above" numberOfTickMarks="11" sliderType="linear" id="Xl4-rU-hFQ"/>
+                                        <connections>
+                                            <binding destination="-2" name="value" keyPath="self.evenOvertonesAmount" id="3u5-TF-K6d"/>
+                                        </connections>
                                     </slider>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="TBB-Zx-OB7">
                                         <rect key="frame" x="426" y="38" width="28" height="14"/>
                                         <animations/>
                                         <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="0.88" id="nBv-Rf-72d">
+                                            <numberFormatter key="formatter" formatterBehavior="custom10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" minimumFractionDigits="2" maximumFractionDigits="2" id="5v4-g0-5yN"/>
                                             <font key="font" metaFont="smallSystem"/>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
+                                        <connections>
+                                            <binding destination="-2" name="value" keyPath="self.allOvertonesAmount" id="bfy-t4-Vjd"/>
+                                        </connections>
                                     </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Yj7-du-NFd">
                                         <rect key="frame" x="426" y="8" width="28" height="14"/>
                                         <animations/>
                                         <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="0.88" id="m6d-4A-GUt">
+                                            <numberFormatter key="formatter" formatterBehavior="custom10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" minimumFractionDigits="2" maximumFractionDigits="2" id="gYX-OB-h8a"/>
                                             <font key="font" metaFont="smallSystem"/>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
+                                        <connections>
+                                            <binding destination="-2" name="value" keyPath="self.evenOvertonesAmount" id="aaK-Dp-C3X"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                                 <constraints>
@@ -437,13 +451,13 @@
                                 </textFieldCell>
                             </textField>
                             <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="c0Q-eC-94Z">
-                                <rect key="frame" x="163" y="397" width="135" height="24"/>
+                                <rect key="frame" x="163" y="397" width="217" height="24"/>
                                 <animations/>
-                                <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="momentary" id="no7-54-2G1">
+                                <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectAny" id="no7-54-2G1">
                                     <font key="font" metaFont="system"/>
                                     <segments>
-                                        <segment label="Chord" width="55"/>
-                                        <segment label="Arpeggio" width="73" tag="1"/>
+                                        <segment label="Chord" imageScaling="none" width="95"/>
+                                        <segment label="Arpeggio" imageScaling="none" width="115" tag="1"/>
                                     </segments>
                                 </segmentedCell>
                                 <connections>
@@ -956,7 +970,7 @@
                                             <rect key="frame" x="10" y="25" width="393" height="526"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <view misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y6c-Rw-DJR" customClass="ResultView" customModule="Equal_Temperament" customModuleProvider="target">
+                                                <view translatesAutoresizingMaskIntoConstraints="NO" id="Y6c-Rw-DJR" customClass="ResultView" customModule="Equal_Temperament" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="393" height="522"/>
                                                     <subviews>
                                                         <tabView drawsBackground="NO" controlSize="small" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="ZgS-OV-6tB">
@@ -1257,7 +1271,7 @@
             <connections>
                 <outlet property="delegate" destination="-2" id="0bl-1N-x8E"/>
             </connections>
-            <point key="canvasLocation" x="-1067.5" y="-211"/>
+            <point key="canvasLocation" x="-1238.5" y="-180"/>
         </window>
         <arrayController objectClassName="EqualTemperamentEntry" editable="NO" id="cy8-kx-1Au">
             <declaredKeys>
@@ -1278,7 +1292,7 @@
         <userDefaultsController representsSharedInstance="YES" id="tZN-Kl-w5K"/>
     </objects>
     <resources>
-        <image name="4EEC55C5-D3C6-4799-B526-1979708C69A5" width="1" height="1">
+        <image name="0DBC40FC-3202-4C00-B3AE-AA4DA8E25CF4" width="1" height="1">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
