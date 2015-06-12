@@ -141,6 +141,22 @@ class Document : NSDocument {
 		get { return NSUserDefaults.standardUserDefaults().integerForKey("selectedPlaybackType"); }
 	}
 	
+	/*
+	Disclosure views
+	*/
+	dynamic var		limitExpanded : Bool {
+		set( aValue ) { NSUserDefaults.standardUserDefaults().setBool(aValue, forKey: "limitExpanded"); }
+		get { return NSUserDefaults.standardUserDefaults().boolForKey("limitExpanded"); }
+	}
+	dynamic var		errorExpanded : Bool {
+		set( aValue ) { NSUserDefaults.standardUserDefaults().setBool(aValue, forKey: "errorExpanded"); }
+		get { return NSUserDefaults.standardUserDefaults().boolForKey("errorExpanded"); }
+	}
+	dynamic var		audioExpanded : Bool {
+		set( aValue ) { NSUserDefaults.standardUserDefaults().setBool(aValue, forKey: "audioExpanded"); }
+		get { return NSUserDefaults.standardUserDefaults().boolForKey("audioExpanded"); }
+	}
+
 	private func updateWaveViewDisplayMode() {
 		if let theWaveView = waveView {
 			switch selectedWaveViewMode {
@@ -318,7 +334,7 @@ class Document : NSDocument {
 	}
 
 	@IBAction func playAction( aSender: NSSegmentedControl ) {
-		tonePlayer.playType( selectedPlaybackType == 0 ? kPlaybackUnison : kPlaybackUp );
+		tonePlayer.playType( PlaybackType(rawValue:selectedPlaybackType) ?? .Unison );
 	}
 
 

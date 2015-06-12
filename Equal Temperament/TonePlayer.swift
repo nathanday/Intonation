@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import AudioToolbox
 
 func dBToPower( aDB: Double ) -> Double { return pow(10.0,aDB/10.0); }
 func powerToDB( aPower: Double ) -> Double { return 10.0*log10(aPower); }
@@ -26,9 +27,9 @@ class TonePlayer {
 	
 	var playing : Bool = false;
 	
-	var oscillatorSet : OscillatorSet {
+	var oscillators : [Oscillator] {
 		get {
-			return OscillatorSet();
+			return [Oscillator(samples: baseSampleLength, cycles: 10, harmonics:harmonics)];
 		}
 	}
 	

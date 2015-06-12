@@ -27,11 +27,11 @@
 		D89543871996347F00A091A4 /* Rational.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89543841996347F00A091A4 /* Rational.swift */; };
 		D895438A1996354100A091A4 /* Document.xib in Resources */ = {isa = PBXBuildFile; fileRef = D89543881996354100A091A4 /* Document.xib */; };
 		D895438B1996363700A091A4 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89543821996347F00A091A4 /* Document.swift */; };
+		D8B14D291B29C68300C971D8 /* Oscillator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B14D281B29C68300C971D8 /* Oscillator.swift */; };
 		D8B5E23F1B0386F200F20584 /* InitialUserDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = D8B5E23E1B0386F200F20584 /* InitialUserDefaults.plist */; };
 		D8B9020E1AD491E30015B5E2 /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B9020C1AD491E30015B5E2 /* PreferencesWindowController.swift */; };
 		D8B9020F1AD491E30015B5E2 /* PreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8B9020D1AD491E30015B5E2 /* PreferencesWindowController.xib */; };
 		D8C343C81AE109E200F5494A /* SpectrumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C343C71AE109E200F5494A /* SpectrumView.swift */; };
-		D8C6D8641B24641A003D5A95 /* Oscillator.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C6D8631B24641A003D5A95 /* Oscillator.m */; };
 		D8E5E6241AD12F7A004DB02D /* HarmonicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E5E6231AD12F7A004DB02D /* HarmonicView.swift */; };
 		D8E5E6271AD130DE004DB02D /* ScaleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E5E6251AD130DE004DB02D /* ScaleView.swift */; };
 		D8E7C7D71B1CAB99000D745B /* TonePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D912D11B197D5300BB479A /* TonePlayer.swift */; };
@@ -49,11 +49,8 @@
 
 /* Begin PBXFileReference section */
 		D83092C01AEBBC6F00B0E6A7 /* DisclosureView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisclosureView.swift; sourceTree = "<group>"; };
-		D83105441B0A5449000EB805 /* Equal Temperament-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Equal Temperament-Bridging-Header.h"; sourceTree = "<group>"; };
 		D831054D1B0A6115000EB805 /* HarmonicsDescription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HarmonicsDescription.swift; sourceTree = "<group>"; };
 		D849E7301ACADFD1006E0964 /* PrimeProducts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimeProducts.swift; sourceTree = "<group>"; };
-		D84F341E1B088D670095D1E8 /* TonePlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TonePlayer.h; sourceTree = "<group>"; };
-		D84F341F1B088D670095D1E8 /* TonePlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TonePlayer.m; sourceTree = "<group>"; };
 		D87356E51ADA0793006DAFEB /* ChordSelectorWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChordSelectorWindowController.swift; sourceTree = "<group>"; };
 		D87356E61ADA0793006DAFEB /* ChordSelectorWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChordSelectorWindowController.xib; sourceTree = "<group>"; };
 		D87651B31ADFCB7D003C4BF2 /* ApplicationDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationDelegate.swift; sourceTree = "<group>"; };
@@ -75,11 +72,11 @@
 		D89543831996347F00A091A4 /* EqualTemperamentEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EqualTemperamentEntry.swift; sourceTree = "<group>"; };
 		D89543841996347F00A091A4 /* Rational.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rational.swift; sourceTree = "<group>"; };
 		D89543891996354100A091A4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Document.xib; sourceTree = "<group>"; };
+		D8B14D281B29C68300C971D8 /* Oscillator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Oscillator.swift; sourceTree = "<group>"; };
 		D8B5E23E1B0386F200F20584 /* InitialUserDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = InitialUserDefaults.plist; sourceTree = "<group>"; };
 		D8B9020C1AD491E30015B5E2 /* PreferencesWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
 		D8B9020D1AD491E30015B5E2 /* PreferencesWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreferencesWindowController.xib; sourceTree = "<group>"; };
 		D8C343C71AE109E200F5494A /* SpectrumView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpectrumView.swift; sourceTree = "<group>"; };
-		D8C6D8611B246419003D5A95 /* Equal Temperament-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Equal Temperament-Bridging-Header.h"; sourceTree = "<group>"; };
 		D8C6D8621B24641A003D5A95 /* Oscillator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Oscillator.h; sourceTree = "<group>"; };
 		D8C6D8631B24641A003D5A95 /* Oscillator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Oscillator.m; sourceTree = "<group>"; };
 		D8D912D11B197D5300BB479A /* TonePlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TonePlayer.swift; sourceTree = "<group>"; };
@@ -158,7 +155,6 @@
 		D89543601996345200A091A4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				D83105441B0A5449000EB805 /* Equal Temperament-Bridging-Header.h */,
 				D89543611996345200A091A4 /* Info.plist */,
 				D89543621996345200A091A4 /* main.swift */,
 			);
@@ -219,11 +215,9 @@
 				D89543841996347F00A091A4 /* Rational.swift */,
 				D831054D1B0A6115000EB805 /* HarmonicsDescription.swift */,
 				D8D912D11B197D5300BB479A /* TonePlayer.swift */,
-				D84F341E1B088D670095D1E8 /* TonePlayer.h */,
-				D84F341F1B088D670095D1E8 /* TonePlayer.m */,
+				D8B14D281B29C68300C971D8 /* Oscillator.swift */,
 				D8C6D8621B24641A003D5A95 /* Oscillator.h */,
 				D8C6D8631B24641A003D5A95 /* Oscillator.m */,
-				D8C6D8611B246419003D5A95 /* Equal Temperament-Bridging-Header.h */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -348,12 +342,12 @@
 				D895438B1996363700A091A4 /* Document.swift in Sources */,
 				D8E5E6271AD130DE004DB02D /* ScaleView.swift in Sources */,
 				D8E7C7D71B1CAB99000D745B /* TonePlayer.swift in Sources */,
-				D8C6D8641B24641A003D5A95 /* Oscillator.m in Sources */,
 				D88A62101ACF7F19004CD4C9 /* UInt+Additions.swift in Sources */,
 				D8C343C81AE109E200F5494A /* SpectrumView.swift in Sources */,
 				D87356E71ADA0793006DAFEB /* ChordSelectorWindowController.swift in Sources */,
 				D87651B41ADFCB7D003C4BF2 /* ApplicationDelegate.swift in Sources */,
 				D88A62111AD02167004CD4C9 /* Scale.swift in Sources */,
+				D8B14D291B29C68300C971D8 /* Oscillator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -434,7 +428,6 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
-				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Equal Temperament/Equal Temperament-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -471,7 +464,6 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
-				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Equal Temperament/Equal Temperament-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -492,7 +484,6 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.godofcocoa.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Equal Temperament/Equal Temperament-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -514,7 +505,6 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.godofcocoa.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Equal Temperament/Equal Temperament-Bridging-Header.h";
 			};
 			name = Release;
 		};
