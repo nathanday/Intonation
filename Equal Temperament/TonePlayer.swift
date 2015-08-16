@@ -29,30 +29,29 @@ class TonePlayer {
 	static let sampleRate : Float64 = 44100.0;
 	static let nyquestFrequency : Float64 = sampleRate/2.0;
 
-	var harmonics : HarmonicsDescription { didSet { generateOscillators(); } }
-	var baseFrequency : Double { didSet { generateOscillators(); } }
-	var ratios : [Rational] { didSet { generateOscillators(); } }
+	var harmonics : HarmonicsDescription { didSet { generateTones(); } }
+	var baseFrequency : Double { didSet { generateTones(); } }
+	var ratios : [Rational] { didSet { generateTones(); } }
 	
 	var amplitude : Double = 1.0;
 	
 	var playing : Bool = false;
 	
-	var everyOscillator : [Oscillator] = [];
+	var everyTone : [Tone] = [];
 
 	func outputAudio( aSamples: UnsafeMutableBufferPointer<Float32>, numberFrames anInNumberFrames: UInt32 ) -> OSStatus {
 		let		theResult : OSStatus = kAudioServicesNoError;
-		var		theMax : Float32 = 1.0;
-		let		theGain = Float32(1.0)/Float32(everyOscillator.count);
+		let		theGain = Float32(0.5);
 		assert( theGain > 0.0, "bad gain value: \(theGain)" );
-		assert( !everyOscillator.isEmpty, "no oscillator" );
+		assert( !everyTone.isEmpty, "no tones" );
 		if !aSamples.isEmpty {
-			for theOscilator in everyOscillator {
-				theMax = theOscilator.generate( length: anInNumberFrames, previous: aSamples, gain: theGain );
+			let		theFirstOscilator = everyTone.first;
+			for theOscilator in everyTone {
+				for i : Int in 0..<Int(anInNumberFrames) {
+					if theFirstOscilator === theOscilator { aSamples[i] = 0.0; }
+					aSamples[i] += theOscilator.generate( gain: theGain );
+				}
 			}
-			for i in aSamples.startIndex..<aSamples.endIndex {
-				aSamples[i] /= theMax;
-			}
-			print( "max = \(theMax)", appendNewline:true );
 		}
 		return theResult;
 	}
@@ -64,7 +63,7 @@ class TonePlayer {
 																 componentManufacturer: OSType(kAudioUnitManufacturer_Apple),
 																		componentFlags: 0,
 																	componentFlagsMask: 0);
-		func oscillatorCallback( anInRefCon : UnsafeMutablePointer<Void>, anIOActionFlags: UnsafeMutablePointer<AudioUnitRenderActionFlags>, anInTimeStamp : UnsafePointer<AudioTimeStamp>, anInBusNumber: UInt32, anInNumberFrames: UInt32, anIOData: UnsafeMutablePointer<AudioBufferList>) -> OSStatus {
+		func toneCallback( anInRefCon : UnsafeMutablePointer<Void>, anIOActionFlags: UnsafeMutablePointer<AudioUnitRenderActionFlags>, anInTimeStamp : UnsafePointer<AudioTimeStamp>, anInBusNumber: UInt32, anInNumberFrames: UInt32, anIOData: UnsafeMutablePointer<AudioBufferList>) -> OSStatus {
 			var		theResult : OSStatus = kAudioServicesNoError;
 			let		theBuffer : AudioBuffer = anIOData.memory.mBuffers;
 			let		theSamples = UnsafeMutableBufferPointer<Float32>(theBuffer)
@@ -79,7 +78,7 @@ class TonePlayer {
 		
 		// Set our tone rendering function on the unit
 //		var		theTonePlayer = self;
-		var		theInput = AURenderCallbackStruct( inputProc: oscillatorCallback, inputProcRefCon: nil );
+		var		theInput = AURenderCallbackStruct( inputProc: toneCallback, inputProcRefCon: nil );
 		err = AudioUnitSetProperty(theResult, kAudioUnitProperty_SetRenderCallback, kAudioUnitScope_Input, 0, &theInput, UInt32(sizeof(AURenderCallbackStruct)));
 		
 		// Set the format to 32 bit, single channel, floating point, linear PCM
@@ -113,12 +112,10 @@ class TonePlayer {
 
 	private var baseSampleLength : UInt { return UInt(sum(ratios).denominator); }
 
-	// 4:5:6
-	
-	func generateOscillators() {
-		everyOscillator.removeAll();
+	func generateTones() {
+		everyTone.removeAll();
 		for theRatio in self.ratios {
-			everyOscillator.append(Oscillator(baseFrequency:baseFrequency/TonePlayer.nyquestFrequency, ratio: theRatio, harmonics:harmonics));
+			everyTone.append(Tone(baseFrequency:baseFrequency/TonePlayer.nyquestFrequency, ratio: theRatio, harmonics:harmonics));
 		}
 	}
 	
