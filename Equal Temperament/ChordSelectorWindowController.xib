@@ -38,7 +38,7 @@
                 </constraints>
                 <animations/>
             </view>
-            <toolbar key="toolbar" implicitIdentifier="05C16AD6-2945-4B69-8700-79DBF66A8F84" autosavesConfiguration="NO" allowsUserCustomization="NO" showsBaselineSeparator="NO" displayMode="iconOnly" sizeMode="regular" id="D4R-LG-pbH">
+            <toolbar key="toolbar" implicitIdentifier="05C16AD6-2945-4B69-8700-79DBF66A8F84" autosavesConfiguration="NO" allowsUserCustomization="NO" showsBaselineSeparator="NO" displayMode="iconAndLabel" sizeMode="regular" id="D4R-LG-pbH">
                 <allowedToolbarItems>
                     <toolbarItem implicitItemIdentifier="5E2115E2-B0F5-4987-9127-C43ACD52BB31" label="Tools" paletteLabel="Tools" image="NSSmartBadgeTemplate" id="E47-bk-gLQ">
                         <nil key="toolTip"/>

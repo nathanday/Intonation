@@ -1,10 +1,10 @@
-//
-//  HarmonicView.swift
-//  Equal Temperament
-//
-//  Created by Nathan Day on 5/04/15.
-//  Copyright (c) 2015 Nathan Day. All rights reserved.
-//
+/*
+	HarmonicView.swift
+	Equal Temperament
+
+	Created by Nathan Day on 5/04/15.
+	Copyright © 2015 Nathan Day. All rights reserved.
+ */
 
 import Cocoa
 
@@ -34,7 +34,7 @@ func log10( var aValue : UInt ) -> UInt {
 func greatestCommonDivisor(u: [Rational] ) -> Int {
 	var		theResult = 1;
 	for theNumber in u {
-		theResult = greatestCommonDivisor(theResult, v: theNumber.numerator);
+		theResult = greatestCommonDivisor(theResult, theNumber.numerator);
 	}
 	return theResult;
 }

@@ -1,10 +1,10 @@
-//
-//  ChordSelectorWindowController.swift
-//  Equal Temperament
-//
-//  Created by Nathan Day on 12/04/15.
-//  Copyright (c) 2015 Nathan Day. All rights reserved.
-//
+/*
+	ChordSelectorWindowController.swift
+	Equal Temperament
+
+	Created by Nathan Day on 12/04/15.
+	Copyright © 2015 Nathan Day. All rights reserved.
+ */
 
 import Cocoa
 

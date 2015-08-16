@@ -8,5 +8,11 @@
 	<integer>1</integer>
 	<key>selectedWaveViewScale</key>
 	<integer>1</integer>
+	<key>numeratorPrimeLimit</key>
+	<integer>2</integer>
+	<key>denominatorPrimeLimit</key>
+	<integer>1</integer>
+	<key>oddLimit</key>
+	<integer>225</integer>
 </dict>
 </plist>

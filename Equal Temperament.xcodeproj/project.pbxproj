@@ -77,8 +77,6 @@
 		D8B9020C1AD491E30015B5E2 /* PreferencesWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
 		D8B9020D1AD491E30015B5E2 /* PreferencesWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreferencesWindowController.xib; sourceTree = "<group>"; };
 		D8C343C71AE109E200F5494A /* SpectrumView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpectrumView.swift; sourceTree = "<group>"; };
-		D8C6D8621B24641A003D5A95 /* Oscillator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Oscillator.h; sourceTree = "<group>"; };
-		D8C6D8631B24641A003D5A95 /* Oscillator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Oscillator.m; sourceTree = "<group>"; };
 		D8D912D11B197D5300BB479A /* TonePlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TonePlayer.swift; sourceTree = "<group>"; };
 		D8E5E6231AD12F7A004DB02D /* HarmonicView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HarmonicView.swift; sourceTree = "<group>"; };
 		D8E5E6251AD130DE004DB02D /* ScaleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScaleView.swift; sourceTree = "<group>"; };
@@ -216,8 +214,6 @@
 				D831054D1B0A6115000EB805 /* HarmonicsDescription.swift */,
 				D8D912D11B197D5300BB479A /* TonePlayer.swift */,
 				D8B14D281B29C68300C971D8 /* Oscillator.swift */,
-				D8C6D8621B24641A003D5A95 /* Oscillator.h */,
-				D8C6D8631B24641A003D5A95 /* Oscillator.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -474,11 +470,6 @@
 				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/AudioKit/Platforms/OSX",
-					"$(DEVELOPER_DIR)/Platforms/MacOSX.platform/Developer/MacOSX10.10.sdk/System/Library/Frameworks",
-				);
 				INFOPLIST_FILE = "Equal Temperament/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
@@ -495,11 +486,6 @@
 				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/AudioKit/Platforms/OSX",
-					"$(DEVELOPER_DIR)/Platforms/MacOSX.platform/Developer/MacOSX10.10.sdk/System/Library/Frameworks",
-				);
 				INFOPLIST_FILE = "Equal Temperament/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;

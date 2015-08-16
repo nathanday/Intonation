@@ -1,10 +1,10 @@
-//
-//  PreferencesWindowController.swift
-//  Equal Temperament
-//
-//  Created by Nathan Day on 8/04/15.
-//  Copyright (c) 2015 Nathan Day. All rights reserved.
-//
+/*
+	PreferencesWindowController.swift
+	Equal Temperament
+
+	Created by Nathan Day on 8/04/15.
+	Copyright © 2015 Nathan Day. All rights reserved.
+ */
 
 import Cocoa
 

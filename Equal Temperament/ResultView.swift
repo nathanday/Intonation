@@ -1,10 +1,10 @@
-//
-//  ResultView.swift
-//  Equal Temperament
-//
-//  Created by Nathan Day on 8/04/15.
-//  Copyright (c) 2015 Nathan Day. All rights reserved.
-//
+/*
+	ResultView.swift
+	Equal Temperament
+
+	Created by Nathan Day on 8/04/15.
+	Copyright © 2015 Nathan Day. All rights reserved.
+ */
 
 import Cocoa
 
@@ -14,7 +14,7 @@ import Cocoa
 		get {
 			var		theResult = 1;
 			for theValue in selectedRatios {
-				theResult *= theValue.denominator/greatestCommonDivisor(theResult,v: theValue.denominator);
+				theResult *= theValue.denominator/greatestCommonDivisor(theResult, theValue.denominator);
 			}
 			return theResult;
 		}

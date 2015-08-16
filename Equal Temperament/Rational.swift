@@ -3,7 +3,7 @@
     Equal Temperament
 
     Created by Nathan Day on 7/06/14.
-    Copyright (c) 2014 Nathan Day. All rights reserved.
+    Copyright © 2014 Nathan Day. All rights reserved.
  */
 
 import Foundation
@@ -26,13 +26,13 @@ struct Rational : CustomStringConvertible, CustomDebugStringConvertible, Hashabl
             aDenominator = -aDenominator;
         }
 
-        let theCommonDivisor = greatestCommonDivisor(aNumerator, v: aDenominator);
+        let theCommonDivisor = greatestCommonDivisor(aNumerator, aDenominator);
         numerator = aNumerator/theCommonDivisor;
         denominator = aDenominator/theCommonDivisor;
     }
 
 	func numeratorForDenominator( aDenominator: Int ) -> Int? {
-		return aDenominator%denominator == 0 ? numerator*(aDenominator/denominator) : nil;
+		return aDenominator != 0 && aDenominator%denominator == 0 ? numerator*(aDenominator/denominator) : nil;
 	}
 
 	var toString: String { return "\(numerator)\\\(denominator)"; }
@@ -190,6 +190,15 @@ func / (a: Rational, b: Int) -> Rational {
 		: Rational(-a.numerator,-a.denominator*b);
 }
 
+func sum( anArray: [Rational] ) -> Rational {
+	var			theResultNum = 0,
+				theResultDen = 1;
+	for theTerm in anArray {
+		theResultNum = theResultNum*theTerm.denominator+theTerm.numerator*theResultDen;
+		theResultDen *= theTerm.denominator
+	}
+	return Rational( theResultNum, theResultDen );
+}
 
 func == (a: Rational, b: Rational) -> Bool { return a.numerator==b.numerator && a.denominator == b.denominator; }
 func != (a: Rational, b: Rational) -> Bool { return a.numerator != b.numerator || a.denominator != b.denominator; }
@@ -197,4 +206,3 @@ func < (a: Rational, b: Rational) -> Bool { 	return a.numerator*b.denominator < 
 func <= (a: Rational, b: Rational) -> Bool { return a.numerator*b.denominator <= b.numerator*a.denominator; }
 func > (a: Rational, b: Rational) -> Bool { return a.numerator*b.denominator > b.numerator*a.denominator; }
 func >= (a: Rational, b: Rational) -> Bool { return a.numerator*b.denominator >= b.numerator*a.denominator; }
-

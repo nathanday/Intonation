@@ -3,12 +3,10 @@
     Equal Temperament
 
     Created by Nathan Day on 8/06/14.
-    Copyright (c) 2014 Nathan Day. All rights reserved.
+    Copyright © 2014 Nathan Day. All rights reserved.
  */
 
 import Cocoa
-
-let kThumbSize = NSSize(width:7.0,height:42.0);
 
 class Document : NSDocument {
 	@IBOutlet var	tableParentContainerView : NSView?
@@ -22,6 +20,18 @@ class Document : NSDocument {
 	@IBOutlet var	baseFrequencyTextField : NSTextField?;
 	@IBOutlet var	documentWindow : NSWindow?;
 	@IBOutlet var	harmonicTitleTextField : NSTextField?;
+
+	static private var		onceToken = false;
+	override class func initialize() {
+		if onceToken {
+			if let theURL = NSBundle.mainBundle().URLForResource( "InitialUserDefaults", withExtension:"plist" ) {
+				if let theDictionary = NSDictionary(contentsOfURL:theURL ) as? [String : AnyObject] {
+					NSUserDefaults.standardUserDefaults().registerDefaults(theDictionary);
+					onceToken = true;
+				}
+			}
+		}
+	}
 
 	var		primeNumber = UInt.primes(upTo: 100 );
 
@@ -41,6 +51,7 @@ class Document : NSDocument {
 		willSet { willChangeValueForKey("numeratorPrimeLimit"); }
 		didSet {
 			didChangeValueForKey("numeratorPrimeLimit");
+			NSUserDefaults.standardUserDefaults().setInteger(numeratorPrimeLimitIndex, forKey:"numeratorPrimeLimit");
 			calculateAllIntervals();
 		}
 	}
@@ -49,13 +60,15 @@ class Document : NSDocument {
 		willSet { willChangeValueForKey("denominatorPrimeLimit"); }
 		didSet {
 			didChangeValueForKey("denominatorPrimeLimit");
+			NSUserDefaults.standardUserDefaults().setInteger(numeratorPrimeLimitIndex, forKey:"denominatorPrimeLimit");
 			calculateAllIntervals();
 		}
 	}
 	var		separatePrimeLimit : Bool = false { didSet { calculateAllIntervals(); } }
-	var		oddLimit : UInt = 17 {
+	var		oddLimit : UInt = 15 {
 		didSet {
 			if( oddLimit%2 == 0 ) { oddLimit++; }
+			NSUserDefaults.standardUserDefaults().setInteger( Int(oddLimit), forKey:"oddLimit");
 			calculateAllIntervals();
 		}
 	}
@@ -132,13 +145,6 @@ class Document : NSDocument {
 		get { return NSUserDefaults.standardUserDefaults().integerForKey("selectedSpectrumType"); }
 	}
 	
-	dynamic var		selectedPlaybackType : Int {
-		set( aValue ) {
-			NSUserDefaults.standardUserDefaults().setInteger( aValue, forKey: "selectedPlaybackType");
-		}
-		get { return NSUserDefaults.standardUserDefaults().integerForKey("selectedPlaybackType"); }
-	}
-	
 	/*
 	Disclosure views
 	*/
@@ -212,7 +218,7 @@ class Document : NSDocument {
 				var		theRatiosString : String = "";
 				var		theCommonFactor = 1;
 				for theValue in selectedJustIntonationRatio {
-					theCommonFactor *= theValue.denominator/greatestCommonDivisor(theCommonFactor,v: theValue.denominator);
+					theCommonFactor *= theValue.denominator/greatestCommonDivisor(theCommonFactor, theValue.denominator);
 				}
 				for theRatio in selectedJustIntonationRatio {
 					if let theValue = theRatio.numeratorForDenominator(theCommonFactor) {
@@ -239,6 +245,11 @@ class Document : NSDocument {
 		updateWaveViewDisplayMode();
 		updateSelectedSpectrumType();
 		updateWaveViewScale();
+		numeratorPrimeLimitIndex = NSUserDefaults.standardUserDefaults().integerForKey("numeratorPrimeLimit");
+		denominatorPrimeLimitIndex = NSUserDefaults.standardUserDefaults().integerForKey("denominatorPrimeLimit");
+		oddLimit = UInt(NSUserDefaults.standardUserDefaults().integerForKey("oddLimit"));
+		tonePlayer.harmonics = overtones;
+		tonePlayer.baseFrequency = baseFrequency;
 	}
 
 	override func dataOfType( typeName: String) throws -> NSData {
@@ -318,8 +329,24 @@ class Document : NSDocument {
 		intervalCount = UInt(aSender.tag);
 	}
 
+	var		previouslySelectedSegment : Int = -1;
+
 	@IBAction func playAction( aSender: NSSegmentedControl ) {
-		tonePlayer.playType( PlaybackType(rawValue:selectedPlaybackType) ?? .Unison );
+		if aSender.selectedSegment == previouslySelectedSegment && tonePlayer.playing {
+			tonePlayer.stop();
+			aSender.setSelected( false, forSegment: previouslySelectedSegment);
+			previouslySelectedSegment = -1;
+		}
+		else {
+			let			thePlaybackType = PlaybackType(rawValue:aSender.selectedSegment) ?? .Unison;
+			if tonePlayer.playing {
+				aSender.setSelected( false, forSegment: previouslySelectedSegment);
+			}
+			previouslySelectedSegment = aSender.selectedSegment;
+			tonePlayer.stop();
+			tonePlayer.playType(thePlaybackType);
+			aSender.setSelected( true, forSegment: aSender.selectedSegment);
+		}
 	}
 
 
@@ -410,6 +437,7 @@ extension Document : NSTableViewDelegate {
 		if let theSpectrumView = spectrumView {
 			theSpectrumView.selectedRatios = theSelectedRatios;
 		}
+		tonePlayer.ratios = theSelectedRatios;
 	}
 }
 

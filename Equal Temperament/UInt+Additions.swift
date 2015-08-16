@@ -1,14 +1,15 @@
-//
-//  UInt+Additions.swift
-//  Equal Temperament
-//
-//  Created by Nathan Day on 4/04/15.
-//  Copyright (c) 2015 Nathan Day. All rights reserved.
-//
+/*
+	UInt+Additions.swift
+	Equal Temperament
+
+	Created by Nathan Day on 4/04/15.
+	Copyright © 2015 Nathan Day. All rights reserved.
+ */
 
 import Foundation
 
 extension UInt {
+	var hexadecimalString : String { get { return String(format: "%x", self ); } }
 
 	func isFactorOf(factor: UInt) -> Bool { return self % factor == 0; }
 	func isFactorOf(factors: Range<UInt>) -> Bool {
@@ -61,12 +62,14 @@ extension UInt {
 func greatestCommonDivisor(u: [Int] ) -> Int {
 	var		theResult = 1;
 	for theNumber in u {
-		theResult = greatestCommonDivisor(theResult, v: theNumber);
+		theResult = greatestCommonDivisor(theResult, theNumber);
 	}
 	return theResult;
 }
 
-func greatestCommonDivisor(u: Int, v: Int) -> Int {
+func greatestCommonDivisor(u: UInt, _ v: UInt) -> UInt { return UInt(greatestCommonDivisor( Int(u), Int(v) )); }
+
+func greatestCommonDivisor(u: Int, _ v: Int) -> Int {
 	// simple cases (termination)
 	if u == v { return u; }
 	if u == 0 { return v; }
@@ -75,19 +78,19 @@ func greatestCommonDivisor(u: Int, v: Int) -> Int {
 	// look for factors of 2
 	if (~u & 0b1) != 0 {  // u is even
 		if (v & 0b1) != 0 {		// v is odd
-			return greatestCommonDivisor(u >> 1, v: v);
+			return greatestCommonDivisor(u >> 1, v);
 		}
 		else { // both u and v are even
-			return greatestCommonDivisor(u >> 1, v: v >> 1) << 1;
+			return greatestCommonDivisor(u >> 1, v >> 1) << 1;
 		}
 	}
 
-	if (~v & 0b1) != 0 { return greatestCommonDivisor(u, v: v >> 1); } // u is odd, v is even
+	if (~v & 0b1) != 0 { return greatestCommonDivisor(u, v >> 1); } // u is odd, v is even
 
 	// reduce larger argument
-	if u > v { return greatestCommonDivisor((u - v) >> 1, v: v); }
+	if u > v { return greatestCommonDivisor((u - v) >> 1, v); }
 
-	return greatestCommonDivisor((v - u) >> 1, v: u);
+	return greatestCommonDivisor((v - u) >> 1, u);
 }
 
 extension UInt {

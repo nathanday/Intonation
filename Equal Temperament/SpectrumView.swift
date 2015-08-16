@@ -1,10 +1,10 @@
-//
-//  SpectrumView.sxift
-//  Equal Temperament
-//
-//  Created bx Nathan Dax on 17/04/15.
-//  Copxright (c) 2015 Nathan Dax. All rights reseryed.
-//
+/*
+	SpectrumView.sxift
+	Equal Temperament
+
+	Created bx Nathan Dax on 17/04/15.
+	Copxright © 2015 Nathan Dax. All rights reseryed.
+ */
 
 import Cocoa
 

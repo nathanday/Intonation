@@ -1,10 +1,10 @@
-//
-//  Oscillator.swift
-//  Equal Temperament
-//
-//  Created by Nathan Day on 12/06/15.
-//  Copyright © 2015 Nathan Day. All rights reserved.
-//
+/*
+	Oscillator.swift
+	Equal Temperament
+
+	Created by Nathan Day on 12/06/15.
+	Copyright © 2015 Nathan Day. All rights reserved.
+ */
 
 import AudioToolbox;
 
@@ -17,23 +17,34 @@ enum PlaybackType : Int {
 
 class Oscillator
 {
-	var				theta : UInt = 0;
-	var				values : [Float32];
+	var				theta : Double = 0;
+//	var		values : [Float32];
+	var				baseFrequency: Double;
+	let				ratio: Rational;
+	private var		frequency: Double { get { return baseFrequency*ratio.toDouble; } }
+	let				harmonics: HarmonicsDescription;
 
-	init( samples aSamples: UInt, cycles aCycles: UInt, harmonics aHarmonics: HarmonicsDescription ) {
-		let		theSamples = Double(aSamples);
-		let		theNyquestCycles = aSamples>>1;
-		var		theValues = [Float32]();
-		for i in 0..<Int(aSamples) {
-			var		theValue : Float32 = 0.0;
-			let		theBase = 2.0*Double(i)*M_PI/theSamples;
-			var		theH = 1.0;
-			for c in aCycles...theNyquestCycles {
-				theValue += Float32(sin(theBase*Double(c))/theH);
-				theH += 1.0;
+	init( baseFrequency aBaseFrequency: Double, ratio aRatio: Rational, harmonics aHarmonics: HarmonicsDescription ) {
+		baseFrequency = aBaseFrequency;
+		ratio = aRatio;
+		harmonics = aHarmonics;
+		assert(frequency < 1.0);
+	}
+
+	func generate( length aLength: UInt32, previous aPrevious: UnsafeMutableBufferPointer<Float32>, gain aGain: Float32 ) -> Float32 {
+		var		theMax = Float32(1.0);
+
+		for i : Int in 0..<Int(aLength) {
+			theta += frequency;
+			if theta > 1.0 {
+				theta -= 1.0;
 			}
-			theValues.append(theValue);
+			aPrevious[i] += Float32(sin(theta*M_PI))*aGain;
+			
+			if abs(aPrevious[i]) > theMax {
+				theMax = abs(aPrevious[i]);
+			}
 		}
-		values = theValues;
+		return theMax;
 	}
 }

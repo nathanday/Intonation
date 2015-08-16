@@ -3,7 +3,7 @@
     Equal Temperament
 
     Created by Nathan Day on 8/06/14.
-    Copyright (c) 2014 Nathan Day. All rights reserved.
+    Copyright © 2014 Nathan Day. All rights reserved.
  */
 
 import Foundation

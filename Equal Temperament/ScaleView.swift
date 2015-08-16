@@ -1,12 +1,14 @@
-//
-//  ScaleView.swift
-//  Equal Temperament
-//
-//  Created by Nathan Day on 5/04/15.
-//  Copyright (c) 2015 Nathan Day. All rights reserved.
-//
+/*
+	ScaleView.swift
+	Equal Temperament
+	
+	Created by Nathan Day on 5/04/15.
+	Copyright © 2015 Nathan Day. All rights reserved.
+ */
 
 import Cocoa
+
+let		π = M_PI;
 
 class ScaleView : ResultView {
 	static let		equalTempGradient: NSGradient? = NSGradient(startingColor: NSColor.lightGrayColor(), endingColor: NSColor(calibratedWhite:0.9, alpha:1.0));
@@ -32,6 +34,7 @@ class ScaleView : ResultView {
 		
 		if useIntervals {
 			for i in 0..<numberOfIntervals { drawEqualTemperamentRatio( rationNumber: i ); }
+//			for i in 0..<UInt(3) { drawEqualTemperamentRatio( rationNumber: i ); }
 		}
 		else {
 			drawNoEqualTemperament();
@@ -101,7 +104,7 @@ class PitchConstellationView : ScaleView {
 	private var		axisesRadius : CGFloat { get { return min(maximumRadius-80.0, 320.0); } }
 	override func drawJustIntonationRatio( ratio aRatio : Rational, hilighted aHilighted : Bool, index anIndex: Int, previousValue aPreviousY : CGFloat ) -> CGFloat {
 		let		theBounds = self.bounds;
-		let		theAngle = CGFloat(log2(aRatio.toDouble) * 2.0*M_PI);
+		let		theAngle = CGFloat(log2(aRatio.toDouble) * 2.0*π);
 		let		theRadius = aHilighted ? maximumRadius - 40.0 : axisesRadius;
 		let		thePath = NSBezierPath()
 		thePath.moveToPoint(NSMakePoint(NSMidX(theBounds), NSMidY(theBounds)));
@@ -127,13 +130,17 @@ class PitchConstellationView : ScaleView {
 	override func drawEqualTemperamentRatio( rationNumber aRatioNumber : UInt ) {
 		let		theBounds = self.bounds;
 		let		theArcLength = 360.0/CGFloat(numberOfIntervals);
-		let		theStart = CGFloat(aRatioNumber)*theArcLength;
-		let		theEnd	= CGFloat(aRatioNumber+1)*theArcLength;
+		let		theStart = CGFloat(90.0)-CGFloat(aRatioNumber+1)*theArcLength;
+		let		theEnd	= CGFloat(90.0)-CGFloat(aRatioNumber)*theArcLength;
 		let		thePath = NSBezierPath();
 		thePath.appendBezierPathWithArcWithCenter(NSMakePoint(NSMidX(theBounds), NSMidY(theBounds)), radius:axisesRadius, startAngle: theStart, endAngle: theEnd);
 		thePath.appendBezierPathWithArcWithCenter(NSMakePoint(NSMidX(theBounds), NSMidY(theBounds)), radius:axisesRadius-equalTempBarWidth, startAngle: theEnd, endAngle: theStart, clockwise: true);
 		thePath.closePath();
 		LinearScaleView.equalTempGradient!.drawInBezierPath(thePath, angle: (theStart+theEnd)*0.5+90.0);
+
+		let		theAngle = (360.0+88.0-theStart) * CGFloat(π/180.0);
+		let		theSize = NSFont.systemFontSizeForControlSize(NSControlSize.SmallControlSize);
+		drawText(string: "\(aRatioNumber+1)", size:theSize, point: NSMakePoint(NSMidX(theBounds)+sin(theAngle)*(axisesRadius-9.0), NSMidY(theBounds)+cos(theAngle)*(axisesRadius-11.0)-theSize*0.8), color:NSColor.whiteColor(), textAlignment: .Center );
 	}
 
 	override func drawNoEqualTemperament( ) {
