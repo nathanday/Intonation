@@ -37,19 +37,25 @@ class TonePlayer {
 	
 	var playing : Bool = false;
 	
-	var everyTone : [Tone] = [];
+	var playingTones : [Rational:Tone] = [:];
 
 	func outputAudio( aSamples: UnsafeMutableBufferPointer<Float32>, numberFrames anInNumberFrames: UInt32 ) -> OSStatus {
 		let		theResult : OSStatus = kAudioServicesNoError;
 		let		theGain = Float32(0.5);
 		assert( theGain > 0.0, "bad gain value: \(theGain)" );
-		assert( !everyTone.isEmpty, "no tones" );
+//		assert( !playingTones.isEmpty, "no tones" );
 		if !aSamples.isEmpty {
-			let		theFirstOscilator = everyTone.first;
-			for theOscilator in everyTone {
-				for i : Int in 0..<Int(anInNumberFrames) {
-					if theFirstOscilator === theOscilator { aSamples[i] = 0.0; }
-					aSamples[i] += theOscilator.generate( gain: theGain );
+			var		theFirst = true;
+			for theRatio in ratios {
+				if let theTone = playingTones[theRatio] {
+					for i : Int in 0..<Int(anInNumberFrames) {
+						if theFirst { aSamples[i] = 0.0; }
+						aSamples[i] += theTone.generate( gain: theGain );
+					}
+					if theTone.complete {
+						playingTones.removeValueForKey(theRatio);
+					}
+					theFirst = false;
 				}
 			}
 		}
@@ -113,9 +119,13 @@ class TonePlayer {
 	private var baseSampleLength : UInt { return UInt(sum(ratios).denominator); }
 
 	func generateTones() {
-		everyTone.removeAll();
+//		playingTones.removeAll();
 		for theRatio in self.ratios {
-			everyTone.append(Tone(baseFrequency:baseFrequency/TonePlayer.nyquestFrequency, ratio: theRatio, harmonics:harmonics));
+			if let theTone = playingTones[theRatio] {
+				theTone.baseFrequency = baseFrequency/TonePlayer.nyquestFrequency;
+			} else {
+				playingTones[theRatio] = Tone(baseFrequency:baseFrequency/TonePlayer.nyquestFrequency, ratio: theRatio, harmonics:harmonics);
+			}
 		}
 	}
 	
@@ -134,5 +144,4 @@ class TonePlayer {
 			playing = theError == noErr;
 		}
 	}
-
 }

@@ -9,6 +9,9 @@
 import Cocoa
 
 class Document : NSDocument {
+	static let		minimumBaseFrequency = 20.0;
+	static let		maximumBaseFrequency = 4_200.0;
+
 	@IBOutlet var	tableParentContainerView : NSView?
 	@IBOutlet var	arrayController : NSArrayController?
 	@IBOutlet var	linearScaleView : ScaleView?;
@@ -20,6 +23,9 @@ class Document : NSDocument {
 	@IBOutlet var	baseFrequencyTextField : NSTextField?;
 	@IBOutlet var	documentWindow : NSWindow?;
 	@IBOutlet var	harmonicTitleTextField : NSTextField?;
+	@IBOutlet var	baseFrequencyDeltaSlider : NSSlider?;
+
+	var		previousBaseFrequencyDelta : Double = 0.0;
 
 	static private var		onceToken = false;
 	override class func initialize() {
@@ -99,7 +105,12 @@ class Document : NSDocument {
 
 	var		baseFrequency : Double {
 		get { return tonePlayer.baseFrequency; }
-		set( aValue ) { tonePlayer.baseFrequency = aValue; }
+		set( aValue ) {
+			let		theValue = max(min(aValue,Document.maximumBaseFrequency), Document.minimumBaseFrequency);
+			self.willChangeValueForKey("baseFrequency");
+			tonePlayer.baseFrequency = theValue;
+			self.didChangeValueForKey("baseFrequency");
+		}
 	}
 
 	var		allOvertonesAmount : Double {
@@ -250,6 +261,11 @@ class Document : NSDocument {
 		oddLimit = UInt(NSUserDefaults.standardUserDefaults().integerForKey("oddLimit"));
 		tonePlayer.harmonics = overtones;
 		tonePlayer.baseFrequency = baseFrequency;
+
+		if let theBaseFrequencyDeltaSlider = baseFrequencyDeltaSlider {
+			theBaseFrequencyDeltaSlider.continuous = true;
+			previousBaseFrequencyDelta = theBaseFrequencyDeltaSlider.doubleValue;
+		}
 	}
 
 	override func dataOfType( typeName: String) throws -> NSData {
@@ -349,6 +365,33 @@ class Document : NSDocument {
 		}
 	}
 
+	@IBAction func baseFrequencyDeltaChanged( aSender: NSSlider ) {
+		let		theMinValue = aSender.minValue;
+		let		theMaxValue = aSender.maxValue;
+		let		theBaseFrequencyDelta = aSender.doubleValue;
+		var		theNegativeDelta = 0.0;
+		var		thePositiveDelta = 0.0;
+
+		if previousBaseFrequencyDelta > theBaseFrequencyDelta {
+			theNegativeDelta = previousBaseFrequencyDelta - theBaseFrequencyDelta;
+			thePositiveDelta = (theBaseFrequencyDelta - theMinValue) + (theMaxValue - previousBaseFrequencyDelta);
+		}
+		else if previousBaseFrequencyDelta < theBaseFrequencyDelta {
+			theNegativeDelta = (previousBaseFrequencyDelta - theMinValue) + (theMaxValue - theBaseFrequencyDelta);
+			thePositiveDelta = theBaseFrequencyDelta - previousBaseFrequencyDelta;
+		}
+
+		assert( theNegativeDelta >= 0.0 );
+		assert( thePositiveDelta >= 0.0 );
+
+		if theNegativeDelta < thePositiveDelta {
+			baseFrequency -= pow(baseFrequency,pow(theNegativeDelta,4.0));
+		} else if theNegativeDelta > thePositiveDelta {
+			baseFrequency += pow(baseFrequency,pow(thePositiveDelta,4.0));
+		}
+
+		previousBaseFrequencyDelta = theBaseFrequencyDelta;
+	}
 
 	override var windowNibName: String! { return "Document"; }
 

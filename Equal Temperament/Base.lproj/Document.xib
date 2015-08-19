@@ -7,6 +7,7 @@
         <customObject id="-2" userLabel="File's Owner" customClass="Document" customModule="Equal_Temperament">
             <connections>
                 <outlet property="arrayController" destination="cy8-kx-1Au" id="huD-lu-K2w"/>
+                <outlet property="baseFrequencyDeltaSlider" destination="aCN-ld-zpq" id="L00-gr-4Hk"/>
                 <outlet property="baseFrequencyTextField" destination="O7m-mx-3Nr" id="qfW-V2-Ycf"/>
                 <outlet property="documentWindow" destination="xOd-HO-29H" id="z8b-wo-5Hh"/>
                 <outlet property="harmonicTitleTextField" destination="vvG-6Z-vMY" id="HfJ-fO-vbR"/>
@@ -267,7 +268,7 @@
                                     <constraint firstAttribute="width" constant="23" id="gU9-Yn-o2Y"/>
                                 </constraints>
                                 <animations/>
-                                <buttonCell key="cell" type="disclosureTriangle" bezelStyle="disclosure" image="816A65BA-3F17-4705-A887-31F829CF6CBF" imagePosition="above" alignment="left" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Wn8-MD-dFW">
+                                <buttonCell key="cell" type="disclosureTriangle" bezelStyle="disclosure" image="323CBA9D-980F-4DCF-8FAB-A17D1669AFDB" imagePosition="above" alignment="left" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Wn8-MD-dFW">
                                     <behavior key="behavior" pushIn="YES" changeBackground="YES" changeGray="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -339,9 +340,9 @@
                                     <slider horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aCN-ld-zpq">
                                         <rect key="frame" x="153" y="37" width="18" height="20"/>
                                         <animations/>
-                                        <sliderCell key="cell" controlSize="small" continuous="YES" alignment="left" minValue="20" maxValue="4200" doubleValue="40" allowsTickMarkValuesOnly="YES" sliderType="circular" id="xL2-3S-jAf"/>
+                                        <sliderCell key="cell" controlSize="small" continuous="YES" alignment="left" maxValue="3" allowsTickMarkValuesOnly="YES" sliderType="circular" id="xL2-3S-jAf"/>
                                         <connections>
-                                            <binding destination="-2" name="value" keyPath="self.baseFrequency" id="2J4-64-jGI"/>
+                                            <action selector="baseFrequencyDeltaChanged:" target="-2" id="ya5-ob-vZg"/>
                                         </connections>
                                     </slider>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HgV-pr-195">
@@ -972,7 +973,7 @@
                                             <rect key="frame" x="10" y="25" width="393" height="526"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <view translatesAutoresizingMaskIntoConstraints="NO" id="Y6c-Rw-DJR" customClass="ResultView" customModule="Equal_Temperament" customModuleProvider="target">
+                                                <view misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y6c-Rw-DJR" customClass="ResultView" customModule="Equal_Temperament" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="393" height="522"/>
                                                     <subviews>
                                                         <tabView drawsBackground="NO" controlSize="small" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="ZgS-OV-6tB">
@@ -1294,7 +1295,7 @@
         <userDefaultsController representsSharedInstance="YES" id="tZN-Kl-w5K"/>
     </objects>
     <resources>
-        <image name="816A65BA-3F17-4705-A887-31F829CF6CBF" width="1" height="1">
+        <image name="323CBA9D-980F-4DCF-8FAB-A17D1669AFDB" width="1" height="1">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

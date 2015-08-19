@@ -215,8 +215,8 @@
 				D89543841996347F00A091A4 /* Rational.swift */,
 				D831054D1B0A6115000EB805 /* HarmonicsDescription.swift */,
 				D8D912D11B197D5300BB479A /* TonePlayer.swift */,
-				D80D8C191B80A167001E7746 /* Envelope.swift */,
 				D8B14D281B29C68300C971D8 /* Tone.swift */,
+				D80D8C191B80A167001E7746 /* Envelope.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
