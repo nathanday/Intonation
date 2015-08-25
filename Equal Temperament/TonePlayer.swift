@@ -29,8 +29,8 @@ class TonePlayer {
 	static let sampleRate : Float64 = 44100.0;
 	static let nyquestFrequency : Float64 = sampleRate/2.0;
 
-	var harmonics : HarmonicsDescription { didSet { generateTones(); } }
-	var baseFrequency : Double { didSet { generateTones(); } }
+	var harmonics : HarmonicsDescription { didSet { updateTones(); } }
+	var baseFrequency : Double { didSet { updateTones(); } }
 	var ratios : [Rational] { didSet { generateTones(); } }
 	
 	var amplitude : Double = 1.0;
@@ -39,23 +39,28 @@ class TonePlayer {
 	
 	var playingTones : [Rational:Tone] = [:];
 
-	func outputAudio( aSamples: UnsafeMutableBufferPointer<Float32>, numberFrames anInNumberFrames: UInt32 ) -> OSStatus {
+	final func outputAudio( aSamples: UnsafeMutableBufferPointer<Float32>, numberFrames anInNumberFrames: UInt32 ) -> OSStatus {
 		let		theResult : OSStatus = kAudioServicesNoError;
 		let		theGain = Float32(0.5);
 		assert( theGain > 0.0, "bad gain value: \(theGain)" );
 //		assert( !playingTones.isEmpty, "no tones" );
 		if !aSamples.isEmpty {
 			var		theFirst = true;
-			for theRatio in ratios {
-				if let theTone = playingTones[theRatio] {
-					for i : Int in 0..<Int(anInNumberFrames) {
-						if theFirst { aSamples[i] = 0.0; }
-						aSamples[i] += theTone.generate( gain: theGain );
+			if ratios.isEmpty {
+				for i : Int in 0..<Int(anInNumberFrames) { aSamples[i] = 0.0; }
+			}
+			else {
+				for theRatio in ratios {
+					if let theTone = playingTones[theRatio] {
+						for i : Int in 0..<Int(anInNumberFrames) {
+							if theFirst { aSamples[i] = 0.0; }
+							aSamples[i] += theTone.generate( gain: theGain );
+						}
+						if theTone.complete {
+							playingTones.removeValueForKey(theRatio);
+						}
+						theFirst = false;
 					}
-					if theTone.complete {
-						playingTones.removeValueForKey(theRatio);
-					}
-					theFirst = false;
 				}
 			}
 		}
@@ -110,21 +115,26 @@ class TonePlayer {
 
 	var toneUnit : AudioComponentInstance;
 
-	func generateAudio( anInTimeStamp : UnsafePointer<AudioTimeStamp>, anInBusNumber: UInt32, anInNumberFrames: UInt32, anIOData: UnsafeMutablePointer<AudioBufferList>) -> Bool {
-		return true;
-	}
-
 	private var outputPower : Double { get { return dBToPower(amplitude); } }
 
 	private var baseSampleLength : UInt { return UInt(sum(ratios).denominator); }
 
 	func generateTones() {
-//		playingTones.removeAll();
 		for theRatio in self.ratios {
 			if let theTone = playingTones[theRatio] {
 				theTone.baseFrequency = baseFrequency/TonePlayer.nyquestFrequency;
+				theTone.harmonics = harmonics;
 			} else {
 				playingTones[theRatio] = Tone(baseFrequency:baseFrequency/TonePlayer.nyquestFrequency, ratio: theRatio, harmonics:harmonics);
+			}
+		}
+	}
+	
+	func updateTones() {
+		for theRatio in self.ratios {
+			if let theTone = playingTones[theRatio] {
+				theTone.baseFrequency = baseFrequency/TonePlayer.nyquestFrequency;
+				theTone.harmonics = harmonics;
 			}
 		}
 	}

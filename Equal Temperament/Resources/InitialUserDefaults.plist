@@ -11,8 +11,10 @@
 	<key>numeratorPrimeLimit</key>
 	<integer>2</integer>
 	<key>denominatorPrimeLimit</key>
-	<integer>1</integer>
-	<key>oddLimit</key>
-	<integer>225</integer>
+	<integer>2</integer>
+	<key>numeratorOddLimit</key>
+	<integer>17</integer>
+	<key>denominatorOddLimit</key>
+	<integer>17</integer>
 </dict>
 </plist>

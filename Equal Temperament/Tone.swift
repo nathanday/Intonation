@@ -23,7 +23,7 @@ class Tone
 	var				envelope = Envelope(attack: 0.1, release: 0.1);
 	let				ratio: Rational;
 	private var		thetaDelta: Double { get { return baseFrequency*ratio.toDouble; } }
-	let				harmonics: HarmonicsDescription;
+	var				harmonics: HarmonicsDescription;
 	var				complete : Bool = false;
 
 	init( baseFrequency aBaseFrequency: Double, ratio aRatio: Rational, harmonics aHarmonics: HarmonicsDescription ) {
@@ -38,7 +38,12 @@ class Tone
 		var		theResult : Float32 = 0.0;
 		(complete,theEnvelope) = envelope[Float32(theta)];
 		if !complete {
-			theResult = Float32(sin(theta*M_PI))*aGain*theEnvelope;
+			var		theTotal : Float32 = 0.0;
+			for i in 1...min(harmonics.maximumHarmonic,Int(0.5/thetaDelta)) {
+				if i%2 == 1 && harmonics.amplitudes[i] < pow(2.0,-7.0) { break; }
+				theTotal += harmonics.amplitudes[i]*Float32(sin(2.0*theta*Double(i)*M_PI));
+			}
+			theResult = Float32(theTotal)*aGain*theEnvelope;
 			theta += thetaDelta;
 		}
 		return theResult;

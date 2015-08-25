@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="8173.3" systemVersion="15A244d" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="8173.3" systemVersion="15A263e" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8173.3"/>
     </dependencies>
@@ -108,10 +108,14 @@
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
-                                                    <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="oddLimit"/>
+                                                    <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="numeratorOddLimit"/>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <connections>
-                                                        <binding destination="cy8-kx-1Au" name="value" keyPath="arrangedObjects.oddLimit" id="CY4-F1-CYO"/>
+                                                        <binding destination="cy8-kx-1Au" name="value" keyPath="arrangedObjects.oddLimit" id="lah-ul-qGu">
+                                                            <dictionary key="options">
+                                                                <bool key="NSConditionallySetsEditable" value="NO"/>
+                                                            </dictionary>
+                                                        </binding>
                                                     </connections>
                                                 </tableColumn>
                                                 <tableColumn width="44" minWidth="44" maxWidth="44" id="TcB-IV-RuD">
@@ -240,11 +244,11 @@
                                     <constraint firstAttribute="height" constant="315" placeholder="YES" id="wJ6-O8-FaX"/>
                                 </constraints>
                                 <animations/>
-                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="Kjc-It-isu">
+                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="Kjc-It-isu">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <animations/>
                                 </scroller>
-                                <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="ZLY-wu-lJG">
+                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="ZLY-wu-lJG">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <animations/>
                                 </scroller>
@@ -268,7 +272,7 @@
                                     <constraint firstAttribute="width" constant="23" id="gU9-Yn-o2Y"/>
                                 </constraints>
                                 <animations/>
-                                <buttonCell key="cell" type="disclosureTriangle" bezelStyle="disclosure" image="323CBA9D-980F-4DCF-8FAB-A17D1669AFDB" imagePosition="above" alignment="left" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Wn8-MD-dFW">
+                                <buttonCell key="cell" type="disclosureTriangle" bezelStyle="disclosure" image="B92127F4-8CF8-4B5F-BB4B-6152CEDAA6CF" imagePosition="above" alignment="left" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Wn8-MD-dFW">
                                     <behavior key="behavior" pushIn="YES" changeBackground="YES" changeGray="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -363,7 +367,7 @@
                                             <constraint firstAttribute="width" constant="142" id="xiw-Tp-qMi"/>
                                         </constraints>
                                         <animations/>
-                                        <sliderCell key="cell" controlSize="small" continuous="YES" state="on" alignment="left" maxValue="1" doubleValue="0.5" tickMarkPosition="above" numberOfTickMarks="11" sliderType="linear" id="3Vo-zH-EzS"/>
+                                        <sliderCell key="cell" controlSize="small" continuous="YES" state="on" alignment="left" maxValue="1" doubleValue="0.5" tickMarkPosition="above" numberOfTickMarks="9" allowsTickMarkValuesOnly="YES" sliderType="linear" id="3Vo-zH-EzS"/>
                                         <connections>
                                             <binding destination="-2" name="value" keyPath="self.allOvertonesAmount" id="2xL-hj-Bdz"/>
                                         </connections>
@@ -383,7 +387,7 @@
                                             <constraint firstAttribute="width" constant="142" id="epc-CN-eOo"/>
                                         </constraints>
                                         <animations/>
-                                        <sliderCell key="cell" controlSize="small" continuous="YES" state="on" alignment="left" maxValue="1" doubleValue="1" tickMarkPosition="above" numberOfTickMarks="11" sliderType="linear" id="Xl4-rU-hFQ"/>
+                                        <sliderCell key="cell" controlSize="small" continuous="YES" state="on" alignment="left" maxValue="1" doubleValue="1" tickMarkPosition="above" numberOfTickMarks="9" allowsTickMarkValuesOnly="YES" sliderType="linear" id="Xl4-rU-hFQ"/>
                                         <connections>
                                             <binding destination="-2" name="value" keyPath="self.evenOvertonesAmount" id="3u5-TF-K6d"/>
                                         </connections>
@@ -615,7 +619,7 @@
                                 <animations/>
                                 <stepperCell key="cell" continuous="YES" alignment="left" increment="2" minValue="3" maxValue="1023" doubleValue="3" id="yWZ-8E-M09"/>
                                 <connections>
-                                    <binding destination="-2" name="value" keyPath="self.oddLimit" id="hir-5h-oCi"/>
+                                    <binding destination="-2" name="value" keyPath="self.numeratorOddLimit" id="hir-5h-oCi"/>
                                 </connections>
                             </stepper>
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CqH-S4-gEG">
@@ -633,7 +637,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="-2" name="value" keyPath="self.oddLimit" id="kaA-Di-Lc9"/>
+                                    <binding destination="-2" name="value" keyPath="self.numeratorOddLimit" id="kaA-Di-Lc9"/>
                                 </connections>
                             </textField>
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="l84-dR-FsE">
@@ -694,9 +698,9 @@
                                         </connections>
                                     </textField>
                                     <button horizontalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pV1-kQ-ZHB">
-                                        <rect key="frame" x="20" y="10" width="143" height="18"/>
+                                        <rect key="frame" x="102" y="10" width="61" height="18"/>
                                         <animations/>
-                                        <buttonCell key="cell" type="check" title="Denominator Prime:" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="QBX-CY-gtp">
+                                        <buttonCell key="cell" type="check" title="Prime:" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="QBX-CY-gtp">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
@@ -713,14 +717,67 @@
                                             <binding destination="-2" name="enabled" keyPath="self.separatePrimeLimit" id="7dB-DO-eRn"/>
                                         </connections>
                                     </stepper>
+                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ngG-hf-WUh">
+                                        <rect key="frame" x="325" y="8" width="60" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="60" id="cWR-u0-hA3"/>
+                                        </constraints>
+                                        <animations/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="right" placeholderString="15" drawsBackground="YES" id="T8j-Eg-hmJ">
+                                            <numberFormatter key="formatter" formatterBehavior="custom10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="1023" id="EoY-3B-sup">
+                                                <real key="minimum" value="3"/>
+                                            </numberFormatter>
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                        <connections>
+                                            <binding destination="-2" name="value" keyPath="self.denominatorOddLimit" id="tEd-Uh-TW2"/>
+                                            <binding destination="-2" name="enabled" keyPath="self.separateOddLimit" id="xZH-Pv-H1Q"/>
+                                        </connections>
+                                    </textField>
+                                    <button horizontalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1Va-AP-5ZR">
+                                        <rect key="frame" x="271" y="10" width="52" height="18"/>
+                                        <animations/>
+                                        <buttonCell key="cell" type="check" title="Odd:" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="zPU-oY-QuX">
+                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <binding destination="-2" name="value" keyPath="self.separateOddLimit" id="gT8-yy-Tm6"/>
+                                        </connections>
+                                    </button>
+                                    <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ohl-qk-qGK">
+                                        <rect key="frame" x="382" y="5" width="19" height="27"/>
+                                        <animations/>
+                                        <stepperCell key="cell" continuous="YES" alignment="left" increment="2" minValue="3" maxValue="1023" doubleValue="3" id="Lco-79-7Gd"/>
+                                        <connections>
+                                            <binding destination="-2" name="value" keyPath="self.denominatorOddLimit" id="wcC-zj-F40"/>
+                                        </connections>
+                                    </stepper>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tsl-lN-vSO">
+                                        <rect key="frame" x="20" y="11" width="82" height="17"/>
+                                        <animations/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Denominator" id="bsK-xO-DP2">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="Ohl-qk-qGK" firstAttribute="bottom" secondItem="ngG-hf-WUh" secondAttribute="bottom" id="2Ra-KO-ofM"/>
+                                    <constraint firstItem="Ohl-qk-qGK" firstAttribute="leading" secondItem="ngG-hf-WUh" secondAttribute="trailing" id="5uZ-ty-Jwv"/>
                                     <constraint firstItem="vrq-pv-rcT" firstAttribute="leading" secondItem="pV1-kQ-ZHB" secondAttribute="trailing" constant="4" id="95Z-IL-xb0"/>
                                     <constraint firstItem="VXK-gt-fiJ" firstAttribute="bottom" secondItem="vrq-pv-rcT" secondAttribute="bottom" id="9h3-Z2-UBk"/>
                                     <constraint firstItem="pV1-kQ-ZHB" firstAttribute="baseline" secondItem="vrq-pv-rcT" secondAttribute="baseline" id="Crt-Hj-3vu"/>
+                                    <constraint firstItem="ngG-hf-WUh" firstAttribute="baseline" secondItem="1Va-AP-5ZR" secondAttribute="baseline" id="LxQ-Di-TI5"/>
+                                    <constraint firstItem="ngG-hf-WUh" firstAttribute="baseline" secondItem="vrq-pv-rcT" secondAttribute="baseline" id="RQM-Ko-jPe"/>
                                     <constraint firstItem="VXK-gt-fiJ" firstAttribute="leading" secondItem="vrq-pv-rcT" secondAttribute="trailing" id="RU8-PG-XmJ"/>
                                     <constraint firstItem="vrq-pv-rcT" firstAttribute="top" secondItem="u2D-Cc-oSQ" secondAttribute="top" id="gQi-cQ-hj2"/>
                                     <constraint firstItem="vrq-pv-rcT" firstAttribute="leading" secondItem="u2D-Cc-oSQ" secondAttribute="leading" constant="165" id="jZ5-3n-Tzn"/>
+                                    <constraint firstItem="ngG-hf-WUh" firstAttribute="leading" secondItem="1Va-AP-5ZR" secondAttribute="trailing" constant="4" id="kxi-1O-AfH"/>
+                                    <constraint firstItem="ngG-hf-WUh" firstAttribute="leading" secondItem="vrq-pv-rcT" secondAttribute="trailing" constant="100" id="suB-g8-mZ3"/>
                                     <constraint firstAttribute="height" constant="30" placeholder="YES" id="vGC-VN-jmw"/>
                                 </constraints>
                                 <animations/>
@@ -1088,7 +1145,7 @@
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <animations/>
                                                             </scroller>
-                                                            <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" controlSize="mini" horizontal="NO" id="RuH-Ow-YRN">
+                                                            <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" controlSize="mini" horizontal="NO" id="RuH-Ow-YRN">
                                                                 <rect key="frame" x="339" y="0.0" width="14" height="469"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <animations/>
@@ -1206,7 +1263,7 @@
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <animations/>
                                                             </scroller>
-                                                            <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" controlSize="small" horizontal="NO" id="1Of-4G-kLr">
+                                                            <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" controlSize="small" horizontal="NO" id="1Of-4G-kLr">
                                                                 <rect key="frame" x="339" y="0.0" width="14" height="469"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <animations/>
@@ -1295,7 +1352,7 @@
         <userDefaultsController representsSharedInstance="YES" id="tZN-Kl-w5K"/>
     </objects>
     <resources>
-        <image name="323CBA9D-980F-4DCF-8FAB-A17D1669AFDB" width="1" height="1">
+        <image name="B92127F4-8CF8-4B5F-BB4B-6152CEDAA6CF" width="1" height="1">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

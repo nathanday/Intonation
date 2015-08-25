@@ -54,30 +54,38 @@ class Document : NSDocument {
 	}
 	var		numeratorPrimeLimit : UInt { get { return primeNumber[numeratorPrimeLimitIndex]; } }
 	var		numeratorPrimeLimitIndex : Int = 2 {
-		willSet { willChangeValueForKey("numeratorPrimeLimit"); }
 		didSet {
-			didChangeValueForKey("numeratorPrimeLimit");
+			willChangeValueForKey("numeratorPrimeLimit");
 			NSUserDefaults.standardUserDefaults().setInteger(numeratorPrimeLimitIndex, forKey:"numeratorPrimeLimit");
 			calculateAllIntervals();
+			didChangeValueForKey("numeratorPrimeLimit");
 		}
 	}
 	var		denominatorPrimeLimit : UInt { get { return primeNumber[denominatorPrimeLimitIndex]; } }
 	var		denominatorPrimeLimitIndex : Int = 1 {
-		willSet { willChangeValueForKey("denominatorPrimeLimit"); }
 		didSet {
-			didChangeValueForKey("denominatorPrimeLimit");
-			NSUserDefaults.standardUserDefaults().setInteger(numeratorPrimeLimitIndex, forKey:"denominatorPrimeLimit");
+			willChangeValueForKey("denominatorPrimeLimit");
+			NSUserDefaults.standardUserDefaults().setInteger(denominatorPrimeLimitIndex, forKey:"denominatorPrimeLimit");
 			calculateAllIntervals();
+			didChangeValueForKey("denominatorPrimeLimit");
 		}
 	}
 	var		separatePrimeLimit : Bool = false { didSet { calculateAllIntervals(); } }
-	var		oddLimit : UInt = 15 {
+	var		numeratorOddLimit : UInt = 15 {
 		didSet {
-			if( oddLimit%2 == 0 ) { oddLimit++; }
-			NSUserDefaults.standardUserDefaults().setInteger( Int(oddLimit), forKey:"oddLimit");
+			if( numeratorOddLimit%2 == 0 ) { numeratorOddLimit++; }
+			NSUserDefaults.standardUserDefaults().setInteger( Int(numeratorOddLimit), forKey:"numeratorOddLimit");
 			calculateAllIntervals();
 		}
 	}
+	var		denominatorOddLimit : UInt = 15 {
+		didSet {
+			if( denominatorOddLimit%2 == 0 ) { denominatorOddLimit++; }
+			NSUserDefaults.standardUserDefaults().setInteger( Int(denominatorOddLimit), forKey:"denominatorOddLimit");
+			calculateAllIntervals();
+		}
+	}
+	var		separateOddLimit : Bool = false { didSet { calculateAllIntervals(); } }
 	var		maximumError : Double = 0.18 { didSet { calculateAllIntervals(); } }
 	var		filtered : Bool = false { didSet { calculateAllIntervals(); } }
 
@@ -258,7 +266,8 @@ class Document : NSDocument {
 		updateWaveViewScale();
 		numeratorPrimeLimitIndex = NSUserDefaults.standardUserDefaults().integerForKey("numeratorPrimeLimit");
 		denominatorPrimeLimitIndex = NSUserDefaults.standardUserDefaults().integerForKey("denominatorPrimeLimit");
-		oddLimit = UInt(NSUserDefaults.standardUserDefaults().integerForKey("oddLimit"));
+		numeratorOddLimit = UInt(NSUserDefaults.standardUserDefaults().integerForKey("numeratorOddLimit"));
+		denominatorOddLimit = UInt(NSUserDefaults.standardUserDefaults().integerForKey("denominatorOddLimit"));
 		tonePlayer.harmonics = overtones;
 		tonePlayer.baseFrequency = baseFrequency;
 
@@ -275,7 +284,8 @@ class Document : NSDocument {
 			"limits":[
 				"numeratorPrime":numeratorPrimeLimitIndex,
 				"denominatorPrime":denominatorPrimeLimitIndex,
-				"odd":oddLimit],
+				"numeratorOdd":numeratorOddLimit,
+				"denominatorOddLimit":denominatorOddLimit],
 			"enableInterval":enableInterval,
 			"maximumError":maximumError,
 			"filtered":filtered,
@@ -315,8 +325,11 @@ class Document : NSDocument {
 					if let theDenominatorPrimeLimitIndex = theLimits["denominatorPrime"] {
 						denominatorPrimeLimitIndex = theDenominatorPrimeLimitIndex;
 					}
-					if let theOddLimit : Int = theLimits["odd"] {
-						oddLimit = UInt(theOddLimit);
+					if let theNumeratorOddLimit : Int = theLimits["numeratorOdd"] {
+						numeratorOddLimit = UInt(theNumeratorOddLimit);
+					}
+					if let theDenominatorOddLimit : Int = theLimits["denominatorOdd"] {
+						denominatorOddLimit = UInt(theDenominatorOddLimit);
 					}
 					enableInterval = theEnableInterval;
 					maximumError = themMaximumError;
@@ -403,9 +416,9 @@ class Document : NSDocument {
 	override class func autosavesInPlace() -> Bool { return true; }
 
 	func calculateAllIntervals() {
-		let		theDenominator = separatePrimeLimit ? denominatorPrimeLimit : numeratorPrimeLimit;
-		let		theEntries = EqualTemperamentCollection(limits: (numeratorPrime:numeratorPrimeLimit,denominatorPrime:theDenominator,numeratorOdd:oddLimit,denominatorOdd:oddLimit), intervalCount: enableInterval ? intervalCount : 0, maximumError: maximumError, filtered: filtered );
-
+		let		theDenominatorPrimeLimit = separatePrimeLimit ? denominatorPrimeLimit : numeratorPrimeLimit;
+		let		theDenominatorOddLimit = separateOddLimit ? denominatorOddLimit : numeratorOddLimit;
+		let		theEntries = EqualTemperamentCollection(limits: (numeratorPrime:numeratorPrimeLimit,denominatorPrime:theDenominatorPrimeLimit,numeratorOdd:numeratorOddLimit,denominatorOdd:theDenominatorOddLimit), intervalCount: enableInterval ? intervalCount : 0, maximumError: maximumError, filtered: filtered );
 		smallestErrorEntries = theEntries.smallestError;
 		biggestErrorEntries = theEntries.biggestError;
 		everyInterval.removeAll(keepCapacity: true);
