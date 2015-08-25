@@ -57,6 +57,13 @@ extension UInt {
 		}
 		return theResult;
 	}
+	var largestPrimeLessThanOrEqualTo : UInt {
+		var		theResult = self;
+		while theResult > 3 && largestPrimeFactor < theResult {
+			theResult--;
+		}
+		return theResult;
+	}
 }
 
 func greatestCommonDivisor(u: [Int] ) -> Int {

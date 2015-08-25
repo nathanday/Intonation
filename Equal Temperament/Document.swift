@@ -40,6 +40,12 @@ class Document : NSDocument {
 	}
 
 	var		primeNumber = UInt.primes(upTo: 100 );
+	func	indexForLargestPrimeLessThanOrEuqalTo( aPrime : UInt ) -> Int? {
+		for i in 1...primeNumber.endIndex {
+			if primeNumber[i] > aPrime { return i-1; }
+		}
+		return nil;
+	}
 
 	var		intervalCount : UInt = 12 {
 		didSet {
@@ -52,20 +58,26 @@ class Document : NSDocument {
 			hideIntervalRelatedColumn(!enableInterval);
 		}
 	}
-	var		numeratorPrimeLimit : UInt { get { return primeNumber[numeratorPrimeLimitIndex]; } }
+	var		numeratorPrimeLimit : UInt {
+		get { return primeNumber[numeratorPrimeLimitIndex]; }
+		set { numeratorPrimeLimitIndex = indexForLargestPrimeLessThanOrEuqalTo(newValue) ?? 2; }
+	}
 	var		numeratorPrimeLimitIndex : Int = 2 {
 		didSet {
 			willChangeValueForKey("numeratorPrimeLimit");
-			NSUserDefaults.standardUserDefaults().setInteger(numeratorPrimeLimitIndex, forKey:"numeratorPrimeLimit");
+			NSUserDefaults.standardUserDefaults().setInteger(Int(numeratorPrimeLimit), forKey:"numeratorPrimeLimit");
 			calculateAllIntervals();
 			didChangeValueForKey("numeratorPrimeLimit");
 		}
 	}
-	var		denominatorPrimeLimit : UInt { get { return primeNumber[denominatorPrimeLimitIndex]; } }
+	var		denominatorPrimeLimit : UInt {
+		get { return primeNumber[denominatorPrimeLimitIndex]; }
+		set { denominatorPrimeLimitIndex = indexForLargestPrimeLessThanOrEuqalTo(newValue) ?? 2; }
+	}
 	var		denominatorPrimeLimitIndex : Int = 1 {
 		didSet {
 			willChangeValueForKey("denominatorPrimeLimit");
-			NSUserDefaults.standardUserDefaults().setInteger(denominatorPrimeLimitIndex, forKey:"denominatorPrimeLimit");
+			NSUserDefaults.standardUserDefaults().setInteger(Int(denominatorPrimeLimit), forKey:"denominatorPrimeLimit");
 			calculateAllIntervals();
 			didChangeValueForKey("denominatorPrimeLimit");
 		}
@@ -88,6 +100,7 @@ class Document : NSDocument {
 	var		separateOddLimit : Bool = false { didSet { calculateAllIntervals(); } }
 	var		maximumError : Double = 0.18 { didSet { calculateAllIntervals(); } }
 	var		filtered : Bool = false { didSet { calculateAllIntervals(); } }
+	var		autoAnchor : Bool = false;
 
 	var		selectedIndicies : [Int] {
 		var		theResult : [Int] = [];
@@ -175,6 +188,10 @@ class Document : NSDocument {
 		set( aValue ) { NSUserDefaults.standardUserDefaults().setBool(aValue, forKey: "errorExpanded"); }
 		get { return NSUserDefaults.standardUserDefaults().boolForKey("errorExpanded"); }
 	}
+	dynamic var		midiExpanded : Bool {
+		set( aValue ) { NSUserDefaults.standardUserDefaults().setBool(aValue, forKey: "midiExpanded"); }
+		get { return NSUserDefaults.standardUserDefaults().boolForKey("midiExpanded"); }
+	}
 	dynamic var		audioExpanded : Bool {
 		set( aValue ) { NSUserDefaults.standardUserDefaults().setBool(aValue, forKey: "audioExpanded"); }
 		get { return NSUserDefaults.standardUserDefaults().boolForKey("audioExpanded"); }
@@ -221,7 +238,7 @@ class Document : NSDocument {
 	dynamic var		smallestError : Double { get { return !smallestErrorEntries.isEmpty ? smallestErrorEntries.first!.error : 0.0; } }
 	dynamic var     averageError : Double = 0.0
 	dynamic var		biggestError : Double { get { return !biggestErrorEntries.isEmpty ? biggestErrorEntries.first!.error : 0.0; } }
-
+	dynamic var		midiAnchor : UInt = 60;
 	dynamic var		smallestErrorEntries : Set<EqualTemperamentEntry> = [] {
 		willSet { self.willChangeValueForKey("smallestError"); }
 		didSet { self.didChangeValueForKey("smallestError"); }
@@ -260,14 +277,14 @@ class Document : NSDocument {
 		}
 	}
 
-	override func awakeFromNib() {
+	override func windowControllerWillLoadNib(aWindowController: NSWindowController) {
 		updateWaveViewDisplayMode();
 		updateSelectedSpectrumType();
 		updateWaveViewScale();
-		numeratorPrimeLimitIndex = NSUserDefaults.standardUserDefaults().integerForKey("numeratorPrimeLimit");
-		denominatorPrimeLimitIndex = NSUserDefaults.standardUserDefaults().integerForKey("denominatorPrimeLimit");
-		numeratorOddLimit = UInt(NSUserDefaults.standardUserDefaults().integerForKey("numeratorOddLimit"));
-		denominatorOddLimit = UInt(NSUserDefaults.standardUserDefaults().integerForKey("denominatorOddLimit"));
+		numeratorPrimeLimit = UInt(NSUserDefaults.standardUserDefaults().integerForKey("numeratorPrimeLimit"));
+		denominatorPrimeLimit = UInt(NSUserDefaults.standardUserDefaults().integerForKey("denominatorPrimeLimit"));
+		numeratorOddLimit = UInt(NSUserDefaults.standardUserDefaults().integerForKey("numeratorOddLimit")) | 1;
+		denominatorOddLimit = UInt(NSUserDefaults.standardUserDefaults().integerForKey("denominatorOddLimit")) | 1;
 		tonePlayer.harmonics = overtones;
 		tonePlayer.baseFrequency = baseFrequency;
 
@@ -282,13 +299,15 @@ class Document : NSDocument {
 		let		thePropertyList = [
 			"intervalCount":intervalCount,
 			"limits":[
-				"numeratorPrime":numeratorPrimeLimitIndex,
-				"denominatorPrime":denominatorPrimeLimitIndex,
+				"numeratorPrime":numeratorPrimeLimit,
+				"denominatorPrime":denominatorPrimeLimit,
 				"numeratorOdd":numeratorOddLimit,
 				"denominatorOddLimit":denominatorOddLimit],
 			"enableInterval":enableInterval,
 			"maximumError":maximumError,
 			"filtered":filtered,
+			"autoAnchor":autoAnchor,
+			"midiAnchor":midiAnchor,
 			"tone":[
 				"baseFrequency":baseFrequency,
 				"allOvertonesAmount":allOvertonesAmount,
@@ -316,14 +335,16 @@ class Document : NSDocument {
 					theEnableInterval = thePropertList["enableInterval"] as? Bool,
 					themMaximumError = thePropertList["maximumError"] as? Double,
 					theFiltered = thePropertList["filtered"] as? Bool,
+					theAutoAnchor = thePropertList["autoAnchor"] as? Bool,
+					theMidiAnchor = thePropertList["midiAnchor"] as? UInt,
 					theTone = thePropertList["tone"] as? [String:AnyObject]
 				{
 					intervalCount = theIntervalCount
-					if let theNumeratorPrimeLimitIndex = theLimits["numeratorPrime"] {
-						numeratorPrimeLimitIndex = theNumeratorPrimeLimitIndex;
+					if let theNumeratorPrimeLimit = theLimits["numeratorPrime"] {
+						numeratorPrimeLimit = UInt(theNumeratorPrimeLimit);
 					}
-					if let theDenominatorPrimeLimitIndex = theLimits["denominatorPrime"] {
-						denominatorPrimeLimitIndex = theDenominatorPrimeLimitIndex;
+					if let theDenominatorPrimeLimit = theLimits["denominatorPrime"] {
+						denominatorPrimeLimit = UInt(theDenominatorPrimeLimit);
 					}
 					if let theNumeratorOddLimit : Int = theLimits["numeratorOdd"] {
 						numeratorOddLimit = UInt(theNumeratorOddLimit);
@@ -334,6 +355,8 @@ class Document : NSDocument {
 					enableInterval = theEnableInterval;
 					maximumError = themMaximumError;
 					filtered = theFiltered;
+					autoAnchor = theAutoAnchor;
+					midiAnchor = theMidiAnchor;
 					if let theBaseFrequency = theTone["baseFrequency"] as? Double {
 						baseFrequency = theBaseFrequency;
 					}

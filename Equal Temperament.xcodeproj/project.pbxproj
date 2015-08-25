@@ -12,6 +12,7 @@
 		D831054E1B0A6115000EB805 /* HarmonicsDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = D831054D1B0A6115000EB805 /* HarmonicsDescription.swift */; };
 		D849E7311ACADFD1006E0964 /* PrimeProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D849E7301ACADFD1006E0964 /* PrimeProducts.swift */; };
 		D84F342B1B08A2C00095D1E8 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89543621996345200A091A4 /* main.swift */; };
+		D87201061B8C7CAE006FDEDC /* NDMidiNoteFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = D87201041B8C7CAE006FDEDC /* NDMidiNoteFormatter.m */; };
 		D87356E71ADA0793006DAFEB /* ChordSelectorWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87356E51ADA0793006DAFEB /* ChordSelectorWindowController.swift */; };
 		D87356E81ADA0793006DAFEB /* ChordSelectorWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D87356E61ADA0793006DAFEB /* ChordSelectorWindowController.xib */; };
 		D87651B41ADFCB7D003C4BF2 /* ApplicationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87651B31ADFCB7D003C4BF2 /* ApplicationDelegate.swift */; };
@@ -53,6 +54,8 @@
 		D83092C01AEBBC6F00B0E6A7 /* DisclosureView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisclosureView.swift; sourceTree = "<group>"; };
 		D831054D1B0A6115000EB805 /* HarmonicsDescription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HarmonicsDescription.swift; sourceTree = "<group>"; };
 		D849E7301ACADFD1006E0964 /* PrimeProducts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimeProducts.swift; sourceTree = "<group>"; };
+		D87201041B8C7CAE006FDEDC /* NDMidiNoteFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NDMidiNoteFormatter.m; sourceTree = "<group>"; };
+		D87201051B8C7CAE006FDEDC /* NDMidiNoteFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NDMidiNoteFormatter.h; sourceTree = "<group>"; };
 		D87356E51ADA0793006DAFEB /* ChordSelectorWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChordSelectorWindowController.swift; sourceTree = "<group>"; };
 		D87356E61ADA0793006DAFEB /* ChordSelectorWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChordSelectorWindowController.xib; sourceTree = "<group>"; };
 		D87651B31ADFCB7D003C4BF2 /* ApplicationDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationDelegate.swift; sourceTree = "<group>"; };
@@ -109,6 +112,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		D87201021B8C7CA0006FDEDC /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				D87201051B8C7CAE006FDEDC /* NDMidiNoteFormatter.h */,
+				D87201041B8C7CAE006FDEDC /* NDMidiNoteFormatter.m */,
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
 		D87C27881AF3A93D00C2BF7B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -144,6 +156,7 @@
 				D8B902091AD48EBF0015B5E2 /* Controllers */,
 				D8B9020A1AD48ED70015B5E2 /* Views */,
 				D8B9020B1AD48EFD0015B5E2 /* Model */,
+				D87201021B8C7CA0006FDEDC /* Library */,
 				D87C27881AF3A93D00C2BF7B /* Resources */,
 				D89543691996345200A091A4 /* Images.xcassets */,
 				D89543601996345200A091A4 /* Supporting Files */,
@@ -342,6 +355,7 @@
 				D8E5E6271AD130DE004DB02D /* ScaleView.swift in Sources */,
 				D80D8C1A1B80A167001E7746 /* Envelope.swift in Sources */,
 				D8E7C7D71B1CAB99000D745B /* TonePlayer.swift in Sources */,
+				D87201061B8C7CAE006FDEDC /* NDMidiNoteFormatter.m in Sources */,
 				D88A62101ACF7F19004CD4C9 /* UInt+Additions.swift in Sources */,
 				D8C343C81AE109E200F5494A /* SpectrumView.swift in Sources */,
 				D87356E71ADA0793006DAFEB /* ChordSelectorWindowController.swift in Sources */,

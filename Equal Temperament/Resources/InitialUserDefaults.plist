@@ -9,12 +9,14 @@
 	<key>selectedWaveViewScale</key>
 	<integer>1</integer>
 	<key>numeratorPrimeLimit</key>
-	<integer>2</integer>
+	<integer>5</integer>
 	<key>denominatorPrimeLimit</key>
-	<integer>2</integer>
+	<integer>5</integer>
 	<key>numeratorOddLimit</key>
 	<integer>17</integer>
 	<key>denominatorOddLimit</key>
 	<integer>17</integer>
+	<key>midiAnchor</key>
+	<integer>60</integer>
 </dict>
 </plist>
