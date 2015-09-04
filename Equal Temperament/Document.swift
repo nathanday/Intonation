@@ -53,6 +53,12 @@ class Document : NSDocument {
 			calculateAllIntervals();
 		}
 	}
+	var		octavesCount : UInt = 1 {
+		didSet {
+			NSUserDefaults.standardUserDefaults().setInteger(Int(octavesCount), forKey:"octavesCount");
+			calculateAllIntervals();
+		}
+	}
 	dynamic var		enableInterval : Bool = true {
 		didSet {
 			hideIntervalRelatedColumn(!enableInterval);
@@ -82,7 +88,12 @@ class Document : NSDocument {
 			didChangeValueForKey("denominatorPrimeLimit");
 		}
 	}
-	var		separatePrimeLimit : Bool = false { didSet { calculateAllIntervals(); } }
+	var		separatePrimeLimit : Bool = false {
+		didSet {
+			NSUserDefaults.standardUserDefaults().setBool( separatePrimeLimit, forKey:"separatePrimeLimit");
+			calculateAllIntervals();
+		}
+	}
 	var		numeratorOddLimit : UInt = 15 {
 		didSet {
 			if( numeratorOddLimit%2 == 0 ) { numeratorOddLimit++; }
@@ -97,10 +108,27 @@ class Document : NSDocument {
 			calculateAllIntervals();
 		}
 	}
-	var		separateOddLimit : Bool = false { didSet { calculateAllIntervals(); } }
-	var		maximumError : Double = 0.18 { didSet { calculateAllIntervals(); } }
-	var		filtered : Bool = false { didSet { calculateAllIntervals(); } }
-	var		autoAnchor : Bool = false;
+	var		separateOddLimit : Bool = false {
+		didSet {
+			NSUserDefaults.standardUserDefaults().setBool( separateOddLimit, forKey:"separateOddLimit");
+			calculateAllIntervals();
+		}
+	}
+	var		maximumError : Double = 0.18 {
+		didSet {
+			NSUserDefaults.standardUserDefaults().setDouble( maximumError, forKey:"maximumError");
+			calculateAllIntervals();
+		}
+	}
+	var		filtered : Bool = false {
+		didSet {
+			NSUserDefaults.standardUserDefaults().setBool( separateOddLimit, forKey:"separateOddLimit");
+			calculateAllIntervals();
+		}
+	}
+	var		autoAnchor : Bool = false {
+		didSet { NSUserDefaults.standardUserDefaults().setBool( autoAnchor, forKey:"autoAnchor"); }
+	}
 
 	var		selectedIndicies : [Int] {
 		var		theResult : [Int] = [];
@@ -112,11 +140,24 @@ class Document : NSDocument {
 		return theResult;
 	}
 	var		selectedEqualTemperamentEntry : [EqualTemperamentEntry] {
-		var		theResult : [EqualTemperamentEntry] = [];
-		if let theArrangedRations = arrayController?.selectedObjects as? [EqualTemperamentEntry] {
-			theResult = theArrangedRations;
+		set(anEqualTemperamentEntries) {
+			if let theArrangedController = arrayController {
+				let		theIndicies = NSMutableIndexSet();
+				for theEntry in anEqualTemperamentEntries {
+					if let theIndex = everyInterval.indexOf(theEntry) {
+						theIndicies.addIndex(theIndex);
+					}
+				}
+				theArrangedController.setSelectionIndexes(theIndicies);
+			}
 		}
-		return theResult;
+		get {
+			var		theResult : [EqualTemperamentEntry] = [];
+			if let theArrangedRations = arrayController?.selectedObjects as? [EqualTemperamentEntry] {
+				theResult = theArrangedRations;
+			}
+			return theResult;
+		}
 	}
 	var		selectedJustIntonationRatio : [Rational] {
 		return selectedEqualTemperamentEntry.map { return $0.justIntonationRatio; };
@@ -238,7 +279,9 @@ class Document : NSDocument {
 	dynamic var		smallestError : Double { get { return !smallestErrorEntries.isEmpty ? smallestErrorEntries.first!.error : 0.0; } }
 	dynamic var     averageError : Double = 0.0
 	dynamic var		biggestError : Double { get { return !biggestErrorEntries.isEmpty ? biggestErrorEntries.first!.error : 0.0; } }
-	dynamic var		midiAnchor : UInt = 60;
+	dynamic var		midiAnchor : Int = 60 {
+		didSet { NSUserDefaults.standardUserDefaults().setInteger(midiAnchor, forKey: "midiAnchor"); }
+	}
 	dynamic var		smallestErrorEntries : Set<EqualTemperamentEntry> = [] {
 		willSet { self.willChangeValueForKey("smallestError"); }
 		didSet { self.didChangeValueForKey("smallestError"); }
@@ -285,6 +328,8 @@ class Document : NSDocument {
 		denominatorPrimeLimit = UInt(NSUserDefaults.standardUserDefaults().integerForKey("denominatorPrimeLimit"));
 		numeratorOddLimit = UInt(NSUserDefaults.standardUserDefaults().integerForKey("numeratorOddLimit")) | 1;
 		denominatorOddLimit = UInt(NSUserDefaults.standardUserDefaults().integerForKey("denominatorOddLimit")) | 1;
+		octavesCount = min(max(UInt(NSUserDefaults.standardUserDefaults().integerForKey("octavesCount")),1),3);
+		midiAnchor = NSUserDefaults.standardUserDefaults().integerForKey("midiAnchor");
 		tonePlayer.harmonics = overtones;
 		tonePlayer.baseFrequency = baseFrequency;
 
@@ -307,6 +352,7 @@ class Document : NSDocument {
 			"maximumError":maximumError,
 			"filtered":filtered,
 			"autoAnchor":autoAnchor,
+			"octavesCount":octavesCount,
 			"midiAnchor":midiAnchor,
 			"tone":[
 				"baseFrequency":baseFrequency,
@@ -335,8 +381,9 @@ class Document : NSDocument {
 					theEnableInterval = thePropertList["enableInterval"] as? Bool,
 					themMaximumError = thePropertList["maximumError"] as? Double,
 					theFiltered = thePropertList["filtered"] as? Bool,
+					theOctavesCount = thePropertList["octavesCount"] as? UInt,
 					theAutoAnchor = thePropertList["autoAnchor"] as? Bool,
-					theMidiAnchor = thePropertList["midiAnchor"] as? UInt,
+					theMidiAnchor = thePropertList["midiAnchor"] as? Int,
 					theTone = thePropertList["tone"] as? [String:AnyObject]
 				{
 					intervalCount = theIntervalCount
@@ -355,6 +402,7 @@ class Document : NSDocument {
 					enableInterval = theEnableInterval;
 					maximumError = themMaximumError;
 					filtered = theFiltered;
+					octavesCount = theOctavesCount;
 					autoAnchor = theAutoAnchor;
 					midiAnchor = theMidiAnchor;
 					if let theBaseFrequency = theTone["baseFrequency"] as? Double {
@@ -439,9 +487,10 @@ class Document : NSDocument {
 	override class func autosavesInPlace() -> Bool { return true; }
 
 	func calculateAllIntervals() {
+		let		theSelectedEntries = selectedEqualTemperamentEntry;
 		let		theDenominatorPrimeLimit = separatePrimeLimit ? denominatorPrimeLimit : numeratorPrimeLimit;
 		let		theDenominatorOddLimit = separateOddLimit ? denominatorOddLimit : numeratorOddLimit;
-		let		theEntries = EqualTemperamentCollection(limits: (numeratorPrime:numeratorPrimeLimit,denominatorPrime:theDenominatorPrimeLimit,numeratorOdd:numeratorOddLimit,denominatorOdd:theDenominatorOddLimit), intervalCount: enableInterval ? intervalCount : 0, maximumError: maximumError, filtered: filtered );
+		let		theEntries = EqualTemperamentCollection(limits: (numeratorPrime:numeratorPrimeLimit,denominatorPrime:theDenominatorPrimeLimit,numeratorOdd:numeratorOddLimit,denominatorOdd:theDenominatorOddLimit), intervalCount: enableInterval ? intervalCount : 0, octaves: octavesCount, maximumError: maximumError, filtered: filtered );
 		smallestErrorEntries = theEntries.smallestError;
 		biggestErrorEntries = theEntries.biggestError;
 		everyInterval.removeAll(keepCapacity: true);
@@ -457,6 +506,7 @@ class Document : NSDocument {
 			thePitchConstellationView.everyRatios = everyInterval.map { return $0.justIntonationRatio; };
 			thePitchConstellationView.useIntervals = enableInterval;
 		}
+		selectedEqualTemperamentEntry = theSelectedEntries;
 	}
 
 	var everyTableColumn : [NSTableColumn] {

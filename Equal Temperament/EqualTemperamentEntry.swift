@@ -9,7 +9,7 @@
 import Foundation
 
 func centsEquivelentForRatio( r : Double, n : UInt ) -> Double { return Double(n)*100.0 * log2(r); }
-func rationsForCentsEquivelent( c : Double, n : UInt ) -> Double { return pow(2.0,c/(100.0*Double(n))); }
+func ratioForCentsEquivelent( c : Double, n : UInt ) -> Double { return pow(2.0,c/(100.0*Double(n))); }
 
 extension Rational {
 	var oddLimit : UInt {
@@ -78,14 +78,8 @@ class EqualTemperamentEntry : NSObject {
 	}
 
 	init( numberator: UInt, denominator: UInt, intervalCount : UInt, maximumError: Double ) {
-		var		theNum = numberator;
-		var		theDen = denominator;
-		while( theNum < denominator ) {
-			theNum *= 2;
-		}
-		while( theDen*2 < numberator ) {
-			theDen *= 2;
-		}
+		let		theNum = numberator;
+		let		theDen = denominator;
 		self.justIntonationRatio = Rational(Int(theNum),Int(theDen));
 		self.intervalCount = intervalCount;
 		self.isClose = true;
@@ -154,7 +148,10 @@ extension EqualTemperamentEntry {
 		Rational(48,25):["diminished octave"],
 		Rational(125,64):["augmented seventh"],
 		Rational(160,81):["semi-diminished octave"],
-		Rational(2,1):["octave"]];
+		Rational(2,1):["octave"],
+		Rational(9,4):["major ninth"],
+		Rational(8,3):["major eleventh"]
+	];
 	var everyIntervalName : [String] {
 		get { if let theNameList = EqualTemperamentEntry.rationNames[self.justIntonationRatio] { return theNameList; } else { return []; } }
 	}
@@ -170,6 +167,7 @@ class EqualTemperamentCollection : CustomStringConvertible {
 	var limits : (numeratorPrime:UInt,denominatorPrime:UInt,numeratorOdd:UInt,denominatorOdd:UInt);
 	var maximumError : Double;
 	var intervalCount : UInt;
+	var octaves : UInt;
 	var filtered : Bool;
 
 	var averageError : Double {
@@ -225,22 +223,27 @@ class EqualTemperamentCollection : CustomStringConvertible {
 		return theResult;
 	}
 
-	init( limits aLimits : (numeratorPrime:UInt,denominatorPrime:UInt,numeratorOdd:UInt,denominatorOdd:UInt), intervalCount anIntervalCount : UInt, maximumError anMaximumError: Double, filtered aFiltered: Bool  ) {
+	init( limits aLimits : (numeratorPrime:UInt,denominatorPrime:UInt,numeratorOdd:UInt,denominatorOdd:UInt), intervalCount anIntervalCount : UInt, octaves anOctaves : UInt, maximumError anMaximumError: Double, filtered aFiltered: Bool  ) {
 		limits = aLimits;
 		intervalCount = anIntervalCount;
 		maximumError = anMaximumError;
 		filtered = aFiltered;
+		octaves = anOctaves;
 		calculate();
 	}
 
 	private func calculate( ) {
-		for theDenom in PrimeProducts(maxPrime: limits.denominatorPrime, range: Range<UInt>(start: 1, end: limits.denominatorOdd)) {
-			for theNum in PrimeProducts(maxPrime: limits.numeratorPrime, range: Range<UInt>(start: theDenom, end: limits.numeratorOdd)) {
-				let		theEntry = EqualTemperamentEntry(numberator: theNum, denominator:theDenom, intervalCount:intervalCount, maximumError: maximumError);
-				let		theDegree = Scale.major.indexOf(theEntry.justIntonationRatio);
-				add(theEntry);
-				if theDegree != nil {
-					theEntry.degreeName = Scale.degreeName(theDegree!);
+		for theDenom in PrimeProducts(maxPrime: limits.denominatorPrime, range: Range<UInt>(start: 1, end: limits.denominatorOdd+1)) {
+			for theNum in PrimeProducts(maxPrime: limits.numeratorPrime, range: Range<UInt>(start: theDenom, end: min(limits.numeratorOdd+1,theDenom*2))) {
+				assert(theNum >= theDenom);
+				assert( theNum <= theDenom*2 );
+				for theOctaves in 0..<octaves {
+					let		theEntry = EqualTemperamentEntry(numberator: theNum*1<<theOctaves, denominator:theDenom, intervalCount:intervalCount, maximumError: maximumError);
+					let		theDegree = Scale.major.indexOf(theEntry.justIntonationRatio);
+					add(theEntry);
+					if theDegree != nil {
+						theEntry.degreeName = Scale.degreeName(theDegree!);
+					}
 				}
 			}
 		}
