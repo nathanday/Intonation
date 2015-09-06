@@ -129,6 +129,12 @@ class Document : NSDocument {
 	var		autoAnchor : Bool = false {
 		didSet { NSUserDefaults.standardUserDefaults().setBool( autoAnchor, forKey:"autoAnchor"); }
 	}
+	var		equalTemperament : Bool = false {
+		didSet {
+			NSUserDefaults.standardUserDefaults().setBool( separateOddLimit, forKey:"equalTemperament");
+			tonePlayer.equalTemperament = equalTemperament;
+		}
+	}
 
 	var		selectedIndicies : [Int] {
 		var		theResult : [Int] = [];
@@ -159,11 +165,9 @@ class Document : NSDocument {
 			return theResult;
 		}
 	}
-	var		selectedJustIntonationRatio : [Rational] {
-		return selectedEqualTemperamentEntry.map { return $0.justIntonationRatio; };
+	var		selectedJustIntonationIntervals : [Interval] {
+		return selectedEqualTemperamentEntry.map { return $0.interval; };
 	}
-
-	var		equalTemperament : Bool = false;
 
 	var		baseFrequency : Double {
 		get { return tonePlayer.baseFrequency; }
@@ -293,14 +297,14 @@ class Document : NSDocument {
 
 	private func updateChordRatioTitle( ) {
 		if let theHarmonicTitleTextField = harmonicTitleTextField {
-			if selectedJustIntonationRatio.count > 1 {
+			if selectedJustIntonationIntervals.count > 1 {
 				var		theRatiosString : String = "";
 				var		theCommonFactor = 1;
-				for theValue in selectedJustIntonationRatio {
+				for theValue in selectedJustIntonationIntervals {
 					theCommonFactor *= theValue.denominator/greatestCommonDivisor(theCommonFactor, theValue.denominator);
 				}
-				for theRatio in selectedJustIntonationRatio {
-					if let theValue = theRatio.numeratorForDenominator(theCommonFactor) {
+				for theRatio in selectedJustIntonationIntervals {
+					if let theValue = theRatio.ratio.numeratorForDenominator(theCommonFactor) {
 						if theRatiosString.startIndex == theRatiosString.endIndex {
 							theRatiosString = "\(theValue)"
 						}
@@ -311,8 +315,8 @@ class Document : NSDocument {
 				}
 				theHarmonicTitleTextField.stringValue = theRatiosString;
 			}
-			else if let theSingle = selectedJustIntonationRatio.first {
-				theHarmonicTitleTextField.stringValue = theSingle.ratioString;
+			else if let theSingle = selectedJustIntonationIntervals.first {
+				theHarmonicTitleTextField.stringValue = theSingle.ratio.ratioString;
 			}
 			else {
 				theHarmonicTitleTextField.stringValue = "";
@@ -352,6 +356,7 @@ class Document : NSDocument {
 			"maximumError":maximumError,
 			"filtered":filtered,
 			"autoAnchor":autoAnchor,
+			"equalTemperament":equalTemperament,
 			"octavesCount":octavesCount,
 			"midiAnchor":midiAnchor,
 			"tone":[
@@ -375,16 +380,17 @@ class Document : NSDocument {
 	override func readFromData( aData: NSData, ofType typeName: String) throws {
 		let		theFormat : UnsafeMutablePointer<NSPropertyListFormat> = nil;
 		do {
-			if let thePropertList = try NSPropertyListSerialization.propertyListWithData(aData, options:.Immutable, format:theFormat) as? [String:AnyObject] {
-				if let theIntervalCount = thePropertList["intervalCount"] as? UInt,
-					theLimits = thePropertList["limits"] as? [String:Int],
-					theEnableInterval = thePropertList["enableInterval"] as? Bool,
-					themMaximumError = thePropertList["maximumError"] as? Double,
-					theFiltered = thePropertList["filtered"] as? Bool,
-					theOctavesCount = thePropertList["octavesCount"] as? UInt,
-					theAutoAnchor = thePropertList["autoAnchor"] as? Bool,
-					theMidiAnchor = thePropertList["midiAnchor"] as? Int,
-					theTone = thePropertList["tone"] as? [String:AnyObject]
+			if let thePropertyList = try NSPropertyListSerialization.propertyListWithData(aData, options:.Immutable, format:theFormat) as? [String:AnyObject] {
+				if let theIntervalCount = thePropertyList["intervalCount"] as? UInt,
+					theLimits = thePropertyList["limits"] as? [String:Int],
+					theEnableInterval = thePropertyList["enableInterval"] as? Bool,
+					themMaximumError = thePropertyList["maximumError"] as? Double,
+					theFiltered = thePropertyList["filtered"] as? Bool,
+					theOctavesCount = thePropertyList["octavesCount"] as? UInt,
+					theAutoAnchor = thePropertyList["autoAnchor"] as? Bool,
+					theEqualTemperament = thePropertyList["equalTemperament"] as? Bool,
+					theMidiAnchor = thePropertyList["midiAnchor"] as? Int,
+					theTone = thePropertyList["tone"] as? [String:AnyObject]
 				{
 					intervalCount = theIntervalCount
 					if let theNumeratorPrimeLimit = theLimits["numeratorPrime"] {
@@ -404,6 +410,7 @@ class Document : NSDocument {
 					filtered = theFiltered;
 					octavesCount = theOctavesCount;
 					autoAnchor = theAutoAnchor;
+					equalTemperament = theEqualTemperament;
 					midiAnchor = theMidiAnchor;
 					if let theBaseFrequency = theTone["baseFrequency"] as? Double {
 						baseFrequency = theBaseFrequency;
@@ -549,24 +556,24 @@ extension Document : NSTableViewDelegate {
 	}
 
 	func tableViewSelectionDidChange(notification: NSNotification) {
-		let		theSelectedRatios = selectedJustIntonationRatio;
+		let		theSelectedIntervals = selectedJustIntonationIntervals;
 		updateChordRatioTitle();
 		if let theLinearScaleView = linearScaleView {
-			theLinearScaleView.selectedRatios = theSelectedRatios;
+			theLinearScaleView.selectedRatios = theSelectedIntervals.map({ return $0.ratio; });
 		}
 		if let thePitchConstellationView = pitchConstellationView {
-			thePitchConstellationView.selectedRatios = theSelectedRatios;
+			thePitchConstellationView.selectedRatios = theSelectedIntervals.map({ return $0.ratio; });
 		}
 		if let theHarmonicView = harmonicView {
-			theHarmonicView.selectedRatios = theSelectedRatios;
+			theHarmonicView.selectedRatios = theSelectedIntervals.map({ return $0.ratio; });
 		}
 		if let theWaveView = waveView {
-			theWaveView.selectedRatios = theSelectedRatios;
+			theWaveView.selectedRatios = theSelectedIntervals.map({ return $0.ratio; });
 		}
 		if let theSpectrumView = spectrumView {
-			theSpectrumView.selectedRatios = theSelectedRatios;
+			theSpectrumView.selectedRatios = theSelectedIntervals.map({ return $0.ratio; });
 		}
-		tonePlayer.ratios = theSelectedRatios;
+		tonePlayer.intervals = theSelectedIntervals;
 	}
 }
 

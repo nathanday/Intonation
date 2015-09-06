@@ -19,7 +19,7 @@ class TonePlayer {
 	init() {
 		harmonics = HarmonicsDescription(amount: 0.5, evenAmount: 1.0);
 		baseFrequency = 110.0;
-		ratios = [1,[5,4],[3,2]];
+		intervals = [];
 		toneUnit = TonePlayer.createAudioComponentInstance();
 		playing = false;
 		assert( currentTonePlayer == nil, "canot create multiple TonePlayers" );
@@ -31,8 +31,13 @@ class TonePlayer {
 
 	var harmonics : HarmonicsDescription { didSet { updateTones(); } }
 	var baseFrequency : Double { didSet { updateTones(); } }
-	var ratios : [Rational] { didSet { generateTones(); } }
-	
+	var intervals : [Interval] { didSet { generateTones(); } }
+	var equalTemperament : Bool = false {
+		didSet {
+			for (_,theTone) in playingTones { theTone.equalTemperament = equalTemperament; }
+		}
+	}
+
 	var amplitude : Double = 1.0;
 	
 	var playing : Bool = false;
@@ -46,18 +51,18 @@ class TonePlayer {
 //		assert( !playingTones.isEmpty, "no tones" );
 		if !aSamples.isEmpty {
 			var		theFirst = true;
-			if ratios.isEmpty {
+			if intervals.isEmpty {
 				for i : Int in 0..<Int(anInNumberFrames) { aSamples[i] = 0.0; }
 			}
 			else {
-				for theRatio in ratios {
-					if let theTone = playingTones[theRatio] {
+				for theInterval in intervals {
+					if let theTone = playingTones[theInterval.ratio] {
 						for i : Int in 0..<Int(anInNumberFrames) {
 							if theFirst { aSamples[i] = 0.0; }
 							aSamples[i] += theTone.generate( gain: theGain );
 						}
 						if theTone.complete {
-							playingTones.removeValueForKey(theRatio);
+							playingTones.removeValueForKey(theInterval.ratio);
 						}
 						theFirst = false;
 					}
@@ -117,22 +122,20 @@ class TonePlayer {
 
 	private var outputPower : Double { get { return dBToPower(amplitude); } }
 
-	private var baseSampleLength : UInt { return UInt(sum(ratios).denominator); }
-
 	func generateTones() {
-		for theRatio in self.ratios {
-			if let theTone = playingTones[theRatio] {
+		for theInterval in self.intervals {
+			if let theTone = playingTones[theInterval.ratio] {
 				theTone.baseFrequency = baseFrequency/TonePlayer.nyquestFrequency;
 				theTone.harmonics = harmonics;
 			} else {
-				playingTones[theRatio] = Tone(baseFrequency:baseFrequency/TonePlayer.nyquestFrequency, ratio: theRatio, harmonics:harmonics);
+				playingTones[theInterval.ratio] = Tone(baseFrequency:baseFrequency/TonePlayer.nyquestFrequency, interval: theInterval, harmonics:harmonics);
 			}
 		}
 	}
 	
 	func updateTones() {
-		for theRatio in self.ratios {
-			if let theTone = playingTones[theRatio] {
+		for theInterval in self.intervals {
+			if let theTone = playingTones[theInterval.ratio] {
 				theTone.baseFrequency = baseFrequency/TonePlayer.nyquestFrequency;
 				theTone.harmonics = harmonics;
 			}

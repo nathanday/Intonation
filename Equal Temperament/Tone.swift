@@ -18,17 +18,23 @@ enum PlaybackType : Int {
 class Tone
 {
 	var				theta : Double = 0;
-//	var				values : [Float32];
 	var				baseFrequency: Double;
 	var				envelope = Envelope(attack: 0.1, release: 0.1);
-	let				ratio: Rational;
-	private var		thetaDelta: Double { get { return baseFrequency*ratio.toDouble; } }
+	let				interval: Interval;
+	private var		thetaDelta: Double {
+		get {
+			return equalTemperament
+					? baseFrequency*interval.equalTemperament
+					: baseFrequency*interval.ratio.toDouble;
+		}
+	}
 	var				harmonics: HarmonicsDescription;
 	var				complete : Bool = false;
+	var				equalTemperament : Bool = false;
 
-	init( baseFrequency aBaseFrequency: Double, ratio aRatio: Rational, harmonics aHarmonics: HarmonicsDescription ) {
+	init( baseFrequency aBaseFrequency: Double, interval anInterval: Interval, harmonics aHarmonics: HarmonicsDescription ) {
 		baseFrequency = aBaseFrequency;
-		ratio = aRatio;
+		interval = anInterval;
 		harmonics = aHarmonics;
 		assert(thetaDelta < 1.0);
 	}
@@ -56,11 +62,11 @@ class Tone
 
 extension Tone : Hashable {
 	var hashValue: Int {
-		get { return ratio.hashValue; }
+		get { return interval.ratio.hashValue; }
 	}
 }
 
 func ==(aLhs: Tone, aRhs: Tone) -> Bool {
-	return aLhs.ratio == aRhs.ratio;
+	return aLhs.interval.ratio == aRhs.interval.ratio;
 }
 
