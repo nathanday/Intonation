@@ -39,6 +39,12 @@ class Document : NSDocument {
 		}
 	}
 
+	var		selectedMethod : UInt = 0 {
+		didSet {
+			calculateAllIntervals();
+		}
+	}
+
 	var		primeNumber = UInt.primes(upTo: 100 );
 	func	indexForLargestPrimeLessThanOrEuqalTo( aPrime : UInt ) -> Int? {
 		for i in 1...primeNumber.endIndex {
@@ -241,6 +247,10 @@ class Document : NSDocument {
 		set( aValue ) { NSUserDefaults.standardUserDefaults().setBool(aValue, forKey: "audioExpanded"); }
 		get { return NSUserDefaults.standardUserDefaults().boolForKey("audioExpanded"); }
 	}
+	dynamic var		savedExpanded : Bool {
+		set( aValue ) { NSUserDefaults.standardUserDefaults().setBool(aValue, forKey: "savedExpanded"); }
+		get { return NSUserDefaults.standardUserDefaults().boolForKey("savedExpanded"); }
+	}
 
 	private func updateWaveViewDisplayMode() {
 		if let theWaveView = waveView {
@@ -346,6 +356,7 @@ class Document : NSDocument {
 	override func dataOfType( typeName: String) throws -> NSData {
 		var anError: NSError! = NSError(domain: "Migrator", code: 0, userInfo: nil)
 		let		thePropertyList = [
+			"selectedMethod":selectedMethod,
 			"intervalCount":intervalCount,
 			"limits":[
 				"numeratorPrime":numeratorPrimeLimit,
@@ -381,7 +392,8 @@ class Document : NSDocument {
 		let		theFormat : UnsafeMutablePointer<NSPropertyListFormat> = nil;
 		do {
 			if let thePropertyList = try NSPropertyListSerialization.propertyListWithData(aData, options:.Immutable, format:theFormat) as? [String:AnyObject] {
-				if let theIntervalCount = thePropertyList["intervalCount"] as? UInt,
+				if let theSelectedMethod = thePropertyList["selectedMethod"] as? UInt,
+					theIntervalCount = thePropertyList["intervalCount"] as? UInt,
 					theLimits = thePropertyList["limits"] as? [String:Int],
 					theEnableInterval = thePropertyList["enableInterval"] as? Bool,
 					themMaximumError = thePropertyList["maximumError"] as? Double,
@@ -392,6 +404,7 @@ class Document : NSDocument {
 					theMidiAnchor = thePropertyList["midiAnchor"] as? Int,
 					theTone = thePropertyList["tone"] as? [String:AnyObject]
 				{
+					selectedMethod = theSelectedMethod;
 					intervalCount = theIntervalCount
 					if let theNumeratorPrimeLimit = theLimits["numeratorPrime"] {
 						numeratorPrimeLimit = UInt(theNumeratorPrimeLimit);
