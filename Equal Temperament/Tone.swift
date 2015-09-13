@@ -17,10 +17,12 @@ enum PlaybackType : Int {
 
 class Tone
 {
+	var				toneUnit : AudioComponentInstance;
 	var				theta : Double = 0;
 	var				baseFrequency: Double;
 	var				envelope = Envelope(attack: 0.1, release: 0.1);
 	let				interval: Interval;
+	var				playing = false;
 	private var		thetaDelta: Double {
 		get {
 			return equalTemperament
@@ -32,10 +34,136 @@ class Tone
 	var				complete : Bool = false;
 	var				equalTemperament : Bool = false;
 
+	func createAudioComponentInstance() -> AudioComponentInstance {
+		var		theResult : AudioComponentInstance = nil;
+		var		theDefaultOutputDescription = AudioComponentDescription( componentType: OSType(kAudioUnitType_Output),
+			componentSubType: OSType(kAudioUnitSubType_DefaultOutput),
+			componentManufacturer: OSType(kAudioUnitManufacturer_Apple),
+			componentFlags: 0,
+			componentFlagsMask: 0);
+		func toneCallback( anInRefCon : UnsafeMutablePointer<Void>, anIOActionFlags: UnsafeMutablePointer<AudioUnitRenderActionFlags>, anInTimeStamp : UnsafePointer<AudioTimeStamp>, anInBusNumber: UInt32, anInNumberFrames: UInt32, anIOData: UnsafeMutablePointer<AudioBufferList>) -> OSStatus {
+			let		theResult : OSStatus = kAudioServicesNoError;
+			let		theBuffer : AudioBuffer = anIOData.memory.mBuffers;
+			let		theSamples = UnsafeMutableBufferPointer<Float32>(theBuffer);
+			let		theToneRef = UnsafeMutablePointer<Tone>(anInRefCon);
+			let		theGain = Float32(0.5);
+			assert( theGain > 0.0, "bad gain value: \(theGain)" );
+			//		assert( !playingTones.isEmpty, "no tones" );
+			if !theSamples.isEmpty {
+				for i : Int in 0..<Int(anInNumberFrames) {
+					theSamples[i] = theToneRef.memory.generate( gain: theGain );
+				}
+				if theToneRef.memory.complete {
+					theToneRef.memory.stop();
+				}
+			}
+			return theResult;
+		}
+
+		// Create a new unit based on this that we'll use for output
+		var		err = AudioComponentInstanceNew( AudioComponentFindNext(nil, &theDefaultOutputDescription), &theResult);
+
+		// Set our tone rendering function on the unit
+		//		var		theTonePlayer = self;
+		let		theSelf = UnsafeMutablePointer<Tone>.alloc(1);
+		theSelf.initialize(self);
+		var		theInput = AURenderCallbackStruct( inputProc: toneCallback, inputProcRefCon: theSelf );
+		err = AudioUnitSetProperty(theResult, kAudioUnitProperty_SetRenderCallback, kAudioUnitScope_Input, 0, &theInput, UInt32(sizeof(AURenderCallbackStruct)));
+
+		// Set the format to 32 bit, single channel, floating point, linear PCM
+		let		four_bytes_per_float : UInt32 = 4;
+		let		eight_bits_per_byte : UInt32 = 8;
+		var		theStreamFormat = AudioStreamBasicDescription( mSampleRate: TonePlayer.sampleRate,
+			mFormatID: kAudioFormatLinearPCM,
+			mFormatFlags: kAudioFormatFlagsNativeFloatPacked | kAudioFormatFlagIsNonInterleaved,
+			mBytesPerPacket: four_bytes_per_float,
+			mFramesPerPacket: 1,
+			mBytesPerFrame: four_bytes_per_float,
+			mChannelsPerFrame: 1,
+			mBitsPerChannel: four_bytes_per_float * eight_bits_per_byte,
+			mReserved: 0);
+
+		err = AudioUnitSetProperty (theResult, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, AudioUnitElement(0), &theStreamFormat, UInt32(sizeof(AudioStreamBasicDescription)) );
+
+		assert(err == noErr, "Error setting stream format: \(err)" );
+		err = AudioUnitInitialize(theResult);
+		assert(err == noErr, "Error starting unit: \(err)" );
+		return theResult;
+	}
+
+//	final func outputAudio( aSamples: UnsafeMutableBufferPointer<Float32>, numberFrames anInNumberFrames: UInt32 ) -> OSStatus {
+//		let		theResult : OSStatus = kAudioServicesNoError;
+//		let		theGain = Float32(0.5);
+//		assert( theGain > 0.0, "bad gain value: \(theGain)" );
+////		assert( !playingTones.isEmpty, "no tones" );
+//		if !aSamples.isEmpty {
+//				for i : Int in 0..<Int(anInNumberFrames) {
+//					aSamples[i] = generate( gain: theGain );
+//				}
+//				if theTone.complete {
+//					stop();
+//				}
+//		}
+//		return theResult;
+//	}
+//
 	init( baseFrequency aBaseFrequency: Double, interval anInterval: Interval, harmonics aHarmonics: HarmonicsDescription ) {
 		baseFrequency = aBaseFrequency;
 		interval = anInterval;
 		harmonics = aHarmonics;
+		toneUnit = nil;
+		var		theDefaultOutputDescription = AudioComponentDescription( componentType: OSType(kAudioUnitType_Output),
+			componentSubType: OSType(kAudioUnitSubType_DefaultOutput),
+			componentManufacturer: OSType(kAudioUnitManufacturer_Apple),
+			componentFlags: 0,
+			componentFlagsMask: 0);
+		func toneCallback( anInRefCon : UnsafeMutablePointer<Void>, anIOActionFlags: UnsafeMutablePointer<AudioUnitRenderActionFlags>, anInTimeStamp : UnsafePointer<AudioTimeStamp>, anInBusNumber: UInt32, anInNumberFrames: UInt32, anIOData: UnsafeMutablePointer<AudioBufferList>) -> OSStatus {
+			let		theResult : OSStatus = kAudioServicesNoError;
+			let		theBuffer : AudioBuffer = anIOData.memory.mBuffers;
+			let		theSamples = UnsafeMutableBufferPointer<Float32>(theBuffer);
+			let		theToneRef = UnsafeMutablePointer<Tone>(anInRefCon);
+			let		theGain = Float32(0.5);
+			assert( theGain > 0.0, "bad gain value: \(theGain)" );
+			//		assert( !playingTones.isEmpty, "no tones" );
+			if !theSamples.isEmpty {
+				for i : Int in 0..<Int(anInNumberFrames) {
+					theSamples[i] = theToneRef.memory.generate( gain: theGain );
+				}
+				if theToneRef.memory.complete {
+					theToneRef.memory.stop();
+				}
+			}
+			return theResult;
+		}
+
+		// Create a new unit based on this that we'll use for output
+		var		err = AudioComponentInstanceNew( AudioComponentFindNext(nil, &theDefaultOutputDescription), &toneUnit);
+
+		// Set our tone rendering function on the unit
+		//		var		theTonePlayer = self;
+		let		theSelf = UnsafeMutablePointer<Tone>.alloc(1);
+		theSelf.initialize(self);
+		var		theInput = AURenderCallbackStruct( inputProc: toneCallback, inputProcRefCon: theSelf );
+		err = AudioUnitSetProperty(toneUnit, kAudioUnitProperty_SetRenderCallback, kAudioUnitScope_Input, 0, &theInput, UInt32(sizeof(AURenderCallbackStruct)));
+
+		// Set the format to 32 bit, single channel, floating point, linear PCM
+		let		four_bytes_per_float : UInt32 = 4;
+		let		eight_bits_per_byte : UInt32 = 8;
+		var		theStreamFormat = AudioStreamBasicDescription( mSampleRate: TonePlayer.sampleRate,
+			mFormatID: kAudioFormatLinearPCM,
+			mFormatFlags: kAudioFormatFlagsNativeFloatPacked | kAudioFormatFlagIsNonInterleaved,
+			mBytesPerPacket: four_bytes_per_float,
+			mFramesPerPacket: 1,
+			mBytesPerFrame: four_bytes_per_float,
+			mChannelsPerFrame: 1,
+			mBitsPerChannel: four_bytes_per_float * eight_bits_per_byte,
+			mReserved: 0);
+
+		err = AudioUnitSetProperty (toneUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, AudioUnitElement(0), &theStreamFormat, UInt32(sizeof(AudioStreamBasicDescription)) );
+
+		assert(err == noErr, "Error setting stream format: \(err)" );
+		err = AudioUnitInitialize(toneUnit);
+		assert(err == noErr, "Error starting unit: \(err)" );
 		assert(thetaDelta < 1.0);
 	}
 
@@ -53,6 +181,23 @@ class Tone
 			theta += thetaDelta;
 		}
 		return theResult;
+	}
+
+
+	func stop() {
+		if playing  {
+			let		theError = AudioOutputUnitStop(self.toneUnit );
+			assert( theError == noErr, "Error starting unit: 0x\(UInt(theError).hexadecimalString)");
+			playing = false;
+		}
+	}
+
+	func play( ) {
+		if !playing {
+			let		theError = AudioOutputUnitStart(self.toneUnit);
+			assert( theError == noErr, "Error starting unit: 0x\(UInt(theError).hexadecimalString)");
+			playing = theError == noErr;
+		}
 	}
 
 	func release() {

@@ -167,9 +167,16 @@ extension EqualTemperamentEntry {
 		Rational(125,64):["augmented seventh"],
 		Rational(160,81):["semi-diminished octave"],
 		Rational(2,1):["octave"],
+
+		Rational(20,9):["minor ninth"],
 		Rational(9,4):["major ninth"],
-		Rational(8,3):["major eleventh"]
-	];
+		Rational(12,5):["minor tenth"],
+		Rational(5,2):["major tenth"],
+		Rational(8,3):["major eleventh"],
+		Rational(3,1):["perfect twelfth"],
+		Rational(16,5):["minor thirteenth"],
+		Rational(10,3):["major thirteenth"],
+];
 	var everyIntervalName : [String] {
 		get { if let theNameList = EqualTemperamentEntry.rationNames[self.justIntonationRatio] { return theNameList; } else { return []; } }
 	}
