@@ -14,11 +14,10 @@ class Document : NSDocument {
 
 	@IBOutlet var	tableParentContainerView : NSView?
 	@IBOutlet var	arrayController : NSArrayController?
-	@IBOutlet var	linearScaleView : ScaleView?;
-	@IBOutlet var	pitchConstellationView : ScaleView?;
-	@IBOutlet var	harmonicView : HarmonicView?;
-	@IBOutlet var	waveView : WaveView?;
-	@IBOutlet var	spectrumView : SpectrumView?;
+	@IBOutlet var	scaleViewController : ScaleViewController?
+	@IBOutlet var	harmonicViewController : HarmonicViewController?
+	@IBOutlet var	waveViewController : WaveViewController?
+	@IBOutlet var	spectrumViewController : SpectrumViewController?;
 	@IBOutlet var	tableView : NSTableView?;
 	@IBOutlet var	baseFrequencyTextField : NSTextField?;
 	@IBOutlet var	documentWindow : NSWindow?;
@@ -197,37 +196,36 @@ class Document : NSDocument {
 		set( aValue ) { tonePlayer.harmonics = aValue; }
 		get { return tonePlayer.harmonics; }
 	}
+	var		arpeggioBeatPerMinute : Double {
+		get { return 60.0/tonePlayer.arpeggioInterval; }
+		set( aValue ) { tonePlayer.arpeggioInterval = 60.0/aValue }
+	}
 	var		tonePlayer = TonePlayer();
 
-	dynamic var		selectedScaleDisplayType : Int {
-		set( aValue ) { NSUserDefaults.standardUserDefaults().setInteger(aValue, forKey: "selectedScaleDisplayType"); }
-		get { return NSUserDefaults.standardUserDefaults().integerForKey("selectedScaleDisplayType"); }
-	}
+//	dynamic var		selectedWaveViewMode : Int {
+//		set(aValue) {
+//			NSUserDefaults.standardUserDefaults().setInteger(aValue, forKey: "selectedWaveViewMode");
+//			updateWaveViewDisplayMode();
+//		}
+//		get { return NSUserDefaults.standardUserDefaults().integerForKey("selectedWaveViewMode"); }
+//	}
+//
+//	dynamic var		selectedWaveViewScale : Int {
+//		set( aValue ) {
+//			NSUserDefaults.standardUserDefaults().setInteger(aValue, forKey: "selectedWaveViewScale");
+//			updateWaveViewScale();
+//		}
+//		get { return NSUserDefaults.standardUserDefaults().integerForKey("selectedWaveViewScale"); }
+//	}
 
-	dynamic var		selectedWaveViewMode : Int {
-		set(aValue) {
-			NSUserDefaults.standardUserDefaults().setInteger(aValue, forKey: "selectedWaveViewMode");
-			updateWaveViewDisplayMode();
-		}
-		get { return NSUserDefaults.standardUserDefaults().integerForKey("selectedWaveViewMode"); }
-	}
+//	dynamic var		selectedSpectrumType : Int {
+//		set( aValue ) {
+//			NSUserDefaults.standardUserDefaults().setInteger( aValue, forKey: "selectedSpectrumType");
+//			updateSelectedSpectrumType();
+//		}
+//		get { return NSUserDefaults.standardUserDefaults().integerForKey("selectedSpectrumType"); }
+//	}
 
-	dynamic var		selectedWaveViewScale : Int {
-		set( aValue ) {
-			NSUserDefaults.standardUserDefaults().setInteger(aValue, forKey: "selectedWaveViewScale");
-			updateWaveViewScale();
-		}
-		get { return NSUserDefaults.standardUserDefaults().integerForKey("selectedWaveViewScale"); }
-	}
-	
-	dynamic var		selectedSpectrumType : Int {
-		set( aValue ) {
-			NSUserDefaults.standardUserDefaults().setInteger( aValue, forKey: "selectedSpectrumType");
-			updateSelectedSpectrumType();
-		}
-		get { return NSUserDefaults.standardUserDefaults().integerForKey("selectedSpectrumType"); }
-	}
-	
 	/*
 	Disclosure views
 	*/
@@ -250,43 +248,6 @@ class Document : NSDocument {
 	dynamic var		savedExpanded : Bool {
 		set( aValue ) { NSUserDefaults.standardUserDefaults().setBool(aValue, forKey: "savedExpanded"); }
 		get { return NSUserDefaults.standardUserDefaults().boolForKey("savedExpanded"); }
-	}
-
-	private func updateWaveViewDisplayMode() {
-		if let theWaveView = waveView {
-			switch selectedWaveViewMode {
-			case 1:
-				theWaveView.displayMode = .combined;
-			default:
-				theWaveView.displayMode = .overlayed;
-			}
-		}
-	}
-	
-	private func updateWaveViewScale() {
-		if let theWaveView = waveView {
-			switch selectedWaveViewScale {
-			case 1:
-				theWaveView.xScale = 50.0;
-			case 2:
-				theWaveView.xScale = 100.0;
-			default:
-				theWaveView.xScale = 25.0;
-			}
-		}
-	}
-	
-	private func updateSelectedSpectrumType() {
-		if let theSpectrumView = spectrumView {
-			switch selectedSpectrumType {
-			case 1:
-				theSpectrumView.spectrumType = .saw;
-			case 2:
-				theSpectrumView.spectrumType = .square;
-			default:
-				theSpectrumView.spectrumType = .sine;
-			}
-		}
 	}
 
 	dynamic var     everyInterval : [EqualTemperamentEntry] = [];
@@ -335,9 +296,6 @@ class Document : NSDocument {
 	}
 
 	override func windowControllerWillLoadNib(aWindowController: NSWindowController) {
-		updateWaveViewDisplayMode();
-		updateSelectedSpectrumType();
-		updateWaveViewScale();
 		numeratorPrimeLimit = UInt(NSUserDefaults.standardUserDefaults().integerForKey("numeratorPrimeLimit"));
 		denominatorPrimeLimit = UInt(NSUserDefaults.standardUserDefaults().integerForKey("denominatorPrimeLimit"));
 		numeratorOddLimit = UInt(NSUserDefaults.standardUserDefaults().integerForKey("numeratorOddLimit")) | 1;
@@ -487,11 +445,13 @@ class Document : NSDocument {
 
 		assert( theNegativeDelta >= 0.0 );
 		assert( thePositiveDelta >= 0.0 );
+		assert( theNegativeDelta <= (theMaxValue-theMinValue) && thePositiveDelta <= (theMaxValue-theMinValue)/2.0
+				|| theNegativeDelta <= (theMaxValue-theMinValue)/2.0 && thePositiveDelta <= (theMaxValue-theMinValue) );
 
 		if theNegativeDelta < thePositiveDelta {
-			baseFrequency -= pow(baseFrequency,pow(theNegativeDelta,4.0));
+			baseFrequency /= theNegativeDelta+1.0;
 		} else if theNegativeDelta > thePositiveDelta {
-			baseFrequency += pow(baseFrequency,pow(thePositiveDelta,4.0));
+			baseFrequency *= thePositiveDelta+1.0;
 		}
 
 		previousBaseFrequencyDelta = theBaseFrequencyDelta;
@@ -513,18 +473,10 @@ class Document : NSDocument {
 		let		theEntries = EqualTemperamentCollection(limits: (numeratorPrime:numeratorPrimeLimit,denominatorPrime:theDenominatorPrimeLimit,numeratorOdd:numeratorOddLimit,denominatorOdd:theDenominatorOddLimit), intervalCount: enableInterval ? intervalCount : 0, octaves: octavesCount, maximumError: maximumError, filtered: filtered );
 		smallestErrorEntries = theEntries.smallestError;
 		biggestErrorEntries = theEntries.biggestError;
-		everyInterval.removeAll(keepCapacity: true);
 		averageError = theEntries.averageError;
 		everyInterval = theEntries.everyEntry;
-		if let theLinearScaleView = linearScaleView {
-			theLinearScaleView.numberOfIntervals = enableInterval ? intervalCount : 0;
-			theLinearScaleView.everyRatios = everyInterval.map { return $0.justIntonationRatio; };
-			theLinearScaleView.useIntervals = enableInterval;
-		}
-		if let thePitchConstellationView = pitchConstellationView {
-			thePitchConstellationView.numberOfIntervals = enableInterval ? intervalCount : 0;
-			thePitchConstellationView.everyRatios = everyInterval.map { return $0.justIntonationRatio; };
-			thePitchConstellationView.useIntervals = enableInterval;
+		if let theScaleViewController = scaleViewController {
+			theScaleViewController.setIntervals(intervals: everyInterval, intervalCount: intervalCount, enabled: enableInterval);
 		}
 		selectedEqualTemperamentEntry = theSelectedEntries;
 	}
@@ -539,12 +491,7 @@ class Document : NSDocument {
 				theTableColumn.hidden = aHide;
 			}
 		}
-		if let theLinearScaleView = linearScaleView {
-			theLinearScaleView.useIntervals = !aHide;
-		}
-		if let thePitchConstellationView = pitchConstellationView {
-			thePitchConstellationView.useIntervals = !aHide;
-		}
+		if let theScaleViewController = scaleViewController { theScaleViewController.hideIntervalRelatedColumn(!aHide); }
 	}
 }
 
@@ -571,20 +518,21 @@ extension Document : NSTableViewDelegate {
 	func tableViewSelectionDidChange(notification: NSNotification) {
 		let		theSelectedIntervals = selectedJustIntonationIntervals;
 		updateChordRatioTitle();
-		if let theLinearScaleView = linearScaleView {
-			theLinearScaleView.selectedRatios = theSelectedIntervals.map({ return $0.ratio; });
+		assert(scaleViewController != nil, "Failed to get ScaleViewController")
+		if let theScaleViewController = scaleViewController {
+			theScaleViewController.setSelectionIntervals(theSelectedIntervals);
 		}
-		if let thePitchConstellationView = pitchConstellationView {
-			thePitchConstellationView.selectedRatios = theSelectedIntervals.map({ return $0.ratio; });
+		assert(harmonicViewController != nil, "Failed to get HarmonicViewController")
+		if let theHarmonicViewController = harmonicViewController {
+			theHarmonicViewController.setSelectionIntervals(theSelectedIntervals);
 		}
-		if let theHarmonicView = harmonicView {
-			theHarmonicView.selectedRatios = theSelectedIntervals.map({ return $0.ratio; });
+		assert(waveViewController != nil, "Failed to get WaveViewController")
+		if let theWaveViewController = waveViewController {
+			theWaveViewController.setSelectionIntervals(theSelectedIntervals);
 		}
-		if let theWaveView = waveView {
-			theWaveView.selectedRatios = theSelectedIntervals.map({ return $0.ratio; });
-		}
-		if let theSpectrumView = spectrumView {
-			theSpectrumView.selectedRatios = theSelectedIntervals.map({ return $0.ratio; });
+		assert(spectrumViewController != nil, "Failed to get SpectrumViewController")
+		if let theSpectrumViewController = spectrumViewController {
+			theSpectrumViewController.setSelectionIntervals(theSelectedIntervals);
 		}
 		tonePlayer.intervals = theSelectedIntervals;
 	}

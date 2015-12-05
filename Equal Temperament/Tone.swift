@@ -91,22 +91,6 @@ class Tone
 		return theResult;
 	}
 
-//	final func outputAudio( aSamples: UnsafeMutableBufferPointer<Float32>, numberFrames anInNumberFrames: UInt32 ) -> OSStatus {
-//		let		theResult : OSStatus = kAudioServicesNoError;
-//		let		theGain = Float32(0.5);
-//		assert( theGain > 0.0, "bad gain value: \(theGain)" );
-////		assert( !playingTones.isEmpty, "no tones" );
-//		if !aSamples.isEmpty {
-//				for i : Int in 0..<Int(anInNumberFrames) {
-//					aSamples[i] = generate( gain: theGain );
-//				}
-//				if theTone.complete {
-//					stop();
-//				}
-//		}
-//		return theResult;
-//	}
-//
 	init( baseFrequency aBaseFrequency: Double, interval anInterval: Interval, harmonics aHarmonics: HarmonicsDescription ) {
 		baseFrequency = aBaseFrequency;
 		interval = anInterval;
@@ -124,7 +108,6 @@ class Tone
 			let		theToneRef = UnsafeMutablePointer<Tone>(anInRefCon);
 			let		theGain = Float32(0.5);
 			assert( theGain > 0.0, "bad gain value: \(theGain)" );
-			//		assert( !playingTones.isEmpty, "no tones" );
 			if !theSamples.isEmpty {
 				for i : Int in 0..<Int(anInNumberFrames) {
 					theSamples[i] = theToneRef.memory.generate( gain: theGain );
@@ -188,6 +171,7 @@ class Tone
 		if playing  {
 			let		theError = AudioOutputUnitStop(self.toneUnit );
 			assert( theError == noErr, "Error starting unit: 0x\(UInt(theError).hexadecimalString)");
+			envelope.beginRelease = true;
 			playing = false;
 		}
 	}

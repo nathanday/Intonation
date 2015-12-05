@@ -12,8 +12,6 @@ import AudioToolbox
 func dBToPower( aDB: Double ) -> Double { return pow(10.0,aDB/10.0); }
 func powerToDB( aPower: Double ) -> Double { return 10.0*log10(aPower); }
 
-var currentTonePlayer : TonePlayer? = nil;
-
 class TonePlayer {
 
 	init() {
@@ -21,8 +19,6 @@ class TonePlayer {
 		baseFrequency = 110.0;
 		intervals = [];
 		playing = false;
-		assert( currentTonePlayer == nil, "canot create multiple TonePlayers" );
-		currentTonePlayer = self;
 	}
 
 	static let sampleRate : Float64 = 44100.0;
@@ -36,11 +32,16 @@ class TonePlayer {
 			for (_,theTone) in playingTones { theTone.equalTemperament = equalTemperament; }
 		}
 	}
+	var arpeggioInterval : NSTimeInterval = 60.0/120.0;
+	private(set) var playbackType : PlaybackType = .Unison;
 
 	var amplitude : Double = 1.0;
 	var playing : Bool = false;
 	var playingTones : [Rational:Tone] = [:];
 	private var outputPower : Double { get { return dBToPower(amplitude); } }
+
+	private var arpeggioTriggerTimer : NSTimer? = nil;
+	private var nextNoteIndex : Int = 0;
 
 	func generateTones() {
 		var		theUnsedRatios = Set<Rational>(playingTones.keys);
@@ -80,12 +81,56 @@ class TonePlayer {
 			playing = false;
 		}
 	}
-	
-	func playType( aType : PlaybackType ) {
-		if !playing {
-			generateTones();
-			for (_,theTone) in self.playingTones {
+
+	private func triggerNextNote() {
+		if intervals.count > 0 {
+			let		theCount = playingTones.count,
+					theLastIndex = theCount-1;
+			if arpeggioTriggerTimer == nil {
+				arpeggioTriggerTimer = NSTimer.scheduledTimerWithTimeInterval(0.4, target: self, selector: "triggerNextNote", userInfo: nil, repeats: true);
+			}
+			switch playbackType {
+			case .Up:
+				nextNoteIndex = (nextNoteIndex+1)%theCount;
+				break;
+			case .Down:
+				nextNoteIndex = ((nextNoteIndex-1)%(theCount-theLastIndex)) + theLastIndex;
+				break;
+			case .UpDown:
+				nextNoteIndex = (nextNoteIndex+1)%(theCount+theLastIndex);
+				break;
+			default:
+				break;
+			}
+			assert( nextNoteIndex < 2*theLastIndex+1 );
+
+			if let theTone = playingTones[intervals[theLastIndex-abs(nextNoteIndex-theLastIndex)].ratio] {
 				theTone.play();
+			}
+		}
+	}
+
+	func playType( aType : PlaybackType ) {
+		if playbackType != aType {
+			stop();
+		}
+
+		if arpeggioTriggerTimer != nil {
+			arpeggioTriggerTimer?.invalidate();
+			arpeggioTriggerTimer = nil;
+		}
+
+		if !playing {
+			playbackType = aType;
+			generateTones();
+			switch playbackType {
+			case .Unison:
+				for (_,theTone) in self.playingTones {
+					theTone.play();
+				}
+				break;
+			default:
+				break;
 			}
 			playing = true;
 		}

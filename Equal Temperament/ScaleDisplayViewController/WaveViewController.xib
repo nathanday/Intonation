@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9531" systemVersion="15C48a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9531"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="WaveViewController" customModule="Equal_Temperament" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="TdE-H4-t53" id="cke-Qb-joZ"/>
+                <outlet property="waveView" destination="9aE-QQ-Q54" id="gRY-KL-dJD"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <view id="TdE-H4-t53" customClass="BackGround" customModule="Equal_Temperament" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="635"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" horizontalScrollElasticity="none" verticalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="gUL-tr-1fR">
+                    <rect key="frame" x="20" y="34" width="353" height="581"/>
+                    <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="hSH-WE-P56">
+                        <rect key="frame" x="0.0" y="0.0" width="353" height="581"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9aE-QQ-Q54" customClass="WaveView" customModule="Equal_Temperament" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="1285" width="353" height="581"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="339" placeholder="YES" id="zBa-SZ-Jge"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="9aE-QQ-Q54" secondAttribute="bottom" id="GS9-xU-jY4"/>
+                            <constraint firstItem="9aE-QQ-Q54" firstAttribute="top" secondItem="hSH-WE-P56" secondAttribute="top" id="NIu-gd-akr"/>
+                            <constraint firstItem="9aE-QQ-Q54" firstAttribute="leading" secondItem="hSH-WE-P56" secondAttribute="leading" id="VFe-UW-UrM"/>
+                        </constraints>
+                    </clipView>
+                    <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" controlSize="mini" horizontal="YES" id="oKZ-dk-B6x">
+                        <rect key="frame" x="1" y="80" width="166" height="15"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </scroller>
+                    <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" controlSize="mini" horizontal="NO" id="l1k-eq-kQs">
+                        <rect key="frame" x="339" y="0.0" width="14" height="581"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </scroller>
+                </scrollView>
+                <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IA4-fM-ilc">
+                    <rect key="frame" x="123" y="6" width="146" height="20"/>
+                    <segmentedCell key="cell" controlSize="small" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="ane-3D-Ka6">
+                        <font key="font" metaFont="smallSystem"/>
+                        <segments>
+                            <segment label="Overlayed" width="70" selected="YES"/>
+                            <segment label="Summed" width="69" tag="1"/>
+                        </segments>
+                    </segmentedCell>
+                    <connections>
+                        <binding destination="-2" name="selectedTag" keyPath="self.selectedWaveViewMode" id="bsM-zr-jyp"/>
+                    </connections>
+                </segmentedControl>
+                <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IOO-UJ-8bY">
+                    <rect key="frame" x="273" y="6" width="102" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="98" id="fMQ-8j-8NY"/>
+                    </constraints>
+                    <segmentedCell key="cell" controlSize="small" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="KC8-8U-MZM">
+                        <font key="font" metaFont="smallSystem"/>
+                        <segments>
+                            <segment label="1×" width="32" selected="YES"/>
+                            <segment label="2×" width="32" tag="1"/>
+                            <segment label="4×" tag="2"/>
+                        </segments>
+                    </segmentedCell>
+                    <connections>
+                        <binding destination="-2" name="selectedTag" keyPath="self.selectedWaveViewScale" id="GKe-NO-GcG"/>
+                    </connections>
+                </segmentedControl>
+            </subviews>
+            <constraints>
+                <constraint firstItem="gUL-tr-1fR" firstAttribute="leading" secondItem="TdE-H4-t53" secondAttribute="leading" constant="20" id="7He-qQ-JhQ"/>
+                <constraint firstAttribute="trailing" secondItem="gUL-tr-1fR" secondAttribute="trailing" constant="20" id="J9h-tQ-YvS"/>
+                <constraint firstItem="IOO-UJ-8bY" firstAttribute="baseline" secondItem="IA4-fM-ilc" secondAttribute="baseline" id="Jzb-lO-Gei"/>
+                <constraint firstItem="IA4-fM-ilc" firstAttribute="top" secondItem="gUL-tr-1fR" secondAttribute="bottom" constant="8" id="KRB-Gx-Ruw"/>
+                <constraint firstAttribute="centerX" secondItem="IA4-fM-ilc" secondAttribute="centerX" id="O0x-wb-fVK"/>
+                <constraint firstItem="IOO-UJ-8bY" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="IA4-fM-ilc" secondAttribute="trailing" constant="8" id="RlC-9V-LvD"/>
+                <constraint firstItem="gUL-tr-1fR" firstAttribute="top" secondItem="TdE-H4-t53" secondAttribute="top" constant="20" id="UGL-Fx-DLt"/>
+                <constraint firstAttribute="trailing" secondItem="IOO-UJ-8bY" secondAttribute="trailing" constant="20" id="mJU-41-tgc"/>
+                <constraint firstAttribute="bottom" secondItem="IA4-fM-ilc" secondAttribute="bottom" constant="8" id="xRf-Xe-eyC"/>
+            </constraints>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="boolean" keyPath="horizontal" value="YES"/>
+            </userDefinedRuntimeAttributes>
+            <connections>
+                <outlet property="childView" destination="gUL-tr-1fR" id="Czs-b2-8sg"/>
+            </connections>
+        </view>
+    </objects>
+</document>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="8121.17" systemVersion="15A178w" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9046" systemVersion="15B17c" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8121.17"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9046"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="PreferencesWindowController" customModule="Equal_Temperament" customModuleProvider="target">
@@ -15,7 +15,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" unifiedTitleAndToolbar="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="440" height="440"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
             <view key="contentView" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="6" width="440" height="440"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -29,6 +29,64 @@
                                 <view key="view" id="MOf-2h-Ak4">
                                     <rect key="frame" x="0.0" y="0.0" width="440" height="440"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <textField horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Xgp-oN-cl1">
+                                            <rect key="frame" x="18" y="403" width="176" height="17"/>
+                                            <animations/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Frequency Range, Minimum:" id="ffn-e4-qiX">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                        <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1yY-2L-4Ml">
+                                            <rect key="frame" x="196" y="400" width="74" height="22"/>
+                                            <animations/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="xMp-st-HTP">
+                                                <numberFormatter key="formatter" formatterBehavior="custom10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" id="obl-dd-Wyl">
+                                                    <real key="minimum" value="12"/>
+                                                    <real key="maximum" value="440"/>
+                                                </numberFormatter>
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                        <textField horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="U8L-ac-BWg">
+                                            <rect key="frame" x="277" y="403" width="67" height="17"/>
+                                            <animations/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Maximum:" id="8z2-kz-bc0">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                        <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="v0Q-jo-eQk">
+                                            <rect key="frame" x="346" y="400" width="74" height="22"/>
+                                            <animations/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="ref-Sp-c0S">
+                                                <numberFormatter key="formatter" formatterBehavior="custom10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" id="NtZ-0P-fjq">
+                                                    <real key="minimum" value="880"/>
+                                                    <real key="maximum" value="4200"/>
+                                                </numberFormatter>
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="Xgp-oN-cl1" firstAttribute="leading" secondItem="MOf-2h-Ak4" secondAttribute="leading" constant="20" id="2Vk-PP-P94"/>
+                                        <constraint firstItem="v0Q-jo-eQk" firstAttribute="width" secondItem="1yY-2L-4Ml" secondAttribute="width" id="BWj-PP-ZoI"/>
+                                        <constraint firstItem="Xgp-oN-cl1" firstAttribute="top" secondItem="MOf-2h-Ak4" secondAttribute="top" constant="20" id="F22-VJ-fRO"/>
+                                        <constraint firstItem="1yY-2L-4Ml" firstAttribute="leading" secondItem="Xgp-oN-cl1" secondAttribute="trailing" constant="4" id="HiE-X9-4HQ"/>
+                                        <constraint firstItem="v0Q-jo-eQk" firstAttribute="baseline" secondItem="Xgp-oN-cl1" secondAttribute="baseline" id="Jer-ug-N7M"/>
+                                        <constraint firstAttribute="trailing" secondItem="v0Q-jo-eQk" secondAttribute="trailing" constant="20" id="bx4-3F-tcA"/>
+                                        <constraint firstItem="U8L-ac-BWg" firstAttribute="baseline" secondItem="Xgp-oN-cl1" secondAttribute="baseline" id="oED-JT-Kmh"/>
+                                        <constraint firstItem="v0Q-jo-eQk" firstAttribute="leading" secondItem="U8L-ac-BWg" secondAttribute="trailing" constant="4" id="ob0-AT-XB2"/>
+                                        <constraint firstItem="1yY-2L-4Ml" firstAttribute="baseline" secondItem="Xgp-oN-cl1" secondAttribute="baseline" id="u80-4h-EeN"/>
+                                        <constraint firstItem="U8L-ac-BWg" firstAttribute="leading" secondItem="1yY-2L-4Ml" secondAttribute="trailing" constant="9" id="xJZ-9b-NrG"/>
+                                    </constraints>
                                     <animations/>
                                 </view>
                             </tabViewItem>

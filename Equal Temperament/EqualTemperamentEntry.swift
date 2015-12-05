@@ -61,7 +61,7 @@ class EqualTemperamentEntry : NSObject {
 	var justIntonationPercent : Double { return centsEquivelentForRatio( self.justIntonationRatio.toDouble, n: self.intervalCount ); }
 	var error : Double { return equalTemperamentRatio-justIntonationRatio.toDouble; }
 	var error12ETCent : Double {
-		return 100.0*Double(closestEqualTemperamentIntervalNumber)-centsEquivelentForRatio( self.justIntonationRatio.toDouble, n: 12 );
+		return centsEquivelentForRatio( justIntonationRatio.toDouble/ratioForCentsEquivelent(Double(closestIntervalNumber)*100.0, n: self.intervalCount ), n: 12 );
 	}
 	var oddLimit : UInt { return justIntonationRatio.oddLimit; }
 
@@ -70,7 +70,7 @@ class EqualTemperamentEntry : NSObject {
 	var degreeName : String = "";
 
 	var errorNETCent : Double {
-		return Double(closestIntervalNumber)*100.0-centsEquivelentForRatio( justIntonationRatio.toDouble, n: intervalCount );
+		return centsEquivelentForRatio(justIntonationRatio.toDouble/ratioForCentsEquivelent(Double(closestIntervalNumber)*100.0, n:intervalCount), n:12);
 	}
 
 	var interval : Interval { return Interval(ratio: self.justIntonationRatio, equalTemperament: self.equalTemperamentRatio); }
@@ -258,8 +258,8 @@ class EqualTemperamentCollection : CustomStringConvertible {
 	}
 
 	private func calculate( ) {
-		for theDenom in PrimeProducts(maxPrime: limits.denominatorPrime, range: Range<UInt>(start: 1, end: limits.denominatorOdd+1)) {
-			for theNum in PrimeProducts(maxPrime: limits.numeratorPrime, range: Range<UInt>(start: theDenom, end: min(limits.numeratorOdd+1,theDenom*2))) {
+		for theDenom in PrimeProducts(maxPrime: limits.denominatorPrime, range: Range<UInt>(start: 1, end: limits.denominatorOdd)) {
+			for theNum in PrimeProducts(maxPrime: limits.numeratorPrime, range: Range<UInt>(start: theDenom, end: min(limits.numeratorOdd,theDenom*2))) {
 				assert(theNum >= theDenom);
 				assert( theNum <= theDenom*2 );
 				for theOctaves in 0..<octaves {

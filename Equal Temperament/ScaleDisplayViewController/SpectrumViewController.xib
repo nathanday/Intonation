@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9531" systemVersion="15C48a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9531"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="SpectrumViewController" customModule="Equal_Temperament" customModuleProvider="target">
+            <connections>
+                <outlet property="spectrumView" destination="Jhy-7k-Bte" id="4f5-HQ-lAC"/>
+                <outlet property="view" destination="fvR-Ai-OGn" id="Y0q-0t-Kox"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="fvR-Ai-OGn" customClass="BackGround" customModule="Equal_Temperament" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="635"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <scrollView misplaced="YES" borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" verticalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="tXk-gg-tWR">
+                    <rect key="frame" x="20" y="34" width="353" height="600"/>
+                    <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="cU7-Ve-xqu">
+                        <rect key="frame" x="0.0" y="0.0" width="353" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jhy-7k-Bte" customClass="SpectrumView" customModule="Equal_Temperament" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="131" width="353" height="469"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="353" placeholder="YES" id="4gs-Lf-Plv"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="Jhy-7k-Bte" firstAttribute="top" secondItem="cU7-Ve-xqu" secondAttribute="top" id="8OF-5l-aVL"/>
+                            <constraint firstItem="Jhy-7k-Bte" firstAttribute="leading" secondItem="cU7-Ve-xqu" secondAttribute="leading" id="Z46-FL-Du0"/>
+                            <constraint firstAttribute="bottom" secondItem="Jhy-7k-Bte" secondAttribute="bottom" id="fU3-vI-c9W"/>
+                        </constraints>
+                    </clipView>
+                    <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" controlSize="small" horizontal="YES" id="NrJ-J3-p9E">
+                        <rect key="frame" x="1" y="79" width="181" height="16"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </scroller>
+                    <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" controlSize="small" horizontal="NO" id="udJ-QQ-XWM">
+                        <rect key="frame" x="339" y="0.0" width="14" height="600"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </scroller>
+                </scrollView>
+                <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EWq-4r-JBf">
+                    <rect key="frame" x="122" y="6" width="148" height="20"/>
+                    <segmentedCell key="cell" controlSize="small" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="cpF-9K-TnF">
+                        <font key="font" metaFont="smallSystem"/>
+                        <segments>
+                            <segment label="Sine" width="42"/>
+                            <segment label="Saw" width="40" selected="YES" tag="1"/>
+                            <segment label="Square" width="58" tag="2"/>
+                        </segments>
+                    </segmentedCell>
+                    <connections>
+                        <binding destination="-2" name="selectedTag" keyPath="self.selectedSpectrumType" id="GqU-cW-mz7"/>
+                    </connections>
+                </segmentedControl>
+            </subviews>
+            <constraints>
+                <constraint firstItem="EWq-4r-JBf" firstAttribute="top" secondItem="tXk-gg-tWR" secondAttribute="bottom" constant="8" id="F7b-vL-ln6"/>
+                <constraint firstAttribute="bottom" secondItem="EWq-4r-JBf" secondAttribute="bottom" constant="8" id="X7d-os-R6L"/>
+                <constraint firstAttribute="trailing" secondItem="tXk-gg-tWR" secondAttribute="trailing" constant="20" id="pta-rF-qwL"/>
+                <constraint firstItem="tXk-gg-tWR" firstAttribute="leading" secondItem="fvR-Ai-OGn" secondAttribute="leading" constant="20" id="sib-hD-oxw"/>
+                <constraint firstAttribute="centerX" secondItem="EWq-4r-JBf" secondAttribute="centerX" id="wr7-Jr-kUW"/>
+                <constraint firstItem="tXk-gg-tWR" firstAttribute="top" secondItem="fvR-Ai-OGn" secondAttribute="top" constant="20" id="xON-dS-cmX"/>
+            </constraints>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="boolean" keyPath="horizontal" value="YES"/>
+            </userDefinedRuntimeAttributes>
+            <connections>
+                <outlet property="childView" destination="tXk-gg-tWR" id="BeP-0P-C3Z"/>
+            </connections>
+        </customView>
+    </objects>
+</document>
