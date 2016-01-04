@@ -228,6 +228,13 @@
 			path = ScaleDisplayViewController;
 			sourceTree = "<group>";
 		};
+		D8AA4E4B1C13405F00B66521 /* GeneratorViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = GeneratorViewControllers;
+			sourceTree = "<group>";
+		};
 		D8B902091AD48EBF0015B5E2 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -240,6 +247,7 @@
 				D87356E51ADA0793006DAFEB /* ChordSelectorWindowController.swift */,
 				D87356E61ADA0793006DAFEB /* ChordSelectorWindowController.xib */,
 				D8AA4E381C132A6200B66521 /* ScaleDisplayViewController */,
+				D8AA4E4B1C13405F00B66521 /* GeneratorViewControllers */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";

@@ -89,14 +89,13 @@ class ChordSelectorItem : NSObject {
 				theChordSelectorGroup.everyChild = chordSelectorItemsForPropertyList(theChildren);
 				theResult = theChordSelectorGroup;
 			}
-			else if let theAbbreviations = aPropertyList["abbreviations"] as? [String], theMode = aPropertyList["mode"] as? [String], theEveryRatioString = aPropertyList["everyRatio"] as? [String] {
-				var		theEveryRatio : [Rational] = [];
-				for theRationalString in theEveryRatioString {
-					if let theRational = theRationalString.toRational() {
-						theEveryRatio.append(theRational);
-					}
+			else if let theAbbreviations = aPropertyList["abbreviations"] as? [String], theMode = aPropertyList["mode"] as? [String], theEveryRatioString = aPropertyList["everyRatio"] as? [[String:AnyObject]] {
+				if let theEveryRatio = chordSelectorItemsForPropertyList( theEveryRatioString ) as? [ChordSelectorRatio] {
+					theResult = ChordSelectorChord(name:theName, abbreviations:theAbbreviations, mode:theMode, everyRatio: theEveryRatio );
 				}
-				theResult = ChordSelectorChord(name:theName, abbreviations:theAbbreviations, mode:theMode, everyRatio: theEveryRatio );
+			}
+			else if let theNumerator = aPropertyList["numerator"] as? Int, theDenominator = aPropertyList["denominator"] as? Int {
+				theResult = ChordSelectorRatio( name: theName, ratio: Rational(theNumerator,theDenominator) );
 			}
 		}
 		return theResult;
@@ -109,11 +108,21 @@ class ChordSelectorItem : NSObject {
 	init( name aName: String ) { name = aName; }
 }
 
+class ChordSelectorRatio : ChordSelectorItem {
+	override var	isLeaf : Bool { get { return true; } }
+	let				ratio : Rational;
+
+	init( name aName: String, ratio aRatio: Rational ) {
+		ratio = aRatio;
+		super.init( name: aName );
+	}
+}
+
 class ChordSelectorChord : ChordSelectorItem {
 	override var	isLeaf : Bool { get { return true; } }
-	let				everyRatio : Array<Rational>;
+	let				everyRatio : Array<ChordSelectorRatio>;
 
-	init( name aName: String, abbreviations anAbbreviations: [String], mode aMode: [String], everyRatio anEveryRatio: [Rational] ) {
+	init( name aName: String, abbreviations anAbbreviations: [String], mode aMode: [String], everyRatio anEveryRatio: [ChordSelectorRatio] ) {
 		everyRatio = anEveryRatio;
 		super.init( name: aName );
 	}

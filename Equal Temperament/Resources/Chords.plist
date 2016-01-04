@@ -26,7 +26,32 @@
 							<string>Ionian</string>
 						</array>
 						<key>everyRatio</key>
-						<string>4:5:6</string>
+						<array>
+							<dict>
+								<key>name</key>
+								<string>First</string>
+								<key>numerator</key>
+								<integer>1</integer>
+								<key>denominator</key>
+								<integer>1</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>Third</string>
+								<key>numerator</key>
+								<integer>5</integer>
+								<key>denominator</key>
+								<integer>4</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>Fifth</string>
+								<key>numerator</key>
+								<integer>3</integer>
+								<key>denominator</key>
+								<integer>2</integer>
+							</dict>
+						</array>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -44,7 +69,40 @@
 							<string>Ionian</string>
 						</array>
 						<key>everyRatio</key>
-						<string>8:10:12:15</string>
+						<array>
+							<dict>
+								<key>name</key>
+								<string>First</string>
+								<key>numerator</key>
+								<integer>1</integer>
+								<key>denominator</key>
+								<integer>1</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>Third</string>
+								<key>numerator</key>
+								<integer>5</integer>
+								<key>denominator</key>
+								<integer>4</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>Fifth</string>
+								<key>numerator</key>
+								<integer>3</integer>
+								<key>denominator</key>
+								<integer>2</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>Seventh</string>
+								<key>numerator</key>
+								<integer>15</integer>
+								<key>denominator</key>
+								<integer>8</integer>
+							</dict>
+						</array>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -58,11 +116,52 @@
 							<string>Ionian</string>
 						</array>
 						<key>everyRatio</key>
-						<string>8:9:10:12:15</string>
+						<array>
+							<dict>
+								<key>name</key>
+								<string>First</string>
+								<key>numerator</key>
+								<integer>1</integer>
+								<key>denominator</key>
+								<integer>1</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>Third</string>
+								<key>numerator</key>
+								<integer>5</integer>
+								<key>denominator</key>
+								<integer>4</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>Fifth</string>
+								<key>numerator</key>
+								<integer>3</integer>
+								<key>denominator</key>
+								<integer>2</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>Seventh</string>
+								<key>numerator</key>
+								<integer>15</integer>
+								<key>denominator</key>
+								<integer>8</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>Ninth</string>
+								<key>numerator</key>
+								<integer>9</integer>
+								<key>denominator</key>
+								<integer>4</integer>
+							</dict>
+						</array>
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>major thirteenth</string>
+						<string>major eleventh</string>
 						<key>abbreviations</key>
 						<array>
 							<string>maj13</string>
@@ -73,13 +172,54 @@
 						</array>
 						<key>everyRatio</key>
 						<array>
-							<string>1</string>
-							<string>3</string>
-							<string>(5)</string>
-							<string>7</string>
-							<string>(9)</string>
-							<string>(11)</string>
-							<string>13</string>
+							<dict>
+								<key>name</key>
+								<string>First</string>
+								<key>numerator</key>
+								<integer>1</integer>
+								<key>denominator</key>
+								<integer>1</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>Third</string>
+								<key>numerator</key>
+								<integer>5</integer>
+								<key>denominator</key>
+								<integer>4</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>Fifth</string>
+								<key>numerator</key>
+								<integer>3</integer>
+								<key>denominator</key>
+								<integer>2</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>Seventh</string>
+								<key>numerator</key>
+								<integer>15</integer>
+								<key>denominator</key>
+								<integer>8</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>Ninth</string>
+								<key>numerator</key>
+								<integer>9</integer>
+								<key>denominator</key>
+								<integer>4</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>Eleventh</string>
+								<key>numerator</key>
+								<integer>8</integer>
+								<key>denominator</key>
+								<integer>3</integer>
+							</dict>
 						</array>
 					</dict>
 					<dict>
@@ -97,10 +237,38 @@
 						</array>
 						<key>everyRatio</key>
 						<array>
-							<string>1</string>
-							<string>3</string>
-							<string>(5)</string>
-							<string>6</string>
+							<dict>
+								<key>name</key>
+								<string>First</string>
+								<key>numerator</key>
+								<integer>1</integer>
+								<key>denominator</key>
+								<integer>1</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>Third</string>
+								<key>numerator</key>
+								<integer>5</integer>
+								<key>denominator</key>
+								<integer>4</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>Fifth</string>
+								<key>numerator</key>
+								<integer>3</integer>
+								<key>denominator</key>
+								<integer>2</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>Sixth</string>
+								<key>numerator</key>
+								<integer>5</integer>
+								<key>denominator</key>
+								<integer>3</integer>
+							</dict>
 						</array>
 					</dict>
 					<dict>
@@ -117,11 +285,46 @@
 						</array>
 						<key>everyRatio</key>
 						<array>
-							<string>1</string>
-							<string>3</string>
-							<string>(5)</string>
-							<string>6</string>
-							<string>9</string>
+							<dict>
+								<key>name</key>
+								<string>First</string>
+								<key>numerator</key>
+								<integer>1</integer>
+								<key>denominator</key>
+								<integer>1</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>Third</string>
+								<key>numerator</key>
+								<integer>5</integer>
+								<key>denominator</key>
+								<integer>4</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>Fifth</string>
+								<key>numerator</key>
+								<integer>3</integer>
+								<key>denominator</key>
+								<integer>2</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>Sixth</string>
+								<key>numerator</key>
+								<integer>5</integer>
+								<key>denominator</key>
+								<integer>3</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>Ninth</string>
+								<key>numerator</key>
+								<integer>9</integer>
+								<key>denominator</key>
+								<integer>4</integer>
+							</dict>
 						</array>
 					</dict>
 					<dict>
@@ -139,8 +342,8 @@
 						</array>
 						<key>everyRatio</key>
 						<array>
-							<string>1</string>
-							<string>3</string>
+							<integer>1</integer>
+							<integer>3</integer>
 							<string>(5)</string>
 							<string>(7)</string>
 							<string>♯11</string>
@@ -162,8 +365,8 @@
 						</array>
 						<key>everyRatio</key>
 						<array>
-							<string>1</string>
-							<string>3</string>
+							<integer>1</integer>
+							<integer>3</integer>
 							<string>(5)</string>
 							<string>(7)</string>
 							<string>(9)</string>
@@ -197,8 +400,8 @@
 								</array>
 								<key>everyRatio</key>
 								<array>
-									<string>1</string>
-									<string>3</string>
+									<integer>1</integer>
+									<integer>3</integer>
 									<string>(5)</string>
 									<string>♭7</string>
 								</array>
@@ -216,11 +419,11 @@
 								</array>
 								<key>everyRatio</key>
 								<array>
-									<string>1</string>
-									<string>3</string>
+									<integer>1</integer>
+									<integer>3</integer>
 									<string>(5)</string>
 									<string>♭7</string>
-									<string>9</string>
+									<integer>9</integer>
 								</array>
 							</dict>
 							<dict>
@@ -236,12 +439,12 @@
 								</array>
 								<key>everyRatio</key>
 								<array>
-									<string>1</string>
-									<string>3</string>
+									<integer>1</integer>
+									<integer>3</integer>
 									<string>(5)</string>
 									<string>♭7</string>
 									<string>(9)</string>
-									<string>13</string>
+									<integer>13</integer>
 								</array>
 							</dict>
 							<dict>
@@ -258,8 +461,8 @@
 								</array>
 								<key>everyRatio</key>
 								<array>
-									<string>1</string>
-									<string>3</string>
+									<integer>1</integer>
+									<integer>3</integer>
 									<string>(5)</string>
 									<string>♭7</string>
 									<string>♯11</string>
@@ -288,8 +491,8 @@
 								</array>
 								<key>everyRatio</key>
 								<array>
-									<string>1</string>
-									<string>3</string>
+									<integer>1</integer>
+									<integer>3</integer>
 									<string>(5)</string>
 									<string>♭7</string>
 									<string>♭9</string>
@@ -309,8 +512,8 @@
 								</array>
 								<key>everyRatio</key>
 								<array>
-									<string>1</string>
-									<string>3</string>
+									<integer>1</integer>
+									<integer>3</integer>
 									<string>(5)</string>
 									<string>♭7</string>
 									<string>♯9</string>
@@ -329,8 +532,8 @@
 								</array>
 								<key>everyRatio</key>
 								<array>
-									<string>1</string>
-									<string>3</string>
+									<integer>1</integer>
+									<integer>3</integer>
 									<string>♭7</string>
 									<string>(♭9)</string>
 									<string>(♭5,♭6,♯9..)</string>
@@ -356,8 +559,8 @@
 								</array>
 								<key>everyRatio</key>
 								<array>
-									<string>1</string>
-									<string>4</string>
+									<integer>1</integer>
+									<integer>4</integer>
 									<string>(5)</string>
 								</array>
 							</dict>
@@ -374,8 +577,8 @@
 								</array>
 								<key>everyRatio</key>
 								<array>
-									<string>1</string>
-									<string>2</string>
+									<integer>1</integer>
+									<integer>2</integer>
 									<string>(5)</string>
 								</array>
 							</dict>
@@ -392,8 +595,8 @@
 								</array>
 								<key>everyRatio</key>
 								<array>
-									<string>1</string>
-									<string>4</string>
+									<integer>1</integer>
+									<integer>4</integer>
 									<string>(5)</string>
 									<string>♭7</string>
 								</array>
@@ -413,7 +616,7 @@
 								</array>
 								<key>everyRatio</key>
 								<array>
-									<string>1</string>
+									<integer>1</integer>
 									<string>(5)</string>
 									<string>♭7</string>
 									<string>(9)</string>
@@ -433,12 +636,12 @@
 								</array>
 								<key>everyRatio</key>
 								<array>
-									<string>1</string>
-									<string>4</string>
+									<integer>1</integer>
+									<integer>4</integer>
 									<string>(5)</string>
 									<string>♭7</string>
 									<string>(9)</string>
-									<string>11</string>
+									<integer>11</integer>
 								</array>
 							</dict>
 							<dict>
@@ -455,8 +658,8 @@
 								</array>
 								<key>everyRatio</key>
 								<array>
-									<string>1</string>
-									<string>4</string>
+									<integer>1</integer>
+									<integer>4</integer>
 									<string>(5)</string>
 									<string>♭9</string>
 								</array>
@@ -490,7 +693,7 @@
 								</array>
 								<key>everyRatio</key>
 								<array>
-									<string>1</string>
+									<integer>1</integer>
 									<string>♭3</string>
 									<string>(5)</string>
 								</array>
@@ -511,7 +714,7 @@
 								</array>
 								<key>everyRatio</key>
 								<array>
-									<string>1</string>
+									<integer>1</integer>
 									<string>♭3</string>
 									<string>(5)</string>
 									<string>♭7</string>
@@ -535,10 +738,10 @@
 								</array>
 								<key>everyRatio</key>
 								<array>
-									<string>1</string>
+									<integer>1</integer>
 									<string>♭3</string>
 									<string>(5)</string>
-									<string>7</string>
+									<integer>7</integer>
 									<string>(9, 13)</string>
 								</array>
 							</dict>
@@ -560,10 +763,10 @@
 								</array>
 								<key>everyRatio</key>
 								<array>
-									<string>1</string>
+									<integer>1</integer>
 									<string>♭3</string>
 									<string>(5)</string>
-									<string>7</string>
+									<integer>7</integer>
 									<string>(9, b13)</string>
 								</array>
 							</dict>
@@ -580,10 +783,10 @@
 								</array>
 								<key>everyRatio</key>
 								<array>
-									<string>1</string>
+									<integer>1</integer>
 									<string>♭3</string>
 									<string>(5)</string>
-									<string>6</string>
+									<integer>6</integer>
 								</array>
 							</dict>
 							<dict>
@@ -599,11 +802,11 @@
 								</array>
 								<key>everyRatio</key>
 								<array>
-									<string>1</string>
+									<integer>1</integer>
 									<string>♭3</string>
 									<string>(5)</string>
 									<string>♭7</string>
-									<string>9</string>
+									<integer>9</integer>
 								</array>
 							</dict>
 							<dict>
@@ -619,12 +822,12 @@
 								</array>
 								<key>everyRatio</key>
 								<array>
-									<string>1</string>
+									<integer>1</integer>
 									<string>♭3</string>
 									<string>(5)</string>
 									<string>♭7</string>
 									<string>(9)</string>
-									<string>11</string>
+									<integer>11</integer>
 								</array>
 							</dict>
 							<dict>
@@ -640,12 +843,12 @@
 								</array>
 								<key>everyRatio</key>
 								<array>
-									<string>1</string>
+									<integer>1</integer>
 									<string>♭3</string>
 									<string>(5)</string>
 									<string>♭7</string>
 									<string>(9)</string>
-									<string>13</string>
+									<integer>13</integer>
 								</array>
 							</dict>
 						</array>
@@ -669,7 +872,7 @@
 								</array>
 								<key>everyRatio</key>
 								<array>
-									<string>1</string>
+									<integer>1</integer>
 									<string>♭3</string>
 									<string>♭5</string>
 								</array>
@@ -689,7 +892,7 @@
 								</array>
 								<key>everyRatio</key>
 								<array>
-									<string>1</string>
+									<integer>1</integer>
 									<string>♭3</string>
 									<string>♭5</string>
 									<string>b♭7</string>
@@ -710,8 +913,8 @@
 								</array>
 								<key>everyRatio</key>
 								<array>
-									<string>1</string>
-									<string>♭3</string>
+									<integer>1</integer>
+									<integer>0</integer>
 									<string>♭5</string>
 									<string>♭7</string>
 									<string>(♭9 or 9,11,13..)</string>
@@ -740,8 +943,8 @@
 						</array>
 						<key>everyRatio</key>
 						<array>
-							<string>1</string>
-							<string>5</string>
+							<integer>1</integer>
+							<integer>5</integer>
 						</array>
 					</dict>
 					<dict>
@@ -758,8 +961,8 @@
 						</array>
 						<key>everyRatio</key>
 						<array>
-							<string>1</string>
-							<string>3</string>
+							<integer>1</integer>
+							<integer>3</integer>
 							<string>♯5</string>
 						</array>
 					</dict>
@@ -777,10 +980,10 @@
 						</array>
 						<key>everyRatio</key>
 						<array>
-							<string>1</string>
-							<string>3</string>
+							<integer>1</integer>
+							<integer>3</integer>
 							<string>♯5</string>
-							<string>7</string>
+							<integer>7</integer>
 						</array>
 					</dict>
 				</array>
@@ -791,7 +994,118 @@
 		<key>name</key>
 		<string>Scales</string>
 		<key>everyChild</key>
-		<array/>
+		<array>
+			<dict>
+				<key>name</key>
+				<string>Just Intonation</string>
+				<key>everyChild</key>
+				<array>
+					<dict>
+						<key>name</key>
+						<string>Natural Chromatic</string>
+						<key>everyRatio</key>
+						<array>
+							<dict>
+								<key>name</key>
+								<string>First</string>
+								<key>numerator</key>
+								<integer>1</integer>
+								<key>denominator</key>
+								<integer>1</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>Major First</string>
+								<key>numerator</key>
+								<integer>16</integer>
+								<key>denominator</key>
+								<integer>15</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>Second</string>
+								<key>numerator</key>
+								<integer>9</integer>
+								<key>denominator</key>
+								<integer>8</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>Major Second</string>
+								<key>numerator</key>
+								<integer>6</integer>
+								<key>denominator</key>
+								<integer>5</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>Third</string>
+								<key>numerator</key>
+								<integer>5</integer>
+								<key>denominator</key>
+								<integer>4</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>Fourth</string>
+								<key>numerator</key>
+								<integer>4</integer>
+								<key>denominator</key>
+								<integer>3</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>Major Fourth</string>
+								<key>numerator</key>
+								<integer>64</integer>
+								<key>denominator</key>
+								<integer>45</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>Fifth</string>
+								<key>numerator</key>
+								<integer>3</integer>
+								<key>denominator</key>
+								<integer>2</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>Major Fifth</string>
+								<key>numerator</key>
+								<integer>8</integer>
+								<key>denominator</key>
+								<integer>5</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>Sixth</string>
+								<key>numerator</key>
+								<integer>5</integer>
+								<key>denominator</key>
+								<integer>3</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>Major Sixth</string>
+								<key>numerator</key>
+								<integer>16</integer>
+								<key>denominator</key>
+								<integer>9</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>Seventh</string>
+								<key>numerator</key>
+								<integer>15</integer>
+								<key>denominator</key>
+								<integer>8</integer>
+							</dict>
+						</array>
+					</dict>
+				</array>
+			</dict>
+		</array>
 	</dict>
 </array>
 </plist>

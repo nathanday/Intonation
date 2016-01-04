@@ -10,20 +10,11 @@ import Cocoa
 
 class HarmonicViewController : NSViewController, ScaleDisplayViewController {
 
-	var	harmonicView : HarmonicView? {
-		var		theResult : HarmonicView? = nil;
-		if self.view is HarmonicView {
-			theResult = (self.view as! HarmonicView);
-		}
-		assert(theResult != nil, "Failed to get HarmonicView")
-		return theResult;
-	}
-
 	func setIntervals( intervals anIntervals : [EqualTemperamentEntry], intervalCount anIntervalCount : UInt, enabled anEnable : Bool ) { }
 	func hideIntervalRelatedColumn( aHide : Bool ) { }
 
 	func setSelectionIntervals( aSelectionIntervals : [Interval]) {
-		if let theHarmonicView = harmonicView {
+		if let theHarmonicView = self.view as? HarmonicView {
 			theHarmonicView.selectedRatios = aSelectionIntervals.map({ return $0.ratio; });
 		}
 	}

@@ -76,6 +76,19 @@ class EqualTemperamentEntry : NSObject {
 	var interval : Interval { return Interval(ratio: self.justIntonationRatio, equalTemperament: self.equalTemperamentRatio); }
 
 	var closestIntervalNumberDescription : String { return isClose ? "\(closestIntervalNumber)" : ""; }
+	var closestNoteDescription : String {
+		var		theResult = "";
+		if isClose {
+			let		noteForIntervalNumber = [ 1, 1, 2, 2, 3, 4, 4, 5, 5, 6, 6, 7 ];
+			let		theNoteNumber = Int(closestIntervalNumber)%noteForIntervalNumber.count;
+			let		theOctave = Int(closestIntervalNumber)/noteForIntervalNumber.count;
+			theResult = "\(noteForIntervalNumber[theNoteNumber]+theOctave*7)";
+			if theNoteNumber > 1 && noteForIntervalNumber[theNoteNumber] == noteForIntervalNumber[theNoteNumber-1] {
+				theResult = "\(theResult) maj";
+			}
+		}
+		return theResult;
+	}
 
 	var isUnison : Bool { return justIntonationRatio.numerator == 1 && justIntonationRatio.denominator == 1; }
 	var isPerfectFourth : Bool { return justIntonationRatio.numerator == 4 && justIntonationRatio.denominator == 3; }
