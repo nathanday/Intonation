@@ -15,6 +15,8 @@
 					<dict>
 						<key>name</key>
 						<string>major</string>
+						<key>kind</key>
+						<integer>0</integer>
 						<key>abbreviations</key>
 						<array>
 							<string>maj</string>
@@ -25,7 +27,7 @@
 						<array>
 							<string>Ionian</string>
 						</array>
-						<key>everyRatio</key>
+						<key>everyChild</key>
 						<array>
 							<dict>
 								<key>name</key>
@@ -56,6 +58,8 @@
 					<dict>
 						<key>name</key>
 						<string>major seventh</string>
+						<key>kind</key>
+						<integer>0</integer>
 						<key>abbreviations</key>
 						<array>
 							<string>maj7</string>
@@ -68,7 +72,7 @@
 						<array>
 							<string>Ionian</string>
 						</array>
-						<key>everyRatio</key>
+						<key>everyChild</key>
 						<array>
 							<dict>
 								<key>name</key>
@@ -107,6 +111,8 @@
 					<dict>
 						<key>name</key>
 						<string>major ninth</string>
+						<key>kind</key>
+						<integer>0</integer>
 						<key>abbreviations</key>
 						<array>
 							<string>maj9</string>
@@ -115,7 +121,7 @@
 						<array>
 							<string>Ionian</string>
 						</array>
-						<key>everyRatio</key>
+						<key>everyChild</key>
 						<array>
 							<dict>
 								<key>name</key>
@@ -162,6 +168,8 @@
 					<dict>
 						<key>name</key>
 						<string>major eleventh</string>
+						<key>kind</key>
+						<integer>0</integer>
 						<key>abbreviations</key>
 						<array>
 							<string>maj13</string>
@@ -170,7 +178,7 @@
 						<array>
 							<string>Ionian</string>
 						</array>
-						<key>everyRatio</key>
+						<key>everyChild</key>
 						<array>
 							<dict>
 								<key>name</key>
@@ -225,6 +233,8 @@
 					<dict>
 						<key>name</key>
 						<string>sixth</string>
+						<key>kind</key>
+						<integer>0</integer>
 						<key>abbreviations</key>
 						<array>
 							<string>6</string>
@@ -235,7 +245,7 @@
 						<array>
 							<string>Ionian</string>
 						</array>
-						<key>everyRatio</key>
+						<key>everyChild</key>
 						<array>
 							<dict>
 								<key>name</key>
@@ -274,6 +284,8 @@
 					<dict>
 						<key>name</key>
 						<string>sixth/ninth</string>
+						<key>kind</key>
+						<integer>0</integer>
 						<key>abbreviations</key>
 						<array>
 							<string>6/9</string>
@@ -283,7 +295,7 @@
 						<array>
 							<string>Ionian</string>
 						</array>
-						<key>everyRatio</key>
+						<key>everyChild</key>
 						<array>
 							<dict>
 								<key>name</key>
@@ -330,6 +342,8 @@
 					<dict>
 						<key>name</key>
 						<string>lydian</string>
+						<key>kind</key>
+						<integer>0</integer>
 						<key>abbreviations</key>
 						<array>
 							<string>maj♯4</string>
@@ -340,7 +354,7 @@
 						<array>
 							<string>Lydian</string>
 						</array>
-						<key>everyRatio</key>
+						<key>everyChild</key>
 						<array>
 							<integer>1</integer>
 							<integer>3</integer>
@@ -353,6 +367,8 @@
 					<dict>
 						<key>name</key>
 						<string>major seventh ♭6 or b13</string>
+						<key>kind</key>
+						<integer>0</integer>
 						<key>abbreviations</key>
 						<array>
 							<string>maj7♭6</string>
@@ -363,7 +379,7 @@
 						<array>
 							<string>Harmonic Major</string>
 						</array>
-						<key>everyRatio</key>
+						<key>everyChild</key>
 						<array>
 							<integer>1</integer>
 							<integer>3</integer>
@@ -384,6 +400,8 @@
 					<dict>
 						<key>name</key>
 						<string>Normal</string>
+						<key>kind</key>
+						<integer>0</integer>
 						<key>everyChild</key>
 						<array>
 							<dict>
@@ -398,7 +416,7 @@
 								<array>
 									<string>Mixolydian</string>
 								</array>
-								<key>everyRatio</key>
+								<key>everyChild</key>
 								<array>
 									<integer>1</integer>
 									<integer>3</integer>
@@ -417,7 +435,7 @@
 								<array>
 									<string>Mixolydian</string>
 								</array>
-								<key>everyRatio</key>
+								<key>everyChild</key>
 								<array>
 									<integer>1</integer>
 									<integer>3</integer>
@@ -437,7 +455,7 @@
 								<array>
 									<string>Mixolydian</string>
 								</array>
-								<key>everyRatio</key>
+								<key>everyChild</key>
 								<array>
 									<integer>1</integer>
 									<integer>3</integer>
@@ -459,7 +477,7 @@
 								<array>
 									<string>Lydian Dominant (melodic minor 4th mode)</string>
 								</array>
-								<key>everyRatio</key>
+								<key>everyChild</key>
 								<array>
 									<integer>1</integer>
 									<integer>3</integer>
@@ -474,6 +492,8 @@
 					<dict>
 						<key>name</key>
 						<string>Altered</string>
+						<key>kind</key>
+						<integer>0</integer>
 						<key>everyChild</key>
 						<array>
 							<dict>
@@ -489,7 +509,7 @@
 									<string>1/2 step/whole step Diminished scale</string>
 									<string>Octatonic scale.</string>
 								</array>
-								<key>everyRatio</key>
+								<key>everyChild</key>
 								<array>
 									<integer>1</integer>
 									<integer>3</integer>
@@ -510,7 +530,7 @@
 								<array>
 									<string>Mixolydian with ♭3</string>
 								</array>
-								<key>everyRatio</key>
+								<key>everyChild</key>
 								<array>
 									<integer>1</integer>
 									<integer>3</integer>
@@ -530,7 +550,7 @@
 								<array>
 									<string>Locrian ♭4 (super-locrian)</string>
 								</array>
-								<key>everyRatio</key>
+								<key>everyChild</key>
 								<array>
 									<integer>1</integer>
 									<integer>3</integer>
@@ -544,6 +564,8 @@
 					<dict>
 						<key>name</key>
 						<string>Suspended</string>
+						<key>kind</key>
+						<integer>0</integer>
 						<key>everyChild</key>
 						<array>
 							<dict>
@@ -557,7 +579,7 @@
 								<array>
 									<string>Usually mixolydian</string>
 								</array>
-								<key>everyRatio</key>
+								<key>everyChild</key>
 								<array>
 									<integer>1</integer>
 									<integer>4</integer>
@@ -575,7 +597,7 @@
 								<array>
 									<string>Usually mixolydian</string>
 								</array>
-								<key>everyRatio</key>
+								<key>everyChild</key>
 								<array>
 									<integer>1</integer>
 									<integer>2</integer>
@@ -593,7 +615,7 @@
 								<array>
 									<string>Usually mixolydian</string>
 								</array>
-								<key>everyRatio</key>
+								<key>everyChild</key>
 								<array>
 									<integer>1</integer>
 									<integer>4</integer>
@@ -614,7 +636,7 @@
 								<array>
 									<string>Usually mixolydian</string>
 								</array>
-								<key>everyRatio</key>
+								<key>everyChild</key>
 								<array>
 									<integer>1</integer>
 									<string>(5)</string>
@@ -634,7 +656,7 @@
 								<array>
 									<string>Mixolydian</string>
 								</array>
-								<key>everyRatio</key>
+								<key>everyChild</key>
 								<array>
 									<integer>1</integer>
 									<integer>4</integer>
@@ -656,7 +678,7 @@
 								<array>
 									<string>Phrygian or phyrgian ♯6</string>
 								</array>
-								<key>everyRatio</key>
+								<key>everyChild</key>
 								<array>
 									<integer>1</integer>
 									<integer>4</integer>
@@ -676,6 +698,8 @@
 					<dict>
 						<key>name</key>
 						<string>Normal</string>
+						<key>kind</key>
+						<integer>0</integer>
 						<key>everyChild</key>
 						<array>
 							<dict>
@@ -691,7 +715,7 @@
 								<array>
 									<string>Dorian or aeolian</string>
 								</array>
-								<key>everyRatio</key>
+								<key>everyChild</key>
 								<array>
 									<integer>1</integer>
 									<string>♭3</string>
@@ -712,7 +736,7 @@
 								<array>
 									<string>Dorian or aeolian</string>
 								</array>
-								<key>everyRatio</key>
+								<key>everyChild</key>
 								<array>
 									<integer>1</integer>
 									<string>♭3</string>
@@ -736,7 +760,7 @@
 								<array>
 									<string>Minor melodic (ascending)</string>
 								</array>
-								<key>everyRatio</key>
+								<key>everyChild</key>
 								<array>
 									<integer>1</integer>
 									<string>♭3</string>
@@ -761,7 +785,7 @@
 								<array>
 									<string>Harmonic Minor</string>
 								</array>
-								<key>everyRatio</key>
+								<key>everyChild</key>
 								<array>
 									<integer>1</integer>
 									<string>♭3</string>
@@ -781,7 +805,7 @@
 								<array>
 									<string>Dorian</string>
 								</array>
-								<key>everyRatio</key>
+								<key>everyChild</key>
 								<array>
 									<integer>1</integer>
 									<string>♭3</string>
@@ -800,7 +824,7 @@
 								<array>
 									<string>Dorian or aeolian</string>
 								</array>
-								<key>everyRatio</key>
+								<key>everyChild</key>
 								<array>
 									<integer>1</integer>
 									<string>♭3</string>
@@ -820,7 +844,7 @@
 								<array>
 									<string>Dorian or aeolian</string>
 								</array>
-								<key>everyRatio</key>
+								<key>everyChild</key>
 								<array>
 									<integer>1</integer>
 									<string>♭3</string>
@@ -841,7 +865,7 @@
 								<array>
 									<string>Dorian</string>
 								</array>
-								<key>everyRatio</key>
+								<key>everyChild</key>
 								<array>
 									<integer>1</integer>
 									<string>♭3</string>
@@ -856,6 +880,8 @@
 					<dict>
 						<key>name</key>
 						<string>Diminished</string>
+						<key>kind</key>
+						<integer>0</integer>
 						<key>everyChild</key>
 						<array>
 							<dict>
@@ -870,7 +896,7 @@
 								<array>
 									<string>Tone/Half-tone (8 note scale)</string>
 								</array>
-								<key>everyRatio</key>
+								<key>everyChild</key>
 								<array>
 									<integer>1</integer>
 									<string>♭3</string>
@@ -890,7 +916,7 @@
 								<array>
 									<string>Tone/Half-tone (8 note scale)</string>
 								</array>
-								<key>everyRatio</key>
+								<key>everyChild</key>
 								<array>
 									<integer>1</integer>
 									<string>♭3</string>
@@ -911,7 +937,7 @@
 									<string>Locrian or locrian</string>
 									<string>♯2</string>
 								</array>
-								<key>everyRatio</key>
+								<key>everyChild</key>
 								<array>
 									<integer>1</integer>
 									<integer>0</integer>
@@ -932,6 +958,8 @@
 					<dict>
 						<key>name</key>
 						<string>fifth</string>
+						<key>kind</key>
+						<integer>0</integer>
 						<key>abbreviations</key>
 						<array>
 							<string>5</string>
@@ -941,7 +969,7 @@
 						<array>
 							<string>None</string>
 						</array>
-						<key>everyRatio</key>
+						<key>everyChild</key>
 						<array>
 							<integer>1</integer>
 							<integer>5</integer>
@@ -950,6 +978,8 @@
 					<dict>
 						<key>name</key>
 						<string>augmented</string>
+						<key>kind</key>
+						<integer>0</integer>
 						<key>abbreviations</key>
 						<array>
 							<string>aug</string>
@@ -959,7 +989,7 @@
 						<array>
 							<string>Whole tone (6 note scale)</string>
 						</array>
-						<key>everyRatio</key>
+						<key>everyChild</key>
 						<array>
 							<integer>1</integer>
 							<integer>3</integer>
@@ -969,6 +999,8 @@
 					<dict>
 						<key>name</key>
 						<string>augmented seventh</string>
+						<key>kind</key>
+						<integer>0</integer>
 						<key>abbreviations</key>
 						<array>
 							<string>7♯5</string>
@@ -978,7 +1010,7 @@
 						<array>
 							<string>Whole tone (6 note scale)</string>
 						</array>
-						<key>everyRatio</key>
+						<key>everyChild</key>
 						<array>
 							<integer>1</integer>
 							<integer>3</integer>
@@ -1003,7 +1035,9 @@
 					<dict>
 						<key>name</key>
 						<string>Natural Chromatic</string>
-						<key>everyRatio</key>
+						<key>kind</key>
+						<integer>1</integer>
+						<key>everyChild</key>
 						<array>
 							<dict>
 								<key>name</key>

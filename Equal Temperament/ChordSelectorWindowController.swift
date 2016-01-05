@@ -68,6 +68,13 @@ extension ChordSelectorWindowController : NSBrowserDelegate {
 	func rootItemForBrowser(aBrowser: NSBrowser) -> AnyObject? {
 		return everyChordRoot;
 	}
+	func browser( browser: NSBrowser, previewViewControllerForLeafItem anItem: AnyObject ) -> NSViewController? {
+		var		theResult : NSViewController?
+		if let theChordSelectorSubChild = anItem as? ChordSelectorSubChild {
+			theResult = theChordSelectorSubChild.previewViewControllerForLeafItem();
+		}
+		return theResult;
+	}
 }
 
 
@@ -89,13 +96,26 @@ class ChordSelectorItem : NSObject {
 				theChordSelectorGroup.everyChild = chordSelectorItemsForPropertyList(theChildren);
 				theResult = theChordSelectorGroup;
 			}
-			else if let theAbbreviations = aPropertyList["abbreviations"] as? [String], theMode = aPropertyList["mode"] as? [String], theEveryRatioString = aPropertyList["everyRatio"] as? [[String:AnyObject]] {
+			else if let theEveryRatioString = aPropertyList["everyChild"] as? [[String:AnyObject]], theKind = aPropertyList["kind"] as? Int {
+				let theAbbreviations = aPropertyList["abbreviations"] as? [String];
+				let	theMode = aPropertyList["mode"] as? Set<String>;
 				if let theEveryRatio = chordSelectorItemsForPropertyList( theEveryRatioString ) as? [ChordSelectorRatio] {
-					theResult = ChordSelectorChord(name:theName, abbreviations:theAbbreviations, mode:theMode, everyRatio: theEveryRatio );
+					switch( theKind )
+					{
+					case 1:
+						theResult = ChordSelectorScale(name:theName, everyRatio: theEveryRatio );
+						break;
+					default:
+						theResult = ChordSelectorChord(name:theName, abbreviations:theAbbreviations, modes:theMode, everyRatio: theEveryRatio );
+						break;
+					}
 				}
 			}
 			else if let theNumerator = aPropertyList["numerator"] as? Int, theDenominator = aPropertyList["denominator"] as? Int {
 				theResult = ChordSelectorRatio( name: theName, ratio: Rational(theNumerator,theDenominator) );
+			}
+			else {
+				print( "Propertlist entity failed to parse \(aPropertyList)" );
 			}
 		}
 		return theResult;
@@ -109,7 +129,6 @@ class ChordSelectorItem : NSObject {
 }
 
 class ChordSelectorRatio : ChordSelectorItem {
-	override var	isLeaf : Bool { get { return true; } }
 	let				ratio : Rational;
 
 	init( name aName: String, ratio aRatio: Rational ) {
@@ -118,14 +137,29 @@ class ChordSelectorRatio : ChordSelectorItem {
 	}
 }
 
-class ChordSelectorChord : ChordSelectorItem {
-	override var	isLeaf : Bool { get { return true; } }
+class ChordSelectorSubChild : ChordSelectorItem {
 	let				everyRatio : Array<ChordSelectorRatio>;
 
-	init( name aName: String, abbreviations anAbbreviations: [String], mode aMode: [String], everyRatio anEveryRatio: [ChordSelectorRatio] ) {
+	init( name aName: String, everyRatio anEveryRatio: [ChordSelectorRatio] ) {
 		everyRatio = anEveryRatio;
 		super.init( name: aName );
 	}
+
+	func previewViewControllerForLeafItem() -> NSViewController? { return nil; }
+}
+
+class ChordSelectorChord : ChordSelectorSubChild {
+	let				abbreviations : Array<String>;
+	let				modes : Set<String>;
+
+	init( name aName: String, abbreviations anAbbreviations: [String]?, modes aMode: Set<String>?, everyRatio anEveryRatio: [ChordSelectorRatio] ) {
+		abbreviations = anAbbreviations ?? [];
+		modes = aMode ?? [];
+		super.init( name: aName, everyRatio: anEveryRatio );
+	}
+}
+
+class ChordSelectorScale : ChordSelectorSubChild {
 }
 
 class ChordSelectorGroup : ChordSelectorItem, MutableCollectionType {
