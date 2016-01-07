@@ -15,15 +15,15 @@
         <window title="Chords and Scales" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="F0z-JX-Cv5" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" utility="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="196" y="240" width="480" height="376"/>
+            <rect key="contentRect" x="196" y="240" width="538" height="452"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
-            <value key="minSize" type="size" width="301" height="111"/>
+            <value key="minSize" type="size" width="480" height="394"/>
             <view key="contentView" id="se5-gp-TjO">
-                <rect key="frame" x="0.0" y="0.0" width="480" height="376"/>
+                <rect key="frame" x="0.0" y="0.0" width="538" height="452"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <browser verticalHuggingPriority="750" allowsExpansionToolTips="YES" enabled="YES" allowsMultipleSelection="YES" allowsEmptySelection="YES" defaultColumnWidth="100" minColumnWidth="100" maxVisibleColumns="3" titled="YES" separatesColumns="YES" allowsTypeSelect="YES" sendsActionOnArrowKeys="YES" columnResizingType="auto" translatesAutoresizingMaskIntoConstraints="NO" id="NyL-oK-1jT">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="398"/>
+                        <rect key="frame" x="0.0" y="0.0" width="538" height="474"/>
                         <connections>
                             <outlet property="delegate" destination="-2" id="MeS-OW-f6B"/>
                         </connections>
@@ -36,7 +36,7 @@
                     <constraint firstAttribute="bottom" secondItem="NyL-oK-1jT" secondAttribute="bottom" id="s9V-uR-Xpk"/>
                 </constraints>
             </view>
-            <toolbar key="toolbar" implicitIdentifier="05C16AD6-2945-4B69-8700-79DBF66A8F84" autosavesConfiguration="NO" allowsUserCustomization="NO" showsBaselineSeparator="NO" displayMode="iconAndLabel" sizeMode="regular" id="D4R-LG-pbH">
+            <toolbar key="toolbar" implicitIdentifier="05C16AD6-2945-4B69-8700-79DBF66A8F84" autosavesConfiguration="NO" allowsUserCustomization="NO" showsBaselineSeparator="NO" displayMode="iconOnly" sizeMode="regular" id="D4R-LG-pbH">
                 <allowedToolbarItems>
                     <toolbarItem implicitItemIdentifier="5E2115E2-B0F5-4987-9127-C43ACD52BB31" label="Tools" paletteLabel="Tools" image="NSSmartBadgeTemplate" id="E47-bk-gLQ">
                         <nil key="toolTip"/>
@@ -84,7 +84,7 @@
             <connections>
                 <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
             </connections>
-            <point key="canvasLocation" x="316" y="228"/>
+            <point key="canvasLocation" x="196" y="208"/>
         </window>
     </objects>
     <resources>

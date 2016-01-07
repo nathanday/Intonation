@@ -202,30 +202,6 @@ class Document : NSDocument {
 	}
 	var		tonePlayer = TonePlayer();
 
-//	dynamic var		selectedWaveViewMode : Int {
-//		set(aValue) {
-//			NSUserDefaults.standardUserDefaults().setInteger(aValue, forKey: "selectedWaveViewMode");
-//			updateWaveViewDisplayMode();
-//		}
-//		get { return NSUserDefaults.standardUserDefaults().integerForKey("selectedWaveViewMode"); }
-//	}
-//
-//	dynamic var		selectedWaveViewScale : Int {
-//		set( aValue ) {
-//			NSUserDefaults.standardUserDefaults().setInteger(aValue, forKey: "selectedWaveViewScale");
-//			updateWaveViewScale();
-//		}
-//		get { return NSUserDefaults.standardUserDefaults().integerForKey("selectedWaveViewScale"); }
-//	}
-
-//	dynamic var		selectedSpectrumType : Int {
-//		set( aValue ) {
-//			NSUserDefaults.standardUserDefaults().setInteger( aValue, forKey: "selectedSpectrumType");
-//			updateSelectedSpectrumType();
-//		}
-//		get { return NSUserDefaults.standardUserDefaults().integerForKey("selectedSpectrumType"); }
-//	}
-
 	/*
 	Disclosure views
 	*/

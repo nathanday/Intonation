@@ -50,7 +50,7 @@
                                                         <constraint firstAttribute="height" constant="17" id="ekX-VT-vhZ"/>
                                                         <constraint firstAttribute="width" constant="23" id="gU9-Yn-o2Y"/>
                                                     </constraints>
-                                                    <buttonCell key="cell" type="disclosureTriangle" bezelStyle="disclosure" image="97FE6F60-947C-4E54-B117-E38183638059" imagePosition="above" alignment="left" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Wn8-MD-dFW">
+                                                    <buttonCell key="cell" type="disclosureTriangle" bezelStyle="disclosure" image="05C6E4CA-E58F-4DE6-9F90-DB2EDEC16146" imagePosition="above" alignment="left" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Wn8-MD-dFW">
                                                         <behavior key="behavior" pushIn="YES" changeBackground="YES" changeGray="YES" lightByContents="YES"/>
                                                         <font key="font" metaFont="system"/>
                                                     </buttonCell>
@@ -135,7 +135,7 @@
                                                         <binding destination="-2" name="value" keyPath="self.numeratorOddLimit" id="hir-5h-oCi"/>
                                                     </connections>
                                                 </stepper>
-                                                <customView hidden="YES" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="u2D-Cc-oSQ" customClass="DisclosureView" customModule="Equal_Temperament" customModuleProvider="target">
+                                                <customView hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="u2D-Cc-oSQ" customClass="DisclosureView" customModule="Equal_Temperament" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="546" height="30"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vrq-pv-rcT">
@@ -1435,7 +1435,7 @@
         <viewController id="prk-7f-QfJ" userLabel="Spectrum View Controller" customClass="SpectrumViewController" customModule="Equal_Temperament" customModuleProvider="target"/>
     </objects>
     <resources>
-        <image name="97FE6F60-947C-4E54-B117-E38183638059" width="1" height="1">
+        <image name="05C6E4CA-E58F-4DE6-9F90-DB2EDEC16146" width="1" height="1">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

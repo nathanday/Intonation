@@ -16,7 +16,7 @@ class TonePlayer {
 
 	init() {
 		harmonics = HarmonicsDescription(amount: 0.5, evenAmount: 1.0);
-		baseFrequency = 110.0;
+		baseFrequency = 220.0;
 		intervals = [];
 		playing = false;
 	}
@@ -48,11 +48,11 @@ class TonePlayer {
 		for theInterval in self.intervals {
 			theUnsedRatios.remove(theInterval.ratio);
 			if let theTone = playingTones[theInterval.ratio] {
-				theTone.baseFrequency = baseFrequency/TonePlayer.nyquestFrequency;
+				theTone.baseFrequency = baseFrequency/(2.0*TonePlayer.nyquestFrequency);
 				theTone.harmonics = harmonics;
 				if playing && !theTone.playing { theTone.play(); }
 			} else {
-				let theTone = Tone(baseFrequency:baseFrequency/TonePlayer.nyquestFrequency, interval: theInterval, harmonics:harmonics);
+				let theTone = Tone(baseFrequency:baseFrequency/(2.0*TonePlayer.nyquestFrequency), interval: theInterval, harmonics:harmonics);
 				playingTones[theInterval.ratio] = theTone;
 				if playing && !theTone.playing { theTone.play(); }
 			}
@@ -66,7 +66,7 @@ class TonePlayer {
 	func updateTones() {
 		for theInterval in self.intervals {
 			if let theTone = playingTones[theInterval.ratio] {
-				theTone.baseFrequency = baseFrequency/TonePlayer.nyquestFrequency;
+				theTone.baseFrequency = baseFrequency/(2.0*TonePlayer.nyquestFrequency);
 				theTone.harmonics = harmonics;
 			}
 		}

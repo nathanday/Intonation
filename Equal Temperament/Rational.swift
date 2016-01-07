@@ -20,6 +20,10 @@ struct Rational : CustomStringConvertible, CustomDebugStringConvertible, Hashabl
 		numerator = 0;
 		denominator = 1;
 	}
+	init(let _ aRational:Rational) {
+		numerator = aRational.numerator;
+		denominator = aRational.denominator;
+	}
     init(var _ aNumerator:Int,var _ aDenominator:Int) {
         if( aDenominator < 0 ) {
             aNumerator = -aNumerator;
@@ -43,6 +47,34 @@ struct Rational : CustomStringConvertible, CustomDebugStringConvertible, Hashabl
 
 	var debugDescription: String {
 		return "\(numerator):\(denominator)";
+	}
+}
+
+enum Ratio {
+	case Value(FloatingPointType);
+	var toDouble : Double {
+		switch self {
+		case .Value( let x as Double ):
+			return x;
+		case .Value( let x as Float ):
+			return Double(x);
+		case .Value( let x as Rational ):
+			return x.toDouble;
+		default:
+			return 1.0;
+		}
+	}
+	var toString : String {
+		switch self {
+		case .Value( let x as Double ):
+			return "\(x)";
+		case .Value( let x as Float ):
+			return "\(Double(x))";
+		case .Value( let x as Rational ):
+			return "\(x.numerator):\(x.denominator)";
+		default:
+			return "error";
+		}
 	}
 }
 
