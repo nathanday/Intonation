@@ -20,14 +20,15 @@ class Tone
 	var				toneUnit : AudioComponentInstance;
 	var				theta : Double = 0;
 	var				baseFrequency: Double;
+	var				equalTempIntervalCount: UInt;
 	var				envelope = Envelope(attack: 0.1, release: 0.1);
 	let				interval: Interval;
 	var				playing = false;
 	private var		thetaDelta: Double {
 		get {
 			return equalTemperament
-					? baseFrequency*interval.equalTemperament
-					: baseFrequency*interval.ratio.toDouble;
+				? baseFrequency*interval.equalTemperamentRatio(forIntervalCount:equalTempIntervalCount)
+				: baseFrequency*interval.ratio.toDouble;
 		}
 	}
 	var				harmonics: HarmonicsDescription;
@@ -91,10 +92,11 @@ class Tone
 		return theResult;
 	}
 
-	init( baseFrequency aBaseFrequency: Double, interval anInterval: Interval, harmonics aHarmonics: HarmonicsDescription ) {
+	init( baseFrequency aBaseFrequency: Double, interval anInterval: Interval, harmonics aHarmonics: HarmonicsDescription, equalTempIntervalCount aNumberOfIntervals: UInt ) {
 		baseFrequency = aBaseFrequency;
 		interval = anInterval;
 		harmonics = aHarmonics;
+		equalTempIntervalCount = aNumberOfIntervals;
 		toneUnit = nil;
 		var		theDefaultOutputDescription = AudioComponentDescription( componentType: OSType(kAudioUnitType_Output),
 			componentSubType: OSType(kAudioUnitSubType_DefaultOutput),
@@ -165,7 +167,6 @@ class Tone
 		}
 		return theResult;
 	}
-
 
 	func stop() {
 		if playing  {

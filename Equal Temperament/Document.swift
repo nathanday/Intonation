@@ -280,6 +280,7 @@ class Document : NSDocument {
 		midiAnchor = NSUserDefaults.standardUserDefaults().integerForKey("midiAnchor");
 		tonePlayer.harmonics = overtones;
 		tonePlayer.baseFrequency = baseFrequency;
+		tonePlayer.equalTempIntervalCount = intervalCount;
 
 		if let theBaseFrequencyDeltaSlider = baseFrequencyDeltaSlider {
 			theBaseFrequencyDeltaSlider.continuous = true;

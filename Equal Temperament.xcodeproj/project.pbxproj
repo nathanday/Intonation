@@ -12,6 +12,7 @@
 		D831054E1B0A6115000EB805 /* HarmonicsDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = D831054D1B0A6115000EB805 /* HarmonicsDescription.swift */; };
 		D849E7311ACADFD1006E0964 /* PrimeProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D849E7301ACADFD1006E0964 /* PrimeProducts.swift */; };
 		D84F342B1B08A2C00095D1E8 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89543621996345200A091A4 /* main.swift */; };
+		D85ABE7F1C3FD06800F2DFAF /* ChordOrScaleSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85ABE7D1C3FD06800F2DFAF /* ChordOrScaleSelectorViewController.swift */; };
 		D8646B281C3D23F500D8C429 /* ChordSelectorItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8646B271C3D23F500D8C429 /* ChordSelectorItem.swift */; };
 		D8646B2D1C3D4C5A00D8C429 /* ChordPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8646B2B1C3D4C5A00D8C429 /* ChordPreviewViewController.swift */; };
 		D8646B2E1C3D4C5A00D8C429 /* ChordPreviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8646B2C1C3D4C5A00D8C429 /* ChordPreviewViewController.xib */; };
@@ -19,7 +20,7 @@
 		D87356E71ADA0793006DAFEB /* ChordSelectorWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87356E51ADA0793006DAFEB /* ChordSelectorWindowController.swift */; };
 		D87356E81ADA0793006DAFEB /* ChordSelectorWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D87356E61ADA0793006DAFEB /* ChordSelectorWindowController.xib */; };
 		D87651B41ADFCB7D003C4BF2 /* ApplicationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87651B31ADFCB7D003C4BF2 /* ApplicationDelegate.swift */; };
-		D87C278A1AF3A95900C2BF7B /* Chords.plist in Resources */ = {isa = PBXBuildFile; fileRef = D87C27891AF3A95900C2BF7B /* Chords.plist */; };
+		D87C278A1AF3A95900C2BF7B /* PresetChordsAndScales.plist in Resources */ = {isa = PBXBuildFile; fileRef = D87C27891AF3A95900C2BF7B /* PresetChordsAndScales.plist */; };
 		D8832F8619A0C86B0095B26F /* WaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8832F8519A0C86B0095B26F /* WaveView.swift */; };
 		D88A62101ACF7F19004CD4C9 /* UInt+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88A620F1ACF7F19004CD4C9 /* UInt+Additions.swift */; };
 		D88A62111AD02167004CD4C9 /* Scale.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8901EBC1ABC226D00A4E071 /* Scale.swift */; };
@@ -67,6 +68,7 @@
 		D83092C01AEBBC6F00B0E6A7 /* DisclosureView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisclosureView.swift; sourceTree = "<group>"; };
 		D831054D1B0A6115000EB805 /* HarmonicsDescription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HarmonicsDescription.swift; sourceTree = "<group>"; };
 		D849E7301ACADFD1006E0964 /* PrimeProducts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimeProducts.swift; sourceTree = "<group>"; };
+		D85ABE7D1C3FD06800F2DFAF /* ChordOrScaleSelectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChordOrScaleSelectorViewController.swift; sourceTree = "<group>"; };
 		D8646B271C3D23F500D8C429 /* ChordSelectorItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChordSelectorItem.swift; sourceTree = "<group>"; };
 		D8646B2B1C3D4C5A00D8C429 /* ChordPreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChordPreviewViewController.swift; sourceTree = "<group>"; };
 		D8646B2C1C3D4C5A00D8C429 /* ChordPreviewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChordPreviewViewController.xib; sourceTree = "<group>"; };
@@ -75,7 +77,7 @@
 		D87356E51ADA0793006DAFEB /* ChordSelectorWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChordSelectorWindowController.swift; sourceTree = "<group>"; };
 		D87356E61ADA0793006DAFEB /* ChordSelectorWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChordSelectorWindowController.xib; sourceTree = "<group>"; };
 		D87651B31ADFCB7D003C4BF2 /* ApplicationDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationDelegate.swift; sourceTree = "<group>"; };
-		D87C27891AF3A95900C2BF7B /* Chords.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Chords.plist; sourceTree = "<group>"; };
+		D87C27891AF3A95900C2BF7B /* PresetChordsAndScales.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PresetChordsAndScales.plist; sourceTree = "<group>"; };
 		D8832F8519A0C86B0095B26F /* WaveView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaveView.swift; sourceTree = "<group>"; };
 		D88A620F1ACF7F19004CD4C9 /* UInt+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UInt+Additions.swift"; sourceTree = "<group>"; };
 		D88EED2C1AEE5AF50084BDCB /* Float+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Float+Additions.swift"; sourceTree = "<group>"; };
@@ -151,7 +153,7 @@
 		D87C27881AF3A93D00C2BF7B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				D87C27891AF3A95900C2BF7B /* Chords.plist */,
+				D87C27891AF3A95900C2BF7B /* PresetChordsAndScales.plist */,
 				D8B5E23E1B0386F200F20584 /* InitialUserDefaults.plist */,
 			);
 			path = Resources;
@@ -250,6 +252,7 @@
 				D89543881996354100A091A4 /* Document.xib */,
 				D8B9020C1AD491E30015B5E2 /* PreferencesWindowController.swift */,
 				D8B9020D1AD491E30015B5E2 /* PreferencesWindowController.xib */,
+				D85ABE7D1C3FD06800F2DFAF /* ChordOrScaleSelectorViewController.swift */,
 				D87356E51ADA0793006DAFEB /* ChordSelectorWindowController.swift */,
 				D87356E61ADA0793006DAFEB /* ChordSelectorWindowController.xib */,
 				D8646B2B1C3D4C5A00D8C429 /* ChordPreviewViewController.swift */,
@@ -278,8 +281,8 @@
 			children = (
 				D89543831996347F00A091A4 /* EqualTemperamentEntry.swift */,
 				D849E7301ACADFD1006E0964 /* PrimeProducts.swift */,
-				D8901EBC1ABC226D00A4E071 /* Scale.swift */,
 				D89543841996347F00A091A4 /* Rational.swift */,
+				D8901EBC1ABC226D00A4E071 /* Scale.swift */,
 				D831054D1B0A6115000EB805 /* HarmonicsDescription.swift */,
 				D8D912D11B197D5300BB479A /* TonePlayer.swift */,
 				D8B14D281B29C68300C971D8 /* Tone.swift */,
@@ -378,7 +381,7 @@
 				D8646B2E1C3D4C5A00D8C429 /* ChordPreviewViewController.xib in Resources */,
 				D8AA4E421C132ADD00B66521 /* HarmonicViewController.xib in Resources */,
 				D8B5E23F1B0386F200F20584 /* InitialUserDefaults.plist in Resources */,
-				D87C278A1AF3A95900C2BF7B /* Chords.plist in Resources */,
+				D87C278A1AF3A95900C2BF7B /* PresetChordsAndScales.plist in Resources */,
 				D8AA4E461C13318300B66521 /* WaveViewController.xib in Resources */,
 				D895438A1996354100A091A4 /* Document.xib in Resources */,
 				D8AA4E3E1C132A8A00B66521 /* ScaleViewController.xib in Resources */,
@@ -413,6 +416,7 @@
 				D8646B281C3D23F500D8C429 /* ChordSelectorItem.swift in Sources */,
 				D8AA4E491C1337B500B66521 /* SpectrumViewController.swift in Sources */,
 				D89543861996347F00A091A4 /* EqualTemperamentEntry.swift in Sources */,
+				D85ABE7F1C3FD06800F2DFAF /* ChordOrScaleSelectorViewController.swift in Sources */,
 				D89074D81AD5486600FD8A1E /* ResultView.swift in Sources */,
 				D88EED2D1AEE5AF50084BDCB /* Float+Additions.swift in Sources */,
 				D895438B1996363700A091A4 /* Document.swift in Sources */,

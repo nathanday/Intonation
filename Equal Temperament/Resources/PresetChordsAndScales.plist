@@ -1145,6 +1145,184 @@
 							</dict>
 						</array>
 					</dict>
+					<dict>
+						<key>name</key>
+						<string>Pythagorean Diatonic</string>
+						<key>kind</key>
+						<integer>1</integer>
+						<key>everyChild</key>
+						<array>
+							<dict>
+								<key>name</key>
+								<string>unison</string>
+								<key>numerator</key>
+								<integer>1</integer>
+								<key>denominator</key>
+								<integer>1</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>major second</string>
+								<key>numerator</key>
+								<integer>9</integer>
+								<key>denominator</key>
+								<integer>8</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>major third</string>
+								<key>numerator</key>
+								<integer>81</integer>
+								<key>denominator</key>
+								<integer>64</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>perfect fourth</string>
+								<key>numerator</key>
+								<integer>4</integer>
+								<key>denominator</key>
+								<integer>3</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>perfect fifth</string>
+								<key>numerator</key>
+								<integer>3</integer>
+								<key>denominator</key>
+								<integer>2</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>major sixth</string>
+								<key>numerator</key>
+								<integer>27</integer>
+								<key>denominator</key>
+								<integer>16</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>major seventh</string>
+								<key>numerator</key>
+								<integer>243</integer>
+								<key>denominator</key>
+								<integer>128</integer>
+							</dict>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>Pythagorean Dodecaphonic</string>
+						<key>kind</key>
+						<integer>1</integer>
+						<key>everyChild</key>
+						<array>
+							<dict>
+								<key>name</key>
+								<string>unison</string>
+								<key>numerator</key>
+								<integer>1</integer>
+								<key>denominator</key>
+								<integer>1</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>minor second</string>
+								<key>numerator</key>
+								<integer>256</integer>
+								<key>denominator</key>
+								<integer>243</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>major second</string>
+								<key>numerator</key>
+								<integer>9</integer>
+								<key>denominator</key>
+								<integer>8</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>minor third</string>
+								<key>numerator</key>
+								<integer>32</integer>
+								<key>denominator</key>
+								<integer>27</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>major third</string>
+								<key>numerator</key>
+								<integer>81</integer>
+								<key>denominator</key>
+								<integer>64</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>perfect fourth</string>
+								<key>numerator</key>
+								<integer>4</integer>
+								<key>denominator</key>
+								<integer>3</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>diminished fifth</string>
+								<key>numerator</key>
+								<integer>1024</integer>
+								<key>denominator</key>
+								<integer>729</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>augmented fourth</string>
+								<key>numerator</key>
+								<integer>729</integer>
+								<key>denominator</key>
+								<integer>512</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>perfect fifth</string>
+								<key>numerator</key>
+								<integer>3</integer>
+								<key>denominator</key>
+								<integer>2</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>minor sixth</string>
+								<key>numerator</key>
+								<integer>128</integer>
+								<key>denominator</key>
+								<integer>81</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>major sixth</string>
+								<key>numerator</key>
+								<integer>27</integer>
+								<key>denominator</key>
+								<integer>16</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>minor seventh</string>
+								<key>numerator</key>
+								<integer>16</integer>
+								<key>denominator</key>
+								<integer>9</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>major seventh</string>
+								<key>numerator</key>
+								<integer>243</integer>
+								<key>denominator</key>
+								<integer>128</integer>
+							</dict>
+						</array>
+					</dict>
 				</array>
 			</dict>
 		</array>

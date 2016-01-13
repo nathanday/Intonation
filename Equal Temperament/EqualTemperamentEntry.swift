@@ -31,22 +31,6 @@ extension Rational {
 	}
 }
 
-struct Interval : Hashable {
-	let		ratio: Rational;
-	let		equalTemperament: Double;
-	var		justInternation : Double { get { return ratio.toDouble; } }
-	var		numerator: Int { get { return ratio.numerator; } }
-	var		denominator: Int { get { return ratio.numerator; } }
-	init( ratio aRatio: Rational, equalTemperament anEqualTemperament: Double ) {
-		ratio = aRatio;
-		equalTemperament = anEqualTemperament;
-	}
-	var hashValue: Int { get { return ratio.hashValue; } }
-}
-
-func == (a: Interval, b: Interval) -> Bool { return a.ratio==b.ratio; }
-
-
 class EqualTemperamentEntry : NSObject {
 	var justIntonationRatio : Rational
 	var isClose : Bool;
@@ -73,7 +57,7 @@ class EqualTemperamentEntry : NSObject {
 		return centsEquivelentForRatio(justIntonationRatio.toDouble/ratioForCentsEquivelent(Double(closestIntervalNumber)*100.0, n:intervalCount), n:12);
 	}
 
-	var interval : Interval { return Interval(ratio: self.justIntonationRatio, equalTemperament: self.equalTemperamentRatio); }
+	var interval : Interval { return Interval(ratio: self.justIntonationRatio); }
 
 	var closestIntervalNumberDescription : String { return isClose ? "\(closestIntervalNumber)" : ""; }
 	var closestNoteDescription : String {

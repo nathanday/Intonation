@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9046" systemVersion="15B17c" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9531" systemVersion="15D13b" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9046"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9531"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="PreferencesWindowController" customModule="Equal_Temperament" customModuleProvider="target">
@@ -22,7 +22,6 @@
                 <subviews>
                     <tabView allowsTruncatedLabels="NO" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="DTJ-zZ-wQo">
                         <rect key="frame" x="0.0" y="0.0" width="440" height="440"/>
-                        <animations/>
                         <font key="font" metaFont="system"/>
                         <tabViewItems>
                             <tabViewItem label="Settings" identifier="1" id="fVU-oj-G2j">
@@ -32,7 +31,6 @@
                                     <subviews>
                                         <textField horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Xgp-oN-cl1">
                                             <rect key="frame" x="18" y="403" width="176" height="17"/>
-                                            <animations/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Frequency Range, Minimum:" id="ffn-e4-qiX">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -41,7 +39,6 @@
                                         </textField>
                                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1yY-2L-4Ml">
                                             <rect key="frame" x="196" y="400" width="74" height="22"/>
-                                            <animations/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="xMp-st-HTP">
                                                 <numberFormatter key="formatter" formatterBehavior="custom10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" id="obl-dd-Wyl">
                                                     <real key="minimum" value="12"/>
@@ -54,7 +51,6 @@
                                         </textField>
                                         <textField horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="U8L-ac-BWg">
                                             <rect key="frame" x="277" y="403" width="67" height="17"/>
-                                            <animations/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Maximum:" id="8z2-kz-bc0">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -63,7 +59,6 @@
                                         </textField>
                                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="v0Q-jo-eQk">
                                             <rect key="frame" x="346" y="400" width="74" height="22"/>
-                                            <animations/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="ref-Sp-c0S">
                                                 <numberFormatter key="formatter" formatterBehavior="custom10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" id="NtZ-0P-fjq">
                                                     <real key="minimum" value="880"/>
@@ -87,14 +82,12 @@
                                         <constraint firstItem="1yY-2L-4Ml" firstAttribute="baseline" secondItem="Xgp-oN-cl1" secondAttribute="baseline" id="u80-4h-EeN"/>
                                         <constraint firstItem="U8L-ac-BWg" firstAttribute="leading" secondItem="1yY-2L-4Ml" secondAttribute="trailing" constant="9" id="xJZ-9b-NrG"/>
                                     </constraints>
-                                    <animations/>
                                 </view>
                             </tabViewItem>
                             <tabViewItem label="Scales" identifier="2" id="ii9-jj-8hZ">
                                 <view key="view" id="ciF-eq-BlZ">
                                     <rect key="frame" x="0.0" y="0.0" width="440" height="440"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <animations/>
                                 </view>
                             </tabViewItem>
                         </tabViewItems>
@@ -106,7 +99,6 @@
                     <constraint firstItem="DTJ-zZ-wQo" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="pEC-aA-JIW"/>
                     <constraint firstItem="DTJ-zZ-wQo" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="v5C-i6-kNS"/>
                 </constraints>
-                <animations/>
             </view>
             <toolbar key="toolbar" implicitIdentifier="5D9C5CB5-545B-4F41-BA55-292B28750196" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="p68-6Q-uU8">
                 <allowedToolbarItems>
