@@ -26,7 +26,7 @@ func log10( var aValue : UInt ) -> UInt {
 	var		theResult = UInt(0)
 	while aValue > 10 {
 		aValue = aValue/10;
-		theResult++;
+		theResult += 1;
 	}
 	return theResult;
 }

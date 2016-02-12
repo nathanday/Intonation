@@ -255,8 +255,8 @@ class EqualTemperamentCollection : CustomStringConvertible {
 	}
 
 	private func calculate( ) {
-		for theDenom in PrimeProducts(maxPrime: limits.denominatorPrime, range: Range<UInt>(start: 1, end: limits.denominatorOdd)) {
-			for theNum in PrimeProducts(maxPrime: limits.numeratorPrime, range: Range<UInt>(start: theDenom, end: min(limits.numeratorOdd,theDenom*2))) {
+		for theDenom in PrimeProducts(maxPrime: limits.denominatorPrime, range: 1..<limits.denominatorOdd) {
+			for theNum in PrimeProducts(maxPrime: limits.numeratorPrime, range: theDenom..<min(limits.numeratorOdd,theDenom*2)) {
 				assert(theNum >= theDenom);
 				assert( theNum <= theDenom*2 );
 				for theOctaves in 0..<octaves {

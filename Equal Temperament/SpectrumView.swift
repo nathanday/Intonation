@@ -83,7 +83,7 @@ class SpectrumView: ResultView {
 			let		theMaxHarm = spectrumType == .sine ? 1 : harmonicForX( NSMaxX(theBounds)+theBaseHeightHalf, aBaseFreq: aBaseFreq, aHarmonicSpacing: theHarmonicSpacing, aBoundMinX: NSMinX(theBounds));
 			let		theHarmStep = spectrumType == .square ? 2 : 1;
 			thePath.lineWidth = 1.0;
-			for var i = theMinHarm >= 1 ? theMinHarm : 1; i <= theMaxHarm; i += theHarmStep {
+			for i in max(theMinHarm,1).stride(through:theMaxHarm, by:theHarmStep) {
 				let		theX = NSMinX(theBounds)+theBaseHeightHalf+theHarmonicSpacing*CGFloat(aBaseFreq)*CGFloat(i)-theHarmonicSpacing;
 				let		theHeight = NSHeight(theBounds)/CGFloat(sqrt(Double(i)));
 
@@ -122,7 +122,7 @@ class SpectrumView: ResultView {
 			let		theMaxHarm = spectrumType == .sine ? 1 : harmonicForX( NSMaxX(theBounds)+theBaseHeightHalf, aBaseFreq: 1.0, aHarmonicSpacing: theHarmonicSpacing, aBoundMinX: NSMinX(theBounds));
 //			let		theHarmStep = spectrumType == .square ? 2 : 1;
 			let		theFontSize = NSFont.systemFontSizeForControlSize(NSControlSize.SmallControlSize)*1.25;
-			for var i = theMinHarm >= 1 ? theMinHarm : 1; i <= theMaxHarm; i++ {
+			for i in max(theMinHarm, 1)...theMaxHarm {
 				let		theX = NSMinX(theBounds)+theBaseHeightHalf+theHarmonicSpacing*CGFloat(i)-theHarmonicSpacing;
 				theTicks.moveToPoint( NSMakePoint(theX, theY0+10.0) );
 				theTicks.lineToPoint( NSMakePoint(theX, theY0+5.0) );

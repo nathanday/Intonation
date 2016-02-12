@@ -51,29 +51,27 @@ struct Rational : CustomStringConvertible, CustomDebugStringConvertible, Hashabl
 }
 
 enum Ratio {
-	case Value(FloatingPointType);
+	case DoubleValue(Double);
+	case FloatValue(Double);
+	case RationalValue(Rational);
 	var toDouble : Double {
 		switch self {
-		case .Value( let x as Double ):
+		case .DoubleValue( let x ):
 			return x;
-		case .Value( let x as Float ):
+		case .FloatValue( let x ):
 			return Double(x);
-		case .Value( let x as Rational ):
+		case .RationalValue( let x ):
 			return x.toDouble;
-		default:
-			return 1.0;
 		}
 	}
 	var toString : String {
 		switch self {
-		case .Value( let x as Double ):
+		case .DoubleValue( let x ):
 			return "\(x)";
-		case .Value( let x as Float ):
+		case .FloatValue( let x ):
 			return "\(Double(x))";
-		case .Value( let x as Rational ):
+		case .RationalValue( let x ):
 			return "\(x.numerator):\(x.denominator)";
-		default:
-			return "error";
 		}
 	}
 }
@@ -161,6 +159,55 @@ extension Rational : FloatingPointType, Equatable, SignedNumberType
 		denominator = 1;
 	}
 
+	static private func farey( aValue: Double, maxDenominator aMaxDenom: UInt ) -> (numerator:Int,denominator:Int) {
+		func _farey( x: Double, _ M: UInt ) -> (numerator:Int,denominator:Int) {
+			var		a = (0,1);
+			var		b = (1,1);
+			while( a.1 <= Int(M) && b.1 <= Int(M) ) {
+				let		theMediant = Double(a.0+b.0)/Double(a.1+b.1);
+				if x == theMediant {
+					if a.1 + b.1 <= Int(M) {
+						return (a.0+b.0, a.1+b.1)
+					}
+					else if b.1 > a.1 {
+						return b;
+					}
+					else {
+						return a;
+					}
+				}
+				else if x > theMediant {
+					a = (a.0+b.0,a.1+b.1);
+				}
+				else {
+					b = (a.0+b.0,a.1+b.1);
+				}
+			}
+
+			if( a.1 > Int(M) ) {
+				return b;
+			}
+			else {
+				return a;
+			}
+		}
+		let		theInt = Int(aValue);
+		var		theResult = _farey( fabs(aValue-Double(theInt)), aMaxDenom );
+		if( theInt < 0 ) {
+			theResult.numerator = -theResult.numerator;
+		}
+		theResult.numerator += theInt*theResult.denominator;
+		return theResult;
+	}
+
+	init(_ aValue: Double, maxDenominator aMaxDenom: UInt ) {
+		(numerator,denominator) = Rational.farey( aValue, maxDenominator:aMaxDenom );
+	}
+
+	init(_ aValue: Float, maxDenominator aMaxDenom: UInt ) {
+		(numerator,denominator) = Rational.farey( Double(aValue), maxDenominator:aMaxDenom );
+	}
+
 	static var infinity: Rational { get { return Rational(1,0); } }
 
 	static var NaN: Rational { get { return Rational(0,0); } }
@@ -210,8 +257,8 @@ func / (a: Rational, b: Rational) -> Rational {
 		? Rational(a.numerator*b.denominator,a.denominator*b.numerator)
 		: Rational(-a.numerator*b.denominator,-a.denominator*b.numerator);
 }
-
 prefix func - (a: Rational) -> Rational { return Rational(-a.numerator,a.denominator); }
+
 func + (a: Rational, b: Int) -> Rational { return Rational(a.numerator+b*a.denominator,a.denominator); }
 func - (a: Rational, b: Int) -> Rational { return Rational(a.numerator-b*a.denominator,a.denominator); }
 func * (a: Rational, b: Int) -> Rational { return Rational(a.numerator*b,a.denominator); }

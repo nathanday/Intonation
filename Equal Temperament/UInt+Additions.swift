@@ -60,7 +60,7 @@ extension UInt {
 	var largestPrimeLessThanOrEqualTo : UInt {
 		var		theResult = self;
 		while theResult > 3 && largestPrimeFactor < theResult {
-			theResult--;
+			theResult -= 1;
 		}
 		return theResult;
 	}

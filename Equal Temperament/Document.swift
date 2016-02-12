@@ -101,14 +101,14 @@ class Document : NSDocument {
 	}
 	var		numeratorOddLimit : UInt = 15 {
 		didSet {
-			if( numeratorOddLimit%2 == 0 ) { numeratorOddLimit++; }
+			if( numeratorOddLimit%2 == 0 ) { numeratorOddLimit += 1; }
 			NSUserDefaults.standardUserDefaults().setInteger( Int(numeratorOddLimit), forKey:"numeratorOddLimit");
 			calculateAllIntervals();
 		}
 	}
 	var		denominatorOddLimit : UInt = 15 {
 		didSet {
-			if( denominatorOddLimit%2 == 0 ) { denominatorOddLimit++; }
+			if( denominatorOddLimit%2 == 0 ) { denominatorOddLimit += 1; }
 			NSUserDefaults.standardUserDefaults().setInteger( Int(denominatorOddLimit), forKey:"denominatorOddLimit");
 			calculateAllIntervals();
 		}

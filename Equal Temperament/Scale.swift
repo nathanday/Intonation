@@ -81,7 +81,7 @@ struct Interval : Hashable {
 	}
 	var		justInternation : Double { get { return ratio.toDouble; } }
 	var		numerator: Int { get { return ratio.numerator; } }
-	var		denominator: Int { get { return ratio.numerator; } }
+	var		denominator: Int { get { return ratio.denominator; } }
 	init( ratio aRatio: Rational, names aNames: [String]? ) { ratio = aRatio; names = aNames; }
 	init( ratio aRatio: Rational ) {
 		let		theNames = Interval.rationNames[aRatio];
@@ -100,7 +100,7 @@ class IntervalSet : SequenceType {
 
 	init(name aName: String, element anElements: [Rational]) {
 		name = aName;
-		everyInterval = anElements.sort({ (a:Rational, b:Rational) -> Bool in return false; });
+		everyInterval = anElements.sort { (a:Rational, b:Rational) -> Bool in return a < b; };
 	}
 
 	subscript(anIndex:Int) -> Rational! {
@@ -111,7 +111,14 @@ class IntervalSet : SequenceType {
 
 	func generate() -> AnyGenerator<Rational> {
 		var		index = 0;
-		return anyGenerator { return index < self.numberOfDegrees ? self[index++] : nil; }
+		return AnyGenerator {
+			var		theResult : Rational? = nil;
+			if index < self.numberOfDegrees {
+				theResult = self[index];
+				index += 1;
+			}
+			return theResult;
+		}
 	}
 
 	func indexOf( aValue : Rational ) -> Int? {
@@ -121,6 +128,35 @@ class IntervalSet : SequenceType {
 			}
 		}
 		return nil;
+	}
+
+	func intervalClosestTo( aValue : Double ) -> Rational? {
+		var		theResult : Rational? = nil;
+		var		thePrevious : Rational? = nil;
+		for theInterval in everyInterval {
+			if theInterval.toDouble > aValue {
+				if let thePreviousValue = thePrevious {
+					if abs(thePreviousValue.toDouble-aValue) < abs(theInterval.toDouble-aValue) {
+						theResult = thePreviousValue;
+						break;
+					}
+					else {
+						theResult = theInterval;
+						break;
+					}
+				}
+				else {
+					theResult = theInterval;
+					break;
+				}
+			}
+			thePrevious = theInterval;
+		}
+		return theResult;
+	}
+
+	func sortedByDifferentsTo( aValue : Double ) -> [Rational] {
+		return everyInterval.sort { (a:Rational, b:Rational) -> Bool in return abs(a.toDouble-aValue) < abs(b.toDouble-aValue); };
 	}
 
 	var description: String {

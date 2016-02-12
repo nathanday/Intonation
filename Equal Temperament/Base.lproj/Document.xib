@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9531" systemVersion="15D13b" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10109" systemVersion="15E39d" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9531"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10109"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="Document" customModule="Equal_Temperament">
@@ -50,7 +50,7 @@
                                                         <constraint firstAttribute="height" constant="17" id="ekX-VT-vhZ"/>
                                                         <constraint firstAttribute="width" constant="23" id="gU9-Yn-o2Y"/>
                                                     </constraints>
-                                                    <buttonCell key="cell" type="disclosureTriangle" bezelStyle="disclosure" image="9BCEA982-DD81-4C2F-97C3-635E497E7D5D" imagePosition="above" alignment="left" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Wn8-MD-dFW">
+                                                    <buttonCell key="cell" type="disclosureTriangle" bezelStyle="disclosure" image="9B5F9F33-4E6C-41B6-9822-873FB351811D" imagePosition="above" alignment="left" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Wn8-MD-dFW">
                                                         <behavior key="behavior" pushIn="YES" changeBackground="YES" changeGray="YES" lightByContents="YES"/>
                                                         <font key="font" metaFont="system"/>
                                                     </buttonCell>
@@ -532,14 +532,14 @@
                                     <binding destination="-2" name="selectedTag" keyPath="self.intervalCount" id="STp-cQ-CY2"/>
                                 </connections>
                             </popUpButton>
-                            <box verticalHuggingPriority="750" misplaced="YES" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="hwN-DG-R19">
-                                <rect key="frame" x="20" y="636" width="511" height="5"/>
+                            <box verticalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="hwN-DG-R19">
+                                <rect key="frame" x="20" y="635" width="511" height="5"/>
                                 <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                                 <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <font key="titleFont" metaFont="system"/>
                             </box>
-                            <button horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4iE-xC-u61">
-                                <rect key="frame" x="15" y="614" width="23" height="17"/>
+                            <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4iE-xC-u61">
+                                <rect key="frame" x="15" y="613" width="23" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="17" id="Ez9-rD-nJI"/>
                                     <constraint firstAttribute="width" constant="23" id="UC4-oD-ytH"/>
@@ -552,8 +552,8 @@
                                     <binding destination="-2" name="value" keyPath="self.errorExpanded" id="dAl-6B-gne"/>
                                 </connections>
                             </button>
-                            <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HvX-kU-ahu">
-                                <rect key="frame" x="244" y="613" width="50" height="18"/>
+                            <button translatesAutoresizingMaskIntoConstraints="NO" id="HvX-kU-ahu">
+                                <rect key="frame" x="244" y="612" width="50" height="18"/>
                                 <buttonCell key="cell" type="check" title="Hide" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="ghA-9C-zoM">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -562,15 +562,15 @@
                                     <binding destination="-2" name="value" keyPath="self.filtered" id="07r-ik-nYt"/>
                                 </connections>
                             </button>
-                            <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kxb-PT-dC2">
-                                <rect key="frame" x="222" y="608" width="19" height="27"/>
+                            <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kxb-PT-dC2">
+                                <rect key="frame" x="222" y="607" width="19" height="27"/>
                                 <stepperCell key="cell" continuous="YES" alignment="left" increment="0.01" maxValue="1" doubleValue="0.20000000000000001" id="rSa-0L-LKy"/>
                                 <connections>
                                     <binding destination="-2" name="value" keyPath="self.maximumError" id="kU2-i0-v8z"/>
                                 </connections>
                             </stepper>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uVS-hV-H9q">
-                                <rect key="frame" x="130" y="614" width="33" height="17"/>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="uVS-hV-H9q">
+                                <rect key="frame" x="130" y="613" width="33" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Max:" id="2k9-Wb-Xcd">
                                     <numberFormatter key="formatter" formatterBehavior="custom10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="309" minimumFractionDigits="3" maximumFractionDigits="3" id="MNa-XH-r4I"/>
                                     <font key="font" metaFont="system"/>
@@ -578,8 +578,8 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dFL-c2-5AS">
-                                <rect key="frame" x="165" y="611" width="60" height="22"/>
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dFL-c2-5AS">
+                                <rect key="frame" x="165" y="610" width="60" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="2qF-61-XxM"/>
                                 </constraints>
@@ -595,8 +595,8 @@
                                     <binding destination="-2" name="value" keyPath="self.maximumError" id="um0-3w-6Zs"/>
                                 </connections>
                             </textField>
-                            <customView hidden="YES" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q7j-Gh-TTU" customClass="DisclosureView" customModule="Equal_Temperament" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="577" width="546" height="30"/>
+                            <customView hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Q7j-Gh-TTU" customClass="DisclosureView" customModule="Equal_Temperament" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="576" width="546" height="30"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aR3-1G-qOp">
                                         <rect key="frame" x="121" y="8" width="42" height="17"/>
@@ -670,8 +670,8 @@
                                     </binding>
                                 </connections>
                             </customView>
-                            <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kMJ-Mt-vEn">
-                                <rect key="frame" x="38" y="614" width="90" height="17"/>
+                            <button translatesAutoresizingMaskIntoConstraints="NO" id="kMJ-Mt-vEn">
+                                <rect key="frame" x="38" y="613" width="90" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="90" id="CHJ-Vt-okx"/>
                                 </constraints>
@@ -702,7 +702,7 @@
                                 </connections>
                             </stepper>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Df-pn-iHL">
-                                <rect key="frame" x="128" y="551" width="36" height="17"/>
+                                <rect key="frame" x="127" y="551" width="36" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Root:" id="KpN-65-0oL">
                                     <numberFormatter key="formatter" formatterBehavior="custom10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="309" minimumFractionDigits="3" maximumFractionDigits="3" id="n42-fH-pc0"/>
                                     <font key="font" metaFont="system"/>
@@ -1435,7 +1435,7 @@
         <viewController id="prk-7f-QfJ" userLabel="Spectrum View Controller" customClass="SpectrumViewController" customModule="Equal_Temperament" customModuleProvider="target"/>
     </objects>
     <resources>
-        <image name="9BCEA982-DD81-4C2F-97C3-635E497E7D5D" width="1" height="1">
+        <image name="9B5F9F33-4E6C-41B6-9822-873FB351811D" width="1" height="1">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

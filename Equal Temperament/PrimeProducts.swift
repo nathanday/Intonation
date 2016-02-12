@@ -20,7 +20,7 @@ struct PrimeProducts : SequenceType {
 
 	func generate() -> AnyGenerator<UInt> {
 		var		value : UInt = productRange.startIndex - 1;
-		return anyGenerator {
+		return AnyGenerator {
 			repeat {
 				value += 1;
 				if value > self.productRange.endIndex { return nil; }

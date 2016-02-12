@@ -36,7 +36,7 @@
 		if( [theScanner scanCharactersFromSet:[NSCharacterSet characterSetWithCharactersInString:@"#+b-4"] intoString:&theArg] )
 		{
 			if( [theArg isEqualToString:@"#"] || [theArg isEqualToString:@"+"] )
-				theNoteNumber++;
+				theNoteNumber += 1;
 			else if( [theArg isEqualToString:@"b"] || [theArg isEqualToString:@"-"] )
 				theNoteNumber--;
 		}
