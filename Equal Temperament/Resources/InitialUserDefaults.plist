@@ -18,5 +18,7 @@
 	<integer>17</integer>
 	<key>midiAnchor</key>
 	<integer>60</integer>
+	<key>findIntervalesHidded</key>
+	<integer>1</integer>
 </dict>
 </plist>

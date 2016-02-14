@@ -18,6 +18,9 @@ class Document : NSDocument {
 	@IBOutlet var	harmonicViewController : HarmonicViewController?
 	@IBOutlet var	waveViewController : WaveViewController?
 	@IBOutlet var	spectrumViewController : SpectrumViewController?;
+
+	@IBOutlet var	findIntervalsViewController : FindIntervalsViewController?
+
 	@IBOutlet var	tableView : NSTableView?;
 	@IBOutlet var	baseFrequencyTextField : NSTextField?;
 	@IBOutlet var	documentWindow : NSWindow?;
@@ -432,6 +435,12 @@ class Document : NSDocument {
 		}
 
 		previousBaseFrequencyDelta = theBaseFrequencyDelta;
+	}
+
+	@IBAction func performFindPanelAction( aSender: AnyObject? ) {
+		if let theFindIntervalsViewController = findIntervalsViewController {
+			theFindIntervalsViewController.hidden = false;
+		}
 	}
 
 	override var windowNibName: String! { return "Document"; }

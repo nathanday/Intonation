@@ -52,7 +52,6 @@
 		D8E5E6271AD130DE004DB02D /* ScaleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E5E6251AD130DE004DB02D /* ScaleView.swift */; };
 		D8E7C7D71B1CAB99000D745B /* TonePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D912D11B197D5300BB479A /* TonePlayer.swift */; };
 		D8ED76D11C58E59E00BB2B8C /* FindIntervalsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8ED76CF1C58E59E00BB2B8C /* FindIntervalsWindowController.swift */; };
-		D8ED76D21C58E59E00BB2B8C /* FindIntervalsWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8ED76D01C58E59E00BB2B8C /* FindIntervalsWindowController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -116,7 +115,6 @@
 		D8E5E6231AD12F7A004DB02D /* HarmonicView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HarmonicView.swift; sourceTree = "<group>"; };
 		D8E5E6251AD130DE004DB02D /* ScaleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScaleView.swift; sourceTree = "<group>"; };
 		D8ED76CF1C58E59E00BB2B8C /* FindIntervalsWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindIntervalsWindowController.swift; sourceTree = "<group>"; };
-		D8ED76D01C58E59E00BB2B8C /* FindIntervalsWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FindIntervalsWindowController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -262,7 +260,6 @@
 				D8646B2B1C3D4C5A00D8C429 /* ChordPreviewViewController.swift */,
 				D8646B2C1C3D4C5A00D8C429 /* ChordPreviewViewController.xib */,
 				D8ED76CF1C58E59E00BB2B8C /* FindIntervalsWindowController.swift */,
-				D8ED76D01C58E59E00BB2B8C /* FindIntervalsWindowController.xib */,
 				D8AA4E381C132A6200B66521 /* ScaleDisplayViewController */,
 				D8AA4E4B1C13405F00B66521 /* GeneratorViewControllers */,
 			);
@@ -391,7 +388,6 @@
 				D8AA4E461C13318300B66521 /* WaveViewController.xib in Resources */,
 				D895438A1996354100A091A4 /* Document.xib in Resources */,
 				D8AA4E3E1C132A8A00B66521 /* ScaleViewController.xib in Resources */,
-				D8ED76D21C58E59E00BB2B8C /* FindIntervalsWindowController.xib in Resources */,
 				D8AA4E4A1C1337B500B66521 /* SpectrumViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
