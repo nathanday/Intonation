@@ -10,7 +10,7 @@
                 <outlet property="baseFrequencyDeltaSlider" destination="aCN-ld-zpq" id="L00-gr-4Hk"/>
                 <outlet property="baseFrequencyTextField" destination="O7m-mx-3Nr" id="qfW-V2-Ycf"/>
                 <outlet property="documentWindow" destination="xOd-HO-29H" id="z8b-wo-5Hh"/>
-                <outlet property="findIntervalsViewController" destination="wsI-yH-MG9" id="1RZ-js-Lf3"/>
+                <outlet property="findIntervalsViewController" destination="Sar-za-ThR" id="BQa-f9-M1G"/>
                 <outlet property="harmonicTitleTextField" destination="vvG-6Z-vMY" id="HfJ-fO-vbR"/>
                 <outlet property="harmonicViewController" destination="gGE-WR-3bh" id="NAh-sG-ZlY"/>
                 <outlet property="scaleViewController" destination="fMJ-Pa-RsX" id="cqN-JH-ihV"/>
@@ -46,6 +46,10 @@
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </searchFieldCell>
+                                        <connections>
+                                            <action selector="find:" target="Sar-za-ThR" id="sfG-2Y-ggU"/>
+                                            <binding destination="Sar-za-ThR" name="value" keyPath="self.ratiosString" id="TON-Sd-sh4"/>
+                                        </connections>
                                     </searchField>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HlL-gD-XUI">
                                         <rect key="frame" x="491" y="5" width="43" height="19"/>
@@ -57,7 +61,7 @@
                                             <font key="font" metaFont="cellTitle"/>
                                         </buttonCell>
                                         <connections>
-                                            <action selector="dismissController:" target="wsI-yH-MG9" id="hRP-MJ-1Nq"/>
+                                            <action selector="dismissController:" target="Sar-za-ThR" id="0lv-8a-8IP"/>
                                         </connections>
                                     </button>
                                     <popUpButton translatesAutoresizingMaskIntoConstraints="NO" id="YJh-om-eg2">
@@ -65,22 +69,25 @@
                                         <constraints>
                                             <constraint firstAttribute="width" constant="60" id="ara-cL-J0z"/>
                                         </constraints>
-                                        <popUpButtonCell key="cell" type="bevel" title="Exact" bezelStyle="rounded" alignment="right" controlSize="small" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" selectedItem="1pp-t3-d6o" id="CGW-OB-a3N">
+                                        <popUpButtonCell key="cell" type="bevel" title="Closest" bezelStyle="rounded" alignment="right" controlSize="small" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" selectedItem="JqI-KU-h2c" id="CGW-OB-a3N">
                                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="smallSystem"/>
                                             <menu key="menu" id="xsx-gO-ofF">
                                                 <items>
-                                                    <menuItem title="Exact" state="on" id="1pp-t3-d6o">
+                                                    <menuItem title="Closest" state="on" id="JqI-KU-h2c">
                                                         <attributedString key="attributedTitle"/>
                                                         <modifierMask key="keyEquivalentModifierMask"/>
                                                     </menuItem>
-                                                    <menuItem title="Closest" id="JqI-KU-h2c">
+                                                    <menuItem title="Exact" id="1pp-t3-d6o">
                                                         <attributedString key="attributedTitle"/>
                                                         <modifierMask key="keyEquivalentModifierMask"/>
                                                     </menuItem>
                                                 </items>
                                             </menu>
                                         </popUpButtonCell>
+                                        <connections>
+                                            <binding destination="Sar-za-ThR" name="selectedIndex" keyPath="self.findMethod" id="0M8-ek-hL6"/>
+                                        </connections>
                                     </popUpButton>
                                     <box verticalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="ElG-q1-Mdg">
                                         <rect key="frame" x="18" y="-2" width="510" height="5"/>
@@ -103,14 +110,14 @@
                                     <constraint firstAttribute="trailing" secondItem="ElG-q1-Mdg" secondAttribute="trailing" constant="18" id="wE1-re-NcU"/>
                                 </constraints>
                                 <connections>
-                                    <binding destination="wsI-yH-MG9" name="hidden" keyPath="self.hidden" id="s9H-vG-y7b"/>
+                                    <binding destination="Sar-za-ThR" name="hidden" keyPath="self.hidden" id="6vG-ck-nqu"/>
                                 </connections>
                             </customView>
                             <tabView type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="SzR-4w-Kgt">
                                 <rect key="frame" x="0.0" y="669" width="546" height="61"/>
                                 <font key="font" metaFont="system"/>
                                 <tabViewItems>
-                                    <tabViewItem label="Just Internation" identifier="1" id="u7x-bS-yyc">
+                                    <tabViewItem label="Limits" identifier="1" id="u7x-bS-yyc">
                                         <view key="view" id="Uy8-dk-XO1">
                                             <rect key="frame" x="0.0" y="0.0" width="506" height="61"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -121,7 +128,7 @@
                                                         <constraint firstAttribute="height" constant="17" id="ekX-VT-vhZ"/>
                                                         <constraint firstAttribute="width" constant="23" id="gU9-Yn-o2Y"/>
                                                     </constraints>
-                                                    <buttonCell key="cell" type="disclosureTriangle" bezelStyle="disclosure" image="F5763136-8E5A-40B3-B1C6-7CCC298814EB" imagePosition="above" alignment="left" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Wn8-MD-dFW">
+                                                    <buttonCell key="cell" type="disclosureTriangle" bezelStyle="disclosure" image="051B64FC-6F48-4612-8495-CA54EE28C116" imagePosition="above" alignment="left" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Wn8-MD-dFW">
                                                         <behavior key="behavior" pushIn="YES" changeBackground="YES" changeGray="YES" lightByContents="YES"/>
                                                         <font key="font" metaFont="system"/>
                                                     </buttonCell>
@@ -1484,7 +1491,7 @@
             <connections>
                 <outlet property="delegate" destination="-2" id="0bl-1N-x8E"/>
             </connections>
-            <point key="canvasLocation" x="-1733.5" y="-716"/>
+            <point key="canvasLocation" x="-1886.5" y="-811"/>
         </window>
         <arrayController objectClassName="EqualTemperamentEntry" editable="NO" id="cy8-kx-1Au" userLabel="Intervals">
             <declaredKeys>
@@ -1507,14 +1514,15 @@
         <viewController id="gGE-WR-3bh" userLabel="Harmonic View Controller" customClass="HarmonicViewController" customModule="Equal_Temperament" customModuleProvider="target"/>
         <viewController id="p1H-S2-RUu" userLabel="Wave View Controller" customClass="WaveViewController" customModule="Equal_Temperament" customModuleProvider="target"/>
         <viewController id="prk-7f-QfJ" userLabel="Spectrum View Controller" customClass="SpectrumViewController" customModule="Equal_Temperament" customModuleProvider="target"/>
-        <viewController id="wsI-yH-MG9" customClass="FindIntervalsViewController" customModule="Equal_Temperament" customModuleProvider="target">
+        <viewController id="Sar-za-ThR" customClass="FindIntervalsViewController" customModule="Equal_Temperament" customModuleProvider="target">
             <connections>
-                <outlet property="view" destination="MIf-rA-OIS" id="ygM-ih-Pyu"/>
+                <outlet property="document" destination="-2" id="Hot-zE-Ok4"/>
+                <outlet property="view" destination="MIf-rA-OIS" id="g0M-kW-5Dx"/>
             </connections>
         </viewController>
     </objects>
     <resources>
-        <image name="F5763136-8E5A-40B3-B1C6-7CCC298814EB" width="1" height="1">
+        <image name="051B64FC-6F48-4612-8495-CA54EE28C116" width="1" height="1">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
