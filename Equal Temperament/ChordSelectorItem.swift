@@ -65,11 +65,11 @@ class ChordSelectorRatio : ChordSelectorItem {
 	let				ratio : Ratio;
 
 	init( name aName: String, ratio aRatio: Rational ) {
-		ratio = .RationalValue(aRatio);
+		ratio = .rational(aRatio);
 		super.init( name: aName );
 	}
 	init( name aName: String, ratio aRatio: Double ) {
-		ratio = .DoubleValue(aRatio);
+		ratio = .irrational(aRatio);
 		super.init( name: aName );
 	}
 }

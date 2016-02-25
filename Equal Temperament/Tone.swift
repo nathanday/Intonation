@@ -15,8 +15,7 @@ enum PlaybackType : Int {
 	case UpDown;
 }
 
-class Tone
-{
+class Tone {
 	var				toneUnit : AudioComponentInstance;
 	var				theta : Double = 0;
 	var				baseFrequency: Double;

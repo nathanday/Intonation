@@ -89,12 +89,12 @@ class TonePlayer {
 		}
 	}
 
-	private func triggerNextNote() {
+	private dynamic func triggerNextNote() {
 		if intervals.count > 0 {
 			let		theCount = playingTones.count,
 					theLastIndex = theCount-1;
 			if arpeggioTriggerTimer == nil {
-				arpeggioTriggerTimer = NSTimer.scheduledTimerWithTimeInterval(0.4, target: self, selector: "triggerNextNote", userInfo: nil, repeats: true);
+				arpeggioTriggerTimer = NSTimer.scheduledTimerWithTimeInterval(0.4, target: self, selector: #selector(TonePlayer.triggerNextNote), userInfo: nil, repeats: true);
 			}
 			switch playbackType {
 			case .Up:

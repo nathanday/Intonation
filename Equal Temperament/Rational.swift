@@ -20,19 +20,16 @@ struct Rational : CustomStringConvertible, CustomDebugStringConvertible, Hashabl
 		numerator = 0;
 		denominator = 1;
 	}
-	init(let _ aRational:Rational) {
+	init( _ aRational:Rational) {
 		numerator = aRational.numerator;
 		denominator = aRational.denominator;
 	}
-    init(var _ aNumerator:Int,var _ aDenominator:Int) {
-        if( aDenominator < 0 ) {
-            aNumerator = -aNumerator;
-            aDenominator = -aDenominator;
-        }
-
-        let theCommonDivisor = greatestCommonDivisor(aNumerator, aDenominator);
-        numerator = aNumerator/theCommonDivisor;
-        denominator = aDenominator/theCommonDivisor;
+    init( _ aNumerator: Int, _ aDenominator: Int) {
+		let		theNumerator = aDenominator < 0 ? -aNumerator : aNumerator;
+		let		theDenominator = abs(aDenominator);
+        let theCommonDivisor = greatestCommonDivisor(theNumerator, theDenominator);
+        numerator = theNumerator/theCommonDivisor;
+        denominator = theDenominator/theCommonDivisor;
     }
 
 	func numeratorForDenominator( aDenominator: Int ) -> Int? {
@@ -51,27 +48,30 @@ struct Rational : CustomStringConvertible, CustomDebugStringConvertible, Hashabl
 }
 
 enum Ratio {
-	case DoubleValue(Double);
-	case FloatValue(Double);
-	case RationalValue(Rational);
+	case irrational(Double);
+	case rational(Rational);
 	var toDouble : Double {
 		switch self {
-		case .DoubleValue( let x ):
+		case .irrational( let x ):
 			return x;
-		case .FloatValue( let x ):
-			return Double(x);
-		case .RationalValue( let x ):
+		case .rational( let x ):
 			return x.toDouble;
 		}
 	}
 	var toString : String {
 		switch self {
-		case .DoubleValue( let x ):
+		case .irrational( let x ):
 			return "\(x)";
-		case .FloatValue( let x ):
-			return "\(Double(x))";
-		case .RationalValue( let x ):
+		case .rational( let x ):
 			return "\(x.numerator):\(x.denominator)";
+		}
+	}
+	var isRational : Bool {
+		switch self {
+		case .irrational:
+			return false;
+		case .rational:
+			return true;
 		}
 	}
 }
@@ -285,3 +285,12 @@ func < (a: Rational, b: Rational) -> Bool { 	return a.numerator*b.denominator < 
 func <= (a: Rational, b: Rational) -> Bool { return a.numerator*b.denominator <= b.numerator*a.denominator; }
 func > (a: Rational, b: Rational) -> Bool { return a.numerator*b.denominator > b.numerator*a.denominator; }
 func >= (a: Rational, b: Rational) -> Bool { return a.numerator*b.denominator >= b.numerator*a.denominator; }
+
+
+func == (a: Rational, b: Int) -> Bool { return a.numerator == b && a.denominator == 1; }
+func != (a: Rational, b: Int) -> Bool { return a.numerator != b || a.denominator == 1; }
+func < (a: Rational, b: Int) -> Bool { 	return a.numerator < b*a.denominator; }
+func <= (a: Rational, b: Int) -> Bool { return a.numerator <= b*a.denominator; }
+func > (a: Rational, b: Int) -> Bool { return a.numerator > b*a.denominator; }
+func >= (a: Rational, b: Int) -> Bool { return a.numerator >= b*a.denominator; }
+

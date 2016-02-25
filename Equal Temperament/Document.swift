@@ -437,7 +437,7 @@ class Document : NSDocument {
 		previousBaseFrequencyDelta = theBaseFrequencyDelta;
 	}
 
-	@IBAction func performFindPanelAction( aSender: AnyObject? ) {
+	@IBAction func showFindClosestIntervlAction( aSender: AnyObject? ) {
 		if let theFindIntervalsViewController = findIntervalsViewController {
 			theFindIntervalsViewController.hidden = false;
 		}

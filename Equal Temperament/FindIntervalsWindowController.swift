@@ -8,27 +8,44 @@
 
 import Cocoa
 
+enum IntervalsFindMethod {
+	case findMethodClosest;
+	case findMethodExact;
+}
+
 class FindIntervalsViewController: NSViewController {
 	@IBOutlet weak var	document : Document? = nil;
-	dynamic var			hidden : Bool = true {
-		didSet {
-			NSUserDefaults.standardUserDefaults().setBool( hidden, forKey:"findIntervalesHidded");
-		}
-	}
-	dynamic var		findMethod : Int = 0;
-	dynamic var		ratiosString : String = "";
+	@IBOutlet weak var	searchField : NSSearchField? = nil;
+	dynamic var			hidden : Bool = true;
+	dynamic var			ratiosString : String = "";
 
-	var				ratios : [Double] {
+	var				findMethod = IntervalsFindMethod.findMethodClosest;
+	var				searchValueHaseRoot = true;
+	var				searchTransposeToFit = true;
+
+	var				ratios : [Ratio] {
 		get {
-			var		theResult : [Double] = [];
+			var		theResult : [Ratio] = [];
 			var		theComponents = ratiosString.componentsSeparatedByString(":");
-			var		theBase : Double = 1.0;
-			if let theValue = Double(theComponents[0]) {
-				theBase = theValue;
-			}
-			for theComp in theComponents {
-				if let theValue = Double(theComp) {
-					theResult.append(theValue/theBase);
+			if ratiosString.containsString(".") {
+				var		theBase : Double = 1.0;
+				if let theValue = Double(theComponents[0]) {
+					theBase = theValue;
+				}
+				for theComp in theComponents {
+					if let theValue = Double(theComp) {
+						theResult.append(Ratio.irrational(theValue/theBase));
+					}
+				}
+			} else {
+				var		theBase : Int = 1;
+				if let theValue = Int(theComponents[0]) {
+					theBase = theValue;
+				}
+				for theComp in theComponents {
+					if let theValue = Int(theComp) {
+						theResult.append(Ratio.rational(Rational(theValue,theBase)));
+					}
 				}
 			}
 			return theResult;
@@ -37,62 +54,140 @@ class FindIntervalsViewController: NSViewController {
 
 	override func viewDidLoad() {
         super.viewDidLoad()
-		hidden = NSUserDefaults.standardUserDefaults().boolForKey("findIntervalesHidded");
+		if let theSearchField = searchField {
+			theSearchField.searchMenuTemplate = createSearchMenu();
+		}
     }
+
+	func createSearchMenu( ) -> NSMenu {
+		let		theSearchMenu = NSMenu(title: "Search Menu");
+		theSearchMenu.autoenablesItems = true;
+		theSearchMenu.addItemWithTitle("Closest", action: #selector(FindIntervalsViewController.findMethodClosestAction(_:)), keyEquivalent: "")?.target = self;
+		theSearchMenu.addItemWithTitle("Exact", action: #selector(FindIntervalsViewController.findMethodExactAction(_:)), keyEquivalent: "")?.target = self;
+		theSearchMenu.addItem(NSMenuItem.separatorItem());
+
+		theSearchMenu.addItemWithTitle("Has Root", action: #selector(FindIntervalsViewController.searchValueHasRootChangedAction(_:)), keyEquivalent: "")?.target = self;
+
+		theSearchMenu.addItemWithTitle("Transpose To Fit", action: #selector(FindIntervalsViewController.searchTransposeToFitChangedAction(_:)), keyEquivalent: "")?.target = self;
+
+		theSearchMenu.addItem(NSMenuItem.separatorItem());
+
+		theSearchMenu.addItemWithTitle("Recent Searches", action: nil, keyEquivalent: "")?.tag = Int(NSSearchFieldRecentsTitleMenuItemTag);
+		theSearchMenu.addItemWithTitle("No recent searches", action: nil, keyEquivalent: "")?.tag = Int(NSSearchFieldNoRecentsMenuItemTag);
+		theSearchMenu.addItemWithTitle("Recents", action: nil, keyEquivalent: "")?.tag = Int(NSSearchFieldRecentsMenuItemTag);
+		let		theRecentSeperator = NSMenuItem.separatorItem();
+		theSearchMenu.addItem(theRecentSeperator);
+		theRecentSeperator.tag = Int(NSSearchFieldRecentsTitleMenuItemTag)
+		theSearchMenu.addItemWithTitle("Clear", action: nil, keyEquivalent: "")?.tag = Int(NSSearchFieldClearRecentsMenuItemTag);
+
+		return theSearchMenu;
+	}
 
 	@IBAction override func dismissController( aSender: AnyObject? ) { hidden = true; }
 
 	@IBAction func find( aSender: AnyObject? ) {
+		performFindEntries();
+	}
+
+	@IBAction func findMethodClosestAction( aSender: AnyObject? ) {
+		findMethod = .findMethodClosest;
+		performFindEntries();
+	}
+
+	@IBAction func findMethodExactAction( aSender: AnyObject? ) {
+		findMethod = .findMethodExact;
+		performFindEntries();
+	}
+
+	@IBAction func searchValueHasRootChangedAction( aSender: AnyObject? ) {
+		searchValueHaseRoot = !searchValueHaseRoot;
+		performFindEntries();
+	}
+
+	@IBAction func searchTransposeToFitChangedAction( aSender: AnyObject? ) {
+		searchTransposeToFit = !searchTransposeToFit;
+		performFindEntries();
+	}
+
+	func performFindEntries() {
 		if let theDocument = document {
+			let			theSearchIntervals = theDocument.everyInterval;
+			let			theNumberOfOctaves = theDocument.octavesCount;
+
 			switch findMethod {
-			case 0:
-				theDocument.selectedEqualTemperamentEntry = findClosestEntries(ratios);
-			default:
-				theDocument.selectedEqualTemperamentEntry = findClosestEntries(ratios);
-//				theDocument.selectedEqualTemperamentEntry = findExactEntries(ratios);
+			case .findMethodClosest:
+				theDocument.selectedEqualTemperamentEntry = findClosestEntries(ratios, searchIntervales:theSearchIntervals, octaves:theNumberOfOctaves);
+			case .findMethodExact:
+				theDocument.selectedEqualTemperamentEntry = findClosestEntries(ratios, searchIntervales:theSearchIntervals, octaves:theNumberOfOctaves);
+				//				theDocument.selectedEqualTemperamentEntry = findExactEntries(ratios);
 			}
 		}
 	}
 
-	func findExactEntries( anRationals : [Rational] ) -> [EqualTemperamentEntry] {
+	dynamic override func validateMenuItem(aMenuItem: NSMenuItem) -> Bool {
+		switch aMenuItem.action {
+		case #selector(FindIntervalsViewController.findMethodClosestAction(_:)):
+			aMenuItem.state = findMethod == .findMethodClosest ? NSOnState : NSOffState;
+		case #selector(FindIntervalsViewController.findMethodExactAction(_:)):
+			aMenuItem.state = findMethod == .findMethodExact ? NSOnState : NSOffState;
+		case #selector(FindIntervalsViewController.searchValueHasRootChangedAction(_:)):
+			aMenuItem.state = searchValueHaseRoot ? NSOnState : NSOffState;
+		case #selector(FindIntervalsViewController.searchTransposeToFitChangedAction(_:)):
+			aMenuItem.state = searchTransposeToFit ? NSOnState : NSOffState;
+		default:
+			assertionFailure("Got selector \(aMenuItem.action)");
+		}
+		return true;
+	}
+
+	func findExactEntries( anRationals : [Rational], searchIntervales aSearchIntervales: [EqualTemperamentEntry], octaves anOctaves: UInt ) -> [EqualTemperamentEntry] {
 		var		theResult = Array<EqualTemperamentEntry>();
-		if let theDocument = document {
-			for theRatio in anRationals {
-				var		theClosestEntry : EqualTemperamentEntry?
-				for theInterval in theDocument.everyInterval {
-					if let theCurrentInterval = theClosestEntry?.interval {
-						if theCurrentInterval.ratio == theRatio {
-							theClosestEntry = theInterval;
-						}
-					} else {
+		for theRatio in anRationals {
+			var		theClosestEntry : EqualTemperamentEntry?
+			for theInterval in aSearchIntervales {
+				if let theCurrentInterval = theClosestEntry?.interval {
+					if theCurrentInterval.ratio == theRatio {
 						theClosestEntry = theInterval;
 					}
+				} else {
+					theClosestEntry = theInterval;
 				}
-				if let theFoundEntry = theClosestEntry {
-					theResult.append(theFoundEntry);
-				}
+			}
+			if let theFoundEntry = theClosestEntry {
+				theResult.append(theFoundEntry);
 			}
 		}
 		return theResult;
 	}
 
-	func findClosestEntries( anIntervals : [Double] ) -> [EqualTemperamentEntry] {
+	func findClosestEntries( anIntervals : [Ratio], searchIntervales aSearchIntervales: [EqualTemperamentEntry], octaves anOctaves: UInt ) -> [EqualTemperamentEntry] {
+		return findEntries( anIntervals, searchIntervales: aSearchIntervales, octaves: anOctaves) {
+			(intervalA:Interval,intervalB:Interval,inputRatio:Ratio) -> Bool in
+			var		theInputRatio = inputRatio.toDouble;
+			while theInputRatio > Double(anOctaves+1) {
+				theInputRatio /= 2.0;
+			}
+			return abs((intervalA.ratio.toDouble) - theInputRatio) > abs(intervalB.ratio.toDouble - theInputRatio);
+		}
+	}
+
+	func findEntries( anIntervals : [Ratio], searchIntervales aSearchIntervales: [EqualTemperamentEntry], octaves anOctaves: UInt, _ aMethod: (Interval,Interval,Ratio) -> Bool ) -> [EqualTemperamentEntry] {
 		var		theResult = Array<EqualTemperamentEntry>();
-		if let theDocument = document {
-			for theRatio in anIntervals {
-				var		theClosestEntry : EqualTemperamentEntry?
-				for theInterval in theDocument.everyInterval {
+		for theRatio in anIntervals {
+			var		theClosestEntry : EqualTemperamentEntry?
+			for theInterval in aSearchIntervales {
+				if (searchTransposeToFit || theInterval.interval.ratio <= Int(anOctaves)) {
 					if let theCurrentInterval = theClosestEntry?.interval {
-						if abs((theCurrentInterval.ratio.toDouble) - theRatio) > abs(theInterval.interval.ratio.toDouble - theRatio) {
+						if aMethod(theCurrentInterval,theInterval.interval,theRatio) {
 							theClosestEntry = theInterval;
 						}
 					} else {
 						theClosestEntry = theInterval;
 					}
 				}
-				if let theFoundEntry = theClosestEntry {
-					theResult.append(theFoundEntry);
-				}
+			}
+			if let theFoundEntry = theClosestEntry {
+				theResult.append(theFoundEntry);
 			}
 		}
 		return theResult;

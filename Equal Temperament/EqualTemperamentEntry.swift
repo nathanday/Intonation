@@ -29,6 +29,8 @@ extension Rational {
 		}
 		return theResult;
 	}
+
+	var additiveDissonance  : UInt { return UInt(numerator) + UInt(denominator); }
 }
 
 class EqualTemperamentEntry : NSObject {
@@ -50,6 +52,8 @@ class EqualTemperamentEntry : NSObject {
 	var oddLimit : UInt { return justIntonationRatio.oddLimit; }
 
 	var primeLimit : UInt { return justIntonationRatio.primeLimit ?? 1; }
+
+	var	additiveDissonance : UInt { return justIntonationRatio.additiveDissonance; }
 
 	var degreeName : String = "";
 
