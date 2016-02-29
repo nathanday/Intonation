@@ -46,7 +46,7 @@ class SpectrumView: ResultView {
 		var		theResult = Set<UInt>();
 		for theRatio in selectedRatios {
 			for p in UInt(theRatio.numerator).everyPrimeFactor {
-				theResult.insert(p);
+				theResult.insert(p.factor);
 			}
 		}
 		return theResult;

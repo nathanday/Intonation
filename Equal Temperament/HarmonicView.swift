@@ -22,10 +22,11 @@ func lengthForRange(aRange: Range<UInt> ) -> UInt {
 	return aRange.endIndex - aRange.startIndex;
 }
 
-func log10( var aValue : UInt ) -> UInt {
+func log10( aValue : UInt ) -> UInt {
+	var		thrValue = aValue;
 	var		theResult = UInt(0)
-	while aValue > 10 {
-		aValue = aValue/10;
+	while thrValue > 10 {
+		thrValue = thrValue/10;
 		theResult += 1;
 	}
 	return theResult;

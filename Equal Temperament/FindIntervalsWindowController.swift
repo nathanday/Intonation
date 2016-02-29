@@ -194,3 +194,21 @@ class FindIntervalsViewController: NSViewController {
 	}
 
 }
+
+extension FindIntervalsViewController : NSTextFieldDelegate {
+	internal func textDidChange(notification: NSNotification) {
+		if let theSearchField = searchField {
+			var		theResult = "";
+			var		thePreviousWasColon = false;
+			for theChar in theSearchField.stringValue.characters {
+				if theChar >= "0" && theChar <= "9" {
+					theResult.append(theChar);
+				}
+				else if theChar >= ":" && !thePreviousWasColon {
+					theResult.append(theChar);
+					thePreviousWasColon = true;
+				}
+			}
+		}
+	}
+}

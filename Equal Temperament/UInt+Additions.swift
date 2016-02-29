@@ -18,6 +18,15 @@ extension UInt {
 		}
 		return false;
 	}
+	func factorCount(factor: UInt) -> UInt {
+		var		theResult = UInt(0);
+		var		theValue = self;
+		while theValue.isFactorOf(factor) {
+			theValue /= factor;
+			theResult += 1;
+		}
+		return theResult;
+	}
 	var largestPossibleFactor : UInt {
 		let squareRoot = sqrt(Double(self))
 		return UInt(floor(squareRoot))
@@ -48,12 +57,22 @@ extension UInt {
 		}
 		return theResult;
 	}
-	var everyPrimeFactor : [UInt] {
-		var		theResult = Array<UInt>();
+	var everyPrimeFactor : [(factor:UInt,power:UInt)] {
+		var		theResult = [(factor:UInt,power:UInt)]();
 		let		theLargestPossibleValue = self.largestPossibleFactor;
-		for thePrime in UInt.primes16bit {
-			if self%thePrime == 0 { theResult.append(thePrime); }
-			if thePrime%2 > theLargestPossibleValue { break; }
+		switch self {
+		case 0:
+			theResult = [(0,1)];
+		case 1:
+			theResult = [(1,1)];
+		default:
+			for thePrime in UInt.primes16bit {
+				let thePower = self.factorCount(thePrime);
+				if thePower > 0 {
+					theResult.append((factor:thePrime,power:thePower));
+				}
+				if thePrime%2 > theLargestPossibleValue { break; }
+			}
 		}
 		return theResult;
 	}
@@ -61,6 +80,37 @@ extension UInt {
 		var		theResult = self;
 		while theResult > 3 && largestPrimeFactor < theResult {
 			theResult -= 1;
+		}
+		return theResult;
+	}
+
+	func superScriptString() -> String {
+		var		theResult = "";
+		if self > 0 {
+			let		digits = "⁰¹²³⁴⁵⁶⁷⁸⁹";
+			var		theValue = self;
+			while theValue > 0 {
+				let		theIndex = digits.startIndex.advancedBy(Int(theValue%10));
+				theResult = "\(digits[theIndex])\(theResult)";
+				theValue /= 10;
+			}
+		}
+		else {
+			theResult = "⁰";
+		}
+		return theResult;
+	}
+
+	func factorsString() -> String {
+		var		theResult = "";
+		for theFact in self.everyPrimeFactor {
+			if theResult.startIndex != theResult.endIndex {
+				theResult.append(Character("×"));
+			}
+			theResult.appendContentsOf("\(theFact.factor)");
+			if theFact.power > 1 {
+				theResult.appendContentsOf("\(theFact.power.superScriptString())");
+			}
 		}
 		return theResult;
 	}

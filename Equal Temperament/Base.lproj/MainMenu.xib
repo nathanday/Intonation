@@ -350,6 +350,15 @@
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="12j-AV-tsq"/>
+                            <menuItem title="Play Selection" id="C3k-tg-Cry">
+                                <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
+                                <connections>
+                                    <action selector="playLastMethod:" target="-1" id="jrb-jx-HAh"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="OI0-9v-Rmj"/>
                             <menuItem title="Save Chord or Scale" id="7Yy-cg-vmf">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>

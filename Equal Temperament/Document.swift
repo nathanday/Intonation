@@ -25,7 +25,9 @@ class Document : NSDocument {
 	@IBOutlet var	baseFrequencyTextField : NSTextField?;
 	@IBOutlet var	documentWindow : NSWindow?;
 	@IBOutlet var	harmonicTitleTextField : NSTextField?;
+	@IBOutlet var	factorsSumTitleTextField : NSTextField?;
 	@IBOutlet var	baseFrequencyDeltaSlider : NSSlider?;
+	@IBOutlet var	playSegmentedControl : NSSegmentedControl?;
 
 	var		previousBaseFrequencyDelta : Double = 0.0;
 
@@ -246,30 +248,40 @@ class Document : NSDocument {
 	}
 
 	private func updateChordRatioTitle( ) {
-		if let theHarmonicTitleTextField = harmonicTitleTextField {
+		if let theHarmonicTitleTextField = harmonicTitleTextField, theFactorsSumTitleTextField = factorsSumTitleTextField {
 			if selectedJustIntonationIntervals.count > 1 {
 				var		theRatiosString : String = "";
+				var		theFactorsString : String = "";
+				var		theFactorsSum = UInt(0);
 				var		theCommonFactor = 1;
 				for theValue in selectedJustIntonationIntervals {
 					theCommonFactor *= theValue.denominator/greatestCommonDivisor(theCommonFactor, theValue.denominator);
 				}
 				for theRatio in selectedJustIntonationIntervals {
 					if let theValue = theRatio.ratio.numeratorForDenominator(theCommonFactor) {
+						let		theFactors = UInt(theValue).factorsString();
 						if theRatiosString.startIndex == theRatiosString.endIndex {
 							theRatiosString = "\(theValue)"
+							theFactorsString = "\(theFactors)"
 						}
 						else {
 							theRatiosString.write( ":\(theValue)" );
+							theFactorsString.write( " + \(theFactors)" );
 						}
+						theFactorsSum += UInt(theValue);
 					}
 				}
 				theHarmonicTitleTextField.stringValue = theRatiosString;
+				theFactorsSumTitleTextField.stringValue = "\(theFactorsString) = \(theFactorsSum)";
+				
 			}
 			else if let theSingle = selectedJustIntonationIntervals.first {
 				theHarmonicTitleTextField.stringValue = theSingle.ratio.ratioString;
+				theFactorsSumTitleTextField.stringValue = "\(UInt(theSingle.ratio.numerator).factorsString()) + \(UInt(theSingle.ratio.denominator).factorsString()) = \(theSingle.ratio.numerator+theSingle.ratio.denominator)";
 			}
 			else {
 				theHarmonicTitleTextField.stringValue = "";
+				theFactorsSumTitleTextField.stringValue = "";
 			}
 		}
 	}
@@ -389,22 +401,12 @@ class Document : NSDocument {
 
 	var		previouslySelectedSegment : Int = -1;
 
+	@IBAction func playLastMethod( aSender: AnyObject? ) {
+		playUsingMethod( previouslySelectedSegment >= 0 ? previouslySelectedSegment : 0 );
+	}
+
 	@IBAction func playAction( aSender: NSSegmentedControl ) {
-		if aSender.selectedSegment == previouslySelectedSegment && tonePlayer.playing {
-			tonePlayer.stop();
-			aSender.setSelected( false, forSegment: previouslySelectedSegment);
-			previouslySelectedSegment = -1;
-		}
-		else {
-			let			thePlaybackType = PlaybackType(rawValue:aSender.selectedSegment) ?? .Unison;
-			if tonePlayer.playing {
-				aSender.setSelected( false, forSegment: previouslySelectedSegment);
-			}
-			previouslySelectedSegment = aSender.selectedSegment;
-			tonePlayer.stop();
-			tonePlayer.playType(thePlaybackType);
-			aSender.setSelected( true, forSegment: aSender.selectedSegment);
-		}
+		playUsingMethod( aSender.selectedSegment );
 	}
 
 	@IBAction func baseFrequencyDeltaChanged( aSender: NSSlider ) {
@@ -440,6 +442,30 @@ class Document : NSDocument {
 	@IBAction func showFindClosestIntervlAction( aSender: AnyObject? ) {
 		if let theFindIntervalsViewController = findIntervalsViewController {
 			theFindIntervalsViewController.hidden = false;
+		}
+	}
+
+	func playUsingMethod( aMethod: Int ) {
+		if aMethod == previouslySelectedSegment && tonePlayer.playing {
+			tonePlayer.stop();
+			if let thePlaySegmentedControl = playSegmentedControl {
+				thePlaySegmentedControl.setSelected( false, forSegment: previouslySelectedSegment);
+			}
+			previouslySelectedSegment = -1;
+		}
+		else {
+			let			thePlaybackType = PlaybackType(rawValue:aMethod) ?? .Unison;
+			if tonePlayer.playing {
+				if let thePlaySegmentedControl = playSegmentedControl {
+					thePlaySegmentedControl.setSelected( false, forSegment: previouslySelectedSegment);
+				}
+			}
+			previouslySelectedSegment = aMethod;
+			tonePlayer.stop();
+			tonePlayer.playType(thePlaybackType);
+			if let thePlaySegmentedControl = playSegmentedControl {
+				thePlaySegmentedControl.setSelected( true, forSegment: aMethod);
+			}
 		}
 	}
 
