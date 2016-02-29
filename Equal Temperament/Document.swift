@@ -548,5 +548,13 @@ extension Document : NSTableViewDelegate {
 		}
 		tonePlayer.intervals = theSelectedIntervals;
 	}
+
+	func tableViewColumnDidResize(aNotification: NSNotification) {
+		if let theTableColumn = aNotification.userInfo!["NSTableColumn"] as? NSTableColumn {
+			if theTableColumn.identifier == "description" {
+				theTableColumn.hidden = theTableColumn.width <= 20.0;
+			}
+		}
+	}
 }
 
