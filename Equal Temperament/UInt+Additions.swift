@@ -84,35 +84,39 @@ extension UInt {
 		return theResult;
 	}
 
-	func superScriptString() -> String {
-		var		theResult = "";
-		if self > 0 {
-			let		digits = "⁰¹²³⁴⁵⁶⁷⁸⁹";
-			var		theValue = self;
-			while theValue > 0 {
-				let		theIndex = digits.startIndex.advancedBy(Int(theValue%10));
-				theResult = "\(digits[theIndex])\(theResult)";
-				theValue /= 10;
+	var superScriptString : String {
+		get {
+			var		theResult = "";
+			if self > 0 {
+				let		digits = "⁰¹²³⁴⁵⁶⁷⁸⁹";
+				var		theValue = self;
+				while theValue > 0 {
+					let		theIndex = digits.startIndex.advancedBy(Int(theValue%10));
+					theResult = "\(digits[theIndex])\(theResult)";
+					theValue /= 10;
+				}
 			}
+			else {
+				theResult = "⁰";
+			}
+			return theResult;
 		}
-		else {
-			theResult = "⁰";
-		}
-		return theResult;
 	}
 
-	func factorsString() -> String {
-		var		theResult = "";
-		for theFact in self.everyPrimeFactor {
-			if theResult.startIndex != theResult.endIndex {
-				theResult.append(Character("×"));
+	var factorsString : String {
+		get {
+			var		theResult = "";
+			for theFact in self.everyPrimeFactor {
+				if theResult.startIndex != theResult.endIndex {
+					theResult.append(Character("×"));
+				}
+				theResult.appendContentsOf("\(theFact.factor)");
+				if theFact.power > 1 {
+					theResult.appendContentsOf("\(theFact.power.superScriptString)");
+				}
 			}
-			theResult.appendContentsOf("\(theFact.factor)");
-			if theFact.power > 1 {
-				theResult.appendContentsOf("\(theFact.power.superScriptString())");
-			}
+			return theResult;
 		}
-		return theResult;
 	}
 }
 

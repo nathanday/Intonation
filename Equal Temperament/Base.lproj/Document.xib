@@ -103,7 +103,7 @@
                                                         <constraint firstAttribute="height" constant="17" id="ekX-VT-vhZ"/>
                                                         <constraint firstAttribute="width" constant="23" id="gU9-Yn-o2Y"/>
                                                     </constraints>
-                                                    <buttonCell key="cell" type="disclosureTriangle" bezelStyle="disclosure" image="7079BCEC-D877-45FE-8023-02858E059D0C" imagePosition="above" alignment="left" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Wn8-MD-dFW">
+                                                    <buttonCell key="cell" type="disclosureTriangle" bezelStyle="disclosure" image="5059CA36-07F7-4EED-BDFC-04E98E415FC2" imagePosition="above" alignment="left" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Wn8-MD-dFW">
                                                         <behavior key="behavior" pushIn="YES" changeBackground="YES" changeGray="YES" lightByContents="YES"/>
                                                         <font key="font" metaFont="system"/>
                                                     </buttonCell>
@@ -1147,7 +1147,7 @@
                                                     </connections>
                                                 </tableColumn>
                                                 <tableColumn editable="NO" width="42" minWidth="42" maxWidth="42" id="L3n-fp-Agk">
-                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="odd">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="Odd">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -1168,14 +1168,13 @@
                                                         </binding>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn editable="NO" width="42" minWidth="42" maxWidth="42" id="TcB-IV-RuD">
-                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="prime">
+                                                <tableColumn editable="NO" width="73" minWidth="73" maxWidth="73" id="TcB-IV-RuD">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="Factors">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
                                                     <textFieldCell key="dataCell" controlSize="small" lineBreakMode="truncatingTail" selectable="YES" alignment="center" title="Text Cell" id="Cny-iH-iCd">
-                                                        <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="V4n-Kg-9Th"/>
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1183,11 +1182,11 @@
                                                     <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="primeLimit"/>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <connections>
-                                                        <binding destination="cy8-kx-1Au" name="value" keyPath="arrangedObjects.primeLimit" id="Yme-xY-B8n"/>
+                                                        <binding destination="cy8-kx-1Au" name="value" keyPath="arrangedObjects.factorsString" id="1Vc-Jw-4Uq"/>
                                                     </connections>
                                                 </tableColumn>
                                                 <tableColumn identifier="" editable="NO" width="42" minWidth="42" maxWidth="42" id="juF-hn-fnk">
-                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="Add">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="Sum">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1260,7 +1259,7 @@
                                                         <binding destination="cy8-kx-1Au" name="value" keyPath="arrangedObjects.errorNETCent" id="HAt-fx-Urv"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn editable="NO" width="151" minWidth="150" maxWidth="600" id="B12-Jo-1gJ">
+                                                <tableColumn editable="NO" width="120" minWidth="120" maxWidth="600" id="B12-Jo-1gJ">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="Name">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1511,6 +1510,7 @@
                 <string>error12ETCent</string>
                 <string>oddLimit</string>
                 <string>primeLimit</string>
+                <string>factorsString</string>
                 <string>additiveDissonance</string>
             </declaredKeys>
             <connections>
@@ -1531,7 +1531,7 @@
         </viewController>
     </objects>
     <resources>
-        <image name="7079BCEC-D877-45FE-8023-02858E059D0C" width="1" height="1">
+        <image name="5059CA36-07F7-4EED-BDFC-04E98E415FC2" width="1" height="1">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

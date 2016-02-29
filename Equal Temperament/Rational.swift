@@ -45,6 +45,9 @@ struct Rational : CustomStringConvertible, CustomDebugStringConvertible, Hashabl
 	var debugDescription: String {
 		return "\(numerator):\(denominator)";
 	}
+	var factorsString : String {
+		return "\(UInt(numerator).factorsString) + \(UInt(denominator).factorsString)";
+	}
 }
 
 enum Ratio {
@@ -208,20 +211,20 @@ extension Rational : FloatingPointType, Equatable, SignedNumberType
 		(numerator,denominator) = Rational.farey( Double(aValue), maxDenominator:aMaxDenom );
 	}
 
-	static var infinity: Rational { get { return Rational(1,0); } }
+	static var infinity: Rational { return Rational(1,0); }
 
-	static var NaN: Rational { get { return Rational(0,0); } }
-	static var quietNaN: Rational { get { return Rational(0,0); } }
+	static var NaN: Rational { return Rational(0,0); }
+	static var quietNaN: Rational { return Rational(0,0); }
 
-	var floatingPointClass: FloatingPointClassification { get { return toDouble.floatingPointClass; } }
-	var isSignMinus: Bool { get { return (numerator < 0) != (denominator < 0); } }
-	var isNormal: Bool { get { return numerator != 0 && denominator != 0; } }
-	var isFinite: Bool { get { return denominator != 0; } }
-	var isZero: Bool { get { return numerator == 0 && denominator != 0; } }
-	var isSubnormal: Bool { get { return toDouble.isSubnormal; } }
-	var isInfinite: Bool { get { return numerator != 0 && denominator == 0; } }
-	var isNaN: Bool { get { return numerator == 0 && denominator == 0; } }
-	var isSignaling: Bool { get { return toDouble.isSignaling; } }
+	var floatingPointClass: FloatingPointClassification { return toDouble.floatingPointClass; }
+	var isSignMinus: Bool { return (numerator < 0) != (denominator < 0); }
+	var isNormal: Bool { return numerator != 0 && denominator != 0; }
+	var isFinite: Bool { return denominator != 0; }
+	var isZero: Bool { return numerator == 0 && denominator != 0; }
+	var isSubnormal: Bool { return toDouble.isSubnormal; }
+	var isInfinite: Bool { return numerator != 0 && denominator == 0; }
+	var isNaN: Bool { return numerator == 0 && denominator == 0; }
+	var isSignaling: Bool { return toDouble.isSignaling; }
 
 	typealias Stride = Rational
 	func distanceTo(anOther: Rational) -> Stride { return self - anOther; }

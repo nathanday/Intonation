@@ -259,7 +259,7 @@ class Document : NSDocument {
 				}
 				for theRatio in selectedJustIntonationIntervals {
 					if let theValue = theRatio.ratio.numeratorForDenominator(theCommonFactor) {
-						let		theFactors = UInt(theValue).factorsString();
+						let		theFactors = UInt(theValue).factorsString;
 						if theRatiosString.startIndex == theRatiosString.endIndex {
 							theRatiosString = "\(theValue)"
 							theFactorsString = "\(theFactors)"
@@ -277,7 +277,7 @@ class Document : NSDocument {
 			}
 			else if let theSingle = selectedJustIntonationIntervals.first {
 				theHarmonicTitleTextField.stringValue = theSingle.ratio.ratioString;
-				theFactorsSumTitleTextField.stringValue = "\(UInt(theSingle.ratio.numerator).factorsString()) + \(UInt(theSingle.ratio.denominator).factorsString()) = \(theSingle.ratio.numerator+theSingle.ratio.denominator)";
+				theFactorsSumTitleTextField.stringValue = "\(theSingle.factorsString) = \(theSingle.ratio.numerator+theSingle.ratio.denominator)";
 			}
 			else {
 				theHarmonicTitleTextField.stringValue = "";

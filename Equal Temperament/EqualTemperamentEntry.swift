@@ -52,6 +52,7 @@ class EqualTemperamentEntry : NSObject {
 	var oddLimit : UInt { return justIntonationRatio.oddLimit; }
 
 	var primeLimit : UInt { return justIntonationRatio.primeLimit ?? 1; }
+	var factorsString : String { return justIntonationRatio.factorsString; }
 
 	var	additiveDissonance : UInt { return justIntonationRatio.additiveDissonance; }
 

@@ -79,15 +79,16 @@ struct Interval : Hashable {
 	func	equalTemperamentRatio( forIntervalCount anIntervals: UInt ) -> Double {
 		return pow(2.0,equalTemperamentValue(forIntervalCount:anIntervals)/Double(anIntervals));
 	}
-	var		justInternation : Double { get { return ratio.toDouble; } }
-	var		numerator: Int { get { return ratio.numerator; } }
-	var		denominator: Int { get { return ratio.denominator; } }
+	var		justInternation : Double { return ratio.toDouble; }
+	var		numerator: Int { return ratio.numerator; }
+	var		denominator: Int { return ratio.denominator; }
 	init( ratio aRatio: Rational, names aNames: [String]? ) { ratio = aRatio; names = aNames; }
 	init( ratio aRatio: Rational ) {
 		let		theNames = Interval.rationNames[aRatio];
 		self.init( ratio:aRatio, names:theNames );
 	}
-	var hashValue: Int { get { return ratio.hashValue; } }
+	var hashValue: Int { return ratio.hashValue; }
+	var factorsString : String { return ratio.factorsString; }
 }
 
 func == (a: Interval, b: Interval) -> Bool { return a.ratio==b.ratio; }
@@ -96,7 +97,7 @@ func == (a: Interval, b: Interval) -> Bool { return a.ratio==b.ratio; }
 class IntervalSet : SequenceType {
 	let		name : String;
 	let		everyInterval : [Rational];
-	var		numberOfDegrees : Int { get { return everyInterval.count; } }
+	var		numberOfDegrees : Int { return everyInterval.count; }
 
 	init(name aName: String, element anElements: [Rational]) {
 		name = aName;
