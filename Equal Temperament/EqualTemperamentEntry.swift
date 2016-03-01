@@ -39,7 +39,7 @@ class EqualTemperamentEntry : NSObject {
     dynamic var justIntonationRatioToString : String { return justIntonationRatio.ratioString; }
     dynamic var justIntonationRatioToDouble : Double { return justIntonationRatio.toDouble; }
 	let intervalCount : UInt
-	var name : String { return "\(justIntonationRatio.numerator):\(justIntonationRatio.denominator)"; }
+	var name : String { return "\(justIntonationRatio.numerator)∶\(justIntonationRatio.denominator)"; }
 	var closestEqualTemperamentIntervalNumber : UInt { return UInt(12.0*Double(log2(justIntonationRatio.toDouble))+0.5); }
 	var closestIntervalNumber : UInt { return UInt(Double(self.intervalCount)*Double(log2(justIntonationRatio.toDouble))+0.5); }
 	var equalTemperamentRatio : Double { return pow(2.0,Double(self.closestEqualTemperamentIntervalNumber)/Double(self.intervalCount)); }

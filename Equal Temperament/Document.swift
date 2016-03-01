@@ -248,7 +248,8 @@ class Document : NSDocument {
 	}
 
 	private func updateChordRatioTitle( ) {
-		if let theHarmonicTitleTextField = harmonicTitleTextField, theFactorsSumTitleTextField = factorsSumTitleTextField {
+		if let theHarmonicTitleTextField = harmonicTitleTextField,
+			theFactorsSumTitleTextField = factorsSumTitleTextField {
 			if selectedJustIntonationIntervals.count > 1 {
 				var		theRatiosString : String = "";
 				var		theFactorsString : String = "";
@@ -265,7 +266,7 @@ class Document : NSDocument {
 							theFactorsString = "\(theFactors)"
 						}
 						else {
-							theRatiosString.write( ":\(theValue)" );
+							theRatiosString.write( "∶\(theValue)" );
 							theFactorsString.write( " + \(theFactors)" );
 						}
 						theFactorsSum += UInt(theValue);
@@ -277,7 +278,7 @@ class Document : NSDocument {
 			}
 			else if let theSingle = selectedJustIntonationIntervals.first {
 				theHarmonicTitleTextField.stringValue = theSingle.ratio.ratioString;
-				theFactorsSumTitleTextField.stringValue = "\(theSingle.factorsString) = \(theSingle.ratio.numerator+theSingle.ratio.denominator)";
+				theFactorsSumTitleTextField.stringValue = "\(UInt(theSingle.ratio.numerator).factorsString) + \(UInt(theSingle.ratio.denominator).factorsString) = \(theSingle.ratio.numerator+theSingle.ratio.denominator)";
 			}
 			else {
 				theHarmonicTitleTextField.stringValue = "";
@@ -304,7 +305,7 @@ class Document : NSDocument {
 	}
 
 	override func dataOfType( typeName: String) throws -> NSData {
-		var anError: NSError! = NSError(domain: "Migrator", code: 0, userInfo: nil)
+		var anError: NSError = NSError(domain: "Migrator", code: 0, userInfo: nil)
 		let		thePropertyList = [
 			"selectedMethod":selectedMethod,
 			"intervalCount":intervalCount,
@@ -332,10 +333,10 @@ class Document : NSDocument {
 			anError = error
 			theResult = nil
 		};
-		if let value = theResult {
-			return value
+		if theResult != nil {
+			throw anError;
 		}
-		throw anError;
+		return theResult!;
 	}
 
 	override func readFromData( aData: NSData, ofType typeName: String) throws {
@@ -448,17 +449,13 @@ class Document : NSDocument {
 	func playUsingMethod( aMethod: Int ) {
 		if aMethod == previouslySelectedSegment && tonePlayer.playing {
 			tonePlayer.stop();
-			if let thePlaySegmentedControl = playSegmentedControl {
-				thePlaySegmentedControl.setSelected( false, forSegment: previouslySelectedSegment);
-			}
+			playSegmentedControl?.setSelected( false, forSegment: previouslySelectedSegment);
 			previouslySelectedSegment = -1;
 		}
 		else {
 			let			thePlaybackType = PlaybackType(rawValue:aMethod) ?? .Unison;
 			if tonePlayer.playing {
-				if let thePlaySegmentedControl = playSegmentedControl {
-					thePlaySegmentedControl.setSelected( false, forSegment: previouslySelectedSegment);
-				}
+				playSegmentedControl?.setSelected( false, forSegment: previouslySelectedSegment);
 			}
 			previouslySelectedSegment = aMethod;
 			tonePlayer.stop();

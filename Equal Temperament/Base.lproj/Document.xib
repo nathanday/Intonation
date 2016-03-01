@@ -107,7 +107,7 @@
                                                                 <constraint firstAttribute="height" constant="17" id="ekX-VT-vhZ"/>
                                                                 <constraint firstAttribute="width" constant="23" id="gU9-Yn-o2Y"/>
                                                             </constraints>
-                                                            <buttonCell key="cell" type="disclosureTriangle" bezelStyle="disclosure" image="900CA9A5-C4AE-4EBE-96D9-4DFA98C071D7" imagePosition="above" alignment="left" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Wn8-MD-dFW">
+                                                            <buttonCell key="cell" type="disclosureTriangle" bezelStyle="disclosure" image="96EA6512-BFA1-44B4-9BAC-B651B2053BDC" imagePosition="above" alignment="left" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Wn8-MD-dFW">
                                                                 <behavior key="behavior" pushIn="YES" changeBackground="YES" changeGray="YES" lightByContents="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
@@ -1422,7 +1422,7 @@
                                             </tabViewItem>
                                             <tabViewItem label="Harmonics" identifier="2" id="PGj-sa-iy4">
                                                 <view key="view" id="fc9-Uj-ik5" customClass="ViewControllerPlaceHolderView" customModule="Equal_Temperament" customModuleProvider="target">
-                                                    <rect key="frame" x="10" y="25" width="402.5" height="672"/>
+                                                    <rect key="frame" x="10" y="25" width="403" height="672"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <connections>
                                                         <outlet property="viewController" destination="gGE-WR-3bh" id="GGB-4e-JgG"/>
@@ -1431,7 +1431,7 @@
                                             </tabViewItem>
                                             <tabViewItem label="Waves" identifier="3" id="Vj8-AE-UOR">
                                                 <view key="view" id="e0X-ZG-vks" customClass="ViewControllerPlaceHolderView" customModule="Equal_Temperament" customModuleProvider="target">
-                                                    <rect key="frame" x="10" y="25" width="402.5" height="672"/>
+                                                    <rect key="frame" x="10" y="25" width="403" height="672"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <connections>
                                                         <outlet property="viewController" destination="p1H-S2-RUu" id="ASz-mR-uex"/>
@@ -1440,7 +1440,7 @@
                                             </tabViewItem>
                                             <tabViewItem label="Spectrum" identifier="" id="BqX-wx-T9U">
                                                 <view key="view" id="f11-Fj-u3P" customClass="ViewControllerPlaceHolderView" customModule="Equal_Temperament" customModuleProvider="target">
-                                                    <rect key="frame" x="10" y="25" width="402.5" height="672"/>
+                                                    <rect key="frame" x="10" y="25" width="403" height="672"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <connections>
                                                         <outlet property="viewController" destination="prk-7f-QfJ" id="1AK-Vg-eEE"/>
@@ -1517,7 +1517,7 @@
         </viewController>
     </objects>
     <resources>
-        <image name="900CA9A5-C4AE-4EBE-96D9-4DFA98C071D7" width="1" height="1">
+        <image name="96EA6512-BFA1-44B4-9BAC-B651B2053BDC" width="1" height="1">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

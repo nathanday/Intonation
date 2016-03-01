@@ -76,6 +76,7 @@ extension UInt {
 		}
 		return theResult;
 	}
+
 	var largestPrimeLessThanOrEqualTo : UInt {
 		var		theResult = self;
 		while theResult > 3 && largestPrimeFactor < theResult {
@@ -108,7 +109,7 @@ extension UInt {
 			var		theResult = "";
 			for theFact in self.everyPrimeFactor {
 				if theResult.startIndex != theResult.endIndex {
-					theResult.append(Character("×"));
+					theResult.append(Character("∙"));
 				}
 				theResult.appendContentsOf("\(theFact.factor)");
 				if theFact.power > 1 {

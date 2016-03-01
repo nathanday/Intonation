@@ -26,7 +26,7 @@ class FindIntervalsViewController: NSViewController {
 	var				ratios : [Ratio] {
 		get {
 			var		theResult : [Ratio] = [];
-			var		theComponents = ratiosString.componentsSeparatedByString(":");
+			var		theComponents = ratiosString.componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString:":∶"));
 			if ratiosString.containsString(".") {
 				var		theBase : Double = 1.0;
 				if let theValue = Double(theComponents[0]) {
@@ -58,6 +58,12 @@ class FindIntervalsViewController: NSViewController {
 			theSearchField.searchMenuTemplate = createSearchMenu();
 		}
     }
+
+	override func viewWillAppear() {
+		if let theWindow = self.view.window {
+			theWindow.makeFirstResponder(searchField);
+		}
+	}
 
 	func createSearchMenu( ) -> NSMenu {
 		let		theSearchMenu = NSMenu(title: "Search Menu");

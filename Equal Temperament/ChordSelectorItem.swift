@@ -21,7 +21,8 @@ class ChordSelectorItem : NSObject {
 	class func chordSelectorItemForPropertyList( aPropertyList: [String:AnyObject] ) -> ChordSelectorItem? {
 		var		theResult : ChordSelectorItem? = nil;
 		if let theName = aPropertyList["name"] as? String {
-			if let theEveryRatioString = aPropertyList["everyChild"] as? [[String:AnyObject]], theKind = aPropertyList["kind"] as? Int {
+			if let theEveryRatioString = aPropertyList["everyChild"] as? [[String:AnyObject]],
+				theKind = aPropertyList["kind"] as? Int {
 				let theAbbreviations = aPropertyList["abbreviations"] as? [String];
 				let	theMode = aPropertyList["mode"] as? Set<String>;
 				if let theEveryRatio = chordSelectorItemsForPropertyList( theEveryRatioString ) as? [ChordSelectorRatio] {
@@ -41,7 +42,8 @@ class ChordSelectorItem : NSObject {
 				theChordSelectorGroup.everyChild = chordSelectorItemsForPropertyList(theChildren);
 				theResult = theChordSelectorGroup;
 			}
-			else if let theNumerator = aPropertyList["numerator"] as? Int, theDenominator = aPropertyList["denominator"] as? Int {
+			else if let theNumerator = aPropertyList["numerator"] as? Int,
+				theDenominator = aPropertyList["denominator"] as? Int {
 				theResult = ChordSelectorRatio( name: theName, ratio: Rational(theNumerator,theDenominator) );
 			}
 			else if let theRatio = aPropertyList["value"] as? Double {

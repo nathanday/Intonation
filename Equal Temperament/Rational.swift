@@ -37,16 +37,16 @@ struct Rational : CustomStringConvertible, CustomDebugStringConvertible, Hashabl
 	}
 
 	var toString: String { return "\(numerator)\\\(denominator)"; }
-	var ratioString: String { return "\(numerator):\(denominator)"; }
+	var ratioString: String { return "\(numerator)∶\(denominator)"; }
 
 	var hashValue: Int { return Int(numerator)^Int(denominator); }
 	var description: String { return toString; }
 
 	var debugDescription: String {
-		return "\(numerator):\(denominator)";
+		return "\(numerator)∶\(denominator)";
 	}
 	var factorsString : String {
-		return "\(UInt(numerator).factorsString) + \(UInt(denominator).factorsString)";
+		return "\(UInt(numerator).factorsString)∶\(UInt(denominator).factorsString)";
 	}
 }
 
@@ -66,7 +66,7 @@ enum Ratio {
 		case .irrational( let x ):
 			return "\(x)";
 		case .rational( let x ):
-			return "\(x.numerator):\(x.denominator)";
+			return "\(x.numerator)∶\(x.denominator)";
 		}
 	}
 	var isRational : Bool {
