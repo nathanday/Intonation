@@ -33,21 +33,13 @@ class ScaleViewController: NSViewController, ScaleDisplayViewController {
 	}
 
 	func hideIntervalRelatedColumn( aHide : Bool ) {
-		if let theLinearScaleView = linearScaleView {
-			theLinearScaleView.useIntervals = !aHide;
-		}
-		if let thePitchConstellationView = pitchConstellationView {
-			thePitchConstellationView.useIntervals = !aHide;
-		}
+		linearScaleView?.useIntervals = !aHide;
+		pitchConstellationView?.useIntervals = !aHide;
 	}
 
 	func setSelectionIntervals( aSelectionIntervals : [Interval]) {
-		if let theLinearScaleView = linearScaleView {
-			theLinearScaleView.selectedRatios = aSelectionIntervals.map({ return $0.ratio; });
-		}
-		if let thePitchConstellationView = pitchConstellationView {
-			thePitchConstellationView.selectedRatios = aSelectionIntervals.map({ return $0.ratio; });
-		}
+		linearScaleView?.selectedRatios = aSelectionIntervals.map({ return $0.ratio; });
+		pitchConstellationView?.selectedRatios = aSelectionIntervals.map({ return $0.ratio; });
 	}
 
 }

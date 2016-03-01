@@ -243,7 +243,8 @@ extension String {
 				theResult = Rational( theInt );
 			}
 		default:
-			if let theNum = Int(theComponents[0]), theDenom = Int(theComponents[0]) {
+			if let theNum = Int(theComponents[0]),
+					theDenom = Int(theComponents[0]) {
 				theResult = Rational( theNum, theDenom );
 			}
 		}

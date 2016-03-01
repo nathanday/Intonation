@@ -180,10 +180,10 @@ extension EqualTemperamentEntry {
 		Rational(10,3):["major thirteenth"],
 ];
 	var everyIntervalName : [String] {
-		get { if let theNameList = EqualTemperamentEntry.rationNames[self.justIntonationRatio] { return theNameList; } else { return []; } }
+		return EqualTemperamentEntry.rationNames[self.justIntonationRatio] ?? [];
 	}
 	var intervalName : String {
-		get { if let theName = everyIntervalName.first { return theName; } else { return ""; } }
+		return everyIntervalName.first ?? "";
 	}
 }
 

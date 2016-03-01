@@ -42,32 +42,26 @@ class WaveViewController: NSViewController, ScaleDisplayViewController {
 	}
 
 	func setSelectionIntervals( aSelectionIntervals : [Interval]) {
-		if let theWaveView = waveView {
-			theWaveView.selectedRatios = aSelectionIntervals.map({ return $0.ratio; });
-		}
+		waveView?.selectedRatios = aSelectionIntervals.map({ return $0.ratio; });
 	}
 
 	private func updateWaveViewDisplayMode() {
-		if let theWaveView = waveView {
-			switch selectedWaveViewMode {
-			case 1:
-				theWaveView.displayMode = .combined;
-			default:
-				theWaveView.displayMode = .overlayed;
-			}
+		switch selectedWaveViewMode {
+		case 1:
+			waveView?.displayMode = .combined;
+		default:
+			waveView?.displayMode = .overlayed;
 		}
 	}
 
 	private func updateWaveViewScale() {
-		if let theWaveView = waveView {
-			switch selectedWaveViewScale {
-			case 1:
-				theWaveView.xScale = 50.0;
-			case 2:
-				theWaveView.xScale = 100.0;
-			default:
-				theWaveView.xScale = 25.0;
-			}
+		switch selectedWaveViewScale {
+		case 1:
+			waveView?.xScale = 50.0;
+		case 2:
+			waveView?.xScale = 100.0;
+		default:
+			waveView?.xScale = 25.0;
 		}
 	}
 }

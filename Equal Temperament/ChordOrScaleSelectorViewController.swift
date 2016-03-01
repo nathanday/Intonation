@@ -32,45 +32,25 @@ class ChordOrScaleSelectorViewController: NSViewController {
 extension ChordOrScaleSelectorViewController : NSBrowserDelegate {
 
 	func browser(aBrowser: NSBrowser, numberOfChildrenOfItem anItem: AnyObject?) -> Int {
-		var		theResult = 0;
-		if let theItem = anItem as? ChordSelectorGroup {
-			theResult = theItem.count;
-		}
-		return theResult;
+		return (anItem as? ChordSelectorGroup)?.count ?? 0;
 	}
 
 	func browser(aBrowser: NSBrowser, child anIndex: Int, ofItem anItem: AnyObject?) -> AnyObject {
-		var		theResult : ChordSelectorItem? = nil;
-		if let theItem = anItem as? ChordSelectorGroup {
-			theResult = theItem[anIndex];
-		}
-		return theResult!;
+		return ((anItem as? ChordSelectorGroup)?[anIndex])!;
 	}
 
 	func browser(aBrowser: NSBrowser, isLeafItem anItem: AnyObject?) -> Bool {
-		var		theResult = false;
-		if let theItem = anItem as? ChordSelectorItem {
-			theResult = theItem.isLeaf;
-		}
-		return theResult;
+		return (anItem as? ChordSelectorItem)?.isLeaf ?? false;
 	}
 
 	func browser(aBrowser: NSBrowser, objectValueForItem anItem: AnyObject?) -> AnyObject? {
-		var		theResult = "";
-		if let theItem = anItem as? ChordSelectorItem {
-			theResult = theItem.name;
-		}
-		return theResult;
+		return (anItem as? ChordSelectorItem)?.name ?? "";
 	}
 
 	func rootItemForBrowser(aBrowser: NSBrowser) -> AnyObject? { return everyChordRoot; }
 
 	func browser( browser: NSBrowser, previewViewControllerForLeafItem anItem: AnyObject ) -> NSViewController? {
-		var		theResult : NSViewController?
-		if let theChordSelectorSubChild = anItem as? ChordSelectorLeaf {
-			theResult = theChordSelectorSubChild.previewViewControllerForLeafItem();
-		}
-		return theResult;
+		return (anItem as? ChordSelectorLeaf)?.previewViewControllerForLeafItem();
 	}
 }
 

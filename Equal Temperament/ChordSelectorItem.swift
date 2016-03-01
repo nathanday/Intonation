@@ -120,7 +120,8 @@ class ChordSelectorGroup : ChordSelectorItem, MutableCollectionType {
 class RootChordSelectorGroup : ChordSelectorGroup {
 	init() {
 		super.init(name:"root");
-		if let theURL = NSBundle.mainBundle().URLForResource("PresetChordsAndScales", withExtension: "plist"), theChordData = NSArray(contentsOfURL: theURL) {
+		if let theURL = NSBundle.mainBundle().URLForResource("PresetChordsAndScales", withExtension: "plist"),
+			theChordData = NSArray(contentsOfURL: theURL) {
 			everyChild = ChordSelectorItem.chordSelectorItemsForPropertyList( theChordData as! [[String : AnyObject]] );
 		}
 	}

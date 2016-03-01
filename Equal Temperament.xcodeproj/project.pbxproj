@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D809895E1C85A27700122857 /* Int+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D809895D1C85A27700122857 /* Int+Additions.swift */; };
+		D80989661C85C66B00122857 /* String+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80989651C85C66B00122857 /* String+Additions.swift */; };
 		D80D8C1A1B80A167001E7746 /* Envelope.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80D8C191B80A167001E7746 /* Envelope.swift */; };
 		D83092C11AEBBC6F00B0E6A7 /* DisclosureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83092C01AEBBC6F00B0E6A7 /* DisclosureView.swift */; };
 		D831054E1B0A6115000EB805 /* HarmonicsDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = D831054D1B0A6115000EB805 /* HarmonicsDescription.swift */; };
@@ -67,6 +68,7 @@
 
 /* Begin PBXFileReference section */
 		D809895D1C85A27700122857 /* Int+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Int+Additions.swift"; sourceTree = "<group>"; };
+		D80989651C85C66B00122857 /* String+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Additions.swift"; sourceTree = "<group>"; };
 		D80D8C191B80A167001E7746 /* Envelope.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Envelope.swift; sourceTree = "<group>"; };
 		D83092C01AEBBC6F00B0E6A7 /* DisclosureView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisclosureView.swift; sourceTree = "<group>"; };
 		D831054D1B0A6115000EB805 /* HarmonicsDescription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HarmonicsDescription.swift; sourceTree = "<group>"; };
@@ -137,6 +139,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D80989601C85C33B00122857 /* Additions */ = {
+			isa = PBXGroup;
+			children = (
+				D88A620F1ACF7F19004CD4C9 /* UInt+Additions.swift */,
+				D809895D1C85A27700122857 /* Int+Additions.swift */,
+				D88EED2C1AEE5AF50084BDCB /* Float+Additions.swift */,
+				D80989651C85C66B00122857 /* String+Additions.swift */,
+			);
+			name = Additions;
+			sourceTree = "<group>";
+		};
 		D84F34081B088BC30095D1E8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -184,12 +197,10 @@
 		D895435F1996345200A091A4 /* Equal Temperament */ = {
 			isa = PBXGroup;
 			children = (
-				D88A620F1ACF7F19004CD4C9 /* UInt+Additions.swift */,
-				D809895D1C85A27700122857 /* Int+Additions.swift */,
-				D88EED2C1AEE5AF50084BDCB /* Float+Additions.swift */,
 				D8B902091AD48EBF0015B5E2 /* Controllers */,
 				D8B9020A1AD48ED70015B5E2 /* Views */,
 				D8B9020B1AD48EFD0015B5E2 /* Model */,
+				D80989601C85C33B00122857 /* Additions */,
 				D87201021B8C7CA0006FDEDC /* Library */,
 				D87C27881AF3A93D00C2BF7B /* Resources */,
 				D89543691996345200A091A4 /* Images.xcassets */,
@@ -429,6 +440,7 @@
 				D88EED2D1AEE5AF50084BDCB /* Float+Additions.swift in Sources */,
 				D895438B1996363700A091A4 /* Document.swift in Sources */,
 				D8E5E6271AD130DE004DB02D /* ScaleView.swift in Sources */,
+				D80989661C85C66B00122857 /* String+Additions.swift in Sources */,
 				D80D8C1A1B80A167001E7746 /* Envelope.swift in Sources */,
 				D8E7C7D71B1CAB99000D745B /* TonePlayer.swift in Sources */,
 				D8AA4E3D1C132A8A00B66521 /* ScaleViewController.swift in Sources */,

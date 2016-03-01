@@ -111,9 +111,7 @@ class TonePlayer {
 			}
 			assert( nextNoteIndex < 2*theLastIndex+1 );
 
-			if let theTone = playingTones[intervals[theLastIndex-abs(nextNoteIndex-theLastIndex)].ratio] {
-				theTone.play();
-			}
+			playingTones[intervals[theLastIndex-abs(nextNoteIndex-theLastIndex)].ratio]?.play();
 		}
 	}
 

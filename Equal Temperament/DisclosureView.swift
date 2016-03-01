@@ -24,9 +24,7 @@ class DisclosureView : NSView {
 
 	override var	hidden : Bool {
 		didSet {
-			if let theComplimentaryView = complimentaryView {
-				theComplimentaryView.hidden = !hidden;
-			}
+			complimentaryView?.hidden = !hidden;
 			invalidateIntrinsicContentSize();
 		}
 	}

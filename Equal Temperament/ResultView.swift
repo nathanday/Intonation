@@ -86,8 +86,7 @@ import Cocoa
 		super.drawRect(dirtyRect);
 		let		thePath = NSBezierPath();
 		assert( childView != nil );
-		if let theSubView : NSView = childView {
-			let		theFrame = theSubView.frame;
+		if let theFrame = childView?.frame {
 			thePath.lineWidth = 1.0;
 			switch orientation {
 			case .vertical:

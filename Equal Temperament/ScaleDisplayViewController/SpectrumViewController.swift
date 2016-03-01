@@ -27,23 +27,18 @@ class SpectrumViewController: NSViewController {
 
 	func setIntervals( intervals anIntervals : [EqualTemperamentEntry], intervalCount anIntervalCount : UInt, enabled anEnable : Bool ) { }
 	func hideIntervalRelatedColumn( aHide : Bool ) { }
-	func setSelectionIntervals( aSelectionIntervals : [Interval])
-	{
-		if let theSpectrumView = spectrumView {
-			theSpectrumView.selectedRatios = aSelectionIntervals.map({ return $0.ratio; });
-		}
+	func setSelectionIntervals( aSelectionIntervals : [Interval]) {
+		spectrumView?.selectedRatios = aSelectionIntervals.map({ return $0.ratio; });
 	}
 
 	private func updateSelectedSpectrumType() {
-		if let theSpectrumView = spectrumView {
-			switch selectedSpectrumType {
-			case 1:
-				theSpectrumView.spectrumType = .saw;
-			case 2:
-				theSpectrumView.spectrumType = .square;
-			default:
-				theSpectrumView.spectrumType = .sine;
-			}
+		switch selectedSpectrumType {
+		case 1:
+			spectrumView?.spectrumType = .saw;
+		case 2:
+			spectrumView?.spectrumType = .square;
+		default:
+			spectrumView?.spectrumType = .sine;
 		}
 	}
 }

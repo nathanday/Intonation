@@ -14,9 +14,7 @@ class HarmonicViewController : NSViewController, ScaleDisplayViewController {
 	func hideIntervalRelatedColumn( aHide : Bool ) { }
 
 	func setSelectionIntervals( aSelectionIntervals : [Interval]) {
-		if let theHarmonicView = self.view as? HarmonicView {
-			theHarmonicView.selectedRatios = aSelectionIntervals.map({ return $0.ratio; });
-		}
+		(self.view as? HarmonicView)?.selectedRatios = aSelectionIntervals.map({ return $0.ratio; });
 	}
 
 }

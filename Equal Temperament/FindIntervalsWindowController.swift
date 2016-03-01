@@ -26,22 +26,16 @@ class FindIntervalsViewController: NSViewController {
 	var				ratios : [Ratio] {
 		get {
 			var		theResult : [Ratio] = [];
-			var		theComponents = ratiosString.componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString:":∶"));
+			var		theComponents = ratiosString.componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString:":∶ "));
 			if ratiosString.containsString(".") {
-				var		theBase : Double = 1.0;
-				if let theValue = Double(theComponents[0]) {
-					theBase = theValue;
-				}
+				let		theBase : Double = Double(theComponents[0]) ?? 1.0;
 				for theComp in theComponents {
 					if let theValue = Double(theComp) {
 						theResult.append(Ratio.irrational(theValue/theBase));
 					}
 				}
 			} else {
-				var		theBase : Int = 1;
-				if let theValue = Int(theComponents[0]) {
-					theBase = theValue;
-				}
+				let		theBase : Int = Int(theComponents[0]) ?? 1;
 				for theComp in theComponents {
 					if let theValue = Int(theComp) {
 						theResult.append(Ratio.rational(Rational(theValue,theBase)));
@@ -54,15 +48,11 @@ class FindIntervalsViewController: NSViewController {
 
 	override func viewDidLoad() {
         super.viewDidLoad()
-		if let theSearchField = searchField {
-			theSearchField.searchMenuTemplate = createSearchMenu();
-		}
+		searchField?.searchMenuTemplate = createSearchMenu();
     }
 
 	override func viewWillAppear() {
-		if let theWindow = self.view.window {
-			theWindow.makeFirstResponder(searchField);
-		}
+		self.view.window?.makeFirstResponder(searchField);
 	}
 
 	func createSearchMenu( ) -> NSMenu {

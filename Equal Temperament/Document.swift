@@ -168,11 +168,7 @@ class Document : NSDocument {
 			}
 		}
 		get {
-			var		theResult : [EqualTemperamentEntry] = [];
-			if let theArrangedRations = arrayController?.selectedObjects as? [EqualTemperamentEntry] {
-				theResult = theArrangedRations;
-			}
-			return theResult;
+			return arrayController?.selectedObjects as? [EqualTemperamentEntry] ?? Array<EqualTemperamentEntry>();
 		}
 	}
 	var		selectedJustIntonationIntervals : [Interval] {
@@ -441,9 +437,7 @@ class Document : NSDocument {
 	}
 
 	@IBAction func showFindClosestIntervlAction( aSender: AnyObject? ) {
-		if let theFindIntervalsViewController = findIntervalsViewController {
-			theFindIntervalsViewController.hidden = false;
-		}
+		findIntervalsViewController?.hidden = false;
 	}
 
 	func playUsingMethod( aMethod: Int ) {
@@ -460,9 +454,7 @@ class Document : NSDocument {
 			previouslySelectedSegment = aMethod;
 			tonePlayer.stop();
 			tonePlayer.playType(thePlaybackType);
-			if let thePlaySegmentedControl = playSegmentedControl {
-				thePlaySegmentedControl.setSelected( true, forSegment: aMethod);
-			}
+			playSegmentedControl?.setSelected( true, forSegment: aMethod);
 		}
 	}
 
@@ -484,9 +476,7 @@ class Document : NSDocument {
 		biggestErrorEntries = theEntries.biggestError;
 		averageError = theEntries.averageError;
 		everyInterval = theEntries.everyEntry;
-		if let theScaleViewController = scaleViewController {
-			theScaleViewController.setIntervals(intervals: everyInterval, intervalCount: intervalCount, enabled: enableInterval);
-		}
+		scaleViewController?.setIntervals(intervals: everyInterval, intervalCount: intervalCount, enabled: enableInterval);
 		selectedEqualTemperamentEntry = theSelectedEntries;
 	}
 
@@ -500,7 +490,7 @@ class Document : NSDocument {
 				theTableColumn.hidden = aHide;
 			}
 		}
-		if let theScaleViewController = scaleViewController { theScaleViewController.hideIntervalRelatedColumn(!aHide); }
+		scaleViewController?.hideIntervalRelatedColumn(!aHide);
 	}
 }
 
@@ -528,21 +518,13 @@ extension Document : NSTableViewDelegate {
 		let		theSelectedIntervals = selectedJustIntonationIntervals;
 		updateChordRatioTitle();
 		assert(scaleViewController != nil, "Failed to get ScaleViewController")
-		if let theScaleViewController = scaleViewController {
-			theScaleViewController.setSelectionIntervals(theSelectedIntervals);
-		}
+		scaleViewController?.setSelectionIntervals(theSelectedIntervals);
 		assert(harmonicViewController != nil, "Failed to get HarmonicViewController")
-		if let theHarmonicViewController = harmonicViewController {
-			theHarmonicViewController.setSelectionIntervals(theSelectedIntervals);
-		}
+		harmonicViewController?.setSelectionIntervals(theSelectedIntervals);
 		assert(waveViewController != nil, "Failed to get WaveViewController")
-		if let theWaveViewController = waveViewController {
-			theWaveViewController.setSelectionIntervals(theSelectedIntervals);
-		}
+		waveViewController?.setSelectionIntervals(theSelectedIntervals);
 		assert(spectrumViewController != nil, "Failed to get SpectrumViewController")
-		if let theSpectrumViewController = spectrumViewController {
-			theSpectrumViewController.setSelectionIntervals(theSelectedIntervals);
-		}
+		spectrumViewController?.setSelectionIntervals(theSelectedIntervals);
 		tonePlayer.intervals = theSelectedIntervals;
 	}
 
