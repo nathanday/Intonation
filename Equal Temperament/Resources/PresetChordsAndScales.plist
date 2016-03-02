@@ -1147,6 +1147,151 @@
 					</dict>
 					<dict>
 						<key>name</key>
+						<string>5-limit Just Intonation</string>
+						<key>kind</key>
+						<integer>1</integer>
+						<key>everyChild</key>
+						<array>
+							<dict>
+								<key>name</key>
+								<string>Unison</string>
+								<key>numerator</key>
+								<integer>1</integer>
+								<key>denominator</key>
+								<integer>1</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>lesser chromatic semitone</string>
+								<key>numerator</key>
+								<integer>25</integer>
+								<key>denominator</key>
+								<integer>24</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>Major Semitone</string>
+								<key>numerator</key>
+								<integer>16</integer>
+								<key>denominator</key>
+								<integer>15</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>Major tone</string>
+								<key>numerator</key>
+								<integer>9</integer>
+								<key>denominator</key>
+								<integer>8</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>Augmented second</string>
+								<key>numerator</key>
+								<integer>75</integer>
+								<key>denominator</key>
+								<integer>64</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>Minor third</string>
+								<key>numerator</key>
+								<integer>6</integer>
+								<key>denominator</key>
+								<integer>5</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>Major third</string>
+								<key>numerator</key>
+								<integer>5</integer>
+								<key>denominator</key>
+								<integer>4</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>Perfect Fourth</string>
+								<key>numerator</key>
+								<integer>4</integer>
+								<key>denominator</key>
+								<integer>3</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>Classic Augmented Fourth</string>
+								<key>numerator</key>
+								<integer>25</integer>
+								<key>denominator</key>
+								<integer>18</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>Classic Diminished fifth</string>
+								<key>numerator</key>
+								<integer>36</integer>
+								<key>denominator</key>
+								<integer>25</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>Perfect fifth</string>
+								<key>numerator</key>
+								<integer>3</integer>
+								<key>denominator</key>
+								<integer>2</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>Classic Augmented fifth</string>
+								<key>numerator</key>
+								<integer>25</integer>
+								<key>denominator</key>
+								<integer>16</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>Minor sixth</string>
+								<key>numerator</key>
+								<integer>8</integer>
+								<key>denominator</key>
+								<integer>5</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>Major sixth</string>
+								<key>numerator</key>
+								<integer>5</integer>
+								<key>denominator</key>
+								<integer>3</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>Minor seventh</string>
+								<key>numerator</key>
+								<integer>9</integer>
+								<key>denominator</key>
+								<integer>5</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>Major seventh</string>
+								<key>numerator</key>
+								<integer>15</integer>
+								<key>denominator</key>
+								<integer>8</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>Octave</string>
+								<key>numerator</key>
+								<integer>2</integer>
+								<key>denominator</key>
+								<integer>1</integer>
+							</dict>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
 						<string>Pythagorean Diatonic</string>
 						<key>kind</key>
 						<integer>1</integer>

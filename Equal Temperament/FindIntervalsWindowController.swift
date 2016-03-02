@@ -25,20 +25,42 @@ class FindIntervalsViewController: NSViewController {
 
 	var				ratios : [Ratio] {
 		get {
-			var		theResult : [Ratio] = [];
-			var		theComponents = ratiosString.componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString:":∶ "));
-			if ratiosString.containsString(".") {
-				let		theBase : Double = Double(theComponents[0]) ?? 1.0;
-				for theComp in theComponents {
-					if let theValue = Double(theComp) {
-						theResult.append(Ratio.irrational(theValue/theBase));
+			func	getRatioValues() -> [Double] {
+				var		theResult = [Double]();
+				for theString in ratiosString.componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString:":∶ ")) {
+					if theString.containsString("/") {
+						let		theComponents = theString.componentsSeparatedByString("/");
+						if let theNumerator = Double(theComponents[0]), theDenominator = Double(theComponents[1]) {
+							if theNumerator != 0.0 && theDenominator != 0.0 {
+								theResult.append(theNumerator/theDenominator);
+							}
+						}
+					}
+					else if let theValue = Double(theString){
+						theResult.append(theValue);
 					}
 				}
-			} else {
-				let		theBase : Int = Int(theComponents[0]) ?? 1;
-				for theComp in theComponents {
-					if let theValue = Int(theComp) {
-						theResult.append(Ratio.rational(Rational(theValue,theBase)));
+				return theResult;
+			}
+			func isInteger( aValue : Double ) -> Bool { return aValue == floor(aValue); }
+
+			var		theResult : [Ratio] = [];
+			let		theComponents = getRatioValues();
+			if theComponents.count == 1 {
+				theResult.append(Ratio.irrational(theComponents[0]));
+			} else if theComponents.count == 2 && isInteger(theComponents[0]) && isInteger(theComponents[1]) && theComponents[0] > theComponents[1] {
+				theResult.append(Ratio.rational(Rational(Int(theComponents[0]),Int(theComponents[1]))));
+			} else if theComponents.count > 0 {
+				let		theBase : Double = theComponents[0] ?? 1.0;
+				for theEnumValue in theComponents {
+					var		theValue = theEnumValue;
+					while theValue < theBase {		// if a value is less than base then we need to move it n octaves
+						theValue *= 2.0;
+					}
+					if isInteger(theValue) && isInteger(theBase) {
+						theResult.append(Ratio.rational(Rational(Int(theValue),Int(theBase))));
+					} else {
+						theResult.append(Ratio.irrational(theValue/theBase));
 					}
 				}
 			}
@@ -51,7 +73,8 @@ class FindIntervalsViewController: NSViewController {
 		searchField?.searchMenuTemplate = createSearchMenu();
     }
 
-	override func viewWillAppear() {
+	func showView() {
+		hidden = false;
 		self.view.window?.makeFirstResponder(searchField);
 	}
 

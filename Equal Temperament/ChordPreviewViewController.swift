@@ -36,11 +36,6 @@ class ChordPreviewViewController: NSViewController {
 	}
 
 	var		itemDescription: String { return ""; }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do view setup here.
-    }
 }
 
 extension ChordPreviewViewController : NSTableViewDataSource {

@@ -12,6 +12,8 @@ class Document : NSDocument {
 	static let		minimumBaseFrequency = 20.0;
 	static let		maximumBaseFrequency = 4_200.0;
 
+	@IBOutlet var	plottingParentContainerView : NSView?
+
 	@IBOutlet var	tableParentContainerView : NSView?
 	@IBOutlet var	arrayController : NSArrayController?
 	@IBOutlet var	scaleViewController : ScaleViewController?
@@ -437,7 +439,7 @@ class Document : NSDocument {
 	}
 
 	@IBAction func showFindClosestIntervlAction( aSender: AnyObject? ) {
-		findIntervalsViewController?.hidden = false;
+		findIntervalsViewController?.showView()
 	}
 
 	func playUsingMethod( aMethod: Int ) {
@@ -537,3 +539,13 @@ extension Document : NSTableViewDelegate {
 	}
 }
 
+extension Document : NSSplitViewDelegate {
+	func splitView(aSplitView: NSSplitView, canCollapseSubview aSubview: NSView) -> Bool {
+		return aSubview == plottingParentContainerView;
+	}
+
+	func splitView( aSplitView: NSSplitView, additionalEffectiveRectOfDividerAtIndex aDividerIndex: Int ) -> NSRect {
+		let		theRect = tableParentContainerView!.frame;
+		return NSRect(x: theRect.maxX-12.0, y: theRect.minY, width: 12.0, height: theRect.height);
+	}
+}

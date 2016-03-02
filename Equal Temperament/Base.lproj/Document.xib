@@ -15,6 +15,7 @@
                 <outlet property="harmonicTitleTextField" destination="vvG-6Z-vMY" id="HfJ-fO-vbR"/>
                 <outlet property="harmonicViewController" destination="gGE-WR-3bh" id="NAh-sG-ZlY"/>
                 <outlet property="playSegmentedControl" destination="c0Q-eC-94Z" id="Z9M-gt-YM5"/>
+                <outlet property="plottingParentContainerView" destination="uia-Ns-BW4" id="jas-ND-6Ur"/>
                 <outlet property="scaleViewController" destination="fMJ-Pa-RsX" id="cqN-JH-ihV"/>
                 <outlet property="spectrumViewController" destination="prk-7f-QfJ" id="Tmj-Du-Sr8"/>
                 <outlet property="tableParentContainerView" destination="lJF-yt-08k" id="aps-bS-vLm"/>
@@ -38,7 +39,7 @@
                     <splitView dividerStyle="thin" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5GS-AI-Vce">
                         <rect key="frame" x="0.0" y="0.0" width="998" height="759"/>
                         <subviews>
-                            <customView horizontalCompressionResistancePriority="250" id="lJF-yt-08k">
+                            <customView identifier="tableSplitViewRoot" horizontalCompressionResistancePriority="250" id="lJF-yt-08k">
                                 <rect key="frame" x="0.0" y="0.0" width="588" height="759"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
@@ -107,7 +108,7 @@
                                                                 <constraint firstAttribute="height" constant="17" id="ekX-VT-vhZ"/>
                                                                 <constraint firstAttribute="width" constant="23" id="gU9-Yn-o2Y"/>
                                                             </constraints>
-                                                            <buttonCell key="cell" type="disclosureTriangle" bezelStyle="disclosure" image="96EA6512-BFA1-44B4-9BAC-B651B2053BDC" imagePosition="above" alignment="left" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Wn8-MD-dFW">
+                                                            <buttonCell key="cell" type="disclosureTriangle" bezelStyle="disclosure" image="A545C91A-83C8-42AE-9CF1-07FBBE2488F5" imagePosition="above" alignment="left" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Wn8-MD-dFW">
                                                                 <behavior key="behavior" pushIn="YES" changeBackground="YES" changeGray="YES" lightByContents="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
@@ -1385,7 +1386,7 @@
                                     <constraint firstItem="SzR-4w-Kgt" firstAttribute="top" secondItem="MIf-rA-OIS" secondAttribute="bottom" id="yHx-KB-rJd"/>
                                 </constraints>
                             </customView>
-                            <customView id="uia-Ns-BW4">
+                            <customView identifier="plottingSplitViewRoot" id="uia-Ns-BW4">
                                 <rect key="frame" x="589" y="0.0" width="409" height="759"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
@@ -1471,6 +1472,9 @@
                             <real value="250"/>
                             <real value="50"/>
                         </holdingPriorities>
+                        <connections>
+                            <outlet property="delegate" destination="-2" id="asr-aD-QB6"/>
+                        </connections>
                     </splitView>
                 </subviews>
                 <constraints>
@@ -1517,7 +1521,7 @@
         </viewController>
     </objects>
     <resources>
-        <image name="96EA6512-BFA1-44B4-9BAC-B651B2053BDC" width="1" height="1">
+        <image name="A545C91A-83C8-42AE-9CF1-07FBBE2488F5" width="1" height="1">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
