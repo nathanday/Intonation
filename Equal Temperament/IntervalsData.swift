@@ -17,6 +17,7 @@ class IntervalsData: NSObject {
 		denominatorPrimeLimitIndex = IntervalsData.indexForLargestPrimeLessThanOrEuqalTo(UInt(NSUserDefaults.standardUserDefaults().integerForKey("denominatorPrimeLimit"))) ?? 2;
 		separatePrimeLimit = NSUserDefaults.standardUserDefaults().boolForKey("separatePrimeLimit");
 		oddLimit = UInt(NSUserDefaults.standardUserDefaults().integerForKey("oddLimit")) | 1;
+		additiveDissonance = UInt(NSUserDefaults.standardUserDefaults().integerForKey("additiveDissonance")) | 1;
 		octavesCount = min(max(UInt(NSUserDefaults.standardUserDefaults().integerForKey("octavesCount")),1),3);
 		maximumError = Double(NSUserDefaults.standardUserDefaults().integerForKey("maximumError"));
 		filtered = NSUserDefaults.standardUserDefaults().boolForKey("filtered");
@@ -47,6 +48,9 @@ class IntervalsData: NSObject {
 			if let theOddLimit = theLimits["oddLimit"] {
 				oddLimit = theOddLimit;
 			}
+			if let theAdditiveDissonance = theLimits["additiveDissonance"] {
+				additiveDissonance = theAdditiveDissonance;
+			}
 			enableInterval = theEnableInterval;
 			maximumError = themMaximumError;
 			filtered = theFiltered;
@@ -70,7 +74,8 @@ class IntervalsData: NSObject {
 			"limits":[
 				"numeratorPrime":numeratorPrimeLimit,
 				"denominatorPrime":denominatorPrimeLimit,
-				"oddLimit":oddLimit],
+				"oddLimit":oddLimit,
+				"additiveDissonance":additiveDissonance],
 			"enableInterval":enableInterval,
 			"maximumError":maximumError,
 			"filtered":filtered,
@@ -106,21 +111,37 @@ class IntervalsData: NSObject {
 	}
 	dynamic var		enableInterval : Bool = true
 	var		numeratorPrimeLimit : UInt {
-		get { return IntervalsData.primeNumber[numeratorPrimeLimitIndex]; }
-		set { numeratorPrimeLimitIndex = IntervalsData.indexForLargestPrimeLessThanOrEuqalTo(newValue) ?? 2; }
+		get {
+			return IntervalsData.primeNumber[numeratorPrimeLimitIndex];
+		}
+		set {
+			numeratorPrimeLimitIndex = IntervalsData.indexForLargestPrimeLessThanOrEuqalTo(newValue) ?? 2;
+		}
 	}
 	var		numeratorPrimeLimitIndex : Int = 2 {
+		willSet {
+			willChangeValueForKey("numeratorPrimeLimit");
+		}
 		didSet {
 			NSUserDefaults.standardUserDefaults().setInteger(Int(numeratorPrimeLimit), forKey:"numeratorPrimeLimit");
+			didChangeValueForKey("numeratorPrimeLimit");
 		}
 	}
 	var		denominatorPrimeLimit : UInt {
-		get { return IntervalsData.primeNumber[denominatorPrimeLimitIndex]; }
-		set { denominatorPrimeLimitIndex = IntervalsData.indexForLargestPrimeLessThanOrEuqalTo(newValue) ?? 2; }
+		get {
+			return IntervalsData.primeNumber[denominatorPrimeLimitIndex];
+		}
+		set {
+			denominatorPrimeLimitIndex = IntervalsData.indexForLargestPrimeLessThanOrEuqalTo(newValue) ?? 2;
+		}
 	}
 	var		denominatorPrimeLimitIndex : Int = 1 {
+		willSet {
+			willChangeValueForKey("denominatorPrimeLimit");
+		}
 		didSet {
 			NSUserDefaults.standardUserDefaults().setInteger(Int(denominatorPrimeLimit), forKey:"denominatorPrimeLimit");
+			didChangeValueForKey("denominatorPrimeLimit");
 		}
 	}
 	var		separatePrimeLimit : Bool = false {
@@ -134,6 +155,12 @@ class IntervalsData: NSObject {
 			NSUserDefaults.standardUserDefaults().setInteger( Int(oddLimit), forKey:"oddLimit");
 		}
 	}
+	var		additiveDissonance : UInt = 256 {
+		didSet {
+			NSUserDefaults.standardUserDefaults().setInteger( Int(additiveDissonance), forKey:"additiveDissonance");
+		}
+	}
+
 	var		maximumError : Double = 0.18 {
 		didSet {
 			NSUserDefaults.standardUserDefaults().setDouble( maximumError, forKey:"maximumError");

@@ -191,7 +191,7 @@ func ==(a: EqualTemperamentEntry, b: EqualTemperamentEntry) -> Bool { return a.j
 
 class EqualTemperamentCollection : CustomStringConvertible {
 	var	everyEqualTemperamentEntry = Set<EqualTemperamentEntry>();
-	var limits : (numeratorPrime:UInt,denominatorPrime:UInt,odd:UInt);
+	var limits : (numeratorPrime:UInt,denominatorPrime:UInt,odd:UInt,additiveDissonance:UInt);
 	var maximumError : Double;
 	var intervalCount : UInt;
 	var octaves : UInt;
@@ -250,7 +250,7 @@ class EqualTemperamentCollection : CustomStringConvertible {
 		return theResult;
 	}
 
-	init( limits aLimits : (numeratorPrime:UInt,denominatorPrime:UInt,odd:UInt), intervalCount anIntervalCount : UInt, octaves anOctaves : UInt, maximumError anMaximumError: Double, filtered aFiltered: Bool  ) {
+	init( limits aLimits : (numeratorPrime:UInt,denominatorPrime:UInt,odd:UInt,additiveDissonance:UInt), intervalCount anIntervalCount : UInt, octaves anOctaves : UInt, maximumError anMaximumError: Double, filtered aFiltered: Bool  ) {
 		limits = aLimits;
 		intervalCount = anIntervalCount;
 		maximumError = anMaximumError;
@@ -262,14 +262,16 @@ class EqualTemperamentCollection : CustomStringConvertible {
 	private func calculate( ) {
 		for theDenom in PrimeProducts(maxPrime: limits.denominatorPrime, range: 1..<limits.odd) {
 			for theNum in PrimeProducts(maxPrime: limits.numeratorPrime, range: theDenom..<theDenom*2) {
-				assert(theNum >= theDenom);
-				assert( theNum <= theDenom*2 );
-				for theOctaves in 0..<octaves {
-					let		theEntry = EqualTemperamentEntry(numberator: theNum*1<<theOctaves, denominator:theDenom, intervalCount:intervalCount, maximumError: maximumError);
-					let		theDegree = Scale.major.indexOf(theEntry.justIntonationRatio);
-					add(theEntry);
-					if theDegree != nil {
-						theEntry.degreeName = Scale.degreeName(theDegree!);
+				if theNum+theDenom <= limits.additiveDissonance {
+					assert(theNum >= theDenom);
+					assert( theNum <= theDenom*2 );
+					for theOctaves in 0..<octaves {
+						let		theEntry = EqualTemperamentEntry(numberator: theNum*1<<theOctaves, denominator:theDenom, intervalCount:intervalCount, maximumError: maximumError);
+						let		theDegree = Scale.major.indexOf(theEntry.justIntonationRatio);
+						add(theEntry);
+						if theDegree != nil {
+							theEntry.degreeName = Scale.degreeName(theDegree!);
+						}
 					}
 				}
 			}

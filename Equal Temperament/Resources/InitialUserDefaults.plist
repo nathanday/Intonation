@@ -14,6 +14,8 @@
 	<integer>5</integer>
 	<key>oddLimit</key>
 	<integer>17</integer>
+	<key>additiveDissonance</key>
+	<integer>31</integer>
 	<key>midiAnchor</key>
 	<integer>60</integer>
 	<key>findIntervalesHidded</key>
