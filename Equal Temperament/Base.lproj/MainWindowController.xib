@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10112" systemVersion="15E49a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10115" systemVersion="15E56a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10112"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10115"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="Document" customModule="Equal_Temperament">
+        <customObject id="-2" userLabel="File's Owner" customClass="MainWindowController" customModule="Equal_Temperament">
             <connections>
                 <outlet property="arrayController" destination="cy8-kx-1Au" id="huD-lu-K2w"/>
                 <outlet property="baseFrequencyDeltaSlider" destination="aCN-ld-zpq" id="L00-gr-4Hk"/>
@@ -108,7 +108,7 @@
                                                                 <constraint firstAttribute="height" constant="17" id="ekX-VT-vhZ"/>
                                                                 <constraint firstAttribute="width" constant="23" id="gU9-Yn-o2Y"/>
                                                             </constraints>
-                                                            <buttonCell key="cell" type="disclosureTriangle" bezelStyle="disclosure" image="A545C91A-83C8-42AE-9CF1-07FBBE2488F5" imagePosition="above" alignment="left" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Wn8-MD-dFW">
+                                                            <buttonCell key="cell" type="disclosureTriangle" bezelStyle="disclosure" image="DDBA712D-1952-4ED9-85A1-36FDB27462C1" imagePosition="above" alignment="left" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Wn8-MD-dFW">
                                                                 <behavior key="behavior" pushIn="YES" changeBackground="YES" changeGray="YES" lightByContents="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
@@ -151,14 +151,14 @@
                                                                 <color key="backgroundColor" red="1" green="0.99997437000274658" blue="0.99999129772186279" alpha="1" colorSpace="calibratedRGB"/>
                                                             </textFieldCell>
                                                             <connections>
-                                                                <binding destination="-2" name="value" keyPath="self.numeratorPrimeLimit" id="hb7-wp-KO0"/>
+                                                                <binding destination="-2" name="value" keyPath="self.intervalsData.numeratorPrimeLimit" id="AXs-sd-1vo"/>
                                                             </connections>
                                                         </textField>
                                                         <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zz0-X9-FcU">
                                                             <rect key="frame" x="252" y="31" width="19" height="27"/>
                                                             <stepperCell key="cell" continuous="YES" alignment="left" maxValue="20" doubleValue="2" id="iGX-Sr-Rdu"/>
                                                             <connections>
-                                                                <binding destination="-2" name="value" keyPath="self.numeratorPrimeLimitIndex" id="Kg7-9a-J2q"/>
+                                                                <binding destination="-2" name="value" keyPath="self.intervalsData.numeratorPrimeLimitIndex" id="hkF-bg-clC"/>
                                                             </connections>
                                                         </stepper>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tpm-5p-DdI">
@@ -183,14 +183,14 @@
                                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                             </textFieldCell>
                                                             <connections>
-                                                                <binding destination="-2" name="value" keyPath="self.numeratorOddLimit" id="kaA-Di-Lc9"/>
+                                                                <binding destination="-2" name="value" keyPath="self.intervalsData.oddLimit" id="DZZ-vK-xHg"/>
                                                             </connections>
                                                         </textField>
                                                         <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="b1E-Oi-eJ0">
                                                             <rect key="frame" x="432" y="31" width="19" height="27"/>
                                                             <stepperCell key="cell" continuous="YES" alignment="left" increment="2" minValue="3" maxValue="1023" doubleValue="3" id="yWZ-8E-M09"/>
                                                             <connections>
-                                                                <binding destination="-2" name="value" keyPath="self.numeratorOddLimit" id="hir-5h-oCi"/>
+                                                                <binding destination="-2" name="value" keyPath="self.intervalsData.oddLimit" id="i1s-A2-K78"/>
                                                             </connections>
                                                         </stepper>
                                                         <customView hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="u2D-Cc-oSQ" customClass="DisclosureView" customModule="Equal_Temperament" customModuleProvider="target">
@@ -210,8 +210,8 @@
                                                                         <color key="backgroundColor" red="1" green="0.99997437000274658" blue="0.99999129772186279" alpha="1" colorSpace="calibratedRGB"/>
                                                                     </textFieldCell>
                                                                     <connections>
-                                                                        <binding destination="-2" name="value" keyPath="self.denominatorPrimeLimit" id="UHx-Ci-1mx"/>
-                                                                        <binding destination="-2" name="enabled" keyPath="self.separatePrimeLimit" id="LYb-K5-FXG"/>
+                                                                        <binding destination="-2" name="value" keyPath="self.intervalsData.denominatorPrimeLimit" id="U7t-SA-uHh"/>
+                                                                        <binding destination="-2" name="enabled" keyPath="self.intervalsData.separatePrimeLimit" id="LYb-K5-FXG"/>
                                                                     </connections>
                                                                 </textField>
                                                                 <button horizontalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pV1-kQ-ZHB">
@@ -221,17 +221,24 @@
                                                                         <font key="font" metaFont="system"/>
                                                                     </buttonCell>
                                                                     <connections>
-                                                                        <binding destination="-2" name="value" keyPath="self.separatePrimeLimit" id="ngF-Jg-rkp"/>
+                                                                        <binding destination="-2" name="value" keyPath="self.intervalsData.separatePrimeLimit" id="a0E-o2-oh2"/>
                                                                     </connections>
                                                                 </button>
                                                                 <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VXK-gt-fiJ">
                                                                     <rect key="frame" x="253" y="6" width="15" height="22"/>
                                                                     <stepperCell key="cell" controlSize="small" continuous="YES" alignment="left" maxValue="20" doubleValue="1" id="iDy-Yp-yzt"/>
                                                                     <connections>
-                                                                        <binding destination="-2" name="value" keyPath="self.denominatorPrimeLimitIndex" id="fIL-qv-zxA"/>
-                                                                        <binding destination="-2" name="enabled" keyPath="self.separatePrimeLimit" id="7dB-DO-eRn"/>
+                                                                        <binding destination="-2" name="value" keyPath="self.intervalsData.denominatorPrimeLimitIndex" id="AVZ-4w-6Vc"/>
+                                                                        <binding destination="-2" name="enabled" keyPath="self.intervalsData.separatePrimeLimit" id="7dB-DO-eRn"/>
                                                                     </connections>
                                                                 </stepper>
+                                                                <button horizontalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1Va-AP-5ZR">
+                                                                    <rect key="frame" x="321" y="10" width="52" height="18"/>
+                                                                    <buttonCell key="cell" type="check" title="Odd:" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="zPU-oY-QuX">
+                                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                                        <font key="font" metaFont="system"/>
+                                                                    </buttonCell>
+                                                                </button>
                                                                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ngG-hf-WUh">
                                                                     <rect key="frame" x="375" y="8" width="60" height="22"/>
                                                                     <constraints>
@@ -245,28 +252,10 @@
                                                                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
-                                                                    <connections>
-                                                                        <binding destination="-2" name="value" keyPath="self.denominatorOddLimit" id="tEd-Uh-TW2"/>
-                                                                        <binding destination="-2" name="enabled" keyPath="self.separateOddLimit" id="xZH-Pv-H1Q"/>
-                                                                    </connections>
                                                                 </textField>
-                                                                <button horizontalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1Va-AP-5ZR">
-                                                                    <rect key="frame" x="321" y="10" width="52" height="18"/>
-                                                                    <buttonCell key="cell" type="check" title="Odd:" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="zPU-oY-QuX">
-                                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                                        <font key="font" metaFont="system"/>
-                                                                    </buttonCell>
-                                                                    <connections>
-                                                                        <binding destination="-2" name="value" keyPath="self.separateOddLimit" id="gT8-yy-Tm6"/>
-                                                                    </connections>
-                                                                </button>
                                                                 <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ohl-qk-qGK">
                                                                     <rect key="frame" x="432" y="5" width="19" height="27"/>
                                                                     <stepperCell key="cell" continuous="YES" alignment="left" increment="2" minValue="3" maxValue="1023" doubleValue="3" id="Lco-79-7Gd"/>
-                                                                    <connections>
-                                                                        <binding destination="-2" name="value" keyPath="self.denominatorOddLimit" id="wcC-zj-F40"/>
-                                                                        <binding destination="-2" name="enabled" keyPath="self.separateOddLimit" id="zKx-Qc-3J7"/>
-                                                                    </connections>
                                                                 </stepper>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tsl-lN-vSO">
                                                                     <rect key="frame" x="50" y="11" width="82" height="17"/>
@@ -444,7 +433,7 @@
                                             </tabViewItem>
                                         </tabViewItems>
                                         <connections>
-                                            <binding destination="-2" name="selectedIndex" keyPath="self.selectedMethod" id="haN-Pv-EeN"/>
+                                            <binding destination="-2" name="selectedIndex" keyPath="self.intervalsData.selectedMethod" id="haN-Pv-EeN"/>
                                         </connections>
                                     </tabView>
                                     <box verticalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="060-us-XDf">
@@ -465,7 +454,7 @@
                                         <rect key="frame" x="252" y="606" width="19" height="27"/>
                                         <stepperCell key="cell" continuous="YES" alignment="left" minValue="5" maxValue="200" doubleValue="5" id="YIT-lc-L2I"/>
                                         <connections>
-                                            <binding destination="-2" name="value" keyPath="self.intervalCount" id="hm7-Ai-2HK"/>
+                                            <binding destination="-2" name="value" keyPath="self.intervalsData.intervalCount" id="CAr-Sf-RDu"/>
                                         </connections>
                                     </stepper>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="uFo-Hv-yzi">
@@ -475,7 +464,7 @@
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
-                                            <binding destination="-2" name="value" keyPath="self.enableInterval" id="7st-aq-yrr"/>
+                                            <binding destination="-2" name="value" keyPath="self.intervalsData.enableInterval" id="LQC-Bm-moY"/>
                                         </connections>
                                     </button>
                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XcK-bI-Ggp">
@@ -492,7 +481,7 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                         <connections>
-                                            <binding destination="-2" name="value" keyPath="self.intervalCount" id="g08-av-eIV"/>
+                                            <binding destination="-2" name="value" keyPath="self.intervalsData.intervalCount" id="jhS-XF-sgm"/>
                                         </connections>
                                     </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hzb-hF-IMP">
@@ -586,7 +575,7 @@
                                             </menu>
                                         </popUpButtonCell>
                                         <connections>
-                                            <binding destination="-2" name="selectedTag" keyPath="self.intervalCount" id="STp-cQ-CY2"/>
+                                            <binding destination="-2" name="selectedTag" keyPath="self.intervalsData.intervalCount" id="8Ca-ax-7Wb"/>
                                         </connections>
                                     </popUpButton>
                                     <box verticalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="hwN-DG-R19">
@@ -616,14 +605,14 @@
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
-                                            <binding destination="-2" name="value" keyPath="self.filtered" id="07r-ik-nYt"/>
+                                            <binding destination="-2" name="value" keyPath="self.intervalsData.filtered" id="XVE-IK-WFZ"/>
                                         </connections>
                                     </button>
                                     <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kxb-PT-dC2">
                                         <rect key="frame" x="252" y="575" width="19" height="27"/>
                                         <stepperCell key="cell" continuous="YES" alignment="left" increment="0.01" maxValue="1" doubleValue="0.20000000000000001" id="rSa-0L-LKy"/>
                                         <connections>
-                                            <binding destination="-2" name="value" keyPath="self.maximumError" id="kU2-i0-v8z"/>
+                                            <binding destination="-2" name="value" keyPath="self.intervalsData.maximumError" id="l18-4w-oza"/>
                                         </connections>
                                     </stepper>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="uVS-hV-H9q">
@@ -649,7 +638,7 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                         <connections>
-                                            <binding destination="-2" name="value" keyPath="self.maximumError" id="um0-3w-6Zs"/>
+                                            <binding destination="-2" name="value" keyPath="self.intervalsData.maximumError" id="Wo1-PF-RR1"/>
                                         </connections>
                                     </textField>
                                     <customView hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Q7j-Gh-TTU" customClass="DisclosureView" customModule="Equal_Temperament" customModuleProvider="target">
@@ -677,7 +666,7 @@
                                                     <color key="backgroundColor" red="1" green="0.99997437000274658" blue="0.99999129772186279" alpha="0.66000000000000003" colorSpace="calibratedRGB"/>
                                                 </textFieldCell>
                                                 <connections>
-                                                    <binding destination="-2" name="value" keyPath="self.averageError" id="b1c-kg-kLg"/>
+                                                    <binding destination="-2" name="value" keyPath="self.document.averageError" id="tc8-eg-kNo"/>
                                                 </connections>
                                             </textField>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4FE-gz-seB">
@@ -702,7 +691,7 @@
                                                     <color key="backgroundColor" red="1" green="0.99997437" blue="0.99999129769999995" alpha="0.66000000000000003" colorSpace="calibratedRGB"/>
                                                 </textFieldCell>
                                                 <connections>
-                                                    <binding destination="-2" name="value" keyPath="self.biggestError" id="KDg-Q0-exd"/>
+                                                    <binding destination="-2" name="value" keyPath="self.document.biggestError" id="KDg-Q0-exd"/>
                                                 </connections>
                                             </textField>
                                         </subviews>
@@ -749,12 +738,12 @@
                                         <rect key="frame" x="252" y="513" width="19" height="27"/>
                                         <stepperCell key="cell" continuous="YES" alignment="left" maxValue="127" doubleValue="60" id="kNI-Ps-uX6"/>
                                         <connections>
-                                            <binding destination="-2" name="enabled" keyPath="self.autoAnchor" id="fri-4H-KnY">
+                                            <binding destination="-2" name="enabled" keyPath="self.intervalsData.autoAnchor" id="fri-4H-KnY">
                                                 <dictionary key="options">
                                                     <string key="NSValueTransformerName">NSNegateBoolean</string>
                                                 </dictionary>
                                             </binding>
-                                            <binding destination="-2" name="value" keyPath="self.midiAnchor" id="eud-wM-gnn"/>
+                                            <binding destination="-2" name="value" keyPath="self.intervalsData.midiAnchor" id="eud-wM-gnn"/>
                                         </connections>
                                     </stepper>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Df-pn-iHL">
@@ -778,12 +767,12 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                         <connections>
-                                            <binding destination="-2" name="enabled" keyPath="self.autoAnchor" id="094-kK-U9H">
+                                            <binding destination="-2" name="enabled" keyPath="self.intervalsData.autoAnchor" id="5Vu-e5-G4H">
                                                 <dictionary key="options">
                                                     <string key="NSValueTransformerName">NSNegateBoolean</string>
                                                 </dictionary>
                                             </binding>
-                                            <binding destination="-2" name="value" keyPath="self.midiAnchor" id="th5-XB-pXe"/>
+                                            <binding destination="-2" name="value" keyPath="self.intervalsData.autoAnchor" id="E6S-Yu-VWr"/>
                                         </connections>
                                     </textField>
                                     <customView hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6NF-Nw-IE9" customClass="DisclosureView" customModule="Equal_Temperament" customModuleProvider="target">
@@ -833,7 +822,7 @@
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
-                                            <binding destination="-2" name="value" keyPath="self.autoAnchor" id="OZr-xx-KfF"/>
+                                            <binding destination="-2" name="value" keyPath="self.intervalsData.autoAnchor" id="PJv-KB-sPC"/>
                                         </connections>
                                     </button>
                                     <box verticalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="Y9z-2C-pJA">
@@ -905,7 +894,7 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                         <connections>
-                                            <binding destination="-2" name="value" keyPath="self.baseFrequency" id="ndZ-Al-kRI"/>
+                                            <binding destination="-2" name="value" keyPath="self.document.baseFrequency" id="ndZ-Al-kRI"/>
                                         </connections>
                                     </textField>
                                     <slider horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aCN-ld-zpq">
@@ -933,7 +922,7 @@
                                                 <rect key="frame" x="195" y="39" width="122" height="19"/>
                                                 <sliderCell key="cell" controlSize="small" continuous="YES" state="on" alignment="left" maxValue="1" doubleValue="0.5" tickMarkPosition="above" numberOfTickMarks="9" allowsTickMarkValuesOnly="YES" sliderType="linear" id="3Vo-zH-EzS"/>
                                                 <connections>
-                                                    <binding destination="-2" name="value" keyPath="self.allOvertonesAmount" id="2xL-hj-Bdz"/>
+                                                    <binding destination="-2" name="value" keyPath="self.document.allOvertonesAmount" id="udl-V0-wEb"/>
                                                 </connections>
                                             </slider>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ilf-cu-Q9g">
@@ -948,7 +937,7 @@
                                                 <rect key="frame" x="404" y="39" width="122" height="19"/>
                                                 <sliderCell key="cell" controlSize="small" continuous="YES" state="on" alignment="left" maxValue="1" doubleValue="1" tickMarkPosition="above" numberOfTickMarks="9" allowsTickMarkValuesOnly="YES" sliderType="linear" id="Xl4-rU-hFQ"/>
                                                 <connections>
-                                                    <binding destination="-2" name="value" keyPath="self.evenOvertonesAmount" id="3u5-TF-K6d"/>
+                                                    <binding destination="-2" name="value" keyPath="self.document.evenOvertonesAmount" id="IrE-14-yuL"/>
                                                 </connections>
                                             </slider>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="TBB-Zx-OB7">
@@ -960,7 +949,7 @@
                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                                 <connections>
-                                                    <binding destination="-2" name="value" keyPath="self.allOvertonesAmount" id="bfy-t4-Vjd"/>
+                                                    <binding destination="-2" name="value" keyPath="self.document.allOvertonesAmount" id="bfy-t4-Vjd"/>
                                                 </connections>
                                             </textField>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Yj7-du-NFd">
@@ -972,7 +961,7 @@
                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                                 <connections>
-                                                    <binding destination="-2" name="value" keyPath="self.evenOvertonesAmount" id="aaK-Dp-C3X"/>
+                                                    <binding destination="-2" name="value" keyPath="self.document.evenOvertonesAmount" id="aaK-Dp-C3X"/>
                                                 </connections>
                                             </textField>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="g6E-G3-zw9">
@@ -990,7 +979,7 @@
                                                 </constraints>
                                                 <sliderCell key="cell" controlSize="small" continuous="YES" state="on" alignment="left" minValue="60" maxValue="480" doubleValue="60" tickMarkPosition="above" numberOfTickMarks="13" allowsTickMarkValuesOnly="YES" sliderType="linear" id="kEU-QT-Wu9"/>
                                                 <connections>
-                                                    <binding destination="-2" name="value" keyPath="self.arpeggioBeatPerMinute" id="ovS-DE-qmq"/>
+                                                    <binding destination="-2" name="value" keyPath="self.document.arpeggioBeatPerMinute" id="nEL-IZ-qwH"/>
                                                 </connections>
                                             </slider>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZvD-sc-Pel">
@@ -1002,7 +991,7 @@
                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                                 <connections>
-                                                    <binding destination="-2" name="value" keyPath="self.evenOvertonesAmount" id="USX-l0-hDr"/>
+                                                    <binding destination="-2" name="value" keyPath="self.document.evenOvertonesAmount" id="USX-l0-hDr"/>
                                                 </connections>
                                             </textField>
                                         </subviews>
@@ -1065,7 +1054,7 @@
                                             </menu>
                                         </popUpButtonCell>
                                         <connections>
-                                            <binding destination="-2" name="selectedTag" keyPath="self.octavesCount" id="kfQ-Io-bYJ"/>
+                                            <binding destination="-2" name="selectedTag" keyPath="self.intervalsData.octavesCount" id="kfQ-Io-bYJ"/>
                                         </connections>
                                     </popUpButton>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fIu-hW-1sY">
@@ -1150,7 +1139,7 @@
                                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                             </textFieldCell>
-                                                            <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="numeratorOddLimit"/>
+                                                            <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="oddLimit"/>
                                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                             <connections>
                                                                 <binding destination="cy8-kx-1Au" name="value" keyPath="arrangedObjects.oddLimit" id="lah-ul-qGu">
@@ -1504,7 +1493,7 @@
                 <string>additiveDissonance</string>
             </declaredKeys>
             <connections>
-                <binding destination="-2" name="contentArray" keyPath="self.everyInterval" id="46l-5F-1Wb"/>
+                <binding destination="-2" name="contentArray" keyPath="self.document.everyInterval" id="46l-5F-1Wb"/>
             </connections>
         </arrayController>
         <userDefaultsController representsSharedInstance="YES" id="tZN-Kl-w5K"/>
@@ -1514,14 +1503,13 @@
         <viewController id="prk-7f-QfJ" userLabel="Spectrum View Controller" customClass="SpectrumViewController" customModule="Equal_Temperament" customModuleProvider="target"/>
         <viewController id="Sar-za-ThR" customClass="FindIntervalsViewController" customModule="Equal_Temperament" customModuleProvider="target">
             <connections>
-                <outlet property="document" destination="-2" id="Hot-zE-Ok4"/>
                 <outlet property="searchField" destination="lau-bI-K3T" id="x5H-DR-m90"/>
                 <outlet property="view" destination="MIf-rA-OIS" id="g0M-kW-5Dx"/>
             </connections>
         </viewController>
     </objects>
     <resources>
-        <image name="A545C91A-83C8-42AE-9CF1-07FBBE2488F5" width="1" height="1">
+        <image name="DDBA712D-1952-4ED9-85A1-36FDB27462C1" width="1" height="1">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

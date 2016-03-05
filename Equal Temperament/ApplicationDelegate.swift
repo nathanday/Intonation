@@ -19,10 +19,10 @@ class ApplicationDelegate: NSObject {
 			if let theURL = NSBundle.mainBundle().URLForResource("InitialUserDefaults", withExtension: "plist") {
 				if let theInitialUserDefaults = NSDictionary(contentsOfURL:theURL) as? [String:AnyObject] {
 					NSUserDefaults.standardUserDefaults().registerDefaults(theInitialUserDefaults);
+					initialUserDefaultsLoaded = true;
 				}
 			}
 			
-			initialUserDefaultsLoaded = true;
 		}
 	}
 

@@ -12,9 +12,7 @@
 	<integer>5</integer>
 	<key>denominatorPrimeLimit</key>
 	<integer>5</integer>
-	<key>numeratorOddLimit</key>
-	<integer>17</integer>
-	<key>denominatorOddLimit</key>
+	<key>oddLimit</key>
 	<integer>17</integer>
 	<key>midiAnchor</key>
 	<integer>60</integer>

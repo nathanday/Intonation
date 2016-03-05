@@ -12,9 +12,11 @@
 		D80D8C1A1B80A167001E7746 /* Envelope.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80D8C191B80A167001E7746 /* Envelope.swift */; };
 		D83092C11AEBBC6F00B0E6A7 /* DisclosureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83092C01AEBBC6F00B0E6A7 /* DisclosureView.swift */; };
 		D831054E1B0A6115000EB805 /* HarmonicsDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = D831054D1B0A6115000EB805 /* HarmonicsDescription.swift */; };
+		D83C4A2C1C8863A00090F939 /* IntervalsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83C4A2B1C8863A00090F939 /* IntervalsData.swift */; };
 		D849E7311ACADFD1006E0964 /* PrimeProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D849E7301ACADFD1006E0964 /* PrimeProducts.swift */; };
 		D84F342B1B08A2C00095D1E8 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89543621996345200A091A4 /* main.swift */; };
 		D85ABE7F1C3FD06800F2DFAF /* ChordOrScaleSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85ABE7D1C3FD06800F2DFAF /* ChordOrScaleSelectorViewController.swift */; };
+		D85C0F671C8848F400FE36FA /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C0F661C8848F400FE36FA /* MainWindowController.swift */; };
 		D8646B281C3D23F500D8C429 /* ChordSelectorItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8646B271C3D23F500D8C429 /* ChordSelectorItem.swift */; };
 		D8646B2D1C3D4C5A00D8C429 /* ChordPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8646B2B1C3D4C5A00D8C429 /* ChordPreviewViewController.swift */; };
 		D8646B2E1C3D4C5A00D8C429 /* ChordPreviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8646B2C1C3D4C5A00D8C429 /* ChordPreviewViewController.xib */; };
@@ -33,7 +35,7 @@
 		D89543791996345200A091A4 /* Equal_TemperamentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89543781996345200A091A4 /* Equal_TemperamentTests.swift */; };
 		D89543861996347F00A091A4 /* EqualTemperamentEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89543831996347F00A091A4 /* EqualTemperamentEntry.swift */; };
 		D89543871996347F00A091A4 /* Rational.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89543841996347F00A091A4 /* Rational.swift */; };
-		D895438A1996354100A091A4 /* Document.xib in Resources */ = {isa = PBXBuildFile; fileRef = D89543881996354100A091A4 /* Document.xib */; };
+		D895438A1996354100A091A4 /* MainWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D89543881996354100A091A4 /* MainWindowController.xib */; };
 		D895438B1996363700A091A4 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89543821996347F00A091A4 /* Document.swift */; };
 		D8AA4E311C131EAA00B66521 /* ViewControllerPlaceHolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AA4E301C131EAA00B66521 /* ViewControllerPlaceHolderView.swift */; };
 		D8AA4E3C1C132A8A00B66521 /* ScaleDisplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AA4E391C132A8A00B66521 /* ScaleDisplayViewController.swift */; };
@@ -72,8 +74,10 @@
 		D80D8C191B80A167001E7746 /* Envelope.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Envelope.swift; sourceTree = "<group>"; };
 		D83092C01AEBBC6F00B0E6A7 /* DisclosureView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisclosureView.swift; sourceTree = "<group>"; };
 		D831054D1B0A6115000EB805 /* HarmonicsDescription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HarmonicsDescription.swift; sourceTree = "<group>"; };
+		D83C4A2B1C8863A00090F939 /* IntervalsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntervalsData.swift; sourceTree = "<group>"; };
 		D849E7301ACADFD1006E0964 /* PrimeProducts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimeProducts.swift; sourceTree = "<group>"; };
 		D85ABE7D1C3FD06800F2DFAF /* ChordOrScaleSelectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChordOrScaleSelectorViewController.swift; sourceTree = "<group>"; };
+		D85C0F661C8848F400FE36FA /* MainWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 		D8646B271C3D23F500D8C429 /* ChordSelectorItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChordSelectorItem.swift; sourceTree = "<group>"; };
 		D8646B2B1C3D4C5A00D8C429 /* ChordPreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChordPreviewViewController.swift; sourceTree = "<group>"; };
 		D8646B2C1C3D4C5A00D8C429 /* ChordPreviewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChordPreviewViewController.xib; sourceTree = "<group>"; };
@@ -99,7 +103,7 @@
 		D89543821996347F00A091A4 /* Document.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
 		D89543831996347F00A091A4 /* EqualTemperamentEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EqualTemperamentEntry.swift; sourceTree = "<group>"; };
 		D89543841996347F00A091A4 /* Rational.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rational.swift; sourceTree = "<group>"; };
-		D89543891996354100A091A4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Document.xib; sourceTree = "<group>"; };
+		D89543891996354100A091A4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainWindowController.xib; sourceTree = "<group>"; };
 		D8AA4E301C131EAA00B66521 /* ViewControllerPlaceHolderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerPlaceHolderView.swift; sourceTree = "<group>"; };
 		D8AA4E391C132A8A00B66521 /* ScaleDisplayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScaleDisplayViewController.swift; sourceTree = "<group>"; };
 		D8AA4E3A1C132A8A00B66521 /* ScaleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScaleViewController.swift; sourceTree = "<group>"; };
@@ -265,7 +269,8 @@
 				D895436B1996345200A091A4 /* MainMenu.xib */,
 				D87651B31ADFCB7D003C4BF2 /* ApplicationDelegate.swift */,
 				D89543821996347F00A091A4 /* Document.swift */,
-				D89543881996354100A091A4 /* Document.xib */,
+				D85C0F661C8848F400FE36FA /* MainWindowController.swift */,
+				D89543881996354100A091A4 /* MainWindowController.xib */,
 				D8B9020C1AD491E30015B5E2 /* PreferencesWindowController.swift */,
 				D8B9020D1AD491E30015B5E2 /* PreferencesWindowController.xib */,
 				D85ABE7D1C3FD06800F2DFAF /* ChordOrScaleSelectorViewController.swift */,
@@ -296,6 +301,7 @@
 		D8B9020B1AD48EFD0015B5E2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D83C4A2B1C8863A00090F939 /* IntervalsData.swift */,
 				D89543831996347F00A091A4 /* EqualTemperamentEntry.swift */,
 				D849E7301ACADFD1006E0964 /* PrimeProducts.swift */,
 				D89543841996347F00A091A4 /* Rational.swift */,
@@ -400,7 +406,7 @@
 				D8B5E23F1B0386F200F20584 /* InitialUserDefaults.plist in Resources */,
 				D87C278A1AF3A95900C2BF7B /* PresetChordsAndScales.plist in Resources */,
 				D8AA4E461C13318300B66521 /* WaveViewController.xib in Resources */,
-				D895438A1996354100A091A4 /* Document.xib in Resources */,
+				D895438A1996354100A091A4 /* MainWindowController.xib in Resources */,
 				D8AA4E3E1C132A8A00B66521 /* ScaleViewController.xib in Resources */,
 				D8AA4E4A1C1337B500B66521 /* SpectrumViewController.xib in Resources */,
 			);
@@ -443,12 +449,14 @@
 				D80989661C85C66B00122857 /* String+Additions.swift in Sources */,
 				D80D8C1A1B80A167001E7746 /* Envelope.swift in Sources */,
 				D8E7C7D71B1CAB99000D745B /* TonePlayer.swift in Sources */,
+				D83C4A2C1C8863A00090F939 /* IntervalsData.swift in Sources */,
 				D8AA4E3D1C132A8A00B66521 /* ScaleViewController.swift in Sources */,
 				D87201061B8C7CAE006FDEDC /* NDMidiNoteFormatter.m in Sources */,
 				D88A62101ACF7F19004CD4C9 /* UInt+Additions.swift in Sources */,
 				D8C343C81AE109E200F5494A /* SpectrumView.swift in Sources */,
 				D87356E71ADA0793006DAFEB /* ChordSelectorWindowController.swift in Sources */,
 				D87651B41ADFCB7D003C4BF2 /* ApplicationDelegate.swift in Sources */,
+				D85C0F671C8848F400FE36FA /* MainWindowController.swift in Sources */,
 				D88A62111AD02167004CD4C9 /* Scale.swift in Sources */,
 				D8AA4E451C13318300B66521 /* WaveViewController.swift in Sources */,
 				D8B14D291B29C68300C971D8 /* Tone.swift in Sources */,
@@ -484,12 +492,12 @@
 			name = MainMenu.xib;
 			sourceTree = "<group>";
 		};
-		D89543881996354100A091A4 /* Document.xib */ = {
+		D89543881996354100A091A4 /* MainWindowController.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				D89543891996354100A091A4 /* Base */,
 			);
-			name = Document.xib;
+			name = MainWindowController.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

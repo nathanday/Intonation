@@ -14,10 +14,13 @@ enum IntervalsFindMethod {
 }
 
 class FindIntervalsViewController: NSViewController {
-	@IBOutlet weak var	document : Document? = nil;
 	@IBOutlet weak var	searchField : NSSearchField? = nil;
 	dynamic var			hidden : Bool = true;
 	dynamic var			ratiosString : String = "";
+
+	var	windowController : MainWindowController? {
+		return self.view.window?.windowController as? MainWindowController
+	}
 
 	var				findMethod = IntervalsFindMethod.findMethodClosest;
 	var				searchValueHaseRoot = true;
@@ -129,9 +132,9 @@ class FindIntervalsViewController: NSViewController {
 	}
 
 	func performFindEntries() {
-		if let theDocument = document {
+		if let theDocument = windowController?.document as? Document {
 			let			theSearchIntervals = theDocument.everyInterval;
-			let			theNumberOfOctaves = theDocument.octavesCount;
+			let			theNumberOfOctaves = theDocument.intervalsData.octavesCount;
 
 			switch findMethod {
 			case .findMethodClosest:

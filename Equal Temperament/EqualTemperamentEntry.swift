@@ -191,7 +191,7 @@ func ==(a: EqualTemperamentEntry, b: EqualTemperamentEntry) -> Bool { return a.j
 
 class EqualTemperamentCollection : CustomStringConvertible {
 	var	everyEqualTemperamentEntry = Set<EqualTemperamentEntry>();
-	var limits : (numeratorPrime:UInt,denominatorPrime:UInt,numeratorOdd:UInt,denominatorOdd:UInt);
+	var limits : (numeratorPrime:UInt,denominatorPrime:UInt,odd:UInt);
 	var maximumError : Double;
 	var intervalCount : UInt;
 	var octaves : UInt;
@@ -250,7 +250,7 @@ class EqualTemperamentCollection : CustomStringConvertible {
 		return theResult;
 	}
 
-	init( limits aLimits : (numeratorPrime:UInt,denominatorPrime:UInt,numeratorOdd:UInt,denominatorOdd:UInt), intervalCount anIntervalCount : UInt, octaves anOctaves : UInt, maximumError anMaximumError: Double, filtered aFiltered: Bool  ) {
+	init( limits aLimits : (numeratorPrime:UInt,denominatorPrime:UInt,odd:UInt), intervalCount anIntervalCount : UInt, octaves anOctaves : UInt, maximumError anMaximumError: Double, filtered aFiltered: Bool  ) {
 		limits = aLimits;
 		intervalCount = anIntervalCount;
 		maximumError = anMaximumError;
@@ -260,8 +260,8 @@ class EqualTemperamentCollection : CustomStringConvertible {
 	}
 
 	private func calculate( ) {
-		for theDenom in PrimeProducts(maxPrime: limits.denominatorPrime, range: 1..<limits.denominatorOdd) {
-			for theNum in PrimeProducts(maxPrime: limits.numeratorPrime, range: theDenom..<min(limits.numeratorOdd,theDenom*2)) {
+		for theDenom in PrimeProducts(maxPrime: limits.denominatorPrime, range: 1..<limits.odd) {
+			for theNum in PrimeProducts(maxPrime: limits.numeratorPrime, range: theDenom..<theDenom*2) {
 				assert(theNum >= theDenom);
 				assert( theNum <= theDenom*2 );
 				for theOctaves in 0..<octaves {
