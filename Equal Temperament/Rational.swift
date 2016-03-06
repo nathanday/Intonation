@@ -13,6 +13,7 @@ struct Rational : CustomStringConvertible, CustomDebugStringConvertible, Hashabl
 	let	numerator:		Int;
 	let	denominator:	Int;
 	var toDouble:		Double { return Double(numerator)/Double(denominator); }
+	var toCents:		Double { return toDouble.toCents; }
 	var toFloat:		Float { return Float(numerator)/Float(denominator); }
 	var toInt:			Int { return numerator/denominator; }
 

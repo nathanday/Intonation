@@ -11,7 +11,11 @@ import Cocoa
 public let PlayBackMethodChangedNotification = "PlayBackMethodChanged";
 public let PlayBackMethodUserInfoKey = "PlayBackMethod";
 
-class Document : NSDocument {
+class Document : NSDocument, MIDIReceiverObserver {
+	var		tonePlayer = TonePlayer();
+	var		midiReceiver = MIDIReceiver(clientName:"Equal Temperament");
+	var		playingRatioForNote : [UInt:EqualTemperamentEntry] = [UInt:EqualTemperamentEntry]();
+
 	var		intervalsData : IntervalsData = IntervalsData() {
 		willSet {
 			removeIntervalsDataObservers();
@@ -71,8 +75,6 @@ class Document : NSDocument {
 	deinit {
 		removeIntervalsDataObservers();
 	}
-
-	var		tonePlayer = TonePlayer();
 
 	var		baseFrequency : Double {
 		get { return intervalsData.baseFrequency; }
@@ -165,6 +167,7 @@ class Document : NSDocument {
 		let		theWindowController = MainWindowController();
 		self.addWindowController(theWindowController);
 		setUpIntervalsDataObservers();
+		midiReceiver.observer = self;
 	}
 
 	dynamic var     everyInterval : [EqualTemperamentEntry] = [];
@@ -213,4 +216,17 @@ class Document : NSDocument {
 		everyInterval = theEntries.everyEntry;
 		selectedEqualTemperamentEntry = theSelectedEntries;
 	}
+
+	// MIDIReceiverObserver methods
+	func midiReceiverNoteOff( aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt, velocity aVelocity: UInt ) {
+		print( "note off, channel=\(aChannel), note=\(aNote), velocity=\(aVelocity)");
+	}
+	func midiReceiverNoteOn( aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt, velocity aVelocity: UInt ) {
+		print( "note on, channel=\(aChannel), note=\(aNote), velocity=\(aVelocity)");
+	}
+	func midiReceiverPolyphonicKeyPressure( aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt, velocity aVelocity: UInt ) { }
+	func midiReceiverControlChange( aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt, velocity aVelocity: UInt ) { }
+	func midiReceiverProgramChange( aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt, velocity aVelocity: UInt ) { }
+	func midiReceiverChannelPressure( aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt, velocity aVelocity: UInt ) { }
+	func midiReceiverPitchBendChange( aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt, velocity aVelocity: UInt ) { }
 }

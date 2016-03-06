@@ -11,3 +11,12 @@ import Foundation
 func square( aValue : CGFloat ) -> CGFloat {
 	return aValue * aValue;
 }
+
+extension Double {
+	static func ratioFor(cents aCents: Double ) -> Double {
+		return Double(pow(2.0,aCents/1200.0));
+	}
+	var toCents : Double {
+		return 1200.0 * log2(self);
+	}
+}

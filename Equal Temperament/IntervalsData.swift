@@ -115,7 +115,9 @@ class IntervalsData: NSObject {
 			return IntervalsData.primeNumber[numeratorPrimeLimitIndex];
 		}
 		set {
-			numeratorPrimeLimitIndex = IntervalsData.indexForLargestPrimeLessThanOrEuqalTo(newValue) ?? 2;
+			willChangeValueForKey("numeratorPrimeLimitIndex");
+			self.numeratorPrimeLimitIndex = IntervalsData.indexForLargestPrimeLessThanOrEuqalTo(newValue) ?? 2;
+			didChangeValueForKey("numeratorPrimeLimitIndex");
 		}
 	}
 	var		numeratorPrimeLimitIndex : Int = 2 {
@@ -132,7 +134,9 @@ class IntervalsData: NSObject {
 			return IntervalsData.primeNumber[denominatorPrimeLimitIndex];
 		}
 		set {
+			willChangeValueForKey("denominatorPrimeLimitIndex");
 			denominatorPrimeLimitIndex = IntervalsData.indexForLargestPrimeLessThanOrEuqalTo(newValue) ?? 2;
+			didChangeValueForKey("denominatorPrimeLimitIndex");
 		}
 	}
 	var		denominatorPrimeLimitIndex : Int = 1 {

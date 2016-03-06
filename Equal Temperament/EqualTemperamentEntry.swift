@@ -8,7 +8,6 @@
 
 import Foundation
 
-func centsEquivelentForRatio( r : Double, n : UInt ) -> Double { return Double(n)*100.0 * log2(r); }
 func ratioForCentsEquivelent( c : Double, n : UInt ) -> Double { return pow(2.0,c/(100.0*Double(n))); }
 
 extension Rational {
@@ -43,11 +42,11 @@ class EqualTemperamentEntry : NSObject {
 	var closestEqualTemperamentIntervalNumber : UInt { return UInt(12.0*Double(log2(justIntonationRatio.toDouble))+0.5); }
 	var closestIntervalNumber : UInt { return UInt(Double(self.intervalCount)*Double(log2(justIntonationRatio.toDouble))+0.5); }
 	var equalTemperamentRatio : Double { return pow(2.0,Double(self.closestEqualTemperamentIntervalNumber)/Double(self.intervalCount)); }
-	var justIntonationCents : Double { return centsEquivelentForRatio( self.justIntonationRatio.toDouble, n: 12 ); }
-	var justIntonationPercent : Double { return centsEquivelentForRatio( self.justIntonationRatio.toDouble, n: self.intervalCount ); }
+	var justIntonationCents : Double { return self.justIntonationRatio.toCents; }
+	var justIntonationPercent : Double { return Double(self.intervalCount)*100.0 * log2(self.justIntonationRatio.toDouble); }
 	var error : Double { return equalTemperamentRatio-justIntonationRatio.toDouble; }
 	var error12ETCent : Double {
-		return centsEquivelentForRatio( justIntonationRatio.toDouble/ratioForCentsEquivelent(Double(closestIntervalNumber)*100.0, n: self.intervalCount ), n: 12 );
+		return (justIntonationRatio.toDouble/ratioForCentsEquivelent(Double(closestIntervalNumber)*100.0, n: self.intervalCount )).toCents;
 	}
 	var oddLimit : UInt { return justIntonationRatio.oddLimit; }
 
@@ -59,7 +58,7 @@ class EqualTemperamentEntry : NSObject {
 	var degreeName : String = "";
 
 	var errorNETCent : Double {
-		return centsEquivelentForRatio(justIntonationRatio.toDouble/ratioForCentsEquivelent(Double(closestIntervalNumber)*100.0, n:intervalCount), n:12);
+		return (justIntonationRatio.toDouble/ratioForCentsEquivelent(Double(closestIntervalNumber)*100.0, n:intervalCount)).toCents;
 	}
 
 	var interval : Interval { return Interval(ratio: self.justIntonationRatio); }

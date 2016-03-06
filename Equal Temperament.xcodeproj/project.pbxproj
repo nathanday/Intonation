@@ -15,6 +15,7 @@
 		D83C4A2C1C8863A00090F939 /* IntervalsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83C4A2B1C8863A00090F939 /* IntervalsData.swift */; };
 		D849E7311ACADFD1006E0964 /* PrimeProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D849E7301ACADFD1006E0964 /* PrimeProducts.swift */; };
 		D84F342B1B08A2C00095D1E8 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89543621996345200A091A4 /* main.swift */; };
+		D85916C31C8C04D0001C5330 /* MIDIReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85916C21C8C04D0001C5330 /* MIDIReceiver.swift */; };
 		D85ABE7F1C3FD06800F2DFAF /* ChordOrScaleSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85ABE7D1C3FD06800F2DFAF /* ChordOrScaleSelectorViewController.swift */; };
 		D85C0F671C8848F400FE36FA /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C0F661C8848F400FE36FA /* MainWindowController.swift */; };
 		D8646B281C3D23F500D8C429 /* ChordSelectorItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8646B271C3D23F500D8C429 /* ChordSelectorItem.swift */; };
@@ -76,6 +77,7 @@
 		D831054D1B0A6115000EB805 /* HarmonicsDescription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HarmonicsDescription.swift; sourceTree = "<group>"; };
 		D83C4A2B1C8863A00090F939 /* IntervalsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntervalsData.swift; sourceTree = "<group>"; };
 		D849E7301ACADFD1006E0964 /* PrimeProducts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimeProducts.swift; sourceTree = "<group>"; };
+		D85916C21C8C04D0001C5330 /* MIDIReceiver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MIDIReceiver.swift; sourceTree = "<group>"; };
 		D85ABE7D1C3FD06800F2DFAF /* ChordOrScaleSelectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChordOrScaleSelectorViewController.swift; sourceTree = "<group>"; };
 		D85C0F661C8848F400FE36FA /* MainWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 		D8646B271C3D23F500D8C429 /* ChordSelectorItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChordSelectorItem.swift; sourceTree = "<group>"; };
@@ -309,6 +311,7 @@
 				D831054D1B0A6115000EB805 /* HarmonicsDescription.swift */,
 				D8D912D11B197D5300BB479A /* TonePlayer.swift */,
 				D8B14D281B29C68300C971D8 /* Tone.swift */,
+				D85916C21C8C04D0001C5330 /* MIDIReceiver.swift */,
 				D80D8C191B80A167001E7746 /* Envelope.swift */,
 				D8646B271C3D23F500D8C429 /* ChordSelectorItem.swift */,
 			);
@@ -441,6 +444,7 @@
 				D8ED76D11C58E59E00BB2B8C /* FindIntervalsWindowController.swift in Sources */,
 				D8AA4E491C1337B500B66521 /* SpectrumViewController.swift in Sources */,
 				D89543861996347F00A091A4 /* EqualTemperamentEntry.swift in Sources */,
+				D85916C31C8C04D0001C5330 /* MIDIReceiver.swift in Sources */,
 				D85ABE7F1C3FD06800F2DFAF /* ChordOrScaleSelectorViewController.swift in Sources */,
 				D89074D81AD5486600FD8A1E /* ResultView.swift in Sources */,
 				D88EED2D1AEE5AF50084BDCB /* Float+Additions.swift in Sources */,
@@ -590,7 +594,7 @@
 				DEFINES_MODULE = YES;
 				INFOPLIST_FILE = "Equal Temperament/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.godofcocoa.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -606,7 +610,7 @@
 				DEFINES_MODULE = YES;
 				INFOPLIST_FILE = "Equal Temperament/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.godofcocoa.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
