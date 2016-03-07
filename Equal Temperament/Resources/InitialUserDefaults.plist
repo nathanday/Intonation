@@ -20,5 +20,7 @@
 	<integer>60</integer>
 	<key>findIntervalesHidded</key>
 	<integer>1</integer>
+	<key>maximumError</key>
+	<integer>18</integer>
 </dict>
 </plist>

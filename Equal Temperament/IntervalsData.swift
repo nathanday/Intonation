@@ -19,7 +19,7 @@ class IntervalsData: NSObject {
 		oddLimit = UInt(NSUserDefaults.standardUserDefaults().integerForKey("oddLimit")) | 1;
 		additiveDissonance = UInt(NSUserDefaults.standardUserDefaults().integerForKey("additiveDissonance")) | 1;
 		octavesCount = min(max(UInt(NSUserDefaults.standardUserDefaults().integerForKey("octavesCount")),1),3);
-		maximumError = Double(NSUserDefaults.standardUserDefaults().integerForKey("maximumError"));
+		maximumError = Double(NSUserDefaults.standardUserDefaults().doubleForKey("maximumError"));
 		filtered = NSUserDefaults.standardUserDefaults().boolForKey("filtered");
 		autoAnchor = NSUserDefaults.standardUserDefaults().boolForKey("autoAnchor");
 		midiAnchor = Int(NSUserDefaults.standardUserDefaults().integerForKey("midiAnchor"));

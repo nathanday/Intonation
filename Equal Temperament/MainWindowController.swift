@@ -12,7 +12,7 @@ class MainWindowController : NSWindowController {
 
 	deinit {
 		NSNotificationCenter.defaultCenter().removeObserver(self);
-		removeObserver(self, forKeyPath: "everyInterval");
+		document?.removeObserver(self, forKeyPath: "everyInterval");
 		splitView?.delegate = nil;
 	}
 
@@ -38,12 +38,12 @@ class MainWindowController : NSWindowController {
 
 	override func awakeFromNib() {
 		super.awakeFromNib();
-		addObserver(self, forKeyPath: "everyInterval", options: NSKeyValueObservingOptions.New, context: nil);
+		document?.addObserver(self, forKeyPath: "everyInterval", options: NSKeyValueObservingOptions.New, context: nil);
 	}
 
 	override func observeValueForKeyPath( aKeyPath: String?, ofObject anObject: AnyObject?, change aChange: [String : AnyObject]?, context aContext: UnsafeMutablePointer<Void>) {
 		if let theDocument = document as? Document {
-			if anObject as? IntervalsData == theDocument.intervalsData {
+			if anObject as? Document == theDocument {
 				if aKeyPath == "everyInterval" {
 					scaleViewController?.setIntervals(intervals: theDocument.everyInterval, intervalCount: theDocument.intervalsData.intervalCount, enabled: theDocument.intervalsData.enableInterval);
 				}
