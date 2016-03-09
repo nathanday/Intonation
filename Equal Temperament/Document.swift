@@ -14,7 +14,8 @@ public let PlayBackMethodUserInfoKey = "PlayBackMethod";
 class Document : NSDocument, MIDIReceiverObserver {
 	var		tonePlayer = TonePlayer();
 	var		midiReceiver = MIDIReceiver(clientName:"Equal Temperament");
-	var		playingRatioForNote : [UInt:EqualTemperamentEntry] = [UInt:EqualTemperamentEntry]();
+	var		midiToHarmonicRatio = MIDIToHarmonicRatio();
+
 
 	var		intervalsData : IntervalsData = IntervalsData() {
 		willSet {
@@ -76,14 +77,13 @@ class Document : NSDocument, MIDIReceiverObserver {
 		removeIntervalsDataObservers();
 	}
 
-	var		baseFrequency : Double {
+	dynamic var		baseFrequency : Double {
 		get { return intervalsData.baseFrequency; }
 		set( aValue ) {
 			let		theValue = max(min(aValue,IntervalsData.maximumBaseFrequency), IntervalsData.minimumBaseFrequency);
-			self.willChangeValueForKey("baseFrequency");
 			intervalsData.baseFrequency = theValue;
 			tonePlayer.baseFrequency = intervalsData.baseFrequency;
-			self.didChangeValueForKey("baseFrequency");
+			midiToHarmonicRatio.baseFrequency = intervalsData.baseFrequency;
 		}
 	}
 	var		allOvertonesAmount : Double {
@@ -183,7 +183,24 @@ class Document : NSDocument, MIDIReceiverObserver {
 		didSet { self.didChangeValueForKey("biggestError"); }
 	}
 
-	var		selectedIndicies = NSIndexSet();
+	func	indexFor(equalTemperamentEntry anEqualTemperamentEntry: EqualTemperamentEntry) -> Int? {
+		return everyInterval.indexOf(anEqualTemperamentEntry);
+	}
+	func	select( index anIndex: Int ) {
+		let		theIndicies = NSMutableIndexSet(indexSet: selectedIndicies);
+		theIndicies.addIndex(anIndex);
+		selectedIndicies = theIndicies;
+	}
+	func	unselect( index anIndex: Int ) {
+		let		theIndicies = NSMutableIndexSet(indexSet: selectedIndicies);
+		theIndicies.removeIndex(anIndex);
+		selectedIndicies = theIndicies;
+	}
+	dynamic var		selectedIndicies = NSIndexSet() {
+		didSet {
+			tonePlayer.intervals = selectedJustIntonationIntervals;
+		}
+	}
 	var		selectedEqualTemperamentEntry : [EqualTemperamentEntry] {
 		set(anEqualTemperamentEntries) {
 			let		theIndicies = NSMutableIndexSet();
@@ -219,14 +236,16 @@ class Document : NSDocument, MIDIReceiverObserver {
 
 	// MIDIReceiverObserver methods
 	func midiReceiverNoteOff( aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt, velocity aVelocity: UInt ) {
-		print( "note off, channel=\(aChannel), note=\(aNote), velocity=\(aVelocity)");
+		if let theEntry = midiToHarmonicRatio.popRatioFor(midiNote: aNote) {
+			if let theIndex = indexFor(equalTemperamentEntry: theEntry) {
+				unselect(index: theIndex);
+			}
+		}
 	}
 	func midiReceiverNoteOn( aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt, velocity aVelocity: UInt ) {
-		print( "note on, channel=\(aChannel), note=\(aNote), velocity=\(aVelocity)");
+		let		theEntry = midiToHarmonicRatio.pushRatioFor(midiNote: aNote, everyInterval: everyInterval );
+		if let theIndex = indexFor(equalTemperamentEntry: theEntry) {
+			select(index: theIndex);
+		}
 	}
-	func midiReceiverPolyphonicKeyPressure( aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt, velocity aVelocity: UInt ) { }
-	func midiReceiverControlChange( aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt, velocity aVelocity: UInt ) { }
-	func midiReceiverProgramChange( aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt, velocity aVelocity: UInt ) { }
-	func midiReceiverChannelPressure( aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt, velocity aVelocity: UInt ) { }
-	func midiReceiverPitchBendChange( aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt, velocity aVelocity: UInt ) { }
 }

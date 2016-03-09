@@ -39,6 +39,7 @@ class MainWindowController : NSWindowController {
 	override func awakeFromNib() {
 		super.awakeFromNib();
 		document?.addObserver(self, forKeyPath: "everyInterval", options: NSKeyValueObservingOptions.New, context: nil);
+		document?.addObserver(self, forKeyPath: "selectedIndicies", options: NSKeyValueObservingOptions.New, context: nil);
 	}
 
 	override func observeValueForKeyPath( aKeyPath: String?, ofObject anObject: AnyObject?, change aChange: [String : AnyObject]?, context aContext: UnsafeMutablePointer<Void>) {
@@ -46,38 +47,25 @@ class MainWindowController : NSWindowController {
 			if anObject as? Document == theDocument {
 				if aKeyPath == "everyInterval" {
 					scaleViewController?.setIntervals(intervals: theDocument.everyInterval, intervalCount: theDocument.intervalsData.intervalCount, enabled: theDocument.intervalsData.enableInterval);
+				} else if aKeyPath == "selectedIndicies" {
+					let		theSelectedIntervals = theDocument.selectedJustIntonationIntervals;
+					arrayController?.setSelectionIndexes(theDocument.selectedIndicies);
+					updateChordRatioTitle();
+					assert(scaleViewController != nil, "Failed to get ScaleViewController")
+					scaleViewController?.setSelectionIntervals(theSelectedIntervals);
+					assert(harmonicViewController != nil, "Failed to get HarmonicViewController")
+					harmonicViewController?.setSelectionIntervals(theSelectedIntervals);
+					assert(waveViewController != nil, "Failed to get WaveViewController")
+					waveViewController?.setSelectionIntervals(theSelectedIntervals);
+					assert(spectrumViewController != nil, "Failed to get SpectrumViewController")
+					spectrumViewController?.setSelectionIntervals(theSelectedIntervals);
 				}
 			}
 		}
 	}
 
-	var		selectedIndicies : [Int] {
-		var		theResult : [Int] = [];
-		if let theTableView = tableView {
-			for theIndex in theTableView.selectedRowIndexes {
-				theResult.append(theIndex);
-			}
-		}
-		return theResult;
-	}
-	var		selectedEqualTemperamentEntry : [EqualTemperamentEntry] {
-		set(anEqualTemperamentEntries) {
-			if let theArrangedController = arrayController  {
-				let		theIndicies = NSMutableIndexSet();
-				for theEntry in anEqualTemperamentEntries {
-					if let theIndex = (document as? Document)?.everyInterval.indexOf(theEntry) {
-						theIndicies.addIndex(theIndex);
-					}
-				}
-				theArrangedController.setSelectionIndexes(theIndicies);
-			}
-		}
-		get {
-			return arrayController?.selectedObjects as? [EqualTemperamentEntry] ?? Array<EqualTemperamentEntry>();
-		}
-	}
 	var		selectedJustIntonationIntervals : [Interval] {
-		return selectedEqualTemperamentEntry.map { return $0.interval; };
+		return (document as! Document).selectedEqualTemperamentEntry.map { return $0.interval; };
 	}
 	dynamic var		enableInterval : Bool = true {
 		didSet {
@@ -281,17 +269,10 @@ extension MainWindowController : NSTableViewDelegate {
 	}
 
 	func tableViewSelectionDidChange(notification: NSNotification) {
-		let		theSelectedIntervals = selectedJustIntonationIntervals;
-		updateChordRatioTitle();
-		assert(scaleViewController != nil, "Failed to get ScaleViewController")
-		scaleViewController?.setSelectionIntervals(theSelectedIntervals);
-		assert(harmonicViewController != nil, "Failed to get HarmonicViewController")
-		harmonicViewController?.setSelectionIntervals(theSelectedIntervals);
-		assert(waveViewController != nil, "Failed to get WaveViewController")
-		waveViewController?.setSelectionIntervals(theSelectedIntervals);
-		assert(spectrumViewController != nil, "Failed to get SpectrumViewController")
-		spectrumViewController?.setSelectionIntervals(theSelectedIntervals);
-		(document as? Document)?.tonePlayer.intervals = theSelectedIntervals;
+		if let theSelectedIntervals = arrayController?.selectionIndexes,
+			theDocument = document as? Document {
+			theDocument.selectedIndicies = theSelectedIntervals;
+		}
 	}
 
 	func tableViewColumnDidResize(aNotification: NSNotification) {
