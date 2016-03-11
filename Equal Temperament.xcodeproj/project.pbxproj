@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		D809895E1C85A27700122857 /* Int+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D809895D1C85A27700122857 /* Int+Additions.swift */; };
 		D80989661C85C66B00122857 /* String+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80989651C85C66B00122857 /* String+Additions.swift */; };
+		D80A61D61C9040C000A2F885 /* SelectDocumentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80A61D41C9040C000A2F885 /* SelectDocumentType.swift */; };
+		D80A61D71C9040C000A2F885 /* SelectDocumentType.xib in Resources */ = {isa = PBXBuildFile; fileRef = D80A61D51C9040C000A2F885 /* SelectDocumentType.xib */; };
 		D80D8C1A1B80A167001E7746 /* Envelope.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80D8C191B80A167001E7746 /* Envelope.swift */; };
 		D83092C11AEBBC6F00B0E6A7 /* DisclosureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83092C01AEBBC6F00B0E6A7 /* DisclosureView.swift */; };
 		D831054E1B0A6115000EB805 /* HarmonicsDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = D831054D1B0A6115000EB805 /* HarmonicsDescription.swift */; };
@@ -73,6 +75,8 @@
 /* Begin PBXFileReference section */
 		D809895D1C85A27700122857 /* Int+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Int+Additions.swift"; sourceTree = "<group>"; };
 		D80989651C85C66B00122857 /* String+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Additions.swift"; sourceTree = "<group>"; };
+		D80A61D41C9040C000A2F885 /* SelectDocumentType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectDocumentType.swift; sourceTree = "<group>"; };
+		D80A61D51C9040C000A2F885 /* SelectDocumentType.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectDocumentType.xib; sourceTree = "<group>"; };
 		D80D8C191B80A167001E7746 /* Envelope.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Envelope.swift; sourceTree = "<group>"; };
 		D83092C01AEBBC6F00B0E6A7 /* DisclosureView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisclosureView.swift; sourceTree = "<group>"; };
 		D831054D1B0A6115000EB805 /* HarmonicsDescription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HarmonicsDescription.swift; sourceTree = "<group>"; };
@@ -283,6 +287,8 @@
 				D8646B2B1C3D4C5A00D8C429 /* ChordPreviewViewController.swift */,
 				D8646B2C1C3D4C5A00D8C429 /* ChordPreviewViewController.xib */,
 				D8ED76CF1C58E59E00BB2B8C /* FindIntervalsWindowController.swift */,
+				D80A61D41C9040C000A2F885 /* SelectDocumentType.swift */,
+				D80A61D51C9040C000A2F885 /* SelectDocumentType.xib */,
 				D8AA4E381C132A6200B66521 /* ScaleDisplayViewController */,
 				D8AA4E4B1C13405F00B66521 /* GeneratorViewControllers */,
 			);
@@ -414,6 +420,7 @@
 				D8AA4E461C13318300B66521 /* WaveViewController.xib in Resources */,
 				D895438A1996354100A091A4 /* MainWindowController.xib in Resources */,
 				D8AA4E3E1C132A8A00B66521 /* ScaleViewController.xib in Resources */,
+				D80A61D71C9040C000A2F885 /* SelectDocumentType.xib in Resources */,
 				D8AA4E4A1C1337B500B66521 /* SpectrumViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -441,6 +448,7 @@
 				D83092C11AEBBC6F00B0E6A7 /* DisclosureView.swift in Sources */,
 				D8B9020E1AD491E30015B5E2 /* PreferencesWindowController.swift in Sources */,
 				D8E5E6241AD12F7A004DB02D /* HarmonicView.swift in Sources */,
+				D80A61D61C9040C000A2F885 /* SelectDocumentType.swift in Sources */,
 				D831054E1B0A6115000EB805 /* HarmonicsDescription.swift in Sources */,
 				D8AA4E3C1C132A8A00B66521 /* ScaleDisplayViewController.swift in Sources */,
 				D8646B281C3D23F500D8C429 /* ChordSelectorItem.swift in Sources */,

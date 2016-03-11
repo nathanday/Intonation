@@ -8,6 +8,38 @@
 
 import Cocoa
 
+enum DocumentType {
+	case Limits;
+	case StackedIntervals;
+	case Preset;
+	case Adhock;
+	static func fromString( aStringValue : String? ) -> DocumentType? {
+		var		theResult : DocumentType? = nil;
+		if aStringValue == "limits" {
+			theResult = .Limits;
+		} else if aStringValue == "stackedIntervals" {
+			theResult = .StackedIntervals;
+		} else if aStringValue == "preset" {
+			theResult = .Preset;
+		} else if aStringValue == "adhock" {
+			theResult = .Adhock;
+		}
+		return theResult;
+	}
+	func toString() -> String {
+		switch self {
+		case Limits:
+			return "limits";
+		case StackedIntervals:
+			return "stackedIntervals";
+		case Preset:
+			return "preset";
+		case Adhock:
+			return "adhock";
+		}
+	}
+}
+
 class IntervalsData: NSObject {
 	static let		minimumBaseFrequency = 20.0;
 	static let		maximumBaseFrequency = 4_200.0;
@@ -26,8 +58,7 @@ class IntervalsData: NSObject {
 	}
 
 	init(withPropertyList aPropertyList: [String:AnyObject] ) {
-		if let theSelectedMethod = aPropertyList["selectedMethod"] as? UInt,
-			theIntervalCount = aPropertyList["intervalCount"] as? UInt,
+		if let theIntervalCount = aPropertyList["intervalCount"] as? UInt,
 			theLimits = aPropertyList["limits"] as? [String:UInt],
 			theEnableInterval = aPropertyList["enableInterval"] as? Bool,
 			themMaximumError = aPropertyList["maximumError"] as? Double,
@@ -37,7 +68,6 @@ class IntervalsData: NSObject {
 			theMidiAnchor = aPropertyList["midiAnchor"] as? Int,
 			theTone = aPropertyList["tone"] as? [String:AnyObject]
 		{
-			selectedMethod = theSelectedMethod;
 			intervalCount = theIntervalCount
 			if let theNumeratorPrimeLimit = theLimits["numeratorPrime"] {
 				numeratorPrimeLimitIndex = IntervalsData.indexForLargestPrimeLessThanOrEuqalTo(theNumeratorPrimeLimit) ?? 2;
@@ -68,14 +98,8 @@ class IntervalsData: NSObject {
 	}
 
 	var propertyListValue : [String:AnyObject] {
-		return [
-			"selectedMethod":selectedMethod,
+		var		theResult : [String:AnyObject] = [
 			"intervalCount":intervalCount,
-			"limits":[
-				"numeratorPrime":numeratorPrimeLimit,
-				"denominatorPrime":denominatorPrimeLimit,
-				"oddLimit":oddLimit,
-				"additiveDissonance":additiveDissonance],
 			"enableInterval":enableInterval,
 			"maximumError":maximumError,
 			"filtered":filtered,
@@ -88,6 +112,24 @@ class IntervalsData: NSObject {
 				"evenOvertonesAmount":overtones.evenAmount
 			]
 		];
+		if let theDocumentType = documentType {
+			theResult["documentType"] = theDocumentType.toString();
+			switch theDocumentType {
+			case .Limits:
+				theResult["limits"] = [
+					"numeratorPrime":numeratorPrimeLimit,
+					"denominatorPrime":denominatorPrimeLimit,
+					"oddLimit":oddLimit,
+					"additiveDissonance":additiveDissonance];
+			case .StackedIntervals:
+				break;
+			case .Preset:
+				break;
+			case .Adhock:
+				break;
+			}
+		}
+		return theResult;
 	}
 
 	static var		primeNumber = UInt.primes(upTo: 100 );
@@ -98,7 +140,7 @@ class IntervalsData: NSObject {
 		return nil;
 	}
 
-	var		selectedMethod : UInt = 0;
+	var		documentType : DocumentType?;
 	var		intervalCount : UInt = 12 {
 		didSet {
 			enableInterval = true;

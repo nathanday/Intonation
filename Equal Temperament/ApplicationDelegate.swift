@@ -30,5 +30,4 @@ class ApplicationDelegate: NSObject {
 	@IBAction func showChordSelectorAction( aSender: AnyObject? ) {
 		chordSelectorWindowController.toggleWindow(aSender);
 	}
-
 }

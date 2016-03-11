@@ -31,7 +31,7 @@ class Document : NSDocument, MIDIReceiverObserver {
 
 	override func observeValueForKeyPath( aKeyPath: String?, ofObject anObject: AnyObject?, change aChange: [String : AnyObject]?, context aContext: UnsafeMutablePointer<Void>) {
 		if anObject as? IntervalsData == intervalsData {
-			let theMatchingKeys : Set = ["selectedMethod", "intervalCount", "octavesCount", "numeratorPrimeLimitIndex", "denominatorPrimeLimitIndex", "separatePrimeLimit", "oddLimit", "additiveDissonance", "maximumError", "filtered"];
+			let theMatchingKeys : Set = ["documentType","intervalCount", "octavesCount", "numeratorPrimeLimitIndex", "denominatorPrimeLimitIndex", "separatePrimeLimit", "oddLimit", "additiveDissonance", "maximumError", "filtered"];
 			if let theKey = aKeyPath {
 				if theMatchingKeys.contains(theKey) {
 					if aChange?[NSKeyValueChangeNotificationIsPriorKey] != nil {
@@ -48,7 +48,7 @@ class Document : NSDocument, MIDIReceiverObserver {
 	}
 
 	func setUpIntervalsDataObservers() {
-		intervalsData.addObserver(self, forKeyPath:"selectedMethod", options: NSKeyValueObservingOptions.Prior, context:nil)
+		intervalsData.addObserver(self, forKeyPath:"documentType", options: NSKeyValueObservingOptions.Prior, context:nil)
 		intervalsData.addObserver(self, forKeyPath:"intervalCount", options: NSKeyValueObservingOptions.Prior, context:nil)
 		intervalsData.addObserver(self, forKeyPath:"octavesCount", options: NSKeyValueObservingOptions.Prior, context:nil)
 		intervalsData.addObserver(self, forKeyPath:"numeratorPrimeLimitIndex", options: NSKeyValueObservingOptions.Prior, context:nil)
@@ -61,7 +61,7 @@ class Document : NSDocument, MIDIReceiverObserver {
 	}
 
 	func removeIntervalsDataObservers() {
-		intervalsData.removeObserver(self, forKeyPath:"selectedMethod");
+		intervalsData.removeObserver(self, forKeyPath:"documentType");
 		intervalsData.removeObserver(self, forKeyPath:"intervalCount");
 		intervalsData.removeObserver(self, forKeyPath:"octavesCount");
 		intervalsData.removeObserver(self, forKeyPath:"numeratorPrimeLimitIndex");
