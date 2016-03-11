@@ -41,8 +41,8 @@ enum DocumentType {
 }
 
 class IntervalsData: NSObject {
-	static let		minimumBaseFrequency = 20.0;
-	static let		maximumBaseFrequency = 4_200.0;
+	static let		minimumBaseFrequency = 16.0;
+	static let		maximumBaseFrequency = 12_544.0;
 
 	override init() {
 		numeratorPrimeLimitIndex = IntervalsData.indexForLargestPrimeLessThanOrEuqalTo(UInt(NSUserDefaults.standardUserDefaults().integerForKey("numeratorPrimeLimit"))) ?? 2;

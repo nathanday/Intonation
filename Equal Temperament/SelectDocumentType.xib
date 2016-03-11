@@ -23,7 +23,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="472" height="384"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <scrollView autohidesScrollers="YES" horizontalLineScroll="69" horizontalPageScroll="10" verticalLineScroll="69" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pOd-Mm-wr7">
+                    <scrollView autohidesScrollers="YES" horizontalLineScroll="69" horizontalPageScroll="10" verticalLineScroll="69" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" verticalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="pOd-Mm-wr7">
                         <rect key="frame" x="20" y="61" width="432" height="278"/>
                         <clipView key="contentView" drawsBackground="NO" id="CuF-Ki-0xW">
                             <rect key="frame" x="1" y="1" width="430" height="276"/>
@@ -114,10 +114,11 @@ Description&gt;</string>
                         <constraints>
                             <constraint firstAttribute="height" constant="278" placeholder="YES" id="CLB-W7-WxA"/>
                             <constraint firstAttribute="width" constant="432" id="ZmE-gm-Qo6"/>
-                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="112" id="has-Xh-XRu"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="69" id="has-Xh-XRu"/>
+                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="278" id="oi0-5w-JpV"/>
                         </constraints>
                         <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="EhP-ym-dyM">
-                            <rect key="frame" x="1" y="282" width="430" height="16"/>
+                            <rect key="frame" x="-100" y="-100" width="430" height="16"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                         <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="DpQ-f5-T4m">

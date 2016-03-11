@@ -8,7 +8,14 @@
 
 import Cocoa
 
+func frequencyForMIDINote( aMIDINote : Int ) -> Double {
+	let		theBase = 440.0/pow(2.0,(69.0/12.0));
+	return pow(2.0,(Double(aMIDINote)/12.0))*theBase;
+}
+
 class MainWindowController : NSWindowController {
+
+	static let		midiSelectBounds : Range<Int> = 12...108;
 
 	deinit {
 		NSNotificationCenter.defaultCenter().removeObserver(self);
@@ -72,6 +79,22 @@ class MainWindowController : NSWindowController {
 			hideIntervalRelatedColumn(!enableInterval);
 		}
 	}
+	dynamic var		midiNoteNotes : [String] = {
+		let		theNoteNames = ["C", "C♯", "D", "D♯", "E", "F", "F♯", "G", "G♯", "A", "A♯", "B"];
+		var		theResult = ["Select Note"];
+		for theNoteNumber in MainWindowController.midiSelectBounds {
+			let		theOctave = theNoteNumber/theNoteNames.count;
+			var		theNoteName = "\(theNoteNames[theNoteNumber%theNoteNames.count])\(theOctave)";
+			if theNoteNumber == 60 {
+				theNoteName = "\(theNoteName) middle";
+			} else if theNoteNumber == 69 {
+				theNoteName = "\(theNoteName) 440Hz";
+			}
+			theResult.append(theNoteName);
+		}
+		return theResult;
+	}();
+
 	/*
 	Disclosure views
 	*/
@@ -228,6 +251,13 @@ class MainWindowController : NSWindowController {
 		findIntervalsViewController?.showView()
 	}
 
+	@IBAction func selectMIDINoteForBaseFrequencyAction( aSender : NSPopUpButton? ) {
+		if let theDocument = document as? Document,
+			theSelectedIndex = aSender?.indexOfSelectedItem {
+			theDocument.baseFrequency = frequencyForMIDINote(theSelectedIndex-1+MainWindowController.midiSelectBounds.startIndex);
+		}
+	}
+
 	override var windowNibName: String! { return "MainWindowController"; }
 
 	override func windowDidLoad() {
@@ -241,6 +271,7 @@ class MainWindowController : NSWindowController {
 							self.willChangeValueForKey("documentTypeString");
 							theDocument.intervalsData.documentType = aType;
 							self.didChangeValueForKey("documentTypeString");
+							theDocument.calculateAllIntervals();
 						}
 						else {
 							self.close();
