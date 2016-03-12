@@ -38,6 +38,26 @@ enum DocumentType {
 			return "adhock";
 		}
 	}
+	func intervalsDataGenerator(intervalsData anIntervalsData: IntervalsData) -> IntervalsDataGenerator {
+		switch self {
+		case Limits:
+			return LimitsBasedGenerator(intervalsData:anIntervalsData);
+		case StackedIntervals:
+			return LimitsBasedGenerator(intervalsData:anIntervalsData);
+		case Preset:
+			return LimitsBasedGenerator(intervalsData:anIntervalsData);
+		case Adhock:
+			return LimitsBasedGenerator(intervalsData:anIntervalsData);
+		}
+	}
+}
+
+
+protocol IntervalsDataGenerator : CustomStringConvertible {
+	var averageError : Double { get }
+	var smallestError : Set<EqualTemperamentEntry> { get }
+	var biggestError : Set<EqualTemperamentEntry> { get }
+	var everyEntry : [EqualTemperamentEntry] { get }
 }
 
 class IntervalsData: NSObject {

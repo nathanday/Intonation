@@ -60,6 +60,7 @@
 		D8E5E6271AD130DE004DB02D /* ScaleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E5E6251AD130DE004DB02D /* ScaleView.swift */; };
 		D8E7C7D71B1CAB99000D745B /* TonePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D912D11B197D5300BB479A /* TonePlayer.swift */; };
 		D8ED76D11C58E59E00BB2B8C /* FindIntervalsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8ED76CF1C58E59E00BB2B8C /* FindIntervalsWindowController.swift */; };
+		D8F2B1D61C93EFD800F88BF7 /* LimitsBasedGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F2B1D51C93EFD800F88BF7 /* LimitsBasedGenerator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -131,6 +132,7 @@
 		D8E5E6231AD12F7A004DB02D /* HarmonicView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HarmonicView.swift; sourceTree = "<group>"; };
 		D8E5E6251AD130DE004DB02D /* ScaleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScaleView.swift; sourceTree = "<group>"; };
 		D8ED76CF1C58E59E00BB2B8C /* FindIntervalsWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindIntervalsWindowController.swift; sourceTree = "<group>"; };
+		D8F2B1D51C93EFD800F88BF7 /* LimitsBasedGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LimitsBasedGenerator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -313,6 +315,7 @@
 			children = (
 				D83C4A2B1C8863A00090F939 /* IntervalsData.swift */,
 				D89543831996347F00A091A4 /* EqualTemperamentEntry.swift */,
+				D8F2B1D51C93EFD800F88BF7 /* LimitsBasedGenerator.swift */,
 				D849E7301ACADFD1006E0964 /* PrimeProducts.swift */,
 				D89543841996347F00A091A4 /* Rational.swift */,
 				D8901EBC1ABC226D00A4E071 /* Scale.swift */,
@@ -460,6 +463,7 @@
 				D85ABE7F1C3FD06800F2DFAF /* ChordOrScaleSelectorViewController.swift in Sources */,
 				D89074D81AD5486600FD8A1E /* ResultView.swift in Sources */,
 				D88EED2D1AEE5AF50084BDCB /* Float+Additions.swift in Sources */,
+				D8F2B1D61C93EFD800F88BF7 /* LimitsBasedGenerator.swift in Sources */,
 				D895438B1996363700A091A4 /* Document.swift in Sources */,
 				D8E5E6271AD130DE004DB02D /* ScaleView.swift in Sources */,
 				D80989661C85C66B00122857 /* String+Additions.swift in Sources */,

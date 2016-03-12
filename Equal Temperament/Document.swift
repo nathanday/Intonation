@@ -224,14 +224,15 @@ class Document : NSDocument, MIDIReceiverObserver {
 	}
 
 	func calculateAllIntervals() {
-		let		theSelectedEntries = selectedEqualTemperamentEntry;
-		let		theDenominatorPrimeLimit = intervalsData.separatePrimeLimit ? intervalsData.denominatorPrimeLimit : intervalsData.numeratorPrimeLimit;
-		let		theEntries = EqualTemperamentCollection(limits: (numeratorPrime:intervalsData.numeratorPrimeLimit, denominatorPrime:theDenominatorPrimeLimit, odd:intervalsData.oddLimit, additiveDissonance:intervalsData.additiveDissonance), intervalCount: intervalsData.enableInterval ? intervalsData.intervalCount : 0, octaves: intervalsData.octavesCount, maximumError: intervalsData.maximumError, filtered: intervalsData.filtered );
-		smallestErrorEntries = theEntries.smallestError;
-		biggestErrorEntries = theEntries.biggestError;
-		averageError = theEntries.averageError;
-		everyInterval = theEntries.everyEntry;
-		selectedEqualTemperamentEntry = theSelectedEntries;
+		if let theDocumentType = intervalsData.documentType {
+			let		theSelectedEntries = selectedEqualTemperamentEntry;
+			let		theEntries = theDocumentType.intervalsDataGenerator( intervalsData: intervalsData );
+			smallestErrorEntries = theEntries.smallestError;
+			biggestErrorEntries = theEntries.biggestError;
+			averageError = theEntries.averageError;
+			everyInterval = theEntries.everyEntry;
+			selectedEqualTemperamentEntry = theSelectedEntries;
+		}
 	}
 
 	// MIDIReceiverObserver methods
