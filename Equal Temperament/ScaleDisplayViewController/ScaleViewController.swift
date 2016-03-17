@@ -38,8 +38,8 @@ class ScaleViewController: NSViewController, ScaleDisplayViewController {
 	}
 
 	func setSelectionIntervals( aSelectionIntervals : [Interval]) {
-		linearScaleView?.selectedRatios = aSelectionIntervals.map({ return $0.ratio; });
-		pitchConstellationView?.selectedRatios = aSelectionIntervals.map({ return $0.ratio; });
+		linearScaleView?.selectedRatios = aSelectionIntervals;
+		pitchConstellationView?.selectedRatios = aSelectionIntervals;
 	}
 
 }

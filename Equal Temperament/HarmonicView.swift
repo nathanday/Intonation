@@ -50,7 +50,7 @@ class HarmonicView: ResultView {
 		}
 	}
 
-	override var	selectedRatios : [Rational] {
+	override var	selectedRatios : [Interval] {
 		didSet(aValue) {
 			updateOctaveRange();
 			setNeedsDisplay();
@@ -157,7 +157,7 @@ class HarmonicView: ResultView {
 			thePath.stroke()
 		}
 
-		func drawRatio( aRatio: Rational, index anIndex: Int, of anOf: Int ) {
+		func drawRatio( aRatio: Interval, index anIndex: Int, of anOf: Int ) {
 			let		theYDenom = yValueForHarmonic( UInt(commonFactor), bounds: theBounds );
 			let		theSize = NSFont.systemFontSizeForControlSize(NSControlSize.SmallControlSize);
 			if aRatio == 1 {

@@ -14,15 +14,20 @@ import Cocoa
 		get {
 			var		theResult = 1;
 			for theValue in selectedRatios {
-				theResult *= theValue.denominator/greatestCommonDivisor(theResult, theValue.denominator);
+				if let theRationalValue = theValue as? RationalInterval {
+					theResult *= theRationalValue.denominator/greatestCommonDivisor(theResult, theRationalValue.denominator);
+				} else {
+					theResult = Int.max;
+					break;
+				}
 			}
 			return theResult;
 		}
 	}
-	var		selectedRatios : [Rational] = [] {
+	var		selectedRatios : [Interval] = [] {
 		didSet { setNeedsDisplay(); }
 	}
-	var		everyRatios : [Rational] = [] {
+	var		everyRatios : [Interval] = [] {
 		didSet { setNeedsDisplay(); }
 	}
 

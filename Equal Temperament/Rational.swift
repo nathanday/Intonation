@@ -25,6 +25,9 @@ struct Rational : CustomStringConvertible, CustomDebugStringConvertible, Hashabl
 		numerator = aRational.numerator;
 		denominator = aRational.denominator;
 	}
+	init( _ aNumerator: UInt, _ aDenominator: UInt) {
+		self.init( Int(aNumerator), Int(aDenominator) );
+	}
     init( _ aNumerator: Int, _ aDenominator: Int) {
 		let		theNumerator = aDenominator < 0 ? -aNumerator : aNumerator;
 		let		theDenominator = abs(aDenominator);
@@ -32,12 +35,21 @@ struct Rational : CustomStringConvertible, CustomDebugStringConvertible, Hashabl
         numerator = theNumerator/theCommonDivisor;
         denominator = theDenominator/theCommonDivisor;
     }
+	init?( _ aString: String ) {
+		let		theComponents = aString.componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: ":/∶"));
+		let		theDenom = theComponents.count > 1 ? Int( theComponents[1] ) : 1;
+		if let theNum = Int(theComponents[0]) {
+			self.init( theNum, theDenom ?? 1 );
+		} else {
+			return nil;
+		}
+	}
 
 	func numeratorForDenominator( aDenominator: Int ) -> Int? {
 		return aDenominator != 0 && aDenominator%denominator == 0 ? numerator*(aDenominator/denominator) : nil;
 	}
 
-	var toString: String { return "\(numerator)\\\(denominator)"; }
+	var toString: String { return "\(numerator)/\(denominator)"; }
 	var ratioString: String { return "\(numerator)∶\(denominator)"; }
 
 	var hashValue: Int { return Int(numerator)^Int(denominator); }
@@ -48,35 +60,6 @@ struct Rational : CustomStringConvertible, CustomDebugStringConvertible, Hashabl
 	}
 	var factorsString : String {
 		return "\(UInt(numerator).factorsString)∶\(UInt(denominator).factorsString)";
-	}
-}
-
-enum Ratio {
-	case irrational(Double);
-	case rational(Rational);
-	var toDouble : Double {
-		switch self {
-		case .irrational( let x ):
-			return x;
-		case .rational( let x ):
-			return x.toDouble;
-		}
-	}
-	var toString : String {
-		switch self {
-		case .irrational( let x ):
-			return "\(x)";
-		case .rational( let x ):
-			return "\(x.numerator)∶\(x.denominator)";
-		}
-	}
-	var isRational : Bool {
-		switch self {
-		case .irrational:
-			return false;
-		case .rational:
-			return true;
-		}
 	}
 }
 

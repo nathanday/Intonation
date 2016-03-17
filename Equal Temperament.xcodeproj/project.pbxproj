@@ -17,6 +17,8 @@
 		D83B54B11C8D96C500624A46 /* MIDIToHarmonicRatio.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83B54B01C8D96C500624A46 /* MIDIToHarmonicRatio.swift */; };
 		D83C4A2C1C8863A00090F939 /* IntervalsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83C4A2B1C8863A00090F939 /* IntervalsData.swift */; };
 		D849E7311ACADFD1006E0964 /* PrimeProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D849E7301ACADFD1006E0964 /* PrimeProducts.swift */; };
+		D84CE1E21C95960E00E19505 /* AdHocGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CE1E11C95960E00E19505 /* AdHocGenerator.swift */; };
+		D84CE1E41C95967700E19505 /* IntervalsDataGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CE1E31C95967700E19505 /* IntervalsDataGenerator.swift */; };
 		D84F342B1B08A2C00095D1E8 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89543621996345200A091A4 /* main.swift */; };
 		D85916C31C8C04D0001C5330 /* MIDIReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85916C21C8C04D0001C5330 /* MIDIReceiver.swift */; };
 		D85ABE7F1C3FD06800F2DFAF /* ChordOrScaleSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85ABE7D1C3FD06800F2DFAF /* ChordOrScaleSelectorViewController.swift */; };
@@ -84,6 +86,8 @@
 		D83B54B01C8D96C500624A46 /* MIDIToHarmonicRatio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MIDIToHarmonicRatio.swift; sourceTree = "<group>"; };
 		D83C4A2B1C8863A00090F939 /* IntervalsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntervalsData.swift; sourceTree = "<group>"; };
 		D849E7301ACADFD1006E0964 /* PrimeProducts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimeProducts.swift; sourceTree = "<group>"; };
+		D84CE1E11C95960E00E19505 /* AdHocGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdHocGenerator.swift; sourceTree = "<group>"; };
+		D84CE1E31C95967700E19505 /* IntervalsDataGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntervalsDataGenerator.swift; sourceTree = "<group>"; };
 		D85916C21C8C04D0001C5330 /* MIDIReceiver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MIDIReceiver.swift; sourceTree = "<group>"; };
 		D85ABE7D1C3FD06800F2DFAF /* ChordOrScaleSelectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChordOrScaleSelectorViewController.swift; sourceTree = "<group>"; };
 		D85C0F661C8848F400FE36FA /* MainWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
@@ -315,7 +319,9 @@
 			children = (
 				D83C4A2B1C8863A00090F939 /* IntervalsData.swift */,
 				D89543831996347F00A091A4 /* EqualTemperamentEntry.swift */,
+				D84CE1E31C95967700E19505 /* IntervalsDataGenerator.swift */,
 				D8F2B1D51C93EFD800F88BF7 /* LimitsBasedGenerator.swift */,
+				D84CE1E11C95960E00E19505 /* AdHocGenerator.swift */,
 				D849E7301ACADFD1006E0964 /* PrimeProducts.swift */,
 				D89543841996347F00A091A4 /* Rational.swift */,
 				D8901EBC1ABC226D00A4E071 /* Scale.swift */,
@@ -447,8 +453,10 @@
 				D849E7311ACADFD1006E0964 /* PrimeProducts.swift in Sources */,
 				D8646B2D1C3D4C5A00D8C429 /* ChordPreviewViewController.swift in Sources */,
 				D84F342B1B08A2C00095D1E8 /* main.swift in Sources */,
+				D84CE1E21C95960E00E19505 /* AdHocGenerator.swift in Sources */,
 				D8832F8619A0C86B0095B26F /* WaveView.swift in Sources */,
 				D83092C11AEBBC6F00B0E6A7 /* DisclosureView.swift in Sources */,
+				D84CE1E41C95967700E19505 /* IntervalsDataGenerator.swift in Sources */,
 				D8B9020E1AD491E30015B5E2 /* PreferencesWindowController.swift in Sources */,
 				D8E5E6241AD12F7A004DB02D /* HarmonicView.swift in Sources */,
 				D80A61D61C9040C000A2F885 /* SelectDocumentType.swift in Sources */,

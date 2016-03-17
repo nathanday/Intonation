@@ -107,7 +107,7 @@ class Document : NSDocument, MIDIReceiverObserver {
 			intervalsData.arpeggioInterval = 60.0/aValue
 			tonePlayer.arpeggioInterval = intervalsData.arpeggioInterval;
 		}
-		get { return 60.0/intervalsData.arpeggioInterval; }
+		get { return 60.0/(intervalsData.arpeggioInterval ?? 1); }
 	}
 
 	var		currentlySelectedMethod : Int? = nil;
@@ -116,6 +116,9 @@ class Document : NSDocument, MIDIReceiverObserver {
 		if let theTextField = aSender {
 			intervalsData.baseFrequency = theTextField.doubleValue;
 		}
+	}
+
+	@IBAction func newDocumentFromSelection( aSender: AnyObject? ) {
 	}
 
 	func playUsingMethod( aMethod: Int ) {
@@ -220,7 +223,7 @@ class Document : NSDocument, MIDIReceiverObserver {
 		}
 	}
 	var		selectedJustIntonationIntervals : [Interval] {
-		return selectedEqualTemperamentEntry.map { return $0.interval; };
+		return selectedEqualTemperamentEntry.map { return $0.interval!; };
 	}
 
 	func calculateAllIntervals() {

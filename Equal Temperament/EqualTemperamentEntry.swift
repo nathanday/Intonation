@@ -19,8 +19,8 @@ extension Rational {
 		else { return theDen; }
 	}
 
-	var primeLimit : UInt? {
-		let		theResult : UInt? = nil;
+	var primeLimit : UInt {
+		let		theResult : UInt = UInt.max;
 		if numerator > 0 && denominator > 0 {
 			let		theNumeratorLargestPrimeFactor = UInt(numerator).largestPrimeFactor;
 			let		theDenominatorLargestPrimeFactor = UInt(denominator).largestPrimeFactor;
@@ -33,27 +33,50 @@ extension Rational {
 }
 
 class EqualTemperamentEntry : NSObject {
-	var justIntonationRatio : Rational
+	var justIntonationRatio : Interval
 	var isClose : Bool;
-    dynamic var justIntonationRatioToString : String { return justIntonationRatio.ratioString; }
+    dynamic var justIntonationRatioToString : String { return justIntonationRatio.toString; }
     dynamic var justIntonationRatioToDouble : Double { return justIntonationRatio.toDouble; }
 	let intervalCount : UInt
-	var name : String { return "\(justIntonationRatio.numerator)∶\(justIntonationRatio.denominator)"; }
+	var name : String { return justIntonationRatio.toString; }
 	var closestEqualTemperamentIntervalNumber : UInt { return UInt(12.0*Double(log2(justIntonationRatio.toDouble))+0.5); }
 	var closestIntervalNumber : UInt { return UInt(Double(self.intervalCount)*Double(log2(justIntonationRatio.toDouble))+0.5); }
 	var equalTemperamentRatio : Double { return pow(2.0,Double(self.closestEqualTemperamentIntervalNumber)/Double(self.intervalCount)); }
-	var justIntonationCents : Double { return self.justIntonationRatio.toCents; }
+	var justIntonationCents : Double { return justIntonationRatio.toDouble.toCents; }
 	var justIntonationPercent : Double { return Double(self.intervalCount)*100.0 * log2(self.justIntonationRatio.toDouble); }
 	var error : Double { return equalTemperamentRatio-justIntonationRatio.toDouble; }
 	var error12ETCent : Double {
 		return (justIntonationRatio.toDouble/ratioForCentsEquivelent(Double(closestIntervalNumber)*100.0, n: self.intervalCount )).toCents;
 	}
-	var oddLimit : UInt { return justIntonationRatio.oddLimit; }
+	var oddLimit : UInt {
+		switch justIntonationRatio {
+		case let x as RationalInterval:
+			return x.ratio.oddLimit;
+		default:
+			return UInt.max;
+		}
+	}
 
-	var primeLimit : UInt { return justIntonationRatio.primeLimit ?? 1; }
-	var factorsString : String { return justIntonationRatio.factorsString; }
+	var primeLimit : UInt {
+		switch justIntonationRatio {
+		case let x as RationalInterval:
+			return x.ratio.primeLimit;
+		default:
+			return UInt.max;
+		}
+	}
+	var factorsString : String {
+		switch justIntonationRatio {
+		case let x as RationalInterval:
+			return x.ratio.factorsString;
+		default:
+			return justIntonationRatio.toString;
+		}
+	}
 
-	var	additiveDissonance : UInt { return justIntonationRatio.additiveDissonance; }
+	var	additiveDissonance : UInt {
+		return justIntonationRatio.additiveDissonance;
+	}
 
 	var degreeName : String = "";
 
@@ -61,7 +84,14 @@ class EqualTemperamentEntry : NSObject {
 		return (justIntonationRatio.toDouble/ratioForCentsEquivelent(Double(closestIntervalNumber)*100.0, n:intervalCount)).toCents;
 	}
 
-	var interval : Interval { return Interval(ratio: self.justIntonationRatio); }
+	var interval : Interval? {
+		switch justIntonationRatio {
+		case let x as RationalInterval:
+			return x;
+		default:
+			return nil;
+		}
+	}
 
 	var closestIntervalNumberDescription : String { return isClose ? "\(closestIntervalNumber)" : ""; }
 	var closestNoteDescription : String {
@@ -78,32 +108,90 @@ class EqualTemperamentEntry : NSObject {
 		return theResult;
 	}
 
-	var isUnison : Bool { return justIntonationRatio.numerator == 1 && justIntonationRatio.denominator == 1; }
-	var isPerfectFourth : Bool { return justIntonationRatio.numerator == 4 && justIntonationRatio.denominator == 3; }
-	var isPerfectFifth : Bool { return justIntonationRatio.numerator == 3 && justIntonationRatio.denominator == 2; }
-	var isOctave : Bool { return justIntonationRatio.numerator != 1 && justIntonationRatio.denominator == 1; }
-	var isFirstOctave : Bool { return justIntonationRatio.numerator == 2 && justIntonationRatio.denominator == 1; }
+	var isUnison : Bool {
+		switch justIntonationRatio {
+		case let x as RationalInterval:
+			return x.numerator == 1 && x.denominator == 1;
+		case let x as IrrationalInterval:
+			return x.ratio == 1.0;
+		default:
+			return false;
+		}
+	}
+	var isPerfectFourth : Bool {
+		switch justIntonationRatio {
+		case let x as RationalInterval:
+			return x.numerator == 4 && x.denominator == 3;
+		case let x as IrrationalInterval:
+			return x.ratio == 4.0/3.0;
+		default:
+			return false;
+		}
+	}
+	var isPerfectFifth : Bool {
+		switch justIntonationRatio {
+		case let x as RationalInterval:
+			return x.numerator == 3 && x.denominator == 2;
+		case let x as IrrationalInterval:
+			return x.ratio == 3.0/2.0;
+		default:
+			return false;
+		}
+	}
+	var isOctave : Bool {
+		switch justIntonationRatio {
+		case let x as RationalInterval:
+			return bitCount(x.numerator) == 1 && x.denominator == 1;
+		case let x as IrrationalInterval:
+			let		theLog2 = log2(x.ratio);
+			return theLog2 == floor(theLog2);
+		default:
+			return false;
+		}
+	}
+	var isFirstOctave : Bool {
+		switch justIntonationRatio {
+		case let x as RationalInterval:
+			return x.numerator == 2 && x.denominator == 1;
+		case let x as IrrationalInterval:
+			return x.ratio == 2.0;
+		default:
+			return false;
+		}
+	}
 
 	var absError : Double { return abs(error); }
 	var absError12ETCent : Double { return abs(error12ETCent); }
 	var absErrorNETCent : Double { return abs(errorNETCent); }
 
-	init( justIntonationRatio: Rational, intervalCount : UInt, maximumError: Double ) {
-		self.justIntonationRatio = justIntonationRatio
+	init( justIntonationRatio: Interval, intervalCount : UInt, maximumError: Double ) {
+		self.justIntonationRatio = justIntonationRatio;
 		self.intervalCount = intervalCount;
 		self.isClose = true;
 		super.init();
 		self.isClose = abs(self.error12ETCent) < 100.0*maximumError;
 	}
 
-	init( numberator: UInt, denominator: UInt, intervalCount : UInt, maximumError: Double ) {
+	convenience init( justIntonationRatio: Rational, intervalCount : UInt, maximumError: Double ) {
+		self.init( justIntonationRatio: RationalInterval(justIntonationRatio), intervalCount : intervalCount, maximumError: maximumError )
+	}
+
+	convenience init( numberator: UInt, denominator: UInt, intervalCount : UInt, maximumError: Double ) {
 		let		theNum = numberator;
 		let		theDen = denominator;
-		self.justIntonationRatio = Rational(Int(theNum),Int(theDen));
-		self.intervalCount = intervalCount;
-		self.isClose = true;
-		super.init();
-		self.isClose = abs(self.error12ETCent) < 100.0*maximumError;
+		self.init( justIntonationRatio: RationalInterval(Rational(Int(theNum),Int(theDen))), intervalCount : intervalCount, maximumError: maximumError )
+	}
+
+	init?( aString: String, intervalCount : UInt, maximumError: Double ) {
+		if let theRatio = Interval.fromString(aString) {
+			self.justIntonationRatio = theRatio;
+			self.intervalCount = intervalCount;
+			self.isClose = true;
+			super.init();
+			self.isClose = abs(self.error12ETCent) < 100.0*maximumError;
+		} else {
+			return nil;
+		}
 	}
 
 	override var description: String { return "ratio:\(justIntonationRatio), closestIntervalNumber:\(closestIntervalNumber)"; }
@@ -116,70 +204,8 @@ class EqualTemperamentEntry : NSObject {
 }
 
 extension EqualTemperamentEntry {
-	private static let	rationNames : [Rational:[String]] = [Rational(1,1):["unison"],
-		Rational(81,80):["syntonic comma"],
-		Rational(128,125):["diesis", "diminished second"],
-		Rational(25,24):["lesser chromatic semitone", "minor semitone", "augmented unison"],
-		Rational(256,243):["Pythagorean minor second", "Pythagorean limma"],
-		Rational(135,128):["greater chromatic semitone", "wide augmented unison"],
-		Rational(16,15):["major semitone", "limma", "minor second"],
-		Rational(27,25):["large limma", "acute minor second"],
-		Rational(800,729):["grave tone", "grave major second"],
-		Rational(10,9):["minor tone", "lesser major second"],
-		Rational(9,8):["major tone", "Pythagorean major second", "greater major second"],
-		Rational(256,225):["diminished third"],
-		Rational(125,108):["semi-augmented second"],
-		Rational(75,64):["augmented second"],
-		Rational(32,27):["Pythagorean minor third"],
-		Rational(6,5):["minor third"],
-		Rational(243,200):["acute minor third"],
-		Rational(100,81):["grave major third"],
-		Rational(5,4):["major third"],
-		Rational(81,64):["Pythagorean major third"],
-		Rational(32,25):["classic diminished fourth"],
-		Rational(125,96):["classic augmented third"],
-		Rational(675,512):["wide augmented third"],
-		Rational(4,3):["perfect fourth"],
-		Rational(27,20):["acute fourth[1]"],
-		Rational(25,18):["classic augmented fourth"],
-		Rational(45,32):["augmented fourth"],
-		Rational(64,45):["diminished fifth"],
-		Rational(36,25):["classic diminished fifth"],
-		Rational(40,27):["grave fifth[1]"],
-		Rational(3,2):["perfect fifth"],
-		Rational(1024,675):["narrow diminished sixth"],
-		Rational(192,125):["classic diminished sixth"],
-		Rational(25,16):["classic augmented fifth"],
-		Rational(128,81):["Pythagorean minor sixth"],
-		Rational(8,5):["minor sixth"],
-		Rational(81,50):["acute minor sixth"],
-		Rational(5,3):["major sixth"],
-		Rational(27,16):["Pythagorean major sixth"],
-		Rational(128,75):["diminished seventh"],
-		Rational(225,128):["augmented sixth"],
-		Rational(16,9):["Pythagorean minor seventh"],
-		Rational(9,5):["minor seventh"],
-		Rational(729,400):["acute minor seventh"],
-		Rational(50,27):["grave major seventh"],
-		Rational(15,8):["major seventh"],
-		Rational(256,135):["narrow diminished octave"],
-		Rational(243,128):["Pythagorean major seventh"],
-		Rational(48,25):["diminished octave"],
-		Rational(125,64):["augmented seventh"],
-		Rational(160,81):["semi-diminished octave"],
-		Rational(2,1):["octave"],
-
-		Rational(20,9):["minor ninth"],
-		Rational(9,4):["major ninth"],
-		Rational(12,5):["minor tenth"],
-		Rational(5,2):["major tenth"],
-		Rational(8,3):["major eleventh"],
-		Rational(3,1):["perfect twelfth"],
-		Rational(16,5):["minor thirteenth"],
-		Rational(10,3):["major thirteenth"],
-];
 	var everyIntervalName : [String] {
-		return EqualTemperamentEntry.rationNames[self.justIntonationRatio] ?? [];
+		return self.justIntonationRatio.names ?? [];
 	}
 	var intervalName : String {
 		return everyIntervalName.first ?? "";

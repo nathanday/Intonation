@@ -21,7 +21,7 @@ class ScaleView : ResultView {
 		didSet { setNeedsDisplay(); }
 	}
 	
-	func drawJustIntonationRatio( ratio aRatio : Rational, hilighted aHilighted : Bool, index anIndex: Int, previousValue aPreviousY : CGFloat ) -> CGFloat {
+	func drawJustIntonationRatio( ratio aRatio : Interval, hilighted aHilighted : Bool, index anIndex: Int, previousValue aPreviousY : CGFloat ) -> CGFloat {
 		return 0.0;
 	}
 	
@@ -53,7 +53,7 @@ class LinearScaleView : ScaleView {
 			return theResult;
 		}
 	}
-	override func drawJustIntonationRatio( ratio aRatio : Rational, hilighted aHilighted : Bool, index anIndex: Int, previousValue aPreviousY : CGFloat ) -> CGFloat {
+	override func drawJustIntonationRatio( ratio aRatio : Interval, hilighted aHilighted : Bool, index anIndex: Int, previousValue aPreviousY : CGFloat ) -> CGFloat {
 		let		theX0 = floor(NSMidX(drawingBounds)+equalTempBarWidth/2.0)-20.5;
 		let		theY = CGFloat(log2(aRatio.toDouble)) * NSHeight(drawingBounds) + NSMinY(drawingBounds);
 		let		theCloseToPrevious = abs(theY-aPreviousY)<14.0;
@@ -102,7 +102,7 @@ class LinearScaleView : ScaleView {
 class PitchConstellationView : ScaleView {
 	private var		maximumRadius : CGFloat { get { return min(NSWidth(self.bounds), NSHeight(self.bounds))*0.5; } }
 	private var		axisesRadius : CGFloat { get { return min(maximumRadius-80.0, 320.0); } }
-	override func drawJustIntonationRatio( ratio aRatio : Rational, hilighted aHilighted : Bool, index anIndex: Int, previousValue aPreviousY : CGFloat ) -> CGFloat {
+	override func drawJustIntonationRatio( ratio aRatio : Interval, hilighted aHilighted : Bool, index anIndex: Int, previousValue aPreviousY : CGFloat ) -> CGFloat {
 		let		theBounds = self.bounds;
 		let		theAngle = CGFloat(log2(aRatio.toDouble) * 2.0*π);
 		let		theRadius = aHilighted ? maximumRadius - 40.0 : axisesRadius;

@@ -22,5 +22,500 @@
 	<integer>1</integer>
 	<key>maximumError</key>
 	<integer>18</integer>
+	<key>ratioNames</key>
+	<array>
+		<dict>
+			<key>ratio</key>
+			<string>1:1</string>
+			<key>names</key>
+			<array>
+				<string>unison</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>81:80</string>
+			<key>names</key>
+			<array>
+				<string>syntonic comma</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>128:125</string>
+			<key>names</key>
+			<array>
+				<string>diesis</string>
+				<string>diminished second</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>25:24</string>
+			<key>names</key>
+			<array>
+				<string>lesser chromatic semitone</string>
+				<string>minor semitone</string>
+				<string>augmented unison</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>256:243</string>
+			<key>names</key>
+			<array>
+				<string>Pythagorean minor second</string>
+				<string>Pythagorean limma</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>135:128</string>
+			<key>names</key>
+			<array>
+				<string>greater chromatic semitone</string>
+				<string>wide augmented unison</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>16:15</string>
+			<key>names</key>
+			<array>
+				<string>major semitone</string>
+				<string>limma</string>
+				<string>minor second</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>27:25</string>
+			<key>names</key>
+			<array>
+				<string>large limma</string>
+				<string>acute minor second</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>800:729</string>
+			<key>names</key>
+			<array>
+				<string>grave tone</string>
+				<string>grave major second</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>10:9</string>
+			<key>names</key>
+			<array>
+				<string>minor tone</string>
+				<string>lesser major second</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>9:8</string>
+			<key>names</key>
+			<array>
+				<string>major tone</string>
+				<string>Pythagorean major second</string>
+				<string>greater major second</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>256:225</string>
+			<key>names</key>
+			<array>
+				<string>diminished third</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>125:108</string>
+			<key>names</key>
+			<array>
+				<string>semi-augmented second</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>75:64</string>
+			<key>names</key>
+			<array>
+				<string>augmented second</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>32:27</string>
+			<key>names</key>
+			<array>
+				<string>Pythagorean minor third</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>6:5</string>
+			<key>names</key>
+			<array>
+				<string>minor third</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>243:200</string>
+			<key>names</key>
+			<array>
+				<string>acute minor third</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>100:81</string>
+			<key>names</key>
+			<array>
+				<string>grave major third</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>5:4</string>
+			<key>names</key>
+			<array>
+				<string>major third</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>81:64</string>
+			<key>names</key>
+			<array>
+				<string>Pythagorean major third</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>32:25</string>
+			<key>names</key>
+			<array>
+				<string>classic diminished fourth</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>125:96</string>
+			<key>names</key>
+			<array>
+				<string>classic augmented third</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>675:512</string>
+			<key>names</key>
+			<array>
+				<string>wide augmented third</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>4:3</string>
+			<key>names</key>
+			<array>
+				<string>perfect fourth</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>27:20</string>
+			<key>names</key>
+			<array>
+				<string>acute fourth(1)</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>25:18</string>
+			<key>names</key>
+			<array>
+				<string>classic augmented fourth</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>45:32</string>
+			<key>names</key>
+			<array>
+				<string>augmented fourth</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>64:45</string>
+			<key>names</key>
+			<array>
+				<string>diminished fifth</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>36:25</string>
+			<key>names</key>
+			<array>
+				<string>classic diminished fifth</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>40:27</string>
+			<key>names</key>
+			<array>
+				<string>grave fifth(1)</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>3:2</string>
+			<key>names</key>
+			<array>
+				<string>perfect fifth</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>1024:675</string>
+			<key>names</key>
+			<array>
+				<string>narrow diminished sixth</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>192:125</string>
+			<key>names</key>
+			<array>
+				<string>classic diminished sixth</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>25:16</string>
+			<key>names</key>
+			<array>
+				<string>classic augmented fifth</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>128:81</string>
+			<key>names</key>
+			<array>
+				<string>Pythagorean minor sixth</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>8:5</string>
+			<key>names</key>
+			<array>
+				<string>minor sixth</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>81:50</string>
+			<key>names</key>
+			<array>
+				<string>acute minor sixth</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>5:3</string>
+			<key>names</key>
+			<array>
+				<string>major sixth</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>27:16</string>
+			<key>names</key>
+			<array>
+				<string>Pythagorean major sixth</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>128:75</string>
+			<key>names</key>
+			<array>
+				<string>diminished seventh</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>225:128</string>
+			<key>names</key>
+			<array>
+				<string>augmented sixth</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>16:9</string>
+			<key>names</key>
+			<array>
+				<string>Pythagorean minor seventh</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>9:5</string>
+			<key>names</key>
+			<array>
+				<string>minor seventh</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>729:400</string>
+			<key>names</key>
+			<array>
+				<string>acute minor seventh</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>50:27</string>
+			<key>names</key>
+			<array>
+				<string>grave major seventh</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>15:8</string>
+			<key>names</key>
+			<array>
+				<string>major seventh</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>256:135</string>
+			<key>names</key>
+			<array>
+				<string>narrow diminished octave</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>243:128</string>
+			<key>names</key>
+			<array>
+				<string>Pythagorean major seventh</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>48:25</string>
+			<key>names</key>
+			<array>
+				<string>diminished octave</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>125:64</string>
+			<key>names</key>
+			<array>
+				<string>augmented seventh</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>160:81</string>
+			<key>names</key>
+			<array>
+				<string>semi-diminished octave</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>2:1</string>
+			<key>names</key>
+			<array>
+				<string>octave</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>20:9</string>
+			<key>names</key>
+			<array>
+				<string>minor ninth</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>9:4</string>
+			<key>names</key>
+			<array>
+				<string>major ninth</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>12:5</string>
+			<key>names</key>
+			<array>
+				<string>minor tenth</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>5:2</string>
+			<key>names</key>
+			<array>
+				<string>major tenth</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>8:3</string>
+			<key>names</key>
+			<array>
+				<string>major eleventh</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>3:1</string>
+			<key>names</key>
+			<array>
+				<string>perfect twelfth</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>16:5</string>
+			<key>names</key>
+			<array>
+				<string>minor thirteenth</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>10:3</string>
+			<key>names</key>
+			<array>
+				<string>major thirteenth</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>

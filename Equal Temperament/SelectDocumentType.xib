@@ -30,7 +30,7 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="67" rowSizeStyle="automatic" viewBased="YES" floatsGroupRows="NO" id="8ye-Gt-awg">
-                                    <rect key="frame" x="0.0" y="0.0" width="430" height="276"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="430" height="0.0"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <size key="intercellSpacing" width="3" height="2"/>
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -104,6 +104,7 @@ Description&gt;</string>
                                         </tableColumn>
                                     </tableColumns>
                                     <connections>
+                                        <action trigger="doubleAction" selector="selectAction:" target="-2" id="CgC-Pf-ekU"/>
                                         <binding destination="jvd-CS-HQB" name="content" keyPath="arrangedObjects" id="fkk-sH-en7"/>
                                         <outlet property="delegate" destination="-2" id="JsY-34-nwl"/>
                                     </connections>

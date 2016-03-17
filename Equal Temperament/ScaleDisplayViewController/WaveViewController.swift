@@ -42,7 +42,7 @@ class WaveViewController: NSViewController, ScaleDisplayViewController {
 	}
 
 	func setSelectionIntervals( aSelectionIntervals : [Interval]) {
-		waveView?.selectedRatios = aSelectionIntervals.map({ return $0.ratio; });
+		waveView?.selectedRatios = aSelectionIntervals;
 	}
 
 	private func updateWaveViewDisplayMode() {

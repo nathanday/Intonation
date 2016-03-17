@@ -45,6 +45,7 @@ class MainWindowController : NSWindowController {
 
 	override func awakeFromNib() {
 		super.awakeFromNib();
+		document?.addObserver(self, forKeyPath: "enableInterval", options: NSKeyValueObservingOptions.New, context: nil);
 		document?.addObserver(self, forKeyPath: "everyInterval", options: NSKeyValueObservingOptions.New, context: nil);
 		document?.addObserver(self, forKeyPath: "selectedIndicies", options: NSKeyValueObservingOptions.New, context: nil);
 	}
@@ -52,7 +53,9 @@ class MainWindowController : NSWindowController {
 	override func observeValueForKeyPath( aKeyPath: String?, ofObject anObject: AnyObject?, change aChange: [String : AnyObject]?, context aContext: UnsafeMutablePointer<Void>) {
 		if let theDocument = document as? Document {
 			if anObject as? Document == theDocument {
-				if aKeyPath == "everyInterval" {
+				if aKeyPath == "enableInterval" {
+					hideIntervalRelatedColumn(theDocument.intervalsData.enableInterval);
+				} else if aKeyPath == "everyInterval" {
 					scaleViewController?.setIntervals(intervals: theDocument.everyInterval, intervalCount: theDocument.intervalsData.intervalCount, enabled: theDocument.intervalsData.enableInterval);
 				} else if aKeyPath == "selectedIndicies" {
 					let		theSelectedIntervals = theDocument.selectedJustIntonationIntervals;
@@ -72,12 +75,7 @@ class MainWindowController : NSWindowController {
 	}
 
 	var		selectedJustIntonationIntervals : [Interval] {
-		return (document as! Document).selectedEqualTemperamentEntry.map { return $0.interval; };
-	}
-	dynamic var		enableInterval : Bool = true {
-		didSet {
-			hideIntervalRelatedColumn(!enableInterval);
-		}
+		return (document as! Document).selectedEqualTemperamentEntry.map { return $0.interval!; };
 	}
 	dynamic var		midiNoteNotes : [String] = {
 		let		theNoteNames = ["C", "C♯", "D", "D♯", "E", "F", "F♯", "G", "G♯", "A", "A♯", "B"];
@@ -128,27 +126,31 @@ class MainWindowController : NSWindowController {
 				var		theFactorsSum = UInt(0);
 				var		theCommonFactor = 1;
 				for theValue in selectedJustIntonationIntervals {
-					theCommonFactor *= theValue.denominator/greatestCommonDivisor(theCommonFactor, theValue.denominator);
+					if let theRationalInterval = theValue as? RationalInterval {
+						theCommonFactor *= theRationalInterval.ratio.denominator/greatestCommonDivisor(theCommonFactor, theRationalInterval.ratio.denominator);
+					}
 				}
 				for theRatio in selectedJustIntonationIntervals {
-					if let theValue = theRatio.ratio.numeratorForDenominator(theCommonFactor) {
-						let		theFactors = UInt(theValue).factorsString;
-						if theRatiosString.startIndex == theRatiosString.endIndex {
-							theRatiosString = "\(theValue)"
-							theFactorsString = "\(theFactors)"
+					if let theRationalInterval = theRatio as? RationalInterval {
+						if let theValue = theRationalInterval.ratio.numeratorForDenominator(theCommonFactor) {
+							let		theFactors = UInt(theValue).factorsString;
+							if theRatiosString.startIndex == theRatiosString.endIndex {
+								theRatiosString = "\(theValue)"
+								theFactorsString = "\(theFactors)"
+							}
+							else {
+								theRatiosString.write( "∶\(theValue)" );
+								theFactorsString.write( " + \(theFactors)" );
+							}
+							theFactorsSum += UInt(theValue);
 						}
-						else {
-							theRatiosString.write( "∶\(theValue)" );
-							theFactorsString.write( " + \(theFactors)" );
-						}
-						theFactorsSum += UInt(theValue);
 					}
 				}
 				theHarmonicTitleTextField.stringValue = theRatiosString;
 				theFactorsSumTitleTextField.stringValue = "\(theFactorsString) = \(theFactorsSum)";
 				
 			}
-			else if let theSingle = selectedJustIntonationIntervals.first {
+			else if let theSingle = selectedJustIntonationIntervals.first as? RationalInterval {
 				theHarmonicTitleTextField.stringValue = theSingle.ratio.ratioString;
 				theFactorsSumTitleTextField.stringValue = "\(UInt(theSingle.ratio.numerator).factorsString) + \(UInt(theSingle.ratio.denominator).factorsString) = \(theSingle.ratio.numerator+theSingle.ratio.denominator)";
 			}
@@ -193,7 +195,6 @@ class MainWindowController : NSWindowController {
 	@IBAction func enableIntervalChanged( aSender: NSButton? ) {
 		if let theButton = aSender, theIntervalData = (document as? Document)?.intervalsData {
 			theIntervalData.enableInterval = theButton.state == NSOnState;
-			hideIntervalRelatedColumn(!theIntervalData.enableInterval);
 		}
 	}
 

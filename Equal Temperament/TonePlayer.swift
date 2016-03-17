@@ -39,17 +39,17 @@ class TonePlayer {
 
 	var amplitude : Double = 1.0;
 	var playing : Bool = false;
-	var playingTones : [Rational:Tone] = [:];
+	var playingTones : [Interval:Tone] = [:];
 	private var outputPower : Double { get { return dBToPower(amplitude); } }
 
 	private var arpeggioTriggerTimer : NSTimer? = nil;
 	private var nextNoteIndex : Int = 0;
 
 	func generateTones() {
-		var		theUnsedRatios = Set<Rational>(playingTones.keys);
+		var		theUnsedRatios = Set<Interval>(playingTones.keys);
 		for theInterval in self.intervals {
-			theUnsedRatios.remove(theInterval.ratio);
-			if let theTone = playingTones[theInterval.ratio] {
+			theUnsedRatios.remove(theInterval);
+			if let theTone = playingTones[theInterval] {
 				theTone.baseFrequency = baseFrequency/(2.0*TonePlayer.nyquestFrequency);
 				theTone.harmonics = harmonics;
 				theTone.equalTempIntervalCount = equalTempIntervalCount;
@@ -58,7 +58,7 @@ class TonePlayer {
 			} else {
 				let theTone = Tone(baseFrequency:baseFrequency/(2.0*TonePlayer.nyquestFrequency), interval: theInterval, harmonics:harmonics, equalTempIntervalCount: equalTempIntervalCount );
 				theTone.equalTemperament = equalTemperament;
-				playingTones[theInterval.ratio] = theTone;
+				playingTones[theInterval] = theTone;
 				if playing && !theTone.playing { theTone.play(); }
 			}
 		}
@@ -70,7 +70,7 @@ class TonePlayer {
 	
 	func updateTones() {
 		for theInterval in self.intervals {
-			if let theTone = playingTones[theInterval.ratio] {
+			if let theTone = playingTones[theInterval] {
 				theTone.baseFrequency = baseFrequency/(2.0*TonePlayer.nyquestFrequency);
 				theTone.harmonics = harmonics;
 				theTone.equalTempIntervalCount = equalTempIntervalCount;
@@ -110,8 +110,7 @@ class TonePlayer {
 				break;
 			}
 			assert( nextNoteIndex < 2*theLastIndex+1 );
-
-			playingTones[intervals[theLastIndex-abs(nextNoteIndex-theLastIndex)].ratio]?.play();
+			playingTones[intervals[theLastIndex-abs(nextNoteIndex-theLastIndex)]]?.play();
 		}
 	}
 

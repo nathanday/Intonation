@@ -26,9 +26,9 @@ class FindIntervalsViewController: NSViewController {
 	var				searchValueHaseRoot = true;
 	var				searchTransposeToFit = true;
 
-	var				ratios : [Ratio] {
+	var				ratios : [Interval] {
 		get {
-			func	getRatioValues() -> [Double] {
+			func	getIntervalValues() -> [Double] {
 				var		theResult = [Double]();
 				for theString in ratiosString.componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString:":∶ ")) {
 					if theString.containsString("/") {
@@ -47,12 +47,12 @@ class FindIntervalsViewController: NSViewController {
 			}
 			func isInteger( aValue : Double ) -> Bool { return aValue == floor(aValue); }
 
-			var		theResult : [Ratio] = [];
-			let		theComponents = getRatioValues();
+			var		theResult : [Interval] = [];
+			let		theComponents = getIntervalValues();
 			if theComponents.count == 1 {
-				theResult.append(Ratio.irrational(theComponents[0]));
+				theResult.append(IrrationalInterval(theComponents[0]));
 			} else if theComponents.count == 2 && isInteger(theComponents[0]) && isInteger(theComponents[1]) && theComponents[0] > theComponents[1] {
-				theResult.append(Ratio.rational(Rational(Int(theComponents[0]),Int(theComponents[1]))));
+				theResult.append(RationalInterval(numerator: Int(theComponents[0]),denominator: Int(theComponents[1])));
 			} else if theComponents.count > 0 {
 				let		theBase : Double = theComponents[0] ?? 1.0;
 				for theEnumValue in theComponents {
@@ -61,9 +61,9 @@ class FindIntervalsViewController: NSViewController {
 						theValue *= 2.0;
 					}
 					if isInteger(theValue) && isInteger(theBase) {
-						theResult.append(Ratio.rational(Rational(Int(theValue),Int(theBase))));
+						theResult.append(RationalInterval(numerator:Int(theValue),denominator:Int(theBase)));
 					} else {
-						theResult.append(Ratio.irrational(theValue/theBase));
+						theResult.append(IrrationalInterval(theValue/theBase));
 					}
 				}
 			}
@@ -162,13 +162,13 @@ class FindIntervalsViewController: NSViewController {
 		return true;
 	}
 
-	func findExactEntries( anRationals : [Rational], searchIntervales aSearchIntervales: [EqualTemperamentEntry], octaves anOctaves: UInt ) -> [EqualTemperamentEntry] {
+	func findExactEntries( anRationals : [Interval], searchIntervales aSearchIntervales: [EqualTemperamentEntry], octaves anOctaves: UInt ) -> [EqualTemperamentEntry] {
 		var		theResult = Array<EqualTemperamentEntry>();
 		for theRatio in anRationals {
 			var		theClosestEntry : EqualTemperamentEntry?
 			for theInterval in aSearchIntervales {
 				if let theCurrentInterval = theClosestEntry?.interval {
-					if theCurrentInterval.ratio == theRatio {
+					if theCurrentInterval == theRatio {
 						theClosestEntry = theInterval;
 					}
 				} else {
@@ -182,29 +182,31 @@ class FindIntervalsViewController: NSViewController {
 		return theResult;
 	}
 
-	func findClosestEntries( anIntervals : [Ratio], searchIntervales aSearchIntervales: [EqualTemperamentEntry], octaves anOctaves: UInt ) -> [EqualTemperamentEntry] {
+	func findClosestEntries( anIntervals : [Interval], searchIntervales aSearchIntervales: [EqualTemperamentEntry], octaves anOctaves: UInt ) -> [EqualTemperamentEntry] {
 		return findEntries( anIntervals, searchIntervales: aSearchIntervales, octaves: anOctaves) {
-			(intervalA:Interval,intervalB:Interval,inputRatio:Ratio) -> Bool in
+			(intervalA:Interval,intervalB:Interval,inputRatio:Interval) -> Bool in
 			var		theInputRatio = inputRatio.toDouble;
 			while theInputRatio > Double(anOctaves+1) {
 				theInputRatio /= 2.0;
 			}
-			return abs((intervalA.ratio.toDouble) - theInputRatio) > abs(intervalB.ratio.toDouble - theInputRatio);
+			return abs((intervalA.toDouble) - theInputRatio) > abs(intervalB.toDouble - theInputRatio);
 		}
 	}
 
-	func findEntries( anIntervals : [Ratio], searchIntervales aSearchIntervales: [EqualTemperamentEntry], octaves anOctaves: UInt, _ aMethod: (Interval,Interval,Ratio) -> Bool ) -> [EqualTemperamentEntry] {
+	func findEntries( anIntervals : [Interval], searchIntervales aSearchIntervales: [EqualTemperamentEntry], octaves anOctaves: UInt, _ aMethod: (Interval,Interval,Interval) -> Bool ) -> [EqualTemperamentEntry] {
 		var		theResult = Array<EqualTemperamentEntry>();
-		for theRatio in anIntervals {
+		for theInterval in anIntervals {
 			var		theClosestEntry : EqualTemperamentEntry?
-			for theInterval in aSearchIntervales {
-				if (searchTransposeToFit || theInterval.interval.ratio <= Int(anOctaves)) {
-					if let theCurrentInterval = theClosestEntry?.interval {
-						if aMethod(theCurrentInterval,theInterval.interval,theRatio) {
-							theClosestEntry = theInterval;
+			for theCompareEntry in aSearchIntervales {
+				if let theCompareInterval = theCompareEntry.interval {
+					if searchTransposeToFit || theCompareInterval.toDouble <= pow(2.0,Double(anOctaves)) {
+						if let theCurrentInterval = theClosestEntry?.interval {
+							if aMethod(theCurrentInterval,theCompareInterval,theInterval) {
+								theClosestEntry = theCompareEntry;
+							}
+						} else {
+							theClosestEntry = theCompareEntry;
 						}
-					} else {
-						theClosestEntry = theInterval;
 					}
 				}
 			}

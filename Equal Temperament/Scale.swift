@@ -8,91 +8,124 @@
 
 import Foundation
 
-struct Interval : Hashable {
-	private static let	rationNames : [Rational:[String]] = [Rational(1,1):["unison"],
-		Rational(81,80):["syntonic comma"],
-		Rational(128,125):["diesis", "diminished second"],
-		Rational(25,24):["lesser chromatic semitone", "minor semitone", "augmented unison"],
-		Rational(256,243):["Pythagorean minor second", "Pythagorean limma"],
-		Rational(135,128):["greater chromatic semitone", "wide augmented unison"],
-		Rational(16,15):["major semitone", "limma", "minor second"],
-		Rational(27,25):["large limma", "acute minor second"],
-		Rational(800,729):["grave tone", "grave major second"],
-		Rational(10,9):["minor tone", "lesser major second"],
-		Rational(9,8):["major tone", "Pythagorean major second", "greater major second"],
-		Rational(256,225):["diminished third"],
-		Rational(125,108):["semi-augmented second"],
-		Rational(75,64):["augmented second"],
-		Rational(32,27):["Pythagorean minor third"],
-		Rational(6,5):["minor third"],
-		Rational(243,200):["acute minor third"],
-		Rational(100,81):["grave major third"],
-		Rational(5,4):["major third"],
-		Rational(81,64):["Pythagorean major third"],
-		Rational(32,25):["classic diminished fourth"],
-		Rational(125,96):["classic augmented third"],
-		Rational(675,512):["wide augmented third"],
-		Rational(4,3):["perfect fourth"],
-		Rational(27,20):["acute fourth[1]"],
-		Rational(25,18):["classic augmented fourth"],
-		Rational(45,32):["augmented fourth"],
-		Rational(64,45):["diminished fifth"],
-		Rational(36,25):["classic diminished fifth"],
-		Rational(40,27):["grave fifth[1]"],
-		Rational(3,2):["perfect fifth"],
-		Rational(1024,675):["narrow diminished sixth"],
-		Rational(192,125):["classic diminished sixth"],
-		Rational(25,16):["classic augmented fifth"],
-		Rational(128,81):["Pythagorean minor sixth"],
-		Rational(8,5):["minor sixth"],
-		Rational(81,50):["acute minor sixth"],
-		Rational(5,3):["major sixth"],
-		Rational(27,16):["Pythagorean major sixth"],
-		Rational(128,75):["diminished seventh"],
-		Rational(225,128):["augmented sixth"],
-		Rational(16,9):["Pythagorean minor seventh"],
-		Rational(9,5):["minor seventh"],
-		Rational(729,400):["acute minor seventh"],
-		Rational(50,27):["grave major seventh"],
-		Rational(15,8):["major seventh"],
-		Rational(256,135):["narrow diminished octave"],
-		Rational(243,128):["Pythagorean major seventh"],
-		Rational(48,25):["diminished octave"],
-		Rational(125,64):["augmented seventh"],
-		Rational(160,81):["semi-diminished octave"],
-		Rational(2,1):["octave"],
-
-		Rational(20,9):["minor ninth"],
-		Rational(9,4):["major ninth"],
-		Rational(12,5):["minor tenth"],
-		Rational(5,2):["major tenth"],
-		Rational(8,3):["major eleventh"],
-		Rational(3,1):["perfect twelfth"],
-		Rational(16,5):["minor thirteenth"],
-		Rational(10,3):["major thirteenth"],
-	];
-	let		ratio: Rational;
-	let		names: [String]?;
+class Interval : Hashable {
+	static func fromString( aString : String ) -> Interval? {
+		var		theResult : Interval?
+		if aString.containsString("∶") {
+			if let theValue = Rational(aString) {
+				theResult = RationalInterval(theValue);
+			}
+		} else {
+			if let theValue = Double(aString) {
+				theResult = IrrationalInterval(theValue);
+			}
+		}
+		return theResult;
+	}
+	var		names: [String]?
+	var		toDouble : Double {
+		preconditionFailure("The method toDouble must be overriden");
+	}
+	var		toString : String {
+		preconditionFailure("The method toString must be overriden");
+	}
 	func	equalTemperamentValue( forIntervalCount anIntervals: UInt ) -> Double {
-		return floor(Double(anIntervals)*log2(justInternation)+0.5);
+		return floor(Double(anIntervals)*log2(toDouble)+0.5);
 	}
 	func	equalTemperamentRatio( forIntervalCount anIntervals: UInt ) -> Double {
 		return pow(2.0,equalTemperamentValue(forIntervalCount:anIntervals)/Double(anIntervals));
 	}
+	init( names aNames: [String]? ) {
+		names = aNames;
+	}
+	var hashValue: Int {
+		return toDouble.hashValue;
+	}
+	var oddLimit : UInt {
+		return UInt.max;
+	}
+	var primeLimit : UInt {
+		return UInt.max;
+	}
+	var factorsString : String {
+		preconditionFailure("The method toString must be overriden");
+	}
+	var ratioString : String {
+		preconditionFailure("The method toString must be overriden");
+	}
+	var additiveDissonance : UInt {
+		return UInt.max;
+	}
+	func numeratorForDenominator( aDenominator: Int ) -> Int? {
+		return nil;
+	}
+}
+
+class RationalInterval : Interval {
+	private static let	ratioNames : [Rational:[String]] = {
+		var theResult = [Rational:[String]]()
+		for theEntry in NSUserDefaults.standardUserDefaults().arrayForKey("ratioNames")! as! [[String:AnyObject]] {
+			if let theRatioString = theEntry["ratio"] as? String,
+				theNames = theEntry["names"] as? [String] {
+				if let theRatio = Rational(theRatioString) {
+					theResult[theRatio] = theNames;
+				}
+			}
+		}
+		return theResult;
+	}()
+	let		ratio: Rational;
+	override var toDouble : Double { return ratio.toDouble; }
+	override var toString : String { return ratio.toString; }
 	var		justInternation : Double { return ratio.toDouble; }
 	var		numerator: Int { return ratio.numerator; }
 	var		denominator: Int { return ratio.denominator; }
-	init( ratio aRatio: Rational, names aNames: [String]? ) { ratio = aRatio; names = aNames; }
-	init( ratio aRatio: Rational ) {
-		let		theNames = Interval.rationNames[aRatio];
-		self.init( ratio:aRatio, names:theNames );
+	init( ratio aRatio: Rational, names aNames: [String]? ) {
+		ratio = aRatio;
+		super.init( names:aNames );
 	}
-	var hashValue: Int { return ratio.hashValue; }
-	var factorsString : String { return ratio.factorsString; }
+	convenience init( _ aRatio: Rational ) {
+		let		theNames = RationalInterval.ratioNames[aRatio];
+		self.init( ratio: aRatio, names:theNames );
+	}
+	convenience init( numerator aNumerator: Int, denominator aDenominator : Int ) {
+		let		theRational = Rational(aNumerator,aDenominator);
+		let		theNames = RationalInterval.ratioNames[theRational];
+		self.init( ratio: theRational, names:theNames );
+	}
+	override var hashValue: Int { return ratio.hashValue; }
+	override var oddLimit : UInt { return ratio.oddLimit; }
+	override var primeLimit : UInt { return ratio.primeLimit; }
+	override var factorsString : String { return ratio.factorsString; }
+	override var ratioString : String { return ratio.ratioString; }
+	override var additiveDissonance : UInt { return ratio.additiveDissonance; }
+	override func numeratorForDenominator( aDenominator: Int ) -> Int? {
+		return ratio.numeratorForDenominator(aDenominator);
+	}
 }
 
-func == (a: Interval, b: Interval) -> Bool { return a.ratio==b.ratio; }
+class IrrationalInterval : Interval {
+	let		ratio: Double;
+	override var		toDouble : Double { return ratio; }
+	override var toString : String { return "\(ratio)"; }
+	override var hashValue: Int { return ratio.hashValue; }
+	init( ratio aRatio: Double, names aNames: [String]? ) {
+		ratio = aRatio;
+		super.init( names:aNames );
+	}
+	convenience init( _ aRatio: Double ) {
+		self.init( ratio: aRatio, names:nil );
+	}
+	override var factorsString : String { return "\(ratio)"; }
+	override var ratioString : String { return "\(ratio)"; }
+}
 
+func == (a: Interval, b: Interval) -> Bool { return a.toDouble == b.toDouble; }
+func == (a: RationalInterval, b: RationalInterval) -> Bool { return a.ratio==b.ratio; }
+func == (a: IrrationalInterval, b: IrrationalInterval) -> Bool { return a.ratio==b.ratio; }
+
+func == (a: Interval, b: Int) -> Bool { return a.toDouble == Double(b); }
+func == (a: RationalInterval, b: Int) -> Bool { return a.ratio==b; }
 
 class IntervalSet : SequenceType {
 	let		name : String;

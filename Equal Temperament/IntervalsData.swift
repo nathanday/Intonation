@@ -12,7 +12,7 @@ enum DocumentType {
 	case Limits;
 	case StackedIntervals;
 	case Preset;
-	case Adhock;
+	case AdHoc;
 	static func fromString( aStringValue : String? ) -> DocumentType? {
 		var		theResult : DocumentType? = nil;
 		if aStringValue == "limits" {
@@ -21,8 +21,8 @@ enum DocumentType {
 			theResult = .StackedIntervals;
 		} else if aStringValue == "preset" {
 			theResult = .Preset;
-		} else if aStringValue == "adhock" {
-			theResult = .Adhock;
+		} else if aStringValue == "adHoc" {
+			theResult = .AdHoc;
 		}
 		return theResult;
 	}
@@ -34,8 +34,8 @@ enum DocumentType {
 			return "stackedIntervals";
 		case Preset:
 			return "preset";
-		case Adhock:
-			return "adhock";
+		case AdHoc:
+			return "adHoc";
 		}
 	}
 	func intervalsDataGenerator(intervalsData anIntervalsData: IntervalsData) -> IntervalsDataGenerator {
@@ -46,19 +46,12 @@ enum DocumentType {
 			return LimitsBasedGenerator(intervalsData:anIntervalsData);
 		case Preset:
 			return LimitsBasedGenerator(intervalsData:anIntervalsData);
-		case Adhock:
+		case AdHoc:
 			return LimitsBasedGenerator(intervalsData:anIntervalsData);
 		}
 	}
 }
 
-
-protocol IntervalsDataGenerator : CustomStringConvertible {
-	var averageError : Double { get }
-	var smallestError : Set<EqualTemperamentEntry> { get }
-	var biggestError : Set<EqualTemperamentEntry> { get }
-	var everyEntry : [EqualTemperamentEntry] { get }
-}
 
 class IntervalsData: NSObject {
 	static let		minimumBaseFrequency = 16.0;
@@ -89,14 +82,36 @@ class IntervalsData: NSObject {
 			theTone = aPropertyList["tone"] as? [String:AnyObject]
 		{
 			intervalCount = theIntervalCount
-			if let theNumeratorPrimeLimit = theLimits["numeratorPrime"] {
-				numeratorPrimeLimitIndex = IntervalsData.indexForLargestPrimeLessThanOrEuqalTo(theNumeratorPrimeLimit) ?? 2;
+			if let theDocumentType = aPropertyList["documentType"] as? String {
+				documentType = DocumentType.fromString(theDocumentType);
+			if let theDocumentType = documentType {
+				switch theDocumentType {
+				case .Limits:
+					if let theNumeratorPrimeLimit = theLimits["numeratorPrime"] {
+						numeratorPrimeLimitIndex = IntervalsData.indexForLargestPrimeLessThanOrEuqalTo(theNumeratorPrimeLimit) ?? 2;
+					}
+					if let theDenominatorPrimeLimit = theLimits["denominatorPrime"] {
+						denominatorPrimeLimitIndex = IntervalsData.indexForLargestPrimeLessThanOrEuqalTo(theDenominatorPrimeLimit) ?? 2;
+					}
+					if let theOddLimit = theLimits["oddLimit"] {
+						oddLimit = theOddLimit;
+					}
+				case .StackedIntervals:
+					break;
+				case .Preset:
+					break;
+				case .AdHoc:
+					if let theOddLimit = aPropertyList["adHoc"] as? [String] {
+						var		theEntites = Set<Interval>();
+						for theEntityString in theOddLimit {
+							if let theInterval = Interval.fromString(theEntityString) {
+								theEntites.insert(theInterval);
+							}
+						}
+					}
+					break;
+				}
 			}
-			if let theDenominatorPrimeLimit = theLimits["denominatorPrime"] {
-				denominatorPrimeLimitIndex = IntervalsData.indexForLargestPrimeLessThanOrEuqalTo(theDenominatorPrimeLimit) ?? 2;
-			}
-			if let theOddLimit = theLimits["oddLimit"] {
-				oddLimit = theOddLimit;
 			}
 			if let theAdditiveDissonance = theLimits["additiveDissonance"] {
 				additiveDissonance = theAdditiveDissonance;
@@ -145,8 +160,12 @@ class IntervalsData: NSObject {
 				break;
 			case .Preset:
 				break;
-			case .Adhock:
-				break;
+			case .AdHoc:
+				var		theEntires = [String]();
+				for theInterval in adHocEntries {
+					theEntires.append(theInterval.toString)
+				}
+				theResult["adHoc"] = theEntires;
 			}
 		}
 		return theResult;
@@ -221,11 +240,12 @@ class IntervalsData: NSObject {
 			NSUserDefaults.standardUserDefaults().setInteger( Int(oddLimit), forKey:"oddLimit");
 		}
 	}
-	var		additiveDissonance : UInt = 256 {
+	var		additiveDissonance : UInt = UInt.max {
 		didSet {
 			NSUserDefaults.standardUserDefaults().setInteger( Int(additiveDissonance), forKey:"additiveDissonance");
 		}
 	}
+	var		adHocEntries = Set<Interval>();
 
 	var		maximumError : Double = 0.18 {
 		didSet {

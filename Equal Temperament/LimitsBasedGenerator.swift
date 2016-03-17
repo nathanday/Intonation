@@ -9,8 +9,8 @@
 import Foundation
 
 class LimitsBasedGenerator : IntervalsDataGenerator {
-	var	_everyEqualTemperamentEntry : Set<EqualTemperamentEntry>?;
-	var	everyEqualTemperamentEntry : Set<EqualTemperamentEntry> {
+	var	_everyEqualTemperamentEntry : [EqualTemperamentEntry]?;
+	override var	everyEntry : [EqualTemperamentEntry] {
 		get {
 			if _everyEqualTemperamentEntry == nil {
 				var		theResult = Set<EqualTemperamentEntry>();
@@ -20,8 +20,9 @@ class LimitsBasedGenerator : IntervalsDataGenerator {
 							assert(theNum >= theDenom);
 							assert( theNum <= theDenom*2 );
 							for theOctaves in 0..<octaves {
-								let		theEntry = EqualTemperamentEntry(numberator: theNum*1<<theOctaves, denominator:theDenom, intervalCount:intervalCount, maximumError: maximumError);
-								let		theDegree = Scale.major.indexOf(theEntry.justIntonationRatio);
+								let		theRational = Rational(theNum*1<<theOctaves,theDenom);
+								let		theEntry = EqualTemperamentEntry(justIntonationRatio: theRational, intervalCount:intervalCount, maximumError: maximumError);
+								let		theDegree = Scale.major.indexOf(theRational);
 								if theEntry.isClose || !filtered {
 									theResult.insert(theEntry);
 								}
@@ -32,7 +33,7 @@ class LimitsBasedGenerator : IntervalsDataGenerator {
 						}
 					}
 				}
-				_everyEqualTemperamentEntry = theResult;
+				_everyEqualTemperamentEntry = theResult.sort({ return $0.justIntonationCents < $1.justIntonationCents; } );
 			}
 			return _everyEqualTemperamentEntry!;
 		}
@@ -40,61 +41,7 @@ class LimitsBasedGenerator : IntervalsDataGenerator {
 	var limits : (numeratorPrime:UInt,denominatorPrime:UInt,odd:UInt,additiveDissonance:UInt);
 	var maximumError : Double;
 	var intervalCount : UInt;
-	var octaves : UInt;
 	var filtered : Bool;
-
-	var averageError : Double {
-		var		theAverageError : Double = 0.0;
-		let		theCount = Double(everyEqualTemperamentEntry.count);
-		for theEntry in everyEqualTemperamentEntry {
-			theAverageError += abs(theEntry.error12ETCent);
-		}
-		return theAverageError/theCount
-	}
-
-	var smallestError : Set<EqualTemperamentEntry> {
-		var		theResult = Set<EqualTemperamentEntry>();
-		var		theError = 0.0;
-		for theEntry in everyEqualTemperamentEntry {
-			if !theEntry.isOctave && !theEntry.isUnison {
-				if theResult.isEmpty {
-					theError = abs(theEntry.error12ETCent);
-					theResult = [theEntry];
-				} else {
-					if abs(theError.distanceTo(abs(theEntry.error12ETCent))) < 0.000001 {
-						theResult.insert(theEntry);
-					}
-					else if theError > abs(theEntry.error12ETCent) {
-						theError = abs(theEntry.error12ETCent);
-						theResult = [theEntry];
-					}
-				}
-			}
-		}
-		return theResult;
-	}
-
-	var biggestError : Set<EqualTemperamentEntry> {
-		var		theResult = Set<EqualTemperamentEntry>();
-		var		theError = 0.0;
-		for theEntry in everyEqualTemperamentEntry {
-			if !theEntry.isOctave && !theEntry.isUnison {
-				if theResult.isEmpty {
-					theError = abs(theEntry.error12ETCent);
-					theResult = [theEntry];
-				} else {
-					if abs(theError.distanceTo(abs(theEntry.error12ETCent))) < 0.000001 {
-						theResult.insert(theEntry);
-					}
-					else if theError < abs(theEntry.error12ETCent) {
-						theError = abs(theEntry.error12ETCent);
-						theResult = [theEntry];
-					}
-				}
-			}
-		}
-		return theResult;
-	}
 
 	init( intervalsData anIntervalsData : IntervalsData ) {
 		let		theDenominatorPrimeLimit = anIntervalsData.separatePrimeLimit ? anIntervalsData.denominatorPrimeLimit : anIntervalsData.numeratorPrimeLimit;
@@ -102,20 +49,10 @@ class LimitsBasedGenerator : IntervalsDataGenerator {
 		intervalCount = anIntervalsData.enableInterval ? anIntervalsData.intervalCount : 0;
 		maximumError = anIntervalsData.maximumError;
 		filtered = anIntervalsData.filtered;
+		super.init();
 		octaves = anIntervalsData.octavesCount;
 	}
-	var everyEntry : [EqualTemperamentEntry] {
-		get {
-			var		theResult = Array<EqualTemperamentEntry>();
-			for theEntry in everyEqualTemperamentEntry {
-				theResult.append(theEntry as EqualTemperamentEntry);
-			}
-			theResult.sortInPlace({ return $0.justIntonationCents < $1.justIntonationCents; } );
-			return theResult;
-		}
-	}
-
-	var description: String {
-		return "entries:\(everyEqualTemperamentEntry.debugDescription)";
+	override var description: String {
+		return "entries:\(everyEntry.debugDescription)";
 	}
 }

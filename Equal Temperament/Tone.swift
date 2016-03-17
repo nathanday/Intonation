@@ -27,7 +27,7 @@ class Tone {
 		get {
 			return equalTemperament
 				? baseFrequency*interval.equalTemperamentRatio(forIntervalCount:equalTempIntervalCount)
-				: baseFrequency*interval.ratio.toDouble;
+				: baseFrequency*interval.toDouble;
 		}
 	}
 	var				harmonics: HarmonicsDescription;
@@ -191,11 +191,11 @@ class Tone {
 
 extension Tone : Hashable {
 	var hashValue: Int {
-		get { return interval.ratio.hashValue; }
+		get { return interval.hashValue; }
 	}
 }
 
 func ==(aLhs: Tone, aRhs: Tone) -> Bool {
-	return aLhs.interval.ratio == aRhs.interval.ratio;
+	return aLhs.interval == aRhs.interval;
 }
 

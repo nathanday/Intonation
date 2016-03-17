@@ -19,7 +19,7 @@ class WaveView: ResultView {
 		didSet { setNeedsDisplay(); }
 	}
 
-	override var		selectedRatios : [Rational] {
+	override var		selectedRatios : [Interval] {
 		didSet {
 			invalidateIntrinsicContentSize();
 			setNeedsDisplay();

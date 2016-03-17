@@ -22,7 +22,7 @@ class SpectrumView: ResultView {
 		}
 	}
 
-	override var selectedRatios : [Rational] {
+	override var selectedRatios : [Interval] {
 		didSet {
 			invalidateIntrinsicContentSize();
 			setNeedsDisplay();
@@ -45,8 +45,12 @@ class SpectrumView: ResultView {
 	var numeratorPrimes : Set<UInt> {
 		var		theResult = Set<UInt>();
 		for theRatio in selectedRatios {
-			for p in UInt(theRatio.numerator).everyPrimeFactor {
-				theResult.insert(p.factor);
+			if let theRationalRatio = theRatio as? RationalInterval {
+				for p in UInt(theRationalRatio.numerator).everyPrimeFactor {
+					theResult.insert(p.factor);
+				}
+			} else {
+				theResult.insert(UInt.max);
 			}
 		}
 		return theResult;

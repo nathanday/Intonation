@@ -64,14 +64,14 @@ class ChordSelectorItem : NSObject {
 }
 
 class ChordSelectorRatio : ChordSelectorItem {
-	let				ratio : Ratio;
+	let				ratio : Interval;
 
 	init( name aName: String, ratio aRatio: Rational ) {
-		ratio = .rational(aRatio);
+		ratio = RationalInterval(aRatio);
 		super.init( name: aName );
 	}
 	init( name aName: String, ratio aRatio: Double ) {
-		ratio = .irrational(aRatio);
+		ratio = IrrationalInterval(aRatio);
 		super.init( name: aName );
 	}
 }
