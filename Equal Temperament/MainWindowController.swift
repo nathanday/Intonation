@@ -75,7 +75,7 @@ class MainWindowController : NSWindowController {
 					scaleViewController?.setIntervals(intervals: theDocument.everyInterval, intervalCount: theDocument.intervalsData.intervalCount, enabled: theDocument.intervalsData.enableInterval);
 				} else if aKeyPath == "selectedIndicies" {
 					let		theSelectedIntervals = theDocument.selectedJustIntonationIntervals;
-					arrayController?.setSelectionIndexes(theDocument.selectedIndicies);
+					arrayController?.setSelectedObjects(theDocument.selectedEqualTemperamentEntry);
 					updateChordRatioTitle();
 					assert(scaleViewController != nil, "Failed to get ScaleViewController")
 					scaleViewController?.setSelectionIntervals(theSelectedIntervals);
@@ -347,9 +347,10 @@ extension MainWindowController : NSTableViewDelegate {
 	}
 
 	func tableViewSelectionDidChange(notification: NSNotification) {
-		if let theSelectedIntervals = arrayController?.selectionIndexes,
+		if let theSelectedEntries = arrayController?.selectedObjects as? [EqualTemperamentEntry],
 			theDocument = document as? Document {
-			theDocument.selectedIndicies = theSelectedIntervals;
+			print( theSelectedEntries );
+			theDocument.selectedEqualTemperamentEntry = theSelectedEntries
 		}
 	}
 
