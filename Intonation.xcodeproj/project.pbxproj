@@ -105,12 +105,12 @@
 		D88EED2C1AEE5AF50084BDCB /* Float+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Float+Additions.swift"; sourceTree = "<group>"; };
 		D8901EBC1ABC226D00A4E071 /* Scale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scale.swift; sourceTree = "<group>"; };
 		D89074D71AD5486600FD8A1E /* ResultView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
-		D895435D1996345200A091A4 /* Equal Temperament.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Equal Temperament.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D895435D1996345200A091A4 /* Intonation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Intonation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D89543611996345200A091A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D89543621996345200A091A4 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		D89543691996345200A091A4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D895436C1996345200A091A4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		D89543721996345200A091A4 /* Equal TemperamentTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Equal TemperamentTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D89543721996345200A091A4 /* Intonation.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Intonation.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D89543771996345200A091A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D89543781996345200A091A4 /* Equal_TemperamentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Equal_TemperamentTests.swift; sourceTree = "<group>"; };
 		D89543821996347F00A091A4 /* Document.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
@@ -206,8 +206,8 @@
 		D895435E1996345200A091A4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D895435D1996345200A091A4 /* Equal Temperament.app */,
-				D89543721996345200A091A4 /* Equal TemperamentTests.xctest */,
+				D895435D1996345200A091A4 /* Intonation.app */,
+				D89543721996345200A091A4 /* Intonation.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -339,9 +339,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D895435C1996345200A091A4 /* Equal Temperament */ = {
+		D895435C1996345200A091A4 /* Intonation */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D895437C1996345200A091A4 /* Build configuration list for PBXNativeTarget "Equal Temperament" */;
+			buildConfigurationList = D895437C1996345200A091A4 /* Build configuration list for PBXNativeTarget "Intonation" */;
 			buildPhases = (
 				D89543591996345200A091A4 /* Sources */,
 				D895435A1996345200A091A4 /* Frameworks */,
@@ -351,14 +351,14 @@
 			);
 			dependencies = (
 			);
-			name = "Equal Temperament";
+			name = Intonation;
 			productName = "Equal Temperament";
-			productReference = D895435D1996345200A091A4 /* Equal Temperament.app */;
+			productReference = D895435D1996345200A091A4 /* Intonation.app */;
 			productType = "com.apple.product-type.application";
 		};
-		D89543711996345200A091A4 /* Equal TemperamentTests */ = {
+		D89543711996345200A091A4 /* IntonationTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D895437F1996345200A091A4 /* Build configuration list for PBXNativeTarget "Equal TemperamentTests" */;
+			buildConfigurationList = D895437F1996345200A091A4 /* Build configuration list for PBXNativeTarget "IntonationTests" */;
 			buildPhases = (
 				D895436E1996345200A091A4 /* Sources */,
 				D895436F1996345200A091A4 /* Frameworks */,
@@ -369,9 +369,9 @@
 			dependencies = (
 				D89543741996345200A091A4 /* PBXTargetDependency */,
 			);
-			name = "Equal TemperamentTests";
+			name = IntonationTests;
 			productName = "Equal TemperamentTests";
-			productReference = D89543721996345200A091A4 /* Equal TemperamentTests.xctest */;
+			productReference = D89543721996345200A091A4 /* Intonation.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -394,7 +394,7 @@
 					};
 				};
 			};
-			buildConfigurationList = D89543581996345200A091A4 /* Build configuration list for PBXProject "Equal Temperament" */;
+			buildConfigurationList = D89543581996345200A091A4 /* Build configuration list for PBXProject "Intonation" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -407,8 +407,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D895435C1996345200A091A4 /* Equal Temperament */,
-				D89543711996345200A091A4 /* Equal TemperamentTests */,
+				D895435C1996345200A091A4 /* Intonation */,
+				D89543711996345200A091A4 /* IntonationTests */,
 			);
 		};
 /* End PBXProject section */
@@ -506,7 +506,7 @@
 /* Begin PBXTargetDependency section */
 		D89543741996345200A091A4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D895435C1996345200A091A4 /* Equal Temperament */;
+			target = D895435C1996345200A091A4 /* Intonation */;
 			targetProxy = D89543731996345200A091A4 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -620,7 +620,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.godofcocoa.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Intonation;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -636,7 +636,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.godofcocoa.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Intonation;
 			};
 			name = Release;
 		};
@@ -656,8 +656,8 @@
 				INFOPLIST_FILE = "Equal TemperamentTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.godofcocoa.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Equal Temperament.app/Contents/MacOS/Equal Temperament";
+				PRODUCT_NAME = Intonation;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Intonation.app/Contents/MacOS/Intonation";
 			};
 			name = Debug;
 		};
@@ -673,15 +673,15 @@
 				INFOPLIST_FILE = "Equal TemperamentTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.godofcocoa.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Equal Temperament.app/Contents/MacOS/Equal Temperament";
+				PRODUCT_NAME = Intonation;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Intonation.app/Contents/MacOS/Intonation";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D89543581996345200A091A4 /* Build configuration list for PBXProject "Equal Temperament" */ = {
+		D89543581996345200A091A4 /* Build configuration list for PBXProject "Intonation" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D895437A1996345200A091A4 /* Debug */,
@@ -690,7 +690,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D895437C1996345200A091A4 /* Build configuration list for PBXNativeTarget "Equal Temperament" */ = {
+		D895437C1996345200A091A4 /* Build configuration list for PBXNativeTarget "Intonation" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D895437D1996345200A091A4 /* Debug */,
@@ -699,7 +699,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D895437F1996345200A091A4 /* Build configuration list for PBXNativeTarget "Equal TemperamentTests" */ = {
+		D895437F1996345200A091A4 /* Build configuration list for PBXNativeTarget "IntonationTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D89543801996345200A091A4 /* Debug */,

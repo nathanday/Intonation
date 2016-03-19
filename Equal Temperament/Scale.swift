@@ -1,6 +1,6 @@
 /*
 	Scale.swift
-	Equal Temperament
+	Intonation
 
 	Created by Nathan Day on 20/03/15.
 	Copyright © 2015 Nathan Day. All rights reserved.

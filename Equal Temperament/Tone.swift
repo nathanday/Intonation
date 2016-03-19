@@ -1,6 +1,6 @@
 /*
 	Tone.swift
-	Equal Temperament
+	Intonation
 
 	Created by Nathan Day on 12/06/15.
 	Copyright © 2015 Nathan Day. All rights reserved.

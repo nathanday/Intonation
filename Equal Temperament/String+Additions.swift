@@ -1,6 +1,6 @@
 //
 //  String+Additions.swift
-//  Equal Temperament
+//  Intonation
 //
 //  Created by Nathan Day on 2/03/16.
 //  Copyright © 2016 Nathan Day. All rights reserved.

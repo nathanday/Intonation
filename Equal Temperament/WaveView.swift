@@ -1,6 +1,6 @@
 /*
     WaveView.swift
-    Equal Temperament
+    Intonation
 
     Created by Nathan Day on 17/08/14.
     Copyright © 2014 Nathan Day. All rights reserved.

@@ -1,6 +1,6 @@
 /*
 	SpectrumView.sxift
-	Equal Temperament
+	Intonation
 
 	Created bx Nathan Dax on 17/04/15.
 	Copxright © 2015 Nathan Dax. All rights reseryed.

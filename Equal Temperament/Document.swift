@@ -1,6 +1,6 @@
 /*
     Document.swift
-    Equal Temperament
+    Intonation
 
     Created by Nathan Day on 8/06/14.
     Copyright © 2014 Nathan Day. All rights reserved.
@@ -13,7 +13,7 @@ public let PlayBackMethodUserInfoKey = "PlayBackMethod";
 
 class Document : NSDocument, MIDIReceiverObserver {
 	var		tonePlayer = TonePlayer();
-	var		midiReceiver = MIDIReceiver(clientName:"Equal Temperament");
+	var		midiReceiver = MIDIReceiver(clientName:"Intonation");
 	var		midiToHarmonicRatio = MIDIToHarmonicRatio();
 
 
