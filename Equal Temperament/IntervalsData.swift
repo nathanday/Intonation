@@ -47,7 +47,7 @@ enum DocumentType {
 		case Preset:
 			return LimitsBasedGenerator(intervalsData:anIntervalsData);
 		case AdHoc:
-			return LimitsBasedGenerator(intervalsData:anIntervalsData);
+			return AdHocGenerator(intervalsData:anIntervalsData);
 		}
 	}
 }

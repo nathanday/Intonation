@@ -16,7 +16,7 @@ class AdHocGenerator: IntervalsDataGenerator {
 	init( intervalsData anIntervalsData : IntervalsData ) {
 		var		theEveryEqualTemperamentEntry = [EqualTemperamentEntry]();
 		for theEntry in anIntervalsData.adHocEntries {
-			theEveryEqualTemperamentEntry.append(EqualTemperamentEntry(justIntonationRatio: theEntry, intervalCount: 12, maximumError: 18.0));
+			theEveryEqualTemperamentEntry.append(EqualTemperamentEntry(interval: theEntry, intervalCount: 12, maximumError: 18.0));
 		}
 		_everyEqualTemperamentEntry = theEveryEqualTemperamentEntry;
 		super.init();

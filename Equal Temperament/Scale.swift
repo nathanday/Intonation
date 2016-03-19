@@ -11,13 +11,13 @@ import Foundation
 class Interval : Hashable {
 	static func fromString( aString : String ) -> Interval? {
 		var		theResult : Interval?
-		if aString.containsString("∶") {
-			if let theValue = Rational(aString) {
-				theResult = RationalInterval(theValue);
-			}
-		} else {
+		if aString.containsString(".") {
 			if let theValue = Double(aString) {
 				theResult = IrrationalInterval(theValue);
+			}
+		} else {
+			if let theValue = Rational(aString) {
+				theResult = RationalInterval(theValue);
 			}
 		}
 		return theResult;
@@ -62,13 +62,16 @@ class Interval : Hashable {
 }
 
 class RationalInterval : Interval {
-	private static let	ratioNames : [Rational:[String]] = {
+	private static let	intervalNames : [Rational:[String]] = {
 		var theResult = [Rational:[String]]()
-		for theEntry in NSUserDefaults.standardUserDefaults().arrayForKey("ratioNames")! as! [[String:AnyObject]] {
+		for theEntry in NSUserDefaults.standardUserDefaults().arrayForKey("intervalNames")! as! [[String:AnyObject]] {
 			if let theRatioString = theEntry["ratio"] as? String,
 				theNames = theEntry["names"] as? [String] {
-				if let theRatio = Rational(theRatioString) {
-					theResult[theRatio] = theNames;
+				if !theRatioString.containsString(".") {
+					if let theRatio = Rational(theRatioString) {
+						precondition(theResult[theRatio] == nil, "Already have \(theRatio)=\(theResult[theRatio])" );
+						theResult[theRatio] = theNames;
+					}
 				}
 			}
 		}
@@ -76,7 +79,7 @@ class RationalInterval : Interval {
 	}()
 	let		ratio: Rational;
 	override var toDouble : Double { return ratio.toDouble; }
-	override var toString : String { return ratio.toString; }
+	override var toString : String { return ratio.ratioString; }
 	var		justInternation : Double { return ratio.toDouble; }
 	var		numerator: Int { return ratio.numerator; }
 	var		denominator: Int { return ratio.denominator; }
@@ -85,12 +88,12 @@ class RationalInterval : Interval {
 		super.init( names:aNames );
 	}
 	convenience init( _ aRatio: Rational ) {
-		let		theNames = RationalInterval.ratioNames[aRatio];
+		let		theNames = RationalInterval.intervalNames[aRatio];
 		self.init( ratio: aRatio, names:theNames );
 	}
 	convenience init( numerator aNumerator: Int, denominator aDenominator : Int ) {
 		let		theRational = Rational(aNumerator,aDenominator);
-		let		theNames = RationalInterval.ratioNames[theRational];
+		let		theNames = RationalInterval.intervalNames[theRational];
 		self.init( ratio: theRational, names:theNames );
 	}
 	override var hashValue: Int { return ratio.hashValue; }
@@ -105,6 +108,20 @@ class RationalInterval : Interval {
 }
 
 class IrrationalInterval : Interval {
+	private static let	intervalNames : [Double:[String]] = {
+		var theResult = [Double:[String]]()
+		for theEntry in NSUserDefaults.standardUserDefaults().arrayForKey("intervalNames")! as! [[String:AnyObject]] {
+			if let theRatioString = theEntry["ratio"] as? String,
+				theNames = theEntry["names"] as? [String] {
+				if theRatioString.containsString(".") {
+					if let theRatio = Double(theRatioString) {
+						theResult[theRatio] = theNames;
+					}
+				}
+			}
+		}
+		return theResult;
+	}()
 	let		ratio: Double;
 	override var		toDouble : Double { return ratio; }
 	override var toString : String { return "\(ratio)"; }
@@ -114,7 +131,8 @@ class IrrationalInterval : Interval {
 		super.init( names:aNames );
 	}
 	convenience init( _ aRatio: Double ) {
-		self.init( ratio: aRatio, names:nil );
+		let		theNames = IrrationalInterval.intervalNames[aRatio];
+		self.init( ratio: aRatio, names:theNames );
 	}
 	override var factorsString : String { return "\(ratio)"; }
 	override var ratioString : String { return "\(ratio)"; }

@@ -33,23 +33,23 @@ extension Rational {
 }
 
 class EqualTemperamentEntry : NSObject {
-	var justIntonationRatio : Interval
+	var interval : Interval
 	var isClose : Bool;
-    dynamic var justIntonationRatioToString : String { return justIntonationRatio.toString; }
-    dynamic var justIntonationRatioToDouble : Double { return justIntonationRatio.toDouble; }
+    dynamic var intervalToString : String { return interval.toString; }
+    dynamic var intervalToDouble : Double { return interval.toDouble; }
 	let intervalCount : UInt
-	var name : String { return justIntonationRatio.toString; }
-	var closestEqualTemperamentIntervalNumber : UInt { return UInt(12.0*Double(log2(justIntonationRatio.toDouble))+0.5); }
-	var closestIntervalNumber : UInt { return UInt(Double(self.intervalCount)*Double(log2(justIntonationRatio.toDouble))+0.5); }
+	var name : String { return interval.toString; }
+	var closestEqualTemperamentIntervalNumber : UInt { return UInt(12.0*Double(log2(interval.toDouble))+0.5); }
+	var closestIntervalNumber : UInt { return UInt(Double(self.intervalCount)*Double(log2(interval.toDouble))+0.5); }
 	var equalTemperamentRatio : Double { return pow(2.0,Double(self.closestEqualTemperamentIntervalNumber)/Double(self.intervalCount)); }
-	var justIntonationCents : Double { return justIntonationRatio.toDouble.toCents; }
-	var justIntonationPercent : Double { return Double(self.intervalCount)*100.0 * log2(self.justIntonationRatio.toDouble); }
-	var error : Double { return equalTemperamentRatio-justIntonationRatio.toDouble; }
+	var justIntonationCents : Double { return interval.toDouble.toCents; }
+	var justIntonationPercent : Double { return Double(self.intervalCount)*100.0 * log2(self.interval.toDouble); }
+	var error : Double { return equalTemperamentRatio-interval.toDouble; }
 	var error12ETCent : Double {
-		return (justIntonationRatio.toDouble/ratioForCentsEquivelent(Double(closestIntervalNumber)*100.0, n: self.intervalCount )).toCents;
+		return (interval.toDouble/ratioForCentsEquivelent(Double(closestIntervalNumber)*100.0, n: self.intervalCount )).toCents;
 	}
 	var oddLimit : UInt {
-		switch justIntonationRatio {
+		switch interval {
 		case let x as RationalInterval:
 			return x.ratio.oddLimit;
 		default:
@@ -58,7 +58,7 @@ class EqualTemperamentEntry : NSObject {
 	}
 
 	var primeLimit : UInt {
-		switch justIntonationRatio {
+		switch interval {
 		case let x as RationalInterval:
 			return x.ratio.primeLimit;
 		default:
@@ -66,31 +66,22 @@ class EqualTemperamentEntry : NSObject {
 		}
 	}
 	var factorsString : String {
-		switch justIntonationRatio {
+		switch interval {
 		case let x as RationalInterval:
 			return x.ratio.factorsString;
 		default:
-			return justIntonationRatio.toString;
+			return interval.toString;
 		}
 	}
 
 	var	additiveDissonance : UInt {
-		return justIntonationRatio.additiveDissonance;
+		return interval.additiveDissonance;
 	}
 
 	var degreeName : String = "";
 
 	var errorNETCent : Double {
-		return (justIntonationRatio.toDouble/ratioForCentsEquivelent(Double(closestIntervalNumber)*100.0, n:intervalCount)).toCents;
-	}
-
-	var interval : Interval? {
-		switch justIntonationRatio {
-		case let x as RationalInterval:
-			return x;
-		default:
-			return nil;
-		}
+		return (interval.toDouble/ratioForCentsEquivelent(Double(closestIntervalNumber)*100.0, n:intervalCount)).toCents;
 	}
 
 	var closestIntervalNumberDescription : String { return isClose ? "\(closestIntervalNumber)" : ""; }
@@ -109,7 +100,7 @@ class EqualTemperamentEntry : NSObject {
 	}
 
 	var isUnison : Bool {
-		switch justIntonationRatio {
+		switch interval {
 		case let x as RationalInterval:
 			return x.numerator == 1 && x.denominator == 1;
 		case let x as IrrationalInterval:
@@ -119,7 +110,7 @@ class EqualTemperamentEntry : NSObject {
 		}
 	}
 	var isPerfectFourth : Bool {
-		switch justIntonationRatio {
+		switch interval {
 		case let x as RationalInterval:
 			return x.numerator == 4 && x.denominator == 3;
 		case let x as IrrationalInterval:
@@ -129,7 +120,7 @@ class EqualTemperamentEntry : NSObject {
 		}
 	}
 	var isPerfectFifth : Bool {
-		switch justIntonationRatio {
+		switch interval {
 		case let x as RationalInterval:
 			return x.numerator == 3 && x.denominator == 2;
 		case let x as IrrationalInterval:
@@ -139,18 +130,18 @@ class EqualTemperamentEntry : NSObject {
 		}
 	}
 	var isOctave : Bool {
-		switch justIntonationRatio {
+		switch interval {
 		case let x as RationalInterval:
 			return bitCount(x.numerator) == 1 && x.denominator == 1;
 		case let x as IrrationalInterval:
 			let		theLog2 = log2(x.ratio);
-			return theLog2 == floor(theLog2);
+			return theLog2 > 0 && theLog2 == floor(theLog2);
 		default:
 			return false;
 		}
 	}
 	var isFirstOctave : Bool {
-		switch justIntonationRatio {
+		switch interval {
 		case let x as RationalInterval:
 			return x.numerator == 2 && x.denominator == 1;
 		case let x as IrrationalInterval:
@@ -164,27 +155,27 @@ class EqualTemperamentEntry : NSObject {
 	var absError12ETCent : Double { return abs(error12ETCent); }
 	var absErrorNETCent : Double { return abs(errorNETCent); }
 
-	init( justIntonationRatio: Interval, intervalCount : UInt, maximumError: Double ) {
-		self.justIntonationRatio = justIntonationRatio;
+	init( interval: Interval, intervalCount : UInt, maximumError: Double ) {
+		self.interval = interval;
 		self.intervalCount = intervalCount;
 		self.isClose = true;
 		super.init();
 		self.isClose = abs(self.error12ETCent) < 100.0*maximumError;
 	}
 
-	convenience init( justIntonationRatio: Rational, intervalCount : UInt, maximumError: Double ) {
-		self.init( justIntonationRatio: RationalInterval(justIntonationRatio), intervalCount : intervalCount, maximumError: maximumError )
+	convenience init( interval: Rational, intervalCount : UInt, maximumError: Double ) {
+		self.init( interval: RationalInterval(interval), intervalCount : intervalCount, maximumError: maximumError )
 	}
 
 	convenience init( numberator: UInt, denominator: UInt, intervalCount : UInt, maximumError: Double ) {
 		let		theNum = numberator;
 		let		theDen = denominator;
-		self.init( justIntonationRatio: RationalInterval(Rational(Int(theNum),Int(theDen))), intervalCount : intervalCount, maximumError: maximumError )
+		self.init( interval: RationalInterval(Rational(Int(theNum),Int(theDen))), intervalCount : intervalCount, maximumError: maximumError )
 	}
 
 	init?( aString: String, intervalCount : UInt, maximumError: Double ) {
 		if let theRatio = Interval.fromString(aString) {
-			self.justIntonationRatio = theRatio;
+			self.interval = theRatio;
 			self.intervalCount = intervalCount;
 			self.isClose = true;
 			super.init();
@@ -194,22 +185,22 @@ class EqualTemperamentEntry : NSObject {
 		}
 	}
 
-	override var description: String { return "ratio:\(justIntonationRatio), closestIntervalNumber:\(closestIntervalNumber)"; }
-	override var hashValue: Int { return justIntonationRatio.hashValue; }
+	override var description: String { return "ratio:\(interval), closestIntervalNumber:\(closestIntervalNumber)"; }
+	override var hashValue: Int { return interval.hashValue; }
 
-	override var hash : Int { return justIntonationRatio.hashValue; }
+	override var hash : Int { return interval.hashValue; }
 	override func isEqual(object: AnyObject?) -> Bool {
-		return self.justIntonationRatio==(object as! EqualTemperamentEntry).justIntonationRatio;
+		return self.interval==(object as? EqualTemperamentEntry)?.interval;
 	}
 }
 
 extension EqualTemperamentEntry {
 	var everyIntervalName : [String] {
-		return self.justIntonationRatio.names ?? [];
+		return self.interval.names ?? [];
 	}
 	var intervalName : String {
 		return everyIntervalName.first ?? "";
 	}
 }
 
-func ==(a: EqualTemperamentEntry, b: EqualTemperamentEntry) -> Bool { return a.justIntonationRatio==b.justIntonationRatio; }
+func ==(a: EqualTemperamentEntry, b: EqualTemperamentEntry) -> Bool { return a.interval==b.interval; }

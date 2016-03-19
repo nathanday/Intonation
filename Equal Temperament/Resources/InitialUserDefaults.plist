@@ -22,7 +22,7 @@
 	<integer>1</integer>
 	<key>maximumError</key>
 	<integer>18</integer>
-	<key>ratioNames</key>
+	<key>intervalNames</key>
 	<array>
 		<dict>
 			<key>ratio</key>
@@ -34,10 +34,273 @@
 		</dict>
 		<dict>
 			<key>ratio</key>
+			<string>4375:4374</string>
+			<key>names</key>
+			<array>
+				<string>Ragisma</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>2401:2400</string>
+			<key>names</key>
+			<array>
+				<string>Breedsma</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>1.000577789506555</string>
+			<key>names</key>
+			<array>
+				<string>Cent</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>1.000693387462581</string>
+			<key>names</key>
+			<array>
+				<string>Millioctave</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>32805:32768</string>
+			<key>names</key>
+			<array>
+				<string>Schisma</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>225:224</string>
+			<key>names</key>
+			<array>
+				<string>Septimal kleisma</string>
+				<string>marvel comma</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>15625:15552</string>
+			<key>names</key>
+			<array>
+				<string>Kleisma</string>
+				<string>semicomma majeur</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>2109375:2097152</string>
+			<key>names</key>
+			<array>
+				<string>Semicomma</string>
+				<string>Fokker's comma</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>145:144</string>
+			<key>names</key>
+			<array>
+				<string>Difference between 29:16 and 9:5</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>1728:1715</string>
+			<key>names</key>
+			<array>
+				<string>Orwell comma</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>126:125</string>
+			<key>names</key>
+			<array>
+				<string>Small septimal semicomma</string>
+				<string>small septimal comma</string>
+				<string>starling comma</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>121:120</string>
+			<key>names</key>
+			<array>
+				<string>Undecimal seconds comma</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>1.009673533228511</string>
+			<key>names</key>
+			<array>
+				<string>72 equal temperament step</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>96:95</string>
+			<key>names</key>
+			<array>
+				<string>Difference between 19:16 and 6:5</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>2048:2025</string>
+			<key>names</key>
+			<array>
+				<string>Diaschisma</string>
+				<string>minor comma</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
 			<string>81:80</string>
 			<key>names</key>
 			<array>
 				<string>syntonic comma</string>
+				<string>major comma</string>
+				<string>komma</string>
+				<string>chromatic diesis</string>
+				<string>comma of Didymus</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>1.013164143024915</string>
+			<key>names</key>
+			<array>
+				<string>Holdrian comma</string>
+				<string>Holder's comma</string>
+				<string>53 equal temperament step</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>531441:524288</string>
+			<key>names</key>
+			<array>
+				<string>Pythagorean comma</string>
+				<string>ditonic comma</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>1.014545334937524</string>
+			<key>names</key>
+			<array>
+				<string>Eighth tone</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>65:64</string>
+			<key>names</key>
+			<array>
+				<string>Sixty-fifth harmonic</string>
+				<string>13th-partial chroma</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>64:63</string>
+			<key>names</key>
+			<array>
+				<string>Septimal comma</string>
+				<string>Archytas' comma</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>1.017049744443627</string>
+			<key>names</key>
+			<array>
+				<string>41 equal temperament step</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>56:55</string>
+			<key>names</key>
+			<array>
+				<string>Ptolemy's enharmonic</string>
+				<string>difference between (11 : 8) and (7 : 5) tritone</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>1.019440643702145</string>
+			<key>names</key>
+			<array>
+				<string>Sixth tone</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>51:50</string>
+			<key>names</key>
+			<array>
+				<string>Difference between 17:16 and 25:24</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>50:49</string>
+			<key>names</key>
+			<array>
+				<string>Septimal sixth tone</string>
+				<string>jubilisma</string>
+				<string>Erlich's decatonic comma</string>
+				<string>tritonic diesis</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>49:48</string>
+			<key>names</key>
+			<array>
+				<string>Septimal diesis</string>
+				<string>slendro diesis</string>
+				<string>septimal 1/6-tone</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>46:45</string>
+			<key>names</key>
+			<array>
+				<string>Inferior quarter tone</string>
+				<string>difference between 23:16 and 45:32</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>1.022611435601268</string>
+			<key>names</key>
+			<array>
+				<string>31 equal temperament step</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>45:44</string>
+			<key>names</key>
+			<array>
+				<string>Undecimal diesis</string>
+				<string>undecimal fifth tone</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>1.023373891996775</string>
+			<key>names</key>
+			<array>
+				<string>Fifth tone</string>
 			</array>
 		</dict>
 		<dict>
@@ -45,8 +308,193 @@
 			<string>128:125</string>
 			<key>names</key>
 			<array>
-				<string>diesis</string>
+				<string>Enharmonic diesis</string>
+				<string>5-limit limma</string>
+				<string>minor diesis</string>
 				<string>diminished second</string>
+				<string>minor diesis</string>
+				<string>diesis</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>42:41</string>
+			<key>names</key>
+			<array>
+				<string>Lesser 41-limit fifth tone</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>41:40</string>
+			<key>names</key>
+			<array>
+				<string>Greater 41-limit fifth tone</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>40:39</string>
+			<key>names</key>
+			<array>
+				<string>Tridecimal fifth tone</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>39:38</string>
+			<key>names</key>
+			<array>
+				<string>Superior quarter-tone</string>
+				<string>novendecimal fifth tone</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>38:37</string>
+			<key>names</key>
+			<array>
+				<string>Lesser 37-limit quarter tone</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>37:36</string>
+			<key>names</key>
+			<array>
+				<string>Greater 37-limit quarter tone</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>36:35</string>
+			<key>names</key>
+			<array>
+				<string>Septimal quarter tone</string>
+				<string>septimal diesis</string>
+				<string>septimal comma</string>
+				<string>superior quarter tone</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>1.029302236643492</string>
+			<key>names</key>
+			<array>
+				<string>Equal-tempered quarter tone</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>35:34</string>
+			<key>names</key>
+			<array>
+				<string>ET quarter-tone approximation</string>
+				<string>lesser 17-limit quarter tone</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>59049:57344</string>
+			<key>names</key>
+			<array>
+				<string>Harrison's comma (9 P5s - 1 H7)</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>34:33</string>
+			<key>names</key>
+			<array>
+				<string>Greater 17-limit quarter tone</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>33:32</string>
+			<key>names</key>
+			<array>
+				<string>Thirty-third harmonic</string>
+				<string>undecimal comma</string>
+				<string>undecimal quarter tone</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>32:31</string>
+			<key>names</key>
+			<array>
+				<string>Inferior quarter-tone</string>
+				<string>thirty-first subharmonic</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>31:30</string>
+			<key>names</key>
+			<array>
+				<string>Inferior quarter-tone</string>
+				<string>difference between 31:16 and 15:8</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>30:29</string>
+			<key>names</key>
+			<array>
+				<string>Lesser 29-limit quarter tone</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>29:28</string>
+			<key>names</key>
+			<array>
+				<string>Greater 29-limit quarter tone</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>28:27</string>
+			<key>names</key>
+			<array>
+				<string>Septimal minor second</string>
+				<string>small minor second</string>
+				<string>inferior quarter tone</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>1.037548235793919</string>
+			<key>names</key>
+			<array>
+				<string>Beta scale step</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>27:26</string>
+			<key>names</key>
+			<array>
+				<string>Chromatic diesis</string>
+				<string>tridecimal comma</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>1.039259226031843</string>
+			<key>names</key>
+			<array>
+				<string>Third tone</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>26:25</string>
+			<key>names</key>
+			<array>
+				<string>Tridecimal third tone</string>
+				<string>third tone</string>
 			</array>
 		</dict>
 		<dict>
@@ -54,9 +502,73 @@
 			<string>25:24</string>
 			<key>names</key>
 			<array>
+				<string>Just chromatic semitone</string>
+				<string>minor chroma</string>
 				<string>lesser chromatic semitone</string>
+				<string>small (just) semitone</string>
+				<string>minor second</string>
+				<string>minor chromatic semitone</string>
 				<string>minor semitone</string>
+				<string>2/7-comma meantone chromatic semitone</string>
 				<string>augmented unison</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>24:23</string>
+			<key>names</key>
+			<array>
+				<string>Lesser 23-limit semitone</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>23:22</string>
+			<key>names</key>
+			<array>
+				<string>Greater 23-limit semitone</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>1.046081918643215</string>
+			<key>names</key>
+			<array>
+				<string>Alpha scale step</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>67:64</string>
+			<key>names</key>
+			<array>
+				<string>Sixty-seventh harmonic</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>22:21</string>
+			<key>names</key>
+			<array>
+				<string>Hard semitone</string>
+				<string>two-fifth tone small semitone</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>21:20</string>
+			<key>names</key>
+			<array>
+				<string>Septimal chromatic semitone</string>
+				<string>minor semitone</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>20:19</string>
+			<key>names</key>
+			<array>
+				<string>Novendecimal augmented unison</string>
 			</array>
 		</dict>
 		<dict>
@@ -65,6 +577,9 @@
 			<key>names</key>
 			<array>
 				<string>Pythagorean minor second</string>
+				<string>limma</string>
+				<string>Pythagorean diatonic semitone</string>
+				<string>Low Semitone</string>
 				<string>Pythagorean limma</string>
 			</array>
 		</dict>
@@ -73,8 +588,53 @@
 			<string>135:128</string>
 			<key>names</key>
 			<array>
-				<string>greater chromatic semitone</string>
-				<string>wide augmented unison</string>
+				<string>Greater Chromatic Semitone</string>
+				<string>Chromatic Semitone</string>
+				<string>Semitone Medius</string>
+				<string>Major Chroma</string>
+				<string>Major Limma</string>
+				<string>Small Limma</string>
+				<string>Major Chromatic Semitone</string>
+				<string>Limma Ascendant</string>
+				<string>Wide Augmented Unison</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>19:18</string>
+			<key>names</key>
+			<array>
+				<string>Novendecimal minor second</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>18:17</string>
+			<key>names</key>
+			<array>
+				<string>Just minor semitone</string>
+				<string>Arabic lute index finger</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>1.059463094359295</string>
+			<key>names</key>
+			<array>
+				<string>Equal-tempered minor second</string>
+				<string>semitone</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>17:16</string>
+			<key>names</key>
+			<array>
+				<string>Minor diatonic semitone</string>
+				<string>just major semitone</string>
+				<string>overtone semitone</string>
+				<string>17th harmonic</string>
+				<string>limma</string>
 			</array>
 		</dict>
 		<dict>
@@ -82,9 +642,63 @@
 			<string>16:15</string>
 			<key>names</key>
 			<array>
+				<string>Just minor second</string>
+				<string>just diatonic semitone</string>
+				<string>large just semitone</string>
+				<string>major second</string>
 				<string>major semitone</string>
 				<string>limma</string>
+				<string>minor diatonic semitone</string>
+				<string>diatonic second semitone</string>
+				<string>diatonic semitone</string>
+				<string>1/6-comma meantone minor second</string>
 				<string>minor second</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>2187:2048</string>
+			<key>names</key>
+			<array>
+				<string>apotome</string>
+				<string>Pythagorean major semitone</string>
+				<string>Pythagorean augmented unison</string>
+				<string>Pythagorean chromatic semitone</string>
+				<string>Pythagorean apotome</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>1.069742077994642</string>
+			<key>names</key>
+			<array>
+				<string>Secor</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>15:14</string>
+			<key>names</key>
+			<array>
+				<string>Septimal diatonic semitone</string>
+				<string>major diatonic semitone</string>
+				<string>Cowell semitone</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>14:13</string>
+			<key>names</key>
+			<array>
+				<string>Lesser tridecimal 2/3-tone</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>69:64</string>
+			<key>names</key>
+			<array>
+				<string>Sixty-ninth harmonic</string>
 			</array>
 		</dict>
 		<dict>
@@ -92,8 +706,58 @@
 			<string>27:25</string>
 			<key>names</key>
 			<array>
+				<string>Semitone maximus</string>
+				<string>minor second</string>
+				<string>large limma</string>
+				<string>Bohlen-Pierce small semitone</string>
+				<string>high semitone</string>
+				<string>alternate Renaissance half-step</string>
 				<string>large limma</string>
 				<string>acute minor second</string>
+				<string>acute minor second</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>1.080059738892306</string>
+			<key>names</key>
+			<array>
+				<string>Two-third tone</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>13:12</string>
+			<key>names</key>
+			<array>
+				<string>Greater tridecimal 2/3-tone</string>
+				<string>Three-quarter tone</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>1.090507732665258</string>
+			<key>names</key>
+			<array>
+				<string>Equal-tempered neutral second</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>12:11</string>
+			<key>names</key>
+			<array>
+				<string>3/4-tone</string>
+				<string>Undecimal neutral second</string>
+				<string>trumpet three-quarter tone</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>35:32</string>
+			<key>names</key>
+			<array>
+				<string>Thirty-fifth harmonic</string>
 			</array>
 		</dict>
 		<dict>
@@ -101,8 +765,45 @@
 			<string>800:729</string>
 			<key>names</key>
 			<array>
-				<string>grave tone</string>
+				<string>Grave whole tone</string>
+				<string>neutral second</string>
 				<string>grave major second</string>
+				<string>grave tone</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>11:10</string>
+			<key>names</key>
+			<array>
+				<string>Greater undecimal minor/major/neutral second</string>
+				<string>4/5-tone</string>
+				<string>Ptolemy's second</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>1.104089513673812</string>
+			<key>names</key>
+			<array>
+				<string>1 step in 7 equal temperament</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>71:64</string>
+			<key>names</key>
+			<array>
+				<string>Seventy-first harmonic</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>65536:59049</string>
+			<key>names</key>
+			<array>
+				<string>Pythagorean diminished third</string>
+				<string>Pythagorean minor tone</string>
 			</array>
 		</dict>
 		<dict>
@@ -110,8 +811,22 @@
 			<string>10:9</string>
 			<key>names</key>
 			<array>
+				<string>Small just whole tone</string>
+				<string>major second</string>
+				<string>minor whole tone</string>
+				<string>lesser whole tone</string>
 				<string>minor tone</string>
+				<string>minor second</string>
+				<string>half-comma meantone major second</string>
 				<string>lesser major second</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>1.122462048309373</string>
+			<key>names</key>
+			<array>
+				<string>Equal-tempered major second</string>
 			</array>
 		</dict>
 		<dict>
@@ -119,8 +834,13 @@
 			<string>9:8</string>
 			<key>names</key>
 			<array>
-				<string>major tone</string>
 				<string>Pythagorean major second</string>
+				<string>Large just whole tone</string>
+				<string>major second (sesquioctavan)</string>
+				<string>tonus</string>
+				<string>major whole tone</string>
+				<string>greater whole tone</string>
+				<string>major tone</string>
 				<string>greater major second</string>
 			</array>
 		</dict>
@@ -130,6 +850,40 @@
 			<key>names</key>
 			<array>
 				<string>diminished third</string>
+				<string>Just diminished third</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>73:64</string>
+			<key>names</key>
+			<array>
+				<string>Seventy-third harmonic</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>8:7</string>
+			<key>names</key>
+			<array>
+				<string>Septimal major second</string>
+				<string>septimal whole tone</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>1.148698354997035</string>
+			<key>names</key>
+			<array>
+				<string>1 step in 5 equal temperament</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>37:32</string>
+			<key>names</key>
+			<array>
+				<string>Thirty-seventh harmonic</string>
 			</array>
 		</dict>
 		<dict>
@@ -137,7 +891,17 @@
 			<string>125:108</string>
 			<key>names</key>
 			<array>
+				<string>Semi-augmented whole tone</string>
 				<string>semi-augmented second</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>7:6</string>
+			<key>names</key>
+			<array>
+				<string>Septimal minor third</string>
+				<string>Sub minor third</string>
 			</array>
 		</dict>
 		<dict>
@@ -145,6 +909,8 @@
 			<string>75:64</string>
 			<key>names</key>
 			<array>
+				<string>Just augmented second</string>
+				<string>Augmented tone</string>
 				<string>augmented second</string>
 			</array>
 		</dict>
@@ -154,6 +920,41 @@
 			<key>names</key>
 			<array>
 				<string>Pythagorean minor third</string>
+				<string>semiditone</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>19:16</string>
+			<key>names</key>
+			<array>
+				<string>19th harmonic</string>
+				<string>19-limit minor third</string>
+				<string>overtone minor third</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>1.189207115002721</string>
+			<key>names</key>
+			<array>
+				<string>Equal-tempered minor third</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>1.196279024976976</string>
+			<key>names</key>
+			<array>
+				<string>Quarter-comma meantone minor third</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>1.197464871148403</string>
+			<key>names</key>
+			<array>
+				<string>Alpha scale minor third</string>
 			</array>
 		</dict>
 		<dict>
@@ -161,7 +962,33 @@
 			<string>6:5</string>
 			<key>names</key>
 			<array>
+				<string>Just minor third</string>
 				<string>minor third</string>
+				<string>1/3-comma meantone minor third</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>19683:16384</string>
+			<key>names</key>
+			<array>
+				<string>Pythagorean augmented second</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>77:64</string>
+			<key>names</key>
+			<array>
+				<string>Seventy-seventh harmonic</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>17:14</string>
+			<key>names</key>
+			<array>
+				<string>Superminor third</string>
 			</array>
 		</dict>
 		<dict>
@@ -169,7 +996,55 @@
 			<string>243:200</string>
 			<key>names</key>
 			<array>
-				<string>acute minor third</string>
+				<string>Acute minor third</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>39:32</string>
+			<key>names</key>
+			<array>
+				<string>Thirty-ninth harmonic</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>1.219013654204475</string>
+			<key>names</key>
+			<array>
+				<string>2 steps in 7 equal temperament</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>11:9</string>
+			<key>names</key>
+			<array>
+				<string>Undecimal neutral third</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>1.224053543304655</string>
+			<key>names</key>
+			<array>
+				<string>Equal-tempered neutral third</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>16:13</string>
+			<key>names</key>
+			<array>
+				<string>Tridecimal neutral third</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>79:64</string>
+			<key>names</key>
+			<array>
+				<string>Seventy-ninth harmonic</string>
 			</array>
 		</dict>
 		<dict>
@@ -177,7 +1052,16 @@
 			<string>100:81</string>
 			<key>names</key>
 			<array>
-				<string>grave major third</string>
+				<string>Grave major third</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>8192:6561</string>
+			<key>names</key>
+			<array>
+				<string>Pythagorean diminished fourth</string>
+				<string>Pythagorean 'schismatic' third</string>
 			</array>
 		</dict>
 		<dict>
@@ -185,7 +1069,18 @@
 			<string>5:4</string>
 			<key>names</key>
 			<array>
+				<string>Just major third</string>
 				<string>major third</string>
+				<string>quarter-comma meantone major third</string>
+				<string>major third</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>1.259921049894873</string>
+			<key>names</key>
+			<array>
+				<string>Equal-tempered major third</string>
 			</array>
 		</dict>
 		<dict>
@@ -194,6 +1089,16 @@
 			<key>names</key>
 			<array>
 				<string>Pythagorean major third</string>
+				<string>ditone</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>14:11</string>
+			<key>names</key>
+			<array>
+				<string>Undecimal diminished fourth</string>
+				<string>major third</string>
 			</array>
 		</dict>
 		<dict>
@@ -201,7 +1106,44 @@
 			<string>32:25</string>
 			<key>names</key>
 			<array>
+				<string>Just diminished fourth</string>
+				<string>diminished fourth</string>
 				<string>classic diminished fourth</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>41:32</string>
+			<key>names</key>
+			<array>
+				<string>Forty-first harmonic</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>9:7</string>
+			<key>names</key>
+			<array>
+				<string>Septimal major third</string>
+				<string>Bohlen-Pierce third</string>
+				<string>Super major Third</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>83:64</string>
+			<key>names</key>
+			<array>
+				<string>Eighty-third harmonic</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>13:10</string>
+			<key>names</key>
+			<array>
+				<string>Tridecimal major third</string>
+				<string>diminished fourth</string>
 			</array>
 		</dict>
 		<dict>
@@ -209,7 +1151,20 @@
 			<string>125:96</string>
 			<key>names</key>
 			<array>
+				<string>Just augmented third</string>
+				<string>augmented third</string>
 				<string>classic augmented third</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>21:16</string>
+			<key>names</key>
+			<array>
+				<string>Twenty-first harmonic</string>
+				<string>narrow fourth</string>
+				<string>septimal fourth</string>
+				<string>wide augmented third</string>
 			</array>
 		</dict>
 		<dict>
@@ -217,7 +1172,23 @@
 			<string>675:512</string>
 			<key>names</key>
 			<array>
-				<string>wide augmented third</string>
+				<string>Wide augmented third</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>1.319507910772894</string>
+			<key>names</key>
+			<array>
+				<string>2 steps in 5 equal temperament</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>85:64</string>
+			<key>names</key>
+			<array>
+				<string>Eighty-fifth harmonic</string>
 			</array>
 		</dict>
 		<dict>
@@ -225,7 +1196,42 @@
 			<string>4:3</string>
 			<key>names</key>
 			<array>
-				<string>perfect fourth</string>
+				<string>Perfect fourth</string>
+				<string>Pythagorean perfect fourth</string>
+				<string>Just perfect fourth</string>
+				<string>diatessaron</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>1.334839854170034</string>
+			<key>names</key>
+			<array>
+				<string>Equal-tempered perfect fourth</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>1.342970182301874</string>
+			<key>names</key>
+			<array>
+				<string>Beta scale perfect fourth</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>43:32</string>
+			<key>names</key>
+			<array>
+				<string>Forty-third harmonic</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>1.345900192632356</string>
+			<key>names</key>
+			<array>
+				<string>3 steps in 7 equal temperament</string>
 			</array>
 		</dict>
 		<dict>
@@ -233,7 +1239,36 @@
 			<string>27:20</string>
 			<key>names</key>
 			<array>
-				<string>acute fourth(1)</string>
+				<string>5-limit wolf fourth</string>
+				<string>acute fourth</string>
+				<string>imperfect fourth</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>177147:131072</string>
+			<key>names</key>
+			<array>
+				<string>Pythagorean augmented third (F+ (pitch))</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>87:64</string>
+			<key>names</key>
+			<array>
+				<string>Eighty-seventh harmonic</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>11:8</string>
+			<key>names</key>
+			<array>
+				<string>eleventh harmonic</string>
+				<string>undecimal tritone</string>
+				<string>lesser undecimal tritone</string>
+				<string>undecimal semi-augmented fourth</string>
 			</array>
 		</dict>
 		<dict>
@@ -241,7 +1276,37 @@
 			<string>25:18</string>
 			<key>names</key>
 			<array>
+				<string>Just augmented fourth</string>
 				<string>classic augmented fourth</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>89:64</string>
+			<key>names</key>
+			<array>
+				<string>Eighty-ninth harmonic</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>7:5</string>
+			<key>names</key>
+			<array>
+				<string>Lesser septimal tritone</string>
+				<string>septimal tritone Huygens' tritone</string>
+				<string>Bohlen-Pierce fourth</string>
+				<string>septimal fifth</string>
+				<string>septimal diminished fifth</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>1024:729</string>
+			<key>names</key>
+			<array>
+				<string>Pythagorean diminished fifth</string>
+				<string>low Pythagorean tritone</string>
 			</array>
 		</dict>
 		<dict>
@@ -249,7 +1314,31 @@
 			<string>45:32</string>
 			<key>names</key>
 			<array>
+				<string>Just augmented fourth</string>
+				<string>just tritone</string>
+				<string>tritone</string>
+				<string>diatonic tritone</string>
+				<string>'augmented'</string>
+				<string>'false' fourth</string>
+				<string>high 5-limit tritone</string>
+				<string>1/6-comma meantone augmented fourth</string>
 				<string>augmented fourth</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>1.414213562373095</string>
+			<key>names</key>
+			<array>
+				<string>Equal-tempered tritone</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>91:64</string>
+			<key>names</key>
+			<array>
+				<string>Ninety-first harmonic</string>
 			</array>
 		</dict>
 		<dict>
@@ -257,7 +1346,40 @@
 			<string>64:45</string>
 			<key>names</key>
 			<array>
+				<string>Just tritone</string>
+				<string>2nd tritone</string>
+				<string>'false' fifth</string>
 				<string>diminished fifth</string>
+				<string>low 5-limit tritone</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>729:512</string>
+			<key>names</key>
+			<array>
+				<string>Pythagorean tritone</string>
+				<string>Pythagorean augmented fourth</string>
+				<string>high Pythagorean tritone</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>10:7</string>
+			<key>names</key>
+			<array>
+				<string>Greater septimal tritone</string>
+				<string>septimal tritone</string>
+				<string>Euler's tritone</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>23:16</string>
+			<key>names</key>
+			<array>
+				<string>Twenty-third harmonic</string>
+				<string>classic diminished fifth</string>
 			</array>
 		</dict>
 		<dict>
@@ -265,7 +1387,41 @@
 			<string>36:25</string>
 			<key>names</key>
 			<array>
+				<string>Just diminished fifth</string>
 				<string>classic diminished fifth</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>93:64</string>
+			<key>names</key>
+			<array>
+				<string>Ninety-third harmonic</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>16:11</string>
+			<key>names</key>
+			<array>
+				<string>Inversion of eleventh harmonic</string>
+				<string>undecimal semi-diminished fifth</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>47:32</string>
+			<key>names</key>
+			<array>
+				<string>Forty-seventh harmonic</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>262144:177147</string>
+			<key>names</key>
+			<array>
+				<string>Pythagorean diminished sixth</string>
 			</array>
 		</dict>
 		<dict>
@@ -273,7 +1429,82 @@
 			<string>40:27</string>
 			<key>names</key>
 			<array>
-				<string>grave fifth(1)</string>
+				<string>5-limit wolf fifth</string>
+				<string>diminished sixth</string>
+				<string>grave fifth</string>
+				<string>imperfect fifth</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>95:64</string>
+			<key>names</key>
+			<array>
+				<string>Ninety-fifth harmonic</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>1.49071198499986</string>
+			<key>names</key>
+			<array>
+				<string>Half-comma meantone perfect fifth</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>1.493801582185722</string>
+			<key>names</key>
+			<array>
+				<string>1/3-comma meantone perfect fifth</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>1.494685499791881</string>
+			<key>names</key>
+			<array>
+				<string>2/7-comma meantone perfect fifth</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>1.495348781221221</string>
+			<key>names</key>
+			<array>
+				<string>Quarter-comma meantone perfect fifth</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>1.496277869738845</string>
+			<key>names</key>
+			<array>
+				<string>1/5-comma meantone perfect fifth</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>1.496897582761954</string>
+			<key>names</key>
+			<array>
+				<string>1/6-comma meantone perfect fifth</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>1.498307076876682</string>
+			<key>names</key>
+			<array>
+				<string>Equal-tempered perfect fifth</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>1.499940903078111</string>
+			<key>names</key>
+			<array>
+				<string>53-TET perfect fifth</string>
 			</array>
 		</dict>
 		<dict>
@@ -281,7 +1512,36 @@
 			<string>3:2</string>
 			<key>names</key>
 			<array>
-				<string>perfect fifth</string>
+				<string>Perfect fifth</string>
+				<string>Pythagorean perfect fifth</string>
+				<string>Just perfect fifth</string>
+				<string>diapente</string>
+				<string>fifth</string>
+				<string>Just fifth</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>1.500419433057408</string>
+			<key>names</key>
+			<array>
+				<string>41-TET perfect fifth</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>1.501294382346335</string>
+			<key>names</key>
+			<array>
+				<string>29-TET perfect fifth</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>97:64</string>
+			<key>names</key>
+			<array>
+				<string>Ninety-seventh harmonic</string>
 			</array>
 		</dict>
 		<dict>
@@ -289,7 +1549,15 @@
 			<string>1024:675</string>
 			<key>names</key>
 			<array>
-				<string>narrow diminished sixth</string>
+				<string>Narrow diminished sixth</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>49:32</string>
+			<key>names</key>
+			<array>
+				<string>Forty-ninth harmonic</string>
 			</array>
 		</dict>
 		<dict>
@@ -297,7 +1565,23 @@
 			<string>192:125</string>
 			<key>names</key>
 			<array>
-				<string>classic diminished sixth</string>
+				<string>Classic diminished sixth</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>99:64</string>
+			<key>names</key>
+			<array>
+				<string>Ninety-ninth harmonic</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>14:9</string>
+			<key>names</key>
+			<array>
+				<string>Septimal minor sixth</string>
 			</array>
 		</dict>
 		<dict>
@@ -305,15 +1589,42 @@
 			<string>25:16</string>
 			<key>names</key>
 			<array>
+				<string>Just augmented fifth</string>
 				<string>classic augmented fifth</string>
 			</array>
 		</dict>
 		<dict>
 			<key>ratio</key>
-			<string>128:81</string>
+			<string>11:7</string>
 			<key>names</key>
 			<array>
-				<string>Pythagorean minor sixth</string>
+				<string>Undecimal minor sixth</string>
+				<string>undecimal augmented fifth</string>
+				<string>pi</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>101:64</string>
+			<key>names</key>
+			<array>
+				<string>Hundred-first harmonic</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>1.587401051968199</string>
+			<key>names</key>
+			<array>
+				<string>Equal-tempered minor sixth</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>51:32</string>
+			<key>names</key>
+			<array>
+				<string>Fifty-first harmonic</string>
 			</array>
 		</dict>
 		<dict>
@@ -321,15 +1632,108 @@
 			<string>8:5</string>
 			<key>names</key>
 			<array>
+				<string>Just minor sixth</string>
 				<string>minor sixth</string>
 			</array>
 		</dict>
 		<dict>
 			<key>ratio</key>
-			<string>81:50</string>
+			<string>6561:4096</string>
 			<key>names</key>
 			<array>
-				<string>acute minor sixth</string>
+				<string>Pythagorean augmented fifth</string>
+				<string>Pythagorean 'schismatic' sixth</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>103:64</string>
+			<key>names</key>
+			<array>
+				<string>Hundred-third harmonic</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>1.618033988749895</string>
+			<key>names</key>
+			<array>
+				<string>Golden ratio (833 cents scale)</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>233:144</string>
+			<key>names</key>
+			<array>
+				<string>Golden ratio approximation (833 cents scale)</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>13:8</string>
+			<key>names</key>
+			<array>
+				<string>Tridecimal neutral sixth</string>
+				<string>overtone sixth</string>
+				<string>thirteenth harmonic</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>1.6339154532411</string>
+			<key>names</key>
+			<array>
+				<string>Equal-tempered neutral sixth</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>18:11</string>
+			<key>names</key>
+			<array>
+				<string>Undecimal neutral sixth</string>
+				<string>Zalzal's neutral sixth</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>105:64</string>
+			<key>names</key>
+			<array>
+				<string>Hundred-fifth harmonic</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>1.640670712015276</string>
+			<key>names</key>
+			<array>
+				<string>5 steps in 7 equal temperament</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>400:243</string>
+			<key>names</key>
+			<array>
+				<string>Grave major sixth</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>53:32</string>
+			<key>names</key>
+			<array>
+				<string>Fifty-third harmonic</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>32768:19683</string>
+			<key>names</key>
+			<array>
+				<string>Pythagorean diminished seventh</string>
 			</array>
 		</dict>
 		<dict>
@@ -337,7 +1741,26 @@
 			<string>5:3</string>
 			<key>names</key>
 			<array>
+				<string>Just major sixth</string>
+				<string>Bohlen-Pierce sixth</string>
+				<string>1/3-comma meantone major sixth</string>
 				<string>major sixth</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>107:64</string>
+			<key>names</key>
+			<array>
+				<string>Hundred-seventh harmonic</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>1.681792830507429</string>
+			<key>names</key>
+			<array>
+				<string>Equal-tempered major sixth</string>
 			</array>
 		</dict>
 		<dict>
@@ -350,18 +1773,85 @@
 		</dict>
 		<dict>
 			<key>ratio</key>
+			<string>109:64</string>
+			<key>names</key>
+			<array>
+				<string>Hundred-ninth harmonic</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
 			<string>128:75</string>
 			<key>names</key>
 			<array>
+				<string>Just diminished seventh</string>
 				<string>diminished seventh</string>
 			</array>
 		</dict>
 		<dict>
 			<key>ratio</key>
-			<string>225:128</string>
+			<string>12:7</string>
 			<key>names</key>
 			<array>
+				<string>Septimal major sixth</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>55:32</string>
+			<key>names</key>
+			<array>
+				<string>Fifty-fifth harmonic</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>111:64</string>
+			<key>names</key>
+			<array>
+				<string>Hundred-eleventh harmonic</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>125:72</string>
+			<key>names</key>
+			<array>
+				<string>Just augmented sixth</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>1.738298855254532</string>
+			<key>names</key>
+			<array>
+				<string>15 steps in Beta scale</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>1.741101126592248</string>
+			<key>names</key>
+			<array>
+				<string>4 steps in 5 equal temperament</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>7:4</string>
+			<key>names</key>
+			<array>
+				<string>Septimal minor seventh</string>
+				<string>harmonic seventh</string>
 				<string>augmented sixth</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>113:64</string>
+			<key>names</key>
+			<array>
+				<string>Hundred-thirteenth harmonic</string>
 			</array>
 		</dict>
 		<dict>
@@ -370,6 +1860,34 @@
 			<key>names</key>
 			<array>
 				<string>Pythagorean minor seventh</string>
+				<string>Small just minor seventh</string>
+				<string>lesser minor seventh</string>
+				<string>just minor seventh</string>
+				<string>Pythagorean small minor seventh</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>57:32</string>
+			<key>names</key>
+			<array>
+				<string>Fifty-seventh harmonic</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>1.781797436280679</string>
+			<key>names</key>
+			<array>
+				<string>Equal-tempered minor seventh</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>115:64</string>
+			<key>names</key>
+			<array>
+				<string>Hundred-fifteenth harmonic</string>
 			</array>
 		</dict>
 		<dict>
@@ -377,7 +1895,44 @@
 			<string>9:5</string>
 			<key>names</key>
 			<array>
+				<string>Greater just minor seventh</string>
+				<string>large just minor seventh</string>
+				<string>Bohlen-Pierce seventh</string>
 				<string>minor seventh</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>59049:32768</string>
+			<key>names</key>
+			<array>
+				<string>Pythagorean augmented sixth</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>1.811447328527813</string>
+			<key>names</key>
+			<array>
+				<string>6 steps in 7 equal temperament</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>29:16</string>
+			<key>names</key>
+			<array>
+				<string>Twenty-ninth harmonic</string>
+				<string>minor seventh</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>20:11</string>
+			<key>names</key>
+			<array>
+				<string>Lesser undecimal neutral seventh</string>
+				<string>large minor seventh</string>
 			</array>
 		</dict>
 		<dict>
@@ -385,7 +1940,41 @@
 			<string>729:400</string>
 			<key>names</key>
 			<array>
-				<string>acute minor seventh</string>
+				<string>Acute minor seventh</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>117:64</string>
+			<key>names</key>
+			<array>
+				<string>Hundred-seventeenth harmonic</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>11:6</string>
+			<key>names</key>
+			<array>
+				<string>21/4-tone</string>
+				<string>Undecimal neutral seventh</string>
+				<string>undecimal 'median' seventh</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>1.834008086409342</string>
+			<key>names</key>
+			<array>
+				<string>Equal-tempered neutral seventh</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>59:32</string>
+			<key>names</key>
+			<array>
+				<string>Fifty-ninth harmonic</string>
 			</array>
 		</dict>
 		<dict>
@@ -393,7 +1982,23 @@
 			<string>50:27</string>
 			<key>names</key>
 			<array>
-				<string>grave major seventh</string>
+				<string>Grave major seventh</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>119:64</string>
+			<key>names</key>
+			<array>
+				<string>Hundred-nineteenth harmonic</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>4096:2187</string>
+			<key>names</key>
+			<array>
+				<string>Pythagorean diminished octave</string>
 			</array>
 		</dict>
 		<dict>
@@ -401,7 +2006,26 @@
 			<string>15:8</string>
 			<key>names</key>
 			<array>
+				<string>Just major seventh</string>
+				<string>small just major seventh</string>
+				<string>1/6-comma meantone major seventh</string>
 				<string>major seventh</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>1.887748625363387</string>
+			<key>names</key>
+			<array>
+				<string>Equal-tempered major seventh</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>121:64</string>
+			<key>names</key>
+			<array>
+				<string>Hundred-twenty-first harmonic</string>
 			</array>
 		</dict>
 		<dict>
@@ -409,7 +2033,173 @@
 			<string>256:135</string>
 			<key>names</key>
 			<array>
+				<string>Octave − major chroma</string>
 				<string>narrow diminished octave</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>61:32</string>
+			<key>names</key>
+			<array>
+				<string>Sixty-first harmonic</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>48:25</string>
+			<key>names</key>
+			<array>
+				<string>Classic diminished octave</string>
+				<string>large just major seventh</string>
+				<string>diminished octave</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>123:64</string>
+			<key>names</key>
+			<array>
+				<string>Hundred-twenty-third harmonic</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>27:14</string>
+			<key>names</key>
+			<array>
+				<string>Septimal major seventh</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>31:16</string>
+			<key>names</key>
+			<array>
+				<string>Thirty-first harmonic</string>
+				<string>augmented seventh</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>35:18</string>
+			<key>names</key>
+			<array>
+				<string>Septimal supermajor seventh</string>
+				<string>septimal quarter tone inverted</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>125:64</string>
+			<key>names</key>
+			<array>
+				<string>Just augmented seventh</string>
+				<string>125th harmonic</string>
+				<string>augmented seventh</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>63:32</string>
+			<key>names</key>
+			<array>
+				<string>Sixty-third harmonic</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>160:81</string>
+			<key>names</key>
+			<array>
+				<string>Octave − syntonic comma</string>
+				<string>semi-diminished octave</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>127:64</string>
+			<key>names</key>
+			<array>
+				<string>Hundred-twenty-seventh harmonic</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>2:1</string>
+			<key>names</key>
+			<array>
+				<string>Octave</string>
+				<string>diapason</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>531441:262144</string>
+			<key>names</key>
+			<array>
+				<string>Pythagorean augmented seventh</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>2.414213562373095</string>
+			<key>names</key>
+			<array>
+				<string>Silver ratio</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>3:1</string>
+			<key>names</key>
+			<array>
+				<string>Tritave</string>
+				<string>just perfect twelfth</string>
+				<string>perfect twelfth</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>4:1</string>
+			<key>names</key>
+			<array>
+				<string>Fifteenth</string>
+				<string>two octaves</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>10:1</string>
+			<key>names</key>
+			<array>
+				<string>Decade</string>
+				<string>compound just major third</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>128:81</string>
+			<key>names</key>
+			<array>
+				<string>Pythagorean minor sixth</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>81:50</string>
+			<key>names</key>
+			<array>
+				<string>acute minor sixth</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>225:128</string>
+			<key>names</key>
+			<array>
+				<string>augmented sixth</string>
+				<string>Just augmented sixth</string>
 			</array>
 		</dict>
 		<dict>
@@ -418,38 +2208,6 @@
 			<key>names</key>
 			<array>
 				<string>Pythagorean major seventh</string>
-			</array>
-		</dict>
-		<dict>
-			<key>ratio</key>
-			<string>48:25</string>
-			<key>names</key>
-			<array>
-				<string>diminished octave</string>
-			</array>
-		</dict>
-		<dict>
-			<key>ratio</key>
-			<string>125:64</string>
-			<key>names</key>
-			<array>
-				<string>augmented seventh</string>
-			</array>
-		</dict>
-		<dict>
-			<key>ratio</key>
-			<string>160:81</string>
-			<key>names</key>
-			<array>
-				<string>semi-diminished octave</string>
-			</array>
-		</dict>
-		<dict>
-			<key>ratio</key>
-			<string>2:1</string>
-			<key>names</key>
-			<array>
-				<string>octave</string>
 			</array>
 		</dict>
 		<dict>
@@ -490,14 +2248,6 @@
 			<key>names</key>
 			<array>
 				<string>major eleventh</string>
-			</array>
-		</dict>
-		<dict>
-			<key>ratio</key>
-			<string>3:1</string>
-			<key>names</key>
-			<array>
-				<string>perfect twelfth</string>
 			</array>
 		</dict>
 		<dict>

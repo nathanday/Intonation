@@ -21,13 +21,12 @@ class LimitsBasedGenerator : IntervalsDataGenerator {
 							assert( theNum <= theDenom*2 );
 							for theOctaves in 0..<octaves {
 								let		theRational = Rational(theNum*1<<theOctaves,theDenom);
-								let		theEntry = EqualTemperamentEntry(justIntonationRatio: theRational, intervalCount:intervalCount, maximumError: maximumError);
-								let		theDegree = Scale.major.indexOf(theRational);
+								let		theEntry = EqualTemperamentEntry(interval: theRational, intervalCount:intervalCount, maximumError: maximumError);
 								if theEntry.isClose || !filtered {
 									theResult.insert(theEntry);
 								}
-								if theDegree != nil {
-									theEntry.degreeName = Scale.degreeName(theDegree!);
+								if let theDegree = Scale.major.indexOf(theRational) {
+									theEntry.degreeName = Scale.degreeName(theDegree);
 								}
 							}
 						}

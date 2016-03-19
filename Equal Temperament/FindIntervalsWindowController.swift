@@ -198,15 +198,13 @@ class FindIntervalsViewController: NSViewController {
 		for theInterval in anIntervals {
 			var		theClosestEntry : EqualTemperamentEntry?
 			for theCompareEntry in aSearchIntervales {
-				if let theCompareInterval = theCompareEntry.interval {
-					if searchTransposeToFit || theCompareInterval.toDouble <= pow(2.0,Double(anOctaves)) {
-						if let theCurrentInterval = theClosestEntry?.interval {
-							if aMethod(theCurrentInterval,theCompareInterval,theInterval) {
-								theClosestEntry = theCompareEntry;
-							}
-						} else {
+				if searchTransposeToFit || theCompareEntry.interval.toDouble <= pow(2.0,Double(anOctaves)) {
+					if let theCurrentInterval = theClosestEntry?.interval {
+						if aMethod(theCurrentInterval,theCompareEntry.interval,theInterval) {
 							theClosestEntry = theCompareEntry;
 						}
+					} else {
+						theClosestEntry = theCompareEntry;
 					}
 				}
 			}

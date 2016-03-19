@@ -42,6 +42,22 @@ class MainWindowController : NSWindowController {
 	@IBOutlet var	factorsSumTitleTextField : NSTextField?;
 	@IBOutlet var	baseFrequencyDeltaSlider : NSSlider?;
 	@IBOutlet var	playSegmentedControl : NSSegmentedControl?;
+	@IBOutlet var	adHocIntervalTextField : NSTextField?;
+
+	var adHocInterval : Interval? {
+		get {
+			var		theResult : Interval?;
+			if let theInterval = adHocIntervalTextField?.stringValue {
+				theResult = Interval.fromString(theInterval);
+			}
+			return theResult;
+		}
+		set {
+			if let theValue = newValue?.toString {
+				adHocIntervalTextField?.stringValue = theValue;
+			}
+		}
+	}
 
 	override func awakeFromNib() {
 		super.awakeFromNib();
@@ -75,7 +91,7 @@ class MainWindowController : NSWindowController {
 	}
 
 	var		selectedJustIntonationIntervals : [Interval] {
-		return (document as! Document).selectedEqualTemperamentEntry.map { return $0.interval!; };
+		return (document as! Document).selectedEqualTemperamentEntry.map { return $0.interval; };
 	}
 	dynamic var		midiNoteNotes : [String] = {
 		let		theNoteNames = ["C", "C♯", "D", "D♯", "E", "F", "F♯", "G", "G♯", "A", "A♯", "B"];
@@ -259,7 +275,16 @@ class MainWindowController : NSWindowController {
 		}
 	}
 
-	override var windowNibName: String! { return "MainWindowController"; }
+	@IBAction func addAdHocIntervalAction( aSender: AnyObject ) {
+		if let theDocument = document as? Document {
+			if let theInterval = adHocInterval {
+				theDocument.intervalsData.adHocEntries.insert(theInterval);
+				theDocument.calculateAllIntervals();
+			}
+		}
+	}
+
+	override var windowNibName: String { return "MainWindowController"; }
 
 	override func windowDidLoad() {
 		super.windowDidLoad();
@@ -287,14 +312,12 @@ class MainWindowController : NSWindowController {
 		}
 	}
 
-	var everyTableColumn : [NSTableColumn] {
-		return tableView != nil ? tableView!.tableColumns as [NSTableColumn] : [];
-	}
-
 	func hideIntervalRelatedColumn( aHide : Bool ) {
-		for theTableColumn in everyTableColumn {
-			if ["interval","percent","error"].contains(theTableColumn.identifier) {
-				theTableColumn.hidden = aHide;
+		if let theTableColumns = tableView?.tableColumns {
+			for theTableColumn in theTableColumns {
+				if ["interval","percent","error"].contains(theTableColumn.identifier) {
+					theTableColumn.hidden = aHide;
+				}
 			}
 		}
 		scaleViewController?.hideIntervalRelatedColumn(!aHide);
@@ -331,7 +354,7 @@ extension MainWindowController : NSTableViewDelegate {
 	}
 
 	func tableViewColumnDidResize(aNotification: NSNotification) {
-		if let theTableColumn = aNotification.userInfo!["NSTableColumn"] as? NSTableColumn {
+		if let theTableColumn = aNotification.userInfo?["NSTableColumn"] as? NSTableColumn {
 			if theTableColumn.identifier == "description" {
 				theTableColumn.hidden = theTableColumn.width <= 20.0;
 			}

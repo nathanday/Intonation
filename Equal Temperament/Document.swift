@@ -134,7 +134,7 @@ class Document : NSDocument, MIDIReceiverObserver {
 			currentlySelectedMethod = aMethod;
 			tonePlayer.stop();
 			tonePlayer.playType(thePlaybackType);
-			NSNotificationCenter.defaultCenter().postNotificationName(PlayBackMethodChangedNotification, object: self, userInfo: [PlayBackMethodUserInfoKey: currentlySelectedMethod!]);
+			NSNotificationCenter.defaultCenter().postNotificationName(PlayBackMethodChangedNotification, object: self, userInfo: [PlayBackMethodUserInfoKey: aMethod]);
 		}
 	}
 
@@ -223,7 +223,7 @@ class Document : NSDocument, MIDIReceiverObserver {
 		}
 	}
 	var		selectedJustIntonationIntervals : [Interval] {
-		return selectedEqualTemperamentEntry.map { return $0.interval!; };
+		return selectedEqualTemperamentEntry.map { return $0.interval; };
 	}
 
 	func calculateAllIntervals() {

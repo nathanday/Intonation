@@ -22,12 +22,12 @@ class ScaleViewController: NSViewController, ScaleDisplayViewController {
 	func setIntervals( intervals anIntervals : [EqualTemperamentEntry], intervalCount anIntervalCount : UInt, enabled anEnable : Bool ) {
 		if let theLinearScaleView = linearScaleView {
 			theLinearScaleView.numberOfIntervals = anEnable ? anIntervalCount : 0;
-			theLinearScaleView.everyRatios = anIntervals.map { return $0.justIntonationRatio; };
+			theLinearScaleView.everyRatios = anIntervals.map { return $0.interval; };
 			theLinearScaleView.useIntervals = anEnable;
 		}
 		if let thePitchConstellationView = pitchConstellationView {
 			thePitchConstellationView.numberOfIntervals = anEnable ? anIntervalCount : 0;
-			thePitchConstellationView.everyRatios = anIntervals.map { return $0.justIntonationRatio; };
+			thePitchConstellationView.everyRatios = anIntervals.map { return $0.interval; };
 			thePitchConstellationView.useIntervals = anEnable;
 		}
 	}
