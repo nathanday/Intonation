@@ -226,6 +226,30 @@ class Document : NSDocument, MIDIReceiverObserver {
 		return selectedEqualTemperamentEntry.map { return $0.interval; };
 	}
 
+	func addInterval( anInterval : Interval ) {
+		addIntervals( [anInterval] );
+	}
+	func addIntervals( anIntervals : [Interval] ) {
+		if intervalsData.documentType == .AdHoc {
+			for theInterval in anIntervals {
+				intervalsData.adHocEntries.insert(theInterval);
+			}
+			calculateAllIntervals();
+		}
+	}
+
+	func removeInterval( anInterval : Interval ) {
+		removeIntervals( [anInterval] );
+	}
+	func removeIntervals( anIntervals : [Interval] ) {
+		if intervalsData.documentType == .AdHoc {
+			for theInterval in anIntervals {
+				intervalsData.adHocEntries.remove(theInterval);
+			}
+			calculateAllIntervals();
+		}
+	}
+
 	func calculateAllIntervals() {
 		if let theDocumentType = intervalsData.documentType {
 			let		theSelectedEntries = selectedEqualTemperamentEntry;

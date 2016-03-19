@@ -278,9 +278,14 @@ class MainWindowController : NSWindowController {
 	@IBAction func addAdHocIntervalAction( aSender: AnyObject ) {
 		if let theDocument = document as? Document {
 			if let theInterval = adHocInterval {
-				theDocument.intervalsData.adHocEntries.insert(theInterval);
-				theDocument.calculateAllIntervals();
+				theDocument.addInterval(theInterval);
 			}
+		}
+	}
+
+	@IBAction func delete( aSender: AnyObject?) {
+		if let theDocument = document as? Document {
+			theDocument.removeIntervals(theDocument.selectedJustIntonationIntervals);
 		}
 	}
 

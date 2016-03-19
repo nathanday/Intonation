@@ -11,7 +11,11 @@ import Cocoa
 class SelectDocumentType : NSWindowController {
 	@IBOutlet var	tableView : NSTableView?;
 	@IBOutlet var	arrayController : NSArrayController?
-	var				selectedDocumentTypeRow : Int?;
+	dynamic var		hasSelection : Bool { return selectedDocumentTypeRow != nil; }
+	var				selectedDocumentTypeRow : Int? {
+		willSet { willChangeValueForKey("hasSelection"); }
+		didSet { didChangeValueForKey("hasSelection"); }
+	}
 	var				completionBlock : ((_:DocumentType?)  -> Void)?;
 	static var		rowData = [
 		(title:"Limits", details:"Create musical intervals using prime and odd limits.", documentType:DocumentType.Limits),
@@ -72,9 +76,8 @@ class SelectDocumentType : NSWindowController {
 
 extension SelectDocumentType : NSTableViewDelegate {
 	func tableViewSelectionDidChange(notification: NSNotification) {
-		if let theSelectedRow = tableView?.selectedRow {
-			selectedDocumentTypeRow = theSelectedRow;
-		}
+		let theSelection = tableView?.selectedRow;
+		selectedDocumentTypeRow = theSelection != -1 ? theSelection : nil;
 	}
 }
 
