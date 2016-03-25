@@ -64,7 +64,6 @@ class MIDIReceiver {
 		var		theSourcePointRef: [UInt32] = [0];
 
 		func midiNotifyBlock(midiNotification: UnsafePointer<MIDINotification>) {
-			print("MyMIDINotifyBlock called!\n" );
 			setUp();
 		}
 
@@ -96,11 +95,8 @@ class MIDIReceiver {
 			}
 		}
 
-		let		theMidiNumberOfDevices = MIDIGetNumberOfDevices() // devices registered on the system
+//		let		theMidiNumberOfDevices = MIDIGetNumberOfDevices() // devices registered on the system
 		let		theMidiNumberOfSources = MIDIGetNumberOfSources() // now online devices
-
-		print("midiNumberOfDevices : \(theMidiNumberOfDevices)")
-		print("midiNumberOfSources : \(theMidiNumberOfSources)")
 
 		for i in 0..<theMidiNumberOfSources {
 			let thePointRef = MIDIGetSource(i)
@@ -117,10 +113,10 @@ class MIDIReceiver {
 			theEndPointRef.removeAtIndex(0)
 			theEndPointName.removeAtIndex(0)
 		}
-		for i in 0..<theEndPointRef.count {
-			print("[\(i)] : \(theEndPointName[i]) (\(theEndPointRef[i]))")
-		}
-
+//		for i in 0..<theEndPointRef.count {
+//			print("[\(i)] : \(theEndPointName[i]) (\(theEndPointRef[i]))")
+//		}
+//
 		theStatus = MIDIClientCreateWithBlock(clientName, &midiClientRef, midiNotifyBlock);
 		precondition( theStatus == OSStatus(noErr), "Status \(theStatus)" );
 		theStatus = MIDIInputPortCreateWithBlock( midiClientRef, "\(clientName) port", &inputPortRef, midiInputBlock );
@@ -135,7 +131,6 @@ class MIDIReceiver {
 
 			theStatus = MIDIPortConnectSource(inputPortRef, theSourcePointRef[i], nil);
 			precondition( theStatus == OSStatus(noErr), "Status \(theStatus)" );
-			print("Created MIDI connect source : \(theSourcePointRef[i]) -> \(inputPortRef)")
 		}
 	}
 }

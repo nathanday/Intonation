@@ -23,9 +23,9 @@ class MainWindowController : NSWindowController {
 		splitView?.delegate = nil;
 	}
 
-	@IBOutlet var	splitView : NSSplitView?;
-	@IBOutlet var	tableParentContainerView : NSView?
-	@IBOutlet var	plottingParentContainerView : NSView?
+	@IBOutlet weak var	splitView : NSSplitView?;
+	@IBOutlet weak var	tableParentContainerView : NSView?
+	@IBOutlet weak var	plottingParentContainerView : NSView?
 
 	@IBOutlet var	arrayController : NSArrayController?
 	@IBOutlet var	scaleViewController : ScaleViewController?
@@ -35,29 +35,12 @@ class MainWindowController : NSWindowController {
 
 	@IBOutlet var	findIntervalsViewController : FindIntervalsViewController?
 
-	@IBOutlet var	tableView : NSTableView?;
-	@IBOutlet var	baseFrequencyTextField : NSTextField?;
-	@IBOutlet var	documentWindow : NSWindow?;
-	@IBOutlet var	harmonicTitleTextField : NSTextField?;
-	@IBOutlet var	factorsSumTitleTextField : NSTextField?;
-	@IBOutlet var	baseFrequencyDeltaSlider : NSSlider?;
-	@IBOutlet var	playSegmentedControl : NSSegmentedControl?;
-	@IBOutlet var	adHocIntervalTextField : NSTextField?;
-
-	var adHocInterval : Interval? {
-		get {
-			var		theResult : Interval?;
-			if let theInterval = adHocIntervalTextField?.stringValue {
-				theResult = Interval.fromString(theInterval);
-			}
-			return theResult;
-		}
-		set {
-			if let theValue = newValue?.toString {
-				adHocIntervalTextField?.stringValue = theValue;
-			}
-		}
-	}
+	@IBOutlet weak var	tableView : NSTableView?;
+	@IBOutlet weak var	baseFrequencyTextField : NSTextField?;
+	@IBOutlet weak var	harmonicTitleTextField : NSTextField?;
+	@IBOutlet weak var	factorsSumTitleTextField : NSTextField?;
+	@IBOutlet weak var	baseFrequencyDeltaSlider : NSSlider?;
+	@IBOutlet weak var	playSegmentedControl : NSSegmentedControl?;
 
 	override func awakeFromNib() {
 		super.awakeFromNib();
@@ -112,10 +95,6 @@ class MainWindowController : NSWindowController {
 	/*
 	Disclosure views
 	*/
-	dynamic var		limitExpanded : Bool {
-		set( aValue ) { NSUserDefaults.standardUserDefaults().setBool(aValue, forKey: "limitExpanded"); }
-		get { return NSUserDefaults.standardUserDefaults().boolForKey("limitExpanded"); }
-	}
 	dynamic var		errorExpanded : Bool {
 		set( aValue ) { NSUserDefaults.standardUserDefaults().setBool(aValue, forKey: "errorExpanded"); }
 		get { return NSUserDefaults.standardUserDefaults().boolForKey("errorExpanded"); }
@@ -275,20 +254,6 @@ class MainWindowController : NSWindowController {
 		}
 	}
 
-	@IBAction func addAdHocIntervalAction( aSender: AnyObject ) {
-		if let theDocument = document as? Document {
-			if let theInterval = adHocInterval {
-				theDocument.addInterval(theInterval);
-			}
-		}
-	}
-
-	@IBAction func delete( aSender: AnyObject?) {
-		if let theDocument = document as? Document {
-			theDocument.removeIntervals(theDocument.selectedJustIntonationIntervals);
-		}
-	}
-
 	override var windowNibName: String { return "MainWindowController"; }
 
 	override func windowDidLoad() {
@@ -354,7 +319,6 @@ extension MainWindowController : NSTableViewDelegate {
 	func tableViewSelectionDidChange(notification: NSNotification) {
 		if let theSelectedEntries = arrayController?.selectedObjects as? [EqualTemperamentEntry],
 			theDocument = document as? Document {
-			print( theSelectedEntries );
 			theDocument.selectedEqualTemperamentEntry = theSelectedEntries
 		}
 	}

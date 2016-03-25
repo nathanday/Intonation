@@ -43,7 +43,7 @@ enum DocumentType {
 		case Limits:
 			return LimitsBasedGenerator(intervalsData:anIntervalsData);
 		case StackedIntervals:
-			return LimitsBasedGenerator(intervalsData:anIntervalsData);
+			return StackedIntervalsDataGenerator(intervalsData:anIntervalsData);
 		case Preset:
 			return LimitsBasedGenerator(intervalsData:anIntervalsData);
 		case AdHoc:
@@ -245,6 +245,7 @@ class IntervalsData: NSObject {
 			NSUserDefaults.standardUserDefaults().setInteger( Int(additiveDissonance), forKey:"additiveDissonance");
 		}
 	}
+	var		stackedIntervals = Set<StackedIntervalSet>();
 	var		adHocEntries = Set<Interval>();
 
 	var		maximumError : Double = 0.18 {

@@ -20,7 +20,7 @@ class LimitsBasedGenerator : IntervalsDataGenerator {
 							assert(theNum >= theDenom);
 							assert( theNum <= theDenom*2 );
 							for theOctaves in 0..<octaves {
-								let		theRational = Rational(theNum*1<<theOctaves,theDenom);
+								let		theRational = RationalInterval(theNum*1<<theOctaves,theDenom);
 								let		theEntry = EqualTemperamentEntry(interval: theRational, intervalCount:intervalCount, maximumError: maximumError);
 								if theEntry.isClose || !filtered {
 									theResult.insert(theEntry);

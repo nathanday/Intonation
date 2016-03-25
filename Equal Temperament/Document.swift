@@ -43,8 +43,14 @@ class Document : NSDocument, MIDIReceiverObserver {
 					}
 				}
 			}
-
 		}
+	}
+
+	func showWithIntervals( anItervals : [Interval]) {
+		intervalsData.documentType = .AdHoc;
+		addIntervals(anItervals);
+		makeWindowControllers();
+		showWindows();
 	}
 
 	func setUpIntervalsDataObservers() {
@@ -119,6 +125,15 @@ class Document : NSDocument, MIDIReceiverObserver {
 	}
 
 	@IBAction func newDocumentFromSelection( aSender: AnyObject? ) {
+		do {
+			if let theDocument = try NSDocumentController.sharedDocumentController().openUntitledDocumentAndDisplay(false) as?
+			Document {
+				theDocument.showWithIntervals(selectedJustIntonationIntervals);
+			}
+		}
+		catch {
+			print( "error" );
+		}
 	}
 
 	func playUsingMethod( aMethod: Int ) {

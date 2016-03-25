@@ -44,10 +44,10 @@ class ChordSelectorItem : NSObject {
 			}
 			else if let theNumerator = aPropertyList["numerator"] as? Int,
 				theDenominator = aPropertyList["denominator"] as? Int {
-				theResult = ChordSelectorRatio( name: theName, ratio: Rational(theNumerator,theDenominator) );
+				theResult = ChordSelectorRatio( name: theName, interval: Rational(theNumerator,theDenominator) );
 			}
 			else if let theRatio = aPropertyList["value"] as? Double {
-				theResult = ChordSelectorRatio( name: theName, ratio: theRatio );
+				theResult = ChordSelectorRatio( name: theName, interval: theRatio );
 			}
 			else {
 				print( "Propertlist entity failed to parse \(aPropertyList)" );
@@ -64,14 +64,14 @@ class ChordSelectorItem : NSObject {
 }
 
 class ChordSelectorRatio : ChordSelectorItem {
-	let				ratio : Interval;
+	let				interval : Interval;
 
-	init( name aName: String, ratio aRatio: Rational ) {
-		ratio = RationalInterval(aRatio);
+	init( name aName: String, interval aRatio: Rational ) {
+		interval = RationalInterval(aRatio);
 		super.init( name: aName );
 	}
-	init( name aName: String, ratio aRatio: Double ) {
-		ratio = IrrationalInterval(aRatio);
+	init( name aName: String, interval aRatio: Double ) {
+		interval = IrrationalInterval(aRatio);
 		super.init( name: aName );
 	}
 }
@@ -84,6 +84,10 @@ class ChordSelectorLeaf : ChordSelectorItem {
 	init( name aName: String, everyRatio anEveryRatio: [ChordSelectorRatio] ) {
 		everyRatio = anEveryRatio;
 		super.init( name: aName );
+	}
+
+	func intervalSet() -> IntervalSet {
+		return Scale(name: name, elements: everyRatio.map { $0.interval;} );
 	}
 
 	func previewViewControllerForLeafItem() -> NSViewController? { return ChordPreviewViewController(self); }

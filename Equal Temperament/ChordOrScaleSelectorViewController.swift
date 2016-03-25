@@ -15,6 +15,7 @@ import Cocoa
 class ChordOrScaleSelectorViewController: NSViewController {
 
 	@IBOutlet var	browser : NSBrowser?;
+	@IBOutlet var	chordSelectorWindowController : ChordSelectorWindowController?
 //	@IBOutlet var	delegate :
 
 	dynamic var	everyChordRoot = RootChordSelectorGroup();
@@ -25,8 +26,8 @@ class ChordOrScaleSelectorViewController: NSViewController {
     }
     
 	@IBAction func selectScaleOrChord(aSender: AnyObject?) {
+//		chordSelectorWindowController?.selectIntervalSet();
 	}
-
 }
 
 extension ChordOrScaleSelectorViewController : NSBrowserDelegate {

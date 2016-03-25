@@ -10,8 +10,12 @@ import Cocoa
 
 class ChordSelectorWindowController: NSWindowController {
 
-	override var	windowNibName: String? { get { return "ChordSelectorWindowController"; } }
-	
+	override var	windowNibName: String? {
+		get { return "ChordSelectorWindowController"; }
+	}
+
+	var		selectionBlock : ((IntervalSet?) -> ())?;
+
     override func windowDidLoad() {
         super.windowDidLoad()
     }
@@ -27,4 +31,15 @@ class ChordSelectorWindowController: NSWindowController {
 		}
 	}
 
+	func showAsSheet(parentWindow aWindow: NSWindow ) {
+		if let theWindow = self.window {
+			theWindow.parentWindow = aWindow;
+			aWindow.beginSheet( theWindow, completionHandler: {
+				(aResponse: NSModalResponse) -> Void in
+			});
+		}
+	}
+
+	func selectIntervalSet( anIntervalSet : IntervalSet ) {
+	}
 }

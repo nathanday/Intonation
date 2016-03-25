@@ -20,6 +20,8 @@
 		D84CE1E21C95960E00E19505 /* AdHocGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CE1E11C95960E00E19505 /* AdHocGenerator.swift */; };
 		D84CE1E41C95967700E19505 /* IntervalsDataGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CE1E31C95967700E19505 /* IntervalsDataGenerator.swift */; };
 		D84F342B1B08A2C00095D1E8 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89543621996345200A091A4 /* main.swift */; };
+		D8571C801CA56D2B008A5A46 /* LimitsGeneratorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8571C7E1CA56D2B008A5A46 /* LimitsGeneratorViewController.swift */; };
+		D8571C811CA56D2B008A5A46 /* LimitsGeneratorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8571C7F1CA56D2B008A5A46 /* LimitsGeneratorViewController.xib */; };
 		D85916C31C8C04D0001C5330 /* MIDIReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85916C21C8C04D0001C5330 /* MIDIReceiver.swift */; };
 		D85ABE7F1C3FD06800F2DFAF /* ChordOrScaleSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85ABE7D1C3FD06800F2DFAF /* ChordOrScaleSelectorViewController.swift */; };
 		D85C0F671C8848F400FE36FA /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C0F661C8848F400FE36FA /* MainWindowController.swift */; };
@@ -27,15 +29,24 @@
 		D8646B2D1C3D4C5A00D8C429 /* ChordPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8646B2B1C3D4C5A00D8C429 /* ChordPreviewViewController.swift */; };
 		D8646B2E1C3D4C5A00D8C429 /* ChordPreviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8646B2C1C3D4C5A00D8C429 /* ChordPreviewViewController.xib */; };
 		D87201061B8C7CAE006FDEDC /* NDMidiNoteFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = D87201041B8C7CAE006FDEDC /* NDMidiNoteFormatter.m */; };
+		D8720B641C9E7D6B00ED9FBB /* StackedIntervalsDataGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8720B631C9E7D6B00ED9FBB /* StackedIntervalsDataGenerator.swift */; };
+		D8720B661C9E8AA200ED9FBB /* Interval.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8720B651C9E8AA200ED9FBB /* Interval.swift */; };
+		D8720B681C9E8B2D00ED9FBB /* StackedIntervalSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8720B671C9E8B2D00ED9FBB /* StackedIntervalSet.swift */; };
 		D87356E71ADA0793006DAFEB /* ChordSelectorWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87356E51ADA0793006DAFEB /* ChordSelectorWindowController.swift */; };
 		D87356E81ADA0793006DAFEB /* ChordSelectorWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D87356E61ADA0793006DAFEB /* ChordSelectorWindowController.xib */; };
 		D87651B41ADFCB7D003C4BF2 /* ApplicationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87651B31ADFCB7D003C4BF2 /* ApplicationDelegate.swift */; };
 		D87C278A1AF3A95900C2BF7B /* PresetChordsAndScales.plist in Resources */ = {isa = PBXBuildFile; fileRef = D87C27891AF3A95900C2BF7B /* PresetChordsAndScales.plist */; };
+		D8812AD01C9ECE3D0093786D /* IntervalSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8812ACF1C9ECE3D0093786D /* IntervalSet.swift */; };
 		D8832F8619A0C86B0095B26F /* WaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8832F8519A0C86B0095B26F /* WaveView.swift */; };
 		D88A62101ACF7F19004CD4C9 /* UInt+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88A620F1ACF7F19004CD4C9 /* UInt+Additions.swift */; };
 		D88A62111AD02167004CD4C9 /* Scale.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8901EBC1ABC226D00A4E071 /* Scale.swift */; };
 		D88EED2D1AEE5AF50084BDCB /* Float+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88EED2C1AEE5AF50084BDCB /* Float+Additions.swift */; };
 		D89074D81AD5486600FD8A1E /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89074D71AD5486600FD8A1E /* ResultView.swift */; };
+		D893993E1CA3E57F00C9CAA6 /* GeneratorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D893993D1CA3E57F00C9CAA6 /* GeneratorViewController.swift */; };
+		D89399411CA3F31C00C9CAA6 /* StackedIntervalsGeneratorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D893993F1CA3F31C00C9CAA6 /* StackedIntervalsGeneratorViewController.swift */; };
+		D89399421CA3F31C00C9CAA6 /* StackedIntervalsGeneratorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D89399401CA3F31C00C9CAA6 /* StackedIntervalsGeneratorViewController.xib */; };
+		D89399451CA3F37000C9CAA6 /* AdHokGeneratorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89399431CA3F37000C9CAA6 /* AdHokGeneratorViewController.swift */; };
+		D89399461CA3F37000C9CAA6 /* AdHokGeneratorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D89399441CA3F37000C9CAA6 /* AdHokGeneratorViewController.xib */; };
 		D895436A1996345200A091A4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D89543691996345200A091A4 /* Images.xcassets */; };
 		D895436D1996345200A091A4 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = D895436B1996345200A091A4 /* MainMenu.xib */; };
 		D89543791996345200A091A4 /* Equal_TemperamentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89543781996345200A091A4 /* Equal_TemperamentTests.swift */; };
@@ -53,6 +64,8 @@
 		D8AA4E461C13318300B66521 /* WaveViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8AA4E441C13318300B66521 /* WaveViewController.xib */; };
 		D8AA4E491C1337B500B66521 /* SpectrumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AA4E471C1337B500B66521 /* SpectrumViewController.swift */; };
 		D8AA4E4A1C1337B500B66521 /* SpectrumViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8AA4E481C1337B500B66521 /* SpectrumViewController.xib */; };
+		D8AFAD301CA58F370008ABFE /* PresetGeneratorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AFAD2E1CA58F370008ABFE /* PresetGeneratorViewController.swift */; };
+		D8AFAD311CA58F370008ABFE /* PresetGeneratorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8AFAD2F1CA58F370008ABFE /* PresetGeneratorViewController.xib */; };
 		D8B14D291B29C68300C971D8 /* Tone.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B14D281B29C68300C971D8 /* Tone.swift */; };
 		D8B5E23F1B0386F200F20584 /* InitialUserDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = D8B5E23E1B0386F200F20584 /* InitialUserDefaults.plist */; };
 		D8B9020E1AD491E30015B5E2 /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B9020C1AD491E30015B5E2 /* PreferencesWindowController.swift */; };
@@ -88,6 +101,8 @@
 		D849E7301ACADFD1006E0964 /* PrimeProducts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimeProducts.swift; sourceTree = "<group>"; };
 		D84CE1E11C95960E00E19505 /* AdHocGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdHocGenerator.swift; sourceTree = "<group>"; };
 		D84CE1E31C95967700E19505 /* IntervalsDataGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntervalsDataGenerator.swift; sourceTree = "<group>"; };
+		D8571C7E1CA56D2B008A5A46 /* LimitsGeneratorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LimitsGeneratorViewController.swift; sourceTree = "<group>"; };
+		D8571C7F1CA56D2B008A5A46 /* LimitsGeneratorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LimitsGeneratorViewController.xib; sourceTree = "<group>"; };
 		D85916C21C8C04D0001C5330 /* MIDIReceiver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MIDIReceiver.swift; sourceTree = "<group>"; };
 		D85ABE7D1C3FD06800F2DFAF /* ChordOrScaleSelectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChordOrScaleSelectorViewController.swift; sourceTree = "<group>"; };
 		D85C0F661C8848F400FE36FA /* MainWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
@@ -96,15 +111,24 @@
 		D8646B2C1C3D4C5A00D8C429 /* ChordPreviewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChordPreviewViewController.xib; sourceTree = "<group>"; };
 		D87201041B8C7CAE006FDEDC /* NDMidiNoteFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NDMidiNoteFormatter.m; sourceTree = "<group>"; };
 		D87201051B8C7CAE006FDEDC /* NDMidiNoteFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NDMidiNoteFormatter.h; sourceTree = "<group>"; };
+		D8720B631C9E7D6B00ED9FBB /* StackedIntervalsDataGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackedIntervalsDataGenerator.swift; sourceTree = "<group>"; };
+		D8720B651C9E8AA200ED9FBB /* Interval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Interval.swift; sourceTree = "<group>"; };
+		D8720B671C9E8B2D00ED9FBB /* StackedIntervalSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackedIntervalSet.swift; sourceTree = "<group>"; };
 		D87356E51ADA0793006DAFEB /* ChordSelectorWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChordSelectorWindowController.swift; sourceTree = "<group>"; };
 		D87356E61ADA0793006DAFEB /* ChordSelectorWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChordSelectorWindowController.xib; sourceTree = "<group>"; };
 		D87651B31ADFCB7D003C4BF2 /* ApplicationDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationDelegate.swift; sourceTree = "<group>"; };
 		D87C27891AF3A95900C2BF7B /* PresetChordsAndScales.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PresetChordsAndScales.plist; sourceTree = "<group>"; };
+		D8812ACF1C9ECE3D0093786D /* IntervalSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntervalSet.swift; sourceTree = "<group>"; };
 		D8832F8519A0C86B0095B26F /* WaveView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaveView.swift; sourceTree = "<group>"; };
 		D88A620F1ACF7F19004CD4C9 /* UInt+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UInt+Additions.swift"; sourceTree = "<group>"; };
 		D88EED2C1AEE5AF50084BDCB /* Float+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Float+Additions.swift"; sourceTree = "<group>"; };
 		D8901EBC1ABC226D00A4E071 /* Scale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scale.swift; sourceTree = "<group>"; };
 		D89074D71AD5486600FD8A1E /* ResultView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
+		D893993D1CA3E57F00C9CAA6 /* GeneratorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratorViewController.swift; sourceTree = "<group>"; };
+		D893993F1CA3F31C00C9CAA6 /* StackedIntervalsGeneratorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackedIntervalsGeneratorViewController.swift; sourceTree = "<group>"; };
+		D89399401CA3F31C00C9CAA6 /* StackedIntervalsGeneratorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StackedIntervalsGeneratorViewController.xib; sourceTree = "<group>"; };
+		D89399431CA3F37000C9CAA6 /* AdHokGeneratorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdHokGeneratorViewController.swift; sourceTree = "<group>"; };
+		D89399441CA3F37000C9CAA6 /* AdHokGeneratorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdHokGeneratorViewController.xib; sourceTree = "<group>"; };
 		D895435D1996345200A091A4 /* Intonation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Intonation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D89543611996345200A091A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D89543621996345200A091A4 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -127,6 +151,8 @@
 		D8AA4E441C13318300B66521 /* WaveViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WaveViewController.xib; sourceTree = "<group>"; };
 		D8AA4E471C1337B500B66521 /* SpectrumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpectrumViewController.swift; sourceTree = "<group>"; };
 		D8AA4E481C1337B500B66521 /* SpectrumViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpectrumViewController.xib; sourceTree = "<group>"; };
+		D8AFAD2E1CA58F370008ABFE /* PresetGeneratorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresetGeneratorViewController.swift; sourceTree = "<group>"; };
+		D8AFAD2F1CA58F370008ABFE /* PresetGeneratorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PresetGeneratorViewController.xib; sourceTree = "<group>"; };
 		D8B14D281B29C68300C971D8 /* Tone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tone.swift; sourceTree = "<group>"; };
 		D8B5E23E1B0386F200F20584 /* InitialUserDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = InitialUserDefaults.plist; sourceTree = "<group>"; };
 		D8B9020C1AD491E30015B5E2 /* PreferencesWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
@@ -192,6 +218,22 @@
 				D8B5E23E1B0386F200F20584 /* InitialUserDefaults.plist */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		D893993C1CA3E54E00C9CAA6 /* GeneratorViewController */ = {
+			isa = PBXGroup;
+			children = (
+				D893993D1CA3E57F00C9CAA6 /* GeneratorViewController.swift */,
+				D8571C7E1CA56D2B008A5A46 /* LimitsGeneratorViewController.swift */,
+				D8571C7F1CA56D2B008A5A46 /* LimitsGeneratorViewController.xib */,
+				D89399431CA3F37000C9CAA6 /* AdHokGeneratorViewController.swift */,
+				D89399441CA3F37000C9CAA6 /* AdHokGeneratorViewController.xib */,
+				D893993F1CA3F31C00C9CAA6 /* StackedIntervalsGeneratorViewController.swift */,
+				D89399401CA3F31C00C9CAA6 /* StackedIntervalsGeneratorViewController.xib */,
+				D8AFAD2E1CA58F370008ABFE /* PresetGeneratorViewController.swift */,
+				D8AFAD2F1CA58F370008ABFE /* PresetGeneratorViewController.xib */,
+			);
+			path = GeneratorViewController;
 			sourceTree = "<group>";
 		};
 		D89543541996345200A091A4 = {
@@ -295,6 +337,7 @@
 				D8ED76CF1C58E59E00BB2B8C /* FindIntervalsWindowController.swift */,
 				D80A61D41C9040C000A2F885 /* SelectDocumentType.swift */,
 				D80A61D51C9040C000A2F885 /* SelectDocumentType.xib */,
+				D893993C1CA3E54E00C9CAA6 /* GeneratorViewController */,
 				D8AA4E381C132A6200B66521 /* ScaleDisplayViewController */,
 				D8AA4E4B1C13405F00B66521 /* GeneratorViewControllers */,
 			);
@@ -321,10 +364,14 @@
 				D89543831996347F00A091A4 /* EqualTemperamentEntry.swift */,
 				D84CE1E31C95967700E19505 /* IntervalsDataGenerator.swift */,
 				D8F2B1D51C93EFD800F88BF7 /* LimitsBasedGenerator.swift */,
+				D8720B631C9E7D6B00ED9FBB /* StackedIntervalsDataGenerator.swift */,
 				D84CE1E11C95960E00E19505 /* AdHocGenerator.swift */,
 				D849E7301ACADFD1006E0964 /* PrimeProducts.swift */,
 				D89543841996347F00A091A4 /* Rational.swift */,
+				D8812ACF1C9ECE3D0093786D /* IntervalSet.swift */,
 				D8901EBC1ABC226D00A4E071 /* Scale.swift */,
+				D8720B671C9E8B2D00ED9FBB /* StackedIntervalSet.swift */,
+				D8720B651C9E8AA200ED9FBB /* Interval.swift */,
 				D831054D1B0A6115000EB805 /* HarmonicsDescription.swift */,
 				D8D912D11B197D5300BB479A /* TonePlayer.swift */,
 				D8B14D281B29C68300C971D8 /* Tone.swift */,
@@ -423,13 +470,17 @@
 				D895436A1996345200A091A4 /* Images.xcassets in Resources */,
 				D895436D1996345200A091A4 /* MainMenu.xib in Resources */,
 				D8646B2E1C3D4C5A00D8C429 /* ChordPreviewViewController.xib in Resources */,
+				D89399461CA3F37000C9CAA6 /* AdHokGeneratorViewController.xib in Resources */,
 				D8AA4E421C132ADD00B66521 /* HarmonicViewController.xib in Resources */,
 				D8B5E23F1B0386F200F20584 /* InitialUserDefaults.plist in Resources */,
 				D87C278A1AF3A95900C2BF7B /* PresetChordsAndScales.plist in Resources */,
 				D8AA4E461C13318300B66521 /* WaveViewController.xib in Resources */,
+				D89399421CA3F31C00C9CAA6 /* StackedIntervalsGeneratorViewController.xib in Resources */,
+				D8AFAD311CA58F370008ABFE /* PresetGeneratorViewController.xib in Resources */,
 				D895438A1996354100A091A4 /* MainWindowController.xib in Resources */,
 				D8AA4E3E1C132A8A00B66521 /* ScaleViewController.xib in Resources */,
 				D80A61D71C9040C000A2F885 /* SelectDocumentType.xib in Resources */,
+				D8571C811CA56D2B008A5A46 /* LimitsGeneratorViewController.xib in Resources */,
 				D8AA4E4A1C1337B500B66521 /* SpectrumViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -450,6 +501,8 @@
 			files = (
 				D809895E1C85A27700122857 /* Int+Additions.swift in Sources */,
 				D89543871996347F00A091A4 /* Rational.swift in Sources */,
+				D893993E1CA3E57F00C9CAA6 /* GeneratorViewController.swift in Sources */,
+				D8AFAD301CA58F370008ABFE /* PresetGeneratorViewController.swift in Sources */,
 				D849E7311ACADFD1006E0964 /* PrimeProducts.swift in Sources */,
 				D8646B2D1C3D4C5A00D8C429 /* ChordPreviewViewController.swift in Sources */,
 				D84F342B1B08A2C00095D1E8 /* main.swift in Sources */,
@@ -461,10 +514,13 @@
 				D8E5E6241AD12F7A004DB02D /* HarmonicView.swift in Sources */,
 				D80A61D61C9040C000A2F885 /* SelectDocumentType.swift in Sources */,
 				D831054E1B0A6115000EB805 /* HarmonicsDescription.swift in Sources */,
+				D8720B641C9E7D6B00ED9FBB /* StackedIntervalsDataGenerator.swift in Sources */,
+				D8720B661C9E8AA200ED9FBB /* Interval.swift in Sources */,
 				D8AA4E3C1C132A8A00B66521 /* ScaleDisplayViewController.swift in Sources */,
 				D8646B281C3D23F500D8C429 /* ChordSelectorItem.swift in Sources */,
 				D8ED76D11C58E59E00BB2B8C /* FindIntervalsWindowController.swift in Sources */,
 				D8AA4E491C1337B500B66521 /* SpectrumViewController.swift in Sources */,
+				D8812AD01C9ECE3D0093786D /* IntervalSet.swift in Sources */,
 				D89543861996347F00A091A4 /* EqualTemperamentEntry.swift in Sources */,
 				D85916C31C8C04D0001C5330 /* MIDIReceiver.swift in Sources */,
 				D83B54B11C8D96C500624A46 /* MIDIToHarmonicRatio.swift in Sources */,
@@ -480,14 +536,18 @@
 				D83C4A2C1C8863A00090F939 /* IntervalsData.swift in Sources */,
 				D8AA4E3D1C132A8A00B66521 /* ScaleViewController.swift in Sources */,
 				D87201061B8C7CAE006FDEDC /* NDMidiNoteFormatter.m in Sources */,
+				D8571C801CA56D2B008A5A46 /* LimitsGeneratorViewController.swift in Sources */,
 				D88A62101ACF7F19004CD4C9 /* UInt+Additions.swift in Sources */,
+				D89399411CA3F31C00C9CAA6 /* StackedIntervalsGeneratorViewController.swift in Sources */,
 				D8C343C81AE109E200F5494A /* SpectrumView.swift in Sources */,
 				D87356E71ADA0793006DAFEB /* ChordSelectorWindowController.swift in Sources */,
 				D87651B41ADFCB7D003C4BF2 /* ApplicationDelegate.swift in Sources */,
 				D85C0F671C8848F400FE36FA /* MainWindowController.swift in Sources */,
 				D88A62111AD02167004CD4C9 /* Scale.swift in Sources */,
 				D8AA4E451C13318300B66521 /* WaveViewController.swift in Sources */,
+				D89399451CA3F37000C9CAA6 /* AdHokGeneratorViewController.swift in Sources */,
 				D8B14D291B29C68300C971D8 /* Tone.swift in Sources */,
+				D8720B681C9E8B2D00ED9FBB /* StackedIntervalSet.swift in Sources */,
 				D8AA4E311C131EAA00B66521 /* ViewControllerPlaceHolderView.swift in Sources */,
 				D8AA4E411C132ADD00B66521 /* HarmonicViewController.swift in Sources */,
 			);

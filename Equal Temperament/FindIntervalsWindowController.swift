@@ -52,7 +52,7 @@ class FindIntervalsViewController: NSViewController {
 			if theComponents.count == 1 {
 				theResult.append(IrrationalInterval(theComponents[0]));
 			} else if theComponents.count == 2 && isInteger(theComponents[0]) && isInteger(theComponents[1]) && theComponents[0] > theComponents[1] {
-				theResult.append(RationalInterval(numerator: Int(theComponents[0]),denominator: Int(theComponents[1])));
+				theResult.append(RationalInterval( Int(theComponents[0]), Int(theComponents[1])));
 			} else if theComponents.count > 0 {
 				let		theBase : Double = theComponents[0] ?? 1.0;
 				for theEnumValue in theComponents {
@@ -61,7 +61,7 @@ class FindIntervalsViewController: NSViewController {
 						theValue *= 2.0;
 					}
 					if isInteger(theValue) && isInteger(theBase) {
-						theResult.append(RationalInterval(numerator:Int(theValue),denominator:Int(theBase)));
+						theResult.append(RationalInterval( Int(theValue), Int(theBase)));
 					} else {
 						theResult.append(IrrationalInterval(theValue/theBase));
 					}

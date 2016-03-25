@@ -46,8 +46,8 @@ extension ChordPreviewViewController : NSTableViewDataSource {
 		if aTableColumn?.identifier == "name"{
 			theResult = chordOrScale.everyRatio[aRow].name;
 		}
-		else if aTableColumn?.identifier == "ratio"{
-			theResult = chordOrScale.everyRatio[aRow].ratio.toString;
+		else if aTableColumn?.identifier == "interval"{
+			theResult = chordOrScale.everyRatio[aRow].interval.toString;
 		}
 		return theResult;
 	}
@@ -55,7 +55,7 @@ extension ChordPreviewViewController : NSTableViewDataSource {
 	func tableView( aTableView: NSTableView, writeRowsWithIndexes aRowIndexes: NSIndexSet, toPasteboard aPboard: NSPasteboard) -> Bool {
 		var		theResult = "";
 		for theIndex in aRowIndexes {
-			theResult.appendContentsOf("\(chordOrScale.everyRatio[theIndex].name)\t\(chordOrScale.everyRatio[theIndex].ratio.toString)\n");
+			theResult.appendContentsOf("\(chordOrScale.everyRatio[theIndex].name)\t\(chordOrScale.everyRatio[theIndex].interval.toString)\n");
 		}
 		aPboard.setString(theResult, forType: NSPasteboardTypeTabularText);
 		return true;
