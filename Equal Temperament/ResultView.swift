@@ -17,7 +17,7 @@ import Cocoa
 				if let theRationalValue = theValue as? RationalInterval {
 					theResult *= theRationalValue.denominator/greatestCommonDivisor(theResult, theRationalValue.denominator);
 				} else {
-					theResult = Int.max;
+					theResult = 1;
 					break;
 				}
 			}

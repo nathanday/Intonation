@@ -25,7 +25,7 @@ class SpectrumViewController: NSViewController {
 		updateSelectedSpectrumType();
     }
 
-	func setIntervals( intervals anIntervals : [EqualTemperamentEntry], intervalCount anIntervalCount : UInt, enabled anEnable : Bool ) { }
+	func setIntervals( intervals anIntervals : [EqualTemperamentEntry], degree anIntervalCount : UInt, enabled anEnable : Bool ) { }
 	func hideIntervalRelatedColumn( aHide : Bool ) { }
 	func setSelectionIntervals( aSelectionIntervals : [Interval]) {
 		spectrumView?.selectedRatios = aSelectionIntervals;

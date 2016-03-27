@@ -19,7 +19,7 @@ class ScaleViewController: NSViewController, ScaleDisplayViewController {
 	}
 
 
-	func setIntervals( intervals anIntervals : [EqualTemperamentEntry], intervalCount anIntervalCount : UInt, enabled anEnable : Bool ) {
+	func setIntervals( intervals anIntervals : [EqualTemperamentEntry], degree anIntervalCount : UInt, enabled anEnable : Bool ) {
 		if let theLinearScaleView = linearScaleView {
 			theLinearScaleView.numberOfIntervals = anEnable ? anIntervalCount : 0;
 			theLinearScaleView.everyRatios = anIntervals.map { return $0.interval; };

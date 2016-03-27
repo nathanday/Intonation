@@ -618,15 +618,6 @@
 		</dict>
 		<dict>
 			<key>ratio</key>
-			<string>1.059463094359295</string>
-			<key>names</key>
-			<array>
-				<string>Equal-tempered minor second</string>
-				<string>semitone</string>
-			</array>
-		</dict>
-		<dict>
-			<key>ratio</key>
 			<string>17:16</string>
 			<key>names</key>
 			<array>
@@ -736,6 +727,22 @@
 		</dict>
 		<dict>
 			<key>ratio</key>
+			<string>1.059463094359295</string>
+			<key>names</key>
+			<array>
+				<string>Equal-tempered minor second</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>2.118926188718591</string>
+			<key>names</key>
+			<array>
+				<string>Equal-tempered minor ninth</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
 			<string>1.090507732665258</string>
 			<key>names</key>
 			<array>
@@ -823,10 +830,34 @@
 		</dict>
 		<dict>
 			<key>ratio</key>
+			<string>1.059463094359295</string>
+			<key>names</key>
+			<array>
+				<string>Equal-tempered minor second</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>2.244924096618746</string>
+			<key>names</key>
+			<array>
+				<string>Equal-tempered major ninth</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
 			<string>1.122462048309373</string>
 			<key>names</key>
 			<array>
 				<string>Equal-tempered major second</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>2.519842099789746</string>
+			<key>names</key>
+			<array>
+				<string>Equal-tempered major fourteenth</string>
 			</array>
 		</dict>
 		<dict>
@@ -939,6 +970,14 @@
 			<key>names</key>
 			<array>
 				<string>Equal-tempered minor third</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>2.378414230005</string>
+			<key>names</key>
+			<array>
+				<string>Equal-tempered minor tenth</string>
 			</array>
 		</dict>
 		<dict>
@@ -1081,6 +1120,14 @@
 			<key>names</key>
 			<array>
 				<string>Equal-tempered major third</string>
+			</array>
+		</dict>
+		<dict>
+			<key>ratio</key>
+			<string>2.51984209979</string>
+			<key>names</key>
+			<array>
+				<string>Equal-tempered major tenth</string>
 			</array>
 		</dict>
 		<dict>

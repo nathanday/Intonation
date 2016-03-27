@@ -20,6 +20,7 @@ class SelectDocumentType : NSWindowController {
 	static var		rowData = [
 		(title:"Limits", details:"Create musical intervals using prime and odd limits.", documentType:DocumentType.Limits),
 		(title:"Stacked Intervals", details:"Create musical intervals by stacking a simpler musical interval.", documentType:DocumentType.StackedIntervals),
+		(title:"Equal Temperament", details:"Create musical intervals by dividing the octave, or other large interval, into equal size ratios.", documentType:DocumentType.EqualTemperament),
 		(title:"AdHoc", details:"Create musical intervals by manual entry.", documentType:DocumentType.AdHoc),
 		(title:"Preset", details:"Use a predfined set of musical intervals.", documentType:DocumentType.Preset),
 		];

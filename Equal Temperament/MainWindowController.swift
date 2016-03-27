@@ -52,10 +52,8 @@ class MainWindowController : NSWindowController {
 	override func observeValueForKeyPath( aKeyPath: String?, ofObject anObject: AnyObject?, change aChange: [String : AnyObject]?, context aContext: UnsafeMutablePointer<Void>) {
 		if let theDocument = document as? Document {
 			if anObject as? Document == theDocument {
-				if aKeyPath == "enableInterval" {
-					hideIntervalRelatedColumn(theDocument.intervalsData.enableInterval);
-				} else if aKeyPath == "everyInterval" {
-					scaleViewController?.setIntervals(intervals: theDocument.everyInterval, intervalCount: theDocument.intervalsData.intervalCount, enabled: theDocument.intervalsData.enableInterval);
+				if aKeyPath == "everyInterval" {
+					scaleViewController?.setIntervals(intervals: theDocument.everyInterval, degree: 12, enabled: true);
 				} else if aKeyPath == "selectedIndicies" {
 					let		theSelectedIntervals = theDocument.selectedJustIntonationIntervals;
 					arrayController?.setSelectedObjects(theDocument.selectedEqualTemperamentEntry);
@@ -187,10 +185,16 @@ class MainWindowController : NSWindowController {
 		}
 	}
 
-	@IBAction func enableIntervalChanged( aSender: NSButton? ) {
-		if let theButton = aSender, theIntervalData = (document as? Document)?.intervalsData {
-			theIntervalData.enableInterval = theButton.state == NSOnState;
+	@IBAction func copy(aSender: AnyObject ) {
+		var		theResult = String();
+		for theEntry in arrayController!.selectedObjects as! [EqualTemperamentEntry] {
+			if theResult.endIndex > theResult.startIndex {
+				theResult.appendContentsOf("\n");
+			}
+			theResult.appendContentsOf("\(theEntry.intervalToDouble)\t\(theEntry.closestIntervalNumber)\t\(theEntry.factorsString)\t\(theEntry.everyIntervalName.first ?? "")");
 		}
+		NSPasteboard.generalPasteboard().clearContents();
+		NSPasteboard.generalPasteboard().setString(theResult, forType: NSPasteboardTypeString);
 	}
 
 	@IBAction func baseFrequencyDeltaChanged( aSender: NSSlider ) {
@@ -225,12 +229,6 @@ class MainWindowController : NSWindowController {
 		previousBaseFrequencyDelta = theBaseFrequencyDelta;
 	}
 	
-	@IBAction func selectPresetInterval( aSender: NSMenuItem ) {
-		if let theIntervalData = (document as? Document)?.intervalsData {
-			theIntervalData.intervalCount = UInt(aSender.tag);
-		}
-	}
-
 	@IBAction func playLastMethod( aSender: AnyObject? ) {
 		if let theDocument = document as? Document {
 			theDocument.playUsingMethod( theDocument.currentlySelectedMethod ?? 0 );
@@ -295,26 +293,6 @@ class MainWindowController : NSWindowController {
 }
 
 extension MainWindowController : NSTableViewDelegate {
-	static let		cellColors = ( backgroundAlpha:CGFloat(0.1), maxErrorTextAlpha:CGFloat(0.25) );
-	func tableView( aTableView: NSTableView, willDisplayCell aCell: AnyObject, forTableColumn aTableColumn: NSTableColumn?, row aRowIndex: Int) {
-		if let	theEntry = arrayController!.arrangedObjects[UInt(aRowIndex)] as? EqualTemperamentEntry, theCell = aCell as? NSTextFieldCell {
-			if let theDocument = document as? Document {
-				let		theExceedsError = theDocument.intervalsData.enableInterval && abs(theEntry.error12ETCent) > 100.0*theDocument.intervalsData.maximumError;
-				if theDocument.smallestErrorEntries.contains(theEntry) {
-					theCell.backgroundColor = NSColor(calibratedRed:0.0, green:0.0, blue:1.0, alpha:MainWindowController.cellColors.backgroundAlpha);
-					theCell.textColor = NSColor(calibratedRed:0.0, green:0.0, blue:0.6, alpha:theExceedsError ? MainWindowController.cellColors.maxErrorTextAlpha : 1.0);
-				}
-				else if theDocument.biggestErrorEntries.contains(theEntry) {
-					theCell.backgroundColor = NSColor(calibratedRed:0.8, green:0.0, blue:0.0, alpha:MainWindowController.cellColors.backgroundAlpha);
-					theCell.textColor = NSColor(calibratedRed:0.52, green:0.0, blue:0.0, alpha:theExceedsError ? MainWindowController.cellColors.maxErrorTextAlpha : 1.0);
-				}
-				else {
-					theCell.backgroundColor = NSColor.clearColor();
-					theCell.textColor = NSColor(calibratedWhite: 0.0, alpha: theExceedsError ? MainWindowController.cellColors.maxErrorTextAlpha : 1.0);
-				}
-			}
-		}
-	}
 
 	func tableViewSelectionDidChange(notification: NSNotification) {
 		if let theSelectedEntries = arrayController?.selectedObjects as? [EqualTemperamentEntry],
@@ -329,6 +307,13 @@ extension MainWindowController : NSTableViewDelegate {
 				theTableColumn.hidden = theTableColumn.width <= 20.0;
 			}
 		}
+	}
+}
+
+extension MainWindowController : NSTableViewDataSource {
+	func tableView(aTableView: NSTableView, pasteboardWriterForRow aRow: Int) -> NSPasteboardWriting? {
+		let		theEntry = (arrayController!.arrangedObjects as! [EqualTemperamentEntry])[aRow];
+		return NSPasteboardItem(pasteboardPropertyList: theEntry.name, ofType: NSPasteboardTypeString);
 	}
 }
 

@@ -17,7 +17,6 @@ class TonePlayer {
 	init() {
 		harmonics = HarmonicsDescription(amount: 0.5, evenAmount: 1.0);
 		baseFrequency = 220.0;
-		equalTempIntervalCount = 12;
 		intervals = [];
 		playing = false;
 	}
@@ -27,13 +26,7 @@ class TonePlayer {
 
 	var harmonics : HarmonicsDescription { didSet { updateTones(); } }
 	var baseFrequency : Double { didSet { updateTones(); } }
-	var equalTempIntervalCount : UInt;
 	var intervals : [Interval] { didSet { generateTones(); } }
-	var equalTemperament : Bool = false {
-		didSet {
-			for (_,theTone) in playingTones { theTone.equalTemperament = equalTemperament; }
-		}
-	}
 	var arpeggioInterval : NSTimeInterval = 60.0/120.0;
 	private(set) var playbackType : PlaybackType = .Unison;
 
@@ -52,12 +45,9 @@ class TonePlayer {
 			if let theTone = playingTones[theInterval] {
 				theTone.baseFrequency = baseFrequency/(2.0*TonePlayer.nyquestFrequency);
 				theTone.harmonics = harmonics;
-				theTone.equalTempIntervalCount = equalTempIntervalCount;
-				theTone.equalTemperament = equalTemperament;
 				if playing && !theTone.playing { theTone.play(); }
 			} else {
-				let theTone = Tone(baseFrequency:baseFrequency/(2.0*TonePlayer.nyquestFrequency), interval: theInterval, harmonics:harmonics, equalTempIntervalCount: equalTempIntervalCount );
-				theTone.equalTemperament = equalTemperament;
+				let theTone = Tone(baseFrequency:baseFrequency/(2.0*TonePlayer.nyquestFrequency), interval: theInterval, harmonics:harmonics );
 				playingTones[theInterval] = theTone;
 				if playing && !theTone.playing { theTone.play(); }
 			}
@@ -73,8 +63,6 @@ class TonePlayer {
 			if let theTone = playingTones[theInterval] {
 				theTone.baseFrequency = baseFrequency/(2.0*TonePlayer.nyquestFrequency);
 				theTone.harmonics = harmonics;
-				theTone.equalTempIntervalCount = equalTempIntervalCount;
-				theTone.equalTemperament = equalTemperament;
 			}
 		}
 	}

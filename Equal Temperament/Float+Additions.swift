@@ -19,4 +19,8 @@ extension Double {
 	var toCents : Double {
 		return 1200.0 * log2(self);
 	}
+
+	func toString(decimalPlaces aDecimalPlaces:UInt) -> String {
+		return NSString(format: "%.*f", aDecimalPlaces, self) as String;
+	}
 }

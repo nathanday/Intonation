@@ -21,10 +21,8 @@ class LimitsBasedGenerator : IntervalsDataGenerator {
 							assert( theNum <= theDenom*2 );
 							for theOctaves in 0..<octaves {
 								let		theRational = RationalInterval(theNum*1<<theOctaves,theDenom);
-								let		theEntry = EqualTemperamentEntry(interval: theRational, intervalCount:intervalCount, maximumError: maximumError);
-								if theEntry.isClose || !filtered {
-									theResult.insert(theEntry);
-								}
+								let		theEntry = EqualTemperamentEntry(interval: theRational );
+								theResult.insert(theEntry);
 								if let theDegree = Scale.major.indexOf(theRational) {
 									theEntry.degreeName = Scale.degreeName(theDegree);
 								}
@@ -38,16 +36,10 @@ class LimitsBasedGenerator : IntervalsDataGenerator {
 		}
 	}
 	var limits : (numeratorPrime:UInt,denominatorPrime:UInt,odd:UInt,additiveDissonance:UInt);
-	var maximumError : Double;
-	var intervalCount : UInt;
-	var filtered : Bool;
 
 	init( intervalsData anIntervalsData : IntervalsData ) {
 		let		theDenominatorPrimeLimit = anIntervalsData.separatePrimeLimit ? anIntervalsData.denominatorPrimeLimit : anIntervalsData.numeratorPrimeLimit;
 		limits = (numeratorPrime:anIntervalsData.numeratorPrimeLimit, denominatorPrime:theDenominatorPrimeLimit, odd:anIntervalsData.oddLimit, additiveDissonance:anIntervalsData.additiveDissonance);
-		intervalCount = anIntervalsData.enableInterval ? anIntervalsData.intervalCount : 0;
-		maximumError = anIntervalsData.maximumError;
-		filtered = anIntervalsData.filtered;
 		super.init();
 		octaves = anIntervalsData.octavesCount;
 	}

@@ -71,6 +71,9 @@
 		D8B9020E1AD491E30015B5E2 /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B9020C1AD491E30015B5E2 /* PreferencesWindowController.swift */; };
 		D8B9020F1AD491E30015B5E2 /* PreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8B9020D1AD491E30015B5E2 /* PreferencesWindowController.xib */; };
 		D8C343C81AE109E200F5494A /* SpectrumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C343C71AE109E200F5494A /* SpectrumView.swift */; };
+		D8E10CB41CA66D130030D8E6 /* EqualTemperamentGeneratorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E10CB21CA66D130030D8E6 /* EqualTemperamentGeneratorViewController.swift */; };
+		D8E10CB51CA66D130030D8E6 /* EqualTemperamentGeneratorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8E10CB31CA66D130030D8E6 /* EqualTemperamentGeneratorViewController.xib */; };
+		D8E10CB71CA689310030D8E6 /* EqualTemperamentGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E10CB61CA689310030D8E6 /* EqualTemperamentGenerator.swift */; };
 		D8E5E6241AD12F7A004DB02D /* HarmonicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E5E6231AD12F7A004DB02D /* HarmonicView.swift */; };
 		D8E5E6271AD130DE004DB02D /* ScaleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E5E6251AD130DE004DB02D /* ScaleView.swift */; };
 		D8E7C7D71B1CAB99000D745B /* TonePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D912D11B197D5300BB479A /* TonePlayer.swift */; };
@@ -159,6 +162,9 @@
 		D8B9020D1AD491E30015B5E2 /* PreferencesWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreferencesWindowController.xib; sourceTree = "<group>"; };
 		D8C343C71AE109E200F5494A /* SpectrumView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpectrumView.swift; sourceTree = "<group>"; };
 		D8D912D11B197D5300BB479A /* TonePlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TonePlayer.swift; sourceTree = "<group>"; };
+		D8E10CB21CA66D130030D8E6 /* EqualTemperamentGeneratorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EqualTemperamentGeneratorViewController.swift; sourceTree = "<group>"; };
+		D8E10CB31CA66D130030D8E6 /* EqualTemperamentGeneratorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EqualTemperamentGeneratorViewController.xib; sourceTree = "<group>"; };
+		D8E10CB61CA689310030D8E6 /* EqualTemperamentGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EqualTemperamentGenerator.swift; sourceTree = "<group>"; };
 		D8E5E6231AD12F7A004DB02D /* HarmonicView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HarmonicView.swift; sourceTree = "<group>"; };
 		D8E5E6251AD130DE004DB02D /* ScaleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScaleView.swift; sourceTree = "<group>"; };
 		D8ED76CF1C58E59E00BB2B8C /* FindIntervalsWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindIntervalsWindowController.swift; sourceTree = "<group>"; };
@@ -230,6 +236,8 @@
 				D89399441CA3F37000C9CAA6 /* AdHokGeneratorViewController.xib */,
 				D893993F1CA3F31C00C9CAA6 /* StackedIntervalsGeneratorViewController.swift */,
 				D89399401CA3F31C00C9CAA6 /* StackedIntervalsGeneratorViewController.xib */,
+				D8E10CB21CA66D130030D8E6 /* EqualTemperamentGeneratorViewController.swift */,
+				D8E10CB31CA66D130030D8E6 /* EqualTemperamentGeneratorViewController.xib */,
 				D8AFAD2E1CA58F370008ABFE /* PresetGeneratorViewController.swift */,
 				D8AFAD2F1CA58F370008ABFE /* PresetGeneratorViewController.xib */,
 			);
@@ -312,13 +320,6 @@
 			path = ScaleDisplayViewController;
 			sourceTree = "<group>";
 		};
-		D8AA4E4B1C13405F00B66521 /* GeneratorViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = GeneratorViewControllers;
-			sourceTree = "<group>";
-		};
 		D8B902091AD48EBF0015B5E2 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -337,9 +338,9 @@
 				D8ED76CF1C58E59E00BB2B8C /* FindIntervalsWindowController.swift */,
 				D80A61D41C9040C000A2F885 /* SelectDocumentType.swift */,
 				D80A61D51C9040C000A2F885 /* SelectDocumentType.xib */,
+				D89543831996347F00A091A4 /* EqualTemperamentEntry.swift */,
 				D893993C1CA3E54E00C9CAA6 /* GeneratorViewController */,
 				D8AA4E381C132A6200B66521 /* ScaleDisplayViewController */,
-				D8AA4E4B1C13405F00B66521 /* GeneratorViewControllers */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -361,10 +362,10 @@
 			isa = PBXGroup;
 			children = (
 				D83C4A2B1C8863A00090F939 /* IntervalsData.swift */,
-				D89543831996347F00A091A4 /* EqualTemperamentEntry.swift */,
 				D84CE1E31C95967700E19505 /* IntervalsDataGenerator.swift */,
 				D8F2B1D51C93EFD800F88BF7 /* LimitsBasedGenerator.swift */,
 				D8720B631C9E7D6B00ED9FBB /* StackedIntervalsDataGenerator.swift */,
+				D8E10CB61CA689310030D8E6 /* EqualTemperamentGenerator.swift */,
 				D84CE1E11C95960E00E19505 /* AdHocGenerator.swift */,
 				D849E7301ACADFD1006E0964 /* PrimeProducts.swift */,
 				D89543841996347F00A091A4 /* Rational.swift */,
@@ -473,6 +474,7 @@
 				D89399461CA3F37000C9CAA6 /* AdHokGeneratorViewController.xib in Resources */,
 				D8AA4E421C132ADD00B66521 /* HarmonicViewController.xib in Resources */,
 				D8B5E23F1B0386F200F20584 /* InitialUserDefaults.plist in Resources */,
+				D8E10CB51CA66D130030D8E6 /* EqualTemperamentGeneratorViewController.xib in Resources */,
 				D87C278A1AF3A95900C2BF7B /* PresetChordsAndScales.plist in Resources */,
 				D8AA4E461C13318300B66521 /* WaveViewController.xib in Resources */,
 				D89399421CA3F31C00C9CAA6 /* StackedIntervalsGeneratorViewController.xib in Resources */,
@@ -499,6 +501,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8E10CB41CA66D130030D8E6 /* EqualTemperamentGeneratorViewController.swift in Sources */,
 				D809895E1C85A27700122857 /* Int+Additions.swift in Sources */,
 				D89543871996347F00A091A4 /* Rational.swift in Sources */,
 				D893993E1CA3E57F00C9CAA6 /* GeneratorViewController.swift in Sources */,
@@ -525,6 +528,7 @@
 				D85916C31C8C04D0001C5330 /* MIDIReceiver.swift in Sources */,
 				D83B54B11C8D96C500624A46 /* MIDIToHarmonicRatio.swift in Sources */,
 				D85ABE7F1C3FD06800F2DFAF /* ChordOrScaleSelectorViewController.swift in Sources */,
+				D8E10CB71CA689310030D8E6 /* EqualTemperamentGenerator.swift in Sources */,
 				D89074D81AD5486600FD8A1E /* ResultView.swift in Sources */,
 				D88EED2D1AEE5AF50084BDCB /* Float+Additions.swift in Sources */,
 				D8F2B1D61C93EFD800F88BF7 /* LimitsBasedGenerator.swift in Sources */,

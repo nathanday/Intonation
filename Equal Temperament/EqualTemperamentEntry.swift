@@ -18,7 +18,6 @@ extension Rational {
 		else if theNum%2 == 1 { return theNum; }
 		else { return theDen; }
 	}
-
 	var primeLimit : UInt {
 		let		theResult : UInt = UInt.max;
 		if numerator > 0 && denominator > 0 {
@@ -34,60 +33,82 @@ extension Rational {
 
 class EqualTemperamentEntry : NSObject {
 	var interval : Interval
-	var isClose : Bool;
-    dynamic var intervalToString : String { return interval.toString; }
+    dynamic var intervalToString : String {
+		switch interval {
+		case let x as RationalInterval:
+			return x.toString;
+		default:
+			return interval.toDouble.toString(decimalPlaces:5);
+		}
+	}
     dynamic var intervalToDouble : Double { return interval.toDouble; }
-	let intervalCount : UInt
-	var name : String { return interval.toString; }
+	var name : String { return interval.ratioString; }
 	var closestEqualTemperamentIntervalNumber : UInt { return UInt(12.0*Double(log2(interval.toDouble))+0.5); }
-	var closestIntervalNumber : UInt { return UInt(Double(self.intervalCount)*Double(log2(interval.toDouble))+0.5); }
-	var equalTemperamentRatio : Double { return pow(2.0,Double(self.closestEqualTemperamentIntervalNumber)/Double(self.intervalCount)); }
+	var closestIntervalNumber : UInt { return UInt(Double(12)*Double(log2(interval.toDouble))+0.5); }
+	var equalTemperamentRatio : Double { return pow(2.0,Double(self.closestEqualTemperamentIntervalNumber)/Double(12)); }
 	var justIntonationCents : Double { return interval.toDouble.toCents; }
-	var justIntonationPercent : Double { return Double(self.intervalCount)*100.0 * log2(self.interval.toDouble); }
+	var justIntonationPercent : Double { return Double(12)*100.0 * log2(self.interval.toDouble); }
 	var error : Double { return equalTemperamentRatio-interval.toDouble; }
 	var error12ETCent : Double {
-		return (interval.toDouble/ratioForCentsEquivelent(Double(closestIntervalNumber)*100.0, n: self.intervalCount )).toCents;
+		return (interval.toDouble/ratioForCentsEquivelent(Double(closestIntervalNumber)*100.0, n: 12 )).toCents;
 	}
-	var oddLimit : UInt {
+	var oddLimit : UInt? {
 		switch interval {
 		case let x as RationalInterval:
 			return x.ratio.oddLimit;
 		default:
-			return UInt.max;
+			return nil;
 		}
 	}
 
-	var primeLimit : UInt {
+	var oddLimitString : String {
+		if let theOddLimit = oddLimit {
+			return "\(theOddLimit)";
+		}
+		return "n/a";
+	}
+
+	var primeLimit : UInt? {
 		switch interval {
 		case let x as RationalInterval:
 			return x.ratio.primeLimit;
 		default:
-			return UInt.max;
-		}
-	}
-	var factorsString : String {
-		switch interval {
-		case let x as RationalInterval:
-			return x.ratio.factorsString;
-		default:
-			return interval.toString;
+			return nil;
 		}
 	}
 
-	var	additiveDissonance : UInt {
+	var primeLimitString : String {
+		if let thePrimeLimit = primeLimit {
+			return "\(thePrimeLimit)";
+		}
+		return "n/a";
+	}
+
+	var factorsString : String {
+		return interval.factorsString;
+	}
+
+	var	additiveDissonance : UInt? {
 		return interval.additiveDissonance;
+	}
+
+	var	additiveDissonanceString : String {
+		if let theAdditiveDissonance = additiveDissonance {
+			return "\(theAdditiveDissonance)";
+		}
+		return "n/a";
 	}
 
 	var degreeName : String = "";
 
 	var errorNETCent : Double {
-		return (interval.toDouble/ratioForCentsEquivelent(Double(closestIntervalNumber)*100.0, n:intervalCount)).toCents;
+		return (interval.toDouble/ratioForCentsEquivelent(Double(closestIntervalNumber)*100.0, n:12)).toCents;
 	}
 
-	var closestIntervalNumberDescription : String { return isClose ? "\(closestIntervalNumber)" : ""; }
+	var closestIntervalNumberDescription : String { return "\(closestIntervalNumber)"; }
 	var closestNoteDescription : String {
 		var		theResult = "";
-		if isClose {
+		if true {
 			let		noteForIntervalNumber = [ 1, 1, 2, 2, 3, 4, 4, 5, 5, 6, 6, 7 ];
 			let		theNoteNumber = Int(closestIntervalNumber)%noteForIntervalNumber.count;
 			let		theOctave = Int(closestIntervalNumber)/noteForIntervalNumber.count;
@@ -155,31 +176,25 @@ class EqualTemperamentEntry : NSObject {
 	var absError12ETCent : Double { return abs(error12ETCent); }
 	var absErrorNETCent : Double { return abs(errorNETCent); }
 
-	init( interval: Interval, intervalCount : UInt, maximumError: Double ) {
+	init( interval: Interval ) {
 		self.interval = interval;
-		self.intervalCount = intervalCount;
-		self.isClose = true;
 		super.init();
-		self.isClose = abs(self.error12ETCent) < 100.0*maximumError;
 	}
 
-	convenience init( interval: Rational, intervalCount : UInt, maximumError: Double ) {
-		self.init( interval: RationalInterval(interval), intervalCount : intervalCount, maximumError: maximumError )
+	convenience init( interval: Rational ) {
+		self.init( interval: RationalInterval(interval) )
 	}
 
-	convenience init( numberator: UInt, denominator: UInt, intervalCount : UInt, maximumError: Double ) {
+	convenience init( numberator: UInt, denominator: UInt ) {
 		let		theNum = numberator;
 		let		theDen = denominator;
-		self.init( interval: RationalInterval(Rational(Int(theNum),Int(theDen))), intervalCount : intervalCount, maximumError: maximumError )
+		self.init( interval: RationalInterval(Rational(Int(theNum),Int(theDen))) )
 	}
 
-	init?( aString: String, intervalCount : UInt, maximumError: Double ) {
+	init?( aString: String ) {
 		if let theRatio = Interval.fromString(aString) {
 			self.interval = theRatio;
-			self.intervalCount = intervalCount;
-			self.isClose = true;
 			super.init();
-			self.isClose = abs(self.error12ETCent) < 100.0*maximumError;
 		} else {
 			return nil;
 		}

@@ -11,6 +11,7 @@ import Cocoa
 enum DocumentType {
 	case Limits;
 	case StackedIntervals;
+	case EqualTemperament;
 	case Preset;
 	case AdHoc;
 	static func fromString( aStringValue : String? ) -> DocumentType? {
@@ -19,6 +20,8 @@ enum DocumentType {
 			theResult = .Limits;
 		} else if aStringValue == "stackedIntervals" {
 			theResult = .StackedIntervals;
+		} else if aStringValue == "equalTemperament" {
+			theResult = .EqualTemperament;
 		} else if aStringValue == "preset" {
 			theResult = .Preset;
 		} else if aStringValue == "adHoc" {
@@ -32,6 +35,8 @@ enum DocumentType {
 			return "limits";
 		case StackedIntervals:
 			return "stackedIntervals";
+		case EqualTemperament:
+			return "equalTemperament";
 		case Preset:
 			return "preset";
 		case AdHoc:
@@ -44,6 +49,8 @@ enum DocumentType {
 			return LimitsBasedGenerator(intervalsData:anIntervalsData);
 		case StackedIntervals:
 			return StackedIntervalsDataGenerator(intervalsData:anIntervalsData);
+		case EqualTemperament:
+			return EqualTemperamentGenerator(intervalsData:anIntervalsData);
 		case Preset:
 			return LimitsBasedGenerator(intervalsData:anIntervalsData);
 		case AdHoc:
@@ -64,24 +71,17 @@ class IntervalsData: NSObject {
 		oddLimit = UInt(NSUserDefaults.standardUserDefaults().integerForKey("oddLimit")) | 1;
 		additiveDissonance = UInt(NSUserDefaults.standardUserDefaults().integerForKey("additiveDissonance")) | 1;
 		octavesCount = min(max(UInt(NSUserDefaults.standardUserDefaults().integerForKey("octavesCount")),1),3);
-		maximumError = Double(NSUserDefaults.standardUserDefaults().doubleForKey("maximumError"));
-		filtered = NSUserDefaults.standardUserDefaults().boolForKey("filtered");
 		autoAnchor = NSUserDefaults.standardUserDefaults().boolForKey("autoAnchor");
 		midiAnchor = Int(NSUserDefaults.standardUserDefaults().integerForKey("midiAnchor"));
 	}
 
 	init(withPropertyList aPropertyList: [String:AnyObject] ) {
-		if let theIntervalCount = aPropertyList["intervalCount"] as? UInt,
-			theLimits = aPropertyList["limits"] as? [String:UInt],
-			theEnableInterval = aPropertyList["enableInterval"] as? Bool,
-			themMaximumError = aPropertyList["maximumError"] as? Double,
-			theFiltered = aPropertyList["filtered"] as? Bool,
+		if let theLimits = aPropertyList["limits"] as? [String:UInt],
 			theOctavesCount = aPropertyList["octavesCount"] as? UInt,
 			theAutoAnchor = aPropertyList["autoAnchor"] as? Bool,
 			theMidiAnchor = aPropertyList["midiAnchor"] as? Int,
 			theTone = aPropertyList["tone"] as? [String:AnyObject]
 		{
-			intervalCount = theIntervalCount
 			if let theDocumentType = aPropertyList["documentType"] as? String {
 				documentType = DocumentType.fromString(theDocumentType);
 			if let theDocumentType = documentType {
@@ -97,6 +97,8 @@ class IntervalsData: NSObject {
 						oddLimit = theOddLimit;
 					}
 				case .StackedIntervals:
+					break;
+				case .EqualTemperament:
 					break;
 				case .Preset:
 					break;
@@ -116,9 +118,6 @@ class IntervalsData: NSObject {
 			if let theAdditiveDissonance = theLimits["additiveDissonance"] {
 				additiveDissonance = theAdditiveDissonance;
 			}
-			enableInterval = theEnableInterval;
-			maximumError = themMaximumError;
-			filtered = theFiltered;
 			octavesCount = theOctavesCount;
 			autoAnchor = theAutoAnchor;
 			midiAnchor = theMidiAnchor;
@@ -134,10 +133,6 @@ class IntervalsData: NSObject {
 
 	var propertyListValue : [String:AnyObject] {
 		var		theResult : [String:AnyObject] = [
-			"intervalCount":intervalCount,
-			"enableInterval":enableInterval,
-			"maximumError":maximumError,
-			"filtered":filtered,
 			"autoAnchor":autoAnchor,
 			"octavesCount":octavesCount,
 			"midiAnchor":midiAnchor,
@@ -157,6 +152,12 @@ class IntervalsData: NSObject {
 					"oddLimit":oddLimit,
 					"additiveDissonance":additiveDissonance];
 			case .StackedIntervals:
+				break;
+			case .EqualTemperament:
+				theResult["limits"] = [
+					"degrees":equalTemperamentDegrees,
+					"interval":equalTemperamentInterval.toString
+				];
 				break;
 			case .Preset:
 				break;
@@ -180,17 +181,14 @@ class IntervalsData: NSObject {
 	}
 
 	var		documentType : DocumentType?;
-	var		intervalCount : UInt = 12 {
-		didSet {
-			enableInterval = true;
-		}
-	}
+	dynamic var		equalTemperamentDegrees : UInt = 12;
+	var		equalTemperamentInterval = RationalInterval(2,1);
+
 	var		octavesCount : UInt = 1 {
 		didSet {
 			NSUserDefaults.standardUserDefaults().setInteger(Int(octavesCount), forKey:"octavesCount");
 		}
 	}
-	dynamic var		enableInterval : Bool = true
 	var		numeratorPrimeLimit : UInt {
 		get {
 			return IntervalsData.primeNumber[numeratorPrimeLimitIndex];
@@ -248,25 +246,9 @@ class IntervalsData: NSObject {
 	var		stackedIntervals = Set<StackedIntervalSet>();
 	var		adHocEntries = Set<Interval>();
 
-	var		maximumError : Double = 0.18 {
-		didSet {
-			NSUserDefaults.standardUserDefaults().setDouble( maximumError, forKey:"maximumError");
-		}
-	}
-	var		filtered : Bool = false {
-		didSet {
-			NSUserDefaults.standardUserDefaults().setBool( filtered, forKey:"filtered");
-		}
-	}
 	var		autoAnchor : Bool = false {
 		didSet { NSUserDefaults.standardUserDefaults().setBool( autoAnchor, forKey:"autoAnchor"); }
 	}
-//	var		equalTemperament : Bool = false {
-//		didSet {
-//			NSUserDefaults.standardUserDefaults().setBool( equalTemperament, forKey:"equalTemperament");
-//			tonePlayer.equalTemperament = equalTemperament;
-//		}
-//	}
 	dynamic var		midiAnchor : Int = 60 {
 		didSet { NSUserDefaults.standardUserDefaults().setInteger(midiAnchor, forKey: "midiAnchor"); }
 	}

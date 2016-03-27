@@ -34,7 +34,6 @@ class ScaleView : ResultView {
 		
 		if useIntervals {
 			for i in 0..<numberOfIntervals { drawEqualTemperamentRatio( rationNumber: i ); }
-//			for i in 0..<UInt(3) { drawEqualTemperamentRatio( rationNumber: i ); }
 		}
 		else {
 			drawNoEqualTemperament();

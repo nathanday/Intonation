@@ -24,16 +24,15 @@ class Document : NSDocument, MIDIReceiverObserver {
 		didSet {
 			tonePlayer.harmonics = intervalsData.overtones;
 			tonePlayer.baseFrequency = intervalsData.baseFrequency;
-			tonePlayer.equalTempIntervalCount = intervalsData.intervalCount;
 			setUpIntervalsDataObservers();
 		}
 	}
+	let watchedKeys : Set = ["documentType", "octavesCount", "numeratorPrimeLimitIndex", "denominatorPrimeLimitIndex", "separatePrimeLimit", "oddLimit", "additiveDissonance", "stackedIntervals", "equalTemperamentDegrees", "equalTemperamentInterval", "adHocEntries"];
 
 	override func observeValueForKeyPath( aKeyPath: String?, ofObject anObject: AnyObject?, change aChange: [String : AnyObject]?, context aContext: UnsafeMutablePointer<Void>) {
 		if anObject as? IntervalsData == intervalsData {
-			let theMatchingKeys : Set = ["documentType","intervalCount", "octavesCount", "numeratorPrimeLimitIndex", "denominatorPrimeLimitIndex", "separatePrimeLimit", "oddLimit", "additiveDissonance", "maximumError", "filtered"];
 			if let theKey = aKeyPath {
-				if theMatchingKeys.contains(theKey) {
+				if watchedKeys.contains(theKey) {
 					if aChange?[NSKeyValueChangeNotificationIsPriorKey] != nil {
 						willChangeValueForKey("intervalsData");
 
@@ -46,37 +45,23 @@ class Document : NSDocument, MIDIReceiverObserver {
 		}
 	}
 
+	func setUpIntervalsDataObservers() {
+		for theKey in watchedKeys {
+			intervalsData.addObserver(self, forKeyPath:theKey, options: NSKeyValueObservingOptions.Prior, context:nil)
+		}
+	}
+
+	func removeIntervalsDataObservers() {
+		for theKey in watchedKeys {
+			intervalsData.removeObserver(self, forKeyPath:theKey);
+		}
+	}
+
 	func showWithIntervals( anItervals : [Interval]) {
 		intervalsData.documentType = .AdHoc;
 		addIntervals(anItervals);
 		makeWindowControllers();
 		showWindows();
-	}
-
-	func setUpIntervalsDataObservers() {
-		intervalsData.addObserver(self, forKeyPath:"documentType", options: NSKeyValueObservingOptions.Prior, context:nil)
-		intervalsData.addObserver(self, forKeyPath:"intervalCount", options: NSKeyValueObservingOptions.Prior, context:nil)
-		intervalsData.addObserver(self, forKeyPath:"octavesCount", options: NSKeyValueObservingOptions.Prior, context:nil)
-		intervalsData.addObserver(self, forKeyPath:"numeratorPrimeLimitIndex", options: NSKeyValueObservingOptions.Prior, context:nil)
-		intervalsData.addObserver(self, forKeyPath:"denominatorPrimeLimitIndex", options: NSKeyValueObservingOptions.Prior, context:nil)
-		intervalsData.addObserver(self, forKeyPath:"separatePrimeLimit", options: NSKeyValueObservingOptions.Prior, context:nil)
-		intervalsData.addObserver(self, forKeyPath:"oddLimit", options: NSKeyValueObservingOptions.Prior, context:nil)
-		intervalsData.addObserver(self, forKeyPath:"additiveDissonance", options: NSKeyValueObservingOptions.Prior, context: nil);
-		intervalsData.addObserver(self, forKeyPath:"maximumError", options: NSKeyValueObservingOptions.Prior, context:nil)
-		intervalsData.addObserver(self, forKeyPath:"filtered", options: NSKeyValueObservingOptions.Prior, context:nil)
-	}
-
-	func removeIntervalsDataObservers() {
-		intervalsData.removeObserver(self, forKeyPath:"documentType");
-		intervalsData.removeObserver(self, forKeyPath:"intervalCount");
-		intervalsData.removeObserver(self, forKeyPath:"octavesCount");
-		intervalsData.removeObserver(self, forKeyPath:"numeratorPrimeLimitIndex");
-		intervalsData.removeObserver(self, forKeyPath:"denominatorPrimeLimitIndex");
-		intervalsData.removeObserver(self, forKeyPath:"separatePrimeLimit");
-		intervalsData.removeObserver(self, forKeyPath:"oddLimit");
-		intervalsData.removeObserver(self, forKeyPath:"additiveDissonance");
-		intervalsData.removeObserver(self, forKeyPath:"maximumError");
-		intervalsData.removeObserver(self, forKeyPath:"filtered");
 	}
 
 	deinit {

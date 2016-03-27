@@ -76,7 +76,7 @@ class StackedIntervalsGeneratorViewController: GeneratorViewController {
 		if let theDocument = document {
 			if theDocument.intervalsData.documentType == .StackedIntervals {
 				theDocument.intervalsData.stackedIntervals.insert(aStackedInterval);
-				theDocument.calculateAllIntervals();
+//				theDocument.calculateAllIntervals();
 				reloadStackedIntervalsTable();
 			}
 		}
@@ -86,7 +86,7 @@ class StackedIntervalsGeneratorViewController: GeneratorViewController {
 		if let theDocument = document {
 			if theDocument.intervalsData.documentType == .StackedIntervals {
 				theDocument.intervalsData.stackedIntervals.remove(aStackedInterval);
-				theDocument.calculateAllIntervals();
+//				theDocument.calculateAllIntervals();
 				reloadStackedIntervalsTable();
 			}
 		}
