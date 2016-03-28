@@ -75,8 +75,8 @@ class StackedIntervalsGeneratorViewController: GeneratorViewController {
 	func addStackedIntervalSet( aStackedInterval : StackedIntervalSet ) {
 		if let theDocument = document {
 			if theDocument.intervalsData.documentType == .StackedIntervals {
-				theDocument.intervalsData.stackedIntervals.insert(aStackedInterval);
-//				theDocument.calculateAllIntervals();
+				theDocument.intervalsData.insertStackedInterval(aStackedInterval);
+				theDocument.calculateAllIntervals();
 				reloadStackedIntervalsTable();
 			}
 		}
@@ -85,8 +85,8 @@ class StackedIntervalsGeneratorViewController: GeneratorViewController {
 	func removeStackedIntervalSet( aStackedInterval : StackedIntervalSet ) {
 		if let theDocument = document {
 			if theDocument.intervalsData.documentType == .StackedIntervals {
-				theDocument.intervalsData.stackedIntervals.remove(aStackedInterval);
-//				theDocument.calculateAllIntervals();
+				theDocument.intervalsData.removeStackedInterval(aStackedInterval);
+				theDocument.calculateAllIntervals();
 				reloadStackedIntervalsTable();
 			}
 		}
@@ -121,37 +121,27 @@ extension StackedIntervalsGeneratorViewController : NSTableViewDataSource {
 		return theResult;
 	}
 
-	func tableView(tableView: NSTableView, setObjectValue object: AnyObject?, forTableColumn tableColumn: NSTableColumn?, row: Int) {
+	func tableView(aTable: NSTableView, setObjectValue anObject: AnyObject?, forTableColumn aTableColumn: NSTableColumn?, row aRow: Int) {
+		if let theSortedStackIntervalSet = sortedStackIntervalSets?[aRow] {
+			if aTableColumn?.identifier == "steps" {
+				if let theIntegerValue = anObject as? UInt {
+					theSortedStackIntervalSet.steps = theIntegerValue;
+				}
+			}
+			else if aTableColumn?.identifier == "octaves" {
+				if let theIntegerValue = anObject as? UInt {
+					theSortedStackIntervalSet.octaves =  theIntegerValue;
+				}
+			}
+			document?.calculateAllIntervals();
+			reloadStackedIntervalsTable();
+		}
 	}
+}
 
-//	func tableView(tableView: NSTableView, sortDescriptorsDidChange oldDescriptors: [NSSortDescriptor]) {
-//	}
-//
-//	func tableView(tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
-//
-//	}
-//
-//	func tableView(tableView: NSTableView, draggingSession session: NSDraggingSession, willBeginAtPoint screenPoint: NSPoint, forRowIndexes rowIndexes: NSIndexSet) {
-//
-//	}
-//
-//	func tableView(tableView: NSTableView, draggingSession session: NSDraggingSession, endedAtPoint screenPoint: NSPoint, operation: NSDragOperation) {
-//
-//	}
-//
-//	func tableView(tableView: NSTableView, updateDraggingItemsForDrag draggingInfo: NSDraggingInfo) {
-//	}
-//
-//	func tableView(tableView: NSTableView, writeRowsWithIndexes rowIndexes: NSIndexSet, toPasteboard pboard: NSPasteboard) -> Bool {
-//	}
-//
-//	func tableView(tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int, proposedDropOperation dropOperation: NSTableViewDropOperation) -> NSDragOperation {
-//	}
-//
-//	func tableView(tableView: NSTableView, acceptDrop info: NSDraggingInfo, row: Int, dropOperation: NSTableViewDropOperation) -> Bool {
-//	}
-//
-//	func tableView(tableView: NSTableView, namesOfPromisedFilesDroppedAtDestination dropDestination: NSURL, forDraggedRowsWithIndexes indexSet: NSIndexSet) -> [String] {
-//	}
-
+extension StackedIntervalsGeneratorViewController : NSTableViewDelegate {
+	func tableView( aTableView: NSTableView, shouldEditTableColumn aTableColumn: NSTableColumn?, row aRow: Int) -> Bool {
+		let		theColumns : Set<String> = ["steps","octaves"];
+		return aTableColumn != nil && theColumns.contains(aTableColumn!.identifier);
+	}
 }

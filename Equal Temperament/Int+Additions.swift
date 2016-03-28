@@ -49,3 +49,12 @@ extension Int {
 		}
 	}
 }
+
+func log2( aValue : Int ) -> Int {
+	if aValue == 0 {
+		return 0;
+	} else {
+		return 1 + log2(aValue>>1);
+	}
+}
+

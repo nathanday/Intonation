@@ -173,6 +173,17 @@ func * (a: Interval, b: Int) -> Interval {
 	}
 }
 
+func * (a: Interval, b: UInt) -> Interval {
+	switch a {
+	case let x as RationalInterval:
+		return RationalInterval(x.ratio.numerator*Int(b),x.ratio.denominator);
+	case let x as IrrationalInterval:
+		return IrrationalInterval(x.ratio*Double(b));
+	default:
+		preconditionFailure("Unexpected type \(a)");
+	}
+}
+
 func equivelentRatios( a: Double, _ b: Double ) -> Bool {
 	return abs(a-b) < 1.0/4096.0;
 }

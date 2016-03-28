@@ -186,15 +186,13 @@ class MainWindowController : NSWindowController {
 	}
 
 	@IBAction func copy(aSender: AnyObject ) {
-		var		theResult = String();
-		for theEntry in arrayController!.selectedObjects as! [EqualTemperamentEntry] {
-			if theResult.endIndex > theResult.startIndex {
-				theResult.appendContentsOf("\n");
-			}
-			theResult.appendContentsOf("\(theEntry.intervalToDouble)\t\(theEntry.closestIntervalNumber)\t\(theEntry.factorsString)\t\(theEntry.everyIntervalName.first ?? "")");
-		}
 		NSPasteboard.generalPasteboard().clearContents();
-		NSPasteboard.generalPasteboard().setString(theResult, forType: NSPasteboardTypeString);
+		NSPasteboard.generalPasteboard().writeObjects( arrayController!.selectedObjects as! [EqualTemperamentEntry] );
+	}
+
+	@IBAction func copyCentsAction(aSender: AnyObject ) {
+		NSPasteboard.generalPasteboard().clearContents();
+		NSPasteboard.generalPasteboard().writeObjects( (arrayController!.selectedObjects as! [EqualTemperamentEntry]).map { return "\($0.toCents)"; } );
 	}
 
 	@IBAction func baseFrequencyDeltaChanged( aSender: NSSlider ) {
@@ -312,8 +310,7 @@ extension MainWindowController : NSTableViewDelegate {
 
 extension MainWindowController : NSTableViewDataSource {
 	func tableView(aTableView: NSTableView, pasteboardWriterForRow aRow: Int) -> NSPasteboardWriting? {
-		let		theEntry = (arrayController!.arrangedObjects as! [EqualTemperamentEntry])[aRow];
-		return NSPasteboardItem(pasteboardPropertyList: theEntry.name, ofType: NSPasteboardTypeString);
+		return (arrayController!.arrangedObjects as! [EqualTemperamentEntry])[aRow];
 	}
 }
 

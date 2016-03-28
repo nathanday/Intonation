@@ -244,6 +244,15 @@ class IntervalsData: NSObject {
 		}
 	}
 	var		stackedIntervals = Set<StackedIntervalSet>();
+
+	func insertStackedInterval( a : StackedIntervalSet ) {
+		stackedIntervals.insert(a);
+	}
+
+	func removeStackedInterval( a : StackedIntervalSet ) {
+		stackedIntervals.remove(a);
+	}
+
 	var		adHocEntries = Set<Interval>();
 
 	var		autoAnchor : Bool = false {

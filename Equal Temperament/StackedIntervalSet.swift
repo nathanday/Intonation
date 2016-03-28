@@ -9,9 +9,13 @@
 import Foundation
 
 class StackedIntervalSet : IntervalSet, Hashable {
-	var		interval : Interval;
-	var		steps : UInt;
-	var		octaves : UInt; 
+	let		interval : Interval;
+	var		steps : UInt {
+		didSet { calculateIntervals(); }
+	}
+	var		octaves : UInt {
+		didSet { calculateIntervals(); }
+	}
 	override var	everyInterval : [Interval] { return _everyInterval; }
 	var		_everyInterval : [Interval];
 
@@ -20,31 +24,43 @@ class StackedIntervalSet : IntervalSet, Hashable {
 		steps = aSteps;
 		octaves = anOctaves;
 		_everyInterval = [Interval]();
-		switch anInterval {
+		super.init( name: anInterval.ratioString );
+		calculateIntervals();
+	}
+
+	private func calculateIntervals() {
+		let		theOctaveValue = 1<<(octaves-1);
+		_everyInterval.removeAll();
+		switch interval {
 		case let x as RationalInterval:
-			var		theNumerator = 1;
-			var		theDenominator = 1;
-			for _ in UInt(0)...aSteps {
-				while theDenominator*2 < theNumerator {
-					theDenominator *= 2;
+			var		theValue : Rational = 1;
+			for _ in UInt(0)...steps {
+				var		theNormalizedValue = theValue;
+				while theNormalizedValue/2 > 1 {
+					theNormalizedValue /= 2;
 				}
-				_everyInterval.append( RationalInterval( theNumerator, theDenominator ) );
-				theNumerator *= x.ratio.numerator;
-				theDenominator *= x.ratio.denominator;
+				_everyInterval.append( RationalInterval( theNormalizedValue ) );
+				theValue *= x.ratio;
+				if theValue > theOctaveValue {
+					break;
+				}
 			}
 		case let x as IrrationalInterval:
 			var		theValue = 1.0;
-			for _ in UInt(1)...aSteps {
-				while theValue*0.5 > 1.0 {
-					theValue *= 0.5;
+			for _ in UInt(0)...steps {
+				var		theNormalizedValue = theValue;
+				while theNormalizedValue*0.5 > 1.0 {
+					theNormalizedValue *= 0.5;
 				}
-				_everyInterval.append( IrrationalInterval( theValue ) );
+				_everyInterval.append( IrrationalInterval( theNormalizedValue ) );
 				theValue *= x.ratio;
+				if theValue > Double(theOctaveValue) {
+					break;
+				}
 			}
 		default:
 			break;
 		}
-		super.init( name: anInterval.ratioString );
 	}
 
 	var hashValue: Int {
@@ -52,6 +68,6 @@ class StackedIntervalSet : IntervalSet, Hashable {
 	}
 }
 
-func ==(lhs: StackedIntervalSet, rhs: StackedIntervalSet) -> Bool {
-	return lhs.everyInterval == rhs.everyInterval;
+func == (lhs: StackedIntervalSet, rhs: StackedIntervalSet) -> Bool {
+	return lhs.interval == rhs.interval;
 }

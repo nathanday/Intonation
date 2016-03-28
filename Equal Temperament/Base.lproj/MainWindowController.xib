@@ -514,7 +514,7 @@
                                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                     <tableColumns>
-                                                        <tableColumn editable="NO" width="55" minWidth="55" maxWidth="55" id="DQA-oo-k6P">
+                                                        <tableColumn editable="NO" width="65" minWidth="60" maxWidth="65" id="DQA-oo-k6P">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="Interval">
                                                                 <font key="font" metaFont="smallSystem"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -531,7 +531,7 @@
                                                                 <binding destination="cy8-kx-1Au" name="value" keyPath="arrangedObjects.name" id="yTy-1k-NiI"/>
                                                             </connections>
                                                         </tableColumn>
-                                                        <tableColumn identifier="interval" editable="NO" width="25" minWidth="25" maxWidth="25" id="geM-Vj-wFf">
+                                                        <tableColumn identifier="interval" editable="NO" width="30" minWidth="30" maxWidth="30" id="geM-Vj-wFf">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="#">
                                                                 <font key="font" metaFont="smallSystem"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -547,7 +547,7 @@
                                                                 <binding destination="cy8-kx-1Au" name="value" keyPath="arrangedObjects.closestIntervalNumberDescription" id="qTp-R2-oFC"/>
                                                             </connections>
                                                         </tableColumn>
-                                                        <tableColumn identifier="note" editable="NO" width="47" minWidth="47" maxWidth="47" id="Lpv-Ap-ujv">
+                                                        <tableColumn identifier="note" editable="NO" width="55" minWidth="55" maxWidth="55" id="Lpv-Ap-ujv">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="Note">
                                                                 <font key="font" metaFont="smallSystem"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -563,7 +563,7 @@
                                                                 <binding destination="cy8-kx-1Au" name="value" keyPath="arrangedObjects.closestNoteDescription" id="BLx-uD-SVO"/>
                                                             </connections>
                                                         </tableColumn>
-                                                        <tableColumn editable="NO" width="47" minWidth="47" maxWidth="47" id="L3n-fp-Agk">
+                                                        <tableColumn editable="NO" width="55" minWidth="55" maxWidth="55" id="L3n-fp-Agk">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="Odd">
                                                                 <font key="font" metaFont="smallSystem"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -580,7 +580,7 @@
                                                                 <binding destination="cy8-kx-1Au" name="value" keyPath="arrangedObjects.oddLimitString" id="e9W-Yb-d45"/>
                                                             </connections>
                                                         </tableColumn>
-                                                        <tableColumn editable="NO" width="78" minWidth="78" maxWidth="78" id="TcB-IV-RuD">
+                                                        <tableColumn editable="NO" width="75" minWidth="75" maxWidth="75" id="TcB-IV-RuD">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="Factors">
                                                                 <font key="font" metaFont="smallSystem"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -597,7 +597,7 @@
                                                                 <binding destination="cy8-kx-1Au" name="value" keyPath="arrangedObjects.factorsString" id="1Vc-Jw-4Uq"/>
                                                             </connections>
                                                         </tableColumn>
-                                                        <tableColumn identifier="" editable="NO" width="47" minWidth="47" maxWidth="47" id="juF-hn-fnk">
+                                                        <tableColumn identifier="" editable="NO" width="50" minWidth="50" maxWidth="50" id="juF-hn-fnk">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="Sum">
                                                                 <font key="font" metaFont="smallSystem"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -632,10 +632,10 @@
                                                             </textFieldCell>
                                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                             <connections>
-                                                                <binding destination="cy8-kx-1Au" name="value" keyPath="arrangedObjects.justIntonationCents" id="aBL-IN-aNH"/>
+                                                                <binding destination="cy8-kx-1Au" name="value" keyPath="arrangedObjects.toCents" id="aBL-IN-aNH"/>
                                                             </connections>
                                                         </tableColumn>
-                                                        <tableColumn identifier="description" editable="NO" width="195" minWidth="25" maxWidth="220" id="B12-Jo-1gJ">
+                                                        <tableColumn identifier="description" editable="NO" width="164" minWidth="25" maxWidth="32000" id="B12-Jo-1gJ">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="Name">
                                                                 <font key="font" metaFont="smallSystem"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -669,7 +669,7 @@
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="250" id="CD8-Ap-mrD"/>
                                         </constraints>
                                         <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="Kjc-It-isu">
-                                            <rect key="frame" x="1" y="334" width="554" height="16"/>
+                                            <rect key="frame" x="1" y="423" width="554" height="16"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                         <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="ZLY-wu-lJG">
@@ -729,7 +729,7 @@
                                     <constraint firstAttribute="trailing" secondItem="O8p-Ed-WPz" secondAttribute="trailing" constant="12" id="hNo-Sw-kqL"/>
                                     <constraint firstItem="MIf-rA-OIS" firstAttribute="top" secondItem="lJF-yt-08k" secondAttribute="top" id="hg1-1p-9C3"/>
                                     <constraint firstItem="O8p-Ed-WPz" firstAttribute="leading" secondItem="lJF-yt-08k" secondAttribute="leading" constant="20" id="htm-c0-SWZ"/>
-                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="688" id="i3s-rt-4cX"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="800" id="i3s-rt-4cX"/>
                                     <constraint firstItem="hpL-6E-c8c" firstAttribute="top" secondItem="SzR-4w-Kgt" secondAttribute="bottom" id="lml-fQ-Uat"/>
                                     <constraint firstAttribute="trailing" secondItem="fR2-Oh-Nea" secondAttribute="trailing" constant="12" id="nJr-Yv-msg"/>
                                     <constraint firstAttribute="trailing" secondItem="hpL-6E-c8c" secondAttribute="trailing" constant="15" id="qE1-gY-dGU"/>
@@ -850,7 +850,7 @@
                 <string>closestEqualTemperamentIntervalNumber</string>
                 <string>numberOfIntervals</string>
                 <string>equalTemperamentRatio</string>
-                <string>justIntonationCents</string>
+                <string>toCents</string>
                 <string>error</string>
                 <string>error12ETCent</string>
                 <string>oddLimit</string>

@@ -30,7 +30,7 @@ class LimitsBasedGenerator : IntervalsDataGenerator {
 						}
 					}
 				}
-				_everyEqualTemperamentEntry = theResult.sort({ return $0.justIntonationCents < $1.justIntonationCents; } );
+				_everyEqualTemperamentEntry = theResult.sort { return $0.toCents < $1.toCents; };
 			}
 			return _everyEqualTemperamentEntry!;
 		}

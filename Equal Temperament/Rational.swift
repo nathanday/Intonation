@@ -259,6 +259,26 @@ func / (a: Rational, b: Int) -> Rational {
 		: Rational(-a.numerator,-a.denominator*b);
 }
 
+func += (inout a: Rational, b: Rational) { a = Rational(a.numerator*b.denominator+b.numerator*a.denominator,a.denominator*b.denominator); }
+func -= (inout a: Rational, b: Rational) { a = Rational(a.numerator*b.denominator-b.numerator*a.denominator,a.denominator*b.denominator); }
+func *= (inout a: Rational, b: Rational) { a = Rational(a.numerator*b.numerator,a.denominator*b.denominator); }
+
+func /= (inout a: Rational, b: Rational) {
+	a = b.numerator >= 0
+		? Rational(a.numerator*b.denominator,a.denominator*b.numerator)
+		: Rational(-a.numerator*b.denominator,-a.denominator*b.numerator);
+}
+
+func += (inout a: Rational, b: Int) { a = Rational(a.numerator+b*a.denominator,a.denominator); }
+func -= (inout a: Rational, b: Int) { a = Rational(a.numerator-b*a.denominator,a.denominator); }
+func *= (inout a: Rational, b: Int) { a = Rational(a.numerator*b,a.denominator); }
+
+func /= (inout a: Rational, b: Int) {
+	a = b >= 0
+		? Rational(a.numerator,a.denominator*b)
+		: Rational(-a.numerator,-a.denominator*b);
+}
+
 func sum( anArray: [Rational] ) -> Rational {
 	var			theResultNum = 0,
 				theResultDen = 1;
@@ -276,11 +296,17 @@ func <= (a: Rational, b: Rational) -> Bool { return a.numerator*b.denominator <=
 func > (a: Rational, b: Rational) -> Bool { return a.numerator*b.denominator > b.numerator*a.denominator; }
 func >= (a: Rational, b: Rational) -> Bool { return a.numerator*b.denominator >= b.numerator*a.denominator; }
 
-
 func == (a: Rational, b: Int) -> Bool { return a.numerator == b && a.denominator == 1; }
 func != (a: Rational, b: Int) -> Bool { return a.numerator != b || a.denominator == 1; }
 func < (a: Rational, b: Int) -> Bool { 	return a.numerator < b*a.denominator; }
 func <= (a: Rational, b: Int) -> Bool { return a.numerator <= b*a.denominator; }
 func > (a: Rational, b: Int) -> Bool { return a.numerator > b*a.denominator; }
 func >= (a: Rational, b: Int) -> Bool { return a.numerator >= b*a.denominator; }
+
+func == (a: Rational, b: UInt) -> Bool { return a.numerator >= 0 && UInt(a.numerator) == b && a.denominator == 1; }
+func != (a: Rational, b: UInt) -> Bool { return a.numerator < 0 || UInt(a.numerator) != b || a.denominator == 1; }
+func < (a: Rational, b: UInt) -> Bool { return a < 0 || a < Int(b); }
+func <= (a: Rational, b: UInt) -> Bool { return a < 0 || a <= Int(b); }
+func > (a: Rational, b: UInt) -> Bool { return a >= 0 && a > Int(b); }
+func >= (a: Rational, b: UInt) -> Bool { return a >= 0 && a >= Int(b); }
 

@@ -11,25 +11,29 @@ import Cocoa
 class StackedIntervalsDataGenerator: IntervalsDataGenerator {
 	var	_everyEqualTemperamentEntry : [EqualTemperamentEntry]?;
 	var	stackedIntervals : Set<StackedIntervalSet>;
-	var degree : UInt;
+	var octave : UInt = 1;
 	override var	everyEntry : [EqualTemperamentEntry] {
 		get {
 			if _everyEqualTemperamentEntry == nil {
 				var		theResult = Set<EqualTemperamentEntry>();
-				for theStackInterval in stackedIntervals {
-					for theInterval in theStackInterval.everyInterval {
-						let		theEntry = EqualTemperamentEntry(interval: theInterval );
-						theResult.insert(theEntry);
+				for theOctave in 0..<octave {
+					let		theOctaveValue = 1<<theOctave;
+
+					for theStackInterval in stackedIntervals {
+						for theInterval in theStackInterval.everyInterval {
+							let		theEntry = EqualTemperamentEntry(interval: theInterval*theOctaveValue );
+							theResult.insert(theEntry);
+						}
 					}
 				}
-				_everyEqualTemperamentEntry = theResult.sort({ return $0.justIntonationCents < $1.justIntonationCents; } );
+				_everyEqualTemperamentEntry = theResult.sort { return $0.toCents < $1.toCents; };
 			}
 			return _everyEqualTemperamentEntry!;
 		}
 	}
 	init( intervalsData anIntervalsData : IntervalsData ) {
 		stackedIntervals = anIntervalsData.stackedIntervals;
-		degree = 12;
+		octave = anIntervalsData.octavesCount;
 	}
 	override var description: String {
 		return "entries:\(everyEntry.debugDescription)";

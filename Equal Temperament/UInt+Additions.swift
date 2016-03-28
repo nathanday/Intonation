@@ -121,6 +121,14 @@ extension UInt {
 	}
 }
 
+func log2( aValue : UInt ) -> UInt {
+	if aValue == 0 {
+		return 0;
+	} else {
+		return 1 + log2(aValue>>1);
+	}
+}
+
 func greatestCommonDivisor(u: [Int] ) -> Int {
 	var		theResult = 1;
 	for theNumber in u {

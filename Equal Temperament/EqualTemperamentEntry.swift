@@ -6,7 +6,7 @@
     Copyright © 2014 Nathan Day. All rights reserved.
  */
 
-import Foundation
+import Cocoa
 
 func ratioForCentsEquivelent( c : Double, n : UInt ) -> Double { return pow(2.0,c/(100.0*Double(n))); }
 
@@ -46,7 +46,7 @@ class EqualTemperamentEntry : NSObject {
 	var closestEqualTemperamentIntervalNumber : UInt { return UInt(12.0*Double(log2(interval.toDouble))+0.5); }
 	var closestIntervalNumber : UInt { return UInt(Double(12)*Double(log2(interval.toDouble))+0.5); }
 	var equalTemperamentRatio : Double { return pow(2.0,Double(self.closestEqualTemperamentIntervalNumber)/Double(12)); }
-	var justIntonationCents : Double { return interval.toDouble.toCents; }
+	var toCents : Double { return interval.toDouble.toCents; }
 	var justIntonationPercent : Double { return Double(12)*100.0 * log2(self.interval.toDouble); }
 	var error : Double { return equalTemperamentRatio-interval.toDouble; }
 	var error12ETCent : Double {
@@ -207,14 +207,29 @@ class EqualTemperamentEntry : NSObject {
 	override func isEqual(object: AnyObject?) -> Bool {
 		return self.interval==(object as? EqualTemperamentEntry)?.interval;
 	}
-}
-
-extension EqualTemperamentEntry {
 	var everyIntervalName : [String] {
 		return self.interval.names ?? [];
 	}
 	var intervalName : String {
 		return everyIntervalName.first ?? "";
+	}
+}
+
+extension EqualTemperamentEntry : NSPasteboardWriting {
+
+	func writableTypesForPasteboard(pasteboard: NSPasteboard) -> [String] {
+		return [NSPasteboardTypeString,NSPasteboardTypeTabularText];
+	}
+
+	func pasteboardPropertyListForType(aType: String) -> AnyObject? {
+		switch aType {
+		case NSPasteboardTypeString:
+			return "\(interval.ratioString),\(interval.toDouble),\(toCents),\(intervalName)";
+		case NSPasteboardTypeTabularText:
+			return "\(interval.ratioString)\t\(interval.toDouble)\t\(toCents)\t\(intervalName)";
+		default:
+			return nil
+		}
 	}
 }
 
