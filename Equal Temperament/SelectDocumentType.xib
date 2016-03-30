@@ -17,20 +17,20 @@
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="F0z-JX-Cv5" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="196" y="240" width="472" height="443"/>
+            <rect key="contentRect" x="196" y="240" width="472" height="445"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
             <view key="contentView" id="se5-gp-TjO">
-                <rect key="frame" x="0.0" y="0.0" width="472" height="443"/>
+                <rect key="frame" x="0.0" y="0.0" width="472" height="445"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <scrollView autohidesScrollers="YES" horizontalLineScroll="69" horizontalPageScroll="10" verticalLineScroll="69" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" verticalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="pOd-Mm-wr7">
-                        <rect key="frame" x="20" y="53" width="432" height="345"/>
+                        <rect key="frame" x="20" y="53" width="432" height="347"/>
                         <clipView key="contentView" drawsBackground="NO" id="CuF-Ki-0xW">
-                            <rect key="frame" x="1" y="1" width="430" height="343"/>
+                            <rect key="frame" x="1" y="1" width="430" height="345"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="67" rowSizeStyle="automatic" viewBased="YES" floatsGroupRows="NO" id="8ye-Gt-awg">
-                                    <rect key="frame" x="0.0" y="0.0" width="430" height="0.0"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="430" height="345"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <size key="intercellSpacing" width="3" height="2"/>
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -113,10 +113,10 @@ Description&gt;</string>
                             <nil key="backgroundColor"/>
                         </clipView>
                         <constraints>
-                            <constraint firstAttribute="height" constant="345" placeholder="YES" id="CLB-W7-WxA"/>
+                            <constraint firstAttribute="height" constant="347" placeholder="YES" id="CLB-W7-WxA"/>
                             <constraint firstAttribute="width" constant="432" id="ZmE-gm-Qo6"/>
-                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="69" id="has-Xh-XRu"/>
-                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="345" id="oi0-5w-JpV"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="70" id="has-Xh-XRu"/>
+                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="347" id="oi0-5w-JpV"/>
                         </constraints>
                         <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="EhP-ym-dyM">
                             <rect key="frame" x="-100" y="-100" width="430" height="16"/>
@@ -128,7 +128,7 @@ Description&gt;</string>
                         </scroller>
                     </scrollView>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Yoi-x3-Dji">
-                        <rect key="frame" x="18" y="406" width="163" height="17"/>
+                        <rect key="frame" x="18" y="408" width="163" height="17"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Choose a Document Type" id="pfe-tv-muL">
                             <font key="font" metaFont="systemMedium" size="13"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>

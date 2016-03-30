@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9531" systemVersion="15C48a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9531"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10116"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="SpectrumViewController" customModule="Equal_Temperament" customModuleProvider="target">
+        <customObject id="-2" userLabel="File's Owner" customClass="SpectrumViewController" customModule="Intonation" customModuleProvider="target">
             <connections>
                 <outlet property="spectrumView" destination="Jhy-7k-Bte" id="4f5-HQ-lAC"/>
                 <outlet property="view" destination="fvR-Ai-OGn" id="Y0q-0t-Kox"/>
@@ -12,7 +13,7 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <customView id="fvR-Ai-OGn" customClass="BackGround" customModule="Equal_Temperament" customModuleProvider="target">
+        <customView id="fvR-Ai-OGn" customClass="BackGround" customModule="Intonation" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="393" height="635"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
@@ -22,7 +23,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="353" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jhy-7k-Bte" customClass="SpectrumView" customModule="Equal_Temperament" customModuleProvider="target">
+                            <view misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jhy-7k-Bte" customClass="SpectrumView" customModule="Intonation" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="131" width="353" height="469"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="353" placeholder="YES" id="4gs-Lf-Plv"/>

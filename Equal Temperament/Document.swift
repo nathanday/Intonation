@@ -17,14 +17,16 @@ class Document : NSDocument, MIDIReceiverObserver {
 	var		midiToHarmonicRatio = MIDIToHarmonicRatio();
 
 
-	var		intervalsData : IntervalsData = IntervalsData() {
+	var		intervalsData : IntervalsData? {
 		willSet {
 			removeIntervalsDataObservers();
 		}
 		didSet {
-			tonePlayer.harmonics = intervalsData.overtones;
-			tonePlayer.baseFrequency = intervalsData.baseFrequency;
-			setUpIntervalsDataObservers();
+			if let theIntervalData = intervalsData {
+				tonePlayer.harmonics = theIntervalData.overtones;
+				tonePlayer.baseFrequency = theIntervalData.baseFrequency;
+				setUpIntervalsDataObservers();
+			}
 		}
 	}
 	let watchedKeys : Set = ["documentType", "octavesCount", "numeratorPrimeLimitIndex", "denominatorPrimeLimitIndex", "separatePrimeLimit", "oddLimit", "additiveDissonance", "stackedIntervals", "equalTemperamentDegrees", "equalTemperamentInterval", "adHocEntries"];
@@ -47,19 +49,20 @@ class Document : NSDocument, MIDIReceiverObserver {
 
 	func setUpIntervalsDataObservers() {
 		for theKey in watchedKeys {
-			intervalsData.addObserver(self, forKeyPath:theKey, options: NSKeyValueObservingOptions.Prior, context:nil)
+			intervalsData?.addObserver(self, forKeyPath:theKey, options: NSKeyValueObservingOptions.Prior, context:nil)
 		}
 	}
 
 	func removeIntervalsDataObservers() {
 		for theKey in watchedKeys {
-			intervalsData.removeObserver(self, forKeyPath:theKey);
+			intervalsData?.removeObserver(self, forKeyPath:theKey);
 		}
 	}
 
 	func showWithIntervals( anItervals : [Interval]) {
-		intervalsData.documentType = .AdHoc;
-		addIntervals(anItervals);
+		let		theIntervalsData = AdHocIntervalsData();
+		intervalsData = theIntervalsData;
+		theIntervalsData.addIntervals(anItervals);
 		makeWindowControllers();
 		showWindows();
 	}
@@ -69,12 +72,12 @@ class Document : NSDocument, MIDIReceiverObserver {
 	}
 
 	dynamic var		baseFrequency : Double {
-		get { return intervalsData.baseFrequency; }
+		get { return intervalsData?.baseFrequency ?? 220.0; }
 		set( aValue ) {
 			let		theValue = max(min(aValue,IntervalsData.maximumBaseFrequency), IntervalsData.minimumBaseFrequency);
-			intervalsData.baseFrequency = theValue;
-			tonePlayer.baseFrequency = intervalsData.baseFrequency;
-			midiToHarmonicRatio.baseFrequency = intervalsData.baseFrequency;
+			intervalsData?.baseFrequency = theValue;
+			tonePlayer.baseFrequency = intervalsData?.baseFrequency ?? 220.0;
+			midiToHarmonicRatio.baseFrequency = intervalsData?.baseFrequency ?? 220.0;
 		}
 	}
 	var		allOvertonesAmount : Double {
@@ -88,24 +91,28 @@ class Document : NSDocument, MIDIReceiverObserver {
 
 	var		overtones : HarmonicsDescription {
 		set( aValue ) {
-			intervalsData.overtones = aValue;
-			tonePlayer.harmonics = intervalsData.overtones;
+			if let theIntervalsData = intervalsData {
+				theIntervalsData.overtones = aValue;
+				tonePlayer.harmonics = theIntervalsData.overtones;
+			}
 		}
-		get { return intervalsData.overtones; }
+		get { return intervalsData?.overtones ?? HarmonicsDescription(amount: 0.5, evenAmount: 1.0); }
 	}
 	var		arpeggioBeatPerMinute : Double {
 		set( aValue ) {
-			intervalsData.arpeggioInterval = 60.0/aValue
-			tonePlayer.arpeggioInterval = intervalsData.arpeggioInterval;
+			if let theIntervalsData = intervalsData {
+				theIntervalsData.arpeggioInterval = 60.0/aValue
+				tonePlayer.arpeggioInterval = theIntervalsData.arpeggioInterval;
+			}
 		}
-		get { return 60.0/(intervalsData.arpeggioInterval ?? 1); }
+		get { return 60.0/(intervalsData?.arpeggioInterval ?? 1); }
 	}
 
 	var		currentlySelectedMethod : Int? = nil;
 
 	@IBAction func baseFrequencyChangedAction( aSender: NSTextField? ) {
 		if let theTextField = aSender {
-			intervalsData.baseFrequency = theTextField.doubleValue;
+			intervalsData?.baseFrequency = theTextField.doubleValue;
 		}
 	}
 
@@ -143,7 +150,7 @@ class Document : NSDocument, MIDIReceiverObserver {
 		var anError: NSError = NSError(domain: "Migrator", code: 0, userInfo: nil)
 		let		theResult: NSData?
 		do {
-			theResult = try NSPropertyListSerialization.dataWithPropertyList(intervalsData.propertyListValue, format:.XMLFormat_v1_0, options:0)
+			theResult = try NSPropertyListSerialization.dataWithPropertyList(intervalsData!.propertyListValue, format:.XMLFormat_v1_0, options:0)
 		} catch let error as NSError {
 			anError = error
 			theResult = nil
@@ -158,7 +165,7 @@ class Document : NSDocument, MIDIReceiverObserver {
 		let		theFormat : UnsafeMutablePointer<NSPropertyListFormat> = nil;
 		do {
 			if let thePropertyList = try NSPropertyListSerialization.propertyListWithData(aData, options:.Immutable, format:theFormat) as? [String:AnyObject] {
-				intervalsData = IntervalsData(withPropertyList:thePropertyList);
+				intervalsData = IntervalsData.from(propertyList:thePropertyList);
 			}
 		}
 		catch {
@@ -226,38 +233,14 @@ class Document : NSDocument, MIDIReceiverObserver {
 		return selectedEqualTemperamentEntry.map { return $0.interval; };
 	}
 
-	func addInterval( anInterval : Interval ) {
-		addIntervals( [anInterval] );
-	}
-	func addIntervals( anIntervals : [Interval] ) {
-		if intervalsData.documentType == .AdHoc {
-			for theInterval in anIntervals {
-				intervalsData.adHocEntries.insert(theInterval);
-			}
-			calculateAllIntervals();
-		}
-	}
-
-	func removeInterval( anInterval : Interval ) {
-		removeIntervals( [anInterval] );
-	}
-	func removeIntervals( anIntervals : [Interval] ) {
-		if intervalsData.documentType == .AdHoc {
-			for theInterval in anIntervals {
-				intervalsData.adHocEntries.remove(theInterval);
-			}
-			calculateAllIntervals();
-		}
-	}
-
 	func calculateAllIntervals() {
-		if let theDocumentType = intervalsData.documentType {
+		if let theIntervalData = intervalsData {
 			let		theSelectedEntries = selectedEqualTemperamentEntry;
-			let		theEntries = theDocumentType.intervalsDataGenerator( intervalsData: intervalsData );
-			smallestErrorEntries = theEntries.smallestError;
-			biggestErrorEntries = theEntries.biggestError;
-			averageError = theEntries.averageError;
-			everyInterval = theEntries.everyEntry;
+			let		theGenerator = theIntervalData.intervalsDataGenerator( );
+			smallestErrorEntries = theGenerator.smallestError;
+			biggestErrorEntries = theGenerator.biggestError;
+			averageError = theGenerator.averageError;
+			everyInterval = theGenerator.everyEntry;
 			selectedEqualTemperamentEntry = theSelectedEntries;
 		}
 	}

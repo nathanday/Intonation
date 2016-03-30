@@ -10,17 +10,36 @@ import Cocoa
 
 class StackedIntervalsGeneratorViewController: GeneratorViewController {
 
+	override func viewDidLoad() {
+		stackedIntervalSetSteps = UInt(NSUserDefaults.standardUserDefaults().integerForKey("stackedIntervalSetSteps"));
+		if stackedIntervalSetSteps == 0 {
+			stackedIntervalSetSteps = 4;
+		}
+		stackedIntervalSetOctaves = UInt(NSUserDefaults.standardUserDefaults().integerForKey("stackedIntervalSetOctaves"));
+		if stackedIntervalSetOctaves == 0 {
+			stackedIntervalSetOctaves = 12;
+		}
+	}
+
 	@IBOutlet weak var stackedIntervalSetBaseTextField : NSTextField?;
 	@IBOutlet weak var stackedIntervalsTableView: NSTableView!
-	dynamic var	stackedIntervalSetSteps : UInt = 5;
-	dynamic var	stackedIntervalSetOctaves : UInt = 12;
+	dynamic var	stackedIntervalSetSteps : UInt = 4 {
+		didSet {
+			NSUserDefaults.standardUserDefaults().setInteger(Int(stackedIntervalSetSteps), forKey:"stackedIntervalSetSteps");
+		}
+	}
+	dynamic var	stackedIntervalSetOctaves : UInt = 12 {
+		didSet {
+			NSUserDefaults.standardUserDefaults().setInteger(Int(stackedIntervalSetSteps), forKey:"stackedIntervalSetOctaves");
+		}
+	}
 
 	override var nibName: String? { return "StackedIntervalsGeneratorViewController"; }
 
 	var _sortedStackIntervalSets : [StackedIntervalSet]?
 	var sortedStackIntervalSets : [StackedIntervalSet]? {
 		if _sortedStackIntervalSets == nil {
-			_sortedStackIntervalSets = document?.intervalsData.stackedIntervals.sort { (a:StackedIntervalSet, b:StackedIntervalSet) -> Bool in
+			_sortedStackIntervalSets = (document!.intervalsData as! StackedIntervalsIntervalsData).stackedIntervals.sort { (a:StackedIntervalSet, b:StackedIntervalSet) -> Bool in
 				return a.interval < b.interval;
 			}
 		}
@@ -74,21 +93,17 @@ class StackedIntervalsGeneratorViewController: GeneratorViewController {
 	}
 	func addStackedIntervalSet( aStackedInterval : StackedIntervalSet ) {
 		if let theDocument = document {
-			if theDocument.intervalsData.documentType == .StackedIntervals {
-				theDocument.intervalsData.insertStackedInterval(aStackedInterval);
-				theDocument.calculateAllIntervals();
-				reloadStackedIntervalsTable();
-			}
+			(document!.intervalsData as! StackedIntervalsIntervalsData).insertStackedInterval(aStackedInterval);
+			theDocument.calculateAllIntervals();
+			reloadStackedIntervalsTable();
 		}
 	}
 
 	func removeStackedIntervalSet( aStackedInterval : StackedIntervalSet ) {
 		if let theDocument = document {
-			if theDocument.intervalsData.documentType == .StackedIntervals {
-				theDocument.intervalsData.removeStackedInterval(aStackedInterval);
-				theDocument.calculateAllIntervals();
-				reloadStackedIntervalsTable();
-			}
+			(document!.intervalsData as! StackedIntervalsIntervalsData).removeStackedInterval(aStackedInterval);
+			theDocument.calculateAllIntervals();
+			reloadStackedIntervalsTable();
 		}
 	}
 
@@ -101,7 +116,7 @@ class StackedIntervalsGeneratorViewController: GeneratorViewController {
 extension StackedIntervalsGeneratorViewController : NSTableViewDataSource {
 
 	func numberOfRowsInTableView(tableView: NSTableView) -> Int {
-		return document?.intervalsData.stackedIntervals.count ?? 0;
+		return (document!.intervalsData as! StackedIntervalsIntervalsData).stackedIntervals.count ?? 0;
 	}
 
 	func tableView(aTable: NSTableView, objectValueForTableColumn aTableColumn: NSTableColumn?, row aRow: Int) -> AnyObject?

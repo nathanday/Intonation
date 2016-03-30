@@ -169,8 +169,7 @@ class MainWindowController : NSWindowController {
 	var		previousBaseFrequencyDelta : Double = 0.0;
 
 	dynamic var		documentTypeString : String? {
-		get { return (document as? Document)?.intervalsData.documentType?.toString(); }
-		set { (document as? Document)?.intervalsData.documentType = DocumentType.fromString(newValue); }
+		get { return (document as? Document)?.intervalsData?.documentType.toString(); }
 	}
 
 	override func windowWillLoad() {
@@ -256,12 +255,12 @@ class MainWindowController : NSWindowController {
 		super.windowDidLoad();
 		if let theDocument = document as? Document {
 			if let theWindow = self.window {
-				if theDocument.intervalsData.documentType == nil {
+				if theDocument.intervalsData == nil {
 					let		theWindowController = SelectDocumentType();
 					theWindowController.completionBlock = { (aType) in
-						if aType != nil {
+						if let theType = aType {
 							self.willChangeValueForKey("documentTypeString");
-							theDocument.intervalsData.documentType = aType;
+							theDocument.intervalsData = IntervalsData.from(documentType: theType );
 							self.didChangeValueForKey("documentTypeString");
 							theDocument.calculateAllIntervals();
 						}

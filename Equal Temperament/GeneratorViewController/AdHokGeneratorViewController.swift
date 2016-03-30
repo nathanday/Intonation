@@ -44,12 +44,10 @@ class AdHokGeneratorViewController: GeneratorViewController {
 	}
 	func addIntervals( anIntervals : [Interval] ) {
 		if let theDocument = document {
-			if theDocument.intervalsData.documentType == .AdHoc {
-				for theInterval in anIntervals {
-					theDocument.intervalsData.adHocEntries.insert(theInterval);
-				}
-				theDocument.calculateAllIntervals();
+			for theInterval in anIntervals {
+				(document!.intervalsData as! AdHocIntervalsData).adHocEntries.insert(theInterval);
 			}
+			theDocument.calculateAllIntervals();
 		}
 	}
 
@@ -58,12 +56,10 @@ class AdHokGeneratorViewController: GeneratorViewController {
 	}
 	func removeIntervals( anIntervals : [Interval] ) {
 		if let theDocument = document {
-			if theDocument.intervalsData.documentType == .AdHoc {
-				for theInterval in anIntervals {
-					theDocument.intervalsData.adHocEntries.remove(theInterval);
-				}
-				theDocument.calculateAllIntervals();
+			for theInterval in anIntervals {
+				(document!.intervalsData as! AdHocIntervalsData).adHocEntries.remove(theInterval);
 			}
+			theDocument.calculateAllIntervals();
 		}
 	}
 	

@@ -9,7 +9,6 @@
 import Foundation
 
 class IntervalsDataGenerator : CustomStringConvertible {
-	var octaves : UInt = 1;
 	var averageError : Double {
 		var		theAverageError : Double = 0.0;
 		let		theCount = Double(everyEntry.count);
@@ -68,7 +67,7 @@ class IntervalsDataGenerator : CustomStringConvertible {
 		}
 	}
 	var description: String {
-		preconditionFailure("The getter for the property everyEntry must be implemented" );
+		return "entries:\(everyEntry.debugDescription)";
 	}
 }
 

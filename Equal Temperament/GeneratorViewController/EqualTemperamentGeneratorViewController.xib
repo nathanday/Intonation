@@ -37,7 +37,7 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
-                        <binding destination="-2" name="value" keyPath="self.equalTemperamentIntervalString" id="GO6-ov-fkd"/>
+                        <binding destination="-2" name="value" keyPath="self.intervalString" id="GO6-ov-fkd"/>
                         <binding destination="-2" name="enabled" keyPath="self.octaveInterval" id="w5c-aj-zBD">
                             <dictionary key="options">
                                 <string key="NSValueTransformerName">NSNegateBoolean</string>

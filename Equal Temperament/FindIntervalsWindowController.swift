@@ -134,7 +134,7 @@ class FindIntervalsViewController: NSViewController {
 	func performFindEntries() {
 		if let theDocument = windowController?.document as? Document {
 			let			theSearchIntervals = theDocument.everyInterval;
-			let			theNumberOfOctaves = theDocument.intervalsData.octavesCount;
+			let			theNumberOfOctaves = theDocument.intervalsData!.octavesCount;
 
 			switch findMethod {
 			case .findMethodClosest:

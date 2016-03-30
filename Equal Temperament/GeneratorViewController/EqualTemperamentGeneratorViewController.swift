@@ -13,12 +13,13 @@ class EqualTemperamentGeneratorViewController: GeneratorViewController {
 	override var nibName: String? { return "EqualTemperamentGeneratorViewController"; }
 
 	override func viewDidLoad() {
-		originalInterval = document!.intervalsData.equalTemperamentInterval;
-		document!.intervalsData.addObserver(self, forKeyPath:"equalTemperamentInterval", options: NSKeyValueObservingOptions.Prior, context:nil)
+		let		theIntervalsData = document!.intervalsData as! EqualTemperamentIntervalsData;
+		originalInterval = theIntervalsData.interval;
+		theIntervalsData.addObserver(self, forKeyPath:"interval", options: NSKeyValueObservingOptions.Prior, context:nil)
 	}
 
 	deinit {
-		document!.intervalsData.removeObserver(self, forKeyPath:"equalTemperamentInterval");
+		(document!.intervalsData as! EqualTemperamentIntervalsData).removeObserver(self, forKeyPath:"interval");
 	}
 
 	override func observeValueForKeyPath( aKeyPath: String?, ofObject anObject: AnyObject?, change aChange: [String : AnyObject]?, context aContext: UnsafeMutablePointer<Void>) {
@@ -26,10 +27,10 @@ class EqualTemperamentGeneratorViewController: GeneratorViewController {
 			if let theKey = aKeyPath {
 				if theKey == "equalTemperamentDegrees" {
 					if aChange?[NSKeyValueChangeNotificationIsPriorKey] != nil {
-						willChangeValueForKey("equalTemperamentIntervalString");
+						willChangeValueForKey("intervalString");
 
 					} else {
-						didChangeValueForKey("equalTemperamentIntervalString");
+						didChangeValueForKey("intervalString");
 					}
 				}
 			}
@@ -38,28 +39,29 @@ class EqualTemperamentGeneratorViewController: GeneratorViewController {
 
 	var		octaveInterval : Bool = true {
 		didSet {
+			let		theIntervalsData = document!.intervalsData as! EqualTemperamentIntervalsData;
 			if octaveInterval {
-				originalInterval = document!.intervalsData.equalTemperamentInterval;
-				document!.intervalsData.equalTemperamentInterval = RationalInterval(2);
+				originalInterval = theIntervalsData.interval;
+				theIntervalsData.interval = RationalInterval(2);
 			} else {
-				document!.intervalsData.equalTemperamentInterval = originalInterval;
+				theIntervalsData.interval = originalInterval;
 			}
 		}
 	}
 
 
-	var equalTemperamentIntervalString : String {
+	var intervalString : String {
 		get {
-			return document?.intervalsData.equalTemperamentInterval.toString ?? "";
+			return (document!.intervalsData as! EqualTemperamentIntervalsData).interval.toString ?? "";
 		}
 		set {
 			if let theValue = RationalInterval.fromString(newValue) {
-				document!.intervalsData.equalTemperamentInterval = theValue;
+				(document!.intervalsData as! EqualTemperamentIntervalsData).interval = theValue;
 			}
 		}
 	}
 
 	@IBAction func changeDegreesAction( aSender: NSPopUpButton) {
-		self.document!.intervalsData.equalTemperamentDegrees = UInt(aSender.selectedTag());
+		(document!.intervalsData as! EqualTemperamentIntervalsData).degrees = UInt(aSender.selectedTag());
 	}
 }

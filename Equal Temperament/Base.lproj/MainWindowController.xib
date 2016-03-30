@@ -30,7 +30,7 @@
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" frameAutosaveName="DocumentWindow" animationBehavior="default" id="xOd-HO-29H" userLabel="Window">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" topStrut="YES"/>
-            <rect key="contentRect" x="10" y="442" width="998" height="733"/>
+            <rect key="contentRect" x="0.0" y="144" width="998" height="733"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
             <value key="minSize" type="size" width="94" height="86"/>
             <view key="contentView" id="gIp-Ho-8D9">
@@ -100,7 +100,7 @@
                                         <tabViewItems>
                                             <tabViewItem label="Limits" identifier="limits" id="u7x-bS-yyc">
                                                 <view key="view" id="Uy8-dk-XO1" customClass="ViewControllerPlaceHolderView" customModule="Intonation" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="588" height="36"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="588" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <connections>
                                                         <outlet property="viewController" destination="All-Sw-ozb" id="sfm-bC-heO"/>
@@ -842,7 +842,7 @@
             <connections>
                 <outlet property="delegate" destination="-2" id="0bl-1N-x8E"/>
             </connections>
-            <point key="canvasLocation" x="-1882" y="-812.5"/>
+            <point key="canvasLocation" x="-2061" y="-840.5"/>
         </window>
         <arrayController objectClassName="EqualTemperamentEntry" editable="NO" avoidsEmptySelection="NO" id="cy8-kx-1Au" userLabel="Intervals">
             <declaredKeys>
@@ -851,7 +851,6 @@
                 <string>numberOfIntervals</string>
                 <string>equalTemperamentRatio</string>
                 <string>toCents</string>
-                <string>error</string>
                 <string>error12ETCent</string>
                 <string>oddLimit</string>
                 <string>primeLimit</string>
