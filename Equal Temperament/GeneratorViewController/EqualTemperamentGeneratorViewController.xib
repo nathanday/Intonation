@@ -16,14 +16,14 @@
             <rect key="frame" x="0.0" y="0.0" width="588" height="30"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <button translatesAutoresizingMaskIntoConstraints="NO" id="9jv-Mo-Tkv">
-                    <rect key="frame" x="421" y="5" width="60" height="18"/>
-                    <buttonCell key="cell" type="check" title="Octave" bezelStyle="regularSquare" imagePosition="left" controlSize="small" state="on" inset="2" id="f6f-ae-CXg">
-                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9jv-Mo-Tkv">
+                    <rect key="frame" x="419" y="-1" width="64" height="28"/>
+                    <buttonCell key="cell" type="push" title="Octave" bezelStyle="rounded" alignment="center" controlSize="small" state="on" borderStyle="border" inset="2" id="f6f-ae-CXg">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="smallSystem"/>
                     </buttonCell>
                     <connections>
-                        <binding destination="-2" name="value" keyPath="self.octaveInterval" id="DbS-qg-6HP"/>
+                        <action selector="setOctaveAction:" target="-2" id="kh3-01-TS9"/>
                     </connections>
                 </button>
                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iS6-yl-omC">
@@ -39,11 +39,6 @@
                     </textFieldCell>
                     <connections>
                         <binding destination="-2" name="value" keyPath="self.intervalString" id="GO6-ov-fkd"/>
-                        <binding destination="-2" name="enabled" keyPath="self.octaveInterval" id="w5c-aj-zBD">
-                            <dictionary key="options">
-                                <string key="NSValueTransformerName">NSNegateBoolean</string>
-                            </dictionary>
-                        </binding>
                     </connections>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lwb-Os-D17">
@@ -135,6 +130,9 @@
                         <constraint firstAttribute="width" constant="60" id="ltS-7a-Yni"/>
                     </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="right" drawsBackground="YES" id="aOs-oS-Jn6">
+                        <numberFormatter key="formatter" formatterBehavior="custom10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="yF9-yE-ueG">
+                            <real key="minimum" value="1"/>
+                        </numberFormatter>
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>

@@ -9,6 +9,7 @@
 import Cocoa
 
 class EqualTemperamentGeneratorViewController: GeneratorViewController {
+
 	required init?( windowController aWindowController: MainWindowController ) {
 		super.init( nibName : "EqualTemperamentGeneratorViewController", windowController: aWindowController);
 	}
@@ -17,12 +18,10 @@ class EqualTemperamentGeneratorViewController: GeneratorViewController {
 		fatalError("init(coder:) has not been implemented")
 	}
 
-	var		originalInterval : RationalInterval = RationalInterval(2);
-
 	override func viewDidLoad() {
-		let		theIntervalsData = document!.intervalsData as! EqualTemperamentIntervalsData;
-		originalInterval = theIntervalsData.interval;
-		theIntervalsData.addObserver(self, forKeyPath:"interval", options: NSKeyValueObservingOptions.Prior, context:nil)
+		if let theIntervalsData = document?.intervalsData as? EqualTemperamentIntervalsData {
+			theIntervalsData.addObserver(self, forKeyPath:"interval", options: NSKeyValueObservingOptions.Prior, context:nil);
+		}
 	}
 
 	deinit {
@@ -44,18 +43,13 @@ class EqualTemperamentGeneratorViewController: GeneratorViewController {
 		}
 	}
 
-	var		octaveInterval : Bool = true {
-		didSet {
-			let		theIntervalsData = document!.intervalsData as! EqualTemperamentIntervalsData;
-			if octaveInterval {
-				originalInterval = theIntervalsData.interval;
-				theIntervalsData.interval = RationalInterval(2);
-			} else {
-				theIntervalsData.interval = originalInterval;
-			}
+	@IBAction func setOctaveAction( aSender : NSButton ) {
+		if let theIntervalsData = document?.intervalsData as? EqualTemperamentIntervalsData {
+			willChangeValueForKey("intervalString");
+			theIntervalsData.interval = RationalInterval(2);
+			didChangeValueForKey("intervalString");
 		}
 	}
-
 
 	var intervalString : String {
 		get {
@@ -64,6 +58,7 @@ class EqualTemperamentGeneratorViewController: GeneratorViewController {
 		set {
 			if let theValue = RationalInterval.fromString(newValue) {
 				(document!.intervalsData as! EqualTemperamentIntervalsData).interval = theValue;
+				document?.calculateAllIntervals();
 			}
 		}
 	}

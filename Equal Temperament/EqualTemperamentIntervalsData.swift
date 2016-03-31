@@ -62,28 +62,36 @@ class EqualTemperamentIntervalsData : IntervalsData {
 }
 
 class EqualTemperamentGenerator: IntervalsDataGenerator {
-	func ratioFor(interval anInterval: Interval, note aNote: UInt, degrees aDegrees : UInt ) -> Double {
-		return pow(anInterval.toDouble,Double(aNote)/Double(aDegrees));
+	let		interval : Interval;
+	let		degrees : UInt;
+
+	func ratioFor( note aNote: UInt ) -> Double {
+		return pow(interval.toDouble,Double(aNote)/Double(degrees));
 	}
-	func formulaStringFor(interval anInterval: Interval, note aNote: UInt, degrees aDegrees : UInt ) -> String {
-		return "\(anInterval.toString)^(\(aNote)/\(aDegrees))";
+	func formulaStringFor( note aNote: UInt ) -> String {
+		return "\(interval.toString)^(\(aNote)/\(degrees))";
 	}
 	var	_everyEqualTemperamentEntry : [EqualTemperamentEntry]?;
 	override var	everyEntry : [EqualTemperamentEntry] {
 		return _everyEqualTemperamentEntry!;
 	}
 	init( intervalsData anIntervalsData : EqualTemperamentIntervalsData ) {
+		interval = anIntervalsData.interval;
+		degrees = anIntervalsData.degrees;
 		super.init();
 		var		theResult = Set<EqualTemperamentEntry>();
-		for theOctave in 0..<anIntervalsData.octavesCount {
-			for theIndex in 0..<anIntervalsData.degrees {
-				let		theString = formulaStringFor(interval:anIntervalsData.interval, note:theIndex+theOctave*12, degrees: anIntervalsData.degrees);
-				let		theRatio = ratioFor(interval:anIntervalsData.interval, note:theIndex+theOctave*12, degrees:anIntervalsData.degrees);
-				let		theInterval = IrrationalInterval(theRatio,factorsString:theString);
-				let		theEntry = EqualTemperamentEntry(interval: theInterval );
-				theResult.insert(theEntry);
-			}
+		var		theIndex : UInt = 0;
+		var		theRatio = ratioFor(note:theIndex);
+		let		theMaxRatio = pow(2.0,Double(anIntervalsData.octavesCount));
+		while theRatio < theMaxRatio {
+			let		theString = formulaStringFor(note:theIndex);
+			let		theInterval = IrrationalInterval(theRatio,factorsString:theString);
+			let		theEntry = EqualTemperamentEntry(interval: theInterval );
+			theResult.insert(theEntry);
+			theIndex += 1;
+			theRatio = ratioFor(note:theIndex);
 		}
+
 		_everyEqualTemperamentEntry = theResult.sort { return $0.toCents < $1.toCents; };
 	}
 }
