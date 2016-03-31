@@ -21,53 +21,5 @@
             stopOnStyle = "0">
          </BreakpointContent>
       </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Equal Temperament/GeneratorViewController/AdHokGeneratorViewController.swift"
-            timestampString = "480946207.071519"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
-            landmarkName = "delete(_:)"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Intonation.AdHokGeneratorViewController.delete (Swift.Optional&lt;Swift.AnyObject&gt;) -&gt; ()"
-                  moduleName = "Intonation"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/nathan/Developer/Projects/Applications/Equal%20Temperament/Equal%20Temperament/GeneratorViewController/AdHokGeneratorViewController.swift"
-                  timestampString = "481035740.912297"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "38"
-                  endingLineNumber = "38"
-                  offsetFromSymbolStart = "16">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Intonation.AdHokGeneratorViewController.delete (Swift.Optional&lt;Swift.AnyObject&gt;) -&gt; ()"
-                  moduleName = "Intonation"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/nathan/Developer/Projects/Applications/Equal%20Temperament/Equal%20Temperament/GeneratorViewController/AdHokGeneratorViewController.swift"
-                  timestampString = "481035740.91242"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "38"
-                  endingLineNumber = "38"
-                  offsetFromSymbolStart = "97">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

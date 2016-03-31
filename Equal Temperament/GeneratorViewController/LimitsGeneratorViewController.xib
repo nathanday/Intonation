@@ -22,7 +22,7 @@
                         <constraint firstAttribute="height" constant="17" id="eJH-4L-dpv"/>
                         <constraint firstAttribute="width" constant="23" id="fCA-kS-Rfc"/>
                     </constraints>
-                    <buttonCell key="cell" type="disclosureTriangle" bezelStyle="disclosure" image="11AF2AE9-30AB-43D4-AC9E-6E871B81FF3D" imagePosition="above" alignment="left" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8fk-MV-khf">
+                    <buttonCell key="cell" type="disclosureTriangle" bezelStyle="disclosure" image="A8DB20B2-F950-4578-88FF-1BD95DA3A0BF" imagePosition="above" alignment="left" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8fk-MV-khf">
                         <behavior key="behavior" pushIn="YES" changeBackground="YES" changeGray="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -51,6 +51,7 @@
                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MBK-OD-HkO">
                     <rect key="frame" x="150" y="34" width="60" height="22"/>
                     <constraints>
+                        <constraint firstAttribute="height" constant="22" id="YKo-Mz-rqT"/>
                         <constraint firstAttribute="width" constant="60" id="nbX-fE-bT4"/>
                     </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="right" placeholderString="5" drawsBackground="YES" id="nIa-lL-rL5">
@@ -84,6 +85,7 @@
                     <rect key="frame" x="469" y="34" width="60" height="22"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="60" id="eRr-56-HM0"/>
+                        <constraint firstAttribute="height" constant="22" id="iom-OY-q2h"/>
                     </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="right" placeholderString="15" drawsBackground="YES" id="vye-vS-BRP">
                         <numberFormatter key="formatter" formatterBehavior="custom10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="1023" id="uvx-zR-c34">
@@ -107,6 +109,7 @@
                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="My7-SP-3uf">
                     <rect key="frame" x="270" y="34" width="60" height="22"/>
                     <constraints>
+                        <constraint firstAttribute="height" constant="22" id="8hc-zp-bOy"/>
                         <constraint firstAttribute="width" constant="60" id="p0g-Bn-McV"/>
                     </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="right" placeholderString="15" drawsBackground="YES" id="T6d-mS-gq0">
@@ -143,6 +146,7 @@
                             <rect key="frame" x="150" y="6" width="60" height="22"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="60" id="gBW-ss-BrH"/>
+                                <constraint firstAttribute="height" constant="22" id="z3V-8n-Gwa"/>
                             </constraints>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="right" placeholderString="3" drawsBackground="YES" id="lt1-TZ-UHJ">
                                 <numberFormatter key="formatter" formatterBehavior="custom10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="309" id="O4x-nD-eUQ">
@@ -239,7 +243,7 @@
         <userDefaultsController representsSharedInstance="YES" id="15X-6Z-TvY"/>
     </objects>
     <resources>
-        <image name="11AF2AE9-30AB-43D4-AC9E-6E871B81FF3D" width="1" height="1">
+        <image name="A8DB20B2-F950-4578-88FF-1BD95DA3A0BF" width="1" height="1">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

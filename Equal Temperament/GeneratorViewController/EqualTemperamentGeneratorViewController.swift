@@ -9,8 +9,15 @@
 import Cocoa
 
 class EqualTemperamentGeneratorViewController: GeneratorViewController {
+	required init?( windowController aWindowController: MainWindowController ) {
+		super.init( nibName : "EqualTemperamentGeneratorViewController", windowController: aWindowController);
+	}
+
+	required init?(coder: NSCoder) {
+		fatalError("init(coder:) has not been implemented")
+	}
+
 	var		originalInterval : RationalInterval = RationalInterval(2);
-	override var nibName: String? { return "EqualTemperamentGeneratorViewController"; }
 
 	override func viewDidLoad() {
 		let		theIntervalsData = document!.intervalsData as! EqualTemperamentIntervalsData;
@@ -25,7 +32,7 @@ class EqualTemperamentGeneratorViewController: GeneratorViewController {
 	override func observeValueForKeyPath( aKeyPath: String?, ofObject anObject: AnyObject?, change aChange: [String : AnyObject]?, context aContext: UnsafeMutablePointer<Void>) {
 		if anObject as? IntervalsData == document!.intervalsData {
 			if let theKey = aKeyPath {
-				if theKey == "equalTemperamentDegrees" {
+				if theKey == "degrees" {
 					if aChange?[NSKeyValueChangeNotificationIsPriorKey] != nil {
 						willChangeValueForKey("intervalString");
 
@@ -52,7 +59,7 @@ class EqualTemperamentGeneratorViewController: GeneratorViewController {
 
 	var intervalString : String {
 		get {
-			return (document!.intervalsData as! EqualTemperamentIntervalsData).interval.toString ?? "";
+			return (document!.intervalsData as! EqualTemperamentIntervalsData).interval.ratio.ratioString ?? "";
 		}
 		set {
 			if let theValue = RationalInterval.fromString(newValue) {

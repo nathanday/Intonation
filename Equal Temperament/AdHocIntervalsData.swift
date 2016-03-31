@@ -39,7 +39,9 @@ class AdHocIntervalsData : IntervalsData {
 	override func intervalsDataGenerator() -> IntervalsDataGenerator {
 		return AdHocGenerator(intervalsData:self);
 	}
-
+	override func viewController( windowController aWindowController : MainWindowController ) -> GeneratorViewController? {
+		return AdHokGeneratorViewController(windowController:aWindowController);
+	}
 	var		adHocEntries : Set<Interval>;
 
 	func addInterval( anInterval : Interval ) {
@@ -49,7 +51,6 @@ class AdHocIntervalsData : IntervalsData {
 		for theInterval in anIntervals {
 			adHocEntries.insert(theInterval);
 		}
-//		calculateAllIntervals();
 	}
 
 	func removeInterval( anInterval : Interval ) {
@@ -59,7 +60,6 @@ class AdHocIntervalsData : IntervalsData {
 		for theInterval in anIntervals {
 			adHocEntries.remove(theInterval);
 		}
-//		calculateAllIntervals();
 	}
 }
 

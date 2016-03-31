@@ -10,7 +10,20 @@ import Cocoa
 
 class GeneratorViewController : NSViewController {
 
-	@IBOutlet var	windowController : MainWindowController?;
+	var	windowController : MainWindowController?;
+
+	required init?( windowController aWindowController: MainWindowController ) {
+		fatalError("init(windowController:) has not been implemented")
+	}
+
+	init?( nibName aNibName: String, windowController aWindowController: MainWindowController ) {
+		windowController = aWindowController;
+		super.init(nibName: aNibName, bundle: nil);
+	}
+	
+	required init?(coder: NSCoder) {
+		fatalError("init(coder:) has not been implemented")
+	}
 
 	var document : Document? {
 		return windowController!.document as? Document;

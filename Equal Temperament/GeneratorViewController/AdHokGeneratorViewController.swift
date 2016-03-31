@@ -11,7 +11,14 @@ import Cocoa
 class AdHokGeneratorViewController: GeneratorViewController {
 
 	@IBOutlet var	adHocIntervalTextField : NSTextField?;
-	override var nibName: String? { return "AdHokGeneratorViewController"; }
+
+	required init?( windowController aWindowController: MainWindowController ) {
+		super.init( nibName : "AdHokGeneratorViewController", windowController: aWindowController);
+	}
+
+	required init?(coder: NSCoder) {
+		fatalError("init(coder:) has not been implemented")
+	}
 
 	var adHocInterval : Interval? {
 		get {

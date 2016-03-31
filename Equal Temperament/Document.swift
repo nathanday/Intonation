@@ -29,19 +29,13 @@ class Document : NSDocument, MIDIReceiverObserver {
 			}
 		}
 	}
-	let watchedKeys : Set = ["documentType", "octavesCount", "numeratorPrimeLimitIndex", "denominatorPrimeLimitIndex", "separatePrimeLimit", "oddLimit", "additiveDissonance", "stackedIntervals", "equalTemperamentDegrees", "equalTemperamentInterval", "adHocEntries"];
+	let watchedKeys : Set = ["documentType", "octavesCount", "numeratorPrimeLimitIndex", "denominatorPrimeLimitIndex", "separatePrimeLimit", "oddLimit", "additiveDissonance", "stackedIntervals", "degrees", "interval", "adHocEntries"];
 
 	override func observeValueForKeyPath( aKeyPath: String?, ofObject anObject: AnyObject?, change aChange: [String : AnyObject]?, context aContext: UnsafeMutablePointer<Void>) {
 		if anObject as? IntervalsData == intervalsData {
 			if let theKey = aKeyPath {
 				if watchedKeys.contains(theKey) {
-					if aChange?[NSKeyValueChangeNotificationIsPriorKey] != nil {
-						willChangeValueForKey("intervalsData");
-
-					} else {
-						calculateAllIntervals();
-						didChangeValueForKey("intervalsData");
-					}
+					calculateAllIntervals();
 				}
 			}
 		}
@@ -49,7 +43,7 @@ class Document : NSDocument, MIDIReceiverObserver {
 
 	func setUpIntervalsDataObservers() {
 		for theKey in watchedKeys {
-			intervalsData?.addObserver(self, forKeyPath:theKey, options: NSKeyValueObservingOptions.Prior, context:nil)
+			intervalsData?.addObserver(self, forKeyPath:theKey, options: NSKeyValueObservingOptions.New, context:nil)
 		}
 	}
 

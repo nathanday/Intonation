@@ -26,6 +26,7 @@ class MainWindowController : NSWindowController {
 	@IBOutlet weak var	splitView : NSSplitView?;
 	@IBOutlet weak var	tableParentContainerView : NSView?
 	@IBOutlet weak var	plottingParentContainerView : NSView?
+	@IBOutlet weak var	documentTypeViewControllerPlaceHolderView: ViewControllerPlaceHolderView?
 
 	@IBOutlet var	arrayController : NSArrayController?
 	@IBOutlet var	scaleViewController : ScaleViewController?
@@ -41,6 +42,8 @@ class MainWindowController : NSWindowController {
 	@IBOutlet weak var	factorsSumTitleTextField : NSTextField?;
 	@IBOutlet weak var	baseFrequencyDeltaSlider : NSSlider?;
 	@IBOutlet weak var	playSegmentedControl : NSSegmentedControl?;
+
+	var		documentTypeViewController : GeneratorViewController?
 
 	override func awakeFromNib() {
 		super.awakeFromNib();
@@ -168,10 +171,6 @@ class MainWindowController : NSWindowController {
 
 	var		previousBaseFrequencyDelta : Double = 0.0;
 
-	dynamic var		documentTypeString : String? {
-		get { return (document as? Document)?.intervalsData?.documentType.toString(); }
-	}
-
 	override func windowWillLoad() {
 		super.windowWillLoad();
 		if let theDocument = document{
@@ -259,10 +258,12 @@ class MainWindowController : NSWindowController {
 					let		theWindowController = SelectDocumentType();
 					theWindowController.completionBlock = { (aType) in
 						if let theType = aType {
-							self.willChangeValueForKey("documentTypeString");
 							theDocument.intervalsData = IntervalsData.from(documentType: theType );
-							self.didChangeValueForKey("documentTypeString");
-							theDocument.calculateAllIntervals();
+							if let theViewController = theDocument.intervalsData?.viewController(windowController: self) {
+								self.documentTypeViewController = theViewController;
+								self.documentTypeViewControllerPlaceHolderView!.loadViewController(theViewController);
+								theDocument.calculateAllIntervals();
+							}
 						}
 						else {
 							self.close();

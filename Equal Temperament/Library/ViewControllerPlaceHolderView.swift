@@ -10,11 +10,21 @@ import Cocoa
 
 class ViewControllerPlaceHolderView : NSView {
 
-	@IBOutlet var	viewController : NSViewController?;
+	@IBOutlet weak var	viewController : NSViewController?
 
-	override func awakeFromNib() { placeRepresentitiveView(); }
+	override func awakeFromNib() {
+		placeRepresentitiveView();
+	}
 
-	func placeRepresentitiveView()
+	func loadViewController( aViewController : NSViewController ) {
+		if viewController != aViewController {
+			viewController?.view.removeFromSuperview();
+			viewController = aViewController;
+			placeRepresentitiveView();
+		}
+	}
+
+	private func placeRepresentitiveView()
 	{
 		if let theView = viewController?.view {
 			theView.frame = self.bounds;

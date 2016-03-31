@@ -12,24 +12,31 @@ import CoreMIDI
 protocol MIDIReceiverObserver {
 	func midiReceiverNoteOff( aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt, velocity aVelocity: UInt );
 	func midiReceiverNoteOn( aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt, velocity aVelocity: UInt );
-	func midiReceiverPolyphonicKeyPressure( aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt, velocity aVelocity: UInt );
+	func midiReceiverPolyphonicKeyPressure( aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt, pressure aPressure: UInt );
 	func midiReceiverControlChange( aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt, velocity aVelocity: UInt );
-	func midiReceiverProgramChange( aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt, velocity aVelocity: UInt );
-	func midiReceiverChannelPressure( aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt, velocity aVelocity: UInt );
-	func midiReceiverPitchBendChange( aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt, velocity aVelocity: UInt );
+	func midiReceiverProgramChange( aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt );
+	func midiReceiverChannelPressure( aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt );
+	func midiReceiverPitchBendChange( aReceiver: MIDIReceiver, channel aChannel: UInt, value aValue: UInt );
 }
 
 extension MIDIReceiverObserver {
 	func midiReceiverNoteOff( aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt, velocity aVelocity: UInt ) { }
 	func midiReceiverNoteOn( aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt, velocity aVelocity: UInt ) { }
-	func midiReceiverPolyphonicKeyPressure( aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt, velocity aVelocity: UInt ) { }
+	func midiReceiverPolyphonicKeyPressure( aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt, pressure aPressure: UInt ) { }
 	func midiReceiverControlChange( aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt, velocity aVelocity: UInt ) { }
-	func midiReceiverProgramChange( aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt, velocity aVelocity: UInt ) { }
-	func midiReceiverChannelPressure( aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt, velocity aVelocity: UInt ) { }
-	func midiReceiverPitchBendChange( aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt, velocity aVelocity: UInt ) { }
+	func midiReceiverProgramChange( aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt ) { }
+	func midiReceiverChannelPressure( aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt ) { }
+	func midiReceiverPitchBendChange( aReceiver: MIDIReceiver, channel aChannel: UInt, value aValue: UInt ) { }
 }
 
 class MIDIReceiver {
+	final private func sevenBits( aByte : UInt ) -> UInt {
+		return aByte&0x7F;
+	}
+	final private func fourteenBits( aByteL : UInt, _ aByteH : UInt ) -> UInt {
+		return sevenBits(aByteL) | (sevenBits(aByteH) << 7);
+	}
+
 	var			midiClientRef = MIDIClientRef();
 	var			inputPortRef : UInt32 = 0;
 	var			clientName : String;
@@ -41,17 +48,23 @@ class MIDIReceiver {
 	}
 
 	func postEvent(bytes aBytes : [UInt] ) {
+		let		theEvent = (aBytes[0]>>4)&7;
 		let		theChannel = UInt(aBytes[0]&0xF);
-		let		theNote = UInt(aBytes[1]&0x7F);
-		let		theVelocity = UInt(aBytes[2]&0x7F);
-		switch (aBytes[0]>>4)&7 {
-		case 0: observer?.midiReceiverNoteOff( self, channel: theChannel, note: theNote, velocity: theVelocity );
-		case 1: observer?.midiReceiverNoteOn( self, channel: theChannel, note: theNote, velocity: theVelocity );
-		case 2: observer?.midiReceiverPolyphonicKeyPressure( self, channel: theChannel, note: theNote, velocity: theVelocity );
-		case 3: observer?.midiReceiverControlChange( self, channel: theChannel, note: theNote, velocity: theVelocity );
-		case 4: observer?.midiReceiverProgramChange( self, channel: theChannel, note: theNote, velocity: theVelocity );
-		case 5: observer?.midiReceiverChannelPressure( self, channel: theChannel, note: theNote, velocity: theVelocity );
-		case 6: observer?.midiReceiverPitchBendChange( self, channel: theChannel, note: theNote, velocity: theVelocity );
+		switch theEvent {
+		case 0:
+			observer?.midiReceiverNoteOff( self, channel: theChannel, note: sevenBits(aBytes[1]), velocity: sevenBits(aBytes[2]) );
+		case 1:
+			observer?.midiReceiverNoteOn( self, channel: theChannel, note: sevenBits(aBytes[1]), velocity: sevenBits(aBytes[2]) );
+		case 2:
+			observer?.midiReceiverPolyphonicKeyPressure( self, channel: theChannel, note: sevenBits(aBytes[1]), pressure: sevenBits(aBytes[2]) );
+		case 3:
+			observer?.midiReceiverControlChange( self, channel: theChannel, note: sevenBits(aBytes[1]), velocity: sevenBits(aBytes[2]) );
+		case 4:
+			observer?.midiReceiverProgramChange( self, channel: theChannel, note: sevenBits(aBytes[1]) );
+		case 5:
+			observer?.midiReceiverChannelPressure( self, channel: theChannel, note: sevenBits(aBytes[1]) );
+		case 6:
+			observer?.midiReceiverPitchBendChange( self, channel: theChannel, value: fourteenBits(aBytes[1], aBytes[2]) );
 		default:
 			break;
 		}

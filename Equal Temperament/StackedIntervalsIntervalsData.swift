@@ -10,16 +10,25 @@ import Cocoa
 
 class StackedIntervalsIntervalsData : IntervalsData {
 	override init() {
-		// XXXXX
 		super.init();
 	}
 	override init?(propertyList aPropertyList: [String:AnyObject] ) {
-		// XXXXX
 		super.init(propertyList:aPropertyList);
+		if let theEntries = aPropertyList["stackedIntervals"] as? [[String:String]] {
+			for theEntry in theEntries{
+				if let theStackedInterval = StackedIntervalSet(propertyList: theEntry) {
+					stackedIntervals.insert(theStackedInterval);
+				}
+			}
+		}
 	}
 	override var propertyListValue : [String:AnyObject] {
 		var		theResult = super.propertyListValue;
-		// XXXXX
+		var		theStackedIntervalsPropertyList = [[String:String]]();
+		for theEntry in stackedIntervals {
+			theStackedIntervalsPropertyList.append(theEntry.propertyList);
+		}
+		theResult["stackedIntervals"] = theStackedIntervalsPropertyList;
 		return theResult;
 	}
 
@@ -27,6 +36,9 @@ class StackedIntervalsIntervalsData : IntervalsData {
 
 	override func intervalsDataGenerator() -> IntervalsDataGenerator {
 		return StackedIntervalsDataGenerator(intervalsData:self);
+	}
+	override func viewController( windowController aWindowController : MainWindowController ) -> GeneratorViewController? {
+		return StackedIntervalsGeneratorViewController(windowController:aWindowController);
 	}
 
 	var		stackedIntervals = Set<StackedIntervalSet>();

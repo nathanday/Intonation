@@ -10,6 +10,14 @@ import Cocoa
 
 class StackedIntervalsGeneratorViewController: GeneratorViewController {
 
+	required init?( windowController aWindowController: MainWindowController ) {
+		super.init( nibName : "StackedIntervalsGeneratorViewController", windowController: aWindowController);
+	}
+
+	required init?(coder: NSCoder) {
+		fatalError("init(coder:) has not been implemented")
+	}
+
 	override func viewDidLoad() {
 		stackedIntervalSetSteps = UInt(NSUserDefaults.standardUserDefaults().integerForKey("stackedIntervalSetSteps"));
 		if stackedIntervalSetSteps == 0 {
@@ -33,8 +41,6 @@ class StackedIntervalsGeneratorViewController: GeneratorViewController {
 			NSUserDefaults.standardUserDefaults().setInteger(Int(stackedIntervalSetSteps), forKey:"stackedIntervalSetOctaves");
 		}
 	}
-
-	override var nibName: String? { return "StackedIntervalsGeneratorViewController"; }
 
 	var _sortedStackIntervalSets : [StackedIntervalSet]?
 	var sortedStackIntervalSets : [StackedIntervalSet]? {

@@ -48,6 +48,10 @@ class LimitsIntervalsData : IntervalsData {
 		return LimitsBasedGenerator(intervalsData:self);
 	}
 
+	override func viewController( windowController aWindowController : MainWindowController ) -> GeneratorViewController? {
+		return LimitsGeneratorViewController(windowController:aWindowController);
+	}
+
 	override var	documentType : DocumentType { return .Limits; }
 
 	var		numeratorPrimeLimit : UInt {

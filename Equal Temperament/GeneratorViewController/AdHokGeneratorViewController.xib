@@ -37,6 +37,7 @@ DQ
                     <rect key="frame" x="150" y="5" width="143" height="22"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="143" id="1q7-Wr-56U"/>
+                        <constraint firstAttribute="height" constant="22" id="OHJ-1p-8ol"/>
                     </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" continuous="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="right" drawsBackground="YES" id="pqg-Ss-EtA">
                         <font key="font" metaFont="system"/>

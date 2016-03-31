@@ -9,15 +9,17 @@
 import Foundation
 
 class Interval : Hashable {
-	class func fromString( aString : String ) -> Interval? {
+	class func fromString( aString : String? ) -> Interval? {
 		var		theResult : Interval?
-		if aString.containsString(".") {
-			if let theValue = Double(aString) {
-				theResult = IrrationalInterval(theValue);
-			}
-		} else {
-			if let theValue = Rational(aString) {
-				theResult = RationalInterval(theValue);
+		if let theString = aString {
+			if theString.containsString(".") {
+				if let theValue = Double(theString) {
+					theResult = IrrationalInterval(theValue);
+				}
+			} else {
+				if let theValue = Rational(theString) {
+					theResult = RationalInterval(theValue);
+				}
 			}
 		}
 		return theResult;
@@ -98,10 +100,12 @@ class RationalInterval : Interval {
 //			self.init( ratio:theValue, names:nil );
 //		}
 //	}
-	class override func fromString( aString : String ) -> RationalInterval? {
+	class override func fromString( aString : String? ) -> RationalInterval? {
 		var		theResult : RationalInterval?
-		if let theValue = Rational(aString) {
-			theResult = RationalInterval(theValue);
+		if let theString = aString {
+			if let theValue = Rational(theString) {
+				theResult = RationalInterval(theValue);
+			}
 		}
 		return theResult;
 	}
@@ -211,3 +215,23 @@ func >= (a: IrrationalInterval, b: IrrationalInterval) -> Bool { return a.ratio 
 
 func == (a: Interval, b: Int) -> Bool { return a.toDouble == Double(b); }
 func == (a: RationalInterval, b: Int) -> Bool { return a.ratio==b; }
+
+extension NSUserDefaults {
+	func intervalForKey(aKey: String) -> Interval? {
+		var			theResult : Interval?;
+		if let theIntervalString = NSUserDefaults.standardUserDefaults().stringForKey(aKey) {
+			theResult = Interval.fromString(theIntervalString);
+		}
+		return theResult;
+	}
+	func rationalIntervalForKey(aKey: String) -> RationalInterval? {
+		var			theResult : RationalInterval?;
+		if let theIntervalString = NSUserDefaults.standardUserDefaults().stringForKey(aKey) {
+			theResult = RationalInterval.fromString(theIntervalString);
+		}
+		return theResult;
+	}
+	func setInterval(aValue: Interval, forKey aKey: String) {
+		setObject(aValue.toString, forKey: aKey);
+	}
+}

@@ -10,8 +10,8 @@ import Cocoa
 
 class EqualTemperamentIntervalsData : IntervalsData {
 	override init() {
-		degrees = 12;
-		interval = RationalInterval(2);
+		degrees = UInt(NSUserDefaults.standardUserDefaults().integerForKey("degrees")) ?? 12;
+		interval = NSUserDefaults.standardUserDefaults().rationalIntervalForKey("interval") ?? RationalInterval(2);
 		super.init();
 	}
 	override init?(propertyList aPropertyList: [String:AnyObject] ) {
@@ -19,16 +19,16 @@ class EqualTemperamentIntervalsData : IntervalsData {
 			if let theDegreesString = theProperties["degrees"] {
 				degrees = UInt(theDegreesString) ?? 12;
 			} else {
-				degrees = 12;
+				degrees = UInt(NSUserDefaults.standardUserDefaults().integerForKey("degrees")) ?? 12;
 			}
 			if let theIntervalString = theProperties["interval"] {
 				interval = RationalInterval.fromString(theIntervalString) ?? RationalInterval(2,1);
 			} else {
-				interval = RationalInterval(2);
+				interval = NSUserDefaults.standardUserDefaults().rationalIntervalForKey("interval") ?? RationalInterval(2);
 			}
 		} else {
-			degrees = 12;
-			interval = RationalInterval(2);
+			degrees = UInt(NSUserDefaults.standardUserDefaults().integerForKey("degrees")) ?? 12;
+			interval = NSUserDefaults.standardUserDefaults().rationalIntervalForKey("interval") ?? RationalInterval(2);
 		}
 		super.init(propertyList:aPropertyList);
 	}
@@ -45,9 +45,20 @@ class EqualTemperamentIntervalsData : IntervalsData {
 	override func intervalsDataGenerator() -> IntervalsDataGenerator {
 		return EqualTemperamentGenerator(intervalsData:self);
 	}
+	override func viewController( windowController aWindowController : MainWindowController ) -> GeneratorViewController? {
+		return EqualTemperamentGeneratorViewController(windowController:aWindowController);
+	}
 
-	dynamic var		degrees : UInt;
-	var				interval : RationalInterval;
+	dynamic var		degrees : UInt {
+		didSet {
+			NSUserDefaults.standardUserDefaults().setInteger(Int(degrees), forKey:"degrees");
+		}
+	}
+	var				interval : RationalInterval {
+		didSet {
+			NSUserDefaults.standardUserDefaults().setInterval(interval, forKey:"interval");
+		}
+	}
 }
 
 class EqualTemperamentGenerator: IntervalsDataGenerator {
