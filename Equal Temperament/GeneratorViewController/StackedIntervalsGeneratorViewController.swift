@@ -21,7 +21,7 @@ class StackedIntervalsGeneratorViewController: GeneratorViewController {
 	override func viewDidLoad() {
 		stackedIntervalSetSteps = UInt(NSUserDefaults.standardUserDefaults().integerForKey("stackedIntervalSetSteps"));
 		if stackedIntervalSetSteps == 0 {
-			stackedIntervalSetSteps = 4;
+			stackedIntervalSetSteps = 7;
 		}
 		stackedIntervalSetOctaves = UInt(NSUserDefaults.standardUserDefaults().integerForKey("stackedIntervalSetOctaves"));
 		if stackedIntervalSetOctaves == 0 {
@@ -31,7 +31,7 @@ class StackedIntervalsGeneratorViewController: GeneratorViewController {
 
 	@IBOutlet weak var stackedIntervalSetBaseTextField : NSTextField?;
 	@IBOutlet weak var stackedIntervalsTableView: NSTableView!
-	dynamic var	stackedIntervalSetSteps : UInt = 4 {
+	dynamic var	stackedIntervalSetSteps : UInt = 7 {
 		didSet {
 			NSUserDefaults.standardUserDefaults().setInteger(Int(stackedIntervalSetSteps), forKey:"stackedIntervalSetSteps");
 		}

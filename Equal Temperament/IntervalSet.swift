@@ -17,6 +17,14 @@ class IntervalSet : SequenceType {
 		name = aName;
 	}
 
+	convenience init?( propertyList aPropertyList: [String:AnyObject] ) {
+		if let theName = aPropertyList["name"] as? String {
+			self.init( name: theName );
+		} else {
+			return nil;
+		}
+	}
+
 	subscript(anIndex:Int) -> Interval! {
 		get {
 			return anIndex >= 0 ? everyInterval[anIndex%numberOfDegrees]*(anIndex/numberOfDegrees+1) : nil;

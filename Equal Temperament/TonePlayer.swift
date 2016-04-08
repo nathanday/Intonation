@@ -21,6 +21,10 @@ class TonePlayer {
 		playing = false;
 	}
 
+	deinit {
+		stop();
+	}
+
 	static let sampleRate : Float64 = 44100.0;
 	static let nyquestFrequency : Float64 = sampleRate/2.0;
 

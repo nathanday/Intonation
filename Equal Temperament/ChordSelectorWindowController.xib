@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10116" systemVersion="15F18b" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10116"/>
@@ -15,15 +15,15 @@
         <window title="Chords and Scales" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="F0z-JX-Cv5" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" utility="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="196" y="240" width="575" height="452"/>
+            <rect key="contentRect" x="196" y="240" width="660" height="452"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
             <value key="minSize" type="size" width="480" height="300"/>
             <view key="contentView" id="se5-gp-TjO">
-                <rect key="frame" x="0.0" y="0.0" width="575" height="452"/>
+                <rect key="frame" x="0.0" y="0.0" width="660" height="452"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <browser verticalHuggingPriority="750" allowsExpansionToolTips="YES" enabled="YES" allowsMultipleSelection="YES" allowsEmptySelection="YES" defaultColumnWidth="100" minColumnWidth="100" maxVisibleColumns="3" titled="YES" separatesColumns="YES" allowsTypeSelect="YES" sendsActionOnArrowKeys="YES" columnResizingType="auto" translatesAutoresizingMaskIntoConstraints="NO" id="NyL-oK-1jT">
-                        <rect key="frame" x="0.0" y="0.0" width="575" height="474"/>
+                    <browser verticalHuggingPriority="750" allowsExpansionToolTips="YES" enabled="YES" allowsMultipleSelection="YES" allowsEmptySelection="YES" defaultColumnWidth="220" minColumnWidth="200" maxVisibleColumns="4" separatesColumns="YES" allowsTypeSelect="YES" sendsActionOnArrowKeys="YES" columnResizingType="auto" translatesAutoresizingMaskIntoConstraints="NO" id="NyL-oK-1jT">
+                        <rect key="frame" x="0.0" y="0.0" width="660" height="452"/>
                         <connections>
                             <action trigger="doubleAction" selector="selectScaleOrChord:" target="nhQ-zm-bGM" id="msW-uT-cun"/>
                             <outlet property="delegate" destination="nhQ-zm-bGM" id="323-O8-nhO"/>
@@ -85,12 +85,11 @@
             <connections>
                 <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
             </connections>
-            <point key="canvasLocation" x="231.5" y="208"/>
+            <point key="canvasLocation" x="267" y="208"/>
         </window>
         <viewController id="nhQ-zm-bGM" customClass="ChordOrScaleSelectorViewController" customModule="Intonation" customModuleProvider="target">
             <connections>
                 <outlet property="browser" destination="NyL-oK-1jT" id="Rey-NP-UuU"/>
-                <outlet property="chordSelectorWindowController" destination="-2" id="P8e-Vr-vID"/>
             </connections>
         </viewController>
     </objects>

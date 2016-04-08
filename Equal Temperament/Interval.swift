@@ -24,12 +24,41 @@ class Interval : Hashable {
 		}
 		return theResult;
 	}
+	class func fromPropertyList( aPropertyList : [String:AnyObject] ) -> Interval? {
+		var		theResult : Interval?
+		var		theEveryName : [String] = [];
+		if let theNames = aPropertyList["names"] as? [String] {
+			theEveryName = theNames;
+		}
+		if let theNumerator = aPropertyList["numerator"] as? Int,
+			theDenominator = aPropertyList["denominator"] as? Int {
+			theResult = RationalInterval( ratio: Rational(theNumerator,theDenominator), names: theEveryName );
+		}
+		else if let theRatioString = aPropertyList["ratio"] as? String {
+			if theRatioString.containsString(".") {
+				if let theRatio = Double(theRatioString) {
+					theResult = IrrationalInterval( ratio: theRatio, names: theEveryName );
+				}
+			} else {
+				if let theRatio = Rational(theRatioString) {
+					theResult = RationalInterval( ratio: theRatio, names: theEveryName );
+				}
+			}
+		}
+		else if let theRatio = aPropertyList["ratio"] as? Double {
+			theResult = IrrationalInterval( ratio: theRatio, names: theEveryName );
+		}
+		return theResult;
+	}
 	var		names: [String]?
 	var		toDouble : Double {
 		preconditionFailure("The method toDouble must be overriden");
 	}
 	var		toString : String {
 		preconditionFailure("The method toString must be overriden");
+	}
+	var		propertyList : [String:AnyObject] {
+		preconditionFailure("The method propertyList must be overriden");
 	}
 	func	equalTemperamentValue( forIntervalCount anIntervals: UInt ) -> Double {
 		return floor(Double(anIntervals)*log2(toDouble)+0.5);
@@ -75,7 +104,14 @@ class RationalInterval : Interval {
 	}()
 	let		ratio: Rational;
 	override var toDouble : Double { return ratio.toDouble; }
-	override var toString : String { return ratio.toString; }
+	override var toString : String { return ratio.ratioString; }
+	override var propertyList : [String:AnyObject] {
+		var		theResult : [String:AnyObject] = ["numerator":numerator, "denominator":denominator];
+		if names?.count > 0 {
+			theResult["names"] = names;
+		}
+		return theResult;
+	}
 	var		justInternation : Double { return ratio.toDouble; }
 	var		numerator: Int { return ratio.numerator; }
 	var		denominator: Int { return ratio.denominator; }
@@ -95,6 +131,22 @@ class RationalInterval : Interval {
 	convenience init( _ aNumerator: UInt, _ aDenominator : UInt ) {
 		self.init( Int(aNumerator), Int(aDenominator) );
 	}
+//	convenience init?( propertyList aPropertyList: [String:AnyObject] ) {
+//		var		theEveryName : [String] = [];
+//		if let theNames = aPropertyList["names"] as? [String] {
+//			theEveryName = theNames;
+//		}
+//		if let theNumerator = aPropertyList["numerator"] as? Int,
+//				theDenominator = aPropertyList["denominator"] as? Int {
+//			self.init( ratio: Rational(theNumerator,theDenominator), names: theEveryName );
+//		} else if let theRatioString = aPropertyList["ratio"] as? String {
+//			if let theRatio = Rational(theRatioString) {
+//				self.init( ratio: theRatio, names: theEveryName );
+//			}
+//		} else {
+//			return nil;
+//		}
+//	}
 //	convenience init?( _ aString : String ) {
 //		if let theValue = Rational(aString) {
 //			self.init( ratio:theValue, names:nil );
@@ -143,6 +195,13 @@ class IrrationalInterval : Interval {
 	let		ratio: Double;
 	override var toDouble : Double { return ratio; }
 	override var toString : String { return "\(ratio)"; }
+	override var propertyList : [String:AnyObject] {
+		var		theResult : [String:AnyObject] = ["value":ratio];
+		if names?.count > 0 {
+			theResult["names"] = names;
+		}
+		return theResult;
+	}
 	override var hashValue: Int { return Int(12000.0*log2(ratio)+0.5).hashValue; }
 	init( ratio aRatio: Double, names aNames: [String]?, factorsString aFactorsString : String? = nil ) {
 		ratio = aRatio;
@@ -153,6 +212,17 @@ class IrrationalInterval : Interval {
 		let		theNames = IrrationalInterval.intervalNames[UInt(aRatio*4096)];
 		self.init( ratio: aRatio, names:theNames );
 		_factorsString = aFactorsString;
+	}
+	convenience init?( propertyList aPropertyList: [String:AnyObject] ) {
+		if let theValue = aPropertyList["ratio"] as? Double{
+			var		theEveryName : [String] = [];
+			if let theNames = aPropertyList["names"] as? [String] {
+				theEveryName = theNames;
+			}
+			self.init( ratio: theValue, names: theEveryName );
+		} else {
+			return nil;
+		}
 	}
 //	convenience init?( _ aString : String ) {
 //		if let theValue = Double(aString) {

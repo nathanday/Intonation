@@ -14,12 +14,13 @@ import Cocoa
 		get {
 			var		theResult = 1;
 			for theValue in selectedRatios {
+				var		theDen = 1;
 				if let theRationalValue = theValue as? RationalInterval {
-					theResult *= theRationalValue.denominator/greatestCommonDivisor(theResult, theRationalValue.denominator);
+					theDen = theRationalValue.denominator;
 				} else {
-					theResult = 1;
-					break;
+					(_,theDen) = Rational.farey( Double(theValue.toDouble), maxDenominator:32 );
 				}
+				theResult *= theDen/greatestCommonDivisor(theResult, theDen);
 			}
 			return theResult;
 		}

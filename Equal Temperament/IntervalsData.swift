@@ -156,8 +156,8 @@ class IntervalsData: NSObject {
 		didSet { NSUserDefaults.standardUserDefaults().setInteger(midiAnchor, forKey: "midiAnchor"); }
 	}
 
-	var		baseFrequency : Double = 220.0;
+	dynamic var		baseFrequency : Double = 220.0;
 
 	var		overtones : HarmonicsDescription = HarmonicsDescription( amount : 0.5, evenAmount: 1.0 );
-	var		arpeggioInterval : Double = 0.5;
+	dynamic var		arpeggioInterval : Double = 0.5;
 }

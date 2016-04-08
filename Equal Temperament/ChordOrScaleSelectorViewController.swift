@@ -8,17 +8,19 @@
 
 import Cocoa
 
-//protocol ChordOrScaleSelector {
-//	func selectedChordOrScale();
-//}
+protocol ChordOrScaleSelector {
+	func chordOrScaleSelectorViewController( aSelf : ChordOrScaleSelectorViewController, selected aSelected: Bool  );
+}
 
 class ChordOrScaleSelectorViewController: NSViewController {
 
 	@IBOutlet var	browser : NSBrowser?;
-	@IBOutlet var	chordSelectorWindowController : ChordSelectorWindowController?
+//	@IBOutlet var	chordSelectorWindowController : ChordSelectorWindowController?
 //	@IBOutlet var	delegate :
 
 	dynamic var	everyChordRoot = RootChordSelectorGroup();
+
+	dynamic var hasLeafSelected : Bool = false;
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,6 +54,29 @@ extension ChordOrScaleSelectorViewController : NSBrowserDelegate {
 
 	func browser( browser: NSBrowser, previewViewControllerForLeafItem anItem: AnyObject ) -> NSViewController? {
 		return (anItem as? ChordSelectorLeaf)?.previewViewControllerForLeafItem();
+	}
+
+	func browser( aBrowser : NSBrowser, selectRow aRow: Int , inColumn aColumn: Int) -> Bool {
+		if let theItem = aBrowser.itemAtRow( aRow, inColumn: aColumn) as? ChordSelectorItem {
+			hasLeafSelected = theItem.isLeaf;
+		} else {
+			hasLeafSelected = false;
+		}
+		return true;
+	}
+
+	func browser( aBrowser: NSBrowser, selectionIndexesForProposedSelection anIndexes: NSIndexSet, inColumn aColumn: Int) -> NSIndexSet {
+		let		theRow = anIndexes.firstIndex;
+		if theRow != NSNotFound {
+			if let theItem = aBrowser.itemAtRow( theRow, inColumn: aColumn) as? ChordSelectorItem {
+				hasLeafSelected = theItem.isLeaf;
+			} else {
+				hasLeafSelected = false;
+			}
+		} else {
+			hasLeafSelected = false;
+		}
+		return anIndexes;
 	}
 }
 

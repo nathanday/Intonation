@@ -21,18 +21,17 @@ class ChordSelectorItem : NSObject {
 	class func chordSelectorItemForPropertyList( aPropertyList: [String:AnyObject] ) -> ChordSelectorItem? {
 		var		theResult : ChordSelectorItem? = nil;
 		if let theName = aPropertyList["name"] as? String {
-			if let theEveryRatioString = aPropertyList["everyChild"] as? [[String:AnyObject]],
-				theKind = aPropertyList["kind"] as? Int {
+			if let theKind = aPropertyList["kind"] as? Int {
 				let theAbbreviations = aPropertyList["abbreviations"] as? [String];
 				let	theMode = aPropertyList["mode"] as? Set<String>;
-				if let theEveryRatio = chordSelectorItemsForPropertyList( theEveryRatioString ) as? [ChordSelectorRatio] {
+				if let theIntervalSet = Scale( propertyList: aPropertyList ) {
 					switch( theKind )
 					{
 					case 1:
-						theResult = ChordSelectorScale(name:theName, everyRatio: theEveryRatio );
+						theResult = ChordSelectorScale(name:theName, everyInterval: theIntervalSet );
 						break;
 					default:
-						theResult = ChordSelectorChord(name:theName, abbreviations:theAbbreviations, modes:theMode, everyRatio: theEveryRatio );
+						theResult = ChordSelectorChord(name:theName, abbreviations:theAbbreviations, modes:theMode, everyInterval: theIntervalSet );
 						break;
 					}
 				}
@@ -41,13 +40,6 @@ class ChordSelectorItem : NSObject {
 				let		theChordSelectorGroup = ChordSelectorGroup(name:theName);
 				theChordSelectorGroup.everyChild = chordSelectorItemsForPropertyList(theChildren);
 				theResult = theChordSelectorGroup;
-			}
-			else if let theNumerator = aPropertyList["numerator"] as? Int,
-				theDenominator = aPropertyList["denominator"] as? Int {
-				theResult = ChordSelectorRatio( name: theName, interval: Rational(theNumerator,theDenominator) );
-			}
-			else if let theRatio = aPropertyList["value"] as? Double {
-				theResult = ChordSelectorRatio( name: theName, interval: theRatio );
 			}
 			else {
 				print( "Propertlist entity failed to parse \(aPropertyList)" );
@@ -63,31 +55,14 @@ class ChordSelectorItem : NSObject {
 	init( name aName: String ) { name = aName; }
 }
 
-class ChordSelectorRatio : ChordSelectorItem {
-	let				interval : Interval;
-
-	init( name aName: String, interval aRatio: Rational ) {
-		interval = RationalInterval(aRatio);
-		super.init( name: aName );
-	}
-	init( name aName: String, interval aRatio: Double ) {
-		interval = IrrationalInterval(aRatio);
-		super.init( name: aName );
-	}
-}
-
 class ChordSelectorLeaf : ChordSelectorItem {
-	let				everyRatio : Array<ChordSelectorRatio>;
+	let				everyInterval : IntervalSet;
 
 	override var	isLeaf : Bool { get { return true; } }
 
-	init( name aName: String, everyRatio anEveryRatio: [ChordSelectorRatio] ) {
-		everyRatio = anEveryRatio;
+	init( name aName: String, everyInterval anEveryInterval: IntervalSet ) {
+		everyInterval = anEveryInterval;
 		super.init( name: aName );
-	}
-
-	func intervalSet() -> IntervalSet {
-		return Scale(name: name, elements: everyRatio.map { $0.interval;} );
 	}
 
 	func previewViewControllerForLeafItem() -> NSViewController? { return ChordPreviewViewController(self); }
@@ -96,10 +71,10 @@ class ChordSelectorLeaf : ChordSelectorItem {
 class ChordSelectorChord : ChordSelectorLeaf {
 	let				abbreviations : Array<String>;
 	let				modes : Set<String>;
-	init( name aName: String, abbreviations anAbbreviations: [String]?, modes aMode: Set<String>?, everyRatio anEveryRatio: [ChordSelectorRatio] ) {
+	init( name aName: String, abbreviations anAbbreviations: [String]?, modes aMode: Set<String>?, everyInterval anEveryInterval: IntervalSet ) {
 		abbreviations = anAbbreviations ?? [];
 		modes = aMode ?? [];
-		super.init( name: aName, everyRatio: anEveryRatio );
+		super.init( name: aName, everyInterval: anEveryInterval );
 	}
 }
 

@@ -8,8 +8,7 @@
 
 import Foundation
 
-struct Rational : CustomStringConvertible, CustomDebugStringConvertible, Hashable
-{
+struct Rational : CustomStringConvertible, CustomDebugStringConvertible, Hashable {
 	let	numerator:		Int;
 	let	denominator:	Int;
 	var toDouble:		Double { return Double(numerator)/Double(denominator); }
@@ -65,8 +64,7 @@ struct Rational : CustomStringConvertible, CustomDebugStringConvertible, Hashabl
 	}
 }
 
-extension Rational : ArrayLiteralConvertible, IntegerLiteralConvertible, FloatLiteralConvertible
-{
+extension Rational : ArrayLiteralConvertible, IntegerLiteralConvertible, FloatLiteralConvertible {
 	static func convertFromArrayLiteral( anElements: Int...) -> Rational {
 		var     theNumerator : Int! = nil;
 		var     theDenominator : Int! = nil;
@@ -88,12 +86,11 @@ extension Rational : ArrayLiteralConvertible, IntegerLiteralConvertible, FloatLi
 		numerator = aNumerator;
 		denominator = 1;
 	}
-	init(floatLiteral aValue: FloatLiteralType) { self.init( Int(aValue*65535.0),Int(65535) ); }
-	static func convertFromFloatLiteral(aValue: FloatLiteralType) -> Rational { return Rational( Int(aValue), 1 ); }
+	init(floatLiteral aValue: FloatLiteralType) { self.init( aValue, maxDenominator:65535 ); }
+	static func convertFromFloatLiteral(aValue: FloatLiteralType) -> Rational { return Rational( aValue, maxDenominator:65535 ); }
 }
 
-extension Rational : FloatingPointType, Equatable, SignedNumberType
-{
+extension Rational : FloatingPointType, Equatable, SignedNumberType {
 	typealias _BitsType = (Int,Int);
 	static func _fromBitPattern(aBits: _BitsType) -> Rational { return Rational(aBits.0,aBits.1); }
 	func _toBitPattern() -> _BitsType { return (numerator,denominator); }
@@ -148,8 +145,8 @@ extension Rational : FloatingPointType, Equatable, SignedNumberType
 		denominator = 1;
 	}
 
-	static private func farey( aValue: Double, maxDenominator aMaxDenom: UInt ) -> (numerator:Int,denominator:Int) {
-		func _farey( x: Double, _ M: UInt ) -> (numerator:Int,denominator:Int) {
+	static func farey( aValue: Double, maxDenominator aMaxDenom: UInt, maxError aMaxError: Double = 0.0 ) -> (numerator:Int,denominator:Int) {
+		func _farey( x: Double, _ M: UInt, _ E:Double ) -> (numerator:Int,denominator:Int) {
 			var		a = (0,1);
 			var		b = (1,1);
 			while( a.1 <= Int(M) && b.1 <= Int(M) ) {
@@ -181,7 +178,7 @@ extension Rational : FloatingPointType, Equatable, SignedNumberType
 			}
 		}
 		let		theInt = Int(aValue);
-		var		theResult = _farey( fabs(aValue-Double(theInt)), aMaxDenom );
+		var		theResult = _farey( fabs(aValue-Double(theInt)), aMaxDenom, aMaxError );
 		if( theInt < 0 ) {
 			theResult.numerator = -theResult.numerator;
 		}

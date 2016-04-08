@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10116" systemVersion="15F18b" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10116"/>
@@ -7,12 +7,18 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="PresetGeneratorViewController" customModule="Intonation" customModuleProvider="target">
             <connections>
-                <outlet property="presetMenu" destination="JcB-VO-Xsk" id="jb2-vy-Jms"/>
+                <outlet property="browser" destination="JrB-PM-RZJ" id="hMj-ZT-AGN"/>
+                <outlet property="choosePresetWindow" destination="fWk-LV-Bfc" id="j9G-0R-Zow"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <viewController id="bWK-3A-s6J" customClass="ChordOrScaleSelectorViewController" customModule="Intonation" customModuleProvider="target">
+            <connections>
+                <outlet property="browser" destination="JrB-PM-RZJ" id="WuR-2F-K4F"/>
+            </connections>
+        </viewController>
         <customView id="Hz6-mo-xeY">
             <rect key="frame" x="0.0" y="0.0" width="588" height="30"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -24,17 +30,6 @@
                         <font key="font" metaFont="systemBold"/>
                     </buttonCell>
                 </button>
-                <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VXL-nk-h8m">
-                    <rect key="frame" x="148" y="2" width="393" height="26"/>
-                    <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="OEg-No-0ph">
-                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="menu"/>
-                        <menu key="menu" id="JcB-VO-Xsk"/>
-                    </popUpButtonCell>
-                    <connections>
-                        <action selector="selectPresetAction:" target="-2" id="S8j-cR-MpQ"/>
-                    </connections>
-                </popUpButton>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FfB-0c-Odu">
                     <rect key="frame" x="102" y="9" width="46" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Select:" id="uCn-Ob-gL4">
@@ -43,22 +38,114 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8r6-e5-NQ9">
+                    <rect key="frame" x="144" y="-2" width="360" height="32"/>
+                    <constraints>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="iRJ-WU-7Na"/>
+                        <constraint firstAttribute="width" constant="348" id="tOy-Ik-mp9"/>
+                    </constraints>
+                    <buttonCell key="cell" type="push" title="Select a Preset" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="CfK-aL-lPK">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="showPresetsSheetAction:" target="-2" id="sjx-R9-MeC"/>
+                    </connections>
+                </button>
             </subviews>
             <constraints>
                 <constraint firstItem="S5c-ua-SQf" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="3y5-fZ-X7E"/>
-                <constraint firstItem="VXL-nk-h8m" firstAttribute="baseline" secondItem="S5c-ua-SQf" secondAttribute="baseline" id="4ZF-WJ-cMH"/>
-                <constraint firstAttribute="bottom" secondItem="VXL-nk-h8m" secondAttribute="bottom" constant="5" id="EOE-LX-99W"/>
-                <constraint firstItem="VXL-nk-h8m" firstAttribute="baseline" secondItem="FfB-0c-Odu" secondAttribute="baseline" id="Khk-oJ-WaX"/>
+                <constraint firstAttribute="trailing" secondItem="8r6-e5-NQ9" secondAttribute="trailing" constant="90" id="54S-u7-5Uh"/>
+                <constraint firstItem="8r6-e5-NQ9" firstAttribute="leading" secondItem="FfB-0c-Odu" secondAttribute="trailing" constant="4" id="Fb0-CP-pad"/>
+                <constraint firstItem="8r6-e5-NQ9" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="4" id="P4L-Vu-szr"/>
                 <constraint firstItem="FfB-0c-Odu" firstAttribute="baseline" secondItem="S5c-ua-SQf" secondAttribute="baseline" id="SUk-4A-DNk"/>
-                <constraint firstItem="VXL-nk-h8m" firstAttribute="leading" secondItem="FfB-0c-Odu" secondAttribute="trailing" constant="4" id="TIj-Wm-8LC"/>
+                <constraint firstAttribute="bottom" secondItem="8r6-e5-NQ9" secondAttribute="bottom" constant="5" id="b5a-nZ-oax"/>
                 <constraint firstItem="S5c-ua-SQf" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="4" id="bwW-5x-NL5"/>
-                <constraint firstItem="VXL-nk-h8m" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="4" id="gvf-GA-2Yh"/>
-                <constraint firstItem="VXL-nk-h8m" firstAttribute="baseline" secondItem="S5c-ua-SQf" secondAttribute="baseline" id="h5m-jo-WA9"/>
-                <constraint firstItem="VXL-nk-h8m" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="150" id="i6f-y0-cxN"/>
-                <constraint firstAttribute="trailing" secondItem="VXL-nk-h8m" secondAttribute="trailing" constant="50" id="pEO-MM-Tv5"/>
-                <constraint firstItem="VXL-nk-h8m" firstAttribute="leading" secondItem="FfB-0c-Odu" secondAttribute="trailing" constant="4" id="qbS-O8-0nV"/>
             </constraints>
-            <point key="canvasLocation" x="197" y="258"/>
+            <point key="canvasLocation" x="194" y="43"/>
         </customView>
+        <window title="Select Preset" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="fWk-LV-Bfc" customClass="NSPanel">
+            <windowStyleMask key="styleMask" titled="YES" resizable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="131" y="158" width="660" height="429"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
+            <view key="contentView" id="CCw-89-Pek">
+                <rect key="frame" x="0.0" y="0.0" width="660" height="429"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <searchField wantsLayer="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="USs-lk-C3k">
+                        <rect key="frame" x="440" y="399" width="200" height="22"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="200" id="Zru-F4-Csc"/>
+                        </constraints>
+                        <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" id="FZa-o2-diA">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </searchFieldCell>
+                    </searchField>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0bd-jZ-nYA">
+                        <rect key="frame" x="557" y="13" width="89" height="32"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="77" id="0xH-oh-hAn"/>
+                        </constraints>
+                        <buttonCell key="cell" type="push" title="Select" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="RLJ-eP-eib">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                            <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
+                        </buttonCell>
+                        <connections>
+                            <action selector="selectPresetAction:" target="-2" id="qM2-bc-oNb"/>
+                            <binding destination="bWK-3A-s6J" name="enabled" keyPath="self.hasLeafSelected" id="utH-Hx-kQU"/>
+                        </connections>
+                    </button>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yRO-cg-LEr">
+                        <rect key="frame" x="465" y="13" width="92" height="32"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="80" id="Iww-7g-maL"/>
+                        </constraints>
+                        <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="WE0-WS-3Rk">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                            <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                        </buttonCell>
+                        <connections>
+                            <action selector="cancelPresetSheetAction:" target="-2" id="Yyj-SC-nR8"/>
+                        </connections>
+                    </button>
+                    <browser verticalHuggingPriority="750" allowsExpansionToolTips="YES" enabled="YES" allowsEmptySelection="YES" prefersAllColumnUserResizing="YES" defaultColumnWidth="220" minColumnWidth="200" maxVisibleColumns="4" separatesColumns="YES" allowsTypeSelect="YES" sendsActionOnArrowKeys="YES" columnResizingType="auto" translatesAutoresizingMaskIntoConstraints="NO" id="JrB-PM-RZJ">
+                        <rect key="frame" x="0.0" y="53" width="660" height="338"/>
+                        <constraints>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="338" id="25b-Od-3ns"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="480" id="AKG-2I-g2v"/>
+                        </constraints>
+                        <connections>
+                            <action trigger="doubleAction" selector="selectPresetAction:" target="-2" id="gs1-qO-wt5"/>
+                            <outlet property="delegate" destination="bWK-3A-s6J" id="moN-Qd-R0q"/>
+                        </connections>
+                    </browser>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="USs-lk-C3k" secondAttribute="trailing" constant="20" id="EH5-nb-dX6"/>
+                    <constraint firstItem="0bd-jZ-nYA" firstAttribute="top" secondItem="JrB-PM-RZJ" secondAttribute="bottom" constant="12" id="FsK-5x-iaY"/>
+                    <constraint firstAttribute="trailing" secondItem="0bd-jZ-nYA" secondAttribute="trailing" constant="20" id="f9E-0Y-6g5"/>
+                    <constraint firstItem="0bd-jZ-nYA" firstAttribute="leading" secondItem="yRO-cg-LEr" secondAttribute="trailing" constant="12" id="fA7-GP-cZT"/>
+                    <constraint firstItem="JrB-PM-RZJ" firstAttribute="leading" secondItem="CCw-89-Pek" secondAttribute="leading" id="fLR-GO-3yh"/>
+                    <constraint firstAttribute="bottom" secondItem="0bd-jZ-nYA" secondAttribute="bottom" constant="20" id="fzt-iC-aXB"/>
+                    <constraint firstItem="0bd-jZ-nYA" firstAttribute="baseline" secondItem="yRO-cg-LEr" secondAttribute="baseline" id="oOq-Na-lJh"/>
+                    <constraint firstItem="USs-lk-C3k" firstAttribute="top" secondItem="CCw-89-Pek" secondAttribute="top" constant="8" id="sG7-DF-xxp"/>
+                    <constraint firstAttribute="trailing" secondItem="JrB-PM-RZJ" secondAttribute="trailing" id="tjB-XG-CXl"/>
+                    <constraint firstItem="JrB-PM-RZJ" firstAttribute="top" secondItem="USs-lk-C3k" secondAttribute="bottom" constant="8" id="vpe-nq-drr"/>
+                </constraints>
+            </view>
+            <connections>
+                <outlet property="delegate" destination="-2" id="BcD-uu-Km0"/>
+            </connections>
+            <point key="canvasLocation" x="233" y="340.5"/>
+        </window>
     </objects>
 </document>

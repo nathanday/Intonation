@@ -36,18 +36,22 @@ class ChordPreviewViewController: NSViewController {
 	}
 
 	var		itemDescription: String { return ""; }
+
+	override func viewDidLoad() {
+		super.viewDidLoad();
+	}
 }
 
 extension ChordPreviewViewController : NSTableViewDataSource {
-	func numberOfRowsInTableView(tableView: NSTableView) -> Int { return chordOrScale.everyRatio.count; }
+	func numberOfRowsInTableView(tableView: NSTableView) -> Int { return chordOrScale.everyInterval.numberOfDegrees; }
 
 	func tableView( aTableView: NSTableView, objectValueForTableColumn aTableColumn: NSTableColumn?, row aRow: Int) -> AnyObject? {
 		var		theResult = "";
-		if aTableColumn?.identifier == "name"{
-			theResult = chordOrScale.everyRatio[aRow].name;
+		if aTableColumn?.identifier == "name" {
+			theResult = chordOrScale.everyInterval[aRow].names?.first ?? "";
 		}
 		else if aTableColumn?.identifier == "interval"{
-			theResult = chordOrScale.everyRatio[aRow].interval.toString;
+			theResult = chordOrScale.everyInterval[aRow].toString;
 		}
 		return theResult;
 	}
@@ -55,7 +59,7 @@ extension ChordPreviewViewController : NSTableViewDataSource {
 	func tableView( aTableView: NSTableView, writeRowsWithIndexes aRowIndexes: NSIndexSet, toPasteboard aPboard: NSPasteboard) -> Bool {
 		var		theResult = "";
 		for theIndex in aRowIndexes {
-			theResult.appendContentsOf("\(chordOrScale.everyRatio[theIndex].name)\t\(chordOrScale.everyRatio[theIndex].interval.toString)\n");
+			theResult.appendContentsOf("\(chordOrScale.everyInterval[theIndex].names?.first ?? "")\t\(chordOrScale.everyInterval[theIndex].toString)\n");
 		}
 		aPboard.setString(theResult, forType: NSPasteboardTypeTabularText);
 		return true;

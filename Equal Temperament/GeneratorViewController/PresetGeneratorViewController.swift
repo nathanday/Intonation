@@ -10,6 +10,10 @@ import Cocoa
 
 class PresetGeneratorViewController: GeneratorViewController {
 
+	@IBOutlet var	choosePresetWindow : NSPanel?
+	@IBOutlet var	browser : NSBrowser?;
+	@IBOutlet var	chordSelectorWindowController : ChordSelectorWindowController?
+
 	required init?( windowController aWindowController: MainWindowController ) {
 		super.init( nibName : "PresetGeneratorViewController", windowController: aWindowController);
 	}
@@ -18,8 +22,27 @@ class PresetGeneratorViewController: GeneratorViewController {
 		fatalError("init(coder:) has not been implemented")
 	}
 
-	@IBOutlet weak var		presetMenu: NSMenu?
+	@IBAction func showPresetsSheetAction(aSender: AnyObject) {
+		if let theSheet = choosePresetWindow {
+			view.window?.beginSheet(theSheet, completionHandler: {
+					(aResponse:NSModalResponse) -> Void in
+					switch aResponse {
+					case NSModalResponseContinue:
+						break;
+					default:
+						break;
+					}
+				}
+			);
+		}
+	}
+}
 
-	@IBAction func selectPresetAction(sender: NSPopUpButton) {
+extension PresetGeneratorViewController : NSWindowDelegate {
+	@IBAction func selectPresetAction(aSender: AnyObject) {
+		view.window?.endSheet( choosePresetWindow!, returnCode: NSModalResponseContinue );
+	}
+	@IBAction func cancelPresetSheetAction(aSender: AnyObject) {
+		view.window?.endSheet( choosePresetWindow!, returnCode: NSModalResponseAbort );
 	}
 }

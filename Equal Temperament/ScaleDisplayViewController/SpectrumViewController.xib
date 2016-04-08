@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10116" systemVersion="15F18b" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10116"/>
@@ -17,14 +17,14 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="635"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <scrollView misplaced="YES" borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" verticalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="tXk-gg-tWR">
-                    <rect key="frame" x="20" y="34" width="353" height="600"/>
+                <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" verticalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="tXk-gg-tWR">
+                    <rect key="frame" x="20" y="34" width="353" height="581"/>
                     <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="cU7-Ve-xqu">
-                        <rect key="frame" x="0.0" y="0.0" width="353" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="353" height="581"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jhy-7k-Bte" customClass="SpectrumView" customModule="Intonation" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="131" width="353" height="469"/>
+                            <view translatesAutoresizingMaskIntoConstraints="NO" id="Jhy-7k-Bte" customClass="SpectrumView" customModule="Intonation" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="353" height="581"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="353" placeholder="YES" id="4gs-Lf-Plv"/>
                                 </constraints>
@@ -41,7 +41,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                     <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" controlSize="small" horizontal="NO" id="udJ-QQ-XWM">
-                        <rect key="frame" x="339" y="0.0" width="14" height="600"/>
+                        <rect key="frame" x="339" y="0.0" width="14" height="581"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>

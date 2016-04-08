@@ -55,18 +55,28 @@ class Document : NSDocument, MIDIReceiverObserver {
 
 	func showWithIntervals( anItervals : [Interval]) {
 		let		theIntervalsData = AdHocIntervalsData();
+		willChangeValueForKey("intervalsData");
 		intervalsData = theIntervalsData;
+		didChangeValueForKey("intervalsData");
 		theIntervalsData.addIntervals(anItervals);
 		makeWindowControllers();
 		showWindows();
 	}
 
 	deinit {
+		tonePlayer.stop();
 		removeIntervalsDataObservers();
 	}
 
+	override func canCloseDocumentWithDelegate(delegate: AnyObject, shouldCloseSelector: Selector, contextInfo: UnsafeMutablePointer<Void>) {
+		tonePlayer.stop();
+		super.canCloseDocumentWithDelegate(delegate, shouldCloseSelector: shouldCloseSelector, contextInfo: contextInfo);
+	}
+
 	dynamic var		baseFrequency : Double {
-		get { return intervalsData?.baseFrequency ?? 220.0; }
+		get {
+			return intervalsData?.baseFrequency ?? 220.0;
+		}
 		set( aValue ) {
 			let		theValue = max(min(aValue,IntervalsData.maximumBaseFrequency), IntervalsData.minimumBaseFrequency);
 			intervalsData?.baseFrequency = theValue;
@@ -90,7 +100,9 @@ class Document : NSDocument, MIDIReceiverObserver {
 				tonePlayer.harmonics = theIntervalsData.overtones;
 			}
 		}
-		get { return intervalsData?.overtones ?? HarmonicsDescription(amount: 0.5, evenAmount: 1.0); }
+		get {
+			return intervalsData?.overtones ?? HarmonicsDescription(amount: 0.5, evenAmount: 1.0);
+		}
 	}
 	var		arpeggioBeatPerMinute : Double {
 		set( aValue ) {
@@ -99,7 +111,9 @@ class Document : NSDocument, MIDIReceiverObserver {
 				tonePlayer.arpeggioInterval = theIntervalsData.arpeggioInterval;
 			}
 		}
-		get { return 60.0/(intervalsData?.arpeggioInterval ?? 1); }
+		get {
+			return 60.0/(intervalsData?.arpeggioInterval ?? 1);
+		}
 	}
 
 	var		currentlySelectedMethod : Int? = nil;
@@ -159,7 +173,9 @@ class Document : NSDocument, MIDIReceiverObserver {
 		let		theFormat : UnsafeMutablePointer<NSPropertyListFormat> = nil;
 		do {
 			if let thePropertyList = try NSPropertyListSerialization.propertyListWithData(aData, options:.Immutable, format:theFormat) as? [String:AnyObject] {
+				willChangeValueForKey("intervalsData");
 				intervalsData = IntervalsData.from(propertyList:thePropertyList);
+				didChangeValueForKey("intervalsData");
 			}
 		}
 		catch {

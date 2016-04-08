@@ -33,7 +33,9 @@ class WaveView: ResultView {
 		}
 	}
 
-	override var intrinsicContentSize: NSSize { get { return NSMakeSize(CGFloat(2*commonFactor)*CGFloat(xScale), NSViewNoInstrinsicMetric); } }
+	override var intrinsicContentSize: NSSize {
+		return NSMakeSize(CGFloat(2*commonFactor)*CGFloat(xScale), NSViewNoInstrinsicMetric);
+	}
 
 	override func drawRect(dirtyRect: NSRect) {
 		var		theBounds = self.bounds;
