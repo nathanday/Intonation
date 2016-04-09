@@ -85,8 +85,9 @@ class EqualTemperamentGenerator: IntervalsDataGenerator {
 		let		theMaxRatio = pow(2.0,Double(anIntervalsData.octavesCount));
 		while theRatio < theMaxRatio {
 			let		theString = formulaStringFor(note:theIndex);
-			let		theInterval = IrrationalInterval(theRatio,factorsString:theString);
+			let		theInterval = EqualTemperamentInterval(degree: theIndex, steps: degrees, interval: interval, names: [theString])
 			let		theEntry = EqualTemperamentEntry(interval: theInterval );
+			theRatio = theInterval.toDouble;
 			theResult.insert(theEntry);
 			theIndex += 1;
 			theRatio = ratioFor(note:theIndex);

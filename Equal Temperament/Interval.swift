@@ -48,6 +48,14 @@ class Interval : Hashable {
 		else if let theRatio = aPropertyList["ratio"] as? Double {
 			theResult = IrrationalInterval( ratio: theRatio, names: theEveryName );
 		}
+		else if let theDegree = aPropertyList["degree"] as? UInt {
+			let theSteps = aPropertyList["steps"] as? UInt;
+			var theInterval : Interval? = nil;
+			if let theIntervalString = aPropertyList["interval"] as? String {
+				theInterval = Interval.fromString(theIntervalString);
+			}
+			theResult = EqualTemperamentInterval( degree: theDegree, steps:theSteps ?? 12, interval:theInterval ?? RationalInterval(2), names: theEveryName );
+		}
 		return theResult;
 	}
 	var		names: [String]?
@@ -104,7 +112,7 @@ class RationalInterval : Interval {
 	}()
 	let		ratio: Rational;
 	override var toDouble : Double { return ratio.toDouble; }
-	override var toString : String { return ratio.ratioString; }
+	override var toString : String { return ratio.toString; }
 	override var propertyList : [String:AnyObject] {
 		var		theResult : [String:AnyObject] = ["numerator":numerator, "denominator":denominator];
 		if names?.count > 0 {
@@ -234,6 +242,56 @@ class IrrationalInterval : Interval {
 		return _factorsString != nil ? _factorsString! : "\(ratio)";
 	}
 	override var ratioString : String { return ratio.toString(decimalPlaces:5); }
+}
+
+class EqualTemperamentInterval : Interval {
+	private static let	intervalNames : [UInt:[String]] = {
+		var theResult = [UInt:[String]]()
+		for theEntry in NSUserDefaults.standardUserDefaults().arrayForKey("intervalNames")! as! [[String:AnyObject]] {
+			if let theRatioString = theEntry["ratio"] as? String,
+				theNames = theEntry["names"] as? [String] {
+				if theRatioString.containsString(".") {
+					if let theRatio = Double(theRatioString) {
+						theResult[UInt(theRatio*4096)] = theNames;
+					}
+				}
+			}
+		}
+		return theResult;
+	}()
+	var		steps : UInt = 12;
+	var		degree : UInt = 0;
+	var		interval : Interval = RationalInterval(2);
+	init( degree aDegree: UInt, steps aSteps: UInt = 12, interval anInterval : Interval = RationalInterval(2), names aNames: [String] ) {
+		interval = anInterval;
+		steps = aSteps;
+		degree = aDegree;
+		super.init( names: aNames );
+	}
+	convenience init?( propertyList aPropertyList: [String:AnyObject] ) {
+		if let theDegree = aPropertyList["degree"] as? UInt {
+			var		theEveryName : [String] = [];
+			if let theNames = aPropertyList["names"] as? [String] {
+				theEveryName = theNames;
+			}
+			self.init( degree: theDegree, steps: (aPropertyList["steps"] as? UInt) ?? 12, interval: (aPropertyList["interval"] as? Interval) ?? RationalInterval(2), names: theEveryName );
+		} else {
+			return nil;
+		}
+	}
+	override var		toDouble : Double {
+		return pow(interval.toDouble,Double(degree)/Double(steps));
+	}
+	override var toString : String {
+		return "\(interval.toString)^\(degree)/\(steps)";
+	}
+	override var propertyList : [String:AnyObject] {
+		return [ "steps":steps, "degree":degree, "interval":interval.toString ];
+	}
+	override var factorsString : String {
+		return "\(interval.toString)^\(degree)/\(steps)";
+	}
+	override var ratioString : String { return toDouble.toString(decimalPlaces:5); }
 }
 
 func * (a: Interval, b: Int) -> Interval {

@@ -47,7 +47,7 @@ class StackedIntervalSet : IntervalSet, Hashable {
 		switch interval {
 		case let x as RationalInterval:
 			var		theValue : Rational = 1;
-			for _ in UInt(0)...steps {
+			for _ in UInt(0)..<steps {
 				var		theNormalizedValue = theValue;
 				while theNormalizedValue/2 > 1 {
 					theNormalizedValue /= 2;
@@ -60,7 +60,7 @@ class StackedIntervalSet : IntervalSet, Hashable {
 			}
 		case let x as IrrationalInterval:
 			var		theValue = 1.0;
-			for _ in UInt(0)...steps {
+			for _ in UInt(0)..<steps {
 				var		theNormalizedValue = theValue;
 				while theNormalizedValue*0.5 > 1.0 {
 					theNormalizedValue *= 0.5;

@@ -36,7 +36,7 @@ class MIDIToHarmonicRatio {
 
 	func pushRatioFor( midiNote aMIDINote: UInt, everyInterval aEveryInterval : [EqualTemperamentEntry] ) -> EqualTemperamentEntry {
 		var		theIndex = (Int(aMIDINote)-Int(anchorMIDINote));
-		if theIndex < 0 {
+		while theIndex < 0 {
 			theIndex += aEveryInterval.count;
 		}
 		let	theResult = aEveryInterval[theIndex%aEveryInterval.count];
