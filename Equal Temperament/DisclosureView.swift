@@ -26,10 +26,20 @@ class DisclosureView : NSView {
 		didSet {
 			complimentaryView?.hidden = !hidden;
 			invalidateIntrinsicContentSize();
+			var		theOrientation = NSLayoutConstraintOrientation.Vertical;
+			var		thePriority = expandedContentHuggingPriority;
+			if( orientation  == .horizontal ) {
+				theOrientation = .Horizontal;
+			}
+			if( hidden ) {
+				thePriority = NSLayoutPriorityDefaultHigh;
+			}
+			super.setContentHuggingPriority(thePriority, forOrientation: theOrientation);
 		}
 	}
 
 	private(set) var		expandedSize : NSSize;
+	@IBInspectable	var		expandedContentHuggingPriority : Float = NSLayoutPriorityDefaultLow;
 	var						colapsedSize : NSSize {
 		get {
 			switch( orientation ) {
