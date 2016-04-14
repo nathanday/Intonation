@@ -24,37 +24,39 @@ class Interval : Hashable {
 		}
 		return theResult;
 	}
-	class func fromPropertyList( aPropertyList : [String:AnyObject] ) -> Interval? {
+	class func fromPropertyList( aPropertyList : AnyObject ) -> Interval? {
 		var		theResult : Interval?
 		var		theEveryName : [String] = [];
-		if let theNames = aPropertyList["names"] as? [String] {
-			theEveryName = theNames;
-		}
-		if let theNumerator = aPropertyList["numerator"] as? Int,
-			theDenominator = aPropertyList["denominator"] as? Int {
-			theResult = RationalInterval( ratio: Rational(theNumerator,theDenominator), names: theEveryName );
-		}
-		else if let theRatioString = aPropertyList["ratio"] as? String {
-			if theRatioString.containsString(".") {
-				if let theRatio = Double(theRatioString) {
-					theResult = IrrationalInterval( ratio: theRatio, names: theEveryName );
-				}
-			} else {
-				if let theRatio = Rational(theRatioString) {
-					theResult = RationalInterval( ratio: theRatio, names: theEveryName );
+		if let thePropertyList = aPropertyList as? [String:AnyObject] {
+			if let theNames = thePropertyList["names"] as? [String] {
+				theEveryName = theNames;
+			}
+			if let theNumerator = thePropertyList["numerator"] as? Int,
+				theDenominator = thePropertyList["denominator"] as? Int {
+				theResult = RationalInterval( ratio: Rational(theNumerator,theDenominator), names: theEveryName );
+			}
+			else if let theRatioString = thePropertyList["ratio"] as? String {
+				if theRatioString.containsString(".") {
+					if let theRatio = Double(theRatioString) {
+						theResult = IrrationalInterval( ratio: theRatio, names: theEveryName );
+					}
+				} else {
+					if let theRatio = Rational(theRatioString) {
+						theResult = RationalInterval( ratio: theRatio, names: theEveryName );
+					}
 				}
 			}
-		}
-		else if let theRatio = aPropertyList["ratio"] as? Double {
-			theResult = IrrationalInterval( ratio: theRatio, names: theEveryName );
-		}
-		else if let theDegree = aPropertyList["degree"] as? UInt {
-			let theSteps = aPropertyList["steps"] as? UInt;
-			var theInterval : Interval? = nil;
-			if let theIntervalString = aPropertyList["interval"] as? String {
-				theInterval = Interval.fromString(theIntervalString);
+			else if let theRatio = thePropertyList["ratio"] as? Double {
+				theResult = IrrationalInterval( ratio: theRatio, names: theEveryName );
 			}
-			theResult = EqualTemperamentInterval( degree: theDegree, steps:theSteps ?? 12, interval:theInterval ?? RationalInterval(2), names: theEveryName );
+			else if let theDegree = thePropertyList["degree"] as? UInt {
+				let theSteps = thePropertyList["steps"] as? UInt;
+				var theInterval : Interval? = nil;
+				if let theIntervalString = thePropertyList["interval"] as? String {
+					theInterval = Interval.fromString(theIntervalString);
+				}
+				theResult = EqualTemperamentInterval( degree: theDegree, steps:theSteps ?? 12, interval:theInterval ?? RationalInterval(2), names: theEveryName );
+			}
 		}
 		return theResult;
 	}
@@ -300,6 +302,8 @@ func * (a: Interval, b: Int) -> Interval {
 		return RationalInterval(x.ratio.numerator*b,x.ratio.denominator);
 	case let x as IrrationalInterval:
 		return IrrationalInterval(x.ratio*Double(b));
+	case let x as EqualTemperamentInterval:
+		return IrrationalInterval(x.toDouble*Double(b));
 	default:
 		preconditionFailure("Unexpected type \(a)");
 	}
@@ -311,6 +315,8 @@ func * (a: Interval, b: UInt) -> Interval {
 		return RationalInterval(x.ratio.numerator*Int(b),x.ratio.denominator);
 	case let x as IrrationalInterval:
 		return IrrationalInterval(x.ratio*Double(b));
+	case let x as EqualTemperamentInterval:
+		return IrrationalInterval(x.toDouble*Double(b));
 	default:
 		preconditionFailure("Unexpected type \(a)");
 	}
@@ -323,23 +329,27 @@ func equivelentRatios( a: Double, _ b: Double ) -> Bool {
 func == (a: Interval, b: Interval) -> Bool { return a.toDouble == b.toDouble; }
 func == (a: RationalInterval, b: RationalInterval) -> Bool { return a.ratio==b.ratio; }
 func == (a: IrrationalInterval, b: IrrationalInterval) -> Bool { return equivelentRatios(a.ratio,b.ratio); }
+func == (a: EqualTemperamentInterval, b: EqualTemperamentInterval) -> Bool { return a.interval == b.interval && a.steps == b.steps && a.degree == b.degree; }
 
 func < (a: Interval, b: Interval) -> Bool { return a.toDouble < b.toDouble; }
 func < (a: RationalInterval, b: RationalInterval) -> Bool { return a.ratio < b.ratio; }
 func < (a: IrrationalInterval, b: IrrationalInterval) -> Bool { return a.ratio < b.ratio; }
+func < (a: EqualTemperamentInterval, b: EqualTemperamentInterval) -> Bool { return a.toDouble < b.toDouble; }
 
 func <= (a: Interval, b: Interval) -> Bool { return a.toDouble <= b.toDouble; }
 func <= (a: RationalInterval, b: RationalInterval) -> Bool { return a.ratio <= b.ratio; }
 func <= (a: IrrationalInterval, b: IrrationalInterval) -> Bool { return a.ratio < b.ratio || equivelentRatios(a.ratio,b.ratio); }
+func <= (a: EqualTemperamentInterval, b: EqualTemperamentInterval) -> Bool { return a==b || a.toDouble < b.toDouble; }
 
 func > (a: Interval, b: Interval) -> Bool { return a.toDouble > b.toDouble; }
 func > (a: RationalInterval, b: RationalInterval) -> Bool { return a.ratio > b.ratio; }
 func > (a: IrrationalInterval, b: IrrationalInterval) -> Bool { return a.ratio > b.ratio; }
-
+func > (a: EqualTemperamentInterval, b: EqualTemperamentInterval) -> Bool { return a.toDouble > b.toDouble; }
 
 func >= (a: Interval, b: Interval) -> Bool { return a.toDouble >= b.toDouble; }
 func >= (a: RationalInterval, b: RationalInterval) -> Bool { return a.ratio >= b.ratio; }
 func >= (a: IrrationalInterval, b: IrrationalInterval) -> Bool { return a.ratio > b.ratio || equivelentRatios(a.ratio,b.ratio); }
+func >= (a: EqualTemperamentInterval, b: EqualTemperamentInterval) -> Bool { return a==b || a.toDouble > b.toDouble; }
 
 func == (a: Interval, b: Int) -> Bool { return a.toDouble == Double(b); }
 func == (a: RationalInterval, b: Int) -> Bool { return a.ratio==b; }

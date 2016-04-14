@@ -46,6 +46,10 @@ class AdHokGeneratorViewController: GeneratorViewController {
 			removeIntervals(theDocument.selectedJustIntonationIntervals);
 		}
 	}
+	@IBAction func paste(aSender: AnyObject ) {
+		let		theEntries = NSPasteboard.generalPasteboard().readObjectsForClasses([EqualTemperamentEntry.self], options: nil) as? [EqualTemperamentEntry];
+		NSLog( "\(theEntries)" );
+	}
 	func addInterval( anInterval : Interval ) {
 		addIntervals( [anInterval] );
 	}

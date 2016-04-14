@@ -51,7 +51,7 @@ struct Rational : CustomStringConvertible, CustomDebugStringConvertible, Hashabl
 	var toString: String {
 		return denominator != 1 ? "\(numerator)/\(denominator)" : "\(numerator)";
 	}
-	var ratioString: String { return "\(numerator)∶\(denominator)"; }
+	var ratioString: String { return "\(numerator):\(denominator)"; }
 
 	var hashValue: Int { return Int(numerator)^Int(denominator); }
 	var description: String { return toString; }

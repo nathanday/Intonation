@@ -184,8 +184,10 @@ class MainWindowController : NSWindowController {
 	}
 
 	@IBAction func copy(aSender: AnyObject ) {
-		NSPasteboard.generalPasteboard().clearContents();
-		NSPasteboard.generalPasteboard().writeObjects( arrayController!.selectedObjects as! [EqualTemperamentEntry] );
+		if let theEntries = arrayController!.selectedObjects as? [EqualTemperamentEntry] {
+			NSPasteboard.generalPasteboard().clearContents();
+			NSPasteboard.generalPasteboard().writeObjects( theEntries );
+		}
 	}
 
 	@IBAction func copyCentsAction(aSender: AnyObject ) {
@@ -248,6 +250,12 @@ class MainWindowController : NSWindowController {
 		}
 	}
 
+	@IBAction func paste(aSender: AnyObject ) {
+		if let theViewController = self.documentTypeViewController as? AdHokGeneratorViewController,
+		theEntries = NSPasteboard.generalPasteboard().readObjectsForClasses([EqualTemperamentEntry.self], options: nil) as? [EqualTemperamentEntry] {
+			theViewController.addIntervals( theEntries.map { return $0.interval; } );
+		}
+	}
 	override var windowNibName: String { return "MainWindowController"; }
 
 	override func windowDidLoad() {
