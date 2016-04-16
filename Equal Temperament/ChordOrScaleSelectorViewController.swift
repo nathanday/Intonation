@@ -21,6 +21,11 @@ class ChordOrScaleSelectorViewController: NSViewController {
 	dynamic var	everyChordRoot = RootChordSelectorGroup();
 
 	dynamic var hasLeafSelected : Bool = false;
+	var selectedIntervalSet : IntervalSet? {
+		didSet {
+			hasLeafSelected = selectedIntervalSet != nil;
+		}
+	}
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,10 +62,10 @@ extension ChordOrScaleSelectorViewController : NSBrowserDelegate {
 	}
 
 	func browser( aBrowser : NSBrowser, selectRow aRow: Int , inColumn aColumn: Int) -> Bool {
-		if let theItem = aBrowser.itemAtRow( aRow, inColumn: aColumn) as? ChordSelectorItem {
-			hasLeafSelected = theItem.isLeaf;
+		if let theItem = aBrowser.itemAtRow( aRow, inColumn: aColumn) as? ChordSelectorLeaf {
+			selectedIntervalSet = theItem.everyInterval;
 		} else {
-			hasLeafSelected = false;
+			selectedIntervalSet = nil;
 		}
 		return true;
 	}
@@ -68,13 +73,13 @@ extension ChordOrScaleSelectorViewController : NSBrowserDelegate {
 	func browser( aBrowser: NSBrowser, selectionIndexesForProposedSelection anIndexes: NSIndexSet, inColumn aColumn: Int) -> NSIndexSet {
 		let		theRow = anIndexes.firstIndex;
 		if theRow != NSNotFound {
-			if let theItem = aBrowser.itemAtRow( theRow, inColumn: aColumn) as? ChordSelectorItem {
-				hasLeafSelected = theItem.isLeaf;
+			if let theItem = aBrowser.itemAtRow( theRow, inColumn: aColumn) as? ChordSelectorLeaf {
+				selectedIntervalSet = theItem.everyInterval;
 			} else {
-				hasLeafSelected = false;
+				selectedIntervalSet = nil;
 			}
 		} else {
-			hasLeafSelected = false;
+			selectedIntervalSet = nil;
 		}
 		return anIndexes;
 	}

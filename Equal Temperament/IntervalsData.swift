@@ -144,7 +144,7 @@ class IntervalsData: NSObject {
 		get { preconditionFailure("The property documentType is abstract and must be overriden"); }
 	}
 
-	var		octavesCount : UInt = 1 {
+	dynamic var		octavesCount : UInt = 1 {
 		didSet {
 			NSUserDefaults.standardUserDefaults().setInteger(Int(octavesCount), forKey:"octavesCount");
 		}

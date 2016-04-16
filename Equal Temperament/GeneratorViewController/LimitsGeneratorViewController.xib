@@ -22,7 +22,7 @@
                         <constraint firstAttribute="height" constant="17" id="eJH-4L-dpv"/>
                         <constraint firstAttribute="width" constant="23" id="fCA-kS-Rfc"/>
                     </constraints>
-                    <buttonCell key="cell" type="disclosureTriangle" bezelStyle="disclosure" image="5835BA2B-871E-45DD-A14C-4E08F5A5FCE9" imagePosition="above" alignment="left" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8fk-MV-khf">
+                    <buttonCell key="cell" type="disclosureTriangle" bezelStyle="disclosure" image="ADE9537C-1251-4E82-9FE9-1ACF6AE629A2" imagePosition="above" alignment="left" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8fk-MV-khf">
                         <behavior key="behavior" pushIn="YES" changeBackground="YES" changeGray="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -183,6 +183,7 @@
                         <constraint firstItem="7J9-NB-Us5" firstAttribute="leading" secondItem="1nc-cv-xXH" secondAttribute="trailing" id="8WA-LU-7s6"/>
                         <constraint firstItem="DBX-3z-8jY" firstAttribute="leading" secondItem="7J9-NB-Us5" secondAttribute="trailing" constant="4" id="8e0-dv-W3N"/>
                         <constraint firstAttribute="height" constant="30" placeholder="YES" id="SUS-Vk-ESi"/>
+                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="30" id="fyi-Jw-GoQ"/>
                         <constraint firstItem="1nc-cv-xXH" firstAttribute="leading" secondItem="FBw-0H-pDk" secondAttribute="leading" constant="150" id="jt4-2x-Y5O"/>
                         <constraint firstItem="1nc-cv-xXH" firstAttribute="baseline" secondItem="PNz-DN-cuw" secondAttribute="baseline" id="lm7-Zg-AsC"/>
                         <constraint firstItem="1nc-cv-xXH" firstAttribute="top" secondItem="FBw-0H-pDk" secondAttribute="top" constant="2" id="m9M-tt-Aa9"/>
@@ -243,7 +244,7 @@
         <userDefaultsController representsSharedInstance="YES" id="15X-6Z-TvY"/>
     </objects>
     <resources>
-        <image name="5835BA2B-871E-45DD-A14C-4E08F5A5FCE9" width="1" height="1">
+        <image name="ADE9537C-1251-4E82-9FE9-1ACF6AE629A2" width="1" height="1">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

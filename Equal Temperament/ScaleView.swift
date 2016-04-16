@@ -21,8 +21,7 @@ class ScaleView : ResultView {
 		didSet { setNeedsDisplay(); }
 	}
 	
-	func drawJustIntonationRatio( ratio aRatio : Interval, hilighted aHilighted : Bool, index anIndex: Int, previousValue aPreviousY : CGFloat ) -> CGFloat {
-		return 0.0;
+	func drawJustIntonationRatio( ratio aRatio : Interval, hilighted aHilighted : Bool, index anIndex: Int ) {
 	}
 	
 	func drawEqualTemperamentRatio( rationNumber aRatioNumber : UInt ) {
@@ -30,8 +29,6 @@ class ScaleView : ResultView {
 	func drawNoEqualTemperament( ) { }
 	
 	override func drawRect(aDirtyRect: NSRect) {
-		var		thePreviousValue : CGFloat = 0.0;
-		
 		if useIntervals {
 			for i in 0..<numberOfIntervals { drawEqualTemperamentRatio( rationNumber: i ); }
 		}
@@ -39,12 +36,14 @@ class ScaleView : ResultView {
 			drawNoEqualTemperament();
 		}
 		for i in 0..<everyRatios.count {
-			thePreviousValue = drawJustIntonationRatio(ratio: everyRatios[i], hilighted: selectedRatios.contains(everyRatios[i]), index:i, previousValue: thePreviousValue );
+			drawJustIntonationRatio(ratio: everyRatios[i], hilighted: selectedRatios.contains(everyRatios[i]), index:i );
 		}
 	}
 }
 
 class LinearScaleView : ScaleView {
+	private var		previousValue : CGFloat = 0.0;
+	private var		offsetCount : UInt = 0;
 	private var		drawingBounds : NSRect {
 		get {
 			var		theResult = NSInsetRect(self.bounds, 0.0, 5.0);
@@ -52,11 +51,16 @@ class LinearScaleView : ScaleView {
 			return theResult;
 		}
 	}
-	override func drawJustIntonationRatio( ratio aRatio : Interval, hilighted aHilighted : Bool, index anIndex: Int, previousValue aPreviousY : CGFloat ) -> CGFloat {
+	override func drawRect(aDirtyRect: NSRect) {
+		previousValue = 0.0;
+		super.drawRect(aDirtyRect);
+	}
+	override func drawJustIntonationRatio( ratio aRatio : Interval, hilighted aHilighted : Bool, index anIndex: Int ) {
 		let		theX0 = floor(NSMidX(drawingBounds)+equalTempBarWidth/2.0)-20.5;
 		let		theY = CGFloat(log2(aRatio.toDouble)) * NSHeight(drawingBounds) + NSMinY(drawingBounds);
-		let		theCloseToPrevious = abs(theY-aPreviousY)<14.0;
-		let		theX1 = theX0 + CGFloat(theCloseToPrevious ? 55.0 : 15.0);
+		let		theCloseToPrevious = abs(theY-previousValue)<14.0;
+		offsetCount = theCloseToPrevious ? ((offsetCount+1)%6) : 0;
+		let		theX1 = theX0 + 15.0 + 40.0*CGFloat(offsetCount);
 		let		thePath = NSBezierPath()
 		thePath.moveToPoint(NSMakePoint(theX1+4.5, theY))
 		thePath.curveToPoint(NSMakePoint(theX1+2.5, theY+2.0), controlPoint1: NSMakePoint(theX1+4.5, theY+1.1), controlPoint2: NSMakePoint(theX1+3.6, theY+2.0))
@@ -82,7 +86,7 @@ class LinearScaleView : ScaleView {
 		let		theTextColor = aHilighted ? NSColor(calibratedHue: hueForIndex(anIndex), saturation: 1.0, brightness: 0.75, alpha: 1.0) : NSColor(white: 0.0, alpha: 0.25);
 		drawText(string: aRatio.ratioString, size:theSize, point: NSMakePoint(theX1+10.0, theY-theSize*0.5-3.0), color:theTextColor );
 		
-		return theCloseToPrevious ? 0.0 : theY;
+		previousValue = theY;
 	}
 	
 	override func drawEqualTemperamentRatio( rationNumber aRatioNumber : UInt ) {
@@ -105,7 +109,7 @@ class PitchConstellationView : ScaleView {
 	private var		axisesRadius : CGFloat {
 		return min(maximumRadius-80.0, 320.0);
 	}
-	override func drawJustIntonationRatio( ratio aRatio : Interval, hilighted aHilighted : Bool, index anIndex: Int, previousValue aPreviousY : CGFloat ) -> CGFloat {
+	override func drawJustIntonationRatio( ratio aRatio : Interval, hilighted aHilighted : Bool, index anIndex: Int ) {
 		let		theBounds = self.bounds;
 		let		theAngle = CGFloat(log2(aRatio.toDouble) * 2.0*π);
 		let		theRadius = aHilighted ? maximumRadius - 40.0 : axisesRadius;
@@ -126,8 +130,6 @@ class PitchConstellationView : ScaleView {
 		let		theTextColor = aHilighted ? NSColor(calibratedHue: hueForIndex(anIndex), saturation: 1.0, brightness: 0.75, alpha: 1.0) : NSColor(white: 0.0, alpha: 0.25);
 		let		theTextAlignment : NSTextAlignment = abs(sin(theAngle)) < 0.707 ? .Center : sin(theAngle) < 0.0 ? .Right :  .Left;
 		drawText(string: aRatio.ratioString, size:theSize, point: NSMakePoint(NSMidX(theBounds)+sin(theAngle)*(theRadius+5.0), NSMidY(theBounds)+cos(theAngle)*(theRadius+11.0)-theSize*0.8), color:theTextColor, textAlignment: theTextAlignment );
-		
-		return 0.0;
 	}
 	
 	override func drawEqualTemperamentRatio( rationNumber aRatioNumber : UInt ) {

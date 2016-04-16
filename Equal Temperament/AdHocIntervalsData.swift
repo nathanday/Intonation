@@ -71,7 +71,7 @@ class AdHocGenerator: IntervalsDataGenerator {
 	init( intervalsData anIntervalsData : AdHocIntervalsData ) {
 		var		theResult = Set<EqualTemperamentEntry>();
 		super.init();
-		for theOctave in 0..<anIntervalsData.octavesCount {
+		for theOctave in 0...anIntervalsData.octavesCount {
 			let		theOctaveValue = (1<<theOctave);
 			for theEntry in anIntervalsData.adHocEntries {
 				theResult.insert(EqualTemperamentEntry(interval: theEntry*theOctaveValue ));

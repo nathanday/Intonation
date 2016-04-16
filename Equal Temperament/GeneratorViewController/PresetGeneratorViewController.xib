@@ -9,6 +9,7 @@
             <connections>
                 <outlet property="browser" destination="JrB-PM-RZJ" id="hMj-ZT-AGN"/>
                 <outlet property="choosePresetWindow" destination="fWk-LV-Bfc" id="j9G-0R-Zow"/>
+                <outlet property="chordOrScaleSelectorViewController" destination="bWK-3A-s6J" id="UOE-J5-Jtj"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>

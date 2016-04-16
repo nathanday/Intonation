@@ -18,7 +18,7 @@
             <rect key="frame" x="0.0" y="0.0" width="588" height="101"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <customView verticalHuggingPriority="300" translatesAutoresizingMaskIntoConstraints="NO" id="qDp-at-EPe" customClass="DisclosureView" customModule="Intonation" customModuleProvider="target">
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="qDp-at-EPe" customClass="DisclosureView" customModule="Intonation" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="588" height="71"/>
                     <subviews>
                         <scrollView autohidesScrollers="YES" horizontalLineScroll="16" horizontalPageScroll="10" verticalLineScroll="16" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sru-5n-zBE">

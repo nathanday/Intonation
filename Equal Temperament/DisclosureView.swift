@@ -94,6 +94,22 @@ class DisclosureView : NSView {
 		}
 	}
 
+	override func setContentHuggingPriority(aPriority: NSLayoutPriority, forOrientation anOrientation: NSLayoutConstraintOrientation) {
+		if !colapsed {
+			switch( orientation ) {
+			case .vertical:
+				if( anOrientation == .Vertical ) {
+					expandedContentHuggingPriority = contentHuggingPriorityForOrientation(.Vertical);
+				}
+			case .horizontal:
+				if( anOrientation == .Horizontal ) {
+					expandedContentHuggingPriority = contentHuggingPriorityForOrientation(.Horizontal);
+				}
+			}
+		}
+		super.setContentHuggingPriority(aPriority, forOrientation: anOrientation);
+	}
+
 	@IBAction func colapse( aSender : AnyObject? ) { colapsed = true; }
 	@IBAction func expand( aSender : AnyObject? ) { colapsed = false; }
 	@IBAction func toggle( aSender : AnyObject? ) { colapsed = !colapsed; }

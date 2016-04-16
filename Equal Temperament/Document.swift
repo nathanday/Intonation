@@ -48,8 +48,10 @@ class Document : NSDocument, MIDIReceiverObserver {
 	}
 
 	func removeIntervalsDataObservers() {
-		for theKey in watchedKeys {
-			intervalsData?.removeObserver(self, forKeyPath:theKey);
+		if let theIntervalsData = intervalsData {
+			for theKey in watchedKeys {
+				theIntervalsData.removeObserver(self, forKeyPath:theKey);
+			}
 		}
 	}
 

@@ -43,6 +43,8 @@ class MainWindowController : NSWindowController {
 	@IBOutlet weak var	baseFrequencyDeltaSlider : NSSlider?;
 	@IBOutlet weak var	playSegmentedControl : NSSegmentedControl?;
 
+	@IBOutlet weak var  octavesCountPopUpButton : NSPopUpButton?
+
 	var		documentTypeViewController : GeneratorViewController?
 
 	override func awakeFromNib() {
@@ -266,11 +268,13 @@ class MainWindowController : NSWindowController {
 					let		theWindowController = SelectDocumentType();
 					theWindowController.completionBlock = { (aType) in
 						if let theType = aType {
-							theDocument.intervalsData = IntervalsData.from(documentType: theType );
+							let		theIntervalData = IntervalsData.from(documentType: theType );
+							theDocument.intervalsData = theIntervalData;
 							if let theViewController = theDocument.intervalsData?.viewController(windowController: self) {
 								self.documentTypeViewController = theViewController;
 								self.documentTypeViewControllerPlaceHolderView!.loadViewController(theViewController);
 								theDocument.calculateAllIntervals();
+								self.octavesCountPopUpButton?.selectItemWithTag(Int(theIntervalData.octavesCount));
 							}
 						}
 						else {

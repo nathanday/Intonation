@@ -12,7 +12,7 @@ class PresetGeneratorViewController: GeneratorViewController {
 
 	@IBOutlet var	choosePresetWindow : NSPanel?
 	@IBOutlet var	browser : NSBrowser?;
-	@IBOutlet var	chordSelectorWindowController : ChordSelectorWindowController?
+	@IBOutlet var	chordOrScaleSelectorViewController : ChordOrScaleSelectorViewController?
 
 	required init?( windowController aWindowController: MainWindowController ) {
 		super.init( nibName : "PresetGeneratorViewController", windowController: aWindowController);
@@ -28,6 +28,10 @@ class PresetGeneratorViewController: GeneratorViewController {
 					(aResponse:NSModalResponse) -> Void in
 					switch aResponse {
 					case NSModalResponseContinue:
+						if let theIntervalData = self.document?.intervalsData as? PresetIntervalsData {
+							theIntervalData.intervals = self.chordOrScaleSelectorViewController!.selectedIntervalSet;
+							self.document?.calculateAllIntervals();
+						}
 						break;
 					default:
 						break;

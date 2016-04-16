@@ -354,6 +354,9 @@ func >= (a: EqualTemperamentInterval, b: EqualTemperamentInterval) -> Bool { ret
 func == (a: Interval, b: Int) -> Bool { return a.toDouble == Double(b); }
 func == (a: RationalInterval, b: Int) -> Bool { return a.ratio==b; }
 
+func == (a: Interval, b: UInt) -> Bool { return a.toDouble == Double(b); }
+func == (a: RationalInterval, b: UInt) -> Bool { return a.ratio==b; }
+
 extension NSUserDefaults {
 	func intervalForKey(aKey: String) -> Interval? {
 		var			theResult : Interval?;

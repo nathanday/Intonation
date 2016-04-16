@@ -36,7 +36,8 @@ class PresetIntervalsData : IntervalsData {
 		return PresetGeneratorViewController(windowController:aWindowController);
 	}
 
-	var			presetName : String?
+	var		presetName : String?
+	var		intervals : IntervalSet?;
 }
 
 class PresetGenerator: IntervalsDataGenerator {
@@ -46,6 +47,16 @@ class PresetGenerator: IntervalsDataGenerator {
 	}
 	init( intervalsData anIntervalsData : PresetIntervalsData ) {
 		var		theResult = Set<EqualTemperamentEntry>();
+		if let theIntervals = anIntervalsData.intervals {
+			for theInterval in theIntervals {
+				let	theOctavesCount = anIntervalsData.octavesCount + (theInterval == 1 ? 1 : 0);
+				for theOctave in 0..<theOctavesCount {
+					let		theOctaveValue = 1<<theOctave;
+					let		theEntry = EqualTemperamentEntry(interval: theInterval*theOctaveValue );
+					theResult.insert(theEntry);
+				}
+			}
+		}
 		super.init();
 		_everyEqualTemperamentEntry = theResult.sort { return $0.toCents < $1.toCents; };
 	}
