@@ -80,7 +80,9 @@ class Document : NSDocument, MIDIReceiverObserver {
 			return intervalsData?.baseFrequency ?? 220.0;
 		}
 		set( aValue ) {
-			let		theValue = max(min(aValue,IntervalsData.maximumBaseFrequency), IntervalsData.minimumBaseFrequency);
+			let		theMinimumBaseFrequency = max(NSUserDefaults.standardUserDefaults().doubleForKey("minimumBaseFrequency"),4.0);
+			let		theMaximumBaseFrequency = max(NSUserDefaults.standardUserDefaults().doubleForKey("maximumBaseFrequency"),20_000.0);
+			let		theValue = max(min(aValue,theMaximumBaseFrequency), theMinimumBaseFrequency);
 			intervalsData?.baseFrequency = theValue;
 			tonePlayer.baseFrequency = intervalsData?.baseFrequency ?? 220.0;
 			midiToHarmonicRatio.baseFrequency = intervalsData?.baseFrequency ?? 220.0;

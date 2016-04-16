@@ -16,7 +16,4 @@ class PreferencesWindowController: NSWindowController {
 
         // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
     }
-
-	var		minmumFrequency : Float32 = 20.0;
-	var		maximumFrequency : Float32 = 4_200.0;
 }

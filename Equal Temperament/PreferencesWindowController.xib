@@ -15,43 +15,51 @@
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="F0z-JX-Cv5">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" unifiedTitleAndToolbar="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="196" y="240" width="440" height="440"/>
+            <rect key="contentRect" x="196" y="240" width="378" height="194"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
             <view key="contentView" id="se5-gp-TjO">
-                <rect key="frame" x="0.0" y="6" width="440" height="440"/>
+                <rect key="frame" x="0.0" y="0.0" width="378" height="194"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <tabView allowsTruncatedLabels="NO" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="DTJ-zZ-wQo">
-                        <rect key="frame" x="0.0" y="0.0" width="440" height="440"/>
+                        <rect key="frame" x="0.0" y="0.0" width="378" height="194"/>
                         <font key="font" metaFont="system"/>
                         <tabViewItems>
                             <tabViewItem label="Settings" identifier="1" id="fVU-oj-G2j">
                                 <view key="view" id="MOf-2h-Ak4">
-                                    <rect key="frame" x="0.0" y="0.0" width="440" height="440"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="378" height="194"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textField horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Xgp-oN-cl1">
-                                            <rect key="frame" x="18" y="403" width="176" height="17"/>
-                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Frequency Range, Minimum:" id="ffn-e4-qiX">
+                                            <rect key="frame" x="38" y="130" width="63" height="17"/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Minimum:" id="ffn-e4-qiX">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
                                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1yY-2L-4Ml">
-                                            <rect key="frame" x="196" y="400" width="74" height="22"/>
-                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="xMp-st-HTP">
+                                            <rect key="frame" x="103" y="127" width="74" height="22"/>
+                                            <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" continuous="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="right" drawsBackground="YES" id="xMp-st-HTP">
                                                 <numberFormatter key="formatter" formatterBehavior="custom10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" id="obl-dd-Wyl">
-                                                    <real key="minimum" value="12"/>
-                                                    <real key="maximum" value="440"/>
+                                                    <real key="minimum" value="8"/>
+                                                    <real key="maximum" value="12000"/>
                                                 </numberFormatter>
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
+                                            <connections>
+                                                <binding destination="KR0-Br-KCJ" name="value" keyPath="values.minimumBaseFrequency" previousBinding="FMh-E6-7cT" id="qee-jL-AoQ">
+                                                    <dictionary key="options">
+                                                        <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                                    </dictionary>
+                                                </binding>
+                                                <binding destination="KR0-Br-KCJ" name="maxValue" keyPath="values.maximumBaseFrequency" id="FMh-E6-7cT"/>
+                                            </connections>
                                         </textField>
                                         <textField horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="U8L-ac-BWg">
-                                            <rect key="frame" x="277" y="403" width="67" height="17"/>
+                                            <rect key="frame" x="195" y="130" width="67" height="17"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Maximum:" id="8z2-kz-bc0">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -59,35 +67,53 @@
                                             </textFieldCell>
                                         </textField>
                                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="v0Q-jo-eQk">
-                                            <rect key="frame" x="346" y="400" width="74" height="22"/>
-                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="ref-Sp-c0S">
+                                            <rect key="frame" x="264" y="127" width="74" height="22"/>
+                                            <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" continuous="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="right" drawsBackground="YES" id="ref-Sp-c0S">
                                                 <numberFormatter key="formatter" formatterBehavior="custom10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" id="NtZ-0P-fjq">
-                                                    <real key="minimum" value="880"/>
-                                                    <real key="maximum" value="4200"/>
+                                                    <real key="minimum" value="16"/>
+                                                    <real key="maximum" value="16000"/>
                                                 </numberFormatter>
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
+                                            <connections>
+                                                <binding destination="KR0-Br-KCJ" name="value" keyPath="values.maximumBaseFrequency" previousBinding="sD4-Qf-ii0" id="p3L-Id-bAs">
+                                                    <dictionary key="options">
+                                                        <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                                    </dictionary>
+                                                </binding>
+                                                <binding destination="KR0-Br-KCJ" name="minValue" keyPath="values.minimumBaseFrequency" id="sD4-Qf-ii0"/>
+                                            </connections>
+                                        </textField>
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zKk-St-WYw">
+                                            <rect key="frame" x="18" y="157" width="110" height="17"/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Frequency Range" id="F5r-sE-7id">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
                                         </textField>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="Xgp-oN-cl1" firstAttribute="leading" secondItem="MOf-2h-Ak4" secondAttribute="leading" constant="20" id="2Vk-PP-P94"/>
                                         <constraint firstItem="v0Q-jo-eQk" firstAttribute="width" secondItem="1yY-2L-4Ml" secondAttribute="width" id="BWj-PP-ZoI"/>
-                                        <constraint firstItem="Xgp-oN-cl1" firstAttribute="top" secondItem="MOf-2h-Ak4" secondAttribute="top" constant="20" id="F22-VJ-fRO"/>
+                                        <constraint firstItem="v0Q-jo-eQk" firstAttribute="baseline" secondItem="1yY-2L-4Ml" secondAttribute="baseline" id="CDo-Jm-uyz"/>
+                                        <constraint firstItem="Xgp-oN-cl1" firstAttribute="leading" secondItem="MOf-2h-Ak4" secondAttribute="leading" constant="40" id="EKQ-Pe-1xg"/>
                                         <constraint firstItem="1yY-2L-4Ml" firstAttribute="leading" secondItem="Xgp-oN-cl1" secondAttribute="trailing" constant="4" id="HiE-X9-4HQ"/>
-                                        <constraint firstItem="v0Q-jo-eQk" firstAttribute="baseline" secondItem="Xgp-oN-cl1" secondAttribute="baseline" id="Jer-ug-N7M"/>
-                                        <constraint firstAttribute="trailing" secondItem="v0Q-jo-eQk" secondAttribute="trailing" constant="20" id="bx4-3F-tcA"/>
-                                        <constraint firstItem="U8L-ac-BWg" firstAttribute="baseline" secondItem="Xgp-oN-cl1" secondAttribute="baseline" id="oED-JT-Kmh"/>
+                                        <constraint firstItem="zKk-St-WYw" firstAttribute="leading" secondItem="MOf-2h-Ak4" secondAttribute="leading" constant="20" id="I7O-Vo-0kt"/>
+                                        <constraint firstItem="zKk-St-WYw" firstAttribute="top" secondItem="MOf-2h-Ak4" secondAttribute="top" constant="20" id="RJp-e6-0le"/>
+                                        <constraint firstItem="v0Q-jo-eQk" firstAttribute="baseline" secondItem="U8L-ac-BWg" secondAttribute="baseline" id="RUg-8i-L4B"/>
+                                        <constraint firstAttribute="trailing" secondItem="v0Q-jo-eQk" secondAttribute="trailing" constant="40" id="VYv-dG-BDD"/>
+                                        <constraint firstItem="U8L-ac-BWg" firstAttribute="leading" secondItem="1yY-2L-4Ml" secondAttribute="trailing" constant="20" id="XzC-OS-4Dk"/>
                                         <constraint firstItem="v0Q-jo-eQk" firstAttribute="leading" secondItem="U8L-ac-BWg" secondAttribute="trailing" constant="4" id="ob0-AT-XB2"/>
+                                        <constraint firstItem="1yY-2L-4Ml" firstAttribute="top" secondItem="zKk-St-WYw" secondAttribute="bottom" constant="8" id="phH-Ss-1pI"/>
                                         <constraint firstItem="1yY-2L-4Ml" firstAttribute="baseline" secondItem="Xgp-oN-cl1" secondAttribute="baseline" id="u80-4h-EeN"/>
-                                        <constraint firstItem="U8L-ac-BWg" firstAttribute="leading" secondItem="1yY-2L-4Ml" secondAttribute="trailing" constant="9" id="xJZ-9b-NrG"/>
                                     </constraints>
                                 </view>
                             </tabViewItem>
                             <tabViewItem label="Scales" identifier="2" id="ii9-jj-8hZ">
                                 <view key="view" id="ciF-eq-BlZ">
-                                    <rect key="frame" x="0.0" y="0.0" width="440" height="440"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="378" height="194"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </view>
                             </tabViewItem>
@@ -119,7 +145,8 @@
             <connections>
                 <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
             </connections>
-            <point key="canvasLocation" x="333" y="319"/>
+            <point key="canvasLocation" x="292" y="196"/>
         </window>
+        <userDefaultsController representsSharedInstance="YES" id="KR0-Br-KCJ"/>
     </objects>
 </document>

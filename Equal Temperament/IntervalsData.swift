@@ -47,8 +47,6 @@ enum DocumentType {
 
 
 class IntervalsData: NSObject {
-	static let		minimumBaseFrequency = 16.0;
-	static let		maximumBaseFrequency = 12_544.0;
 
 	class func from(propertyList aPropertyList: [String:AnyObject] ) -> IntervalsData? {
 		var		theResult : IntervalsData?

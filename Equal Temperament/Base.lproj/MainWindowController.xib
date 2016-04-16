@@ -249,11 +249,11 @@
                                                         </textFieldCell>
                                                     </textField>
                                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="O7m-mx-3Nr">
-                                                        <rect key="frame" x="354" y="572" width="60" height="22"/>
+                                                        <rect key="frame" x="354" y="572" width="70" height="22"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="60" id="fT4-LE-lf3"/>
+                                                            <constraint firstAttribute="width" constant="70" id="fT4-LE-lf3"/>
                                                         </constraints>
-                                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="right" title="261.6" drawsBackground="YES" id="0A8-iO-ULx">
+                                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="right" title="18,888.8" drawsBackground="YES" id="0A8-iO-ULx">
                                                             <numberFormatter key="formatter" formatterBehavior="custom10_4" numberStyle="decimal" minimumIntegerDigits="2" maximumIntegerDigits="4" minimumFractionDigits="1" maximumFractionDigits="1" id="SCB-b2-gyy">
                                                                 <real key="minimum" value="20"/>
                                                                 <real key="maximum" value="4200"/>
@@ -263,11 +263,13 @@
                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>
                                                         <connections>
-                                                            <binding destination="-2" name="value" keyPath="self.document.baseFrequency" id="ndZ-Al-kRI"/>
+                                                            <binding destination="-2" name="value" keyPath="self.document.baseFrequency" previousBinding="KF5-XW-faA" id="Nhc-80-jAj"/>
+                                                            <binding destination="tZN-Kl-w5K" name="maxValue" keyPath="values.maximumBaseFrequency" id="8U7-Ip-fwK"/>
+                                                            <binding destination="tZN-Kl-w5K" name="minValue" keyPath="values.minimumBaseFrequency" previousBinding="8U7-Ip-fwK" id="KF5-XW-faA"/>
                                                         </connections>
                                                     </textField>
                                                     <slider horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aCN-ld-zpq">
-                                                        <rect key="frame" x="415" y="573" width="18" height="20"/>
+                                                        <rect key="frame" x="425" y="573" width="18" height="20"/>
                                                         <sliderCell key="cell" controlSize="small" continuous="YES" alignment="left" maxValue="0.5" allowsTickMarkValuesOnly="YES" sliderType="circular" id="xL2-3S-jAf"/>
                                                         <connections>
                                                             <action selector="baseFrequencyDeltaChanged:" target="-2" id="ya5-ob-vZg"/>
@@ -441,7 +443,7 @@
                                                         </textFieldCell>
                                                     </textField>
                                                     <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="F1d-wV-Fyf">
-                                                        <rect key="frame" x="442" y="570" width="115" height="22"/>
+                                                        <rect key="frame" x="452" y="570" width="105" height="22"/>
                                                         <popUpButtonCell key="cell" type="push" title="Select Note" bezelStyle="rounded" alignment="left" controlSize="small" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" pullsDown="YES" id="Rn1-vq-XVT">
                                                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="smallSystem"/>

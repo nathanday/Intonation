@@ -1261,16 +1261,6 @@
 								<key>denominator</key>
 								<integer>8</integer>
 							</dict>
-							<dict>
-								<key>names</key>
-								<array>
-									<string>Perfect octave</string>
-								</array>
-								<key>numerator</key>
-								<integer>2</integer>
-								<key>denominator</key>
-								<integer>1</integer>
-							</dict>
 						</array>
 					</dict>
 					<dict>
@@ -1439,16 +1429,6 @@
 								<integer>15</integer>
 								<key>denominator</key>
 								<integer>8</integer>
-							</dict>
-							<dict>
-								<key>names</key>
-								<array>
-									<string>Octave</string>
-								</array>
-								<key>numerator</key>
-								<integer>2</integer>
-								<key>denominator</key>
-								<integer>1</integer>
 							</dict>
 						</array>
 					</dict>
@@ -1689,13 +1669,18 @@
 								<array>
 									<string>Perfect unison</string>
 								</array>
-								<key>ratio</key>
-								<integer>1</integer>
+								<key>steps</key>
+								<integer>12</integer>
+								<key>degree</key>
+								<integer>0</integer>
+								<key>interval</key>
+								<integer>2</integer>
 							</dict>
 							<dict>
 								<key>names</key>
 								<array>
 									<string>Minor second</string>
+									<string>Augmented unison</string>
 								</array>
 								<key>steps</key>
 								<integer>12</integer>
@@ -1708,508 +1693,144 @@
 								<key>names</key>
 								<array>
 									<string>Major second</string>
+									<string>Diminished third</string>
 								</array>
-								<key>numerator</key>
-								<integer>9</integer>
-								<key>denominator</key>
-								<integer>8</integer>
+								<key>steps</key>
+								<integer>12</integer>
+								<key>degree</key>
+								<integer>2</integer>
+								<key>interval</key>
+								<integer>2</integer>
 							</dict>
 							<dict>
 								<key>names</key>
 								<array>
 									<string>Minor third</string>
+									<string>Augmented second</string>
 								</array>
-								<key>numerator</key>
-								<integer>6</integer>
-								<key>denominator</key>
-								<integer>5</integer>
+								<key>steps</key>
+								<integer>12</integer>
+								<key>degree</key>
+								<integer>3</integer>
+								<key>interval</key>
+								<integer>2</integer>
 							</dict>
 							<dict>
 								<key>names</key>
 								<array>
 									<string>Major third</string>
+									<string>Diminished fourth</string>
 								</array>
-								<key>numerator</key>
-								<integer>5</integer>
-								<key>denominator</key>
+								<key>steps</key>
+								<integer>12</integer>
+								<key>degree</key>
 								<integer>4</integer>
+								<key>interval</key>
+								<integer>2</integer>
 							</dict>
 							<dict>
 								<key>names</key>
 								<array>
 									<string>Perfect Fourth</string>
+									<string>Augmented third</string>
 								</array>
-								<key>numerator</key>
-								<integer>4</integer>
-								<key>denominator</key>
-								<integer>3</integer>
+								<key>steps</key>
+								<integer>12</integer>
+								<key>degree</key>
+								<integer>5</integer>
+								<key>interval</key>
+								<integer>2</integer>
 							</dict>
 							<dict>
 								<key>names</key>
 								<array>
+									<string>Augmented Fourth</string>
 									<string>Diminished fifth</string>
 								</array>
-								<key>numerator</key>
-								<integer>64</integer>
-								<key>denominator</key>
-								<integer>45</integer>
+								<key>steps</key>
+								<integer>12</integer>
+								<key>degree</key>
+								<integer>6</integer>
+								<key>interval</key>
+								<integer>2</integer>
 							</dict>
 							<dict>
 								<key>names</key>
 								<array>
 									<string>Perfect fifth</string>
+									<string>Diminished sixth</string>
 								</array>
-								<key>numerator</key>
-								<integer>3</integer>
-								<key>denominator</key>
+								<key>steps</key>
+								<integer>12</integer>
+								<key>degree</key>
+								<integer>7</integer>
+								<key>interval</key>
 								<integer>2</integer>
 							</dict>
 							<dict>
 								<key>names</key>
 								<array>
 									<string>Minor sixth</string>
+									<string>Augmented fifth</string>
 								</array>
-								<key>numerator</key>
+								<key>steps</key>
+								<integer>12</integer>
+								<key>degree</key>
 								<integer>8</integer>
-								<key>denominator</key>
-								<integer>5</integer>
+								<key>interval</key>
+								<integer>2</integer>
 							</dict>
 							<dict>
 								<key>names</key>
 								<array>
 									<string>Major sixth</string>
+									<string>Diminished seventh</string>
 								</array>
-								<key>numerator</key>
-								<integer>5</integer>
-								<key>denominator</key>
-								<integer>3</integer>
+								<key>steps</key>
+								<integer>12</integer>
+								<key>degree</key>
+								<integer>9</integer>
+								<key>interval</key>
+								<integer>2</integer>
 							</dict>
 							<dict>
 								<key>names</key>
 								<array>
 									<string>Minor seventh</string>
+									<string>Augmented sixth</string>
 								</array>
-								<key>numerator</key>
-								<integer>16</integer>
-								<key>denominator</key>
-								<integer>9</integer>
+								<key>steps</key>
+								<integer>12</integer>
+								<key>degree</key>
+								<integer>10</integer>
+								<key>interval</key>
+								<integer>2</integer>
 							</dict>
 							<dict>
 								<key>names</key>
 								<array>
 									<string>Major seventh</string>
+									<string>Diminished octave</string>
 								</array>
-								<key>numerator</key>
-								<integer>15</integer>
-								<key>denominator</key>
-								<integer>8</integer>
+								<key>steps</key>
+								<integer>12</integer>
+								<key>degree</key>
+								<integer>11</integer>
+								<key>interval</key>
+								<integer>2</integer>
 							</dict>
 							<dict>
 								<key>names</key>
 								<array>
 									<string>Perfect octave</string>
+									<string>Augmented seventh</string>
 								</array>
-								<key>numerator</key>
+								<key>steps</key>
+								<integer>12</integer>
+								<key>degree</key>
+								<integer>12</integer>
+								<key>interval</key>
 								<integer>2</integer>
-								<key>denominator</key>
-								<integer>1</integer>
-							</dict>
-						</array>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>5-limit Just Intonation</string>
-						<key>kind</key>
-						<integer>1</integer>
-						<key>everyInterval</key>
-						<array>
-							<dict>
-								<key>names</key>
-								<array>
-									<string>Unison</string>
-								</array>
-								<key>numerator</key>
-								<integer>1</integer>
-								<key>denominator</key>
-								<integer>1</integer>
-							</dict>
-							<dict>
-								<key>names</key>
-								<array>
-									<string>lesser chromatic semitone</string>
-								</array>
-								<key>numerator</key>
-								<integer>25</integer>
-								<key>denominator</key>
-								<integer>24</integer>
-							</dict>
-							<dict>
-								<key>names</key>
-								<array>
-									<string>Major Semitone</string>
-								</array>
-								<key>numerator</key>
-								<integer>16</integer>
-								<key>denominator</key>
-								<integer>15</integer>
-							</dict>
-							<dict>
-								<key>names</key>
-								<array>
-									<string>Major tone</string>
-								</array>
-								<key>numerator</key>
-								<integer>9</integer>
-								<key>denominator</key>
-								<integer>8</integer>
-							</dict>
-							<dict>
-								<key>names</key>
-								<array>
-									<string>Augmented second</string>
-								</array>
-								<key>numerator</key>
-								<integer>75</integer>
-								<key>denominator</key>
-								<integer>64</integer>
-							</dict>
-							<dict>
-								<key>names</key>
-								<array>
-									<string>Minor third</string>
-								</array>
-								<key>numerator</key>
-								<integer>6</integer>
-								<key>denominator</key>
-								<integer>5</integer>
-							</dict>
-							<dict>
-								<key>names</key>
-								<array>
-									<string>Major third</string>
-								</array>
-								<key>numerator</key>
-								<integer>5</integer>
-								<key>denominator</key>
-								<integer>4</integer>
-							</dict>
-							<dict>
-								<key>names</key>
-								<array>
-									<string>Perfect Fourth</string>
-								</array>
-								<key>numerator</key>
-								<integer>4</integer>
-								<key>denominator</key>
-								<integer>3</integer>
-							</dict>
-							<dict>
-								<key>names</key>
-								<array>
-									<string>Classic Augmented Fourth</string>
-								</array>
-								<key>numerator</key>
-								<integer>25</integer>
-								<key>denominator</key>
-								<integer>18</integer>
-							</dict>
-							<dict>
-								<key>names</key>
-								<array>
-									<string>Classic Diminished fifth</string>
-								</array>
-								<key>numerator</key>
-								<integer>36</integer>
-								<key>denominator</key>
-								<integer>25</integer>
-							</dict>
-							<dict>
-								<key>names</key>
-								<array>
-									<string>Perfect fifth</string>
-								</array>
-								<key>numerator</key>
-								<integer>3</integer>
-								<key>denominator</key>
-								<integer>2</integer>
-							</dict>
-							<dict>
-								<key>names</key>
-								<array>
-									<string>Classic Augmented fifth</string>
-								</array>
-								<key>numerator</key>
-								<integer>25</integer>
-								<key>denominator</key>
-								<integer>16</integer>
-							</dict>
-							<dict>
-								<key>names</key>
-								<array>
-									<string>Minor sixth</string>
-								</array>
-								<key>numerator</key>
-								<integer>8</integer>
-								<key>denominator</key>
-								<integer>5</integer>
-							</dict>
-							<dict>
-								<key>names</key>
-								<array>
-									<string>Major sixth</string>
-								</array>
-								<key>numerator</key>
-								<integer>5</integer>
-								<key>denominator</key>
-								<integer>3</integer>
-							</dict>
-							<dict>
-								<key>names</key>
-								<array>
-									<string>Minor seventh</string>
-								</array>
-								<key>numerator</key>
-								<integer>9</integer>
-								<key>denominator</key>
-								<integer>5</integer>
-							</dict>
-							<dict>
-								<key>names</key>
-								<array>
-									<string>Major seventh</string>
-								</array>
-								<key>numerator</key>
-								<integer>15</integer>
-								<key>denominator</key>
-								<integer>8</integer>
-							</dict>
-							<dict>
-								<key>names</key>
-								<array>
-									<string>Octave</string>
-								</array>
-								<key>numerator</key>
-								<integer>2</integer>
-								<key>denominator</key>
-								<integer>1</integer>
-							</dict>
-						</array>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>Pythagorean Diatonic</string>
-						<key>kind</key>
-						<integer>1</integer>
-						<key>everyInterval</key>
-						<array>
-							<dict>
-								<key>names</key>
-								<array>
-									<string>unison</string>
-								</array>
-								<key>numerator</key>
-								<integer>1</integer>
-								<key>denominator</key>
-								<integer>1</integer>
-							</dict>
-							<dict>
-								<key>names</key>
-								<array>
-									<string>major second</string>
-								</array>
-								<key>numerator</key>
-								<integer>9</integer>
-								<key>denominator</key>
-								<integer>8</integer>
-							</dict>
-							<dict>
-								<key>names</key>
-								<array>
-									<string>major third</string>
-								</array>
-								<key>numerator</key>
-								<integer>81</integer>
-								<key>denominator</key>
-								<integer>64</integer>
-							</dict>
-							<dict>
-								<key>names</key>
-								<array>
-									<string>perfect fourth</string>
-								</array>
-								<key>numerator</key>
-								<integer>4</integer>
-								<key>denominator</key>
-								<integer>3</integer>
-							</dict>
-							<dict>
-								<key>names</key>
-								<array>
-									<string>perfect fifth</string>
-								</array>
-								<key>numerator</key>
-								<integer>3</integer>
-								<key>denominator</key>
-								<integer>2</integer>
-							</dict>
-							<dict>
-								<key>names</key>
-								<array>
-									<string>major sixth</string>
-								</array>
-								<key>numerator</key>
-								<integer>27</integer>
-								<key>denominator</key>
-								<integer>16</integer>
-							</dict>
-							<dict>
-								<key>names</key>
-								<array>
-									<string>major seventh</string>
-								</array>
-								<key>numerator</key>
-								<integer>243</integer>
-								<key>denominator</key>
-								<integer>128</integer>
-							</dict>
-						</array>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>Pythagorean Dodecaphonic</string>
-						<key>kind</key>
-						<integer>1</integer>
-						<key>everyInterval</key>
-						<array>
-							<dict>
-								<key>names</key>
-								<array>
-									<string>unison</string>
-								</array>
-								<key>numerator</key>
-								<integer>1</integer>
-								<key>denominator</key>
-								<integer>1</integer>
-							</dict>
-							<dict>
-								<key>names</key>
-								<array>
-									<string>minor second</string>
-								</array>
-								<key>numerator</key>
-								<integer>256</integer>
-								<key>denominator</key>
-								<integer>243</integer>
-							</dict>
-							<dict>
-								<key>names</key>
-								<array>
-									<string>major second</string>
-								</array>
-								<key>numerator</key>
-								<integer>9</integer>
-								<key>denominator</key>
-								<integer>8</integer>
-							</dict>
-							<dict>
-								<key>names</key>
-								<array>
-									<string>minor third</string>
-								</array>
-								<key>numerator</key>
-								<integer>32</integer>
-								<key>denominator</key>
-								<integer>27</integer>
-							</dict>
-							<dict>
-								<key>names</key>
-								<array>
-									<string>major third</string>
-								</array>
-								<key>numerator</key>
-								<integer>81</integer>
-								<key>denominator</key>
-								<integer>64</integer>
-							</dict>
-							<dict>
-								<key>names</key>
-								<array>
-									<string>perfect fourth</string>
-								</array>
-								<key>numerator</key>
-								<integer>4</integer>
-								<key>denominator</key>
-								<integer>3</integer>
-							</dict>
-							<dict>
-								<key>names</key>
-								<array>
-									<string>diminished fifth</string>
-								</array>
-								<key>numerator</key>
-								<integer>1024</integer>
-								<key>denominator</key>
-								<integer>729</integer>
-							</dict>
-							<dict>
-								<key>names</key>
-								<array>
-									<string>augmented fourth</string>
-								</array>
-								<key>numerator</key>
-								<integer>729</integer>
-								<key>denominator</key>
-								<integer>512</integer>
-							</dict>
-							<dict>
-								<key>names</key>
-								<array>
-									<string>perfect fifth</string>
-								</array>
-								<key>numerator</key>
-								<integer>3</integer>
-								<key>denominator</key>
-								<integer>2</integer>
-							</dict>
-							<dict>
-								<key>names</key>
-								<array>
-									<string>minor sixth</string>
-								</array>
-								<key>numerator</key>
-								<integer>128</integer>
-								<key>denominator</key>
-								<integer>81</integer>
-							</dict>
-							<dict>
-								<key>names</key>
-								<array>
-									<string>major sixth</string>
-								</array>
-								<key>numerator</key>
-								<integer>27</integer>
-								<key>denominator</key>
-								<integer>16</integer>
-							</dict>
-							<dict>
-								<key>names</key>
-								<array>
-									<string>minor seventh</string>
-								</array>
-								<key>numerator</key>
-								<integer>16</integer>
-								<key>denominator</key>
-								<integer>9</integer>
-							</dict>
-							<dict>
-								<key>names</key>
-								<array>
-									<string>major seventh</string>
-								</array>
-								<key>numerator</key>
-								<integer>243</integer>
-								<key>denominator</key>
-								<integer>128</integer>
 							</dict>
 						</array>
 					</dict>

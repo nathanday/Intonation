@@ -4,6 +4,10 @@
 <dict>
 	<key>selectedScaleDisplayType</key>
 	<integer>1</integer>
+	<key>minimumBaseFrequency</key>
+	<integer>16</integer>
+	<key>maximumBaseFrequency</key>
+	<real>12544</real>
 	<key>selectedSpectrumType</key>
 	<integer>1</integer>
 	<key>selectedWaveViewScale</key>
@@ -96,7 +100,7 @@
 			<key>names</key>
 			<array>
 				<string>Semicomma</string>
-				<string>Fokker's comma</string>
+				<string>Fokker&apos;s comma</string>
 			</array>
 		</dict>
 		<dict>
@@ -176,7 +180,7 @@
 			<key>names</key>
 			<array>
 				<string>Holdrian comma</string>
-				<string>Holder's comma</string>
+				<string>Holder&apos;s comma</string>
 				<string>53 equal temperament step</string>
 			</array>
 		</dict>
@@ -212,7 +216,7 @@
 			<key>names</key>
 			<array>
 				<string>Septimal comma</string>
-				<string>Archytas' comma</string>
+				<string>Archytas&apos; comma</string>
 			</array>
 		</dict>
 		<dict>
@@ -228,7 +232,7 @@
 			<string>56:55</string>
 			<key>names</key>
 			<array>
-				<string>Ptolemy's enharmonic</string>
+				<string>Ptolemy&apos;s enharmonic</string>
 				<string>difference between (11 : 8) and (7 : 5) tritone</string>
 			</array>
 		</dict>
@@ -255,7 +259,7 @@
 			<array>
 				<string>Septimal sixth tone</string>
 				<string>jubilisma</string>
-				<string>Erlich's decatonic comma</string>
+				<string>Erlich&apos;s decatonic comma</string>
 				<string>tritonic diesis</string>
 			</array>
 		</dict>
@@ -398,7 +402,7 @@
 			<string>59049:57344</string>
 			<key>names</key>
 			<array>
-				<string>Harrison's comma (9 P5s - 1 H7)</string>
+				<string>Harrison&apos;s comma (9 P5s - 1 H7)</string>
 			</array>
 		</dict>
 		<dict>
@@ -785,7 +789,7 @@
 			<array>
 				<string>Greater undecimal minor/major/neutral second</string>
 				<string>4/5-tone</string>
-				<string>Ptolemy's second</string>
+				<string>Ptolemy&apos;s second</string>
 			</array>
 		</dict>
 		<dict>
@@ -1092,7 +1096,7 @@
 			<key>names</key>
 			<array>
 				<string>Pythagorean diminished fourth</string>
-				<string>Pythagorean 'schismatic' third</string>
+				<string>Pythagorean &apos;schismatic&apos; third</string>
 			</array>
 		</dict>
 		<dict>
@@ -1341,7 +1345,7 @@
 			<key>names</key>
 			<array>
 				<string>Lesser septimal tritone</string>
-				<string>septimal tritone Huygens' tritone</string>
+				<string>septimal tritone Huygens&apos; tritone</string>
 				<string>Bohlen-Pierce fourth</string>
 				<string>septimal fifth</string>
 				<string>septimal diminished fifth</string>
@@ -1365,8 +1369,8 @@
 				<string>just tritone</string>
 				<string>tritone</string>
 				<string>diatonic tritone</string>
-				<string>'augmented'</string>
-				<string>'false' fourth</string>
+				<string>&apos;augmented&apos;</string>
+				<string>&apos;false&apos; fourth</string>
 				<string>high 5-limit tritone</string>
 				<string>1/6-comma meantone augmented fourth</string>
 				<string>augmented fourth</string>
@@ -1403,7 +1407,7 @@
 			<array>
 				<string>Just tritone</string>
 				<string>2nd tritone</string>
-				<string>'false' fifth</string>
+				<string>&apos;false&apos; fifth</string>
 				<string>diminished fifth</string>
 				<string>low 5-limit tritone</string>
 			</array>
@@ -1425,7 +1429,7 @@
 			<array>
 				<string>Greater septimal tritone</string>
 				<string>septimal tritone</string>
-				<string>Euler's tritone</string>
+				<string>Euler&apos;s tritone</string>
 			</array>
 		</dict>
 		<dict>
@@ -1713,7 +1717,7 @@
 			<key>names</key>
 			<array>
 				<string>Pythagorean augmented fifth</string>
-				<string>Pythagorean 'schismatic' sixth</string>
+				<string>Pythagorean &apos;schismatic&apos; sixth</string>
 			</array>
 		</dict>
 		<dict>
@@ -1764,7 +1768,7 @@
 			<key>names</key>
 			<array>
 				<string>Undecimal neutral sixth</string>
-				<string>Zalzal's neutral sixth</string>
+				<string>Zalzal&apos;s neutral sixth</string>
 			</array>
 		</dict>
 		<dict>
@@ -2045,7 +2049,7 @@
 			<array>
 				<string>21/4-tone</string>
 				<string>Undecimal neutral seventh</string>
-				<string>undecimal 'median' seventh</string>
+				<string>undecimal &apos;median&apos; seventh</string>
 			</array>
 		</dict>
 		<dict>
