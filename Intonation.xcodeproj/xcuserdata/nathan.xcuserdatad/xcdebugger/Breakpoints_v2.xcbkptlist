@@ -28,11 +28,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Equal Temperament/MainWindowController.swift"
-            timestampString = "482515325.440039"
+            timestampString = "482753459.915095"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "207"
-            endingLineNumber = "207"
+            startingLineNumber = "208"
+            endingLineNumber = "208"
             landmarkName = "baseFrequencyDeltaChanged(_:)"
             landmarkType = "5">
          </BreakpointContent>

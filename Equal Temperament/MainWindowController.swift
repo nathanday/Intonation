@@ -27,6 +27,7 @@ class MainWindowController : NSWindowController {
 	@IBOutlet weak var	tableParentContainerView : NSView?
 	@IBOutlet weak var	plottingParentContainerView : NSView?
 	@IBOutlet weak var	documentTypeViewControllerPlaceHolderView: ViewControllerPlaceHolderView?
+	@IBOutlet weak var	tableParentContainerSplitView : NSSplitView?;
 
 	@IBOutlet var	arrayController : NSArrayController?
 	@IBOutlet var	scaleViewController : ScaleViewController?
@@ -258,6 +259,12 @@ class MainWindowController : NSWindowController {
 			theViewController.addIntervals( theEntries.map { return $0.interval; } );
 		}
 	}
+	@IBAction func delete(aSender: AnyObject) {
+		if let theViewController = self.documentTypeViewController as? AdHokGeneratorViewController,
+			theSelectedObjects = arrayController?.selectedObjects as? [EqualTemperamentEntry] {
+			theViewController.removeIntervals( theSelectedObjects.map { return $0.interval; } );
+		}
+	}
 	override var windowNibName: String { return "MainWindowController"; }
 
 	override func windowDidLoad() {
@@ -328,11 +335,25 @@ extension MainWindowController : NSTableViewDataSource {
 
 extension MainWindowController : NSSplitViewDelegate {
 	func splitView(aSplitView: NSSplitView, canCollapseSubview aSubview: NSView) -> Bool {
-		return aSubview == plottingParentContainerView;
+		var		theResult = false;
+		if aSplitView == splitView {
+			theResult = aSubview == plottingParentContainerView;
+		}
+		return theResult;
 	}
 
 	func splitView( aSplitView: NSSplitView, additionalEffectiveRectOfDividerAtIndex aDividerIndex: Int ) -> NSRect {
-		let		theRect = tableParentContainerView!.frame;
-		return NSRect(x: theRect.maxX-12.0, y: theRect.minY, width: 12.0, height: theRect.height);
+		var		theResult = NSZeroRect;
+		if aSplitView == splitView {
+			let		theRect = tableParentContainerView!.frame;
+			theResult = NSRect(x: theRect.maxX-12.0, y: theRect.minY, width: 12.0, height: theRect.height);
+		} else if aSplitView == tableParentContainerSplitView {
+			if documentTypeViewController is StackedIntervalsGeneratorViewController {
+				theResult = documentTypeViewControllerPlaceHolderView!.frame;
+				theResult.origin.y = theResult.maxY - 10.0;
+				theResult.size.height = 10.0;
+			}
+		}
+		return theResult;
 	}
 }

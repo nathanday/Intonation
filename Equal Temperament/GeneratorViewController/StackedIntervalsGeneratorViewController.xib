@@ -115,8 +115,18 @@ CA
                                 <action selector="delete:" target="-2" id="8kV-51-68h"/>
                             </connections>
                         </button>
+                        <imageView wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" alphaValue="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="cRm-dL-tcI">
+                            <rect key="frame" x="252" y="2" width="128" height="6"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="6" id="ZnB-WO-6oT"/>
+                                <constraint firstAttribute="width" constant="128" id="yfE-ip-f2a"/>
+                            </constraints>
+                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="DragThumb" id="35x-B7-G8f"/>
+                        </imageView>
                     </subviews>
                     <constraints>
+                        <constraint firstItem="cRm-dL-tcI" firstAttribute="top" secondItem="sru-5n-zBE" secondAttribute="bottom" constant="1" id="0HM-OD-AIC"/>
+                        <constraint firstItem="cRm-dL-tcI" firstAttribute="centerX" secondItem="sru-5n-zBE" secondAttribute="centerX" id="5bg-gS-A4B"/>
                         <constraint firstItem="8Fo-Mu-QQK" firstAttribute="top" secondItem="sru-5n-zBE" secondAttribute="top" id="6Au-5o-Vn6"/>
                         <constraint firstItem="sru-5n-zBE" firstAttribute="top" secondItem="qDp-at-EPe" secondAttribute="top" constant="4" id="9Dy-1W-eod"/>
                         <constraint firstItem="sru-5n-zBE" firstAttribute="leading" secondItem="qDp-at-EPe" secondAttribute="leading" constant="150" id="DcK-Fp-xZv"/>
@@ -290,4 +300,7 @@ DQ
             <point key="canvasLocation" x="617" y="184.5"/>
         </customView>
     </objects>
+    <resources>
+        <image name="DragThumb" width="2" height="6"/>
+    </resources>
 </document>

@@ -15,19 +15,17 @@ class EqualTemperamentIntervalsData : IntervalsData {
 		super.init();
 	}
 	override init?(propertyList aPropertyList: [String:AnyObject] ) {
-		if let theProperties = aPropertyList["equalTemperament"] as? [String:String] {
-			if let theDegreesString = theProperties["degrees"] {
-				degrees = UInt(theDegreesString) ?? 12;
-			} else {
-				degrees = UInt(NSUserDefaults.standardUserDefaults().integerForKey("degrees")) ?? 12;
-			}
-			if let theIntervalString = theProperties["interval"] {
-				interval = RationalInterval.fromString(theIntervalString) ?? RationalInterval(2,1);
-			} else {
-				interval = NSUserDefaults.standardUserDefaults().rationalIntervalForKey("interval") ?? RationalInterval(2);
-			}
+		guard let theProperties = aPropertyList["equalTemperament"] as? [String:String] else {
+			return nil;
+		}
+		if let theDegreesString = theProperties["degrees"] {
+			degrees = UInt(theDegreesString) ?? 12;
 		} else {
 			degrees = UInt(NSUserDefaults.standardUserDefaults().integerForKey("degrees")) ?? 12;
+		}
+		if let theIntervalString = theProperties["interval"] {
+			interval = RationalInterval.fromString(theIntervalString) ?? RationalInterval(2,1);
+		} else {
 			interval = NSUserDefaults.standardUserDefaults().rationalIntervalForKey("interval") ?? RationalInterval(2);
 		}
 		super.init(propertyList:aPropertyList);

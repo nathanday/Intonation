@@ -15,11 +15,12 @@ class AdHocIntervalsData : IntervalsData {
 	}
 	override init?(propertyList aPropertyList: [String:AnyObject] ) {
 		adHocEntries = Set<Interval>();
-		if let theOddLimit = aPropertyList["adHoc"] as? [String] {
-			for theEntityString in theOddLimit {
-				if let theInterval = Interval.fromString(theEntityString) {
-					adHocEntries.insert(theInterval);
-				}
+		guard let theOddLimit = aPropertyList["adHoc"] as? [String] else {
+			return nil;
+		}
+		for theEntityString in theOddLimit {
+			if let theInterval = Interval.fromString(theEntityString) {
+				adHocEntries.insert(theInterval);
 			}
 		}
 		super.init(propertyList:aPropertyList);
@@ -71,7 +72,7 @@ class AdHocGenerator: IntervalsDataGenerator {
 	init( intervalsData anIntervalsData : AdHocIntervalsData ) {
 		var		theResult = Set<EqualTemperamentEntry>();
 		super.init();
-		for theOctave in 0...anIntervalsData.octavesCount {
+		for theOctave in 0..<anIntervalsData.octavesCount {
 			let		theOctaveValue = (1<<theOctave);
 			for theEntry in anIntervalsData.adHocEntries {
 				theResult.insert(EqualTemperamentEntry(interval: theEntry*theOctaveValue ));
