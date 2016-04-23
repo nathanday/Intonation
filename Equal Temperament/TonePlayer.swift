@@ -106,18 +106,8 @@ class TonePlayer {
 		}
 	}
 
-	func playType( aType : PlaybackType ) {
-		if playbackType != aType {
-			stop();
-		}
-
-		if arpeggioTriggerTimer != nil {
-			arpeggioTriggerTimer?.invalidate();
-			arpeggioTriggerTimer = nil;
-		}
-
+	func resume() {
 		if !playing {
-			playbackType = aType;
 			generateTones();
 			switch playbackType {
 			case .Unison:
@@ -128,5 +118,19 @@ class TonePlayer {
 			}
 			playing = true;
 		}
+	}
+
+	func playType( aType : PlaybackType ) {
+		if playbackType != aType {
+			stop();
+		}
+
+		if arpeggioTriggerTimer != nil {
+			arpeggioTriggerTimer?.invalidate();
+			arpeggioTriggerTimer = nil;
+		}
+
+		playbackType = aType;
+		resume();
 	}
 }

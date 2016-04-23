@@ -70,6 +70,19 @@ class Document : NSDocument, MIDIReceiverObserver {
 		removeIntervalsDataObservers();
 	}
 
+	var		playbackPaused : Bool = false {
+		didSet {
+			switch playbackPaused {
+			case true:
+				tonePlayer.stop();
+			default:
+				if currentlySelectedMethod != nil {
+					tonePlayer.resume();
+				}
+			}
+		}
+	}
+
 	override func canCloseDocumentWithDelegate(delegate: AnyObject, shouldCloseSelector: Selector, contextInfo: UnsafeMutablePointer<Void>) {
 		tonePlayer.stop();
 		super.canCloseDocumentWithDelegate(delegate, shouldCloseSelector: shouldCloseSelector, contextInfo: contextInfo);

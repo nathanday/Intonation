@@ -305,6 +305,18 @@ class MainWindowController : NSWindowController {
 		}
 		scaleViewController!.hideIntervalRelatedColumn(!aHide);
 	}
+
+	func windowDidBecomeMain( aNotification: NSNotification) {
+		if let theDocument = document as? Document {
+			theDocument.playbackPaused = false;
+		}
+	}
+
+	func windowDidResignMain( aNotification: NSNotification) {
+		if let theDocument = document as? Document {
+			theDocument.playbackPaused = true;
+		}
+	}
 }
 
 extension MainWindowController : NSTableViewDelegate {
