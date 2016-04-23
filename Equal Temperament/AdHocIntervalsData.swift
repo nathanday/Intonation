@@ -78,6 +78,6 @@ class AdHocGenerator: IntervalsDataGenerator {
 				theResult.insert(EqualTemperamentEntry(interval: theEntry*theOctaveValue ));
 			}
 		}
-		_everyEqualTemperamentEntry = theResult.sort { return $0.toCents < $1.toCents; };
+		_everyEqualTemperamentEntry = theResult.sort { return $0.toRatio < $1.toRatio; };
 	}
 }

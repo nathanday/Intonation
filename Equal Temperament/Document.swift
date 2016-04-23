@@ -17,7 +17,7 @@ class Document : NSDocument, MIDIReceiverObserver {
 	var		midiToHarmonicRatio = MIDIToHarmonicRatio();
 
 
-	var		intervalsData : IntervalsData? {
+	dynamic var		intervalsData : IntervalsData? {
 		willSet {
 			removeIntervalsDataObservers();
 		}
@@ -29,7 +29,7 @@ class Document : NSDocument, MIDIReceiverObserver {
 			}
 		}
 	}
-	let watchedKeys : Set = ["documentType", "octavesCount", "numeratorPrimeLimitIndex", "denominatorPrimeLimitIndex", "separatePrimeLimit", "oddLimit", "additiveDissonance", "stackedIntervals", "degrees", "interval", "adHocEntries"];
+	let watchedKeys : Set = ["additiveDissonance", "adHocEntries", "degrees", "denominatorPrimeLimitIndex", "documentType", "interval", "numeratorPrimeLimitIndex", "octavesCount", "oddLimit", "separatePrimeLimit", "stackedIntervals"];
 
 	override func observeValueForKeyPath( aKeyPath: String?, ofObject anObject: AnyObject?, change aChange: [String : AnyObject]?, context aContext: UnsafeMutablePointer<Void>) {
 		if anObject as? IntervalsData == intervalsData {

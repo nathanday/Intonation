@@ -13,11 +13,25 @@ func square( aValue : CGFloat ) -> CGFloat {
 }
 
 extension Double {
-	static func ratioFor(cents aCents: Double ) -> Double {
-		return Double(pow(2.0,aCents/1200.0));
+	var ratioFromCents : Double {
+		return Double(pow(2.0,self/1200.0));
 	}
 	var toCents : Double {
 		return 1200.0 * log2(self);
+	}
+
+	var ratioFromSemitone : Double {
+		return Double(pow(2.0,self/12.0));
+	}
+	var toSemitone : Double {
+		return 12.0 * log2(self);
+	}
+
+	var ratioFromOctave : Double {
+		return Double(pow(2.0,self));
+	}
+	var toOctave : Double {
+		return log2(self);
 	}
 
 	func toString(decimalPlaces aDecimalPlaces:UInt) -> String {

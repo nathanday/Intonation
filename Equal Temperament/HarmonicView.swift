@@ -190,6 +190,8 @@ class HarmonicView: ResultView {
 
 		for i in (1<<octaveRange.startIndex)...(1<<(octaveRange.endIndex)) { drawHarmonic(i); }
 		for i in octaveRange { drawOctave( i ); }
-		for i in 0..<selectedRatios.count { drawRatio( selectedRatios[i], index:i, of:selectedRatios.count ); }
+		for (theIndex,theRatio) in selectedRatios.enumerate() {
+			drawRatio( theRatio, index:theIndex, of:selectedRatios.count );
+		}
     }
 }

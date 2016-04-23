@@ -126,8 +126,8 @@ class MIDIReceiver {
 			theEndPointRef.removeAtIndex(0)
 			theEndPointName.removeAtIndex(0)
 		}
-//		for i in 0..<theEndPointRef.count {
-//			print("[\(i)] : \(theEndPointName[i]) (\(theEndPointRef[i]))")
+//		for (theIndex,theRef) in theEndPointRef.enumerate() {
+//			print("[\(theIndex)] : \(theEndPointName[theIndex]) (\(theRef))")
 //		}
 //
 		theStatus = MIDIClientCreateWithBlock(clientName, &midiClientRef, midiNotifyBlock);

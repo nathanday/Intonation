@@ -92,19 +92,19 @@ class WaveView: ResultView {
 
 		switch displayMode {
 		case .combined:
-//			for i in 0..<selectedRatios.count {
-//				NSColor(calibratedHue: (CGFloat(i+4)*1.0/5.1-2.0/15.0)%1.0, saturation: 0.5, brightness: 0.75, alpha: theOutOffFocusAlpha).setStroke();
-//				drawWave( [selectedRatios[i].toDouble], lineWidth:1.0 );
+//			for (theIndex,theRatio) in selectedRatios.enumerate() {
+//				NSColor(calibratedHue: (CGFloat(theIndex+4)*1.0/5.1-2.0/15.0)%1.0, saturation: 0.5, brightness: 0.75, alpha: theOutOffFocusAlpha).setStroke();
+//				drawWave( [theRatio.toDouble], lineWidth:1.0 );
 //			}
 			NSColor(calibratedWhite: 0.0, alpha: 1.0).setStroke();
 			drawWave( selectedRatios.map({$0.toDouble;}), lineWidth:2.0 );
 		case .overlayed:
 			NSColor(calibratedWhite: 0.5, alpha: theOutOffFocusAlpha).setStroke();
 			drawWave( selectedRatios.map({$0.toDouble;}), lineWidth:1.5 );
-			for i in 0..<selectedRatios.count {
-				let		theHue = hueForIndex(i);
+			for (theIndex,theRatio) in selectedRatios.enumerate() {
+				let		theHue = hueForIndex(theIndex);
 				NSColor(calibratedHue: theHue, saturation: 1.0, brightness: 0.75, alpha: 1.0).setStroke();
-				drawWave( [selectedRatios[i].toDouble], lineWidth:2.0 );
+				drawWave( [theRatio.toDouble], lineWidth:2.0 );
 			}
 		}
 		drawAxises();

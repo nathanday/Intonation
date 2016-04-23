@@ -35,8 +35,8 @@ class ScaleView : ResultView {
 		else {
 			drawNoEqualTemperament();
 		}
-		for i in 0..<everyRatios.count {
-			drawJustIntonationRatio(ratio: everyRatios[i], hilighted: selectedRatios.contains(everyRatios[i]), index:i );
+		for (theIndex,theRatio) in everyRatios.enumerate() {
+			drawJustIntonationRatio(ratio: theRatio, hilighted: selectedRatios.contains(theRatio), index:theIndex );
 		}
 	}
 }

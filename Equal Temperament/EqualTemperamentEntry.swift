@@ -8,7 +8,7 @@
 
 import Cocoa
 
-func ratioForCentsEquivelent( c : Double, n : UInt ) -> Double { return pow(2.0,c/(100.0*Double(n))); }
+//func ratioForCentsEquivelent( c : Double, n : UInt ) -> Double { return pow(2.0,c/(100.0*Double(n))); }
 
 extension Rational {
 	var oddLimit : UInt {
@@ -46,11 +46,13 @@ class EqualTemperamentEntry : NSObject, NSPasteboardReading, NSPasteboardWriting
 	var closestEqualTemperamentIntervalNumber : UInt { return UInt(12.0*Double(log2(interval.toDouble))+0.5); }
 	var closestIntervalNumber : UInt { return UInt(Double(12)*Double(log2(interval.toDouble))+0.5); }
 	var equalTemperamentRatio : Double { return pow(2.0,Double(self.closestEqualTemperamentIntervalNumber)/Double(12)); }
-	var toCents : Double { return interval.toDouble.toCents; }
+	var toRatio : Double { return interval.toDouble; }
+	var toCents : Double { return interval.toCents; }
+	var toOctave : Double { return interval.toOctave; }
 	var justIntonationPercent : Double { return Double(12)*100.0 * log2(self.interval.toDouble); }
 	var error : Double { return equalTemperamentRatio-interval.toDouble; }
 	var error12ETCent : Double {
-		return (interval.toDouble/ratioForCentsEquivelent(Double(closestIntervalNumber)*100.0, n: 12 )).toCents;
+		return (interval.toDouble/Double(closestIntervalNumber).ratioFromSemitone).toCents;
 	}
 	var oddLimit : UInt? {
 		switch interval {
@@ -102,7 +104,7 @@ class EqualTemperamentEntry : NSObject, NSPasteboardReading, NSPasteboardWriting
 	var degreeName : String = "";
 
 	var errorNETCent : Double {
-		return (interval.toDouble/ratioForCentsEquivelent(Double(closestIntervalNumber)*100.0, n:12)).toCents;
+		return (interval.toDouble/Double(closestIntervalNumber).ratioFromSemitone).toCents;
 	}
 
 	var closestIntervalNumberDescription : String { return "\(closestIntervalNumber)"; }

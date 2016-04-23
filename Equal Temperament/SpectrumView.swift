@@ -156,8 +156,8 @@ class SpectrumView: ResultView {
 			theMinorTicks.stroke();
 		}
 
-		for i in 0..<selectedRatios.count {
-			drawSpectrum( baseFreq: selectedRatios[i].toDouble, harmonic:i );
+		for (theIndex,theRatio) in selectedRatios.enumerate() {
+			drawSpectrum( baseFreq: theRatio.toDouble, harmonic:theIndex );
 		}
 		drawAxises();
 	}

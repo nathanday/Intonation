@@ -64,6 +64,8 @@ class Interval : Hashable {
 	var		toDouble : Double {
 		preconditionFailure("The method toDouble must be overriden");
 	}
+	var		toCents : Double { return toDouble.toCents; }
+	var		toOctave : Double { return toDouble.toOctave; }
 	var		toString : String {
 		preconditionFailure("The method toString must be overriden");
 	}
@@ -140,6 +142,12 @@ class RationalInterval : Interval {
 	}
 	convenience init( _ aNumerator: UInt, _ aDenominator : UInt ) {
 		self.init( Int(aNumerator), Int(aDenominator) );
+	}
+	convenience init( _ anInteger: UInt ) {
+		self.init( Int(anInteger), 1 );
+	}
+	convenience init( _ anInteger: Int ) {
+		self.init( anInteger, 1 );
 	}
 //	convenience init?( propertyList aPropertyList: [String:AnyObject] ) {
 //		var		theEveryName : [String] = [];

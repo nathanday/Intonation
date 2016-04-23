@@ -17,6 +17,7 @@ class FindIntervalsViewController: NSViewController {
 	@IBOutlet weak var	searchField : NSSearchField? = nil;
 	dynamic var			hidden : Bool = true;
 	dynamic var			ratiosString : String = "";
+	dynamic var			centErrorsString : String = "";
 
 	var	windowController : MainWindowController? {
 		return self.view.window?.windowController as? MainWindowController
@@ -68,6 +69,19 @@ class FindIntervalsViewController: NSViewController {
 				}
 			}
 			return theResult;
+		}
+	}
+
+	var		centErrors : [Double] = [] {
+		didSet {
+			var		theCentErrorsString = "";
+			for theCents in centErrors {
+				if !theCentErrorsString.isEmpty {
+					theCentErrorsString.appendContentsOf(", ");
+				}
+				theCentErrorsString.appendContentsOf("\(theCents.toString(decimalPlaces:2)) ¢");
+			}
+			centErrorsString =  theCentErrorsString;
 		}
 	}
 
@@ -138,9 +152,9 @@ class FindIntervalsViewController: NSViewController {
 
 			switch findMethod {
 			case .findMethodClosest:
-				theDocument.selectedEqualTemperamentEntry = findClosestEntries(ratios, searchIntervales:theSearchIntervals, octaves:theNumberOfOctaves);
+				(theDocument.selectedEqualTemperamentEntry,centErrors) = findClosestEntries(ratios, searchIntervales:theSearchIntervals, octaves:theNumberOfOctaves);
 			case .findMethodExact:
-				theDocument.selectedEqualTemperamentEntry = findClosestEntries(ratios, searchIntervales:theSearchIntervals, octaves:theNumberOfOctaves);
+				(theDocument.selectedEqualTemperamentEntry,centErrors) = findClosestEntries(ratios, searchIntervales:theSearchIntervals, octaves:theNumberOfOctaves);
 				//				theDocument.selectedEqualTemperamentEntry = findExactEntries(ratios);
 			}
 		}
@@ -182,7 +196,7 @@ class FindIntervalsViewController: NSViewController {
 		return theResult;
 	}
 
-	func findClosestEntries( anIntervals : [Interval], searchIntervales aSearchIntervales: [EqualTemperamentEntry], octaves anOctaves: UInt ) -> [EqualTemperamentEntry] {
+	func findClosestEntries( anIntervals : [Interval], searchIntervales aSearchIntervales: [EqualTemperamentEntry], octaves anOctaves: UInt ) -> ([EqualTemperamentEntry],[Double]) {
 		return findEntries( anIntervals, searchIntervales: aSearchIntervales, octaves: anOctaves) {
 			(intervalA:Interval,intervalB:Interval,inputRatio:Interval) -> Bool in
 			var		theInputRatio = inputRatio.toDouble;
@@ -193,8 +207,9 @@ class FindIntervalsViewController: NSViewController {
 		}
 	}
 
-	func findEntries( anIntervals : [Interval], searchIntervales aSearchIntervales: [EqualTemperamentEntry], octaves anOctaves: UInt, _ aMethod: (Interval,Interval,Interval) -> Bool ) -> [EqualTemperamentEntry] {
-		var		theResult = Array<EqualTemperamentEntry>();
+	func findEntries( anIntervals : [Interval], searchIntervales aSearchIntervales: [EqualTemperamentEntry], octaves anOctaves: UInt, _ aMethod: (Interval,Interval,Interval) -> Bool ) -> ([EqualTemperamentEntry],[Double]) {
+		var		theResult = [EqualTemperamentEntry]();
+		var		theResultErrors = [Double]();
 		for theInterval in anIntervals {
 			var		theClosestEntry : EqualTemperamentEntry?
 			for theCompareEntry in aSearchIntervales {
@@ -210,9 +225,10 @@ class FindIntervalsViewController: NSViewController {
 			}
 			if let theFoundEntry = theClosestEntry {
 				theResult.append(theFoundEntry);
+				theResultErrors.append(theFoundEntry.toCents-theInterval.toDouble.toCents);
 			}
 		}
-		return theResult;
+		return (theResult,theResultErrors);
 	}
 
 }

@@ -20,7 +20,7 @@ class MainWindowController : NSWindowController {
 	deinit {
 		NSNotificationCenter.defaultCenter().removeObserver(self);
 		document?.removeObserver(self, forKeyPath: "everyInterval");
-		splitView?.delegate = nil;
+		splitView!.delegate = nil;
 	}
 
 	@IBOutlet weak var	splitView : NSSplitView?;
@@ -59,19 +59,19 @@ class MainWindowController : NSWindowController {
 		if let theDocument = document as? Document {
 			if anObject as? Document == theDocument {
 				if aKeyPath == "everyInterval" {
-					scaleViewController?.setIntervals(intervals: theDocument.everyInterval, degree: 12, enabled: true);
+					scaleViewController!.setIntervals(intervals: theDocument.everyInterval, degree: 12, enabled: true);
 				} else if aKeyPath == "selectedIndicies" {
 					let		theSelectedIntervals = theDocument.selectedJustIntonationIntervals;
-					arrayController?.setSelectedObjects(theDocument.selectedEqualTemperamentEntry);
+					arrayController!.setSelectedObjects(theDocument.selectedEqualTemperamentEntry);
 					updateChordRatioTitle();
 					assert(scaleViewController != nil, "Failed to get ScaleViewController")
-					scaleViewController?.setSelectionIntervals(theSelectedIntervals);
+					scaleViewController!.setSelectionIntervals(theSelectedIntervals);
 					assert(harmonicViewController != nil, "Failed to get HarmonicViewController")
-					harmonicViewController?.setSelectionIntervals(theSelectedIntervals);
+					harmonicViewController!.setSelectionIntervals(theSelectedIntervals);
 					assert(waveViewController != nil, "Failed to get WaveViewController")
-					waveViewController?.setSelectionIntervals(theSelectedIntervals);
+					waveViewController!.setSelectionIntervals(theSelectedIntervals);
 					assert(spectrumViewController != nil, "Failed to get SpectrumViewController")
-					spectrumViewController?.setSelectionIntervals(theSelectedIntervals);
+					spectrumViewController!.setSelectionIntervals(theSelectedIntervals);
 				}
 			}
 		}
@@ -243,7 +243,7 @@ class MainWindowController : NSWindowController {
 	}
 
 	@IBAction func showFindClosestIntervlAction( aSender: AnyObject? ) {
-		findIntervalsViewController?.showView()
+		findIntervalsViewController!.showView()
 	}
 
 	@IBAction func selectMIDINoteForBaseFrequencyAction( aSender : NSPopUpButton? ) {
@@ -298,21 +298,19 @@ class MainWindowController : NSWindowController {
 	}
 
 	func hideIntervalRelatedColumn( aHide : Bool ) {
-		if let theTableColumns = tableView?.tableColumns {
-			for theTableColumn in theTableColumns {
-				if ["interval","percent","error"].contains(theTableColumn.identifier) {
-					theTableColumn.hidden = aHide;
-				}
+		for theTableColumn in tableView!.tableColumns {
+			if ["interval","percent","error"].contains(theTableColumn.identifier) {
+				theTableColumn.hidden = aHide;
 			}
 		}
-		scaleViewController?.hideIntervalRelatedColumn(!aHide);
+		scaleViewController!.hideIntervalRelatedColumn(!aHide);
 	}
 }
 
 extension MainWindowController : NSTableViewDelegate {
 
 	func tableViewSelectionDidChange(notification: NSNotification) {
-		if let theSelectedEntries = arrayController?.selectedObjects as? [EqualTemperamentEntry],
+		if let theSelectedEntries = arrayController!.selectedObjects as? [EqualTemperamentEntry],
 			theDocument = document as? Document {
 			theDocument.selectedEqualTemperamentEntry = theSelectedEntries
 		}
@@ -353,6 +351,14 @@ extension MainWindowController : NSSplitViewDelegate {
 				theResult.origin.y = theResult.maxY - 10.0;
 				theResult.size.height = 10.0;
 			}
+		}
+		return theResult;
+	}
+
+	func splitView( aSplitView: NSSplitView, shouldHideDividerAtIndex aDividerIndex: Int) -> Bool {
+		var			theResult = false;
+		if aSplitView == tableParentContainerSplitView {
+			theResult = !(documentTypeViewController is StackedIntervalsGeneratorViewController);
 		}
 		return theResult;
 	}

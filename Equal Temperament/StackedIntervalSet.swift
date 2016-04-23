@@ -37,6 +37,19 @@ class StackedIntervalSet : IntervalSet, Hashable {
 		}
 	}
 
+	func contains( anInterval: Interval ) -> Bool {
+		for theInterval in everyInterval {
+			if theInterval == anInterval {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	func contains( anInterval: UInt ) -> Bool { return contains( RationalInterval(anInterval) ); }
+	func contains( anInterval: Rational ) -> Bool { return contains( RationalInterval(anInterval) ); }
+	func contains( anInterval: Double ) -> Bool { return contains( IrrationalInterval(anInterval) ); }
+
 	var propertyList : [String:String] {
 		return ["interval":interval.toString,"steps":"\(steps)","octaves":"\(octaves)"];
 	}

@@ -33,6 +33,7 @@ struct Rational : CustomStringConvertible, CustomDebugStringConvertible, Hashabl
         let theCommonDivisor = greatestCommonDivisor(theNumerator, theDenominator);
         numerator = theNumerator/theCommonDivisor;
         denominator = theDenominator/theCommonDivisor;
+		precondition(theDenominator != 0, "\(numerator)/\(denominator) is not a number");
     }
 	init?( _ aString: String ) {
 		let		theComponents = aString.componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: ":/∶"));
@@ -86,8 +87,8 @@ extension Rational : ArrayLiteralConvertible, IntegerLiteralConvertible, FloatLi
 		numerator = aNumerator;
 		denominator = 1;
 	}
-	init(floatLiteral aValue: FloatLiteralType) { self.init( aValue, maxDenominator:65535 ); }
-	static func convertFromFloatLiteral(aValue: FloatLiteralType) -> Rational { return Rational( aValue, maxDenominator:65535 ); }
+	init(floatLiteral aValue: FloatLiteralType) { self.init( aValue, maxDenominator:UInt.max ); }
+	static func convertFromFloatLiteral(aValue: FloatLiteralType) -> Rational { return Rational( aValue, maxDenominator:UInt.max ); }
 }
 
 extension Rational : FloatingPointType, Equatable, SignedNumberType {
