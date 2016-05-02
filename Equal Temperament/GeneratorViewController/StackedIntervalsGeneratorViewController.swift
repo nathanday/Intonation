@@ -55,8 +55,11 @@ class StackedIntervalsGeneratorViewController: GeneratorViewController {
 	var stackedIntervalSet : StackedIntervalSet? {
 		get {
 			var		theResult : StackedIntervalSet?;
-			if let theInterval = stackedIntervalSetBaseTextField?.stringValue {
-				if let theInterval = Interval.fromString(theInterval) {
+			if let theIntervalString = stackedIntervalSetBaseTextField?.stringValue {
+				if var theInterval = Interval.fromString(theIntervalString) {
+					while theInterval < 1 {
+						theInterval *= 2;
+					}
 					theResult = StackedIntervalSet( interval: theInterval, steps: stackedIntervalSetSteps, octaves: stackedIntervalSetOctaves );
 				}
 			}

@@ -341,8 +341,10 @@ func == (a: EqualTemperamentInterval, b: EqualTemperamentInterval) -> Bool { ret
 
 func < (a: Interval, b: Interval) -> Bool { return a.toDouble < b.toDouble; }
 func < (a: RationalInterval, b: RationalInterval) -> Bool { return a.ratio < b.ratio; }
+func < (a: RationalInterval, b: Int) -> Bool { return a.ratio < b; }
 func < (a: IrrationalInterval, b: IrrationalInterval) -> Bool { return a.ratio < b.ratio; }
 func < (a: EqualTemperamentInterval, b: EqualTemperamentInterval) -> Bool { return a.toDouble < b.toDouble; }
+func < (a: Interval, b: Int) -> Bool { return a.toDouble < Double(b); }
 
 func <= (a: Interval, b: Interval) -> Bool { return a.toDouble <= b.toDouble; }
 func <= (a: RationalInterval, b: RationalInterval) -> Bool { return a.ratio <= b.ratio; }
@@ -351,8 +353,10 @@ func <= (a: EqualTemperamentInterval, b: EqualTemperamentInterval) -> Bool { ret
 
 func > (a: Interval, b: Interval) -> Bool { return a.toDouble > b.toDouble; }
 func > (a: RationalInterval, b: RationalInterval) -> Bool { return a.ratio > b.ratio; }
+func > (a: RationalInterval, b: Int) -> Bool { return a.ratio > b; }
 func > (a: IrrationalInterval, b: IrrationalInterval) -> Bool { return a.ratio > b.ratio; }
 func > (a: EqualTemperamentInterval, b: EqualTemperamentInterval) -> Bool { return a.toDouble > b.toDouble; }
+func > (a: Interval, b: Int) -> Bool { return a.toDouble > Double(b); }
 
 func >= (a: Interval, b: Interval) -> Bool { return a.toDouble >= b.toDouble; }
 func >= (a: RationalInterval, b: RationalInterval) -> Bool { return a.ratio >= b.ratio; }
@@ -364,6 +368,15 @@ func == (a: RationalInterval, b: Int) -> Bool { return a.ratio==b; }
 
 func == (a: Interval, b: UInt) -> Bool { return a.toDouble == Double(b); }
 func == (a: RationalInterval, b: UInt) -> Bool { return a.ratio==b; }
+
+func * (a: Interval, b: Interval) -> Interval { return IrrationalInterval(a.toDouble * b.toDouble); }
+func * (a: RationalInterval, b: RationalInterval) -> RationalInterval { return RationalInterval(a.ratio * b.ratio); }
+func * (a: RationalInterval, b: Int) -> RationalInterval { return RationalInterval(a.ratio * b); }
+
+func *= (inout a: Interval, b: Interval) { a = IrrationalInterval(a.toDouble*b.toDouble); }
+func *= (inout a: Interval, b: Int) { a = IrrationalInterval(a.toDouble*Double(b)); }
+func *= (inout a: RationalInterval, b: RationalInterval) { a = RationalInterval(a.ratio*b.ratio); }
+func *= (inout a: RationalInterval, b: Int) { a = RationalInterval(a.ratio*b); }
 
 extension NSUserDefaults {
 	func intervalForKey(aKey: String) -> Interval? {
