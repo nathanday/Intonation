@@ -56,7 +56,7 @@ class LimitsIntervalsData : IntervalsData {
 
 	var		numeratorPrimeLimit : UInt {
 		get {
-			return IntervalsData.primeNumber[numeratorPrimeLimitIndex];
+			return PrimesSequence(end: 100)[numeratorPrimeLimitIndex];
 		}
 		set {
 			willChangeValueForKey("numeratorPrimeLimitIndex");
@@ -75,7 +75,7 @@ class LimitsIntervalsData : IntervalsData {
 	}
 	var		denominatorPrimeLimit : UInt {
 		get {
-			return IntervalsData.primeNumber[denominatorPrimeLimitIndex];
+			return PrimesSequence(end:100)[denominatorPrimeLimitIndex];
 		}
 		set {
 			willChangeValueForKey("denominatorPrimeLimitIndex");

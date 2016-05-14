@@ -130,10 +130,14 @@ class IntervalsData: NSObject {
 		return theResult;
 	}
 
-	static var		primeNumber = UInt.primes(upTo: 100 );
-	static func	indexForLargestPrimeLessThanOrEuqalTo( aPrime : UInt ) -> Int? {
-		for i in 1...primeNumber.endIndex {
-			if primeNumber[i] > aPrime { return i-1; }
+	static func	indexForLargestPrimeLessThanOrEuqalTo( aValue : UInt ) -> Int? {
+		var		i = 0;
+		guard aValue >= 2 else {
+			return nil;
+		}
+		for p in PrimesSequence(end: aValue ) {
+			if p > aValue { return i; }
+			i += 1;
 		}
 		return nil;
 	}

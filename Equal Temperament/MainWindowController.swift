@@ -126,12 +126,12 @@ class MainWindowController : NSWindowController {
 				var		theCommonFactor = 1;
 				for theValue in selectedJustIntonationIntervals {
 					if let theRationalInterval = theValue as? RationalInterval {
-						theCommonFactor *= theRationalInterval.ratio.denominator/greatestCommonDivisor(theCommonFactor, theRationalInterval.ratio.denominator);
+						theCommonFactor *= theRationalInterval.ratio.denominator/Int(greatestCommonDivisor(UInt(theCommonFactor), UInt(theRationalInterval.ratio.denominator)));
 					}
 				}
 				for theRatio in selectedJustIntonationIntervals {
-					if let theRationalInterval = theRatio as? RationalInterval {
-						if let theValue = theRationalInterval.ratio.numeratorForDenominator(theCommonFactor) {
+					if let theRationalInterval = theRatio as? RationalInterval,
+						theValue = theRationalInterval.ratio.numeratorForDenominator(theCommonFactor) {
 							let		theFactors = UInt(theValue).factorsString;
 							if theRatiosString.startIndex == theRatiosString.endIndex {
 								theRatiosString = "\(theValue)"
@@ -142,7 +142,6 @@ class MainWindowController : NSWindowController {
 								theFactorsString.write( " + \(theFactors)" );
 							}
 							theFactorsSum += UInt(theValue);
-						}
 					}
 				}
 				theHarmonicTitleTextField.stringValue = theRatiosString;

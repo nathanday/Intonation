@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D809895E1C85A27700122857 /* Int+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D809895D1C85A27700122857 /* Int+Additions.swift */; };
 		D80989661C85C66B00122857 /* String+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80989651C85C66B00122857 /* String+Additions.swift */; };
 		D80A61D61C9040C000A2F885 /* SelectDocumentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80A61D41C9040C000A2F885 /* SelectDocumentType.swift */; };
 		D80A61D71C9040C000A2F885 /* SelectDocumentType.xib in Resources */ = {isa = PBXBuildFile; fileRef = D80A61D51C9040C000A2F885 /* SelectDocumentType.xib */; };
 		D80D8C1A1B80A167001E7746 /* Envelope.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80D8C191B80A167001E7746 /* Envelope.swift */; };
+		D8257B241CE72F2B008198E7 /* PrimesSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = D885A12F1CE60B7300A3B996 /* PrimesSequence.swift */; };
 		D83092C11AEBBC6F00B0E6A7 /* DisclosureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83092C01AEBBC6F00B0E6A7 /* DisclosureView.swift */; };
 		D831054E1B0A6115000EB805 /* HarmonicsDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = D831054D1B0A6115000EB805 /* HarmonicsDescription.swift */; };
 		D83B54B11C8D96C500624A46 /* MIDIToHarmonicRatio.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83B54B01C8D96C500624A46 /* MIDIToHarmonicRatio.swift */; };
@@ -38,7 +38,7 @@
 		D87C278A1AF3A95900C2BF7B /* PresetChordsAndScales.plist in Resources */ = {isa = PBXBuildFile; fileRef = D87C27891AF3A95900C2BF7B /* PresetChordsAndScales.plist */; };
 		D8812AD01C9ECE3D0093786D /* IntervalSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8812ACF1C9ECE3D0093786D /* IntervalSet.swift */; };
 		D8832F8619A0C86B0095B26F /* WaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8832F8519A0C86B0095B26F /* WaveView.swift */; };
-		D88A62101ACF7F19004CD4C9 /* UInt+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88A620F1ACF7F19004CD4C9 /* UInt+Additions.swift */; };
+		D88A62101ACF7F19004CD4C9 /* IntegerType+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88A620F1ACF7F19004CD4C9 /* IntegerType+Additions.swift */; };
 		D88A62111AD02167004CD4C9 /* Scale.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8901EBC1ABC226D00A4E071 /* Scale.swift */; };
 		D88EED2D1AEE5AF50084BDCB /* Float+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88EED2C1AEE5AF50084BDCB /* Float+Additions.swift */; };
 		D89074D81AD5486600FD8A1E /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89074D71AD5486600FD8A1E /* ResultView.swift */; };
@@ -93,7 +93,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		D809895D1C85A27700122857 /* Int+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Int+Additions.swift"; sourceTree = "<group>"; };
 		D80989651C85C66B00122857 /* String+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Additions.swift"; sourceTree = "<group>"; };
 		D80A61D41C9040C000A2F885 /* SelectDocumentType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectDocumentType.swift; sourceTree = "<group>"; };
 		D80A61D51C9040C000A2F885 /* SelectDocumentType.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectDocumentType.xib; sourceTree = "<group>"; };
@@ -124,7 +123,8 @@
 		D87C27891AF3A95900C2BF7B /* PresetChordsAndScales.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PresetChordsAndScales.plist; sourceTree = "<group>"; };
 		D8812ACF1C9ECE3D0093786D /* IntervalSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntervalSet.swift; sourceTree = "<group>"; };
 		D8832F8519A0C86B0095B26F /* WaveView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaveView.swift; sourceTree = "<group>"; };
-		D88A620F1ACF7F19004CD4C9 /* UInt+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UInt+Additions.swift"; sourceTree = "<group>"; };
+		D885A12F1CE60B7300A3B996 /* PrimesSequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimesSequence.swift; sourceTree = "<group>"; };
+		D88A620F1ACF7F19004CD4C9 /* IntegerType+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IntegerType+Additions.swift"; sourceTree = "<group>"; };
 		D88EED2C1AEE5AF50084BDCB /* Float+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Float+Additions.swift"; sourceTree = "<group>"; };
 		D8901EBC1ABC226D00A4E071 /* Scale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scale.swift; sourceTree = "<group>"; };
 		D89074D71AD5486600FD8A1E /* ResultView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
@@ -194,8 +194,7 @@
 		D80989601C85C33B00122857 /* Additions */ = {
 			isa = PBXGroup;
 			children = (
-				D88A620F1ACF7F19004CD4C9 /* UInt+Additions.swift */,
-				D809895D1C85A27700122857 /* Int+Additions.swift */,
+				D88A620F1ACF7F19004CD4C9 /* IntegerType+Additions.swift */,
 				D88EED2C1AEE5AF50084BDCB /* Float+Additions.swift */,
 				D80989651C85C66B00122857 /* String+Additions.swift */,
 			);
@@ -370,6 +369,7 @@
 				D8E10CB61CA689310030D8E6 /* EqualTemperamentIntervalsData.swift */,
 				D89768EF1CABF7BC007D30BA /* PresetIntervalsData.swift */,
 				D84CE1E11C95960E00E19505 /* AdHocIntervalsData.swift */,
+				D885A12F1CE60B7300A3B996 /* PrimesSequence.swift */,
 				D849E7301ACADFD1006E0964 /* PrimeProducts.swift */,
 				D89543841996347F00A091A4 /* Rational.swift */,
 				D8720B651C9E8AA200ED9FBB /* Interval.swift */,
@@ -505,7 +505,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8E10CB41CA66D130030D8E6 /* EqualTemperamentGeneratorViewController.swift in Sources */,
-				D809895E1C85A27700122857 /* Int+Additions.swift in Sources */,
 				D89543871996347F00A091A4 /* Rational.swift in Sources */,
 				D89768F01CABF7BC007D30BA /* PresetIntervalsData.swift in Sources */,
 				D893993E1CA3E57F00C9CAA6 /* GeneratorViewController.swift in Sources */,
@@ -517,6 +516,7 @@
 				D8832F8619A0C86B0095B26F /* WaveView.swift in Sources */,
 				D83092C11AEBBC6F00B0E6A7 /* DisclosureView.swift in Sources */,
 				D84CE1E41C95967700E19505 /* IntervalsDataGenerator.swift in Sources */,
+				D8257B241CE72F2B008198E7 /* PrimesSequence.swift in Sources */,
 				D8B9020E1AD491E30015B5E2 /* PreferencesWindowController.swift in Sources */,
 				D8E5E6241AD12F7A004DB02D /* HarmonicView.swift in Sources */,
 				D80A61D61C9040C000A2F885 /* SelectDocumentType.swift in Sources */,
@@ -545,7 +545,7 @@
 				D8AA4E3D1C132A8A00B66521 /* ScaleViewController.swift in Sources */,
 				D87201061B8C7CAE006FDEDC /* NDMidiNoteFormatter.m in Sources */,
 				D8571C801CA56D2B008A5A46 /* LimitsGeneratorViewController.swift in Sources */,
-				D88A62101ACF7F19004CD4C9 /* UInt+Additions.swift in Sources */,
+				D88A62101ACF7F19004CD4C9 /* IntegerType+Additions.swift in Sources */,
 				D89399411CA3F31C00C9CAA6 /* StackedIntervalsGeneratorViewController.swift in Sources */,
 				D8C343C81AE109E200F5494A /* SpectrumView.swift in Sources */,
 				D87356E71ADA0793006DAFEB /* ChordSelectorWindowController.swift in Sources */,

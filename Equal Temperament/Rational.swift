@@ -30,9 +30,9 @@ struct Rational : CustomStringConvertible, CustomDebugStringConvertible, Hashabl
     init( _ aNumerator: Int, _ aDenominator: Int) {
 		let		theNumerator = aDenominator < 0 ? -aNumerator : aNumerator;
 		let		theDenominator = abs(aDenominator);
-        let theCommonDivisor = greatestCommonDivisor(theNumerator, theDenominator);
-        numerator = theNumerator/theCommonDivisor;
-        denominator = theDenominator/theCommonDivisor;
+        let		theCommonDivisor = greatestCommonDivisor(UInt(theNumerator), UInt(theDenominator));
+        numerator = theNumerator/Int(theCommonDivisor);
+        denominator = theDenominator/Int(theCommonDivisor);
 		precondition(theDenominator != 0, "\(numerator)/\(denominator) is not a number");
     }
 	init?( _ aString: String ) {

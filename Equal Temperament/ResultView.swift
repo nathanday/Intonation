@@ -20,7 +20,7 @@ import Cocoa
 				} else {
 					(_,theDen) = Rational.farey( Double(theValue.toDouble), maxDenominator:32 );
 				}
-				theResult *= theDen/greatestCommonDivisor(theResult, theDen);
+				theResult *= theDen/Int(greatestCommonDivisor( UInt(theResult), UInt(theDen) ));
 			}
 			return theResult;
 		}

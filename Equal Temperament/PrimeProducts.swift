@@ -13,8 +13,7 @@ struct PrimeProducts : SequenceType {
 	let		productRange : Range<UInt>;
 
 	init( maxPrime aMaxPrime: UInt, range aRange: Range<UInt> ) {
-		let		thePrimes = UInt.primes(upTo:aMaxPrime);
-		maxPrime = thePrimes.last!;
+		maxPrime = aMaxPrime;
 		productRange = aRange;
 	}
 

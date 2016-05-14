@@ -33,7 +33,7 @@ func log10( aValue : UInt ) -> UInt {
 func greatestCommonDivisor(u: [Rational] ) -> Int {
 	var		theResult = 1;
 	for theNumber in u {
-		theResult = greatestCommonDivisor(theResult, theNumber.numerator);
+		theResult = Int(greatestCommonDivisor( UInt(theResult), UInt(theNumber.numerator)));
 	}
 	return theResult;
 }
