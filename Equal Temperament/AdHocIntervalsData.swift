@@ -19,7 +19,7 @@ class AdHocIntervalsData : IntervalsData {
 			return nil;
 		}
 		for theEntityString in theOddLimit {
-			if let theInterval = Interval.fromString(theEntityString) {
+			if let theInterval = Interval.from(string:theEntityString) {
 				adHocEntries.insert(theInterval);
 			}
 		}
@@ -35,7 +35,7 @@ class AdHocIntervalsData : IntervalsData {
 		return theResult;
 	}
 
-	override var	documentType : DocumentType { return .AdHoc; }
+	override var	documentType : DocumentType { return .adHoc; }
 
 	override func intervalsDataGenerator() -> IntervalsDataGenerator {
 		return AdHocGenerator(intervalsData:self);
@@ -45,19 +45,19 @@ class AdHocIntervalsData : IntervalsData {
 	}
 	var		adHocEntries : Set<Interval>;
 
-	func addInterval( anInterval : Interval ) {
+	func addInterval( _ anInterval : Interval ) {
 		addIntervals( [anInterval] );
 	}
-	func addIntervals( anIntervals : [Interval] ) {
+	func addIntervals( _ anIntervals : [Interval] ) {
 		for theInterval in anIntervals {
 			adHocEntries.insert(theInterval);
 		}
 	}
 
-	func removeInterval( anInterval : Interval ) {
+	func removeInterval( _ anInterval : Interval ) {
 		removeIntervals( [anInterval] );
 	}
-	func removeIntervals( anIntervals : [Interval] ) {
+	func removeIntervals( _ anIntervals : [Interval] ) {
 		for theInterval in anIntervals {
 			adHocEntries.remove(theInterval);
 		}
@@ -78,6 +78,6 @@ class AdHocGenerator: IntervalsDataGenerator {
 				theResult.insert(EqualTemperamentEntry(interval: theEntry*theOctaveValue ));
 			}
 		}
-		_everyEqualTemperamentEntry = theResult.sort { return $0.toRatio < $1.toRatio; };
+		_everyEqualTemperamentEntry = theResult.sorted { return $0.toRatio < $1.toRatio; };
 	}
 }

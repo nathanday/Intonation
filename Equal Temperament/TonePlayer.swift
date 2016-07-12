@@ -9,8 +9,8 @@
 import Foundation
 import AudioToolbox
 
-func dBToPower( aDB: Double ) -> Double { return pow(10.0,aDB/10.0); }
-func powerToDB( aPower: Double ) -> Double { return 10.0*log10(aPower); }
+func dBToPower( _ aDB: Double ) -> Double { return pow(10.0,aDB/10.0); }
+func powerToDB( _ aPower: Double ) -> Double { return 10.0*log10(aPower); }
 
 class TonePlayer {
 
@@ -31,15 +31,15 @@ class TonePlayer {
 	var harmonics : HarmonicsDescription { didSet { updateTones(); } }
 	var baseFrequency : Double { didSet { updateTones(); } }
 	var intervals : [Interval] { didSet { generateTones(); } }
-	var arpeggioInterval : NSTimeInterval = 60.0/120.0;
-	private(set) var playbackType : PlaybackType = .Unison;
+	var arpeggioInterval : TimeInterval = 60.0/120.0;
+	private(set) var playbackType : PlaybackType = .unison;
 
 	var amplitude : Double = 1.0;
 	var playing : Bool = false;
 	var playingTones : [Interval:Tone] = [:];
 	private var outputPower : Double { get { return dBToPower(amplitude); } }
 
-	private var arpeggioTriggerTimer : NSTimer? = nil;
+	private var arpeggioTriggerTimer : Timer? = nil;
 	private var nextNoteIndex : Int = 0;
 
 	func generateTones() {
@@ -86,16 +86,16 @@ class TonePlayer {
 			let		theCount = playingTones.count,
 					theLastIndex = theCount-1;
 			if arpeggioTriggerTimer == nil {
-				arpeggioTriggerTimer = NSTimer.scheduledTimerWithTimeInterval(0.4, target: self, selector: #selector(TonePlayer.triggerNextNote), userInfo: nil, repeats: true);
+				arpeggioTriggerTimer = Timer.scheduledTimer(timeInterval: 0.4, target: self, selector: #selector(TonePlayer.triggerNextNote), userInfo: nil, repeats: true);
 			}
 			switch playbackType {
-			case .Up:
+			case .up:
 				nextNoteIndex = (nextNoteIndex+1)%theCount;
 				break;
-			case .Down:
+			case .down:
 				nextNoteIndex = ((nextNoteIndex-1)%(theCount-theLastIndex)) + theLastIndex;
 				break;
-			case .UpDown:
+			case .upDown:
 				nextNoteIndex = (nextNoteIndex+1)%(theCount+theLastIndex);
 				break;
 			default:
@@ -110,7 +110,7 @@ class TonePlayer {
 		if !playing {
 			generateTones();
 			switch playbackType {
-			case .Unison:
+			case .unison:
 				for (_,theTone) in self.playingTones { theTone.play(); }
 				break;
 			default:
@@ -120,7 +120,7 @@ class TonePlayer {
 		}
 	}
 
-	func playType( aType : PlaybackType ) {
+	func playType( _ aType : PlaybackType ) {
 		if playbackType != aType {
 			stop();
 		}

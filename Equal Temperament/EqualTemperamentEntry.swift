@@ -194,7 +194,7 @@ class EqualTemperamentEntry : NSObject, NSPasteboardReading, NSPasteboardWriting
 	}
 
 	init?( string aString: String ) {
-		if let theRatio = Interval.fromString(aString) {
+		if let theRatio = Interval.from(string:aString) {
 			self.interval = theRatio;
 			super.init();
 		} else {
@@ -206,7 +206,7 @@ class EqualTemperamentEntry : NSObject, NSPasteboardReading, NSPasteboardWriting
 	override var hashValue: Int { return interval.hashValue; }
 
 	override var hash : Int { return interval.hashValue; }
-	override func isEqual(object: AnyObject?) -> Bool {
+	override func isEqual(_ object: AnyObject?) -> Bool {
 		return self.interval==(object as? EqualTemperamentEntry)?.interval;
 	}
 	var everyIntervalName : [String] {
@@ -218,11 +218,11 @@ class EqualTemperamentEntry : NSObject, NSPasteboardReading, NSPasteboardWriting
 
 // NSPasteboardWriting
 
-	func writableTypesForPasteboard(pasteboard: NSPasteboard) -> [String] {
+	func writableTypes(for pasteboard: NSPasteboard) -> [String] {
 		return ["com.godofcocoa.intonation.interval",NSPasteboardTypeString,NSPasteboardTypeTabularText];
 	}
 
-	func pasteboardPropertyListForType(aType: String) -> AnyObject? {
+	func pasteboardPropertyList(forType aType: String) -> AnyObject? {
 		switch aType {
 		case NSPasteboardTypeString:
 			return interval.ratioString;
@@ -236,24 +236,24 @@ class EqualTemperamentEntry : NSObject, NSPasteboardReading, NSPasteboardWriting
 	}
 
 // NSPasteboardReading
-	static func readableTypesForPasteboard(pasteboard: NSPasteboard) -> [String] {
+	static func readableTypes(for pasteboard: NSPasteboard) -> [String] {
 		return ["com.godofcocoa.intonation.interval",NSPasteboardTypeString];
 	}
 
-	static func readingOptionsForType(type: String, pasteboard: NSPasteboard) -> NSPasteboardReadingOptions {
-		return .AsPropertyList;
+	static func readingOptions(forType type: String, pasteboard: NSPasteboard) -> NSPasteboardReadingOptions {
+		return .asPropertyList;
 	}
 	required init?(pasteboardPropertyList aPropertyList: AnyObject, ofType aType: String) {
 		switch aType {
 		case NSPasteboardTypeString:
 			if let theString = aPropertyList as? String,
-				theRatio = Interval.fromString(theString) {
+				theRatio = Interval.from(string:theString) {
 				self.interval = theRatio;
 			} else {
 				return nil;
 			}
 		case "com.godofcocoa.intonation.interval":
-			if let theInterval = Interval.fromPropertyList(aPropertyList) {
+			if let theInterval = Interval.from(propertyList:aPropertyList) {
 				self.interval = theInterval;
 			} else {
 				return nil;

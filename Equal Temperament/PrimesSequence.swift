@@ -6,7 +6,7 @@
 //  Copyright © 2016 Nathan Day. All rights reserved.
 //
 
-class PrimesSequence : SequenceType {
+class PrimesSequence : Sequence {
 	static var		primes : [UInt] = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67];
 	var endAt:UInt
 
@@ -14,7 +14,7 @@ class PrimesSequence : SequenceType {
 		endAt = end
 	}
 
-	private func extendPrimes() -> UInt? {
+	@discardableResult private func extendPrimes() -> UInt? {
 		var		theResult : UInt? = nil;
 		var		theTestValue = PrimesSequence.primes.last!;
 		testValueLoop: while theResult < 4294967293 {
@@ -33,10 +33,10 @@ class PrimesSequence : SequenceType {
 		return theResult;
 	}
 
-	func generate() -> AnyGenerator<UInt> {
+	func makeIterator() -> AnyIterator<UInt> {
 		var iterationIndex = 0
 
-		return AnyGenerator( body:{
+		return AnyIterator({
 			var		theResult : UInt? = nil;
 			if iterationIndex >= PrimesSequence.primes.endIndex {
 				self.extendPrimes()

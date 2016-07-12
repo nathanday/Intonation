@@ -11,11 +11,11 @@ import Foundation
 extension UInt {
 	var hexadecimalString : String { get { return String(format: "%x", self ); } }
 
-	func isFactorOf(factor: UInt) -> Bool { return self % factor == 0; }
-	func isFactorOf(factors: Range<UInt>) -> Bool {
+	func isFactorOf(_ factor: UInt) -> Bool { return self % factor == 0; }
+	func isFactorOf(_ factors: CountableClosedRange<UInt>) -> Bool {
 		for a in factors {
 			if a*a > self {
-				false;
+				return false;
 			}
 			if self.isFactorOf(a) {
 				return true;
@@ -60,7 +60,7 @@ extension UInt {
 				let		digits = "⁰¹²³⁴⁵⁶⁷⁸⁹";
 				var		theValue = Int(self);
 				while theValue > 0 {
-					let		theIndex = digits.startIndex.advancedBy((theValue%10));
+					let		theIndex = digits.characters.index(digits.startIndex, offsetBy: (theValue%10));
 					theResult = "\(digits[theIndex])\(theResult)";
 					theValue /= 10;
 				}
@@ -72,7 +72,7 @@ extension UInt {
 		}
 	}
 
-	func factorCount(factor: UInt) -> UInt {
+	func factorCount(_ factor: UInt) -> UInt {
 		var		theResult : UInt = 0;
 		var		theValue = self;
 		while theValue.isFactorOf(factor) {
@@ -96,9 +96,9 @@ extension UInt {
 				if theResult.startIndex != theResult.endIndex {
 					theResult.append(Character("∙"));
 				}
-				theResult.appendContentsOf("\(theFact.factor)");
+				theResult.append("\(theFact.factor)");
 				if theFact.power > 1 {
-					theResult.appendContentsOf("\(theFact.power.superScriptString)");
+					theResult.append("\(theFact.power.superScriptString)");
 				}
 			}
 			return theResult;
@@ -106,7 +106,7 @@ extension UInt {
 	}
 }
 
-func sqrt<T : UnsignedIntegerType>( n : T ) -> T {
+func sqrt<T : UnsignedInteger>( _ n : T ) -> T {
 	switch n {
 	case let x as UInt:
 		return UInt(sqrt(Double(x))) as! T;
@@ -123,7 +123,7 @@ func sqrt<T : UnsignedIntegerType>( n : T ) -> T {
 	}
 }
 
-func log2<T : UnsignedIntegerType>( aValue : T ) -> T {
+func log2<T : UnsignedInteger>( _ aValue : T ) -> T {
 	if aValue == 0 {
 		return 0;
 	} else {
@@ -131,7 +131,7 @@ func log2<T : UnsignedIntegerType>( aValue : T ) -> T {
 	}
 }
 
-func greatestCommonDivisor(u: [UInt] ) -> UInt {
+func greatestCommonDivisor(_ u: [UInt] ) -> UInt {
 	var		theResult : UInt = 1;
 	for theNumber in u {
 		theResult = greatestCommonDivisor(theResult, theNumber);
@@ -139,7 +139,7 @@ func greatestCommonDivisor(u: [UInt] ) -> UInt {
 	return theResult;
 }
 
-func greatestCommonDivisor<T : UnsignedIntegerType>(u: T, _ v: T) -> T {
+func greatestCommonDivisor<T : UnsignedInteger>(_ u: T, _ v: T) -> T {
 	// simple cases (termination)
 	if u == v { return u; }
 	if u == 0 { return v; }
@@ -163,25 +163,21 @@ func greatestCommonDivisor<T : UnsignedIntegerType>(u: T, _ v: T) -> T {
 	return greatestCommonDivisor((v - u) / 2, u);
 }
 
-func bitCount( x : UInt) -> Int {
+func bitCount( _ x : UInt) -> Int {
 	var		theX = x;
 	var		theCount = 0;
 	while theX > 0 {
-		if theX & UInt(0x1) == 1 {
-			theCount += 1;
-		}
+		if theX & UInt(0x1) == 1 { theCount += 1; }
 		theX >>= 1;
 	}
 	return theCount;
 }
 
-func bitCount( x : Int) -> Int {
+func bitCount( _ x : Int) -> Int {
 	var		theX = x;
 	var		theCount = 0;
 	while theX > 0 {
-		if theX & 0x1 == 1 {
-			theCount += 1;
-		}
+		if theX & 0x1 == 1 { theCount += 1; }
 		theX >>= 1;
 	}
 	return theCount;

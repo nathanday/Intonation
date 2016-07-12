@@ -11,7 +11,7 @@ import Cocoa
 protocol ScaleDisplayViewController {
 
 	func setIntervals( intervals anIntervals : [EqualTemperamentEntry], degree anIntervalCount : UInt, enabled anEnable : Bool );
-	func hideIntervalRelatedColumn( aHide : Bool );
-	func setSelectionIntervals( aSelectionIntervals : [Interval]);
+	func hideIntervalRelatedColumn( _ aHide : Bool );
+	func setSelectionIntervals( _ aSelectionIntervals : [Interval]);
 
 }

@@ -10,8 +10,8 @@ import Cocoa
 
 class EqualTemperamentIntervalsData : IntervalsData {
 	override init() {
-		degrees = UInt(NSUserDefaults.standardUserDefaults().integerForKey("degrees")) ?? 12;
-		interval = NSUserDefaults.standardUserDefaults().rationalIntervalForKey("interval") ?? RationalInterval(2);
+		degrees = UInt(UserDefaults.standard.integer(forKey: "degrees")) ?? 12;
+		interval = UserDefaults.standard.rationalIntervalForKey("interval") ?? RationalInterval(2);
 		super.init();
 	}
 	override init?(propertyList aPropertyList: [String:AnyObject] ) {
@@ -21,12 +21,12 @@ class EqualTemperamentIntervalsData : IntervalsData {
 		if let theDegreesString = theProperties["degrees"] {
 			degrees = UInt(theDegreesString) ?? 12;
 		} else {
-			degrees = UInt(NSUserDefaults.standardUserDefaults().integerForKey("degrees")) ?? 12;
+			degrees = UInt(UserDefaults.standard.integer(forKey: "degrees")) ?? 12;
 		}
 		if let theIntervalString = theProperties["interval"] {
-			interval = RationalInterval.fromString(theIntervalString) ?? RationalInterval(2,1);
+			interval = RationalInterval.from(string:theIntervalString) ?? RationalInterval(2,1);
 		} else {
-			interval = NSUserDefaults.standardUserDefaults().rationalIntervalForKey("interval") ?? RationalInterval(2);
+			interval = UserDefaults.standard.rationalIntervalForKey("interval") ?? RationalInterval(2);
 		}
 		super.init(propertyList:aPropertyList);
 	}
@@ -38,7 +38,7 @@ class EqualTemperamentIntervalsData : IntervalsData {
 		return theResult;
 	}
 
-	override var	documentType : DocumentType { return .EqualTemperament; }
+	override var	documentType : DocumentType { return .equalTemperament; }
 
 	override func intervalsDataGenerator() -> IntervalsDataGenerator {
 		return EqualTemperamentGenerator(intervalsData:self);
@@ -49,12 +49,12 @@ class EqualTemperamentIntervalsData : IntervalsData {
 
 	dynamic var		degrees : UInt {
 		didSet {
-			NSUserDefaults.standardUserDefaults().setInteger(Int(degrees), forKey:"degrees");
+			UserDefaults.standard.set(Int(degrees), forKey:"degrees");
 		}
 	}
 	var				interval : RationalInterval {
 		didSet {
-			NSUserDefaults.standardUserDefaults().setInterval(interval, forKey:"interval");
+			UserDefaults.standard.setInterval(interval, forKey:"interval");
 		}
 	}
 }
@@ -91,6 +91,6 @@ class EqualTemperamentGenerator: IntervalsDataGenerator {
 			theRatio = ratioFor(note:theIndex);
 		}
 
-		_everyEqualTemperamentEntry = theResult.sort { return $0.toCents < $1.toCents; };
+		_everyEqualTemperamentEntry = theResult.sorted { return $0.toCents < $1.toCents; };
 	}
 }

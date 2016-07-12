@@ -27,7 +27,7 @@ class IntervalsDataGenerator : CustomStringConvertible {
 					theError = abs(theEntry.error12ETCent);
 					theResult = [theEntry];
 				} else {
-					if abs(theError.distanceTo(abs(theEntry.error12ETCent))) < 0.000001 {
+					if abs(theError.distance(to: abs(theEntry.error12ETCent))) < 0.000001 {
 						theResult.insert(theEntry);
 					}
 					else if theError > abs(theEntry.error12ETCent) {
@@ -49,7 +49,7 @@ class IntervalsDataGenerator : CustomStringConvertible {
 					theError = abs(theEntry.error12ETCent);
 					theResult = [theEntry];
 				} else {
-					if abs(theError.distanceTo(abs(theEntry.error12ETCent))) < 0.000001 {
+					if abs(theError.distance(to: abs(theEntry.error12ETCent))) < 0.000001 {
 						theResult.insert(theEntry);
 					}
 					else if theError < abs(theEntry.error12ETCent) {

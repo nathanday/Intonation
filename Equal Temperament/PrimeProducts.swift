@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct PrimeProducts : SequenceType {
+struct PrimeProducts : Sequence {
 	let		maxPrime : UInt;
 	let		productRange : Range<UInt>;
 
@@ -17,12 +17,12 @@ struct PrimeProducts : SequenceType {
 		productRange = aRange;
 	}
 
-	func generate() -> AnyGenerator<UInt> {
-		var		value : UInt = productRange.startIndex - 1;
-		return AnyGenerator {
+	func makeIterator() -> AnyIterator<UInt> {
+		var		value : UInt = productRange.lowerBound - 1;
+		return AnyIterator {
 			repeat {
 				value += 1;
-				if value > self.productRange.endIndex { return nil; }
+				if value > self.productRange.upperBound { return nil; }
 			} while value.largestPrimeFactor > self.maxPrime;
 			return value;
 		}

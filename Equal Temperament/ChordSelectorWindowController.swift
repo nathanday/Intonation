@@ -20,9 +20,9 @@ class ChordSelectorWindowController: NSWindowController {
         super.windowDidLoad()
     }
 
-	@IBAction func toggleWindow(aSender: AnyObject?) {
+	@IBAction func toggleWindow( _ aSender: AnyObject?) {
 		if let theWindow = self.window {
-			if theWindow.visible {
+			if theWindow.isVisible {
 				close();
 			}
 			else {
@@ -33,13 +33,13 @@ class ChordSelectorWindowController: NSWindowController {
 
 	func showAsSheet(parentWindow aWindow: NSWindow ) {
 		if let theWindow = self.window {
-			theWindow.parentWindow = aWindow;
+			theWindow.parent = aWindow;
 			aWindow.beginSheet( theWindow, completionHandler: {
 				(aResponse: NSModalResponse) -> Void in
 			});
 		}
 	}
 
-	func selectIntervalSet( anIntervalSet : IntervalSet ) {
+	func selectIntervalSet( _ anIntervalSet : IntervalSet ) {
 	}
 }

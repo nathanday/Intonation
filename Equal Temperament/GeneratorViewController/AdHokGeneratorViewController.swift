@@ -24,7 +24,7 @@ class AdHokGeneratorViewController: GeneratorViewController {
 		get {
 			var		theResult : Interval?;
 			if let theInterval = adHocIntervalTextField?.stringValue {
-				theResult = Interval.fromString(theInterval);
+				theResult = Interval.from(string:theInterval);
 			}
 			return theResult;
 		}
@@ -35,25 +35,25 @@ class AdHokGeneratorViewController: GeneratorViewController {
 		}
 	}
 
-	@IBAction func addAdHocIntervalAction( aSender: AnyObject ) {
+	@IBAction func addAdHocIntervalAction( _ aSender: AnyObject ) {
 		if let theInterval = adHocInterval {
 			addInterval(theInterval);
 		}
 	}
 
-	@IBAction func delete( aSender: AnyObject?) {
+	@IBAction func delete( _ aSender: AnyObject?) {
 		if let theDocument = document {
 			removeIntervals(theDocument.selectedJustIntonationIntervals);
 		}
 	}
-	@IBAction func paste(aSender: AnyObject ) {
-		let		theEntries = NSPasteboard.generalPasteboard().readObjectsForClasses([EqualTemperamentEntry.self], options: nil) as? [EqualTemperamentEntry];
+	@IBAction func paste( _ aSender: AnyObject ) {
+		let		theEntries = NSPasteboard.general().readObjects(forClasses: [EqualTemperamentEntry.self], options: nil) as? [EqualTemperamentEntry];
 		NSLog( "\(theEntries)" );
 	}
-	func addInterval( anInterval : Interval ) {
+	func addInterval( _ anInterval : Interval ) {
 		addIntervals( [anInterval] );
 	}
-	func addIntervals( anIntervals : [Interval] ) {
+	func addIntervals( _ anIntervals : [Interval] ) {
 		if let theDocument = document {
 			for theInterval in anIntervals {
 				(document!.intervalsData as! AdHocIntervalsData).adHocEntries.insert(theInterval);
@@ -62,10 +62,10 @@ class AdHokGeneratorViewController: GeneratorViewController {
 		}
 	}
 
-	func removeInterval( anInterval : Interval ) {
+	func removeInterval( _ anInterval : Interval ) {
 		removeIntervals( [anInterval] );
 	}
-	func removeIntervals( anIntervals : [Interval] ) {
+	func removeIntervals( _ anIntervals : [Interval] ) {
 		if let theDocument = document {
 			for theInterval in anIntervals {
 				(document!.intervalsData as! AdHocIntervalsData).adHocEntries.remove(theInterval);

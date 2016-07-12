@@ -43,9 +43,9 @@ class ChordPreviewViewController: NSViewController {
 }
 
 extension ChordPreviewViewController : NSTableViewDataSource {
-	func numberOfRowsInTableView(tableView: NSTableView) -> Int { return chordOrScale.everyInterval.numberOfDegrees; }
+	func numberOfRows(in tableView: NSTableView) -> Int { return chordOrScale.everyInterval.numberOfDegrees; }
 
-	func tableView( aTableView: NSTableView, objectValueForTableColumn aTableColumn: NSTableColumn?, row aRow: Int) -> AnyObject? {
+	func tableView( _ aTableView: NSTableView, objectValueFor aTableColumn: NSTableColumn?, row aRow: Int) -> AnyObject? {
 		var		theResult = "";
 		if aTableColumn?.identifier == "name" {
 			theResult = chordOrScale.everyInterval[aRow].names?.first ?? "";
@@ -56,10 +56,10 @@ extension ChordPreviewViewController : NSTableViewDataSource {
 		return theResult;
 	}
 
-	func tableView( aTableView: NSTableView, writeRowsWithIndexes aRowIndexes: NSIndexSet, toPasteboard aPboard: NSPasteboard) -> Bool {
+	func tableView( _ aTableView: NSTableView, writeRowsWith aRowIndexes: IndexSet, to aPboard: NSPasteboard) -> Bool {
 		var		theResult = "";
 		for theIndex in aRowIndexes {
-			theResult.appendContentsOf("\(chordOrScale.everyInterval[theIndex].names?.first ?? "")\t\(chordOrScale.everyInterval[theIndex].toString)\n");
+			theResult.append("\(chordOrScale.everyInterval[theIndex].names?.first ?? "")\t\(chordOrScale.everyInterval[theIndex].toString)\n");
 		}
 		aPboard.setString(theResult, forType: NSPasteboardTypeTabularText);
 		return true;

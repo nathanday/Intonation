@@ -9,10 +9,10 @@
 import Foundation
 
 class Interval : Hashable {
-	class func fromString( aString : String? ) -> Interval? {
+	class func from( string aString : String? ) -> Interval? {
 		var		theResult : Interval?
 		if let theString = aString {
-			if theString.containsString(".") {
+			if theString.contains(".") {
 				if let theValue = Double(theString) {
 					theResult = IrrationalInterval(theValue);
 				}
@@ -24,7 +24,7 @@ class Interval : Hashable {
 		}
 		return theResult;
 	}
-	class func fromPropertyList( aPropertyList : AnyObject ) -> Interval? {
+	class func from( propertyList aPropertyList : AnyObject ) -> Interval? {
 		var		theResult : Interval?
 		var		theEveryName : [String] = [];
 		if let thePropertyList = aPropertyList as? [String:AnyObject] {
@@ -36,7 +36,7 @@ class Interval : Hashable {
 				theResult = RationalInterval( ratio: Rational(theNumerator,theDenominator), names: theEveryName );
 			}
 			else if let theRatioString = thePropertyList["ratio"] as? String {
-				if theRatioString.containsString(".") {
+				if theRatioString.contains(".") {
 					if let theRatio = Double(theRatioString) {
 						theResult = IrrationalInterval( ratio: theRatio, names: theEveryName );
 					}
@@ -53,7 +53,7 @@ class Interval : Hashable {
 				let theSteps = thePropertyList["steps"] as? UInt;
 				var theInterval : Interval? = nil;
 				if let theIntervalString = thePropertyList["interval"] as? String {
-					theInterval = Interval.fromString(theIntervalString);
+					theInterval = Interval.from(string:theIntervalString);
 				}
 				theResult = EqualTemperamentInterval( degree: theDegree, steps:theSteps ?? 12, interval:theInterval ?? RationalInterval(2), names: theEveryName );
 			}
@@ -93,7 +93,7 @@ class Interval : Hashable {
 		preconditionFailure("The method toString must be overriden");
 	}
 	var additiveDissonance : UInt? { return nil; }
-	func numeratorForDenominator( aDenominator: Int ) -> Int? {
+	func numeratorForDenominator( _ aDenominator: Int ) -> Int? {
 		return nil;
 	}
 }
@@ -101,10 +101,10 @@ class Interval : Hashable {
 class RationalInterval : Interval {
 	private static let	intervalNames : [Rational:[String]] = {
 		var theResult = [Rational:[String]]()
-		for theEntry in NSUserDefaults.standardUserDefaults().arrayForKey("intervalNames")! as! [[String:AnyObject]] {
+		for theEntry in UserDefaults.standard.array(forKey: "intervalNames")! as! [[String:AnyObject]] {
 			if let theRatioString = theEntry["ratio"] as? String,
 				theNames = theEntry["names"] as? [String] {
-				if !theRatioString.containsString(".") {
+				if !theRatioString.contains(".") {
 					if let theRatio = Rational(theRatioString) {
 						precondition(theResult[theRatio] == nil, "Already have \(theRatio)=\(theResult[theRatio])" );
 						theResult[theRatio] = theNames;
@@ -170,7 +170,7 @@ class RationalInterval : Interval {
 //			self.init( ratio:theValue, names:nil );
 //		}
 //	}
-	class override func fromString( aString : String? ) -> RationalInterval? {
+	class override func from( string aString : String? ) -> RationalInterval? {
 		var		theResult : RationalInterval?
 		if let theString = aString {
 			if let theValue = Rational(theString) {
@@ -185,7 +185,7 @@ class RationalInterval : Interval {
 	override var factorsString : String { return ratio.factorsString; }
 	override var ratioString : String { return ratio.ratioString; }
 	override var additiveDissonance : UInt? { return ratio.additiveDissonance; }
-	override func numeratorForDenominator( aDenominator: Int ) -> Int? {
+	override func numeratorForDenominator( _ aDenominator: Int ) -> Int? {
 		return ratio.numeratorForDenominator(aDenominator);
 	}
 }
@@ -193,16 +193,16 @@ class RationalInterval : Interval {
 class IrrationalInterval : Interval {
 	private static let	intervalNames : [UInt:[String]] = {
 		var theResult = [UInt:[String]]()
-		for theEntry in NSUserDefaults.standardUserDefaults().arrayForKey("intervalNames")! as! [[String:AnyObject]] {
+		for theEntry in UserDefaults.standard.array(forKey: "intervalNames")! as! [[String:AnyObject]] {
 			if let theRatioString = theEntry["ratio"] as? String,
 				theNames = theEntry["names"] as? [String] {
-				if theRatioString.containsString(".") {
+				if theRatioString.contains(".") {
 					if let theRatio = Double(theRatioString) {
 						theResult[UInt(theRatio*4096)] = theNames;
 					}
 				}
 				else if theRatioString.hasSuffix(":1") {
-					if let theRatio = UInt( theRatioString.componentsSeparatedByString(":").first! ) {
+					if let theRatio = UInt( theRatioString.components(separatedBy: ":").first! ) {
 						theResult[UInt(theRatio*4096)] = theNames;
 					}
 				}
@@ -257,10 +257,10 @@ class IrrationalInterval : Interval {
 class EqualTemperamentInterval : Interval {
 	private static let	intervalNames : [UInt:[String]] = {
 		var theResult = [UInt:[String]]()
-		for theEntry in NSUserDefaults.standardUserDefaults().arrayForKey("intervalNames")! as! [[String:AnyObject]] {
+		for theEntry in UserDefaults.standard.array(forKey: "intervalNames")! as! [[String:AnyObject]] {
 			if let theRatioString = theEntry["ratio"] as? String,
 				theNames = theEntry["names"] as? [String] {
-				if theRatioString.containsString(".") {
+				if theRatioString.contains(".") {
 					if let theRatio = Double(theRatioString) {
 						theResult[UInt(theRatio*4096)] = theNames;
 					}
@@ -330,7 +330,7 @@ func * (a: Interval, b: UInt) -> Interval {
 	}
 }
 
-func equivelentRatios( a: Double, _ b: Double ) -> Bool {
+func equivelentRatios( _ a: Double, _ b: Double ) -> Bool {
 	return abs(a-b) < 1.0/4096.0;
 }
 
@@ -373,27 +373,27 @@ func * (a: Interval, b: Interval) -> Interval { return IrrationalInterval(a.toDo
 func * (a: RationalInterval, b: RationalInterval) -> RationalInterval { return RationalInterval(a.ratio * b.ratio); }
 func * (a: RationalInterval, b: Int) -> RationalInterval { return RationalInterval(a.ratio * b); }
 
-func *= (inout a: Interval, b: Interval) { a = IrrationalInterval(a.toDouble*b.toDouble); }
-func *= (inout a: Interval, b: Int) { a = IrrationalInterval(a.toDouble*Double(b)); }
-func *= (inout a: RationalInterval, b: RationalInterval) { a = RationalInterval(a.ratio*b.ratio); }
-func *= (inout a: RationalInterval, b: Int) { a = RationalInterval(a.ratio*b); }
+func *= (a: inout Interval, b: Interval) { a = IrrationalInterval(a.toDouble*b.toDouble); }
+func *= (a: inout Interval, b: Int) { a = IrrationalInterval(a.toDouble*Double(b)); }
+func *= (a: inout RationalInterval, b: RationalInterval) { a = RationalInterval(a.ratio*b.ratio); }
+func *= (a: inout RationalInterval, b: Int) { a = RationalInterval(a.ratio*b); }
 
-extension NSUserDefaults {
-	func intervalForKey(aKey: String) -> Interval? {
+extension UserDefaults {
+	func intervalForKey(_ aKey: String) -> Interval? {
 		var			theResult : Interval?;
-		if let theIntervalString = NSUserDefaults.standardUserDefaults().stringForKey(aKey) {
-			theResult = Interval.fromString(theIntervalString);
+		if let theIntervalString = UserDefaults.standard.string(forKey: aKey) {
+			theResult = Interval.from(string:theIntervalString);
 		}
 		return theResult;
 	}
-	func rationalIntervalForKey(aKey: String) -> RationalInterval? {
+	func rationalIntervalForKey(_ aKey: String) -> RationalInterval? {
 		var			theResult : RationalInterval?;
-		if let theIntervalString = NSUserDefaults.standardUserDefaults().stringForKey(aKey) {
-			theResult = RationalInterval.fromString(theIntervalString);
+		if let theIntervalString = UserDefaults.standard.string(forKey: aKey) {
+			theResult = RationalInterval.from(string:theIntervalString);
 		}
 		return theResult;
 	}
-	func setInterval(aValue: Interval, forKey aKey: String) {
-		setObject(aValue.toString, forKey: aKey);
+	func setInterval(_ aValue: Interval, forKey aKey: String) {
+		set(aValue.toString, forKey: aKey);
 	}
 }

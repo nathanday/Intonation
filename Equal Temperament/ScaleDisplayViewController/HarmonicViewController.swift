@@ -11,9 +11,9 @@ import Cocoa
 class HarmonicViewController : NSViewController, ScaleDisplayViewController {
 
 	func setIntervals( intervals anIntervals : [EqualTemperamentEntry], degree anIntervalCount : UInt, enabled anEnable : Bool ) { }
-	func hideIntervalRelatedColumn( aHide : Bool ) { }
+	func hideIntervalRelatedColumn( _ aHide : Bool ) { }
 
-	func setSelectionIntervals( aSelectionIntervals : [Interval]) {
+	func setSelectionIntervals( _ aSelectionIntervals : [Interval]) {
 		(self.view as? HarmonicView)?.selectedRatios = aSelectionIntervals;
 	}
 

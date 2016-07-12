@@ -21,27 +21,27 @@ class WaveViewController: NSViewController, ScaleDisplayViewController {
 
 	dynamic var		selectedWaveViewMode : Int {
 		set(aValue) {
-			NSUserDefaults.standardUserDefaults().setInteger(aValue, forKey: "selectedWaveViewMode");
+			UserDefaults.standard.set(aValue, forKey: "selectedWaveViewMode");
 			updateWaveViewDisplayMode();
 		}
-		get { return NSUserDefaults.standardUserDefaults().integerForKey("selectedWaveViewMode"); }
+		get { return UserDefaults.standard.integer(forKey: "selectedWaveViewMode"); }
 	}
 
 	dynamic var		selectedWaveViewScale : Int {
 		set( aValue ) {
-			NSUserDefaults.standardUserDefaults().setInteger(aValue, forKey: "selectedWaveViewScale");
+			UserDefaults.standard.set(aValue, forKey: "selectedWaveViewScale");
 			updateWaveViewScale();
 		}
-		get { return NSUserDefaults.standardUserDefaults().integerForKey("selectedWaveViewScale"); }
+		get { return UserDefaults.standard.integer(forKey: "selectedWaveViewScale"); }
 	}
 
 	func setIntervals( intervals anIntervals : [EqualTemperamentEntry], degree anDegree : UInt, enabled anEnable : Bool ) {
 	}
 
-	func hideIntervalRelatedColumn( aHide : Bool ) {
+	func hideIntervalRelatedColumn( _ aHide : Bool ) {
 	}
 
-	func setSelectionIntervals( aSelectionIntervals : [Interval]) {
+	func setSelectionIntervals( _ aSelectionIntervals : [Interval]) {
 		waveView?.selectedRatios = aSelectionIntervals;
 	}
 

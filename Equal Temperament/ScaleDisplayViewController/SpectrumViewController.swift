@@ -14,10 +14,10 @@ class SpectrumViewController: NSViewController {
 
 	dynamic var		selectedSpectrumType : Int {
 		set( aValue ) {
-			NSUserDefaults.standardUserDefaults().setInteger( aValue, forKey: "selectedSpectrumType");
+			UserDefaults.standard.set( aValue, forKey: "selectedSpectrumType");
 			updateSelectedSpectrumType();
 		}
-		get { return NSUserDefaults.standardUserDefaults().integerForKey("selectedSpectrumType"); }
+		get { return UserDefaults.standard.integer(forKey: "selectedSpectrumType"); }
 	}
 
 	override func viewWillAppear() {
@@ -26,8 +26,8 @@ class SpectrumViewController: NSViewController {
     }
 
 	func setIntervals( intervals anIntervals : [EqualTemperamentEntry], degree anIntervalCount : UInt, enabled anEnable : Bool ) { }
-	func hideIntervalRelatedColumn( aHide : Bool ) { }
-	func setSelectionIntervals( aSelectionIntervals : [Interval]) {
+	func hideIntervalRelatedColumn( _ aHide : Bool ) { }
+	func setSelectionIntervals( _ aSelectionIntervals : [Interval]) {
 		spectrumView?.selectedRatios = aSelectionIntervals;
 	}
 

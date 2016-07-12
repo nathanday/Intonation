@@ -14,8 +14,8 @@ class ScaleViewController: NSViewController, ScaleDisplayViewController {
 	@IBOutlet var	pitchConstellationView : ScaleView?;
 
 	dynamic var		selectedScaleDisplayType : Int {
-		set( aValue ) { NSUserDefaults.standardUserDefaults().setInteger(aValue, forKey: "selectedScaleDisplayType"); }
-		get { return NSUserDefaults.standardUserDefaults().integerForKey("selectedScaleDisplayType"); }
+		set( aValue ) { UserDefaults.standard.set(aValue, forKey: "selectedScaleDisplayType"); }
+		get { return UserDefaults.standard.integer(forKey: "selectedScaleDisplayType"); }
 	}
 
 
@@ -32,12 +32,12 @@ class ScaleViewController: NSViewController, ScaleDisplayViewController {
 		}
 	}
 
-	func hideIntervalRelatedColumn( aHide : Bool ) {
+	func hideIntervalRelatedColumn( _ aHide : Bool ) {
 		linearScaleView?.useIntervals = !aHide;
 		pitchConstellationView?.useIntervals = !aHide;
 	}
 
-	func setSelectionIntervals( aSelectionIntervals : [Interval]) {
+	func setSelectionIntervals( _ aSelectionIntervals : [Interval]) {
 		linearScaleView?.selectedRatios = aSelectionIntervals;
 		pitchConstellationView?.selectedRatios = aSelectionIntervals;
 	}

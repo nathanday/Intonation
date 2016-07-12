@@ -31,7 +31,7 @@ class Document : NSDocument, MIDIReceiverObserver {
 	}
 	let watchedKeys : Set = ["additiveDissonance", "adHocEntries", "degrees", "denominatorPrimeLimitIndex", "documentType", "interval", "numeratorPrimeLimitIndex", "octavesCount", "oddLimit", "separatePrimeLimit", "stackedIntervals"];
 
-	override func observeValueForKeyPath( aKeyPath: String?, ofObject anObject: AnyObject?, change aChange: [String : AnyObject]?, context aContext: UnsafeMutablePointer<Void>) {
+	override func observeValue( forKeyPath aKeyPath: String?, of anObject: AnyObject?, change aChange: [NSKeyValueChangeKey : AnyObject]?, context aContext: UnsafeMutablePointer<Void>?) {
 		if anObject as? IntervalsData == intervalsData {
 			if let theKey = aKeyPath {
 				if watchedKeys.contains(theKey) {
@@ -43,7 +43,7 @@ class Document : NSDocument, MIDIReceiverObserver {
 
 	func setUpIntervalsDataObservers() {
 		for theKey in watchedKeys {
-			intervalsData?.addObserver(self, forKeyPath:theKey, options: NSKeyValueObservingOptions.New, context:nil)
+			intervalsData?.addObserver(self, forKeyPath:theKey, options: NSKeyValueObservingOptions.new, context:nil)
 		}
 	}
 
@@ -55,11 +55,11 @@ class Document : NSDocument, MIDIReceiverObserver {
 		}
 	}
 
-	func showWithIntervals( anItervals : [Interval]) {
+	func showWithIntervals( _ anItervals : [Interval]) {
 		let		theIntervalsData = AdHocIntervalsData();
-		willChangeValueForKey("intervalsData");
+		willChangeValue(forKey: "intervalsData");
 		intervalsData = theIntervalsData;
-		didChangeValueForKey("intervalsData");
+		didChangeValue(forKey: "intervalsData");
 		theIntervalsData.addIntervals(anItervals);
 		makeWindowControllers();
 		showWindows();
@@ -83,9 +83,9 @@ class Document : NSDocument, MIDIReceiverObserver {
 		}
 	}
 
-	override func canCloseDocumentWithDelegate(delegate: AnyObject, shouldCloseSelector: Selector, contextInfo: UnsafeMutablePointer<Void>) {
+	override func canClose(withDelegate delegate: AnyObject, shouldClose shouldCloseSelector: Selector?, contextInfo: UnsafeMutablePointer<Void>?) {
 		tonePlayer.stop();
-		super.canCloseDocumentWithDelegate(delegate, shouldCloseSelector: shouldCloseSelector, contextInfo: contextInfo);
+		super.canClose(withDelegate: delegate, shouldClose: shouldCloseSelector, contextInfo: contextInfo);
 	}
 
 	dynamic var		baseFrequency : Double {
@@ -93,8 +93,8 @@ class Document : NSDocument, MIDIReceiverObserver {
 			return intervalsData?.baseFrequency ?? 220.0;
 		}
 		set( aValue ) {
-			let		theMinimumBaseFrequency = max(NSUserDefaults.standardUserDefaults().doubleForKey("minimumBaseFrequency"),4.0);
-			let		theMaximumBaseFrequency = max(NSUserDefaults.standardUserDefaults().doubleForKey("maximumBaseFrequency"),20_000.0);
+			let		theMinimumBaseFrequency = max(UserDefaults.standard.double(forKey: "minimumBaseFrequency"),4.0);
+			let		theMaximumBaseFrequency = max(UserDefaults.standard.double(forKey: "maximumBaseFrequency"),20_000.0);
 			let		theValue = max(min(aValue,theMaximumBaseFrequency), theMinimumBaseFrequency);
 			intervalsData?.baseFrequency = theValue;
 			tonePlayer.baseFrequency = intervalsData?.baseFrequency ?? 220.0;
@@ -135,47 +135,47 @@ class Document : NSDocument, MIDIReceiverObserver {
 
 	var		currentlySelectedMethod : Int? = nil;
 
-	@IBAction func baseFrequencyChangedAction( aSender: NSTextField? ) {
+	@IBAction func baseFrequencyChangedAction( _ aSender: NSTextField? ) {
 		if let theTextField = aSender {
 			intervalsData?.baseFrequency = theTextField.doubleValue;
 		}
 	}
 
-	@IBAction func newDocumentFromSelection( aSender: AnyObject? ) {
+	@IBAction func newDocumentFromSelection( _ aSender: AnyObject? ) {
 		do {
-			if let theDocument = try NSDocumentController.sharedDocumentController().openUntitledDocumentAndDisplay(false) as?
+			if let theDocument = try NSDocumentController.shared().openUntitledDocumentAndDisplay(false) as?
 			Document {
 				theDocument.showWithIntervals(selectedJustIntonationIntervals);
 			}
 		}
 		catch {
-			print( "error" );
+			self.print( "error" );
 		}
 	}
 
-	func playUsingMethod( aMethod: Int ) {
+	func playUsingMethod( _ aMethod: Int ) {
 		if aMethod == currentlySelectedMethod && tonePlayer.playing {
 			tonePlayer.stop();
 			currentlySelectedMethod = nil;
-			NSNotificationCenter.defaultCenter().postNotificationName(PlayBackMethodChangedNotification, object: self);
+			NotificationCenter.default.post(name: Notification.Name(rawValue: PlayBackMethodChangedNotification), object: self);
 		}
 		else {
-			let			thePlaybackType = PlaybackType(rawValue:aMethod) ?? .Unison;
+			let			thePlaybackType = PlaybackType(rawValue:aMethod) ?? .unison;
 			if tonePlayer.playing {
 			}
 			currentlySelectedMethod = aMethod;
 			tonePlayer.stop();
 			tonePlayer.playType(thePlaybackType);
-			NSNotificationCenter.defaultCenter().postNotificationName(PlayBackMethodChangedNotification, object: self, userInfo: [PlayBackMethodUserInfoKey: aMethod]);
+			NotificationCenter.default.post(name: Notification.Name(rawValue: PlayBackMethodChangedNotification), object: self, userInfo: [PlayBackMethodUserInfoKey: aMethod]);
 		}
 	}
 
 	override class func autosavesInPlace() -> Bool { return true; }
-	override func dataOfType( typeName: String) throws -> NSData {
+	override func data( ofType typeName: String) throws -> Data {
 		var anError: NSError = NSError(domain: "Migrator", code: 0, userInfo: nil)
-		let		theResult: NSData?
+		let		theResult: Data?
 		do {
-			theResult = try NSPropertyListSerialization.dataWithPropertyList(intervalsData!.propertyListValue, format:.XMLFormat_v1_0, options:0)
+			theResult = try PropertyListSerialization.data(fromPropertyList: intervalsData!.propertyListValue, format:.xml, options:0)
 		} catch let error as NSError {
 			anError = error
 			theResult = nil
@@ -186,13 +186,13 @@ class Document : NSDocument, MIDIReceiverObserver {
 		return theResult!;
 	}
 
-	override func readFromData( aData: NSData, ofType typeName: String) throws {
-		let		theFormat : UnsafeMutablePointer<NSPropertyListFormat> = nil;
+	override func read( from aData: Data, ofType typeName: String) throws {
+		let		theFormat : UnsafeMutablePointer<PropertyListSerialization.PropertyListFormat>? = nil;
 		do {
-			if let thePropertyList = try NSPropertyListSerialization.propertyListWithData(aData, options:.Immutable, format:theFormat) as? [String:AnyObject] {
-				willChangeValueForKey("intervalsData");
+			if let thePropertyList = try PropertyListSerialization.propertyList(from: aData, options:PropertyListSerialization.MutabilityOptions(), format:theFormat) as? [String:AnyObject] {
+				willChangeValue(forKey: "intervalsData");
 				intervalsData = IntervalsData.from(propertyList:thePropertyList);
-				didChangeValueForKey("intervalsData");
+				didChangeValue(forKey: "intervalsData");
 			}
 		}
 		catch {
@@ -212,28 +212,28 @@ class Document : NSDocument, MIDIReceiverObserver {
 	dynamic var     averageError : Double = 0.0
 	dynamic var		biggestError : Double { get { return !biggestErrorEntries.isEmpty ? biggestErrorEntries.first!.error : 0.0; } }
 	dynamic var		smallestErrorEntries : Set<EqualTemperamentEntry> = [] {
-		willSet { self.willChangeValueForKey("smallestError"); }
-		didSet { self.didChangeValueForKey("smallestError"); }
+		willSet { self.willChangeValue(forKey: "smallestError"); }
+		didSet { self.didChangeValue(forKey: "smallestError"); }
 	}
 	dynamic var		biggestErrorEntries : Set<EqualTemperamentEntry> = [] {
-		willSet { self.willChangeValueForKey("biggestError"); }
-		didSet { self.didChangeValueForKey("biggestError"); }
+		willSet { self.willChangeValue(forKey: "biggestError"); }
+		didSet { self.didChangeValue(forKey: "biggestError"); }
 	}
 
 	func	indexFor(equalTemperamentEntry anEqualTemperamentEntry: EqualTemperamentEntry) -> Int? {
-		return everyInterval.indexOf(anEqualTemperamentEntry);
+		return everyInterval.index(of: anEqualTemperamentEntry);
 	}
 	func	select( index anIndex: Int ) {
-		let		theIndicies = NSMutableIndexSet(indexSet: selectedIndicies);
-		theIndicies.addIndex(anIndex);
-		selectedIndicies = theIndicies;
+		let		theIndicies = NSMutableIndexSet(indexSet:selectedIndicies);
+		theIndicies.add(anIndex);
+		selectedIndicies = theIndicies as IndexSet;
 	}
 	func	unselect( index anIndex: Int ) {
-		let		theIndicies = NSMutableIndexSet(indexSet: selectedIndicies);
-		theIndicies.removeIndex(anIndex);
-		selectedIndicies = theIndicies;
+		let		theIndicies = NSMutableIndexSet(indexSet:selectedIndicies);
+		theIndicies.remove(anIndex);
+		selectedIndicies = theIndicies as IndexSet;
 	}
-	dynamic var		selectedIndicies = NSIndexSet() {
+	dynamic var		selectedIndicies = IndexSet() {
 		didSet {
 			tonePlayer.intervals = selectedJustIntonationIntervals;
 		}
@@ -242,11 +242,11 @@ class Document : NSDocument, MIDIReceiverObserver {
 		set(anEqualTemperamentEntries) {
 			let		theIndicies = NSMutableIndexSet();
 			for theEntry in anEqualTemperamentEntries {
-				if let theIndex = everyInterval.indexOf(theEntry) {
-					theIndicies.addIndex(theIndex);
+				if let theIndex = everyInterval.index(of: theEntry) {
+					theIndicies.add(theIndex);
 				}
 			}
-			selectedIndicies = theIndicies;
+			selectedIndicies = theIndicies as IndexSet;
 		}
 		get {
 			var		theResult = [EqualTemperamentEntry]();
@@ -273,14 +273,14 @@ class Document : NSDocument, MIDIReceiverObserver {
 	}
 
 	// MIDIReceiverObserver methods
-	func midiReceiverNoteOff( aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt, velocity aVelocity: UInt ) {
+	func midiReceiverNoteOff( _ aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt, velocity aVelocity: UInt ) {
 		if let theEntry = midiToHarmonicRatio.popRatioFor(midiNote: aNote) {
 			if let theIndex = indexFor(equalTemperamentEntry: theEntry) {
 				unselect(index: theIndex);
 			}
 		}
 	}
-	func midiReceiverNoteOn( aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt, velocity aVelocity: UInt ) {
+	func midiReceiverNoteOn( _ aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt, velocity aVelocity: UInt ) {
 		let		theEntry = midiToHarmonicRatio.pushRatioFor(midiNote: aNote, everyInterval: everyInterval );
 		if let theIndex = indexFor(equalTemperamentEntry: theEntry) {
 			select(index: theIndex);

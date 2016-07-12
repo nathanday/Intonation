@@ -9,7 +9,7 @@
 import Cocoa
 
 protocol ChordOrScaleSelector {
-	func chordOrScaleSelectorViewController( aSelf : ChordOrScaleSelectorViewController, selected aSelected: Bool  );
+	func chordOrScaleSelectorViewController( _ aSelf : ChordOrScaleSelectorViewController, selected aSelected: Bool  );
 }
 
 class ChordOrScaleSelectorViewController: NSViewController {
@@ -32,37 +32,37 @@ class ChordOrScaleSelectorViewController: NSViewController {
         // Do view setup here.
     }
     
-	@IBAction func selectScaleOrChord(aSender: AnyObject?) {
+	@IBAction func selectScaleOrChord( _ aSender: AnyObject?) {
 //		chordSelectorWindowController?.selectIntervalSet();
 	}
 }
 
 extension ChordOrScaleSelectorViewController : NSBrowserDelegate {
 
-	func browser(aBrowser: NSBrowser, numberOfChildrenOfItem anItem: AnyObject?) -> Int {
+	func browser(_ aBrowser: NSBrowser, numberOfChildrenOfItem anItem: AnyObject?) -> Int {
 		return (anItem as? ChordSelectorGroup)?.count ?? 0;
 	}
 
-	func browser(aBrowser: NSBrowser, child anIndex: Int, ofItem anItem: AnyObject?) -> AnyObject {
+	func browser(_ aBrowser: NSBrowser, child anIndex: Int, ofItem anItem: AnyObject?) -> AnyObject {
 		return ((anItem as? ChordSelectorGroup)?[anIndex])!;
 	}
 
-	func browser(aBrowser: NSBrowser, isLeafItem anItem: AnyObject?) -> Bool {
+	func browser(_ aBrowser: NSBrowser, isLeafItem anItem: AnyObject?) -> Bool {
 		return (anItem as? ChordSelectorItem)?.isLeaf ?? false;
 	}
 
-	func browser(aBrowser: NSBrowser, objectValueForItem anItem: AnyObject?) -> AnyObject? {
+	func browser(_ aBrowser: NSBrowser, objectValueForItem anItem: AnyObject?) -> AnyObject? {
 		return (anItem as? ChordSelectorItem)?.name ?? "";
 	}
 
-	func rootItemForBrowser(aBrowser: NSBrowser) -> AnyObject? { return everyChordRoot; }
+	func rootItem(for aBrowser: NSBrowser) -> AnyObject? { return everyChordRoot; }
 
-	func browser( browser: NSBrowser, previewViewControllerForLeafItem anItem: AnyObject ) -> NSViewController? {
+	func browser( _ browser: NSBrowser, previewViewControllerForLeafItem anItem: AnyObject ) -> NSViewController? {
 		return (anItem as? ChordSelectorLeaf)?.previewViewControllerForLeafItem();
 	}
 
-	func browser( aBrowser : NSBrowser, selectRow aRow: Int , inColumn aColumn: Int) -> Bool {
-		if let theItem = aBrowser.itemAtRow( aRow, inColumn: aColumn) as? ChordSelectorLeaf {
+	func browser( _ aBrowser : NSBrowser, selectRow aRow: Int , inColumn aColumn: Int) -> Bool {
+		if let theItem = aBrowser.item( atRow: aRow, inColumn: aColumn) as? ChordSelectorLeaf {
 			selectedIntervalSet = theItem.everyInterval;
 		} else {
 			selectedIntervalSet = nil;
@@ -70,10 +70,10 @@ extension ChordOrScaleSelectorViewController : NSBrowserDelegate {
 		return true;
 	}
 
-	func browser( aBrowser: NSBrowser, selectionIndexesForProposedSelection anIndexes: NSIndexSet, inColumn aColumn: Int) -> NSIndexSet {
-		let		theRow = anIndexes.firstIndex;
+	func browser( _ aBrowser: NSBrowser, selectionIndexesForProposedSelection anIndexes: IndexSet, inColumn aColumn: Int) -> IndexSet {
+		let		theRow = anIndexes.first;
 		if theRow != NSNotFound {
-			if let theItem = aBrowser.itemAtRow( theRow, inColumn: aColumn) as? ChordSelectorLeaf {
+			if let theItem = aBrowser.item( atRow: theRow!, inColumn: aColumn) as? ChordSelectorLeaf {
 				selectedIntervalSet = theItem.everyInterval;
 			} else {
 				selectedIntervalSet = nil;

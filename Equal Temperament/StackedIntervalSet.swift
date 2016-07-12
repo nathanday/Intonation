@@ -28,7 +28,7 @@ class StackedIntervalSet : IntervalSet, Hashable {
 		calculateIntervals();
 	}
 	convenience init?(propertyList aPropertyList : [String:String] ) {
-		if let theInterval = Interval.fromString(aPropertyList["interval"]) {
+		if let theInterval = Interval.from(string:aPropertyList["interval"]) {
 			let theStepsString = aPropertyList["steps"] ?? "2";
 			let theOctavesString = aPropertyList["octaves"] ?? "2";
 			self.init(interval : theInterval, steps : UInt(theStepsString) ?? 2, octaves: UInt(theOctavesString) ?? 2);
@@ -37,7 +37,7 @@ class StackedIntervalSet : IntervalSet, Hashable {
 		}
 	}
 
-	func contains( anInterval: Interval ) -> Bool {
+	func contains( _ anInterval: Interval ) -> Bool {
 		for theInterval in everyInterval {
 			if theInterval == anInterval {
 				return true;
@@ -46,9 +46,9 @@ class StackedIntervalSet : IntervalSet, Hashable {
 		return false;
 	}
 
-	func contains( anInterval: UInt ) -> Bool { return contains( RationalInterval(anInterval) ); }
-	func contains( anInterval: Rational ) -> Bool { return contains( RationalInterval(anInterval) ); }
-	func contains( anInterval: Double ) -> Bool { return contains( IrrationalInterval(anInterval) ); }
+	func contains( _ anInterval: UInt ) -> Bool { return contains( RationalInterval(anInterval) ); }
+	func contains( _ anInterval: Rational ) -> Bool { return contains( RationalInterval(anInterval) ); }
+	func contains( _ anInterval: Double ) -> Bool { return contains( IrrationalInterval(anInterval) ); }
 
 	var propertyList : [String:String] {
 		return ["interval":interval.toString,"steps":"\(steps)","octaves":"\(octaves)"];

@@ -31,9 +31,9 @@ class FindIntervalsViewController: NSViewController {
 		get {
 			func	getIntervalValues() -> [Double] {
 				var		theResult = [Double]();
-				for theString in ratiosString.componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString:":∶ ")) {
-					if theString.containsString("/") {
-						let		theComponents = theString.componentsSeparatedByString("/");
+				for theString in ratiosString.components(separatedBy: CharacterSet(charactersIn:":∶ ")) {
+					if theString.contains("/") {
+						let		theComponents = theString.components(separatedBy: "/");
 						if let theNumerator = Double(theComponents[0]), theDenominator = Double(theComponents[1]) {
 							if theNumerator != 0.0 && theDenominator != 0.0 {
 								theResult.append(theNumerator/theDenominator);
@@ -46,7 +46,7 @@ class FindIntervalsViewController: NSViewController {
 				}
 				return theResult;
 			}
-			func isInteger( aValue : Double ) -> Bool { return aValue == floor(aValue); }
+			func isInteger( _ aValue : Double ) -> Bool { return aValue == floor(aValue); }
 
 			var		theResult : [Interval] = [];
 			let		theComponents = getIntervalValues();
@@ -77,9 +77,9 @@ class FindIntervalsViewController: NSViewController {
 			var		theCentErrorsString = "";
 			for theCents in centErrors {
 				if !theCentErrorsString.isEmpty {
-					theCentErrorsString.appendContentsOf(", ");
+					theCentErrorsString.append( ", " );
 				}
-				theCentErrorsString.appendContentsOf("\(theCents.toString(decimalPlaces:2)) ¢");
+				theCentErrorsString.append("\(theCents.toString(decimalPlaces:2)) ¢");
 			}
 			centErrorsString =  theCentErrorsString;
 		}
@@ -98,49 +98,49 @@ class FindIntervalsViewController: NSViewController {
 	func createSearchMenu( ) -> NSMenu {
 		let		theSearchMenu = NSMenu(title: "Search Menu");
 		theSearchMenu.autoenablesItems = true;
-		theSearchMenu.addItemWithTitle("Closest", action: #selector(FindIntervalsViewController.findMethodClosestAction(_:)), keyEquivalent: "")?.target = self;
-		theSearchMenu.addItemWithTitle("Exact", action: #selector(FindIntervalsViewController.findMethodExactAction(_:)), keyEquivalent: "")?.target = self;
-		theSearchMenu.addItem(NSMenuItem.separatorItem());
+		theSearchMenu.addItem(withTitle: "Closest", action: #selector(FindIntervalsViewController.findMethodClosestAction(_:)), keyEquivalent: "").target = self;
+		theSearchMenu.addItem(withTitle: "Exact", action: #selector(FindIntervalsViewController.findMethodExactAction(_:)), keyEquivalent: "").target = self;
+		theSearchMenu.addItem(NSMenuItem.separator());
 
-		theSearchMenu.addItemWithTitle("Has Root", action: #selector(FindIntervalsViewController.searchValueHasRootChangedAction(_:)), keyEquivalent: "")?.target = self;
+		theSearchMenu.addItem(withTitle: "Has Root", action: #selector(FindIntervalsViewController.searchValueHasRootChangedAction(_:)), keyEquivalent: "").target = self;
 
-		theSearchMenu.addItemWithTitle("Transpose To Fit", action: #selector(FindIntervalsViewController.searchTransposeToFitChangedAction(_:)), keyEquivalent: "")?.target = self;
+		theSearchMenu.addItem(withTitle: "Transpose To Fit", action: #selector(FindIntervalsViewController.searchTransposeToFitChangedAction(_:)), keyEquivalent: "").target = self;
 
-		theSearchMenu.addItem(NSMenuItem.separatorItem());
+		theSearchMenu.addItem(NSMenuItem.separator());
 
-		theSearchMenu.addItemWithTitle("Recent Searches", action: nil, keyEquivalent: "")?.tag = Int(NSSearchFieldRecentsTitleMenuItemTag);
-		theSearchMenu.addItemWithTitle("No recent searches", action: nil, keyEquivalent: "")?.tag = Int(NSSearchFieldNoRecentsMenuItemTag);
-		theSearchMenu.addItemWithTitle("Recents", action: nil, keyEquivalent: "")?.tag = Int(NSSearchFieldRecentsMenuItemTag);
-		let		theRecentSeperator = NSMenuItem.separatorItem();
+		theSearchMenu.addItem(withTitle: "Recent Searches", action: nil, keyEquivalent: "").tag = Int(NSSearchFieldRecentsTitleMenuItemTag);
+		theSearchMenu.addItem(withTitle: "No recent searches", action: nil, keyEquivalent: "").tag = Int(NSSearchFieldNoRecentsMenuItemTag);
+		theSearchMenu.addItem(withTitle: "Recents", action: nil, keyEquivalent: "").tag = Int(NSSearchFieldRecentsMenuItemTag);
+		let		theRecentSeperator = NSMenuItem.separator();
 		theSearchMenu.addItem(theRecentSeperator);
 		theRecentSeperator.tag = Int(NSSearchFieldRecentsTitleMenuItemTag)
-		theSearchMenu.addItemWithTitle("Clear", action: nil, keyEquivalent: "")?.tag = Int(NSSearchFieldClearRecentsMenuItemTag);
+		theSearchMenu.addItem(withTitle: "Clear", action: nil, keyEquivalent: "").tag = Int(NSSearchFieldClearRecentsMenuItemTag);
 
 		return theSearchMenu;
 	}
 
-	@IBAction override func dismissController( aSender: AnyObject? ) { hidden = true; }
+	@IBAction override func dismiss( _ aSender: AnyObject? ) { hidden = true; }
 
-	@IBAction func find( aSender: AnyObject? ) {
+	@IBAction func find( _ aSender: AnyObject? ) {
 		performFindEntries();
 	}
 
-	@IBAction func findMethodClosestAction( aSender: AnyObject? ) {
+	@IBAction func findMethodClosestAction( _ aSender: AnyObject? ) {
 		findMethod = .findMethodClosest;
 		performFindEntries();
 	}
 
-	@IBAction func findMethodExactAction( aSender: AnyObject? ) {
+	@IBAction func findMethodExactAction( _ aSender: AnyObject? ) {
 		findMethod = .findMethodExact;
 		performFindEntries();
 	}
 
-	@IBAction func searchValueHasRootChangedAction( aSender: AnyObject? ) {
+	@IBAction func searchValueHasRootChangedAction( _ aSender: AnyObject? ) {
 		searchValueHaseRoot = !searchValueHaseRoot;
 		performFindEntries();
 	}
 
-	@IBAction func searchTransposeToFitChangedAction( aSender: AnyObject? ) {
+	@IBAction func searchTransposeToFitChangedAction( _ aSender: AnyObject? ) {
 		searchTransposeToFit = !searchTransposeToFit;
 		performFindEntries();
 	}
@@ -160,15 +160,15 @@ class FindIntervalsViewController: NSViewController {
 		}
 	}
 
-	dynamic override func validateMenuItem(aMenuItem: NSMenuItem) -> Bool {
+	dynamic override func validateMenuItem( _ aMenuItem: NSMenuItem) -> Bool {
 		switch aMenuItem.action {
-		case #selector(FindIntervalsViewController.findMethodClosestAction(_:)):
+		case (#selector(FindIntervalsViewController.findMethodClosestAction(_:)))?:
 			aMenuItem.state = findMethod == .findMethodClosest ? NSOnState : NSOffState;
-		case #selector(FindIntervalsViewController.findMethodExactAction(_:)):
+		case (#selector(FindIntervalsViewController.findMethodExactAction(_:)))?:
 			aMenuItem.state = findMethod == .findMethodExact ? NSOnState : NSOffState;
-		case #selector(FindIntervalsViewController.searchValueHasRootChangedAction(_:)):
+		case (#selector(FindIntervalsViewController.searchValueHasRootChangedAction(_:)))?:
 			aMenuItem.state = searchValueHaseRoot ? NSOnState : NSOffState;
-		case #selector(FindIntervalsViewController.searchTransposeToFitChangedAction(_:)):
+		case (#selector(FindIntervalsViewController.searchTransposeToFitChangedAction(_:)))?:
 			aMenuItem.state = searchTransposeToFit ? NSOnState : NSOffState;
 		default:
 			assertionFailure("Got selector \(aMenuItem.action)");
@@ -176,7 +176,7 @@ class FindIntervalsViewController: NSViewController {
 		return true;
 	}
 
-	func findExactEntries( anRationals : [Interval], searchIntervales aSearchIntervales: [EqualTemperamentEntry], octaves anOctaves: UInt ) -> [EqualTemperamentEntry] {
+	func findExactEntries( _ anRationals : [Interval], searchIntervales aSearchIntervales: [EqualTemperamentEntry], octaves anOctaves: UInt ) -> [EqualTemperamentEntry] {
 		var		theResult = Array<EqualTemperamentEntry>();
 		for theRatio in anRationals {
 			var		theClosestEntry : EqualTemperamentEntry?
@@ -196,7 +196,7 @@ class FindIntervalsViewController: NSViewController {
 		return theResult;
 	}
 
-	func findClosestEntries( anIntervals : [Interval], searchIntervales aSearchIntervales: [EqualTemperamentEntry], octaves anOctaves: UInt ) -> ([EqualTemperamentEntry],[Double]) {
+	func findClosestEntries( _ anIntervals : [Interval], searchIntervales aSearchIntervales: [EqualTemperamentEntry], octaves anOctaves: UInt ) -> ([EqualTemperamentEntry],[Double]) {
 		return findEntries( anIntervals, searchIntervales: aSearchIntervales, octaves: anOctaves) {
 			(intervalA:Interval,intervalB:Interval,inputRatio:Interval) -> Bool in
 			var		theInputRatio = inputRatio.toDouble;
@@ -207,7 +207,7 @@ class FindIntervalsViewController: NSViewController {
 		}
 	}
 
-	func findEntries( anIntervals : [Interval], searchIntervales aSearchIntervales: [EqualTemperamentEntry], octaves anOctaves: UInt, _ aMethod: (Interval,Interval,Interval) -> Bool ) -> ([EqualTemperamentEntry],[Double]) {
+	func findEntries( _ anIntervals : [Interval], searchIntervales aSearchIntervales: [EqualTemperamentEntry], octaves anOctaves: UInt, _ aMethod: (Interval,Interval,Interval) -> Bool ) -> ([EqualTemperamentEntry],[Double]) {
 		var		theResult = [EqualTemperamentEntry]();
 		var		theResultErrors = [Double]();
 		for theInterval in anIntervals {
@@ -234,7 +234,7 @@ class FindIntervalsViewController: NSViewController {
 }
 
 extension FindIntervalsViewController : NSTextFieldDelegate {
-	internal func textDidChange(notification: NSNotification) {
+	internal func textDidChange(notification: Notification) {
 		if let theSearchField = searchField {
 			var		theResult = "";
 			var		thePreviousWasColon = false;

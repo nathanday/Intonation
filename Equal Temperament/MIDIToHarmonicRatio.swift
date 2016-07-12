@@ -26,7 +26,7 @@ class MIDIToHarmonicRatio {
 		}
 	}
 
-	func frequencyForMIDINote( aMidiNote : UInt ) -> Double {
+	func frequencyForMIDINote( _ aMidiNote : UInt ) -> Double {
 		return pow(2,Double(aMidiNote)/12)*440/pow(2,Double(69)/12)
 	}
 

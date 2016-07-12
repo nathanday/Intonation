@@ -9,20 +9,21 @@
 import Cocoa
 
 class SelectDocumentType : NSWindowController {
+	var		referenceToSelf : NSWindowController? = nil;
 	@IBOutlet var	tableView : NSTableView?;
 	@IBOutlet var	arrayController : NSArrayController?
 	dynamic var		hasSelection : Bool { return selectedDocumentTypeRow != nil; }
 	var				selectedDocumentTypeRow : Int? {
-		willSet { willChangeValueForKey("hasSelection"); }
-		didSet { didChangeValueForKey("hasSelection"); }
+		willSet { willChangeValue(forKey: "hasSelection"); }
+		didSet { didChangeValue(forKey: "hasSelection"); }
 	}
 	var				completionBlock : ((_:DocumentType?)  -> Void)?;
 	static var		rowData = [
-		(title:"Limits", details:"Create musical intervals using prime and odd limits.", documentType:DocumentType.Limits),
-		(title:"Stacked Intervals", details:"Create musical intervals by stacking a simpler musical interval.", documentType:DocumentType.StackedIntervals),
-		(title:"Equal Temperament", details:"Create musical intervals by dividing the octave, or other large interval, into equal size ratios.", documentType:DocumentType.EqualTemperament),
-		(title:"AdHoc", details:"Create musical intervals by manual entry.", documentType:DocumentType.AdHoc),
-		(title:"Preset", details:"Use a predfined set of musical intervals.", documentType:DocumentType.Preset),
+		(title:"Limits", details:"Create musical intervals using prime and odd limits.", documentType:DocumentType.limits),
+		(title:"Stacked Intervals", details:"Create musical intervals by stacking a simpler musical interval.", documentType:DocumentType.stackedIntervals),
+		(title:"Equal Temperament", details:"Create musical intervals by dividing the octave, or other large interval, into equal size ratios.", documentType:DocumentType.equalTemperament),
+		(title:"AdHoc", details:"Create musical intervals by manual entry.", documentType:DocumentType.adHoc),
+		(title:"Preset", details:"Use a predfined set of musical intervals.", documentType:DocumentType.preset),
 		];
 
 	var				selectedDocumentType : DocumentType? {
@@ -44,39 +45,35 @@ class SelectDocumentType : NSWindowController {
     }
 
 	func showAsSheet(parentWindow aWindow: NSWindow ) {
-		if let theWindow = self.window {
-			theWindow.parentWindow = aWindow;
-			aWindow.beginSheet( theWindow, completionHandler: {
-				(aResponse: NSModalResponse) -> Void in
-				switch aResponse {
-				case NSModalResponseStop:
-					self.completionBlock?( nil );
-				case NSModalResponseAbort:
-					self.completionBlock?( nil );
-				case NSModalResponseContinue:
-					self.completionBlock?( self.selectedDocumentType );
-				default:
-					self.completionBlock?( nil );
-				}
-			});
-		}
+		self.referenceToSelf = self;
+		window!.parent = aWindow;
+		aWindow.beginSheet( window!, completionHandler: {
+			(aResponse: NSModalResponse) -> Void in
+			switch aResponse {
+			case NSModalResponseStop:
+				self.completionBlock?( nil );
+			case NSModalResponseAbort:
+				self.completionBlock?( nil );
+			case NSModalResponseContinue:
+				self.completionBlock?( self.selectedDocumentType );
+			default:
+				self.completionBlock?( nil );
+			}
+			self.referenceToSelf = nil;
+		});
 	}
 
-	@IBAction func selectAction( aSender: AnyObject? ) {
-		if let theWindow = window {
-			theWindow.parentWindow?.endSheet(theWindow, returnCode:NSModalResponseContinue);
-		}
+	@IBAction func selectAction( _ aSender: AnyObject? ) {
+		window!.parent?.endSheet(window!, returnCode:NSModalResponseContinue);
 	}
 
-	@IBAction func cancelAction( aSender: AnyObject? ) {
-		if let theWindow = window {
-			theWindow.parentWindow?.endSheet(theWindow);
-		}
+	@IBAction func cancelAction( _ aSender: AnyObject? ) {
+		window!.parent?.endSheet(window!);
 	}
 }
 
 extension SelectDocumentType : NSTableViewDelegate {
-	func tableViewSelectionDidChange(notification: NSNotification) {
+	func tableViewSelectionDidChange(_ notification: Notification) {
 		let theSelection = tableView?.selectedRow;
 		selectedDocumentTypeRow = theSelection != -1 ? theSelection : nil;
 	}

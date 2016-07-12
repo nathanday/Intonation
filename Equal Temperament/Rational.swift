@@ -9,12 +9,16 @@
 import Foundation
 
 struct Rational : CustomStringConvertible, CustomDebugStringConvertible, Hashable {
-	let	numerator:		Int;
-	let	denominator:	Int;
+	private(set) var	numerator:		Int;
+	private(set) var	denominator:	Int;
 	var toDouble:		Double { return Double(numerator)/Double(denominator); }
 	var toCents:		Double { return toDouble.toCents; }
 	var toFloat:		Float { return Float(numerator)/Float(denominator); }
 	var toInt:			Int { return numerator/denominator; }
+
+	static var zero : Rational { return Rational(0,1); }
+	static var one : Rational { return Rational(1,1); }
+	static var max : Rational { return Rational(Int.max,1); }
 
 	init() {
 		numerator = 0;
@@ -24,9 +28,6 @@ struct Rational : CustomStringConvertible, CustomDebugStringConvertible, Hashabl
 		numerator = aRational.numerator;
 		denominator = aRational.denominator;
 	}
-	init( _ aNumerator: UInt, _ aDenominator: UInt) {
-		self.init( Int(aNumerator), Int(aDenominator) );
-	}
     init( _ aNumerator: Int, _ aDenominator: Int) {
 		let		theNumerator = aDenominator < 0 ? -aNumerator : aNumerator;
 		let		theDenominator = abs(aDenominator);
@@ -35,8 +36,11 @@ struct Rational : CustomStringConvertible, CustomDebugStringConvertible, Hashabl
         denominator = theDenominator/Int(theCommonDivisor);
 		precondition(theDenominator != 0, "\(numerator)/\(denominator) is not a number");
     }
+	init( _ aNumerator: UInt, _ aDenominator: UInt) {
+		self.init( Int(aNumerator), Int(aDenominator) );
+	}
 	init?( _ aString: String ) {
-		let		theComponents = aString.componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: ":/∶"));
+		let		theComponents = aString.components(separatedBy: CharacterSet(charactersIn: ":/∶"));
 		let		theDenom = theComponents.count > 1 ? Int( theComponents[1] ) : 1;
 		if let theNum = Int(theComponents[0]) {
 			self.init( theNum, theDenom ?? 1 );
@@ -45,7 +49,7 @@ struct Rational : CustomStringConvertible, CustomDebugStringConvertible, Hashabl
 		}
 	}
 
-	func numeratorForDenominator( aDenominator: Int ) -> Int? {
+	func numeratorForDenominator( _ aDenominator: Int ) -> Int? {
 		return aDenominator != 0 && aDenominator%denominator == 0 ? numerator*(aDenominator/denominator) : nil;
 	}
 
@@ -72,13 +76,13 @@ extension Rational : ArrayLiteralConvertible, IntegerLiteralConvertible, FloatLi
 		for theElement in anElements {
 			if theNumerator == nil { theNumerator = theElement; }
 			else if theDenominator == nil { theDenominator = theElement; }
-			else { NSException(name: NSRangeException, reason: "Too many arguments", userInfo: nil).raise(); }
+			else { NSException(name: NSExceptionName.rangeException, reason: "Too many arguments", userInfo: nil).raise(); }
 		}
-		if( theNumerator == nil || theDenominator == nil ) { NSException(name: NSRangeException, reason: "Too few arguments", userInfo: nil).raise(); }
+		if( theNumerator == nil || theDenominator == nil ) { NSException(name: NSExceptionName.rangeException, reason: "Too few arguments", userInfo: nil).raise(); }
 		return Rational( theNumerator, theDenominator );
 	}
 
-	static func convertFromIntegerLiteral(aValue: IntegerLiteralType) -> Rational { return Rational( Int(aValue), 1 ); }
+	static func convertFromIntegerLiteral( aValue: IntegerLiteralType) -> Rational { return Rational( Int(aValue), 1 ); }
 
 	init( arrayLiteral elements: Int...) {
 		self.init( elements[0], elements[1] );
@@ -88,13 +92,23 @@ extension Rational : ArrayLiteralConvertible, IntegerLiteralConvertible, FloatLi
 		denominator = 1;
 	}
 	init(floatLiteral aValue: FloatLiteralType) { self.init( aValue, maxDenominator:UInt.max ); }
-	static func convertFromFloatLiteral(aValue: FloatLiteralType) -> Rational { return Rational( aValue, maxDenominator:UInt.max ); }
+	static func convertFromFloatLiteral( aValue: FloatLiteralType) -> Rational { return Rational( aValue, maxDenominator:UInt.max ); }
 }
 
-extension Rational : FloatingPointType, Equatable, SignedNumberType {
+extension Rational : FloatingPoint, Equatable, SignedNumber {
+	typealias Exponent = Int32;
 	typealias _BitsType = (Int,Int);
-	static func _fromBitPattern(aBits: _BitsType) -> Rational { return Rational(aBits.0,aBits.1); }
+	static func _fromBitPattern( aBits: _BitsType) -> Rational { return Rational(aBits.0,aBits.1); }
 	func _toBitPattern() -> _BitsType { return (numerator,denominator); }
+
+	init(sign: FloatingPointSign, exponent: Rational.Exponent, significand: Rational) {
+		numerator = sign != significand.sign ? -significand.numerator : significand.numerator;
+		denominator = significand.denominator;
+	}
+
+	init(signOf: Rational, magnitudeOf: Rational) {
+		self.init(signOf.sign != magnitudeOf.sign ? -magnitudeOf.numerator : magnitudeOf.numerator, magnitudeOf.denominator);
+	}
 
 	init(_ aValue: UInt8) {
 		numerator = Int(aValue);
@@ -146,8 +160,8 @@ extension Rational : FloatingPointType, Equatable, SignedNumberType {
 		denominator = 1;
 	}
 
-	static func farey( aValue: Double, maxDenominator aMaxDenom: UInt, maxError aMaxError: Double = 0.0 ) -> (numerator:Int,denominator:Int) {
-		func _farey( x: Double, _ M: UInt, _ E:Double ) -> (numerator:Int,denominator:Int) {
+	static func farey( _ aValue: Double, maxDenominator aMaxDenom: UInt, maxError aMaxError: Double = 0.0 ) -> (numerator:Int,denominator:Int) {
+		func _farey( _ x: Double, _ M: UInt, _ E:Double ) -> (numerator:Int,denominator:Int) {
 			var		a = (0,1);
 			var		b = (1,1);
 			while( a.1 <= Int(M) && b.1 <= Int(M) ) {
@@ -195,30 +209,201 @@ extension Rational : FloatingPointType, Equatable, SignedNumberType {
 		(numerator,denominator) = Rational.farey( Double(aValue), maxDenominator:aMaxDenom );
 	}
 
-	static var infinity: Rational { return Rational(1,0); }
+	static var radix: Int { return 2; }
+	static var nan: Rational { return Rational.zero; }
+	static var signalingNaN: Rational { return nan; }
 
-	static var NaN: Rational { return Rational(0,0); }
+	static var infinity: Rational { return Rational(0,1); }
+
+	static var greatestFiniteMagnitude: Rational { return Rational(Int.max,1); }
+
+	static var pi: Rational { return Rational(3373259426,1073741824); }
+
+	var ulp: Rational { return Rational(1,Int.max); }
+
+	static var ulpOfOne: Rational { return Rational(Int.max,Int.max-1); }
+
+	static var leastNormalMagnitude: Rational { return Rational(1,Int.max); }
+
+	static var leastNonzeroMagnitude: Rational { return Rational(1,Int.max); }
+
+	var sign: FloatingPointSign { if numerator < 0 { return .minus;} else { return .plus;} }
+
+	var exponent: Rational.Exponent {
+		var		theResult = 0;
+
+		if denominator == 0 {
+			theResult = Int.max;
+		}
+		else {
+			theResult =  log10(numerator) - log10(denominator);
+		}
+		return Rational.Exponent(theResult);
+	}
+
+	var significand: Rational { return sign == .minus ? -self : self; }
+
+	func adding( other: Rational) -> Rational {
+		return Rational(numerator*other.denominator+other.numerator*denominator,denominator*other.denominator);
+	}
+
+	mutating func add( _ other: Rational) {
+		numerator = numerator*other.denominator + other.numerator*denominator;
+		denominator *= other.denominator;
+	}
+
+	func negated() -> Rational { return Rational(-numerator,denominator); }
+	mutating func negate() { numerator = -numerator; }
+
+	func subtracting( other: Rational) -> Rational {
+		return Rational(numerator*other.denominator-other.numerator*denominator,denominator*other.denominator);
+	}
+
+	mutating func subtract( _ other: Rational) {
+		numerator = numerator*other.denominator-other.numerator*denominator;
+		denominator *= other.denominator;
+	}
+
+	func multiplied(by other: Rational) -> Rational { return Rational(numerator*other.numerator,denominator*other.denominator); }
+
+	mutating func multiply(by other: Rational) {
+		numerator *= other.numerator;
+		denominator *= other.denominator;
+	}
+
+	func divided(by other: Rational) -> Rational { return Rational(numerator*other.denominator,denominator*other.numerator); }
+
+	mutating func divide(by other: Rational) {
+		numerator *= other.denominator;
+		denominator *= other.numerator;
+	}
+
+
+	/// Remainder of `self` divided by `other` using truncating division.
+	/// Equivalent to the C standard library function `fmod`.
+	///
+	/// If `self` and `other` are finite numbers, the truncating remainder
+	/// `r` has the same sign as `other` and is strictly smaller in magnitude.
+	/// It satisfies `r = self - other*n`, where `n` is the integral part
+	/// of `self/other`.
+	///
+	/// `truncatingRemainder` is always exact.
+	func truncatingRemainder(dividingBy anOther: Rational) -> Rational {
+		var		theResult = Rational(self);
+		theResult.formTruncatingRemainder( dividingBy: anOther );
+		return theResult;
+	}
+
+	/// Mutating form of `truncatingRemainder`.
+	mutating func formTruncatingRemainder(dividingBy anOther: Rational) {
+		while self > anOther {
+			subtract(anOther);
+		}
+	}
+
+	static func minimum( x: Rational, _ y: Rational) -> Rational { return x <= y ? x : y; }
+	static func maximum( x: Rational, _ y: Rational) -> Rational { return x >= y ? x : y; }
+
+	static func minimumMagnitude( x: Rational, _ y: Rational) -> Rational { return abs(x) <= abs(y) ? x : y; }
+	static func maximumMagnitude( x: Rational, _ y: Rational) -> Rational { return abs(x) >= abs(y) ? x : y; }
+
+	var nextUp: Rational {
+		if numerator < 0 && denominator == 0 {
+			return Rational(Int.min,1);
+		} else if numerator == Int.min && denominator == 1 {
+			return Rational.zero;
+		} else if self == Rational.zero {
+			return Rational.leastNonzeroMagnitude;
+		} else if self == Rational.greatestFiniteMagnitude {
+			return Rational.infinity;
+		} else if self == -Rational.infinity {
+			return self;
+		} else {
+			return self + Rational.leastNonzeroMagnitude;
+		}
+	}
+
+	var nextDown: Rational {
+		if numerator > 0 && denominator == 0 {
+			return Rational(Int.max,1);
+		} else if numerator == Int.max && denominator == 1 {
+			return Rational.zero;
+		} else if self == Rational.zero {
+			return -Rational.leastNonzeroMagnitude;
+		} else if self == -Rational.greatestFiniteMagnitude {
+			return -Rational.infinity;
+		} else if self == -Rational.infinity {
+			return Rational.infinity;
+		} else {
+			return self - Rational.leastNonzeroMagnitude;
+		}
+	}
+
+	func isEqual(to other: Rational) -> Bool {
+		return self.numerator==other.numerator && self.denominator==other.denominator;
+	}
+
+	func isLess(than other: Rational) -> Bool {
+		return numerator*other.denominator < other.numerator*denominator;
+	}
+
+	func isLessThanOrEqualTo(_ other: Rational) -> Bool {
+		return numerator*other.denominator <= other.numerator*denominator;
+	}
+
+	func isTotallyOrdered(below other: Rational) -> Bool {
+		return numerator*other.denominator < other.numerator*denominator;
+	}
+
+	var isNormal: Bool { return self != Rational.zero; }
+	var isFinite: Bool { return denominator != 0; }
+	var isZero: Bool { return numerator == 0; }
+	var isSubnormal: Bool { return self == Rational.zero; }
+	var isInfinite: Bool { return denominator == 0; }
+	var isNaN: Bool { return numerator == 0 && denominator == 0; }
+	var isSignalingNaN: Bool { return false; }
+
+	var floatingPointClass: FloatingPointClassification {
+		if isSignalingNaN {
+			return .signalingNaN;
+		} else if denominator == 0 {
+			if numerator < 0 {
+				return .negativeInfinity;
+			} else if numerator > 0 {
+				return .positiveInfinity;
+			} else {
+				return .quietNaN;
+			}
+		} else {
+			if numerator < 0 {
+				return .negativeNormal;
+			} else if numerator > 0 {
+				return .positiveNormal;
+			} else {
+				return .positiveZero;
+			}
+		}
+	}
+
+	var isCanonical: Bool { return true; }
+
 	static var quietNaN: Rational { return Rational(0,0); }
 
-	var floatingPointClass: FloatingPointClassification { return toDouble.floatingPointClass; }
-	var isSignMinus: Bool { return (numerator < 0) != (denominator < 0); }
-	var isNormal: Bool { return numerator != 0 && denominator != 0; }
-	var isFinite: Bool { return denominator != 0; }
-	var isZero: Bool { return numerator == 0 && denominator != 0; }
-	var isSubnormal: Bool { return toDouble.isSubnormal; }
-	var isInfinite: Bool { return numerator != 0 && denominator == 0; }
-	var isNaN: Bool { return numerator == 0 && denominator == 0; }
-	var isSignaling: Bool { return toDouble.isSignaling; }
+//	var isSignMinus: Bool { return (numerator < 0) != (denominator < 0); }
 
 	typealias Stride = Rational
-	func distanceTo(anOther: Rational) -> Stride { return self - anOther; }
-	func advancedBy(anOther: Stride) -> Rational { return self + anOther; }
+	func distance(to anOther: Rational) -> Stride { return self - anOther; }
+	func advanced(by anOther: Stride) -> Rational { return self + anOther; }
+
+	static func abs(_ x: Rational) -> Rational {
+		return x.sign == .minus ? -x : x;
+	}
 }
 
 extension String {
 	func toRational() -> Rational? {
 		var		theResult : Rational? = nil;
-		let		theComponents = componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: ":/"));
+		let		theComponents = components(separatedBy: CharacterSet(charactersIn: ":/"));
 		switch theComponents.count {
 		case 0:
 			theResult = Rational();
@@ -257,21 +442,21 @@ func / (a: Rational, b: Int) -> Rational {
 		: Rational(-a.numerator,-a.denominator*b);
 }
 
-func += (inout a: Rational, b: Rational) { a = Rational(a.numerator*b.denominator+b.numerator*a.denominator,a.denominator*b.denominator); }
-func -= (inout a: Rational, b: Rational) { a = Rational(a.numerator*b.denominator-b.numerator*a.denominator,a.denominator*b.denominator); }
-func *= (inout a: Rational, b: Rational) { a = Rational(a.numerator*b.numerator,a.denominator*b.denominator); }
+func += ( a: inout Rational, b: Rational) { a = Rational(a.numerator*b.denominator+b.numerator*a.denominator,a.denominator*b.denominator); }
+func -= ( a: inout Rational, b: Rational) { a = Rational(a.numerator*b.denominator-b.numerator*a.denominator,a.denominator*b.denominator); }
+func *= (a: inout Rational, b: Rational) { a = Rational(a.numerator*b.numerator,a.denominator*b.denominator); }
 
-func /= (inout a: Rational, b: Rational) {
+func /= ( a: inout Rational, b: Rational) {
 	a = b.numerator >= 0
 		? Rational(a.numerator*b.denominator,a.denominator*b.numerator)
 		: Rational(-a.numerator*b.denominator,-a.denominator*b.numerator);
 }
 
-func += (inout a: Rational, b: Int) { a = Rational(a.numerator+b*a.denominator,a.denominator); }
-func -= (inout a: Rational, b: Int) { a = Rational(a.numerator-b*a.denominator,a.denominator); }
-func *= (inout a: Rational, b: Int) { a = Rational(a.numerator*b,a.denominator); }
+func += ( a: inout Rational, b: Int) { a = Rational(a.numerator+b*a.denominator,a.denominator); }
+func -= ( a: inout Rational, b: Int) { a = Rational(a.numerator-b*a.denominator,a.denominator); }
+func *= ( a: inout Rational, b: Int) { a = Rational(a.numerator*b,a.denominator); }
 
-func /= (inout a: Rational, b: Int) {
+func /= ( a: inout Rational, b: Int) {
 	a = b >= 0
 		? Rational(a.numerator,a.denominator*b)
 		: Rational(-a.numerator,-a.denominator*b);
@@ -289,7 +474,7 @@ func sum( anArray: [Rational] ) -> Rational {
 
 func == (a: Rational, b: Rational) -> Bool { return a.numerator==b.numerator && a.denominator == b.denominator; }
 func != (a: Rational, b: Rational) -> Bool { return a.numerator != b.numerator || a.denominator != b.denominator; }
-func < (a: Rational, b: Rational) -> Bool { 	return a.numerator*b.denominator < b.numerator*a.denominator; }
+func < (a: Rational, b: Rational) -> Bool { return a.numerator*b.denominator < b.numerator*a.denominator; }
 func <= (a: Rational, b: Rational) -> Bool { return a.numerator*b.denominator <= b.numerator*a.denominator; }
 func > (a: Rational, b: Rational) -> Bool { return a.numerator*b.denominator > b.numerator*a.denominator; }
 func >= (a: Rational, b: Rational) -> Bool { return a.numerator*b.denominator >= b.numerator*a.denominator; }

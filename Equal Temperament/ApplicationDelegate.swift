@@ -16,16 +16,16 @@ class ApplicationDelegate: NSObject {
 	static var		initialUserDefaultsLoaded = false;
 	override class func initialize() {
 		if initialUserDefaultsLoaded == false {
-			if let theURL = NSBundle.mainBundle().URLForResource("InitialUserDefaults", withExtension: "plist"),
-				theInitialUserDefaults = NSDictionary(contentsOfURL:theURL) as? [String:AnyObject] {
-					NSUserDefaults.standardUserDefaults().registerDefaults(theInitialUserDefaults);
+			if let theURL = Bundle.main.urlForResource("InitialUserDefaults", withExtension: "plist"),
+				theInitialUserDefaults = NSDictionary(contentsOf:theURL) as? [String:AnyObject] {
+					UserDefaults.standard.register(theInitialUserDefaults);
 					initialUserDefaultsLoaded = true;
 			}
 		}
 	}
 
-	@IBAction func showPreferencesAction( aSender: AnyObject? ) { preferencesWindowController.showWindow(aSender); }
-	@IBAction func showChordSelectorAction( aSender: AnyObject? ) {
+	@IBAction func showPreferencesAction( _ aSender: AnyObject? ) { preferencesWindowController.showWindow(aSender); }
+	@IBAction func showChordSelectorAction( _ aSender: AnyObject? ) {
 		chordSelectorWindowController.toggleWindow(aSender);
 	}
 }

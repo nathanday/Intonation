@@ -8,7 +8,7 @@
 
 import Foundation
 
-class IntervalSet : SequenceType {
+class IntervalSet : Sequence {
 	let		name : String;
 	var		everyInterval : [Interval] { get { preconditionFailure("The method everyInterval must be overriden"); } }
 	var		numberOfDegrees : Int { return everyInterval.count; }
@@ -31,9 +31,9 @@ class IntervalSet : SequenceType {
 		}
 	}
 
-	func generate() -> AnyGenerator<Interval> {
+	func makeIterator() -> AnyIterator<Interval> {
 		var		index = 0;
-		return AnyGenerator {
+		return AnyIterator {
 			var		theResult : Interval? = nil;
 			if index < self.numberOfDegrees {
 				theResult = self[index];
@@ -43,7 +43,7 @@ class IntervalSet : SequenceType {
 		}
 	}
 
-	func indexOf( aValue : Interval ) -> Int? {
+	func indexOf( _ aValue : Interval ) -> Int? {
 		for i in 0..<numberOfDegrees {
 			if self[i] == aValue {
 				return i;
@@ -52,7 +52,7 @@ class IntervalSet : SequenceType {
 		return nil;
 	}
 
-	func intervalClosestTo( aValue : Double ) -> Interval? {
+	func intervalClosestTo( _ aValue : Double ) -> Interval? {
 		var		theResult : Interval? = nil;
 		var		thePrevious : Interval? = nil;
 		for theInterval in everyInterval {
@@ -77,8 +77,8 @@ class IntervalSet : SequenceType {
 		return theResult;
 	}
 
-	func sortedByDifferentsTo( aValue : Double ) -> [Interval] {
-		return everyInterval.sort { (a:Interval, b:Interval) -> Bool in return abs(a.toDouble-aValue) < abs(b.toDouble-aValue); };
+	func sortedByDifferentsTo( _ aValue : Double ) -> [Interval] {
+		return everyInterval.sorted { (a:Interval, b:Interval) -> Bool in return abs(a.toDouble-aValue) < abs(b.toDouble-aValue); };
 	}
 
 	var description: String {

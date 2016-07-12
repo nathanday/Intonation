@@ -10,11 +10,11 @@ import Foundation
 
 class LimitsIntervalsData : IntervalsData {
 	override init() {
-		numeratorPrimeLimitIndex = IntervalsData.indexForLargestPrimeLessThanOrEuqalTo(UInt(NSUserDefaults.standardUserDefaults().integerForKey("numeratorPrimeLimit"))) ?? 2;
-		denominatorPrimeLimitIndex = IntervalsData.indexForLargestPrimeLessThanOrEuqalTo(UInt(NSUserDefaults.standardUserDefaults().integerForKey("denominatorPrimeLimit"))) ?? 2;
-		separatePrimeLimit = NSUserDefaults.standardUserDefaults().boolForKey("separatePrimeLimit");
-		oddLimit = UInt(NSUserDefaults.standardUserDefaults().integerForKey("oddLimit")) | 1;
-		additiveDissonance = UInt(NSUserDefaults.standardUserDefaults().integerForKey("additiveDissonance")) | 1;
+		numeratorPrimeLimitIndex = IntervalsData.indexForLargestPrimeLessThanOrEuqalTo(UInt(UserDefaults.standard.integer(forKey: "numeratorPrimeLimit"))) ?? 2;
+		denominatorPrimeLimitIndex = IntervalsData.indexForLargestPrimeLessThanOrEuqalTo(UInt(UserDefaults.standard.integer(forKey: "denominatorPrimeLimit"))) ?? 2;
+		separatePrimeLimit = UserDefaults.standard.bool(forKey: "separatePrimeLimit");
+		oddLimit = UInt(UserDefaults.standard.integer(forKey: "oddLimit")) | 1;
+		additiveDissonance = UInt(UserDefaults.standard.integer(forKey: "additiveDissonance")) | 1;
 		super.init();
 	}
 	override init?(propertyList aPropertyList: [String:AnyObject] ) {
@@ -52,25 +52,25 @@ class LimitsIntervalsData : IntervalsData {
 		return LimitsGeneratorViewController(windowController:aWindowController);
 	}
 
-	override var	documentType : DocumentType { return .Limits; }
+	override var	documentType : DocumentType { return .limits; }
 
 	var		numeratorPrimeLimit : UInt {
 		get {
 			return PrimesSequence(end: 100)[numeratorPrimeLimitIndex];
 		}
 		set {
-			willChangeValueForKey("numeratorPrimeLimitIndex");
+			willChangeValue(forKey: "numeratorPrimeLimitIndex");
 			self.numeratorPrimeLimitIndex = IntervalsData.indexForLargestPrimeLessThanOrEuqalTo(newValue) ?? 2;
-			didChangeValueForKey("numeratorPrimeLimitIndex");
+			didChangeValue(forKey: "numeratorPrimeLimitIndex");
 		}
 	}
 	var		numeratorPrimeLimitIndex : Int = 2 {
 		willSet {
-			willChangeValueForKey("numeratorPrimeLimit");
+			willChangeValue(forKey: "numeratorPrimeLimit");
 		}
 		didSet {
-			NSUserDefaults.standardUserDefaults().setInteger(Int(numeratorPrimeLimit), forKey:"numeratorPrimeLimit");
-			didChangeValueForKey("numeratorPrimeLimit");
+			UserDefaults.standard.set(Int(numeratorPrimeLimit), forKey:"numeratorPrimeLimit");
+			didChangeValue(forKey: "numeratorPrimeLimit");
 		}
 	}
 	var		denominatorPrimeLimit : UInt {
@@ -78,34 +78,34 @@ class LimitsIntervalsData : IntervalsData {
 			return PrimesSequence(end:100)[denominatorPrimeLimitIndex];
 		}
 		set {
-			willChangeValueForKey("denominatorPrimeLimitIndex");
+			willChangeValue(forKey: "denominatorPrimeLimitIndex");
 			denominatorPrimeLimitIndex = IntervalsData.indexForLargestPrimeLessThanOrEuqalTo(newValue) ?? 2;
-			didChangeValueForKey("denominatorPrimeLimitIndex");
+			didChangeValue(forKey: "denominatorPrimeLimitIndex");
 		}
 	}
 	var		denominatorPrimeLimitIndex : Int = 1 {
 		willSet {
-			willChangeValueForKey("denominatorPrimeLimit");
+			willChangeValue(forKey: "denominatorPrimeLimit");
 		}
 		didSet {
-			NSUserDefaults.standardUserDefaults().setInteger(Int(denominatorPrimeLimit), forKey:"denominatorPrimeLimit");
-			didChangeValueForKey("denominatorPrimeLimit");
+			UserDefaults.standard.set(Int(denominatorPrimeLimit), forKey:"denominatorPrimeLimit");
+			didChangeValue(forKey: "denominatorPrimeLimit");
 		}
 	}
 	var		separatePrimeLimit : Bool = false {
 		didSet {
-			NSUserDefaults.standardUserDefaults().setBool( separatePrimeLimit, forKey:"separatePrimeLimit");
+			UserDefaults.standard.set( separatePrimeLimit, forKey:"separatePrimeLimit");
 		}
 	}
 	var		oddLimit : UInt = 15 {
 		didSet {
 			if( oddLimit%2 == 0 ) { oddLimit += 1; }
-			NSUserDefaults.standardUserDefaults().setInteger( Int(oddLimit), forKey:"oddLimit");
+			UserDefaults.standard.set( Int(oddLimit), forKey:"oddLimit");
 		}
 	}
 	var		additiveDissonance : UInt = UInt.max {
 		didSet {
-			NSUserDefaults.standardUserDefaults().setInteger( Int(additiveDissonance), forKey:"additiveDissonance");
+			UserDefaults.standard.set( Int(additiveDissonance), forKey:"additiveDissonance");
 		}
 	}
 }
@@ -133,7 +133,7 @@ class LimitsBasedGenerator : IntervalsDataGenerator {
 						}
 					}
 				}
-				_everyEqualTemperamentEntry = theResult.sort { return $0.toCents < $1.toCents; };
+				_everyEqualTemperamentEntry = theResult.sorted { return $0.toCents < $1.toCents; };
 			}
 			return _everyEqualTemperamentEntry!;
 		}

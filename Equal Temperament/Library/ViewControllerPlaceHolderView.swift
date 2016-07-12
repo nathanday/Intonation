@@ -16,7 +16,7 @@ class ViewControllerPlaceHolderView : NSView {
 		placeRepresentitiveView();
 	}
 
-	func loadViewController( aViewController : NSViewController ) {
+	func loadViewController( _ aViewController : NSViewController ) {
 		if viewController != aViewController {
 			viewController?.view.removeFromSuperview();
 			viewController = aViewController;
@@ -28,7 +28,7 @@ class ViewControllerPlaceHolderView : NSView {
 	{
 		if let theView = viewController?.view {
 			theView.frame = self.bounds;
-			theView.autoresizingMask = [ .ViewWidthSizable, .ViewHeightSizable ];
+			theView.autoresizingMask = [ .viewWidthSizable, .viewHeightSizable ];
 			addSubview(theView);
 		}
 	}

@@ -9,37 +9,37 @@
 import Cocoa
 
 enum DocumentType {
-	case Limits;
-	case StackedIntervals;
-	case EqualTemperament;
-	case Preset;
-	case AdHoc;
-	static func fromString( aStringValue : String? ) -> DocumentType? {
+	case limits;
+	case stackedIntervals;
+	case equalTemperament;
+	case preset;
+	case adHoc;
+	static func fromString( _ aStringValue : String? ) -> DocumentType? {
 		var		theResult : DocumentType? = nil;
 		if aStringValue == "limits" {
-			theResult = .Limits;
+			theResult = .limits;
 		} else if aStringValue == "stackedIntervals" {
-			theResult = .StackedIntervals;
+			theResult = .stackedIntervals;
 		} else if aStringValue == "equalTemperament" {
-			theResult = .EqualTemperament;
+			theResult = .equalTemperament;
 		} else if aStringValue == "preset" {
-			theResult = .Preset;
+			theResult = .preset;
 		} else if aStringValue == "adHoc" {
-			theResult = .AdHoc;
+			theResult = .adHoc;
 		}
 		return theResult;
 	}
 	func toString() -> String {
 		switch self {
-		case Limits:
+		case limits:
 			return "limits";
-		case StackedIntervals:
+		case stackedIntervals:
 			return "stackedIntervals";
-		case EqualTemperament:
+		case equalTemperament:
 			return "equalTemperament";
-		case Preset:
+		case preset:
 			return "preset";
-		case AdHoc:
+		case adHoc:
 			return "adHoc";
 		}
 	}
@@ -53,19 +53,19 @@ class IntervalsData: NSObject {
 		if let theDocumentTypeString = aPropertyList["documentType"] as? String {
 			if let theDocumentType = DocumentType.fromString(theDocumentTypeString) {
 				switch theDocumentType {
-				case .Limits:
+				case .limits:
 					theResult = LimitsIntervalsData(propertyList:aPropertyList);
 					break;
-				case .StackedIntervals:
+				case .stackedIntervals:
 					theResult = StackedIntervalsIntervalsData(propertyList:aPropertyList);
 					break;
-				case .EqualTemperament:
+				case .equalTemperament:
 					theResult = EqualTemperamentIntervalsData(propertyList:aPropertyList);
 					break;
-				case .Preset:
+				case .preset:
 					theResult = PresetIntervalsData(propertyList:aPropertyList);
 					break;
-				case .AdHoc:
+				case .adHoc:
 					theResult = AdHocIntervalsData(propertyList:aPropertyList);
 					break;
 				}
@@ -76,18 +76,18 @@ class IntervalsData: NSObject {
 
 	class func from(documentType aDocumentType: DocumentType ) -> IntervalsData {
 		switch aDocumentType {
-		case .Limits: return LimitsIntervalsData();
-		case .StackedIntervals: return StackedIntervalsIntervalsData();
-		case .EqualTemperament: return EqualTemperamentIntervalsData();
-		case .Preset: return PresetIntervalsData();
-		case .AdHoc: return AdHocIntervalsData();
+		case .limits: return LimitsIntervalsData();
+		case .stackedIntervals: return StackedIntervalsIntervalsData();
+		case .equalTemperament: return EqualTemperamentIntervalsData();
+		case .preset: return PresetIntervalsData();
+		case .adHoc: return AdHocIntervalsData();
 		}
 	}
 
 	override init() {
-		octavesCount = min(max(UInt(NSUserDefaults.standardUserDefaults().integerForKey("octavesCount")),1),3);
-		autoAnchor = NSUserDefaults.standardUserDefaults().boolForKey("autoAnchor");
-		midiAnchor = Int(NSUserDefaults.standardUserDefaults().integerForKey("midiAnchor"));
+		octavesCount = min(max(UInt(UserDefaults.standard.integer(forKey: "octavesCount")),1),3);
+		autoAnchor = UserDefaults.standard.bool(forKey: "autoAnchor");
+		midiAnchor = Int(UserDefaults.standard.integer(forKey: "midiAnchor"));
 	}
 
 	init?(propertyList aPropertyList: [String:AnyObject] ) {
@@ -130,7 +130,7 @@ class IntervalsData: NSObject {
 		return theResult;
 	}
 
-	static func	indexForLargestPrimeLessThanOrEuqalTo( aValue : UInt ) -> Int? {
+	static func	indexForLargestPrimeLessThanOrEuqalTo( _ aValue : UInt ) -> Int? {
 		var		i = 0;
 		guard aValue >= 2 else {
 			return nil;
@@ -148,14 +148,14 @@ class IntervalsData: NSObject {
 
 	dynamic var		octavesCount : UInt = 1 {
 		didSet {
-			NSUserDefaults.standardUserDefaults().setInteger(Int(octavesCount), forKey:"octavesCount");
+			UserDefaults.standard.set(Int(octavesCount), forKey:"octavesCount");
 		}
 	}
 	var		autoAnchor : Bool = false {
-		didSet { NSUserDefaults.standardUserDefaults().setBool( autoAnchor, forKey:"autoAnchor"); }
+		didSet { UserDefaults.standard.set( autoAnchor, forKey:"autoAnchor"); }
 	}
 	dynamic var		midiAnchor : Int = 60 {
-		didSet { NSUserDefaults.standardUserDefaults().setInteger(midiAnchor, forKey: "midiAnchor"); }
+		didSet { UserDefaults.standard.set(midiAnchor, forKey: "midiAnchor"); }
 	}
 
 	dynamic var		baseFrequency : Double = 220.0;

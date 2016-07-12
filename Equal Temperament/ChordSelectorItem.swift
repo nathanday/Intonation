@@ -9,7 +9,7 @@
 import Cocoa
 
 class ChordSelectorItem : NSObject {
-	class func chordSelectorItemsForPropertyList( aPropertyList: [[String:AnyObject]] ) -> [ChordSelectorItem] {
+	class func chordSelectorItemsForPropertyList( _ aPropertyList: [[String:AnyObject]] ) -> [ChordSelectorItem] {
 		var		theResult : [ChordSelectorItem] = [];
 		for theData in aPropertyList {
 			if let theItem = chordSelectorItemForPropertyList( theData ) {
@@ -18,7 +18,7 @@ class ChordSelectorItem : NSObject {
 		}
 		return theResult;
 	}
-	class func chordSelectorItemForPropertyList( aPropertyList: [String:AnyObject] ) -> ChordSelectorItem? {
+	class func chordSelectorItemForPropertyList( _ aPropertyList: [String:AnyObject] ) -> ChordSelectorItem? {
 		var		theResult : ChordSelectorItem? = nil;
 		if let theName = aPropertyList["name"] as? String {
 			if let theKind = aPropertyList["kind"] as? Int {
@@ -37,9 +37,7 @@ class ChordSelectorItem : NSObject {
 				}
 			}
 			else if let theChildren = aPropertyList["everyChild"] as? [[String:AnyObject]] {
-				let		theChordSelectorGroup = ChordSelectorGroup(name:theName);
-				theChordSelectorGroup.everyChild = chordSelectorItemsForPropertyList(theChildren);
-				theResult = theChordSelectorGroup;
+				theResult = ChordSelectorGroup(name:theName, children:chordSelectorItemsForPropertyList(theChildren));
 			}
 			else {
 				print( "Propertlist entity failed to parse \(aPropertyList)" );
@@ -85,9 +83,18 @@ class ChordSelectorChord : ChordSelectorLeaf {
 class ChordSelectorScale : ChordSelectorLeaf {
 }
 
-class ChordSelectorGroup : ChordSelectorItem, MutableCollectionType {
-	dynamic var			everyChild : [ChordSelectorItem] = [];
+class ChordSelectorGroup : ChordSelectorItem, MutableCollection {
+	typealias SubSequence = ChordSelectorGroup
+	typealias Index = Int
+	dynamic var			everyChild : [ChordSelectorItem] = [ChordSelectorItem]();
 	dynamic var			count : Int { get { return everyChild.endIndex-everyChild.startIndex; } }
+	override init( name aName: String ) {
+		super.init(name:aName);
+	}
+	init( name aName: String, children aChildren : [ChordSelectorItem] ) {
+		everyChild = aChildren;
+		super.init(name:aName);
+	}
 	subscript (anIndex: Int) -> ChordSelectorItem {
 		get { return everyChild[anIndex]; }
 		set( aValue ) {
@@ -95,16 +102,30 @@ class ChordSelectorGroup : ChordSelectorItem, MutableCollectionType {
 			aValue.parent = self;
 		}
 	}
-	func generate() -> IndexingGenerator<[ChordSelectorItem]> { return everyChild.generate(); }
+	subscript(aBounds: Range<Int>) -> ChordSelectorGroup {
+		get {
+			return ChordSelectorGroup( name: "\(name) slice", children: Array(everyChild[aBounds]));
+		}
+		set(aValue) {
+			everyChild.replaceSubrange(aBounds, with: aValue.everyChild);
+		}
+	}
+	func makeIterator() -> IndexingIterator<[ChordSelectorItem]> { return everyChild.makeIterator(); }
 	var startIndex: Int { get { return everyChild.startIndex; } }
 	var endIndex: Int { get { return everyChild.endIndex; } }
+	func formIndex(after anIndex: inout Int) {
+		everyChild.formIndex(after : &anIndex);
+	}
+	func index(after anIndex: Int) -> Int {
+		return everyChild.index(after:anIndex);
+	}
 }
 
 class RootChordSelectorGroup : ChordSelectorGroup {
 	init() {
 		super.init(name:"root");
-		if let theURL = NSBundle.mainBundle().URLForResource("PresetChordsAndScales", withExtension: "plist"),
-			theChordData = NSArray(contentsOfURL: theURL) {
+		if let theURL = Bundle.main.urlForResource("PresetChordsAndScales", withExtension: "plist"),
+			theChordData = NSArray(contentsOf: theURL) {
 			everyChild = ChordSelectorItem.chordSelectorItemsForPropertyList( theChordData as! [[String : AnyObject]] );
 		}
 	}

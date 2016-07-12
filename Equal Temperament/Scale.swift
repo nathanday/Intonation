@@ -17,7 +17,7 @@ class Scale : IntervalSet {
 	var		_everyInterval : [Interval];
 
 	init(name aName: String, elements anElements: [Interval] ) {
-		_everyInterval = anElements.sort { (a:Interval, b:Interval) -> Bool in return a < b; };
+		_everyInterval = anElements.sorted { (a:Interval, b:Interval) -> Bool in return a < b; };
 		super.init( name: aName );
 	}
 	convenience init?( propertyList aPropertyList: [String:AnyObject] ) {
@@ -25,7 +25,7 @@ class Scale : IntervalSet {
 			theEveryInterval = aPropertyList["everyInterval"] as? [[String:AnyObject]] {
 			var		theIntervals = [Interval]();
 			for theIntervalPropertyList in theEveryInterval {
-				if let theInterval = Interval.fromPropertyList(theIntervalPropertyList) {
+				if let theInterval = Interval.from(propertyList:theIntervalPropertyList) {
 					theIntervals.append(theInterval);
 				} else {
 					return nil;
@@ -37,7 +37,7 @@ class Scale : IntervalSet {
 		}
 	}
 
-	static func degreeName( anIndex : Int ) -> String {
+	static func degreeName( _ anIndex : Int ) -> String {
 		var thePrefix : String
 		switch anIndex % 10 {
 		case 0 where anIndex%100 < 10:

@@ -9,7 +9,7 @@
 import Foundation
 
 extension String {
-	func stringByReplacingOccurrencesOfStrings(aTargets: [String], withString aReplacement: String, options aMask: NSStringCompareOptions = NSStringCompareOptions(rawValue: 0), range aSearchRange: Range<Index>? = nil, locale aLocale: NSLocale? = nil) -> String {
+	func stringByReplacingOccurrencesOfStrings(_ aTargets: [String], withString aReplacement: String, options aMask: NSString.CompareOptions = NSString.CompareOptions(rawValue: 0), range aSearchRange: Range<Index>? = nil, locale aLocale: Locale? = nil) -> String {
 		var		theResult = self;
 		for theTarget in aTargets {
 			theResult.replacingOccurrencesOfString( theTarget, withString: aReplacement, options: aMask, range: aSearchRange, locale: aLocale );
@@ -17,15 +17,15 @@ extension String {
 		return theResult;
 	}
 
-	mutating func replacingOccurrencesOfStrings( aTarget: [String], withString aReplacement: String ) {
+	mutating func replacingOccurrencesOfStrings( _ aTarget: [String], withString aReplacement: String ) {
 		for theTarget in aTarget {
 			replacingOccurrencesOfString( theTarget, withString: aReplacement );
 		}
 	}
 
-	mutating func replacingOccurrencesOfString( aTarget: String, withString aReplacement: String, options aMask: NSStringCompareOptions = NSStringCompareOptions(rawValue: 0), range aSearchRange: Range<Index>? = nil, locale aLocale: NSLocale? = nil ) {
-		while let theRange = rangeOfString(aTarget, options: aMask, range: aSearchRange, locale: aLocale) {
-			replaceRange(theRange, with: aReplacement);
+	mutating func replacingOccurrencesOfString( _ aTarget: String, withString aReplacement: String, options aMask: NSString.CompareOptions = NSString.CompareOptions(rawValue: 0), range aSearchRange: Range<Index>? = nil, locale aLocale: Locale? = nil ) {
+		while let theRange = range(of: aTarget, options: aMask, range: aSearchRange, locale: aLocale) {
+			replaceSubrange(theRange, with: aReplacement);
 		}
 	}
 }

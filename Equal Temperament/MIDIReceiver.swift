@@ -10,30 +10,30 @@ import Foundation
 import CoreMIDI
 
 protocol MIDIReceiverObserver {
-	func midiReceiverNoteOff( aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt, velocity aVelocity: UInt );
-	func midiReceiverNoteOn( aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt, velocity aVelocity: UInt );
-	func midiReceiverPolyphonicKeyPressure( aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt, pressure aPressure: UInt );
-	func midiReceiverControlChange( aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt, velocity aVelocity: UInt );
-	func midiReceiverProgramChange( aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt );
-	func midiReceiverChannelPressure( aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt );
-	func midiReceiverPitchBendChange( aReceiver: MIDIReceiver, channel aChannel: UInt, value aValue: UInt );
+	func midiReceiverNoteOff( _ aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt, velocity aVelocity: UInt );
+	func midiReceiverNoteOn( _ aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt, velocity aVelocity: UInt );
+	func midiReceiverPolyphonicKeyPressure( _ aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt, pressure aPressure: UInt );
+	func midiReceiverControlChange( _ aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt, velocity aVelocity: UInt );
+	func midiReceiverProgramChange( _ aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt );
+	func midiReceiverChannelPressure( _ aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt );
+	func midiReceiverPitchBendChange( _ aReceiver: MIDIReceiver, channel aChannel: UInt, value aValue: UInt );
 }
 
 extension MIDIReceiverObserver {
-	func midiReceiverNoteOff( aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt, velocity aVelocity: UInt ) { }
-	func midiReceiverNoteOn( aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt, velocity aVelocity: UInt ) { }
-	func midiReceiverPolyphonicKeyPressure( aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt, pressure aPressure: UInt ) { }
-	func midiReceiverControlChange( aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt, velocity aVelocity: UInt ) { }
-	func midiReceiverProgramChange( aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt ) { }
-	func midiReceiverChannelPressure( aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt ) { }
-	func midiReceiverPitchBendChange( aReceiver: MIDIReceiver, channel aChannel: UInt, value aValue: UInt ) { }
+	func midiReceiverNoteOff( _ aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt, velocity aVelocity: UInt ) { }
+	func midiReceiverNoteOn( _ aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt, velocity aVelocity: UInt ) { }
+	func midiReceiverPolyphonicKeyPressure( _ aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt, pressure aPressure: UInt ) { }
+	func midiReceiverControlChange( _ aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt, velocity aVelocity: UInt ) { }
+	func midiReceiverProgramChange( _ aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt ) { }
+	func midiReceiverChannelPressure( _ aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt ) { }
+	func midiReceiverPitchBendChange( _ aReceiver: MIDIReceiver, channel aChannel: UInt, value aValue: UInt ) { }
 }
 
 class MIDIReceiver {
-	final private func sevenBits( aByte : UInt ) -> UInt {
+	final private func sevenBits( _ aByte : UInt ) -> UInt {
 		return aByte&0x7F;
 	}
-	final private func fourteenBits( aByteL : UInt, _ aByteH : UInt ) -> UInt {
+	final private func fourteenBits( _ aByteL : UInt, _ aByteH : UInt ) -> UInt {
 		return sevenBits(aByteL) | (sevenBits(aByteH) << 7);
 	}
 
@@ -76,13 +76,13 @@ class MIDIReceiver {
 		var		theEndPointName: [String] = [""]
 		var		theSourcePointRef: [UInt32] = [0];
 
-		func midiNotifyBlock(midiNotification: UnsafePointer<MIDINotification>) {
+		func midiNotifyBlock(_ midiNotification: UnsafePointer<MIDINotification>) {
 			setUp();
 		}
 
-		func midiInputBlock(packetList: UnsafePointer<MIDIPacketList>, srcConnRefCon: UnsafeMutablePointer<Void>)
+		func midiInputBlock(_ packetList: UnsafePointer<MIDIPacketList>, srcConnRefCon: UnsafeMutablePointer<Swift.Void>?) -> Swift.Void
 		{
-			let packets: MIDIPacketList = packetList.memory
+			let packets: MIDIPacketList = packetList.pointee
 			var packet: MIDIPacket = packets.packet
 			for _ in 0..<packets.numPackets {
 				let msgs = MIDIPacketDivider.messageFor(packet:packet);
@@ -94,13 +94,13 @@ class MIDIReceiver {
 				for theMsg in msgs {
 					postEvent( bytes: theMsg );
 				}
-				packet = MIDIPacketNext( &packet ).memory
+				packet = MIDIPacketNext( &packet ).pointee
 			}
 		}
-		func convertCfTypeToString(cfValue: Unmanaged<CFString>!) -> String?{
+		func convertCfTypeToString(_ cfValue: Unmanaged<CFString>!) -> String?{
 			/* Coded by Vandad Nahavandipoor */
 			let value = Unmanaged.fromOpaque(
-				cfValue.toOpaque()).takeUnretainedValue() as CFStringRef
+				cfValue.toOpaque()).takeUnretainedValue() as CFString
 			if CFGetTypeID(value) == CFStringGetTypeID(){
 				return value as String
 			} else {
@@ -123,8 +123,8 @@ class MIDIReceiver {
 			}
 		}
 		if theEndPointRef.count > 0 {
-			theEndPointRef.removeAtIndex(0)
-			theEndPointName.removeAtIndex(0)
+			theEndPointRef.remove(at: 0)
+			theEndPointName.remove(at: 0)
 		}
 //		for (theIndex,theRef) in theEndPointRef.enumerate() {
 //			print("[\(theIndex)] : \(theEndPointName[theIndex]) (\(theRef))")
@@ -139,7 +139,7 @@ class MIDIReceiver {
 			theSourcePointRef.append(MIDIGetSource(i))
 			if i == 0 {
 				// avoid appending to empty array.
-				theSourcePointRef.removeAtIndex(0)
+				theSourcePointRef.remove(at: 0)
 			}
 
 			theStatus = MIDIPortConnectSource(inputPortRef, theSourcePointRef[i], nil);
@@ -154,7 +154,7 @@ struct MIDIPacketDivider {
 		return mypacket2msgs(packet2mypacket(aPacket))
 	}
 
-	static func packet2mypacket(packet: MIDIPacket) -> [UInt] {
+	static func packet2mypacket(_ packet: MIDIPacket) -> [UInt] {
 		var mypacket = [UInt]()
 		switch packet.length {
 		case 1: mypacket = [UInt(packet.data.0)]
@@ -199,7 +199,7 @@ struct MIDIPacketDivider {
 		return mypacket
 	}
 
-	static func mypacket2msgs( aPacket: [UInt]) -> [[UInt]] {
+	static func mypacket2msgs( _ aPacket: [UInt]) -> [[UInt]] {
 
 		var		thePacket = aPacket
 		var		theIndex = 0;
@@ -228,7 +228,7 @@ struct MIDIPacketDivider {
 			}
 		}
 
-		msgs.removeAtIndex(0)
+		msgs.remove(at: 0)
 
 		return msgs
 	}

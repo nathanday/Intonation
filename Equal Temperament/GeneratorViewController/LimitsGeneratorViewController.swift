@@ -19,7 +19,7 @@ class LimitsGeneratorViewController: GeneratorViewController {
 	}
 
 	dynamic var		limitExpanded : Bool {
-		set( aValue ) { NSUserDefaults.standardUserDefaults().setBool(aValue, forKey: "limitExpanded"); }
-		get { return NSUserDefaults.standardUserDefaults().boolForKey("limitExpanded"); }
+		set( aValue ) { UserDefaults.standard.set(aValue, forKey: "limitExpanded"); }
+		get { return UserDefaults.standard.bool(forKey: "limitExpanded"); }
 	}
 }

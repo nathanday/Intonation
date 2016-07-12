@@ -8,7 +8,7 @@
 
 import Foundation
 
-func square( aValue : CGFloat ) -> CGFloat {
+func square( _ aValue : CGFloat ) -> CGFloat {
 	return aValue * aValue;
 }
 

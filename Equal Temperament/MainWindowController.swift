@@ -8,17 +8,17 @@
 
 import Cocoa
 
-func frequencyForMIDINote( aMIDINote : Int ) -> Double {
+func frequencyForMIDINote( _ aMIDINote : Int ) -> Double {
 	let		theBase = 440.0/pow(2.0,(69.0/12.0));
 	return pow(2.0,(Double(aMIDINote)/12.0))*theBase;
 }
 
 class MainWindowController : NSWindowController {
 
-	static let		midiSelectBounds : Range<Int> = 12...108;
+	static let		midiSelectBounds : CountableClosedRange<Int> = 12...108;
 
 	deinit {
-		NSNotificationCenter.defaultCenter().removeObserver(self);
+		NotificationCenter.default.removeObserver(self);
 		document?.removeObserver(self, forKeyPath: "everyInterval");
 		splitView!.delegate = nil;
 	}
@@ -50,12 +50,12 @@ class MainWindowController : NSWindowController {
 
 	override func awakeFromNib() {
 		super.awakeFromNib();
-		document?.addObserver(self, forKeyPath: "enableInterval", options: NSKeyValueObservingOptions.New, context: nil);
-		document?.addObserver(self, forKeyPath: "everyInterval", options: NSKeyValueObservingOptions.New, context: nil);
-		document?.addObserver(self, forKeyPath: "selectedIndicies", options: NSKeyValueObservingOptions.New, context: nil);
+		document?.addObserver(self, forKeyPath: "enableInterval", options: NSKeyValueObservingOptions.new, context: nil);
+		document?.addObserver(self, forKeyPath: "everyInterval", options: NSKeyValueObservingOptions.new, context: nil);
+		document?.addObserver(self, forKeyPath: "selectedIndicies", options: NSKeyValueObservingOptions.new, context: nil);
 	}
 
-	override func observeValueForKeyPath( aKeyPath: String?, ofObject anObject: AnyObject?, change aChange: [String : AnyObject]?, context aContext: UnsafeMutablePointer<Void>) {
+	override func observeValue( forKeyPath aKeyPath: String?, of anObject: AnyObject?, change aChange: [NSKeyValueChangeKey : AnyObject]?, context aContext: UnsafeMutablePointer<Void>?) {
 		if let theDocument = document as? Document {
 			if anObject as? Document == theDocument {
 				if aKeyPath == "everyInterval" {
@@ -100,20 +100,20 @@ class MainWindowController : NSWindowController {
 	Disclosure views
 	*/
 	dynamic var		errorExpanded : Bool {
-		set( aValue ) { NSUserDefaults.standardUserDefaults().setBool(aValue, forKey: "errorExpanded"); }
-		get { return NSUserDefaults.standardUserDefaults().boolForKey("errorExpanded"); }
+		set( aValue ) { UserDefaults.standard.set(aValue, forKey: "errorExpanded"); }
+		get { return UserDefaults.standard.bool(forKey: "errorExpanded"); }
 	}
 	dynamic var		midiExpanded : Bool {
-		set( aValue ) { NSUserDefaults.standardUserDefaults().setBool(aValue, forKey: "midiExpanded"); }
-		get { return NSUserDefaults.standardUserDefaults().boolForKey("midiExpanded"); }
+		set( aValue ) { UserDefaults.standard.set(aValue, forKey: "midiExpanded"); }
+		get { return UserDefaults.standard.bool(forKey: "midiExpanded"); }
 	}
 	dynamic var		audioExpanded : Bool {
-		set( aValue ) { NSUserDefaults.standardUserDefaults().setBool(aValue, forKey: "audioExpanded"); }
-		get { return NSUserDefaults.standardUserDefaults().boolForKey("audioExpanded"); }
+		set( aValue ) { UserDefaults.standard.set(aValue, forKey: "audioExpanded"); }
+		get { return UserDefaults.standard.bool(forKey: "audioExpanded"); }
 	}
 	dynamic var		savedExpanded : Bool {
-		set( aValue ) { NSUserDefaults.standardUserDefaults().setBool(aValue, forKey: "savedExpanded"); }
-		get { return NSUserDefaults.standardUserDefaults().boolForKey("savedExpanded"); }
+		set( aValue ) { UserDefaults.standard.set(aValue, forKey: "savedExpanded"); }
+		get { return UserDefaults.standard.bool(forKey: "savedExpanded"); }
 	}
 
 	private func updateChordRatioTitle( ) {
@@ -159,7 +159,7 @@ class MainWindowController : NSWindowController {
 		}
 	}
 
-	func playBackMethodChanged(notification aNotification: NSNotification) {
+	func playBackMethodChanged(notification aNotification: Notification) {
 		if let theDocument = document as? Document {
 			if let thePlaySegmentedControl = playSegmentedControl {
 				if let theSelectedMethod = theDocument.currentlySelectedMethod {
@@ -176,28 +176,28 @@ class MainWindowController : NSWindowController {
 	override func windowWillLoad() {
 		super.windowWillLoad();
 		if let theDocument = document{
-			NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(playBackMethodChanged(notification:)), name: PlayBackMethodChangedNotification, object: theDocument );
+			NotificationCenter.default.addObserver(self, selector: #selector(playBackMethodChanged(notification:)), name: NSNotification.Name(rawValue: PlayBackMethodChangedNotification), object: theDocument );
 		}
 
 		if let theBaseFrequencyDeltaSlider = baseFrequencyDeltaSlider {
-			theBaseFrequencyDeltaSlider.continuous = true;
+			theBaseFrequencyDeltaSlider.isContinuous = true;
 			previousBaseFrequencyDelta = theBaseFrequencyDeltaSlider.doubleValue;
 		}
 	}
 
-	@IBAction func copy(aSender: AnyObject ) {
+	@IBAction func copy( _ aSender: AnyObject ) {
 		if let theEntries = arrayController!.selectedObjects as? [EqualTemperamentEntry] {
-			NSPasteboard.generalPasteboard().clearContents();
-			NSPasteboard.generalPasteboard().writeObjects( theEntries );
+			NSPasteboard.general().clearContents();
+			NSPasteboard.general().writeObjects( theEntries );
 		}
 	}
 
-	@IBAction func copyCentsAction(aSender: AnyObject ) {
-		NSPasteboard.generalPasteboard().clearContents();
-		NSPasteboard.generalPasteboard().writeObjects( (arrayController!.selectedObjects as! [EqualTemperamentEntry]).map { return "\($0.toCents)"; } );
+	@IBAction func copyCentsAction( _ aSender: AnyObject ) {
+		NSPasteboard.general().clearContents();
+		NSPasteboard.general().writeObjects( (arrayController!.selectedObjects as! [EqualTemperamentEntry]).map { return "\($0.toCents)"; } );
 	}
 
-	@IBAction func baseFrequencyDeltaChanged( aSender: NSSlider ) {
+	@IBAction func baseFrequencyDeltaChanged( _ aSender: NSSlider ) {
 		let		theMinValue = aSender.minValue;
 		let		theMaxValue = aSender.maxValue;
 		let		theBaseFrequencyDelta = aSender.doubleValue;
@@ -229,41 +229,49 @@ class MainWindowController : NSWindowController {
 		previousBaseFrequencyDelta = theBaseFrequencyDelta;
 	}
 	
-	@IBAction func playLastMethod( aSender: AnyObject? ) {
+	@IBAction func playLastMethod( _ aSender: AnyObject? ) {
 		if let theDocument = document as? Document {
 			theDocument.playUsingMethod( theDocument.currentlySelectedMethod ?? 0 );
 		}
 	}
 
-	@IBAction func playAction( aSender: NSSegmentedControl ) {
+	@IBAction func playAction( _ aSender: NSSegmentedControl ) {
 		if let theDocument = document as? Document {
 			theDocument.playUsingMethod( aSender.selectedSegment );
 		}
 	}
 
-	@IBAction func showFindClosestIntervlAction( aSender: AnyObject? ) {
+	@IBAction func showFindClosestIntervlAction( _ aSender: AnyObject? ) {
 		findIntervalsViewController!.showView()
 	}
 
-	@IBAction func selectMIDINoteForBaseFrequencyAction( aSender : NSPopUpButton? ) {
+	@IBAction func selectMIDINoteForBaseFrequencyAction( _ aSender : NSPopUpButton? ) {
 		if let theDocument = document as? Document,
 			theSelectedIndex = aSender?.indexOfSelectedItem {
-			theDocument.baseFrequency = frequencyForMIDINote(theSelectedIndex-1+MainWindowController.midiSelectBounds.startIndex);
+			theDocument.baseFrequency = frequencyForMIDINote(theSelectedIndex-1+MainWindowController.midiSelectBounds.lowerBound);
 		}
 	}
 
-	@IBAction func paste(aSender: AnyObject ) {
+	@IBAction func paste( _ aSender: AnyObject ) {
 		if let theViewController = self.documentTypeViewController as? AdHokGeneratorViewController,
-		theEntries = NSPasteboard.generalPasteboard().readObjectsForClasses([EqualTemperamentEntry.self], options: nil) as? [EqualTemperamentEntry] {
+		theEntries = NSPasteboard.general().readObjects(forClasses: [EqualTemperamentEntry.self], options: nil) as? [EqualTemperamentEntry] {
 			theViewController.addIntervals( theEntries.map { return $0.interval; } );
 		}
 	}
-	@IBAction func delete(aSender: AnyObject) {
+	@IBAction func delete( _ aSender: AnyObject) {
 		if let theViewController = self.documentTypeViewController as? AdHokGeneratorViewController,
 			theSelectedObjects = arrayController?.selectedObjects as? [EqualTemperamentEntry] {
 			theViewController.removeIntervals( theSelectedObjects.map { return $0.interval; } );
 		}
 	}
+	@IBAction func exportAction( _ aSender: AnyObject? ) {
+		let		theExportWindowController = ExportWindowController(document:self.document as! Document);
+		theExportWindowController.completionBlock = {
+			
+		}
+		theExportWindowController.showAsSheet(parentWindow: self.window! );
+	}
+
 	override var windowNibName: String { return "MainWindowController"; }
 
 	override func windowDidLoad() {
@@ -280,7 +288,7 @@ class MainWindowController : NSWindowController {
 								self.documentTypeViewController = theViewController;
 								self.documentTypeViewControllerPlaceHolderView!.loadViewController(theViewController);
 								theDocument.calculateAllIntervals();
-								self.octavesCountPopUpButton?.selectItemWithTag(Int(theIntervalData.octavesCount));
+								self.octavesCountPopUpButton?.selectItem(withTag: Int(theIntervalData.octavesCount));
 							}
 						}
 						else {
@@ -296,22 +304,22 @@ class MainWindowController : NSWindowController {
 		}
 	}
 
-	func hideIntervalRelatedColumn( aHide : Bool ) {
+	func hideIntervalRelatedColumn( _ aHide : Bool ) {
 		for theTableColumn in tableView!.tableColumns {
 			if ["interval","percent","error"].contains(theTableColumn.identifier) {
-				theTableColumn.hidden = aHide;
+				theTableColumn.isHidden = aHide;
 			}
 		}
 		scaleViewController!.hideIntervalRelatedColumn(!aHide);
 	}
 
-	func windowDidBecomeMain( aNotification: NSNotification) {
+	func windowDidBecomeMain( _ aNotification: Notification) {
 		if let theDocument = document as? Document {
 			theDocument.playbackPaused = false;
 		}
 	}
 
-	func windowDidResignMain( aNotification: NSNotification) {
+	func windowDidResignMain( _ aNotification: Notification) {
 		if let theDocument = document as? Document {
 			theDocument.playbackPaused = true;
 		}
@@ -320,30 +328,30 @@ class MainWindowController : NSWindowController {
 
 extension MainWindowController : NSTableViewDelegate {
 
-	func tableViewSelectionDidChange(notification: NSNotification) {
+	func tableViewSelectionDidChange(_ notification: Notification) {
 		if let theSelectedEntries = arrayController!.selectedObjects as? [EqualTemperamentEntry],
 			theDocument = document as? Document {
 			theDocument.selectedEqualTemperamentEntry = theSelectedEntries
 		}
 	}
 
-	func tableViewColumnDidResize(aNotification: NSNotification) {
-		if let theTableColumn = aNotification.userInfo?["NSTableColumn"] as? NSTableColumn {
+	func tableViewColumnDidResize(_ aNotification: Notification) {
+		if let theTableColumn = (aNotification as NSNotification).userInfo?["NSTableColumn"] as? NSTableColumn {
 			if theTableColumn.identifier == "description" {
-				theTableColumn.hidden = theTableColumn.width <= 20.0;
+				theTableColumn.isHidden = theTableColumn.width <= 20.0;
 			}
 		}
 	}
 }
 
 extension MainWindowController : NSTableViewDataSource {
-	func tableView(aTableView: NSTableView, pasteboardWriterForRow aRow: Int) -> NSPasteboardWriting? {
+	func tableView(_ aTableView: NSTableView, pasteboardWriterForRow aRow: Int) -> NSPasteboardWriting? {
 		return (arrayController!.arrangedObjects as! [EqualTemperamentEntry])[aRow];
 	}
 }
 
 extension MainWindowController : NSSplitViewDelegate {
-	func splitView(aSplitView: NSSplitView, canCollapseSubview aSubview: NSView) -> Bool {
+	func splitView(_ aSplitView: NSSplitView, canCollapseSubview aSubview: NSView) -> Bool {
 		var		theResult = false;
 		if aSplitView == splitView {
 			theResult = aSubview == plottingParentContainerView;
@@ -351,7 +359,7 @@ extension MainWindowController : NSSplitViewDelegate {
 		return theResult;
 	}
 
-	func splitView( aSplitView: NSSplitView, additionalEffectiveRectOfDividerAtIndex aDividerIndex: Int ) -> NSRect {
+	func splitView( _ aSplitView: NSSplitView, additionalEffectiveRectOfDividerAt aDividerIndex: Int ) -> NSRect {
 		var		theResult = NSZeroRect;
 		if aSplitView == splitView {
 			let		theRect = tableParentContainerView!.frame;
@@ -366,7 +374,7 @@ extension MainWindowController : NSSplitViewDelegate {
 		return theResult;
 	}
 
-	func splitView( aSplitView: NSSplitView, shouldHideDividerAtIndex aDividerIndex: Int) -> Bool {
+	func splitView( _ aSplitView: NSSplitView, shouldHideDividerAt aDividerIndex: Int) -> Bool {
 		var			theResult = false;
 		if aSplitView == tableParentContainerSplitView {
 			theResult = !(documentTypeViewController is StackedIntervalsGeneratorViewController);

@@ -27,7 +27,7 @@ class PresetIntervalsData : IntervalsData {
 		return theResult;
 	}
 
-	override var	documentType : DocumentType { return .Preset; }
+	override var	documentType : DocumentType { return .preset; }
 
 	override func intervalsDataGenerator() -> IntervalsDataGenerator {
 		return PresetGenerator(intervalsData:self);
@@ -58,6 +58,6 @@ class PresetGenerator: IntervalsDataGenerator {
 			}
 		}
 		super.init();
-		_everyEqualTemperamentEntry = theResult.sort { return $0.toCents < $1.toCents; };
+		_everyEqualTemperamentEntry = theResult.sorted { return $0.toCents < $1.toCents; };
 	}
 }

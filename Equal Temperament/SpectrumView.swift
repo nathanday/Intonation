@@ -63,18 +63,18 @@ class SpectrumView: ResultView {
 			};
 			return NSMakeSize(spectrumType == .sine
 				? harmonicSpacing+20.0
-				: CGFloat(max(thePrimesProduct,8)+1)*harmonicSpacing, NSViewNoInstrinsicMetric);
+				: CGFloat(max(thePrimesProduct,8)+1)*harmonicSpacing, NSViewNoIntrinsicMetric);
 		}
 	}
 
-	override func drawRect(aDirtyRect: NSRect) {
+	override func draw(_ aDirtyRect: NSRect) {
 		var		theBounds = NSInsetRect(self.bounds, 0.0, 30.0);
 		let		theBaseHeightHalf : CGFloat = 6.0;
 		let		theTopWidthHalf : CGFloat = 2.0;
 		theBounds.origin.y += 10.0;
-		super.drawRect(aDirtyRect);
+		super.draw(aDirtyRect);
 
-		func harmonicForX( x : CGFloat, aBaseFreq: Double, aHarmonicSpacing : CGFloat, aBoundMinX : CGFloat ) -> Int {
+		func harmonicForX( _ x : CGFloat, aBaseFreq: Double, aHarmonicSpacing : CGFloat, aBoundMinX : CGFloat ) -> Int {
 			return Int((x-aBoundMinX+aHarmonicSpacing)/(aHarmonicSpacing*CGFloat(aBaseFreq)));
 		}
 
@@ -86,21 +86,21 @@ class SpectrumView: ResultView {
 			let		theMaxHarm = spectrumType == .sine ? 1 : harmonicForX( NSMaxX(theBounds)+theBaseHeightHalf, aBaseFreq: aBaseFreq, aHarmonicSpacing: theHarmonicSpacing, aBoundMinX: NSMinX(theBounds));
 			let		theHarmStep = spectrumType == .square ? 2 : 1;
 			thePath.lineWidth = 1.0;
-			for i in max(theMinHarm,1).stride(through:theMaxHarm, by:theHarmStep) {
+			for i in stride(from: max(theMinHarm,1), through:theMaxHarm, by:theHarmStep) {
 				let		theX = NSMinX(theBounds)+theBaseHeightHalf+theHarmonicSpacing*CGFloat(aBaseFreq)*CGFloat(i)-theHarmonicSpacing;
 				let		theHeight = NSHeight(theBounds)/CGFloat(sqrt(Double(i)));
 
-				thePath.moveToPoint( NSMakePoint(theX-theBaseHeightHalf, theY0) );
+				thePath.move( to: NSMakePoint(theX-theBaseHeightHalf, theY0) );
 
-				thePath.curveToPoint( NSMakePoint(theX-theTopWidthHalf, theY0+theHeight ),
+				thePath.curve( to: NSMakePoint(theX-theTopWidthHalf, theY0+theHeight ),
 					controlPoint1: NSMakePoint(theX-(theBaseHeightHalf-theTopWidthHalf), theY0 ),
 					controlPoint2: NSMakePoint(theX-theTopWidthHalf, theY0+theHeight*0.5) );
 
-				thePath.curveToPoint( NSMakePoint(theX+theTopWidthHalf, theY0+theHeight ),
+				thePath.curve( to: NSMakePoint(theX+theTopWidthHalf, theY0+theHeight ),
 					controlPoint1: NSMakePoint(theX-theTopWidthHalf, theY0+theHeight+theTopWidthHalf),
 					controlPoint2: NSMakePoint(theX+theTopWidthHalf, theY0+theHeight+theTopWidthHalf));
 
-				thePath.curveToPoint( NSMakePoint(theX+theBaseHeightHalf, theY0),
+				thePath.curve( to: NSMakePoint(theX+theBaseHeightHalf, theY0),
 					controlPoint1: NSMakePoint(theX+theTopWidthHalf, theY0+theHeight*0.5),
 					controlPoint2: NSMakePoint(theX+(theBaseHeightHalf-theTopWidthHalf), theY0));
 			}
@@ -108,8 +108,8 @@ class SpectrumView: ResultView {
 			NSColor(calibratedHue: hueForIndex(aHarmonic), saturation: 0.5, brightness: 0.875, alpha: 0.25).setFill();
 			thePath.fill();
 			thePath.stroke();
-			thePath.moveToPoint(NSMakePoint( NSMinX(aDirtyRect), theY0));
-			thePath.lineToPoint(NSMakePoint( NSMaxX(aDirtyRect), theY0));
+			thePath.move(to: NSMakePoint( NSMinX(aDirtyRect), theY0));
+			thePath.line(to: NSMakePoint( NSMaxX(aDirtyRect), theY0));
 			NSColor(calibratedWhite: 0.25, alpha: 1.0).setStroke();
 			thePath.lineWidth = 1.0;
 			thePath.stroke();
@@ -124,38 +124,38 @@ class SpectrumView: ResultView {
 			let		theMinHarm = harmonicForX( NSMinX(aDirtyRect)-theBaseHeightHalf, aBaseFreq: 1.0, aHarmonicSpacing: theHarmonicSpacing, aBoundMinX: NSMinX(theBounds));
 			let		theMaxHarm = spectrumType == .sine ? 1 : harmonicForX( NSMaxX(theBounds)+theBaseHeightHalf, aBaseFreq: 1.0, aHarmonicSpacing: theHarmonicSpacing, aBoundMinX: NSMinX(theBounds));
 //			let		theHarmStep = spectrumType == .square ? 2 : 1;
-			let		theFontSize = NSFont.systemFontSizeForControlSize(NSControlSize.SmallControlSize)*1.25;
+			let		theFontSize = NSFont.systemFontSize(for: NSControlSize.small)*1.25;
 			for i in max(theMinHarm, 1)...theMaxHarm {
 				let		theX = NSMinX(theBounds)+theBaseHeightHalf+theHarmonicSpacing*CGFloat(i)-theHarmonicSpacing;
-				theTicks.moveToPoint( NSMakePoint(theX, theY0+10.0) );
-				theTicks.lineToPoint( NSMakePoint(theX, theY0+5.0) );
-				theMinorTicks.moveToPoint( NSMakePoint(theX+theHarmonicSpacing*0.25, theY0+10.0) );
-				theMinorTicks.lineToPoint( NSMakePoint(theX+theHarmonicSpacing*0.25, theY0+7.5) );
-				theMinorTicks.moveToPoint( NSMakePoint(theX+theHarmonicSpacing*0.5, theY0+10.0) );
-				theMinorTicks.lineToPoint( NSMakePoint(theX+theHarmonicSpacing*0.5, theY0+5.0) );
-				theMinorTicks.moveToPoint( NSMakePoint(theX+theHarmonicSpacing*0.75, theY0+10.0) );
-				theMinorTicks.lineToPoint( NSMakePoint(theX+theHarmonicSpacing*0.75, theY0+7.5) );
-				theOverPath.moveToPoint( NSMakePoint(theX, theY0));
-				theOverPath.lineToPoint( NSMakePoint(theX, theY0+NSHeight(theBounds) ));
-				drawText(string: "\(i)", size: theFontSize, point: NSMakePoint( theX+0.5, theY0-theFontSize), color: NSColor(calibratedWhite: 0.5, alpha: 1.0), textAlignment: .Center);
+				theTicks.move( to: NSMakePoint(theX, theY0+10.0) );
+				theTicks.line( to: NSMakePoint(theX, theY0+5.0) );
+				theMinorTicks.move( to: NSMakePoint(theX+theHarmonicSpacing*0.25, theY0+10.0) );
+				theMinorTicks.line( to: NSMakePoint(theX+theHarmonicSpacing*0.25, theY0+7.5) );
+				theMinorTicks.move( to: NSMakePoint(theX+theHarmonicSpacing*0.5, theY0+10.0) );
+				theMinorTicks.line( to: NSMakePoint(theX+theHarmonicSpacing*0.5, theY0+5.0) );
+				theMinorTicks.move( to: NSMakePoint(theX+theHarmonicSpacing*0.75, theY0+10.0) );
+				theMinorTicks.line( to: NSMakePoint(theX+theHarmonicSpacing*0.75, theY0+7.5) );
+				theOverPath.move( to: NSMakePoint(theX, theY0));
+				theOverPath.line( to: NSMakePoint(theX, theY0+NSHeight(theBounds) ));
+				drawText(string: "\(i)", size: theFontSize, point: NSMakePoint( theX+0.5, theY0-theFontSize), color: NSColor(calibratedWhite: 0.5, alpha: 1.0), textAlignment: .center);
 			}
 			NSColor(calibratedWhite: 0.25, alpha: 1.0).setStroke();
 			theTicks.lineWidth = 1.0;
-			theTicks.lineCapStyle = NSLineCapStyle.RoundLineCapStyle
+			theTicks.lineCapStyle = NSLineCapStyle.roundLineCapStyle
 			theTicks.stroke();
 
 			NSColor(calibratedWhite: 0.0, alpha: 0.5).setStroke();
 			theOverPath.lineWidth = 0.25;
-			theOverPath.lineCapStyle = NSLineCapStyle.RoundLineCapStyle
+			theOverPath.lineCapStyle = NSLineCapStyle.roundLineCapStyle
 			theOverPath.stroke();
 
 			NSColor(calibratedWhite: 0.25, alpha: 1.0).setStroke();
 			theMinorTicks.lineWidth = 0.5;
-			theMinorTicks.lineCapStyle = NSLineCapStyle.RoundLineCapStyle
+			theMinorTicks.lineCapStyle = NSLineCapStyle.roundLineCapStyle
 			theMinorTicks.stroke();
 		}
 
-		for (theIndex,theRatio) in selectedRatios.enumerate() {
+		for (theIndex,theRatio) in selectedRatios.enumerated() {
 			drawSpectrum( baseFreq: theRatio.toDouble, harmonic:theIndex );
 		}
 		drawAxises();

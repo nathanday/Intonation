@@ -32,7 +32,7 @@ class StackedIntervalsIntervalsData : IntervalsData {
 		return theResult;
 	}
 
-	override var	documentType : DocumentType { return .StackedIntervals; }
+	override var	documentType : DocumentType { return .stackedIntervals; }
 
 	override func intervalsDataGenerator() -> IntervalsDataGenerator {
 		return StackedIntervalsDataGenerator(intervalsData:self);
@@ -43,11 +43,11 @@ class StackedIntervalsIntervalsData : IntervalsData {
 
 	var		stackedIntervals = Set<StackedIntervalSet>();
 
-	func insertStackedInterval( a : StackedIntervalSet ) {
+	func insertStackedInterval( _ a : StackedIntervalSet ) {
 		stackedIntervals.insert(a);
 	}
 
-	func removeStackedInterval( a : StackedIntervalSet ) {
+	func removeStackedInterval( _ a : StackedIntervalSet ) {
 		stackedIntervals.remove(a);
 	}
 }
@@ -69,6 +69,6 @@ class StackedIntervalsDataGenerator: IntervalsDataGenerator {
 				}
 			}
 		}
-		_everyEqualTemperamentEntry = theResult.sort { return $0.toCents < $1.toCents; };
+		_everyEqualTemperamentEntry = theResult.sorted { return $0.toCents < $1.toCents; };
 	}
 }
