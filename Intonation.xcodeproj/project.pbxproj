@@ -22,7 +22,6 @@
 		D849E7311ACADFD1006E0964 /* PrimeProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D849E7301ACADFD1006E0964 /* PrimeProducts.swift */; };
 		D84CE1E21C95960E00E19505 /* AdHocIntervalsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CE1E11C95960E00E19505 /* AdHocIntervalsData.swift */; };
 		D84CE1E41C95967700E19505 /* IntervalsDataGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CE1E31C95967700E19505 /* IntervalsDataGenerator.swift */; };
-		D84F342B1B08A2C00095D1E8 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89543621996345200A091A4 /* main.swift */; };
 		D8571C801CA56D2B008A5A46 /* LimitsGeneratorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8571C7E1CA56D2B008A5A46 /* LimitsGeneratorViewController.swift */; };
 		D8571C811CA56D2B008A5A46 /* LimitsGeneratorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8571C7F1CA56D2B008A5A46 /* LimitsGeneratorViewController.xib */; };
 		D85916C31C8C04D0001C5330 /* MIDIReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85916C21C8C04D0001C5330 /* MIDIReceiver.swift */; };
@@ -523,7 +522,6 @@
 				D8AFAD301CA58F370008ABFE /* PresetGeneratorViewController.swift in Sources */,
 				D849E7311ACADFD1006E0964 /* PrimeProducts.swift in Sources */,
 				D8646B2D1C3D4C5A00D8C429 /* ChordPreviewViewController.swift in Sources */,
-				D84F342B1B08A2C00095D1E8 /* main.swift in Sources */,
 				D84CE1E21C95960E00E19505 /* AdHocIntervalsData.swift in Sources */,
 				D8832F8619A0C86B0095B26F /* WaveView.swift in Sources */,
 				D83092C11AEBBC6F00B0E6A7 /* DisclosureView.swift in Sources */,

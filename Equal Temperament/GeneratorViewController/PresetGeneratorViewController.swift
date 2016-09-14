@@ -22,7 +22,7 @@ class PresetGeneratorViewController: GeneratorViewController {
 		fatalError("init(coder:) has not been implemented")
 	}
 
-	@IBAction func showPresetsSheetAction( _ aSender: AnyObject) {
+	@IBAction func showPresetsSheetAction( _ aSender: Any) {
 		if let theSheet = choosePresetWindow {
 			view.window?.beginSheet(theSheet, completionHandler: {
 					(aResponse:NSModalResponse) -> Void in
@@ -43,10 +43,10 @@ class PresetGeneratorViewController: GeneratorViewController {
 }
 
 extension PresetGeneratorViewController : NSWindowDelegate {
-	@IBAction func selectPresetAction( _ aSender: AnyObject) {
+	@IBAction func selectPresetAction( _ aSender: Any) {
 		view.window?.endSheet( choosePresetWindow!, returnCode: NSModalResponseContinue );
 	}
-	@IBAction func cancelPresetSheetAction( _ aSender: AnyObject) {
+	@IBAction func cancelPresetSheetAction( _ aSender: Any) {
 		view.window?.endSheet( choosePresetWindow!, returnCode: NSModalResponseAbort );
 	}
 }

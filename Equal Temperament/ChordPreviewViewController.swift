@@ -45,7 +45,7 @@ class ChordPreviewViewController: NSViewController {
 extension ChordPreviewViewController : NSTableViewDataSource {
 	func numberOfRows(in tableView: NSTableView) -> Int { return chordOrScale.everyInterval.numberOfDegrees; }
 
-	func tableView( _ aTableView: NSTableView, objectValueFor aTableColumn: NSTableColumn?, row aRow: Int) -> AnyObject? {
+	func tableView( _ aTableView: NSTableView, objectValueFor aTableColumn: NSTableColumn?, row aRow: Int) -> Any? {
 		var		theResult = "";
 		if aTableColumn?.identifier == "name" {
 			theResult = chordOrScale.everyInterval[aRow].names?.first ?? "";

@@ -13,13 +13,13 @@ class PresetIntervalsData : IntervalsData {
 //		XXXXX
 		super.init();
 	}
-	override init?(propertyList aPropertyList: [String:AnyObject] ) {
+	override init?(propertyList aPropertyList: [String:Any] ) {
 		if let theProperties = aPropertyList["preset"] as? [String:String] {
 			presetName = theProperties["name"];
 		}
 		super.init(propertyList:aPropertyList);
 	}
-	override var propertyListValue : [String:AnyObject] {
+	override var propertyListValue : [String:Any] {
 		var		theResult = super.propertyListValue;
 		if let theName = presetName {
 			theResult["preset"] = ["name":theName];

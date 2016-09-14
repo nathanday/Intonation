@@ -35,7 +35,7 @@ import Cocoa
 	func hueForIndex( _ aIndex : Int ) -> CGFloat { return (CGFloat(aIndex+4)*1.0/5.1-2.0/15.0).truncatingRemainder(dividingBy: 1.0); }
 
 	func drawText(string aString: String, size aSize: CGFloat, point aPoint: CGPoint ) {
-		drawText(string: aString, size: aSize, point: aPoint, color:NSColor.black(), textAlignment: .left );
+		drawText(string: aString, size: aSize, point: aPoint, color:NSColor.black, textAlignment: .left );
 	}
 	func drawText(string aString: String, size aSize: CGFloat, point aPoint: CGPoint, color aColor: NSColor ) {
 		drawText(string: aString, size: aSize, point: aPoint, color:aColor, textAlignment: .left );
@@ -73,7 +73,7 @@ import Cocoa
 			thePath.appendArc(withCenter: NSMakePoint(theBounds.minX+2.0, theBounds.minY+2.0), radius: 4.0, startAngle: 270, endAngle: 180, clockwise: true)
 			thePath.appendArc(withCenter: NSMakePoint(theBounds.minX+2.0, theBounds.maxY-2.0), radius: 4.0, startAngle: 180, endAngle: 90, clockwise: true)
 			thePath.close()
-			NSColor.white().setFill()
+			NSColor.white.setFill()
 			thePath.fill()
 		}
 
@@ -106,7 +106,7 @@ import Cocoa
 				thePath.move(to: NSMakePoint(NSMaxX(theFrame)+1.0,NSMinY(theFrame)));
 				thePath.line(to: NSMakePoint(NSMaxX(theFrame)+1.0,NSMaxY(theFrame)));
 			}
-			NSColor.darkGray().setStroke();
+			NSColor.darkGray.setStroke();
 			thePath.stroke();
 		}
 	}

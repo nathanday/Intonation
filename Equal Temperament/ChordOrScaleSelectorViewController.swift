@@ -32,32 +32,32 @@ class ChordOrScaleSelectorViewController: NSViewController {
         // Do view setup here.
     }
     
-	@IBAction func selectScaleOrChord( _ aSender: AnyObject?) {
+	@IBAction func selectScaleOrChord( _ aSender: Any?) {
 //		chordSelectorWindowController?.selectIntervalSet();
 	}
 }
 
 extension ChordOrScaleSelectorViewController : NSBrowserDelegate {
 
-	func browser(_ aBrowser: NSBrowser, numberOfChildrenOfItem anItem: AnyObject?) -> Int {
+	func browser(_ aBrowser: NSBrowser, numberOfChildrenOfItem anItem: Any?) -> Int {
 		return (anItem as? ChordSelectorGroup)?.count ?? 0;
 	}
 
-	func browser(_ aBrowser: NSBrowser, child anIndex: Int, ofItem anItem: AnyObject?) -> AnyObject {
+	func browser(_ aBrowser: NSBrowser, child anIndex: Int, ofItem anItem: Any?) -> Any {
 		return ((anItem as? ChordSelectorGroup)?[anIndex])!;
 	}
 
-	func browser(_ aBrowser: NSBrowser, isLeafItem anItem: AnyObject?) -> Bool {
+	func browser(_ aBrowser: NSBrowser, isLeafItem anItem: Any?) -> Bool {
 		return (anItem as? ChordSelectorItem)?.isLeaf ?? false;
 	}
 
-	func browser(_ aBrowser: NSBrowser, objectValueForItem anItem: AnyObject?) -> AnyObject? {
+	func browser(_ aBrowser: NSBrowser, objectValueForItem anItem: Any?) -> Any? {
 		return (anItem as? ChordSelectorItem)?.name ?? "";
 	}
 
-	func rootItem(for aBrowser: NSBrowser) -> AnyObject? { return everyChordRoot; }
+	func rootItem(for aBrowser: NSBrowser) -> Any? { return everyChordRoot; }
 
-	func browser( _ browser: NSBrowser, previewViewControllerForLeafItem anItem: AnyObject ) -> NSViewController? {
+	func browser( _ browser: NSBrowser, previewViewControllerForLeafItem anItem: Any ) -> NSViewController? {
 		return (anItem as? ChordSelectorLeaf)?.previewViewControllerForLeafItem();
 	}
 

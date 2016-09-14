@@ -83,10 +83,10 @@ class WaveView: ResultView {
 					thePath.line(to: NSMakePoint(theX, theZeroAxis+theLen));
 				}
 				if i%8 == 4 {
-					drawText(string: "\(i/8 + 1)", size: NSFont.systemFontSize(for: NSControlSize.regular)*1.25, point: NSMakePoint(theX-6.0,20.0), color:NSColor.darkGray(), textAlignment:.center );
+					drawText(string: "\(i/8 + 1)", size: NSFont.systemFontSize(for: NSControlSize.regular)*1.25, point: NSMakePoint(theX-6.0,20.0), color:NSColor.darkGray, textAlignment:.center );
 				}
 			}
-			NSColor.darkGray().setStroke();
+			NSColor.darkGray.setStroke();
 			thePath.stroke();
 		}
 

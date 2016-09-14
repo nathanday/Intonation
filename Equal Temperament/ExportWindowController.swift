@@ -74,6 +74,8 @@ class ExportWindowController: NSWindowController {
 			return selectedExportMethod == .binary;
 		}
 	}
+	dynamic var outputSelectedInterval : Bool = false;
+	dynamic var textOutputDelimiter : String = "\\t";
 
 	func showAsSheet(parentWindow aWindow: NSWindow ) {
 		referenceToSelf = self;
@@ -96,12 +98,29 @@ class ExportWindowController: NSWindowController {
     override func windowDidLoad() {
         super.windowDidLoad()
     }
-    
-	@IBAction func nextAction( _ aSender: AnyObject? ) {
+
+	@IBAction func selectPresetDelimiter( _ aSender: NSMenuItem? ) {
+		switch aSender!.tag {
+		case 9:
+			textOutputDelimiter = "\\t";
+			break;
+		case 10:
+			textOutputDelimiter = "\\n";
+			break;
+		case 44:
+			textOutputDelimiter = ",";
+			break;
+		default:
+			assertionFailure("Unexpect tag \(aSender!.tag)");
+			break;
+		}
+	}
+
+	@IBAction func nextAction( _ aSender: Any? ) {
 		window!.parent?.endSheet(window!, returnCode:NSModalResponseContinue);
 	}
 
-	@IBAction func cancelAction( _ aSender: AnyObject? ) {
+	@IBAction func cancelAction( _ aSender: Any? ) {
 		window!.parent!.endSheet(window!);
 	}
 }

@@ -12,7 +12,7 @@ class StackedIntervalsIntervalsData : IntervalsData {
 	override init() {
 		super.init();
 	}
-	override init?(propertyList aPropertyList: [String:AnyObject] ) {
+	override init?(propertyList aPropertyList: [String:Any] ) {
 		super.init(propertyList:aPropertyList);
 		if let theEntries = aPropertyList["stackedIntervals"] as? [[String:String]] {
 			for theEntry in theEntries{
@@ -22,7 +22,7 @@ class StackedIntervalsIntervalsData : IntervalsData {
 			}
 		}
 	}
-	override var propertyListValue : [String:AnyObject] {
+	override var propertyListValue : [String:Any] {
 		var		theResult = super.propertyListValue;
 		var		theStackedIntervalsPropertyList = [[String:String]]();
 		for theEntry in stackedIntervals {

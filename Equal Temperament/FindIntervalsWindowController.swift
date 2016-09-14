@@ -34,7 +34,8 @@ class FindIntervalsViewController: NSViewController {
 				for theString in ratiosString.components(separatedBy: CharacterSet(charactersIn:":∶ ")) {
 					if theString.contains("/") {
 						let		theComponents = theString.components(separatedBy: "/");
-						if let theNumerator = Double(theComponents[0]), theDenominator = Double(theComponents[1]) {
+						if let theNumerator = Double(theComponents[0]),
+							let theDenominator = Double(theComponents[1]) {
 							if theNumerator != 0.0 && theDenominator != 0.0 {
 								theResult.append(theNumerator/theDenominator);
 							}
@@ -55,7 +56,7 @@ class FindIntervalsViewController: NSViewController {
 			} else if theComponents.count == 2 && isInteger(theComponents[0]) && isInteger(theComponents[1]) && theComponents[0] > theComponents[1] {
 				theResult.append(RationalInterval( Int(theComponents[0]), Int(theComponents[1])));
 			} else if theComponents.count > 0 {
-				let		theBase : Double = theComponents[0] ?? 1.0;
+				let		theBase : Double = theComponents[0];
 				for theEnumValue in theComponents {
 					var		theValue = theEnumValue;
 					while theValue < theBase {		// if a value is less than base then we need to move it n octaves
@@ -119,28 +120,28 @@ class FindIntervalsViewController: NSViewController {
 		return theSearchMenu;
 	}
 
-	@IBAction override func dismiss( _ aSender: AnyObject? ) { hidden = true; }
+	@IBAction override open func dismiss( _ aSender: Any? ) { hidden = true; }
 
-	@IBAction func find( _ aSender: AnyObject? ) {
+	@IBAction func find( _ aSender: Any? ) {
 		performFindEntries();
 	}
 
-	@IBAction func findMethodClosestAction( _ aSender: AnyObject? ) {
+	@IBAction func findMethodClosestAction( _ aSender: Any? ) {
 		findMethod = .findMethodClosest;
 		performFindEntries();
 	}
 
-	@IBAction func findMethodExactAction( _ aSender: AnyObject? ) {
+	@IBAction func findMethodExactAction( _ aSender: Any? ) {
 		findMethod = .findMethodExact;
 		performFindEntries();
 	}
 
-	@IBAction func searchValueHasRootChangedAction( _ aSender: AnyObject? ) {
+	@IBAction func searchValueHasRootChangedAction( _ aSender: Any? ) {
 		searchValueHaseRoot = !searchValueHaseRoot;
 		performFindEntries();
 	}
 
-	@IBAction func searchTransposeToFitChangedAction( _ aSender: AnyObject? ) {
+	@IBAction func searchTransposeToFitChangedAction( _ aSender: Any? ) {
 		searchTransposeToFit = !searchTransposeToFit;
 		performFindEntries();
 	}

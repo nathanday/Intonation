@@ -17,7 +17,7 @@ class IntervalSet : Sequence {
 		name = aName;
 	}
 
-	convenience init?( propertyList aPropertyList: [String:AnyObject] ) {
+	convenience init?( propertyList aPropertyList: [String:Any] ) {
 		if let theName = aPropertyList["name"] as? String {
 			self.init( name: theName );
 		} else {

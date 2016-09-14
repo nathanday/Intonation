@@ -110,9 +110,9 @@ class DisclosureView : NSView {
 		super.setContentHuggingPriority(aPriority, for: anOrientation);
 	}
 
-	@IBAction func colapse( _ aSender : AnyObject? ) { colapsed = true; }
-	@IBAction func expand( _ aSender : AnyObject? ) { colapsed = false; }
-	@IBAction func toggle( _ aSender : AnyObject? ) { colapsed = !colapsed; }
+	@IBAction func colapse( _ aSender : Any? ) { colapsed = true; }
+	@IBAction func expand( _ aSender : Any? ) { colapsed = false; }
+	@IBAction func toggle( _ aSender : Any? ) { colapsed = !colapsed; }
 
 //	override func drawRect(aDirtyRect: NSRect) {
 //		NSColor(calibratedRed: 0.5, green: 0.75, blue: 1.0, alpha: 1.0).setFill();

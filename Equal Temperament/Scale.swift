@@ -20,9 +20,9 @@ class Scale : IntervalSet {
 		_everyInterval = anElements.sorted { (a:Interval, b:Interval) -> Bool in return a < b; };
 		super.init( name: aName );
 	}
-	convenience init?( propertyList aPropertyList: [String:AnyObject] ) {
+	convenience init?( propertyList aPropertyList: [String:Any] ) {
 		if let theName = aPropertyList["name"] as? String,
-			theEveryInterval = aPropertyList["everyInterval"] as? [[String:AnyObject]] {
+			let theEveryInterval = aPropertyList["everyInterval"] as? [[String:Any]] {
 			var		theIntervals = [Interval]();
 			for theIntervalPropertyList in theEveryInterval {
 				if let theInterval = Interval.from(propertyList:theIntervalPropertyList) {

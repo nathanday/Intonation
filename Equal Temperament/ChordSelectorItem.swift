@@ -9,7 +9,7 @@
 import Cocoa
 
 class ChordSelectorItem : NSObject {
-	class func chordSelectorItemsForPropertyList( _ aPropertyList: [[String:AnyObject]] ) -> [ChordSelectorItem] {
+	class func chordSelectorItemsForPropertyList( _ aPropertyList: [[String:Any]] ) -> [ChordSelectorItem] {
 		var		theResult : [ChordSelectorItem] = [];
 		for theData in aPropertyList {
 			if let theItem = chordSelectorItemForPropertyList( theData ) {
@@ -18,7 +18,7 @@ class ChordSelectorItem : NSObject {
 		}
 		return theResult;
 	}
-	class func chordSelectorItemForPropertyList( _ aPropertyList: [String:AnyObject] ) -> ChordSelectorItem? {
+	class func chordSelectorItemForPropertyList( _ aPropertyList: [String:Any] ) -> ChordSelectorItem? {
 		var		theResult : ChordSelectorItem? = nil;
 		if let theName = aPropertyList["name"] as? String {
 			if let theKind = aPropertyList["kind"] as? Int {
@@ -36,7 +36,7 @@ class ChordSelectorItem : NSObject {
 					}
 				}
 			}
-			else if let theChildren = aPropertyList["everyChild"] as? [[String:AnyObject]] {
+			else if let theChildren = aPropertyList["everyChild"] as? [[String:Any]] {
 				theResult = ChordSelectorGroup(name:theName, children:chordSelectorItemsForPropertyList(theChildren));
 			}
 			else {
@@ -124,9 +124,9 @@ class ChordSelectorGroup : ChordSelectorItem, MutableCollection {
 class RootChordSelectorGroup : ChordSelectorGroup {
 	init() {
 		super.init(name:"root");
-		if let theURL = Bundle.main.urlForResource("PresetChordsAndScales", withExtension: "plist"),
-			theChordData = NSArray(contentsOf: theURL) {
-			everyChild = ChordSelectorItem.chordSelectorItemsForPropertyList( theChordData as! [[String : AnyObject]] );
+		if let theURL = Bundle.main.url(forResource:"PresetChordsAndScales", withExtension: "plist"),
+			let theChordData = NSArray(contentsOf: theURL) {
+			everyChild = ChordSelectorItem.chordSelectorItemsForPropertyList( theChordData as! [[String : Any]] );
 		}
 	}
 }

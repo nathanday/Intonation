@@ -9,8 +9,8 @@
 import Foundation
 
 struct Rational : CustomStringConvertible, CustomDebugStringConvertible, Hashable {
-	private(set) var	numerator:		Int;
-	private(set) var	denominator:	Int;
+	internal(set) var	numerator:		Int;
+	internal(set) var	denominator:	Int;
 	var toDouble:		Double { return Double(numerator)/Double(denominator); }
 	var toCents:		Double { return toDouble.toCents; }
 	var toFloat:		Float { return Float(numerator)/Float(denominator); }
@@ -48,6 +48,9 @@ struct Rational : CustomStringConvertible, CustomDebugStringConvertible, Hashabl
 			return nil;
 		}
 	}
+	init( _ aTuple: (numerator:Int,denominator:Int) ) {
+		self.init(aTuple.numerator,aTuple.denominator);
+	}
 
 	func numeratorForDenominator( _ aDenominator: Int ) -> Int? {
 		return aDenominator != 0 && aDenominator%denominator == 0 ? numerator*(aDenominator/denominator) : nil;
@@ -69,7 +72,7 @@ struct Rational : CustomStringConvertible, CustomDebugStringConvertible, Hashabl
 	}
 }
 
-extension Rational : ArrayLiteralConvertible, IntegerLiteralConvertible, FloatLiteralConvertible {
+extension Rational : ExpressibleByArrayLiteral, ExpressibleByIntegerLiteral, ExpressibleByFloatLiteral {
 	static func convertFromArrayLiteral( anElements: Int...) -> Rational {
 		var     theNumerator : Int! = nil;
 		var     theDenominator : Int! = nil;
@@ -88,22 +91,93 @@ extension Rational : ArrayLiteralConvertible, IntegerLiteralConvertible, FloatLi
 		self.init( elements[0], elements[1] );
 	}
 	init(integerLiteral aNumerator:Int) {
-		numerator = aNumerator;
-		denominator = 1;
+		self.init( aNumerator, 1 );
 	}
 	init(floatLiteral aValue: FloatLiteralType) { self.init( aValue, maxDenominator:UInt.max ); }
 	static func convertFromFloatLiteral( aValue: FloatLiteralType) -> Rational { return Rational( aValue, maxDenominator:UInt.max ); }
 }
 
 extension Rational : FloatingPoint, Equatable, SignedNumber {
+	public mutating func addProduct(_ l: Rational, _ r: Rational) {
+		numerator = numerator*l.denominator*r.denominator + denominator*l.numerator*r.numerator;
+		denominator = denominator*l.denominator*r.denominator;
+	}
+
+	public func rounded(_ aRule: FloatingPointRoundingRule) -> Rational {
+		var		theResult = Rational(self);
+		theResult.round(aRule);
+		return theResult;
+	}
+
+	public mutating func round(_ aRule: FloatingPointRoundingRule) {
+		switch aRule {
+		case .awayFromZero:
+			numerator > 0 ? self.round(.up) : self.round(.down);
+		case .down:
+			numerator = numerator/denominator;
+			denominator = 1;
+		case .toNearestOrAwayFromZero:
+			numerator = (numerator+numerator%denominator)/denominator;
+			denominator = 1;
+		case .toNearestOrEven:
+			numerator = (numerator+denominator-1)/denominator;
+			denominator = 1;
+		case .towardZero:
+			numerator > 0 ? self.round(.down) : self.round(.up);
+		case .up:
+			numerator = (numerator+denominator-1)/denominator;
+			denominator = 1;
+		}
+	}
+
+	public mutating func formSquareRoot() {
+		(numerator,denominator) = Rational.farey( self.toDouble, maxDenominator:UInt.max );
+	}
+
+	/// Replaces this value with the remainder of itself divided by the given
+	/// value using truncating division.
+	///
+	/// Performing truncating division with floating-point values results in a
+	/// truncated integer quotient and a remainder. For values `x` and `y` and
+	/// their truncated integer quotient `q`, the remainder `r` satisfies
+	/// `x == y * q + r`.
+	///
+	/// The following example calculates the truncating remainder of dividing
+	/// 8.625 by 0.75:
+	///
+	///     var x = 8.625
+	///     print(x / 0.75)
+	///     // Prints "11.5"
+	///
+	///     let q = (x / 0.75).rounded(.towardZero)
+	///     // q == 11.0
+	///     x.formTruncatingRemainder(dividingBy: 0.75)
+	///     // x == 0.375
+	///
+	///     let x1 = 0.75 * q + x
+	///     // x1 == 8.625
+	///
+	/// If this value and `other` are both finite numbers, the truncating
+	/// remainder has the same sign as `other` and is strictly smaller in
+	/// magnitude. The `formtruncatingRemainder(dividingBy:)` method is always
+	/// exact.
+	///
+	/// - Parameter other: The value to use when dividing this value.
+	///
+	/// - SeeAlso: `truncatingRemainder(dividingBy:)`,
+	///   `formRemainder(dividingBy:)`
+	public mutating func formTruncatingRemainder(dividingBy anOther: Rational) {
+//		code
+	}
+
 	typealias Exponent = Int32;
 	typealias _BitsType = (Int,Int);
+	typealias Magnitude = UInt32;
 	static func _fromBitPattern( aBits: _BitsType) -> Rational { return Rational(aBits.0,aBits.1); }
 	func _toBitPattern() -> _BitsType { return (numerator,denominator); }
 
 	init(sign: FloatingPointSign, exponent: Rational.Exponent, significand: Rational) {
-		numerator = sign != significand.sign ? -significand.numerator : significand.numerator;
-		denominator = significand.denominator;
+		self.init( sign != significand.sign ? -significand.numerator : significand.numerator, significand.denominator );
 	}
 
 	init(signOf: Rational, magnitudeOf: Rational) {
@@ -111,53 +185,43 @@ extension Rational : FloatingPoint, Equatable, SignedNumber {
 	}
 
 	init(_ aValue: UInt8) {
-		numerator = Int(aValue);
-		denominator = 1;
+		self.init(Int(aValue),1);
 	}
 
 	init(_ aValue: Int8) {
-		numerator = Int(aValue);
-		denominator = 1;
+		self.init(Int(aValue),1);
 	}
 
 	init(_ aValue: UInt16) {
-		numerator = Int(aValue);
-		denominator = 1;
+		self.init(Int(aValue),1);
 	}
 
 	init(_ aValue: Int16) {
-		numerator = Int(aValue);
-		denominator = 1;
+		self.init(Int(aValue),1);
 	}
 
 	init(_ aValue: UInt32) {
-		numerator = Int(aValue);
-		denominator = 1;
+		self.init(Int(aValue),1);
 	}
 
 	init(_ aValue: Int32) {
-		numerator = Int(aValue);
-		denominator = 1;
+		self.init(Int(aValue),1);
 	}
 
 	init(_ aValue: UInt64) {
-		numerator = Int(aValue);
-		denominator = 1;
+		self.init(Int(aValue),1);
 	}
 
 	init(_ aValue: Int64) {
-		numerator = Int(aValue);
-		denominator = 1;
+		self.init(Int(aValue),1);
 	}
 
 	init(_ aValue: UInt) {
-		numerator = Int(aValue);
-		denominator = 1;
+		self.init(Int(aValue),1);
 	}
 
 	init(_ aValue: Int) {
-		numerator = Int(aValue);
-		denominator = 1;
+		self.init(Int(aValue),1);
 	}
 
 	static func farey( _ aValue: Double, maxDenominator aMaxDenom: UInt, maxError aMaxError: Double = 0.0 ) -> (numerator:Int,denominator:Int) {
@@ -202,11 +266,11 @@ extension Rational : FloatingPoint, Equatable, SignedNumber {
 	}
 
 	init(_ aValue: Double, maxDenominator aMaxDenom: UInt ) {
-		(numerator,denominator) = Rational.farey( aValue, maxDenominator:aMaxDenom );
+		self.init(Rational.farey( aValue, maxDenominator:aMaxDenom ));
 	}
 
 	init(_ aValue: Float, maxDenominator aMaxDenom: UInt ) {
-		(numerator,denominator) = Rational.farey( Double(aValue), maxDenominator:aMaxDenom );
+		self.init(Rational.farey( Double(aValue), maxDenominator:aMaxDenom ));
 	}
 
 	static var radix: Int { return 2; }
@@ -217,7 +281,13 @@ extension Rational : FloatingPoint, Equatable, SignedNumber {
 
 	static var greatestFiniteMagnitude: Rational { return Rational(Int.max,1); }
 
-	static var pi: Rational { return Rational(3373259426,1073741824); }
+	static var pi: Rational {
+#if arch(x86_64) || arch(arm64)
+		return Rational(7244019458077122842,2305843009213693951);
+#else
+		return Rational(1686629713,536870912);
+#endif
+	}
 
 	var ulp: Rational { return Rational(1,Int.max); }
 
@@ -271,7 +341,7 @@ extension Rational : FloatingPoint, Equatable, SignedNumber {
 		denominator *= other.denominator;
 	}
 
-	func divided(by other: Rational) -> Rational { return Rational(numerator*other.denominator,denominator*other.numerator); }
+	func divided(dividingBy other: Rational) -> Rational { return Rational(numerator*other.denominator,denominator*other.numerator); }
 
 	mutating func divide(by other: Rational) {
 		numerator *= other.denominator;
@@ -290,12 +360,12 @@ extension Rational : FloatingPoint, Equatable, SignedNumber {
 	/// `truncatingRemainder` is always exact.
 	func truncatingRemainder(dividingBy anOther: Rational) -> Rational {
 		var		theResult = Rational(self);
-		theResult.formTruncatingRemainder( dividingBy: anOther );
+		theResult.formRemainder( dividingBy: anOther );
 		return theResult;
 	}
 
 	/// Mutating form of `truncatingRemainder`.
-	mutating func formTruncatingRemainder(dividingBy anOther: Rational) {
+	mutating func formRemainder(dividingBy anOther: Rational) {
 		while self > anOther {
 			subtract(anOther);
 		}
@@ -351,7 +421,7 @@ extension Rational : FloatingPoint, Equatable, SignedNumber {
 		return numerator*other.denominator <= other.numerator*denominator;
 	}
 
-	func isTotallyOrdered(below other: Rational) -> Bool {
+	func isTotallyOrdered(belowOrEqualTo other: Rational) -> Bool {
 		return numerator*other.denominator < other.numerator*denominator;
 	}
 
@@ -413,7 +483,7 @@ extension String {
 			}
 		default:
 			if let theNum = Int(theComponents[0]),
-					theDenom = Int(theComponents[0]) {
+				let theDenom = Int(theComponents[0]) {
 				theResult = Rational( theNum, theDenom );
 			}
 		}

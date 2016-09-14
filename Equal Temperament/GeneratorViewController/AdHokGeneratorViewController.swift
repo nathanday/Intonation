@@ -35,18 +35,18 @@ class AdHokGeneratorViewController: GeneratorViewController {
 		}
 	}
 
-	@IBAction func addAdHocIntervalAction( _ aSender: AnyObject ) {
+	@IBAction func addAdHocIntervalAction( _ aSender: Any ) {
 		if let theInterval = adHocInterval {
 			addInterval(theInterval);
 		}
 	}
 
-	@IBAction func delete( _ aSender: AnyObject?) {
+	@IBAction func delete( _ aSender: Any?) {
 		if let theDocument = document {
 			removeIntervals(theDocument.selectedJustIntonationIntervals);
 		}
 	}
-	@IBAction func paste( _ aSender: AnyObject ) {
+	@IBAction func paste( _ aSender: Any ) {
 		let		theEntries = NSPasteboard.general().readObjects(forClasses: [EqualTemperamentEntry.self], options: nil) as? [EqualTemperamentEntry];
 		NSLog( "\(theEntries)" );
 	}

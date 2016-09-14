@@ -71,12 +71,12 @@ class HarmonicView: ResultView {
 
 	final private func updateOctaveRange() {
 		var		theOctaveStart : UInt = 0;
-		var		theOctaveEnd : UInt = 1;
+		var		theOctaveEnd : UInt = 0;
 		let		theCommonFactor = commonFactor;
 		if let theFirst = selectedRatios.first {
 			theOctaveStart = theCommonFactor > 1 ? HarmonicView.octaveForHarmonic(UInt(theCommonFactor)) : 0;
 			if let theNum = theFirst.numeratorForDenominator(theCommonFactor) {
-				theOctaveEnd = theNum > 0 ? HarmonicView.octaveForHarmonic(UInt(theNum)) : 1;
+				theOctaveEnd = theNum > 0 ? HarmonicView.octaveForHarmonic(UInt(theNum)) : 0;
 			}
 			else {
 				theOctaveEnd = theOctaveStart;
@@ -125,14 +125,14 @@ class HarmonicView: ResultView {
 			let		theSize = NSFont.systemFontSize(for: NSControlSize.regular)*1.25;
 			let		theOctaveHeight = NSHeight(theBounds)/CGFloat(lengthForRange(octaveRange));
 			let		theY = floor((CGFloat(anOctave-octaveRange.first!)+0.5) * theOctaveHeight+NSMinY(theBounds));
-			drawText(string: "\(anOctave+1)", size:theSize, point: NSMakePoint(theXOrigin-2.5, theY-theSize*0.55), color: NSColor.darkGray());
+			drawText(string: "\(anOctave+1)", size:theSize, point: NSMakePoint(theXOrigin-2.5, theY-theSize*0.55), color: NSColor.darkGray);
 			let		thePath = NSBezierPath();
 			thePath.lineWidth = 0.5;
 			thePath.move(to: NSMakePoint(theXOrigin+3.5, theY+theOctaveHeight/2.0-5.0));
 			thePath.line(to: NSMakePoint(theXOrigin+3.5, theY+theSize*0.75));
 			thePath.move(to: NSMakePoint(theXOrigin+3.5, theY-theSize*0.45));
 			thePath.line(to: NSMakePoint(theXOrigin+3.5, theY-theOctaveHeight/2.0+5.0));
-			NSColor.darkGray().setStroke();
+			NSColor.darkGray.setStroke();
 			thePath.lineCapStyle = NSLineCapStyle.roundLineCapStyle
 			thePath.stroke()
 		}
@@ -156,15 +156,15 @@ class HarmonicView: ResultView {
 				thePath.lineWidth = 1.0;
 				if (aHarmonic)%4 == 0 {
 					thePath.line(to: NSMakePoint(theXOrigin+58.0, floor(theY*2.0)*0.5+0.25));
-					NSColor.darkGray().setStroke();
+					NSColor.darkGray.setStroke();
 				}
 				else if (aHarmonic)%2 == 0 {
 					thePath.line(to: NSMakePoint(theXOrigin+54.0, floor(theY*2.0)*0.5+0.25));
-					NSColor.gray().setStroke();
+					NSColor.gray.setStroke();
 				}
 				else {
 					thePath.line(to: NSMakePoint(theXOrigin+50.0, floor(theY*2.0)*0.5+0.25));
-					NSColor.lightGray().setStroke();
+					NSColor.lightGray.setStroke();
 				}
 			}
 			thePath.stroke()

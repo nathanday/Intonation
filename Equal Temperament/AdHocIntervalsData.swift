@@ -13,7 +13,7 @@ class AdHocIntervalsData : IntervalsData {
 		adHocEntries = Set<Interval>();
 		super.init();
 	}
-	override init?(propertyList aPropertyList: [String:AnyObject] ) {
+	override init?(propertyList aPropertyList: [String:Any] ) {
 		adHocEntries = Set<Interval>();
 		guard let theOddLimit = aPropertyList["adHoc"] as? [String] else {
 			return nil;
@@ -25,7 +25,7 @@ class AdHocIntervalsData : IntervalsData {
 		}
 		super.init(propertyList:aPropertyList);
 	}
-	override var propertyListValue : [String:AnyObject] {
+	override var propertyListValue : [String:Any] {
 		var		theResult = super.propertyListValue;
 		var		theEntires = [String]();
 		for theInterval in adHocEntries {

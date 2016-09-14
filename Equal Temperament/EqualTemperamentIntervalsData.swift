@@ -10,18 +10,24 @@ import Cocoa
 
 class EqualTemperamentIntervalsData : IntervalsData {
 	override init() {
-		degrees = UInt(UserDefaults.standard.integer(forKey: "degrees")) ?? 12;
+		degrees = UInt(UserDefaults.standard.integer(forKey: "degrees"));
+		if( degrees == 0 ) {
+			degrees = 12;
+		}
 		interval = UserDefaults.standard.rationalIntervalForKey("interval") ?? RationalInterval(2);
 		super.init();
 	}
-	override init?(propertyList aPropertyList: [String:AnyObject] ) {
+	override init?(propertyList aPropertyList: [String:Any] ) {
 		guard let theProperties = aPropertyList["equalTemperament"] as? [String:String] else {
 			return nil;
 		}
 		if let theDegreesString = theProperties["degrees"] {
 			degrees = UInt(theDegreesString) ?? 12;
 		} else {
-			degrees = UInt(UserDefaults.standard.integer(forKey: "degrees")) ?? 12;
+			degrees = UInt(UserDefaults.standard.integer(forKey: "degrees"));
+			if( degrees == 0 ) {
+				degrees = 12;
+			}
 		}
 		if let theIntervalString = theProperties["interval"] {
 			interval = RationalInterval.from(string:theIntervalString) ?? RationalInterval(2,1);
@@ -30,7 +36,7 @@ class EqualTemperamentIntervalsData : IntervalsData {
 		}
 		super.init(propertyList:aPropertyList);
 	}
-	override var propertyListValue : [String:AnyObject] {
+	override var propertyListValue : [String:Any] {
 		var		theResult = super.propertyListValue;
 		theResult["limits"] = [
 			"degrees":"\(degrees)",

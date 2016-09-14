@@ -55,7 +55,7 @@ class MainWindowController : NSWindowController {
 		document?.addObserver(self, forKeyPath: "selectedIndicies", options: NSKeyValueObservingOptions.new, context: nil);
 	}
 
-	override func observeValue( forKeyPath aKeyPath: String?, of anObject: AnyObject?, change aChange: [NSKeyValueChangeKey : AnyObject]?, context aContext: UnsafeMutablePointer<Void>?) {
+	override func observeValue( forKeyPath aKeyPath: String?, of anObject: Any?, change aChange: [NSKeyValueChangeKey : Any]?, context aContext: UnsafeMutableRawPointer?) {
 		if let theDocument = document as? Document {
 			if anObject as? Document == theDocument {
 				if aKeyPath == "everyInterval" {
@@ -118,7 +118,7 @@ class MainWindowController : NSWindowController {
 
 	private func updateChordRatioTitle( ) {
 		if let theHarmonicTitleTextField = harmonicTitleTextField,
-			theFactorsSumTitleTextField = factorsSumTitleTextField {
+			let theFactorsSumTitleTextField = factorsSumTitleTextField {
 			if selectedJustIntonationIntervals.count > 1 {
 				var		theRatiosString : String = "";
 				var		theFactorsString : String = "";
@@ -131,7 +131,7 @@ class MainWindowController : NSWindowController {
 				}
 				for theRatio in selectedJustIntonationIntervals {
 					if let theRationalInterval = theRatio as? RationalInterval,
-						theValue = theRationalInterval.ratio.numeratorForDenominator(theCommonFactor) {
+						let theValue = theRationalInterval.ratio.numeratorForDenominator(theCommonFactor) {
 							let		theFactors = UInt(theValue).factorsString;
 							if theRatiosString.startIndex == theRatiosString.endIndex {
 								theRatiosString = "\(theValue)"
@@ -185,16 +185,16 @@ class MainWindowController : NSWindowController {
 		}
 	}
 
-	@IBAction func copy( _ aSender: AnyObject ) {
+	@IBAction func copy( _ aSender: Any ) {
 		if let theEntries = arrayController!.selectedObjects as? [EqualTemperamentEntry] {
 			NSPasteboard.general().clearContents();
 			NSPasteboard.general().writeObjects( theEntries );
 		}
 	}
 
-	@IBAction func copyCentsAction( _ aSender: AnyObject ) {
+	@IBAction func copyCentsAction( _ aSender: Any ) {
 		NSPasteboard.general().clearContents();
-		NSPasteboard.general().writeObjects( (arrayController!.selectedObjects as! [EqualTemperamentEntry]).map { return "\($0.toCents)"; } );
+		NSPasteboard.general().writeObjects( (arrayController!.selectedObjects as! [EqualTemperamentEntry]).map { return "\($0.toCents)" as NSString; } );
 	}
 
 	@IBAction func baseFrequencyDeltaChanged( _ aSender: NSSlider ) {
@@ -229,7 +229,7 @@ class MainWindowController : NSWindowController {
 		previousBaseFrequencyDelta = theBaseFrequencyDelta;
 	}
 	
-	@IBAction func playLastMethod( _ aSender: AnyObject? ) {
+	@IBAction func playLastMethod( _ aSender: Any? ) {
 		if let theDocument = document as? Document {
 			theDocument.playUsingMethod( theDocument.currentlySelectedMethod ?? 0 );
 		}
@@ -241,33 +241,32 @@ class MainWindowController : NSWindowController {
 		}
 	}
 
-	@IBAction func showFindClosestIntervlAction( _ aSender: AnyObject? ) {
+	@IBAction func showFindClosestIntervlAction( _ aSender: Any? ) {
 		findIntervalsViewController!.showView()
 	}
 
 	@IBAction func selectMIDINoteForBaseFrequencyAction( _ aSender : NSPopUpButton? ) {
 		if let theDocument = document as? Document,
-			theSelectedIndex = aSender?.indexOfSelectedItem {
+			let theSelectedIndex = aSender?.indexOfSelectedItem {
 			theDocument.baseFrequency = frequencyForMIDINote(theSelectedIndex-1+MainWindowController.midiSelectBounds.lowerBound);
 		}
 	}
 
-	@IBAction func paste( _ aSender: AnyObject ) {
+	@IBAction func paste( _ aSender: Any ) {
 		if let theViewController = self.documentTypeViewController as? AdHokGeneratorViewController,
-		theEntries = NSPasteboard.general().readObjects(forClasses: [EqualTemperamentEntry.self], options: nil) as? [EqualTemperamentEntry] {
+			let theEntries = NSPasteboard.general().readObjects(forClasses: [EqualTemperamentEntry.self], options: nil) as? [EqualTemperamentEntry] {
 			theViewController.addIntervals( theEntries.map { return $0.interval; } );
 		}
 	}
-	@IBAction func delete( _ aSender: AnyObject) {
+	@IBAction func delete( _ aSender: Any) {
 		if let theViewController = self.documentTypeViewController as? AdHokGeneratorViewController,
-			theSelectedObjects = arrayController?.selectedObjects as? [EqualTemperamentEntry] {
+			let theSelectedObjects = arrayController?.selectedObjects as? [EqualTemperamentEntry] {
 			theViewController.removeIntervals( theSelectedObjects.map { return $0.interval; } );
 		}
 	}
-	@IBAction func exportAction( _ aSender: AnyObject? ) {
+	@IBAction func exportAction( _ aSender: Any? ) {
 		let		theExportWindowController = ExportWindowController(document:self.document as! Document);
 		theExportWindowController.completionBlock = {
-			
 		}
 		theExportWindowController.showAsSheet(parentWindow: self.window! );
 	}
@@ -330,7 +329,7 @@ extension MainWindowController : NSTableViewDelegate {
 
 	func tableViewSelectionDidChange(_ notification: Notification) {
 		if let theSelectedEntries = arrayController!.selectedObjects as? [EqualTemperamentEntry],
-			theDocument = document as? Document {
+			let theDocument = document as? Document {
 			theDocument.selectedEqualTemperamentEntry = theSelectedEntries
 		}
 	}

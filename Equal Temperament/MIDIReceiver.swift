@@ -80,7 +80,7 @@ class MIDIReceiver {
 			setUp();
 		}
 
-		func midiInputBlock(_ packetList: UnsafePointer<MIDIPacketList>, srcConnRefCon: UnsafeMutablePointer<Swift.Void>?) -> Swift.Void
+		func midiInputBlock(_ packetList: UnsafePointer<MIDIPacketList>, srcConnRefCon: UnsafeMutableRawPointer?) -> Swift.Void
 		{
 			let packets: MIDIPacketList = packetList.pointee
 			var packet: MIDIPacket = packets.packet
@@ -130,9 +130,9 @@ class MIDIReceiver {
 //			print("[\(theIndex)] : \(theEndPointName[theIndex]) (\(theRef))")
 //		}
 //
-		theStatus = MIDIClientCreateWithBlock(clientName, &midiClientRef, midiNotifyBlock);
+		theStatus = MIDIClientCreateWithBlock(clientName as CFString, &midiClientRef, midiNotifyBlock);
 		precondition( theStatus == OSStatus(noErr), "Status \(theStatus)" );
-		theStatus = MIDIInputPortCreateWithBlock( midiClientRef, "\(clientName) port", &inputPortRef, midiInputBlock );
+		theStatus = MIDIInputPortCreateWithBlock( midiClientRef, "\(clientName) port" as CFString, &inputPortRef, midiInputBlock );
 		precondition( theStatus == OSStatus(noErr), "Status \(theStatus)" );
 
 		for i in 0..<theMidiNumberOfSources {

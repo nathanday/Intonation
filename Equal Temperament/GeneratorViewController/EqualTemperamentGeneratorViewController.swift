@@ -28,7 +28,7 @@ class EqualTemperamentGeneratorViewController: GeneratorViewController {
 		(document!.intervalsData as! EqualTemperamentIntervalsData).removeObserver(self, forKeyPath:"interval");
 	}
 
-	override func observeValue( forKeyPath aKeyPath: String?, of anObject: AnyObject?, change aChange: [NSKeyValueChangeKey : AnyObject]?, context aContext: UnsafeMutablePointer<Void>?) {
+	override func observeValue(forKeyPath aKeyPath: String?, of anObject: Any?, change aChange: [NSKeyValueChangeKey : Any]?, context aContext: UnsafeMutableRawPointer?) {
 		if anObject as? IntervalsData == document!.intervalsData {
 			if let theKey = aKeyPath {
 				if theKey == "degrees" {
@@ -53,7 +53,7 @@ class EqualTemperamentGeneratorViewController: GeneratorViewController {
 
 	var intervalString : String {
 		get {
-			return (document!.intervalsData as! EqualTemperamentIntervalsData).interval.ratio.ratioString ?? "";
+			return (document!.intervalsData as! EqualTemperamentIntervalsData).interval.ratio.ratioString;
 		}
 		set {
 			if let theValue = RationalInterval.from(string:newValue) {

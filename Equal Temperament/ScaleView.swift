@@ -11,7 +11,7 @@ import Cocoa
 let		π = M_PI;
 
 class ScaleView : ResultView {
-	static let		equalTempGradient: NSGradient? = NSGradient(starting: NSColor.lightGray(), ending: NSColor(calibratedWhite:0.9, alpha:1.0));
+	static let		equalTempGradient: NSGradient? = NSGradient(starting: NSColor.lightGray, ending: NSColor(calibratedWhite:0.9, alpha:1.0));
 	let		equalTempBarWidth : CGFloat = 20.0;
 	
 	var		numberOfIntervals : UInt = 12 {
@@ -145,7 +145,7 @@ class PitchConstellationView : ScaleView {
 
 		let		theAngle = (360.0+88.0-theStart) * CGFloat(π/180.0);
 		let		theSize = NSFont.systemFontSize(for: NSControlSize.small);
-		drawText(string: "\(aRatioNumber+1)", size:theSize, point: NSMakePoint(NSMidX(theBounds)+sin(theAngle)*(axisesRadius-9.0), NSMidY(theBounds)+cos(theAngle)*(axisesRadius-11.0)-theSize*0.8), color:NSColor.white(), textAlignment: .center );
+		drawText(string: "\(aRatioNumber+1)", size:theSize, point: NSMakePoint(NSMidX(theBounds)+sin(theAngle)*(axisesRadius-9.0), NSMidY(theBounds)+cos(theAngle)*(axisesRadius-11.0)-theSize*0.8), color:NSColor.white, textAlignment: .center );
 	}
 
 	override func drawNoEqualTemperament( ) {

@@ -84,13 +84,13 @@ class StackedIntervalsGeneratorViewController: GeneratorViewController {
 		return nil;
 	}
 
-	@IBAction func delete( _ aSender: AnyObject?) {
+	@IBAction func delete( _ aSender: Any?) {
 		if let theSelectedStackedIntervalSet = selectedStackedIntervalSet {
 			removeStackedIntervalSet(theSelectedStackedIntervalSet);
 		}
 	}
 
-	@IBAction func addStackIntervalAction( _ aSender: AnyObject ) {
+	@IBAction func addStackIntervalAction( _ aSender: Any ) {
 		if let theStackedIntervalSet = stackedIntervalSet {
 			addStackedIntervalSet(theStackedIntervalSet);
 		}
@@ -116,7 +116,7 @@ class StackedIntervalsGeneratorViewController: GeneratorViewController {
 		}
 	}
 
-	private func reloadStackedIntervalsTable() {
+	internal func reloadStackedIntervalsTable() {
 		_sortedStackIntervalSets = nil;
 		stackedIntervalsTableView.reloadData();
 	}
@@ -125,12 +125,12 @@ class StackedIntervalsGeneratorViewController: GeneratorViewController {
 extension StackedIntervalsGeneratorViewController : NSTableViewDataSource {
 
 	func numberOfRows(in tableView: NSTableView) -> Int {
-		return (document!.intervalsData as! StackedIntervalsIntervalsData).stackedIntervals.count ?? 0;
+		return (document?.intervalsData as? StackedIntervalsIntervalsData)!.stackedIntervals.count;
 	}
 
-	func tableView(_ aTable: NSTableView, objectValueFor aTableColumn: NSTableColumn?, row aRow: Int) -> AnyObject?
+	public func tableView(_ aTable: NSTableView, objectValueFor aTableColumn: NSTableColumn?, row aRow: Int) -> Any?
 	{
-		var		theResult : AnyObject?
+		var		theResult : Any?
 		if let theSortedStackIntervalSet = sortedStackIntervalSets?[aRow] {
 			if aTableColumn?.identifier == "interval" {
 				theResult = theSortedStackIntervalSet.interval.ratioString;
@@ -145,7 +145,7 @@ extension StackedIntervalsGeneratorViewController : NSTableViewDataSource {
 		return theResult;
 	}
 
-	func tableView(_ aTable: NSTableView, setObjectValue anObject: AnyObject?, for aTableColumn: NSTableColumn?, row aRow: Int) {
+	func tableView(_ aTable: NSTableView, setObjectValue anObject: Any?, for aTableColumn: NSTableColumn?, row aRow: Int) {
 		if let theSortedStackIntervalSet = sortedStackIntervalSets?[aRow] {
 			if aTableColumn?.identifier == "steps" {
 				if let theIntegerValue = anObject as? UInt {

@@ -62,10 +62,10 @@ class ExportGenerator {
 			switch wordSize {
 			case .size32:
 				var		theValue = Float32(theInterval.toDouble);
-				theData.append(&theValue, length: sizeof(Float32.self))
+				theData.append(&theValue, length: MemoryLayout<Float32>.size)
 			case .size64:
 				var		theValue = Float64(theInterval.toDouble);
-				theData.append(&theValue, length: sizeof(Float64.self))
+				theData.append(&theValue, length: MemoryLayout<Float64>.size)
 			}
 		}
 		return theData.write(to: aURL, atomically: true );

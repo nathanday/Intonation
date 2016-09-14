@@ -15,6 +15,29 @@ enum PlaybackType : Int {
 	case upDown;
 }
 
+func fastSin( _ aX: Double) -> Double
+{
+	//x is scaled 0<=x<4096
+	var		x = aX;
+	let		A = -0.0000000040319426317;
+	let		B = 216.83205691;
+	let		C = 0.000028463350538;
+	let		D = -0.0030774648337;
+	var		y : Double;
+
+	var		negate=false;
+	if( x > 2048.0 )
+	{
+		negate=true;
+		x -= 2048.0;
+	}
+	if( x > 1024.0 ) {
+		x = 2048.0 - x;
+	}
+	y = (A + x)/(B + C*x*x) + D*x;
+	return negate ? -y : y;
+}
+
 class Tone {
 	var				toneUnit : AudioComponentInstance?;
 	var				theta : Double = 0;
@@ -38,7 +61,7 @@ class Tone {
 			componentFlags: 0,
 			componentFlagsMask: 0);
 
-		func toneCallback( _ anInRefCon : UnsafeMutablePointer<Swift.Void>, anIOActionFlags: UnsafeMutablePointer<AudioUnitRenderActionFlags>, anInTimeStamp : UnsafePointer<AudioTimeStamp>, anInBusNumber: UInt32, anInNumberFrames: UInt32, anIOData: UnsafeMutablePointer<AudioBufferList>?) -> OSStatus {
+		func toneCallback( _ anInRefCon : UnsafeMutableRawPointer, anIOActionFlags: UnsafeMutablePointer<AudioUnitRenderActionFlags>, anInTimeStamp : UnsafePointer<AudioTimeStamp>, anInBusNumber: UInt32, anInNumberFrames: UInt32, anIOData: UnsafeMutablePointer<AudioBufferList>?) -> OSStatus {
 			let		theResult : OSStatus = kAudioServicesNoError;
 			if let theBuffer : AudioBuffer = anIOData?.pointee.mBuffers {
 				let		theSamples = UnsafeMutableBufferPointer<Float32>(theBuffer);
@@ -63,10 +86,10 @@ class Tone {
 
 		// Set our tone rendering function on the unit
 		//		var		theTonePlayer = self;
-		let		theSelf = UnsafeMutablePointer<Tone>(allocatingCapacity: 1);
-		theSelf.initialize(with: self);
+		let		theSelf = UnsafeMutablePointer<Tone>.allocate(capacity: 1);
+		theSelf.initialize(to: self);
 		var		theInput = AURenderCallbackStruct( inputProc: toneCallback, inputProcRefCon: theSelf );
-		err = AudioUnitSetProperty(theResult!, kAudioUnitProperty_SetRenderCallback, kAudioUnitScope_Input, 0, &theInput, UInt32(sizeof(AURenderCallbackStruct.self)));
+		err = AudioUnitSetProperty(theResult!, kAudioUnitProperty_SetRenderCallback, kAudioUnitScope_Input, 0, &theInput, UInt32(MemoryLayout<AURenderCallbackStruct>.size));
 
 		// Set the format to 32 bit, single channel, floating point, linear PCM
 		let		four_bytes_per_float : UInt32 = 4;
@@ -81,7 +104,7 @@ class Tone {
 			mBitsPerChannel: four_bytes_per_float * eight_bits_per_byte,
 			mReserved: 0);
 
-		err = AudioUnitSetProperty (theResult!, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, AudioUnitElement(0), &theStreamFormat, UInt32(sizeof(AudioStreamBasicDescription.self)) );
+		err = AudioUnitSetProperty (theResult!, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, AudioUnitElement(0), &theStreamFormat, UInt32(MemoryLayout<AudioStreamBasicDescription>.size) );
 
 		assert(err == noErr, "Error setting stream format: \(err)" );
 		err = AudioUnitInitialize(theResult!);
@@ -99,7 +122,7 @@ class Tone {
 			componentManufacturer: OSType(kAudioUnitManufacturer_Apple),
 			componentFlags: 0,
 			componentFlagsMask: 0);
-		func toneCallback( _ anInRefCon : UnsafeMutablePointer<Swift.Void>, anIOActionFlags: UnsafeMutablePointer<AudioUnitRenderActionFlags>, anInTimeStamp : UnsafePointer<AudioTimeStamp>, anInBusNumber: UInt32, anInNumberFrames: UInt32, anIOData: UnsafeMutablePointer<AudioBufferList>?) -> OSStatus {
+		func toneCallback( _ anInRefCon : UnsafeMutableRawPointer, anIOActionFlags: UnsafeMutablePointer<AudioUnitRenderActionFlags>, anInTimeStamp : UnsafePointer<AudioTimeStamp>, anInBusNumber: UInt32, anInNumberFrames: UInt32, anIOData: UnsafeMutablePointer<AudioBufferList>?) -> OSStatus {
 			let		theResult : OSStatus = kAudioServicesNoError;
 			if let theBuffer : AudioBuffer = anIOData?.pointee.mBuffers {
 				let		theSamples = UnsafeMutableBufferPointer<Float32>(theBuffer);
@@ -123,10 +146,10 @@ class Tone {
 
 		// Set our tone rendering function on the unit
 		//		var		theTonePlayer = self;
-		let		theSelf = UnsafeMutablePointer<Tone>(allocatingCapacity: 1);
-		theSelf.initialize(with: self);
+		let		theSelf = UnsafeMutablePointer<Tone>.allocate(capacity: 1);
+		theSelf.initialize(to: self);
 		var		theInput = AURenderCallbackStruct( inputProc: toneCallback, inputProcRefCon: theSelf );
-		err = AudioUnitSetProperty(toneUnit!, kAudioUnitProperty_SetRenderCallback, kAudioUnitScope_Input, 0, &theInput, UInt32(sizeof(AURenderCallbackStruct.self)));
+		err = AudioUnitSetProperty(toneUnit!, kAudioUnitProperty_SetRenderCallback, kAudioUnitScope_Input, 0, &theInput, UInt32(MemoryLayout<AURenderCallbackStruct>.size));
 
 		// Set the format to 32 bit, single channel, floating point, linear PCM
 		let		four_bytes_per_float : UInt32 = 4;
@@ -141,7 +164,7 @@ class Tone {
 			mBitsPerChannel: four_bytes_per_float * eight_bits_per_byte,
 			mReserved: 0);
 
-		err = AudioUnitSetProperty (toneUnit!, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, AudioUnitElement(0), &theStreamFormat, UInt32(sizeof(AudioStreamBasicDescription.self)) );
+		err = AudioUnitSetProperty (toneUnit!, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, AudioUnitElement(0), &theStreamFormat, UInt32(MemoryLayout<AudioStreamBasicDescription>.size) );
 
 		assert(err == noErr, "Error setting stream format: \(err)" );
 		err = AudioUnitInitialize(toneUnit!);
@@ -157,7 +180,7 @@ class Tone {
 			var		theTotal : Float32 = 0.0;
 			for i in 1...min(harmonics.maximumHarmonic,Int(0.5/thetaDelta)) {
 				if i%2 == 1 && harmonics.amplitudes[i] < pow(2.0,-7.0) { break; }
-				theTotal += harmonics.amplitudes[i]*Float32(sin(2.0*theta*Double(i)*M_PI));
+				theTotal += harmonics.amplitudes[i]*Float32(fastSin(2.0*theta*Double(i)*M_PI));
 			}
 			theResult = Float32(theTotal)*aGain*theEnvelope;
 			theta += thetaDelta;

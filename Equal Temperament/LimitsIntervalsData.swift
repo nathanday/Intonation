@@ -17,7 +17,7 @@ class LimitsIntervalsData : IntervalsData {
 		additiveDissonance = UInt(UserDefaults.standard.integer(forKey: "additiveDissonance")) | 1;
 		super.init();
 	}
-	override init?(propertyList aPropertyList: [String:AnyObject] ) {
+	override init?(propertyList aPropertyList: [String:Any] ) {
 		if let theLimits = aPropertyList["limits"] as? [String:UInt] {
 			if let theNumeratorPrimeLimit = theLimits["numeratorPrime"] {
 				numeratorPrimeLimitIndex = IntervalsData.indexForLargestPrimeLessThanOrEuqalTo(theNumeratorPrimeLimit) ?? 2;
@@ -34,7 +34,7 @@ class LimitsIntervalsData : IntervalsData {
 		}
 		super.init(propertyList:aPropertyList);
 	}
-	override var propertyListValue : [String:AnyObject] {
+	override var propertyListValue : [String:Any] {
 		var		theResult = super.propertyListValue;
 		theResult["limits"] = [
 			"numeratorPrime":numeratorPrimeLimit,

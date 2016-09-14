@@ -20,7 +20,7 @@ class ChordSelectorWindowController: NSWindowController {
         super.windowDidLoad()
     }
 
-	@IBAction func toggleWindow( _ aSender: AnyObject?) {
+	@IBAction func toggleWindow( _ aSender: Any?) {
 		if let theWindow = self.window {
 			if theWindow.isVisible {
 				close();

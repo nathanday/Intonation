@@ -120,10 +120,11 @@ func sqrt<T : UnsignedInteger>( _ n : T ) -> T {
 		return UInt64(sqrt(Double(x))) as! T;
 	default:
 		precondition(false, "Unhandled type");
+		return 0;
 	}
 }
 
-func log2<T : UnsignedInteger>( _ aValue : T ) -> T {
+func log2<T : Integer>( _ aValue : T ) -> T {
 	if aValue == 0 {
 		return 0;
 	} else {

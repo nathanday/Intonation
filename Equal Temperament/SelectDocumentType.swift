@@ -63,11 +63,11 @@ class SelectDocumentType : NSWindowController {
 		});
 	}
 
-	@IBAction func selectAction( _ aSender: AnyObject? ) {
+	@IBAction func selectAction( _ aSender: Any? ) {
 		window!.parent?.endSheet(window!, returnCode:NSModalResponseContinue);
 	}
 
-	@IBAction func cancelAction( _ aSender: AnyObject? ) {
+	@IBAction func cancelAction( _ aSender: Any? ) {
 		window!.parent?.endSheet(window!);
 	}
 }

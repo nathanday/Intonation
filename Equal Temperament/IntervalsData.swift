@@ -31,15 +31,15 @@ enum DocumentType {
 	}
 	func toString() -> String {
 		switch self {
-		case limits:
+		case .limits:
 			return "limits";
-		case stackedIntervals:
+		case .stackedIntervals:
 			return "stackedIntervals";
-		case equalTemperament:
+		case .equalTemperament:
 			return "equalTemperament";
-		case preset:
+		case .preset:
 			return "preset";
-		case adHoc:
+		case .adHoc:
 			return "adHoc";
 		}
 	}
@@ -48,7 +48,7 @@ enum DocumentType {
 
 class IntervalsData: NSObject {
 
-	class func from(propertyList aPropertyList: [String:AnyObject] ) -> IntervalsData? {
+	class func from(propertyList aPropertyList: [String:Any] ) -> IntervalsData? {
 		var		theResult : IntervalsData?
 		if let theDocumentTypeString = aPropertyList["documentType"] as? String {
 			if let theDocumentType = DocumentType.fromString(theDocumentTypeString) {
@@ -90,11 +90,11 @@ class IntervalsData: NSObject {
 		midiAnchor = Int(UserDefaults.standard.integer(forKey: "midiAnchor"));
 	}
 
-	init?(propertyList aPropertyList: [String:AnyObject] ) {
+	init?(propertyList aPropertyList: [String:Any] ) {
 		if let theOctavesCount = aPropertyList["octavesCount"] as? UInt,
-			theAutoAnchor = aPropertyList["autoAnchor"] as? Bool,
-			theMidiAnchor = aPropertyList["midiAnchor"] as? Int,
-			theTone = aPropertyList["tone"] as? [String:AnyObject]
+			let theAutoAnchor = aPropertyList["autoAnchor"] as? Bool,
+			let theMidiAnchor = aPropertyList["midiAnchor"] as? Int,
+			let theTone = aPropertyList["tone"] as? [String:Any]
 		{
 			octavesCount = theOctavesCount;
 			autoAnchor = theAutoAnchor;
@@ -103,7 +103,7 @@ class IntervalsData: NSObject {
 				baseFrequency = theBaseFrequency;
 			}
 			if let theAllOvertonesAmount = theTone["allOvertonesAmount"] as? Double,
-				theEvenOvertonesAmount = theTone["evenOvertonesAmount"] as? Double {
+				let theEvenOvertonesAmount = theTone["evenOvertonesAmount"] as? Double {
 				overtones = HarmonicsDescription(amount: theAllOvertonesAmount, evenAmount: theEvenOvertonesAmount);
 			}
 		}
@@ -116,8 +116,8 @@ class IntervalsData: NSObject {
 	func viewController( windowController aWindowController : MainWindowController ) -> GeneratorViewController? {		preconditionFailure("The method viewController is abstract and must be overriden");
 	}
 
-	var propertyListValue : [String:AnyObject] {
-		let		theResult : [String:AnyObject] = [
+	var propertyListValue : [String:Any] {
+		let		theResult : [String:Any] = [
 			"autoAnchor":autoAnchor,
 			"octavesCount":octavesCount,
 			"midiAnchor":midiAnchor,

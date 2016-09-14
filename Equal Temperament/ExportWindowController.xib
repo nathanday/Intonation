@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11173.2" systemVersion="16A254g" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10117"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11173.2"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="ExportWindowController" customModule="Intonation" customModuleProvider="target">
@@ -12,25 +12,25 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <window title="Export" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="F0z-JX-Cv5">
-            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+        <window title="Export" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="F0z-JX-Cv5" customClass="NSPanel">
+            <windowStyleMask key="styleMask" titled="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="196" y="240" width="431" height="222"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
-            <view key="contentView" misplaced="YES" id="se5-gp-TjO">
-                <rect key="frame" x="0.0" y="0.0" width="431" height="222"/>
-                <autoresizingMask key="autoresizingMask"/>
+            <rect key="contentRect" x="196" y="240" width="432" height="222"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="900"/>
+            <view key="contentView" id="se5-gp-TjO">
+                <rect key="frame" x="0.0" y="0.0" width="432" height="222"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ODY-1t-evc">
-                        <rect key="frame" x="120" y="188" width="191" height="22"/>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ODY-1t-evc">
+                        <rect key="frame" x="121" y="188" width="191" height="22"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Export Your Document" id="3uO-bC-lfI">
                             <font key="font" metaFont="system" size="18"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <customView misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TaL-ch-zgE">
-                        <rect key="frame" x="0.0" y="142" width="431" height="38"/>
+                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="TaL-ch-zgE">
+                        <rect key="frame" x="0.0" y="142" width="432" height="38"/>
                         <subviews>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YVF-Qu-4Xw">
                                 <rect key="frame" x="0.0" y="0.0" width="216" height="38"/>
@@ -38,7 +38,7 @@
                                     <constraint firstAttribute="height" constant="38" id="xpo-z5-Ycz"/>
                                 </constraints>
                                 <buttonCell key="cell" type="square" title="Text" bezelStyle="shadowlessSquare" image="ExportTypeButtonOff" imagePosition="overlaps" alignment="center" alternateImage="ExportTypeButtonOn" state="on" imageScaling="proportionallyDown" inset="2" id="bkU-Kb-VM4">
-                                    <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
@@ -51,7 +51,7 @@
                                     <constraint firstAttribute="height" constant="38" id="XiF-T3-dZ0"/>
                                 </constraints>
                                 <buttonCell key="cell" type="square" title="Binary" bezelStyle="shadowlessSquare" image="ExportTypeButtonOff" imagePosition="overlaps" alignment="center" alternateImage="ExportTypeButtonOn" imageScaling="proportionallyDown" inset="2" id="JZk-rc-avl">
-                                    <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
@@ -70,8 +70,8 @@
                             <constraint firstItem="Tkz-y4-BKI" firstAttribute="width" secondItem="YVF-Qu-4Xw" secondAttribute="width" id="xrP-rs-4SP"/>
                         </constraints>
                     </customView>
-                    <tabView misplaced="YES" drawsBackground="NO" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="GaD-ts-Avq">
-                        <rect key="frame" x="0.0" y="49" width="431" height="85"/>
+                    <tabView drawsBackground="NO" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="GaD-ts-Avq">
+                        <rect key="frame" x="0.0" y="49" width="432" height="85"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="85" id="p33-0w-wC7"/>
                         </constraints>
@@ -96,6 +96,13 @@
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
+                                            <connections>
+                                                <binding destination="-2" name="value" keyPath="self.outputSelectedInterval" id="RKV-1j-M98">
+                                                    <dictionary key="options">
+                                                        <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                                    </dictionary>
+                                                </binding>
+                                            </connections>
                                         </button>
                                         <button translatesAutoresizingMaskIntoConstraints="NO" id="Qnk-H3-RW6">
                                             <rect key="frame" x="63" y="11" width="76" height="18"/>
@@ -103,12 +110,12 @@
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
+                                            <connections>
+                                                <binding destination="-2" name="value" keyPath="self.outputSelectedInterval" id="GAg-bg-eTI"/>
+                                            </connections>
                                         </button>
-                                        <box horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="bg7-5h-zeU">
+                                        <box horizontalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="bg7-5h-zeU">
                                             <rect key="frame" x="213" y="0.0" width="5" height="85"/>
-                                            <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                                            <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                            <font key="titleFont" metaFont="system"/>
                                         </box>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yir-QR-wH7">
                                             <rect key="frame" x="244" y="60" width="59" height="17"/>
@@ -128,10 +135,13 @@
                                                 <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
+                                            <connections>
+                                                <binding destination="-2" name="value" keyPath="self.textOutputDelimiter" id="zLq-Ll-2UP"/>
+                                            </connections>
                                         </textField>
                                         <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="s2L-qT-fas">
                                             <rect key="frame" x="317" y="27" width="86" height="26"/>
-                                            <popUpButtonCell key="cell" type="push" title="Choose" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" pullsDown="YES" selectedItem="yaU-kh-evy" id="Fxz-BA-sUS">
+                                            <popUpButtonCell key="cell" type="push" title="Choose" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" pullsDown="YES" id="Fxz-BA-sUS">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="menu"/>
                                                 <menu key="menu" id="yg5-F0-ioh">
@@ -139,11 +149,22 @@
                                                         <menuItem title="Choose" hidden="YES" id="yaU-kh-evy">
                                                             <modifierMask key="keyEquivalentModifierMask"/>
                                                         </menuItem>
-                                                        <menuItem title="New Line" id="eNm-Vd-DTq">
+                                                        <menuItem title="New Line" tag="10" id="eNm-Vd-DTq">
                                                             <modifierMask key="keyEquivalentModifierMask"/>
+                                                            <connections>
+                                                                <action selector="selectPresetDelimiter:" target="-2" id="ipJ-HK-Fuh"/>
+                                                            </connections>
                                                         </menuItem>
-                                                        <menuItem title="Comma" id="mHT-eH-mcP"/>
-                                                        <menuItem title="Tab" id="fj3-oq-y0s"/>
+                                                        <menuItem title="Comma" tag="44" id="mHT-eH-mcP">
+                                                            <connections>
+                                                                <action selector="selectPresetDelimiter:" target="-2" id="Cqp-NW-O4D"/>
+                                                            </connections>
+                                                        </menuItem>
+                                                        <menuItem title="Tab" tag="9" id="fj3-oq-y0s">
+                                                            <connections>
+                                                                <action selector="selectPresetDelimiter:" target="-2" id="Ubb-EI-Qyu"/>
+                                                            </connections>
+                                                        </menuItem>
                                                     </items>
                                                 </menu>
                                             </popUpButtonCell>
@@ -173,7 +194,7 @@
                             </tabViewItem>
                             <tabViewItem label="Binary" identifier="binary" id="qwL-Zo-BTm">
                                 <view key="view" id="mz8-ei-Qcn">
-                                    <rect key="frame" x="0.0" y="0.0" width="431" height="85"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="432" height="85"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="g1v-M3-xxt">
@@ -184,7 +205,7 @@
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
-                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wmS-Q6-tTD">
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wmS-Q6-tTD">
                                             <rect key="frame" x="244" y="60" width="74" height="17"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Endianness" id="FH4-yj-lFS">
                                                 <font key="font" metaFont="system"/>
@@ -192,14 +213,14 @@
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
-                                        <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0q1-zn-rzl">
+                                        <button translatesAutoresizingMaskIntoConstraints="NO" id="0q1-zn-rzl">
                                             <rect key="frame" x="257" y="35" width="89" height="18"/>
                                             <buttonCell key="cell" type="radio" title="Big-Endian" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="6Ke-Pl-jxK">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
                                         </button>
-                                        <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QU3-yd-QHM">
+                                        <button translatesAutoresizingMaskIntoConstraints="NO" id="QU3-yd-QHM">
                                             <rect key="frame" x="257" y="11" width="100" height="18"/>
                                             <buttonCell key="cell" type="radio" title="Little-Endian" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="Mux-uz-dbd">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -220,11 +241,8 @@
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
                                         </button>
-                                        <box horizontalHuggingPriority="750" misplaced="YES" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="hmY-Wb-q5N">
+                                        <box horizontalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="hmY-Wb-q5N">
                                             <rect key="frame" x="213" y="0.0" width="5" height="85"/>
-                                            <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                                            <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                            <font key="titleFont" metaFont="system"/>
                                         </box>
                                     </subviews>
                                     <constraints>
@@ -252,8 +270,8 @@
                             <binding destination="-2" name="selectedIdentifier" keyPath="self.selectedExportMethodIdentifier" id="b5c-80-B8I"/>
                         </connections>
                     </tabView>
-                    <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ugi-1U-N09">
-                        <rect key="frame" x="338" y="13" width="79" height="32"/>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ugi-1U-N09">
+                        <rect key="frame" x="339" y="13" width="79" height="32"/>
                         <buttonCell key="cell" type="push" title="Next…" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="STa-tB-asu">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -265,8 +283,8 @@ DQ
                             <action selector="nextAction:" target="-2" id="I9k-GL-lj6"/>
                         </connections>
                     </button>
-                    <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LsO-HM-wLo">
-                        <rect key="frame" x="256" y="13" width="82" height="32"/>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LsO-HM-wLo">
+                        <rect key="frame" x="257" y="13" width="82" height="32"/>
                         <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="isd-P7-gh2">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -297,7 +315,7 @@ Gw
             <connections>
                 <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
             </connections>
-            <point key="canvasLocation" x="282.5" y="213"/>
+            <point key="canvasLocation" x="72" y="107"/>
         </window>
     </objects>
     <resources>

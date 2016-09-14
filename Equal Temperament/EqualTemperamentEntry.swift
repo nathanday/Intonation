@@ -206,9 +206,6 @@ class EqualTemperamentEntry : NSObject, NSPasteboardReading, NSPasteboardWriting
 	override var hashValue: Int { return interval.hashValue; }
 
 	override var hash : Int { return interval.hashValue; }
-	override func isEqual(_ object: AnyObject?) -> Bool {
-		return self.interval==(object as? EqualTemperamentEntry)?.interval;
-	}
 	var everyIntervalName : [String] {
 		return self.interval.names ?? [];
 	}
@@ -222,7 +219,7 @@ class EqualTemperamentEntry : NSObject, NSPasteboardReading, NSPasteboardWriting
 		return ["com.godofcocoa.intonation.interval",NSPasteboardTypeString,NSPasteboardTypeTabularText];
 	}
 
-	func pasteboardPropertyList(forType aType: String) -> AnyObject? {
+	func pasteboardPropertyList(forType aType: String) -> Any? {
 		switch aType {
 		case NSPasteboardTypeString:
 			return interval.ratioString;
@@ -243,11 +240,11 @@ class EqualTemperamentEntry : NSObject, NSPasteboardReading, NSPasteboardWriting
 	static func readingOptions(forType type: String, pasteboard: NSPasteboard) -> NSPasteboardReadingOptions {
 		return .asPropertyList;
 	}
-	required init?(pasteboardPropertyList aPropertyList: AnyObject, ofType aType: String) {
+	required init?(pasteboardPropertyList aPropertyList: Any, ofType aType: String) {
 		switch aType {
 		case NSPasteboardTypeString:
 			if let theString = aPropertyList as? String,
-				theRatio = Interval.from(string:theString) {
+				let theRatio = Interval.from(string:theString) {
 				self.interval = theRatio;
 			} else {
 				return nil;

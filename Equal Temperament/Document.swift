@@ -31,7 +31,7 @@ class Document : NSDocument, MIDIReceiverObserver {
 	}
 	let watchedKeys : Set = ["additiveDissonance", "adHocEntries", "degrees", "denominatorPrimeLimitIndex", "documentType", "interval", "numeratorPrimeLimitIndex", "octavesCount", "oddLimit", "separatePrimeLimit", "stackedIntervals"];
 
-	override func observeValue( forKeyPath aKeyPath: String?, of anObject: AnyObject?, change aChange: [NSKeyValueChangeKey : AnyObject]?, context aContext: UnsafeMutablePointer<Void>?) {
+	override func observeValue( forKeyPath aKeyPath: String?, of anObject: Any?, change aChange: [NSKeyValueChangeKey : Any]?, context aContext: UnsafeMutableRawPointer?) {
 		if anObject as? IntervalsData == intervalsData {
 			if let theKey = aKeyPath {
 				if watchedKeys.contains(theKey) {
@@ -83,7 +83,7 @@ class Document : NSDocument, MIDIReceiverObserver {
 		}
 	}
 
-	override func canClose(withDelegate delegate: AnyObject, shouldClose shouldCloseSelector: Selector?, contextInfo: UnsafeMutablePointer<Void>?) {
+	override func canClose(withDelegate delegate: Any, shouldClose shouldCloseSelector: Selector?, contextInfo: UnsafeMutableRawPointer?) {
 		tonePlayer.stop();
 		super.canClose(withDelegate: delegate, shouldClose: shouldCloseSelector, contextInfo: contextInfo);
 	}
@@ -141,7 +141,7 @@ class Document : NSDocument, MIDIReceiverObserver {
 		}
 	}
 
-	@IBAction func newDocumentFromSelection( _ aSender: AnyObject? ) {
+	@IBAction func newDocumentFromSelection( _ aSender: Any? ) {
 		do {
 			if let theDocument = try NSDocumentController.shared().openUntitledDocumentAndDisplay(false) as?
 			Document {
@@ -189,7 +189,7 @@ class Document : NSDocument, MIDIReceiverObserver {
 	override func read( from aData: Data, ofType typeName: String) throws {
 		let		theFormat : UnsafeMutablePointer<PropertyListSerialization.PropertyListFormat>? = nil;
 		do {
-			if let thePropertyList = try PropertyListSerialization.propertyList(from: aData, options:PropertyListSerialization.MutabilityOptions(), format:theFormat) as? [String:AnyObject] {
+			if let thePropertyList = try PropertyListSerialization.propertyList(from: aData, options:PropertyListSerialization.MutabilityOptions(), format:theFormat) as? [String:Any] {
 				willChangeValue(forKey: "intervalsData");
 				intervalsData = IntervalsData.from(propertyList:thePropertyList);
 				didChangeValue(forKey: "intervalsData");
