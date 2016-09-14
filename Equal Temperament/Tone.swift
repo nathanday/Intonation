@@ -65,7 +65,8 @@ class Tone {
 			let		theResult : OSStatus = kAudioServicesNoError;
 			if let theBuffer : AudioBuffer = anIOData?.pointee.mBuffers {
 				let		theSamples = UnsafeMutableBufferPointer<Float32>(theBuffer);
-				let		theToneRef = UnsafeMutablePointer<Tone>(anInRefCon);
+//				let		theToneRef = UnsafeMutablePointer<Tone>(anInRefCon);
+				let		theToneRef = anInRefCon.bindMemory(to: Tone.self, capacity: 1);
 				let		theGain = Float32(0.5);
 				assert( theGain > 0.0, "bad gain value: \(theGain)" );
 				//		assert( !playingTones.isEmpty, "no tones" );
@@ -126,7 +127,8 @@ class Tone {
 			let		theResult : OSStatus = kAudioServicesNoError;
 			if let theBuffer : AudioBuffer = anIOData?.pointee.mBuffers {
 				let		theSamples = UnsafeMutableBufferPointer<Float32>(theBuffer);
-				let		theToneRef = UnsafeMutablePointer<Tone>(anInRefCon);
+//				let		theToneRef = UnsafeMutablePointer<Tone>(anInRefCon);
+				let		theToneRef = anInRefCon.bindMemory(to: Tone.self, capacity: 1);
 				let		theGain = Float32(0.5);
 				assert( theGain > 0.0, "bad gain value: \(theGain)" );
 				if !theSamples.isEmpty {

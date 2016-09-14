@@ -8,7 +8,8 @@
 
 import Cocoa
 
-class ApplicationDelegate: NSObject {
+@NSApplicationMain
+class ApplicationDelegate: NSObject, NSApplicationDelegate {
 
 	lazy var		preferencesWindowController : PreferencesWindowController = PreferencesWindowController();
 	lazy var		chordSelectorWindowController : ChordSelectorWindowController = ChordSelectorWindowController();
