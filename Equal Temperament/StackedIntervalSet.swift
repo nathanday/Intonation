@@ -92,8 +92,9 @@ class StackedIntervalSet : IntervalSet, Hashable {
 	var hashValue: Int {
 		return interval.hashValue;
 	}
+
+	static func == (lhs: StackedIntervalSet, rhs: StackedIntervalSet) -> Bool {
+		return lhs.interval == rhs.interval;
+	}
 }
 
-func == (lhs: StackedIntervalSet, rhs: StackedIntervalSet) -> Bool {
-	return lhs.interval == rhs.interval;
-}

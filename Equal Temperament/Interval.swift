@@ -84,6 +84,9 @@ class Interval : Hashable {
 	var hashValue: Int {
 		return toDouble.hashValue;
 	}
+	static func == (a: Interval, b: Interval) -> Bool {
+		return a.toDouble == b.toDouble;
+	}
 	var oddLimit : UInt? { return nil; }
 	var primeLimit : UInt? { return nil; }
 	var factorsString : String {
@@ -96,6 +99,18 @@ class Interval : Hashable {
 	func numeratorForDenominator( _ aDenominator: Int ) -> Int? {
 		return nil;
 	}
+
+	static func < (a: Interval, b: Interval) -> Bool { return a.toDouble < b.toDouble; }
+	static func < (a: Interval, b: Int) -> Bool { return a.toDouble < Double(b); }
+	static func <= (a: Interval, b: Interval) -> Bool { return a.toDouble <= b.toDouble; }
+	static func > (a: Interval, b: Interval) -> Bool { return a.toDouble > b.toDouble; }
+	static func >= (a: Interval, b: Interval) -> Bool { return a.toDouble >= b.toDouble; }
+	static func == (a: Interval, b: Int) -> Bool { return a.toDouble == Double(b); }
+	static func == (a: Interval, b: UInt) -> Bool { return a.toDouble == Double(b); }
+	static func * (a: Interval, b: Interval) -> Interval { return IrrationalInterval(a.toDouble * b.toDouble); }
+	static func *= (a: inout Interval, b: Interval) { a = IrrationalInterval(a.toDouble*b.toDouble); }
+	static func *= (a: inout Interval, b: Int) { a = IrrationalInterval(a.toDouble*Double(b)); }
+	static func > (a: Interval, b: Int) -> Bool { return a.toDouble > Double(b); }
 }
 
 class RationalInterval : Interval {
@@ -179,7 +194,7 @@ class RationalInterval : Interval {
 		}
 		return theResult;
 	}
-	override var hashValue: Int { return ratio.hashValue; }
+	static func == (a: RationalInterval, b: RationalInterval) -> Bool { return a.ratio==b.ratio; }
 	override var oddLimit : UInt? { return ratio.oddLimit; }
 	override var primeLimit : UInt? { return ratio.primeLimit; }
 	override var factorsString : String { return ratio.factorsString; }
@@ -188,6 +203,19 @@ class RationalInterval : Interval {
 	override func numeratorForDenominator( _ aDenominator: Int ) -> Int? {
 		return ratio.numeratorForDenominator(aDenominator);
 	}
+
+	static func < (a: RationalInterval, b: RationalInterval) -> Bool { return a.ratio < b.ratio; }
+	static func < (a: RationalInterval, b: Int) -> Bool { return a.ratio < b; }
+	static func <= (a: RationalInterval, b: RationalInterval) -> Bool { return a.ratio <= b.ratio; }
+	static func > (a: RationalInterval, b: RationalInterval) -> Bool { return a.ratio > b.ratio; }
+	static func > (a: RationalInterval, b: Int) -> Bool { return a.ratio > b; }
+	static func >= (a: RationalInterval, b: RationalInterval) -> Bool { return a.ratio >= b.ratio; }
+	static func == (a: RationalInterval, b: Int) -> Bool { return a.ratio==b; }
+	static func == (a: RationalInterval, b: UInt) -> Bool { return a.ratio==b; }
+	static func * (a: RationalInterval, b: RationalInterval) -> RationalInterval { return RationalInterval(a.ratio * b.ratio); }
+	static func * (a: RationalInterval, b: Int) -> RationalInterval { return RationalInterval(a.ratio * b); }
+	static func *= (a: inout RationalInterval, b: RationalInterval) { a = RationalInterval(a.ratio*b.ratio); }
+	static func *= (a: inout RationalInterval, b: Int) { a = RationalInterval(a.ratio*b); }
 }
 
 class IrrationalInterval : Interval {
@@ -220,7 +248,7 @@ class IrrationalInterval : Interval {
 		}
 		return theResult;
 	}
-	override var hashValue: Int { return Int(12000.0*log2(ratio)+0.5).hashValue; }
+	static func == (a: IrrationalInterval, b: IrrationalInterval) -> Bool { return equivelentRatios(a.ratio,b.ratio); }
 	init( ratio aRatio: Double, names aNames: [String]?, factorsString aFactorsString : String? = nil ) {
 		ratio = aRatio;
 		_factorsString = aFactorsString;
@@ -252,6 +280,11 @@ class IrrationalInterval : Interval {
 		return _factorsString != nil ? _factorsString! : "\(ratio)";
 	}
 	override var ratioString : String { return ratio.toString(decimalPlaces:5); }
+
+	static func < (a: IrrationalInterval, b: IrrationalInterval) -> Bool { return a.ratio < b.ratio; }
+	static func <= (a: IrrationalInterval, b: IrrationalInterval) -> Bool { return a.ratio < b.ratio || equivelentRatios(a.ratio,b.ratio); }
+	static func > (a: IrrationalInterval, b: IrrationalInterval) -> Bool { return a.ratio > b.ratio; }
+	static func >= (a: IrrationalInterval, b: IrrationalInterval) -> Bool { return a.ratio > b.ratio || equivelentRatios(a.ratio,b.ratio); }
 }
 
 class EqualTemperamentInterval : Interval {
@@ -302,6 +335,12 @@ class EqualTemperamentInterval : Interval {
 		return "\(interval.toString)^\(degree)/\(steps)";
 	}
 	override var ratioString : String { return toDouble.toString(decimalPlaces:5); }
+	static func == (a: EqualTemperamentInterval, b: EqualTemperamentInterval) -> Bool { return a.interval == b.interval && a.steps == b.steps && a.degree == b.degree; }
+
+	static func < (a: EqualTemperamentInterval, b: EqualTemperamentInterval) -> Bool { return a.toDouble < b.toDouble; }
+	static func <= (a: EqualTemperamentInterval, b: EqualTemperamentInterval) -> Bool { return a==b || a.toDouble < b.toDouble; }
+	static func > (a: EqualTemperamentInterval, b: EqualTemperamentInterval) -> Bool { return a.toDouble > b.toDouble; }
+	static func >= (a: EqualTemperamentInterval, b: EqualTemperamentInterval) -> Bool { return a==b || a.toDouble > b.toDouble; }
 }
 
 func * (a: Interval, b: Int) -> Interval {
@@ -334,49 +373,45 @@ func equivelentRatios( _ a: Double, _ b: Double ) -> Bool {
 	return abs(a-b) < 1.0/4096.0;
 }
 
-func == (a: Interval, b: Interval) -> Bool { return a.toDouble == b.toDouble; }
-func == (a: RationalInterval, b: RationalInterval) -> Bool { return a.ratio==b.ratio; }
-func == (a: IrrationalInterval, b: IrrationalInterval) -> Bool { return equivelentRatios(a.ratio,b.ratio); }
-func == (a: EqualTemperamentInterval, b: EqualTemperamentInterval) -> Bool { return a.interval == b.interval && a.steps == b.steps && a.degree == b.degree; }
+//func == (a: Interval, b: Interval) -> Bool { return a.toDouble == b.toDouble; }
+//func == (a: RationalInterval, b: RationalInterval) -> Bool { return a.ratio==b.ratio; }
+//func == (a: IrrationalInterval, b: IrrationalInterval) -> Bool { return equivelentRatios(a.ratio,b.ratio); }
+//func == (a: EqualTemperamentInterval, b: EqualTemperamentInterval) -> Bool { return a.interval == b.interval && a.steps == b.steps && a.degree == b.degree; }
 
-func < (a: Interval, b: Interval) -> Bool { return a.toDouble < b.toDouble; }
-func < (a: RationalInterval, b: RationalInterval) -> Bool { return a.ratio < b.ratio; }
-func < (a: RationalInterval, b: Int) -> Bool { return a.ratio < b; }
-func < (a: IrrationalInterval, b: IrrationalInterval) -> Bool { return a.ratio < b.ratio; }
-func < (a: EqualTemperamentInterval, b: EqualTemperamentInterval) -> Bool { return a.toDouble < b.toDouble; }
-func < (a: Interval, b: Int) -> Bool { return a.toDouble < Double(b); }
+//func < (a: Interval, b: Interval) -> Bool { return a.toDouble < b.toDouble; }
+//func < (a: Interval, b: Int) -> Bool { return a.toDouble < Double(b); }
+//func <= (a: Interval, b: Interval) -> Bool { return a.toDouble <= b.toDouble; }
+//func > (a: Interval, b: Interval) -> Bool { return a.toDouble > b.toDouble; }
+//func >= (a: Interval, b: Interval) -> Bool { return a.toDouble >= b.toDouble; }
+//func == (a: Interval, b: Int) -> Bool { return a.toDouble == Double(b); }
+//func == (a: Interval, b: UInt) -> Bool { return a.toDouble == Double(b); }
+//func * (a: Interval, b: Interval) -> Interval { return IrrationalInterval(a.toDouble * b.toDouble); }
+//func *= (a: inout Interval, b: Interval) { a = IrrationalInterval(a.toDouble*b.toDouble); }
+//func *= (a: inout Interval, b: Int) { a = IrrationalInterval(a.toDouble*Double(b)); }
+//func > (a: Interval, b: Int) -> Bool { return a.toDouble > Double(b); }
 
-func <= (a: Interval, b: Interval) -> Bool { return a.toDouble <= b.toDouble; }
-func <= (a: RationalInterval, b: RationalInterval) -> Bool { return a.ratio <= b.ratio; }
-func <= (a: IrrationalInterval, b: IrrationalInterval) -> Bool { return a.ratio < b.ratio || equivelentRatios(a.ratio,b.ratio); }
-func <= (a: EqualTemperamentInterval, b: EqualTemperamentInterval) -> Bool { return a==b || a.toDouble < b.toDouble; }
+//func < (a: RationalInterval, b: RationalInterval) -> Bool { return a.ratio < b.ratio; }
+//func < (a: RationalInterval, b: Int) -> Bool { return a.ratio < b; }
+//func <= (a: RationalInterval, b: RationalInterval) -> Bool { return a.ratio <= b.ratio; }
+//func > (a: RationalInterval, b: RationalInterval) -> Bool { return a.ratio > b.ratio; }
+//func > (a: RationalInterval, b: Int) -> Bool { return a.ratio > b; }
+//func >= (a: RationalInterval, b: RationalInterval) -> Bool { return a.ratio >= b.ratio; }
+//func == (a: RationalInterval, b: Int) -> Bool { return a.ratio==b; }
+//func == (a: RationalInterval, b: UInt) -> Bool { return a.ratio==b; }
+//func * (a: RationalInterval, b: RationalInterval) -> RationalInterval { return RationalInterval(a.ratio * b.ratio); }
+//func * (a: RationalInterval, b: Int) -> RationalInterval { return RationalInterval(a.ratio * b); }
+//func *= (a: inout RationalInterval, b: RationalInterval) { a = RationalInterval(a.ratio*b.ratio); }
+//func *= (a: inout RationalInterval, b: Int) { a = RationalInterval(a.ratio*b); }
 
-func > (a: Interval, b: Interval) -> Bool { return a.toDouble > b.toDouble; }
-func > (a: RationalInterval, b: RationalInterval) -> Bool { return a.ratio > b.ratio; }
-func > (a: RationalInterval, b: Int) -> Bool { return a.ratio > b; }
-func > (a: IrrationalInterval, b: IrrationalInterval) -> Bool { return a.ratio > b.ratio; }
-func > (a: EqualTemperamentInterval, b: EqualTemperamentInterval) -> Bool { return a.toDouble > b.toDouble; }
-func > (a: Interval, b: Int) -> Bool { return a.toDouble > Double(b); }
+//func < (a: IrrationalInterval, b: IrrationalInterval) -> Bool { return a.ratio < b.ratio; }
+//func <= (a: IrrationalInterval, b: IrrationalInterval) -> Bool { return a.ratio < b.ratio || equivelentRatios(a.ratio,b.ratio); }
+//func > (a: IrrationalInterval, b: IrrationalInterval) -> Bool { return a.ratio > b.ratio; }
+//func >= (a: IrrationalInterval, b: IrrationalInterval) -> Bool { return a.ratio > b.ratio || equivelentRatios(a.ratio,b.ratio); }
 
-func >= (a: Interval, b: Interval) -> Bool { return a.toDouble >= b.toDouble; }
-func >= (a: RationalInterval, b: RationalInterval) -> Bool { return a.ratio >= b.ratio; }
-func >= (a: IrrationalInterval, b: IrrationalInterval) -> Bool { return a.ratio > b.ratio || equivelentRatios(a.ratio,b.ratio); }
-func >= (a: EqualTemperamentInterval, b: EqualTemperamentInterval) -> Bool { return a==b || a.toDouble > b.toDouble; }
-
-func == (a: Interval, b: Int) -> Bool { return a.toDouble == Double(b); }
-func == (a: RationalInterval, b: Int) -> Bool { return a.ratio==b; }
-
-func == (a: Interval, b: UInt) -> Bool { return a.toDouble == Double(b); }
-func == (a: RationalInterval, b: UInt) -> Bool { return a.ratio==b; }
-
-func * (a: Interval, b: Interval) -> Interval { return IrrationalInterval(a.toDouble * b.toDouble); }
-func * (a: RationalInterval, b: RationalInterval) -> RationalInterval { return RationalInterval(a.ratio * b.ratio); }
-func * (a: RationalInterval, b: Int) -> RationalInterval { return RationalInterval(a.ratio * b); }
-
-func *= (a: inout Interval, b: Interval) { a = IrrationalInterval(a.toDouble*b.toDouble); }
-func *= (a: inout Interval, b: Int) { a = IrrationalInterval(a.toDouble*Double(b)); }
-func *= (a: inout RationalInterval, b: RationalInterval) { a = RationalInterval(a.ratio*b.ratio); }
-func *= (a: inout RationalInterval, b: Int) { a = RationalInterval(a.ratio*b); }
+//func < (a: EqualTemperamentInterval, b: EqualTemperamentInterval) -> Bool { return a.toDouble < b.toDouble; }
+//func <= (a: EqualTemperamentInterval, b: EqualTemperamentInterval) -> Bool { return a==b || a.toDouble < b.toDouble; }
+//func > (a: EqualTemperamentInterval, b: EqualTemperamentInterval) -> Bool { return a.toDouble > b.toDouble; }
+//func >= (a: EqualTemperamentInterval, b: EqualTemperamentInterval) -> Bool { return a==b || a.toDouble > b.toDouble; }
 
 extension UserDefaults {
 	func intervalForKey(_ aKey: String) -> Interval? {

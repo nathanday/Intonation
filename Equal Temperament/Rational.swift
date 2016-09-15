@@ -61,7 +61,7 @@ struct Rational : CustomStringConvertible, CustomDebugStringConvertible, Hashabl
 	}
 	var ratioString: String { return "\(numerator):\(denominator)"; }
 
-	var hashValue: Int { return Int(numerator)^Int(denominator); }
+	var hashValue: Int { return numerator^denominator; }
 	var description: String { return toString; }
 
 	var debugDescription: String {
@@ -468,6 +468,78 @@ extension Rational : FloatingPoint, Equatable, SignedNumber {
 	static func abs(_ x: Rational) -> Rational {
 		return x.sign == .minus ? -x : x;
 	}
+
+	static func == (a: Rational, b: Rational) -> Bool { return a.numerator==b.numerator && a.denominator == b.denominator; }
+	static func != (a: Rational, b: Rational) -> Bool { return a.numerator != b.numerator || a.denominator != b.denominator; }
+	static func < (a: Rational, b: Rational) -> Bool { return a.numerator*b.denominator < b.numerator*a.denominator; }
+	static func <= (a: Rational, b: Rational) -> Bool { return a.numerator*b.denominator <= b.numerator*a.denominator; }
+	static func > (a: Rational, b: Rational) -> Bool { return a.numerator*b.denominator > b.numerator*a.denominator; }
+	static func >= (a: Rational, b: Rational) -> Bool { return a.numerator*b.denominator >= b.numerator*a.denominator; }
+
+	static func == (a: Rational, b: Int) -> Bool { return a.numerator == b && a.denominator == 1; }
+	static func != (a: Rational, b: Int) -> Bool { return a.numerator != b || a.denominator == 1; }
+	static func < (a: Rational, b: Int) -> Bool { 	return a.numerator < b*a.denominator; }
+	static func <= (a: Rational, b: Int) -> Bool { return a.numerator <= b*a.denominator; }
+	static func > (a: Rational, b: Int) -> Bool { return a.numerator > b*a.denominator; }
+	static func >= (a: Rational, b: Int) -> Bool { return a.numerator >= b*a.denominator; }
+
+	static func == (a: Rational, b: UInt) -> Bool { return a.numerator >= 0 && UInt(a.numerator) == b && a.denominator == 1; }
+	static func != (a: Rational, b: UInt) -> Bool { return a.numerator < 0 || UInt(a.numerator) != b || a.denominator == 1; }
+	static func < (a: Rational, b: UInt) -> Bool { return a < 0 || a < Int(b); }
+	static func <= (a: Rational, b: UInt) -> Bool { return a < 0 || a <= Int(b); }
+	static func > (a: Rational, b: UInt) -> Bool { return a >= 0 && a > Int(b); }
+	static func >= (a: Rational, b: UInt) -> Bool { return a >= 0 && a >= Int(b); }
+	
+	static func + (a: Rational, b: Rational) -> Rational { return Rational(a.numerator*b.denominator+b.numerator*a.denominator,a.denominator*b.denominator); }
+	static func - (a: Rational, b: Rational) -> Rational { return Rational(a.numerator*b.denominator-b.numerator*a.denominator,a.denominator*b.denominator); }
+	static func * (a: Rational, b: Rational) -> Rational { return Rational(a.numerator*b.numerator,a.denominator*b.denominator); }
+
+	static func / (a: Rational, b: Rational) -> Rational {
+		return b.numerator >= 0
+			? Rational(a.numerator*b.denominator,a.denominator*b.numerator)
+			: Rational(-a.numerator*b.denominator,-a.denominator*b.numerator);
+	}
+	static prefix func - (a: Rational) -> Rational { return Rational(-a.numerator,a.denominator); }
+
+	static func + (a: Rational, b: Int) -> Rational { return Rational(a.numerator+b*a.denominator,a.denominator); }
+	static func - (a: Rational, b: Int) -> Rational { return Rational(a.numerator-b*a.denominator,a.denominator); }
+	static func * (a: Rational, b: Int) -> Rational { return Rational(a.numerator*b,a.denominator); }
+
+	static func / (a: Rational, b: Int) -> Rational {
+		return b >= 0
+			? Rational(a.numerator,a.denominator*b)
+			: Rational(-a.numerator,-a.denominator*b);
+	}
+
+	static func += ( a: inout Rational, b: Rational) { a = Rational(a.numerator*b.denominator+b.numerator*a.denominator,a.denominator*b.denominator); }
+	static func -= ( a: inout Rational, b: Rational) { a = Rational(a.numerator*b.denominator-b.numerator*a.denominator,a.denominator*b.denominator); }
+	static func *= (a: inout Rational, b: Rational) { a = Rational(a.numerator*b.numerator,a.denominator*b.denominator); }
+
+	static func /= ( a: inout Rational, b: Rational) {
+		a = b.numerator >= 0
+			? Rational(a.numerator*b.denominator,a.denominator*b.numerator)
+			: Rational(-a.numerator*b.denominator,-a.denominator*b.numerator);
+	}
+
+	static func += ( a: inout Rational, b: Int) { a = Rational(a.numerator+b*a.denominator,a.denominator); }
+	static func -= ( a: inout Rational, b: Int) { a = Rational(a.numerator-b*a.denominator,a.denominator); }
+	static func *= ( a: inout Rational, b: Int) { a = Rational(a.numerator*b,a.denominator); }
+
+	static func /= ( a: inout Rational, b: Int) {
+		a = b >= 0
+			? Rational(a.numerator,a.denominator*b)
+			: Rational(-a.numerator,-a.denominator*b);
+	}
+
+	static func sum( anArray: [Rational] ) -> Rational {
+		var			theResultNum = 0,
+					theResultDen = 1;
+		for theTerm in anArray {
+			theResultNum = theResultNum*theTerm.denominator+theTerm.numerator*theResultDen;
+			theResultDen *= theTerm.denominator
+		}
+		return Rational( theResultNum, theResultDen );
+	}
 }
 
 extension String {
@@ -491,75 +563,4 @@ extension String {
 	}
 }
 
-func + (a: Rational, b: Rational) -> Rational { return Rational(a.numerator*b.denominator+b.numerator*a.denominator,a.denominator*b.denominator); }
-func - (a: Rational, b: Rational) -> Rational { return Rational(a.numerator*b.denominator-b.numerator*a.denominator,a.denominator*b.denominator); }
-func * (a: Rational, b: Rational) -> Rational { return Rational(a.numerator*b.numerator,a.denominator*b.denominator); }
-
-func / (a: Rational, b: Rational) -> Rational {
-	return b.numerator >= 0
-		? Rational(a.numerator*b.denominator,a.denominator*b.numerator)
-		: Rational(-a.numerator*b.denominator,-a.denominator*b.numerator);
-}
-prefix func - (a: Rational) -> Rational { return Rational(-a.numerator,a.denominator); }
-
-func + (a: Rational, b: Int) -> Rational { return Rational(a.numerator+b*a.denominator,a.denominator); }
-func - (a: Rational, b: Int) -> Rational { return Rational(a.numerator-b*a.denominator,a.denominator); }
-func * (a: Rational, b: Int) -> Rational { return Rational(a.numerator*b,a.denominator); }
-
-func / (a: Rational, b: Int) -> Rational {
-	return b >= 0
-		? Rational(a.numerator,a.denominator*b)
-		: Rational(-a.numerator,-a.denominator*b);
-}
-
-func += ( a: inout Rational, b: Rational) { a = Rational(a.numerator*b.denominator+b.numerator*a.denominator,a.denominator*b.denominator); }
-func -= ( a: inout Rational, b: Rational) { a = Rational(a.numerator*b.denominator-b.numerator*a.denominator,a.denominator*b.denominator); }
-func *= (a: inout Rational, b: Rational) { a = Rational(a.numerator*b.numerator,a.denominator*b.denominator); }
-
-func /= ( a: inout Rational, b: Rational) {
-	a = b.numerator >= 0
-		? Rational(a.numerator*b.denominator,a.denominator*b.numerator)
-		: Rational(-a.numerator*b.denominator,-a.denominator*b.numerator);
-}
-
-func += ( a: inout Rational, b: Int) { a = Rational(a.numerator+b*a.denominator,a.denominator); }
-func -= ( a: inout Rational, b: Int) { a = Rational(a.numerator-b*a.denominator,a.denominator); }
-func *= ( a: inout Rational, b: Int) { a = Rational(a.numerator*b,a.denominator); }
-
-func /= ( a: inout Rational, b: Int) {
-	a = b >= 0
-		? Rational(a.numerator,a.denominator*b)
-		: Rational(-a.numerator,-a.denominator*b);
-}
-
-func sum( anArray: [Rational] ) -> Rational {
-	var			theResultNum = 0,
-				theResultDen = 1;
-	for theTerm in anArray {
-		theResultNum = theResultNum*theTerm.denominator+theTerm.numerator*theResultDen;
-		theResultDen *= theTerm.denominator
-	}
-	return Rational( theResultNum, theResultDen );
-}
-
-func == (a: Rational, b: Rational) -> Bool { return a.numerator==b.numerator && a.denominator == b.denominator; }
-func != (a: Rational, b: Rational) -> Bool { return a.numerator != b.numerator || a.denominator != b.denominator; }
-func < (a: Rational, b: Rational) -> Bool { return a.numerator*b.denominator < b.numerator*a.denominator; }
-func <= (a: Rational, b: Rational) -> Bool { return a.numerator*b.denominator <= b.numerator*a.denominator; }
-func > (a: Rational, b: Rational) -> Bool { return a.numerator*b.denominator > b.numerator*a.denominator; }
-func >= (a: Rational, b: Rational) -> Bool { return a.numerator*b.denominator >= b.numerator*a.denominator; }
-
-func == (a: Rational, b: Int) -> Bool { return a.numerator == b && a.denominator == 1; }
-func != (a: Rational, b: Int) -> Bool { return a.numerator != b || a.denominator == 1; }
-func < (a: Rational, b: Int) -> Bool { 	return a.numerator < b*a.denominator; }
-func <= (a: Rational, b: Int) -> Bool { return a.numerator <= b*a.denominator; }
-func > (a: Rational, b: Int) -> Bool { return a.numerator > b*a.denominator; }
-func >= (a: Rational, b: Int) -> Bool { return a.numerator >= b*a.denominator; }
-
-func == (a: Rational, b: UInt) -> Bool { return a.numerator >= 0 && UInt(a.numerator) == b && a.denominator == 1; }
-func != (a: Rational, b: UInt) -> Bool { return a.numerator < 0 || UInt(a.numerator) != b || a.denominator == 1; }
-func < (a: Rational, b: UInt) -> Bool { return a < 0 || a < Int(b); }
-func <= (a: Rational, b: UInt) -> Bool { return a < 0 || a <= Int(b); }
-func > (a: Rational, b: UInt) -> Bool { return a >= 0 && a > Int(b); }
-func >= (a: Rational, b: UInt) -> Bool { return a >= 0 && a >= Int(b); }
 

@@ -203,9 +203,15 @@ class EqualTemperamentEntry : NSObject, NSPasteboardReading, NSPasteboardWriting
 	}
 
 	override var description: String { return "ratio:\(interval), closestIntervalNumber:\(closestIntervalNumber)"; }
-	override var hashValue: Int { return interval.hashValue; }
+	public override var hashValue: Int { return interval.hashValue; }
+	override public func isEqual(_ anObject: Any?) -> Bool {
+		let	theObject = anObject as! EqualTemperamentEntry;
+		return interval == theObject.interval;
+	}
+	public static func == (a: EqualTemperamentEntry, b: EqualTemperamentEntry) -> Bool {
+		return a.interval == b.interval;
+	}
 
-	override var hash : Int { return interval.hashValue; }
 	var everyIntervalName : [String] {
 		return self.interval.names ?? [];
 	}
@@ -262,4 +268,3 @@ class EqualTemperamentEntry : NSObject, NSPasteboardReading, NSPasteboardWriting
 	}
 }
 
-func ==(a: EqualTemperamentEntry, b: EqualTemperamentEntry) -> Bool { return a.interval==b.interval; }

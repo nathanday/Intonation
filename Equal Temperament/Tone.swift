@@ -213,12 +213,11 @@ class Tone {
 }
 
 extension Tone : Hashable {
-	var hashValue: Int {
+	public var hashValue: Int {
 		get { return interval.hashValue; }
 	}
-}
-
-func ==(aLhs: Tone, aRhs: Tone) -> Bool {
-	return aLhs.interval == aRhs.interval;
+	public static func ==(aLhs: Tone, aRhs: Tone) -> Bool {
+		return aLhs.interval == aRhs.interval;
+	}
 }
 
