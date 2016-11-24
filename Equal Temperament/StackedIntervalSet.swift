@@ -96,5 +96,9 @@ class StackedIntervalSet : IntervalSet, Hashable {
 	static func == (lhs: StackedIntervalSet, rhs: StackedIntervalSet) -> Bool {
 		return lhs.interval == rhs.interval;
 	}
+
+	override var description: String {
+		return "interval=\(interval), steps=\(steps), octaves=\(octaves)";
+	}
 }
 

@@ -79,7 +79,7 @@ class LimitsIntervalsData : IntervalsData {
 		}
 		set {
 			willChangeValue(forKey: "denominatorPrimeLimitIndex");
-			denominatorPrimeLimitIndex = IntervalsData.indexForLargestPrimeLessThanOrEuqalTo(newValue) ?? 2;
+			self.denominatorPrimeLimitIndex = IntervalsData.indexForLargestPrimeLessThanOrEuqalTo(newValue) ?? 2;
 			didChangeValue(forKey: "denominatorPrimeLimitIndex");
 		}
 	}

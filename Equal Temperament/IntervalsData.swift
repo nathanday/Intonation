@@ -103,8 +103,9 @@ class IntervalsData: NSObject {
 				baseFrequency = theBaseFrequency;
 			}
 			if let theAllOvertonesAmount = theTone["allOvertonesAmount"] as? Double,
-				let theEvenOvertonesAmount = theTone["evenOvertonesAmount"] as? Double {
-				overtones = HarmonicsDescription(amount: theAllOvertonesAmount, evenAmount: theEvenOvertonesAmount);
+				let theEvenOvertonesAmount = theTone["evenOvertonesAmount"] as? Double,
+				let theSpectrumStretch = theTone["spectrumStretch"] as? Double {
+				overtones = HarmonicsDescription(amount: theAllOvertonesAmount, evenAmount: theEvenOvertonesAmount, spectrumStretch: theSpectrumStretch );
 			}
 		}
 	}
@@ -160,6 +161,6 @@ class IntervalsData: NSObject {
 
 	dynamic var		baseFrequency : Double = 220.0;
 
-	var		overtones : HarmonicsDescription = HarmonicsDescription( amount : 0.5, evenAmount: 1.0 );
+	var		overtones : HarmonicsDescription = HarmonicsDescription( );
 	dynamic var		arpeggioInterval : Double = 0.5;
 }

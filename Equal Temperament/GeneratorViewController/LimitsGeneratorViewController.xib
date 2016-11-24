@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10116" systemVersion="15F18b" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2659" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10116"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11542"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="LimitsGeneratorViewController" customModule="Intonation" customModuleProvider="target">
@@ -22,7 +23,7 @@
                         <constraint firstAttribute="height" constant="17" id="eJH-4L-dpv"/>
                         <constraint firstAttribute="width" constant="23" id="fCA-kS-Rfc"/>
                     </constraints>
-                    <buttonCell key="cell" type="disclosureTriangle" bezelStyle="disclosure" image="ADE9537C-1251-4E82-9FE9-1ACF6AE629A2" imagePosition="above" alignment="left" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8fk-MV-khf">
+                    <buttonCell key="cell" type="disclosureTriangle" bezelStyle="disclosure" image="03C5A878-51D6-44ED-8D3E-7479AC777CA2" imagePosition="above" alignment="left" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8fk-MV-khf">
                         <behavior key="behavior" pushIn="YES" changeBackground="YES" changeGray="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -75,7 +76,7 @@
                     </textFieldCell>
                 </textField>
                 <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7KY-r9-B8X">
-                    <rect key="frame" x="327" y="31" width="19" height="27"/>
+                    <rect key="frame" x="327" y="32" width="19" height="27"/>
                     <stepperCell key="cell" continuous="YES" alignment="left" increment="2" minValue="3" maxValue="1023" doubleValue="3" id="liE-iT-IOF"/>
                     <connections>
                         <binding destination="-2" name="value" keyPath="self.document.intervalsData.oddLimit" id="tTH-2N-Ilr"/>
@@ -100,7 +101,7 @@
                     </connections>
                 </textField>
                 <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eP2-gP-8Pb">
-                    <rect key="frame" x="207" y="31" width="19" height="27"/>
+                    <rect key="frame" x="207" y="32" width="19" height="27"/>
                     <stepperCell key="cell" continuous="YES" alignment="left" maxValue="20" doubleValue="2" id="Qvn-nS-YGh"/>
                     <connections>
                         <binding destination="-2" name="value" keyPath="self.document.intervalsData.numeratorPrimeLimitIndex" id="gh3-kU-3j0"/>
@@ -125,7 +126,7 @@
                     </connections>
                 </textField>
                 <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HyA-UV-b1e">
-                    <rect key="frame" x="526" y="31" width="19" height="27"/>
+                    <rect key="frame" x="526" y="32" width="19" height="27"/>
                     <stepperCell key="cell" continuous="YES" alignment="left" increment="2" minValue="2" maxValue="1023" doubleValue="80" id="hMQ-OI-Dap"/>
                     <connections>
                         <binding destination="-2" name="value" keyPath="self.document.intervalsData.additiveDissonance" id="Uqk-aS-RSo"/>
@@ -161,10 +162,10 @@
                             </connections>
                         </textField>
                         <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7J9-NB-Us5">
-                            <rect key="frame" x="207" y="3" width="19" height="27"/>
+                            <rect key="frame" x="207" y="4" width="19" height="27"/>
                             <stepperCell key="cell" continuous="YES" alignment="left" maxValue="20" doubleValue="1" id="Hv4-7b-ePx"/>
                             <connections>
-                                <binding destination="-2" name="value" keyPath="self.document.intervalsData.denominatorPrimeLimit" id="CAK-Oi-w1K"/>
+                                <binding destination="-2" name="value" keyPath="self.document.intervalsData.denominatorPrimeLimitIndex" id="GRc-dH-p16"/>
                             </connections>
                         </stepper>
                         <button horizontalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DBX-3z-8jY">
@@ -240,11 +241,12 @@
                 <constraint firstItem="MBK-OD-HkO" firstAttribute="leading" secondItem="7LN-zV-as1" secondAttribute="trailing" constant="4" id="xwR-C5-LOF"/>
                 <constraint firstItem="My7-SP-3uf" firstAttribute="leading" secondItem="MBK-OD-HkO" secondAttribute="trailing" constant="60" id="zth-Lm-wVu"/>
             </constraints>
+            <point key="canvasLocation" x="18" y="182"/>
         </customView>
         <userDefaultsController representsSharedInstance="YES" id="15X-6Z-TvY"/>
     </objects>
     <resources>
-        <image name="ADE9537C-1251-4E82-9FE9-1ACF6AE629A2" width="1" height="1">
+        <image name="03C5A878-51D6-44ED-8D3E-7479AC777CA2" width="1" height="1">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

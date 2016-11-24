@@ -103,12 +103,17 @@ class Document : NSDocument, MIDIReceiverObserver {
 	}
 	var		allOvertonesAmount : Double {
 		get { return overtones.amount; }
-		set( aValue ) { overtones = HarmonicsDescription(amount: aValue, evenAmount: overtones.evenAmount); }
+		set( aValue ) { overtones = HarmonicsDescription(amount: aValue, evenAmount: overtones.evenAmount, spectrumStretch: overtones.spectrumStretch ); }
 	}
 	var		evenOvertonesAmount : Double {
 		get { return overtones.evenAmount; }
-		set( aValue ) { overtones = HarmonicsDescription(amount: overtones.amount, evenAmount: aValue); }
+		set( aValue ) { overtones = HarmonicsDescription(amount: overtones.amount, evenAmount: aValue, spectrumStretch: overtones.spectrumStretch); }
 	}
+	var		spectrumStretch : Double {
+		get { return overtones.spectrumStretch; }
+		set( aValue ) { overtones = HarmonicsDescription(amount: overtones.amount, evenAmount: overtones.evenAmount, spectrumStretch: aValue ); }
+	}
+
 
 	var		overtones : HarmonicsDescription {
 		set( aValue ) {
@@ -118,7 +123,7 @@ class Document : NSDocument, MIDIReceiverObserver {
 			}
 		}
 		get {
-			return intervalsData?.overtones ?? HarmonicsDescription(amount: 0.5, evenAmount: 1.0);
+			return intervalsData?.overtones ?? HarmonicsDescription();
 		}
 	}
 	var		arpeggioBeatPerMinute : Double {

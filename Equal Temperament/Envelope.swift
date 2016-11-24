@@ -22,6 +22,16 @@ struct Envelope {
 
 	init( attack anAttack: Float32, release aRelease: Float32 ) { self.init( attack: anAttack, hold: nil, release: aRelease ); }
 
+	mutating func get( out anOut: [Float], x anX: Float, step aStep: Float ) -> Bool {
+		var		theResult = true;
+		var		theOut = anOut
+		var		theX = anX;
+		for i in 0..<anOut.count {
+			(theResult, theOut[i]) = self[theX];
+			theX += aStep;
+		}
+		return theResult;
+	}
 	subscript( anX: Float32 ) -> (Bool,Float32) {
 		mutating get {
 			let		theX = max(anX,0.0);

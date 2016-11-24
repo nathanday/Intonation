@@ -15,7 +15,7 @@ func powerToDB( _ aPower: Double ) -> Double { return 10.0*log10(aPower); }
 class TonePlayer {
 
 	init() {
-		harmonics = HarmonicsDescription(amount: 0.5, evenAmount: 1.0);
+		harmonics = HarmonicsDescription();
 		baseFrequency = 220.0;
 		intervals = [];
 		playing = false;

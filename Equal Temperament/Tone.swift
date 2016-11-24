@@ -15,29 +15,6 @@ enum PlaybackType : Int {
 	case upDown;
 }
 
-func fastSin( _ aX: Double) -> Double
-{
-	//x is scaled 0<=x<4096
-	var		x = aX;
-	let		A = -0.0000000040319426317;
-	let		B = 216.83205691;
-	let		C = 0.000028463350538;
-	let		D = -0.0030774648337;
-	var		y : Double;
-
-	var		negate=false;
-	if( x > 2048.0 )
-	{
-		negate=true;
-		x -= 2048.0;
-	}
-	if( x > 1024.0 ) {
-		x = 2048.0 - x;
-	}
-	y = (A + x)/(B + C*x*x) + D*x;
-	return negate ? -y : y;
-}
-
 class Tone {
 	var				toneUnit : AudioComponentInstance?;
 	var				theta : Double = 0;
@@ -65,15 +42,13 @@ class Tone {
 			let		theResult : OSStatus = kAudioServicesNoError;
 			if let theBuffer : AudioBuffer = anIOData?.pointee.mBuffers {
 				let		theSamples = UnsafeMutableBufferPointer<Float32>(theBuffer);
-//				let		theToneRef = UnsafeMutablePointer<Tone>(anInRefCon);
-				let		theToneRef = anInRefCon.bindMemory(to: Tone.self, capacity: 1);
+				let		theToneRef = anInRefCon.assumingMemoryBound(to: Tone.self);
+				let		theTone = theToneRef.pointee;
 				let		theGain = Float32(0.5);
 				assert( theGain > 0.0, "bad gain value: \(theGain)" );
 				//		assert( !playingTones.isEmpty, "no tones" );
 				if !theSamples.isEmpty {
-					for i : Int in 0..<Int(anInNumberFrames) {
-						theSamples[i] = theToneRef.pointee.generate( gain: theGain );
-					}
+					theTone.generate( buffer: theSamples, gain: theGain, count: Int(anInNumberFrames) );
 					if theToneRef.pointee.complete {
 						theToneRef.pointee.stop();
 					}
@@ -127,14 +102,12 @@ class Tone {
 			let		theResult : OSStatus = kAudioServicesNoError;
 			if let theBuffer : AudioBuffer = anIOData?.pointee.mBuffers {
 				let		theSamples = UnsafeMutableBufferPointer<Float32>(theBuffer);
-//				let		theToneRef = UnsafeMutablePointer<Tone>(anInRefCon);
-				let		theToneRef = anInRefCon.bindMemory(to: Tone.self, capacity: 1);
+				let		theToneRef = anInRefCon.assumingMemoryBound(to: Tone.self);
+				let		theTone = theToneRef.pointee;
 				let		theGain = Float32(0.5);
 				assert( theGain > 0.0, "bad gain value: \(theGain)" );
 				if !theSamples.isEmpty {
-					for i : Int in 0..<Int(anInNumberFrames) {
-						theSamples[i] = theToneRef.pointee.generate( gain: theGain );
-					}
+					theTone.generate( buffer: theSamples, gain: theGain, count: Int(anInNumberFrames) );
 					if theToneRef.pointee.complete {
 						theToneRef.pointee.stop();
 					}
@@ -174,21 +147,56 @@ class Tone {
 		assert(thetaDelta < 1.0);
 	}
 
-	final func generate( gain aGain: Float32 ) -> Float32 {
+	final func generate( buffer aBuffer : UnsafeMutableBufferPointer<Float32>, gain aGain: Float32, count aCount : Int ) {
 		var		theEnvelope : Float32 = 0.0;
-		var		theResult : Float32 = 0.0;
-		(complete,theEnvelope) = envelope[Float32(theta)];
-		if !complete {
-			var		theTotal : Float32 = 0.0;
-			for i in 1...min(harmonics.maximumHarmonic,Int(0.5/thetaDelta)) {
-				if i%2 == 1 && harmonics.amplitudes[i] < pow(2.0,-7.0) { break; }
-				theTotal += harmonics.amplitudes[i]*Float32(fastSin(2.0*theta*Double(i)*M_PI));
+		let		theThreshold = powf(2.0,-7.0);
+		for j : Int in 0..<aCount {
+			(complete,theEnvelope) = envelope[Float32(theta)];
+			if !complete {
+				var		theTotal : Float32 = 0.0;
+				for i in 1...min(harmonics.maximumHarmonic,Int(0.5/thetaDelta)) {
+					if i%2 == 1 && harmonics.amplitudes[i] < theThreshold { break; }
+					let theFreq = harmonics.frequency[i];
+					theTotal += harmonics.amplitudes[i]*Float32(sin(theta*theFreq));
+				}
+				aBuffer[j] = Float32(theTotal)*aGain*theEnvelope;
+				theta += thetaDelta;
 			}
-			theResult = Float32(theTotal)*aGain*theEnvelope;
-			theta += thetaDelta;
 		}
-		return theResult;
 	}
+
+	/*
+	final func generate( buffer aBuffer : UnsafeMutableBufferPointer<Float32>, gain aGain: Float32, count aCount : Int ) {
+		var		theEnvelope : Float32 = 0.0;
+		let		theThreshold = powf(2.0,-7.0);
+		for j : Int in 0..<aCount {
+			(complete,theEnvelope) = envelope[Float32(theta)];
+			if !complete {
+				var		theTotal : Float32 = 0.0;
+				for i in 1...min(harmonics.maximumHarmonic,Int(0.5/thetaDelta)) {
+					if i%2 == 1 && harmonics.amplitudes[i] < theThreshold { break; }
+					theTotal += harmonics.amplitudes[i]*Float32(sin(theta*harmonics.frequency[i]));
+				}
+				aBuffer[j] = Float32(theTotal)*aGain*theEnvelope;
+				theta += thetaDelta;
+			}
+		}
+	}
+	*/
+
+//	final func fastGenerate( buffer aBuffer : UnsafeMutableBufferPointer<Float32>, gain aGain: Float32, count aCount : Int ) {
+//		var		theEnvelope : Float32 = 0.0;
+//		for j : Int in 0.stride(through: aCount, by: 8) {
+//			(complete,theEnvelope) = envelope[Float32(theta)];
+//			if !complete {
+//				var		theTotal : UnsafeMutablePointer<Float> = [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0];
+//				for i in 1...min(harmonics.maximumHarmonic,Int(0.5/thetaDelta)) {
+//			vvsinf( theTotal,
+//		          _: UnsafePointer<Float>,
+//		             _: UnsafePointer<Int32>);
+//			}
+//		}
+//	}
 
 	func stop() {
 		if playing  {
