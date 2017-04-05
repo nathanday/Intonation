@@ -8,8 +8,6 @@
 
 import Cocoa
 
-let		π = M_PI;
-
 class ScaleView : ResultView {
 	static let		equalTempGradient: NSGradient? = NSGradient(starting: NSColor.lightGray, ending: NSColor(calibratedWhite:0.9, alpha:1.0));
 	let		equalTempBarWidth : CGFloat = 20.0;
@@ -111,7 +109,7 @@ class PitchConstellationView : ScaleView {
 	}
 	override func drawJustIntonationRatio( ratio aRatio : Interval, hilighted aHilighted : Bool, index anIndex: Int ) {
 		let		theBounds = self.bounds;
-		let		theAngle = CGFloat(log2(aRatio.toDouble) * 2.0*π);
+		let		theAngle = CGFloat(log2(aRatio.toDouble) * 2.0*Double.pi);
 		let		theRadius = aHilighted ? maximumRadius - 40.0 : axisesRadius;
 		let		thePath = NSBezierPath()
 		thePath.move(to: NSMakePoint(NSMidX(theBounds), NSMidY(theBounds)));
@@ -143,7 +141,7 @@ class PitchConstellationView : ScaleView {
 		thePath.close();
 		LinearScaleView.equalTempGradient!.draw(in: thePath, angle: (theStart+theEnd)*0.5+90.0);
 
-		let		theAngle = (360.0+88.0-theStart) * CGFloat(π/180.0);
+		let		theAngle = (360.0+88.0-theStart) * CGFloat(Double.pi/180.0);
 		let		theSize = NSFont.systemFontSize(for: NSControlSize.small);
 		drawText(string: "\(aRatioNumber+1)", size:theSize, point: NSMakePoint(NSMidX(theBounds)+sin(theAngle)*(axisesRadius-9.0), NSMidY(theBounds)+cos(theAngle)*(axisesRadius-11.0)-theSize*0.8), color:NSColor.white, textAlignment: .center );
 	}

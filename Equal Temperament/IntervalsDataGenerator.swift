@@ -18,8 +18,8 @@ class IntervalsDataGenerator : CustomStringConvertible {
 		return theAverageError/theCount
 	}
 
-	var smallestError : Set<EqualTemperamentEntry> {
-		var		theResult = Set<EqualTemperamentEntry>();
+	var smallestError : Set<IntervalEntry> {
+		var		theResult = Set<IntervalEntry>();
 		var		theError = 0.0;
 		for theEntry in everyEntry {
 			if !theEntry.isOctave && !theEntry.isUnison {
@@ -40,8 +40,8 @@ class IntervalsDataGenerator : CustomStringConvertible {
 		return theResult;
 	}
 
-	var biggestError : Set<EqualTemperamentEntry> {
-		var		theResult = Set<EqualTemperamentEntry>();
+	var biggestError : Set<IntervalEntry> {
+		var		theResult = Set<IntervalEntry>();
 		var		theError = 0.0;
 		for theEntry in everyEntry {
 			if !theEntry.isOctave && !theEntry.isUnison {
@@ -61,7 +61,7 @@ class IntervalsDataGenerator : CustomStringConvertible {
 		}
 		return theResult;
 	}
-	var everyEntry : [EqualTemperamentEntry] {
+	var everyEntry : [IntervalEntry] {
 		get {
 			preconditionFailure("The getter for the property everyEntry must be implemented" );
 		}

@@ -1,5 +1,5 @@
 /*
-    EqualTemperamentEntry.swift
+    IntervalEntry.swift
     Intonation
 
     Created by Nathan Day on 8/06/14.
@@ -31,7 +31,7 @@ extension Rational {
 	var additiveDissonance  : UInt { return UInt(numerator) + UInt(denominator); }
 }
 
-class EqualTemperamentEntry : NSObject, NSPasteboardReading, NSPasteboardWriting {
+class IntervalEntry : NSObject, NSPasteboardReading, NSPasteboardWriting {
 	var interval : Interval
     dynamic var intervalToString : String {
 		switch interval {
@@ -205,10 +205,10 @@ class EqualTemperamentEntry : NSObject, NSPasteboardReading, NSPasteboardWriting
 	override var description: String { return "ratio:\(interval), closestIntervalNumber:\(closestIntervalNumber)"; }
 	public override var hashValue: Int { return interval.hashValue; }
 	override public func isEqual(_ anObject: Any?) -> Bool {
-		let	theObject = anObject as! EqualTemperamentEntry;
+		let	theObject = anObject as! IntervalEntry;
 		return interval == theObject.interval;
 	}
-	public static func == (a: EqualTemperamentEntry, b: EqualTemperamentEntry) -> Bool {
+	public static func == (a: IntervalEntry, b: IntervalEntry) -> Bool {
 		return a.interval == b.interval;
 	}
 

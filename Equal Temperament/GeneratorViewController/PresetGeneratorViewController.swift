@@ -9,10 +9,12 @@
 import Cocoa
 
 class PresetGeneratorViewController: GeneratorViewController {
+    static let       defaultIntervalString = "<Select a Present>";
 
 	@IBOutlet var	choosePresetWindow : NSPanel?
 	@IBOutlet var	browser : NSBrowser?;
 	@IBOutlet var	chordOrScaleSelectorViewController : ChordOrScaleSelectorViewController?
+    @IBOutlet var   intervalNameTextView : NSTextField?
 
 	required init?( windowController aWindowController: MainWindowController ) {
 		super.init( nibName : "PresetGeneratorViewController", windowController: aWindowController);
@@ -21,6 +23,10 @@ class PresetGeneratorViewController: GeneratorViewController {
 	required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
+    
+    override func awakeFromNib() {
+        intervalNameTextView?.stringValue = PresetGeneratorViewController.defaultIntervalString;
+    }
 
 	@IBAction func showPresetsSheetAction( _ aSender: Any) {
 		if let theSheet = choosePresetWindow {
@@ -31,6 +37,11 @@ class PresetGeneratorViewController: GeneratorViewController {
 						if let theIntervalData = self.document?.intervalsData as? PresetIntervalsData {
 							theIntervalData.intervals = self.chordOrScaleSelectorViewController!.selectedIntervalSet;
 							self.document?.calculateAllIntervals();
+                            if let theName = theIntervalData.intervals?.name {
+                                self.intervalNameTextView?.stringValue = theName;
+                            } else {
+                                self.intervalNameTextView?.stringValue = PresetGeneratorViewController.defaultIntervalString;
+                            }
 						}
 						break;
 					default:

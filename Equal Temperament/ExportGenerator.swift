@@ -26,7 +26,7 @@ enum WordSize {
 class ExportGenerator {
 	let		method : ExportMethod;
 	var		delimiter : String = "\n";
-	var		stringEncoding = String.Encoding.utf8;;
+	var		stringEncoding = String.Encoding.utf8;
 	var		wordSize : WordSize = .size32;
 	var		endianness : Endianness = .big;
 	var		everyInterval : [Interval];

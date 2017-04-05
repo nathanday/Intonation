@@ -75,28 +75,28 @@ class EqualTemperamentGenerator: IntervalsDataGenerator {
 	func formulaStringFor( note aNote: UInt ) -> String {
 		return "\(interval.toString)^(\(aNote)/\(degrees))";
 	}
-	var	_everyEqualTemperamentEntry : [EqualTemperamentEntry]?;
-	override var	everyEntry : [EqualTemperamentEntry] {
-		return _everyEqualTemperamentEntry!;
+	var	_everyIntervalEntry : [IntervalEntry]?;
+	override var	everyEntry : [IntervalEntry] {
+		return _everyIntervalEntry!;
 	}
 	init( intervalsData anIntervalsData : EqualTemperamentIntervalsData ) {
 		interval = anIntervalsData.interval;
 		degrees = anIntervalsData.degrees;
 		super.init();
-		var		theResult = Set<EqualTemperamentEntry>();
+		var		theResult = Set<IntervalEntry>();
 		var		theIndex : UInt = 0;
 		var		theRatio = ratioFor(note:theIndex);
 		let		theMaxRatio = pow(2.0,Double(anIntervalsData.octavesCount));
 		while theRatio <= theMaxRatio {
 			let		theString = formulaStringFor(note:theIndex);
 			let		theInterval = EqualTemperamentInterval(degree: theIndex, steps: degrees, interval: interval, names: [theString])
-			let		theEntry = EqualTemperamentEntry(interval: theInterval );
+			let		theEntry = IntervalEntry(interval: theInterval );
 			theRatio = theInterval.toDouble;
 			theResult.insert(theEntry);
 			theIndex += 1;
 			theRatio = ratioFor(note:theIndex);
 		}
 
-		_everyEqualTemperamentEntry = theResult.sorted { return $0.toCents < $1.toCents; };
+		_everyIntervalEntry = theResult.sorted { return $0.toCents < $1.toCents; };
 	}
 }

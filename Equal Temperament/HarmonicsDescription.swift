@@ -33,7 +33,7 @@ struct HarmonicsDescription {
 				theValue = 1.0;
 			}
 			amplitudes.append(theValue);
-			frequency.append(2.0*M_PI*pow(Double(i),spectrumStretch));
+			frequency.append(2.0*Double.pi*pow(Double(i),spectrumStretch));
 		}
 	}
 	var		amount : Double;

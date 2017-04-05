@@ -62,7 +62,7 @@ class MainWindowController : NSWindowController {
 					scaleViewController!.setIntervals(intervals: theDocument.everyInterval, degree: 12, enabled: true);
 				} else if aKeyPath == "selectedIndicies" {
 					let		theSelectedIntervals = theDocument.selectedJustIntonationIntervals;
-					arrayController!.setSelectedObjects(theDocument.selectedEqualTemperamentEntry);
+					arrayController!.setSelectedObjects(theDocument.selectedIntervalEntry);
 					updateChordRatioTitle();
 					assert(scaleViewController != nil, "Failed to get ScaleViewController")
 					scaleViewController!.setSelectionIntervals(theSelectedIntervals);
@@ -78,7 +78,7 @@ class MainWindowController : NSWindowController {
 	}
 
 	var		selectedJustIntonationIntervals : [Interval] {
-		return (document as! Document).selectedEqualTemperamentEntry.map { return $0.interval; };
+		return (document as! Document).selectedIntervalEntry.map { return $0.interval; };
 	}
 	dynamic var		midiNoteNotes : [String] = {
 		let		theNoteNames = ["C", "C♯", "D", "D♯", "E", "F", "F♯", "G", "G♯", "A", "A♯", "B"];
@@ -186,7 +186,7 @@ class MainWindowController : NSWindowController {
 	}
 
 	@IBAction func copy( _ aSender: Any ) {
-		if let theEntries = arrayController!.selectedObjects as? [EqualTemperamentEntry] {
+		if let theEntries = arrayController!.selectedObjects as? [IntervalEntry] {
 			NSPasteboard.general().clearContents();
 			NSPasteboard.general().writeObjects( theEntries );
 		}
@@ -194,7 +194,7 @@ class MainWindowController : NSWindowController {
 
 	@IBAction func copyCentsAction( _ aSender: Any ) {
 		NSPasteboard.general().clearContents();
-		NSPasteboard.general().writeObjects( (arrayController!.selectedObjects as! [EqualTemperamentEntry]).map { return "\($0.toCents)" as NSString; } );
+		NSPasteboard.general().writeObjects( (arrayController!.selectedObjects as! [IntervalEntry]).map { return "\($0.toCents)" as NSString; } );
 	}
 
 	@IBAction func baseFrequencyDeltaChanged( _ aSender: NSSlider ) {
@@ -254,13 +254,13 @@ class MainWindowController : NSWindowController {
 
 	@IBAction func paste( _ aSender: Any ) {
 		if let theViewController = self.documentTypeViewController as? AdHokGeneratorViewController,
-			let theEntries = NSPasteboard.general().readObjects(forClasses: [EqualTemperamentEntry.self], options: nil) as? [EqualTemperamentEntry] {
+			let theEntries = NSPasteboard.general().readObjects(forClasses: [IntervalEntry.self], options: nil) as? [IntervalEntry] {
 			theViewController.addIntervals( theEntries.map { return $0.interval; } );
 		}
 	}
 	@IBAction func delete( _ aSender: Any) {
 		if let theViewController = self.documentTypeViewController as? AdHokGeneratorViewController,
-			let theSelectedObjects = arrayController?.selectedObjects as? [EqualTemperamentEntry] {
+			let theSelectedObjects = arrayController?.selectedObjects as? [IntervalEntry] {
 			theViewController.removeIntervals( theSelectedObjects.map { return $0.interval; } );
 		}
 	}
@@ -328,9 +328,9 @@ class MainWindowController : NSWindowController {
 extension MainWindowController : NSTableViewDelegate {
 
 	func tableViewSelectionDidChange(_ notification: Notification) {
-		if let theSelectedEntries = arrayController!.selectedObjects as? [EqualTemperamentEntry],
+		if let theSelectedEntries = arrayController!.selectedObjects as? [IntervalEntry],
 			let theDocument = document as? Document {
-			theDocument.selectedEqualTemperamentEntry = theSelectedEntries
+			theDocument.selectedIntervalEntry = theSelectedEntries
 		}
 	}
 
@@ -345,7 +345,7 @@ extension MainWindowController : NSTableViewDelegate {
 
 extension MainWindowController : NSTableViewDataSource {
 	func tableView(_ aTableView: NSTableView, pasteboardWriterForRow aRow: Int) -> NSPasteboardWriting? {
-		return (arrayController!.arrangedObjects as! [EqualTemperamentEntry])[aRow];
+		return (arrayController!.arrangedObjects as! [IntervalEntry])[aRow];
 	}
 }
 

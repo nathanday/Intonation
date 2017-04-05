@@ -65,19 +65,19 @@ class AdHocIntervalsData : IntervalsData {
 }
 
 class AdHocGenerator: IntervalsDataGenerator {
-	var	_everyEqualTemperamentEntry : [EqualTemperamentEntry]?;
-	override var everyEntry : [EqualTemperamentEntry] {
-		return _everyEqualTemperamentEntry!;
+	var	_everyIntervalEntry : [IntervalEntry]?;
+	override var everyEntry : [IntervalEntry] {
+		return _everyIntervalEntry!;
 	}
 	init( intervalsData anIntervalsData : AdHocIntervalsData ) {
-		var		theResult = Set<EqualTemperamentEntry>();
+		var		theResult = Set<IntervalEntry>();
 		super.init();
 		for theOctave in 0..<anIntervalsData.octavesCount {
 			let		theOctaveValue = (1<<theOctave);
 			for theEntry in anIntervalsData.adHocEntries {
-				theResult.insert(EqualTemperamentEntry(interval: theEntry*theOctaveValue ));
+				theResult.insert(IntervalEntry(interval: theEntry*theOctaveValue ));
 			}
 		}
-		_everyEqualTemperamentEntry = theResult.sorted { return $0.toRatio < $1.toRatio; };
+		_everyIntervalEntry = theResult.sorted { return $0.toRatio < $1.toRatio; };
 	}
 }

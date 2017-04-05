@@ -53,22 +53,22 @@ class StackedIntervalsIntervalsData : IntervalsData {
 }
 
 class StackedIntervalsDataGenerator: IntervalsDataGenerator {
-	var	_everyEqualTemperamentEntry : [EqualTemperamentEntry]?;
-	override var	everyEntry : [EqualTemperamentEntry] {
-		return _everyEqualTemperamentEntry!;
+	var	_everyIntervalEntry : [IntervalEntry]?;
+	override var	everyEntry : [IntervalEntry] {
+		return _everyIntervalEntry!;
 	}
 	init( intervalsData anIntervalsData : StackedIntervalsIntervalsData ) {
 		super.init();
-		var		theResult = Set<EqualTemperamentEntry>();
-		for theOctave in 0..<anIntervalsData.octavesCount {
-			let		theOctaveValue = 1<<theOctave;
-			for theStackInterval in anIntervalsData.stackedIntervals {
-				for theInterval in theStackInterval.everyInterval {
-					let		theEntry = EqualTemperamentEntry(interval: theInterval*theOctaveValue );
+		var		theResult = Set<IntervalEntry>();
+        for theStackInterval in anIntervalsData.stackedIntervals {
+            for theInterval in theStackInterval.everyInterval {
+                for theOctave in 0..<anIntervalsData.octavesCount {
+                    let		theOctaveValue = 1<<theOctave;
+					let		theEntry = IntervalEntry(interval: theInterval*theOctaveValue );
 					theResult.insert(theEntry);
 				}
 			}
 		}
-		_everyEqualTemperamentEntry = theResult.sorted { return $0.toCents < $1.toCents; };
+		_everyIntervalEntry = theResult.sorted { return $0.toCents < $1.toCents; };
 	}
 }

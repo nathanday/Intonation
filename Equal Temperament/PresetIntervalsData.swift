@@ -41,23 +41,23 @@ class PresetIntervalsData : IntervalsData {
 }
 
 class PresetGenerator: IntervalsDataGenerator {
-	var	_everyEqualTemperamentEntry : [EqualTemperamentEntry]?;
-	override var everyEntry : [EqualTemperamentEntry] {
-		return _everyEqualTemperamentEntry!;
+	var	_everyIntervalEntry : [IntervalEntry]?;
+	override var everyEntry : [IntervalEntry] {
+		return _everyIntervalEntry!;
 	}
 	init( intervalsData anIntervalsData : PresetIntervalsData ) {
-		var		theResult = Set<EqualTemperamentEntry>();
+		var		theResult = Set<IntervalEntry>();
 		if let theIntervals = anIntervalsData.intervals {
 			for theInterval in theIntervals {
 				let	theOctavesCount = anIntervalsData.octavesCount + (theInterval == 1 ? 1 : 0);
 				for theOctave in 0..<theOctavesCount {
 					let		theOctaveValue = 1<<theOctave;
-					let		theEntry = EqualTemperamentEntry(interval: theInterval*theOctaveValue );
+					let		theEntry = IntervalEntry(interval: theInterval*theOctaveValue );
 					theResult.insert(theEntry);
 				}
 			}
 		}
 		super.init();
-		_everyEqualTemperamentEntry = theResult.sorted { return $0.toCents < $1.toCents; };
+		_everyIntervalEntry = theResult.sorted { return $0.toCents < $1.toCents; };
 	}
 }

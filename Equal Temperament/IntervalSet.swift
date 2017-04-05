@@ -90,6 +90,6 @@ class IntervalSet : Sequence {
 				theResult = ", \(r.ratioString)";
 			}
 		}
-		return "\(name) = \(theResult)]";
+		return "\(name) = \(String(describing: theResult))]";
 	}
 }

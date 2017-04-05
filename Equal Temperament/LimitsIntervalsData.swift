@@ -112,11 +112,11 @@ class LimitsIntervalsData : IntervalsData {
 
 class LimitsBasedGenerator : IntervalsDataGenerator {
 	var octaves : UInt = 1;
-	var	_everyEqualTemperamentEntry : [EqualTemperamentEntry]?;
-	override var	everyEntry : [EqualTemperamentEntry] {
+	var	_everyIntervalEntry : [IntervalEntry]?;
+	override var	everyEntry : [IntervalEntry] {
 		get {
-			if _everyEqualTemperamentEntry == nil {
-				var		theResult = Set<EqualTemperamentEntry>();
+			if _everyIntervalEntry == nil {
+				var		theResult = Set<IntervalEntry>();
 				for theDenom in PrimeProducts(maxPrime: limits.denominatorPrime, range: 1..<limits.odd) {
 					for theNum in PrimeProducts(maxPrime: limits.numeratorPrime, range: theDenom..<theDenom*2) {
 						if theNum+theDenom <= limits.additiveDissonance {
@@ -124,7 +124,7 @@ class LimitsBasedGenerator : IntervalsDataGenerator {
 							assert( theNum <= theDenom*2 );
 							for theOctaves in 0..<octaves {
 								let		theRational = RationalInterval(theNum*1<<theOctaves,theDenom);
-								let		theEntry = EqualTemperamentEntry(interval: theRational );
+								let		theEntry = IntervalEntry(interval: theRational );
 								theResult.insert(theEntry);
 								if let theDegree = Scale.major.indexOf(theRational) {
 									theEntry.degreeName = Scale.degreeName(theDegree);
@@ -133,9 +133,9 @@ class LimitsBasedGenerator : IntervalsDataGenerator {
 						}
 					}
 				}
-				_everyEqualTemperamentEntry = theResult.sorted { return $0.toCents < $1.toCents; };
+				_everyIntervalEntry = theResult.sorted { return $0.toCents < $1.toCents; };
 			}
-			return _everyEqualTemperamentEntry!;
+			return _everyIntervalEntry!;
 		}
 	}
 	var limits : (numeratorPrime:UInt,denominatorPrime:UInt,odd:UInt,additiveDissonance:UInt);

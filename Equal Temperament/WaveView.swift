@@ -57,7 +57,7 @@ class WaveView: ResultView {
 				let		thePhase = Double(theX)/Double(theWidth);
 				var		theValue = 0.0;
 				for theFreq in aFreqs {
-					theValue += sin(theFreq*thePhase*2*M_PI*Double(commonFactor));
+					theValue += sin(theFreq*thePhase*2*Double.pi*Double(commonFactor));
 				}
 				thePath.line(to: NSMakePoint(theX0+CGFloat(theX), theZeroAxis+CGFloat(theValue*theScalingFactor)*theHeight*0.6));
 			}

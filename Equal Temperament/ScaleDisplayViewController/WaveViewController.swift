@@ -35,7 +35,7 @@ class WaveViewController: NSViewController, ScaleDisplayViewController {
 		get { return UserDefaults.standard.integer(forKey: "selectedWaveViewScale"); }
 	}
 
-	func setIntervals( intervals anIntervals : [EqualTemperamentEntry], degree anDegree : UInt, enabled anEnable : Bool ) {
+	func setIntervals( intervals anIntervals : [IntervalEntry], degree anDegree : UInt, enabled anEnable : Bool ) {
 	}
 
 	func hideIntervalRelatedColumn( _ aHide : Bool ) {

@@ -212,21 +212,21 @@ class Document : NSDocument, MIDIReceiverObserver {
 		midiReceiver.observer = self;
 	}
 
-	dynamic var     everyInterval : [EqualTemperamentEntry] = [];
+	dynamic var     everyInterval : [IntervalEntry] = [];
 	dynamic var		smallestError : Double { get { return !smallestErrorEntries.isEmpty ? smallestErrorEntries.first!.error : 0.0; } }
 	dynamic var     averageError : Double = 0.0
 	dynamic var		biggestError : Double { get { return !biggestErrorEntries.isEmpty ? biggestErrorEntries.first!.error : 0.0; } }
-	dynamic var		smallestErrorEntries : Set<EqualTemperamentEntry> = [] {
+	dynamic var		smallestErrorEntries : Set<IntervalEntry> = [] {
 		willSet { self.willChangeValue(forKey: "smallestError"); }
 		didSet { self.didChangeValue(forKey: "smallestError"); }
 	}
-	dynamic var		biggestErrorEntries : Set<EqualTemperamentEntry> = [] {
+	dynamic var		biggestErrorEntries : Set<IntervalEntry> = [] {
 		willSet { self.willChangeValue(forKey: "biggestError"); }
 		didSet { self.didChangeValue(forKey: "biggestError"); }
 	}
 
-	func	indexFor(equalTemperamentEntry anEqualTemperamentEntry: EqualTemperamentEntry) -> Int? {
-		return everyInterval.index(of: anEqualTemperamentEntry);
+	func	indexFor(equalTemperamentEntry anIntervalEntry: IntervalEntry) -> Int? {
+		return everyInterval.index(of: anIntervalEntry);
 	}
 	func	select( index anIndex: Int ) {
 		let		theIndicies = NSMutableIndexSet(indexSet:selectedIndicies);
@@ -243,10 +243,10 @@ class Document : NSDocument, MIDIReceiverObserver {
 			tonePlayer.intervals = selectedJustIntonationIntervals;
 		}
 	}
-	var		selectedEqualTemperamentEntry : [EqualTemperamentEntry] {
-		set(anEqualTemperamentEntries) {
+	var		selectedIntervalEntry : [IntervalEntry] {
+		set(anIntervalEntries) {
 			let		theIndicies = NSMutableIndexSet();
-			for theEntry in anEqualTemperamentEntries {
+			for theEntry in anIntervalEntries {
 				if let theIndex = everyInterval.index(of: theEntry) {
 					theIndicies.add(theIndex);
 				}
@@ -254,7 +254,7 @@ class Document : NSDocument, MIDIReceiverObserver {
 			selectedIndicies = theIndicies as IndexSet;
 		}
 		get {
-			var		theResult = [EqualTemperamentEntry]();
+			var		theResult = [IntervalEntry]();
 			for theIndex in selectedIndicies {
 				theResult.append(everyInterval[theIndex]);
 			}
@@ -262,18 +262,18 @@ class Document : NSDocument, MIDIReceiverObserver {
 		}
 	}
 	var		selectedJustIntonationIntervals : [Interval] {
-		return selectedEqualTemperamentEntry.map { return $0.interval; };
+		return selectedIntervalEntry.map { return $0.interval; };
 	}
 
 	func calculateAllIntervals() {
 		if let theIntervalData = intervalsData {
-			let		theSelectedEntries = selectedEqualTemperamentEntry;
+			let		theSelectedEntries = selectedIntervalEntry;
 			let		theGenerator = theIntervalData.intervalsDataGenerator( );
 			smallestErrorEntries = theGenerator.smallestError;
 			biggestErrorEntries = theGenerator.biggestError;
 			averageError = theGenerator.averageError;
 			everyInterval = theGenerator.everyEntry;
-			selectedEqualTemperamentEntry = theSelectedEntries;
+			selectedIntervalEntry = theSelectedEntries;
 		}
 	}
 
