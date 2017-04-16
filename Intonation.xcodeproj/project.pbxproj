@@ -73,6 +73,7 @@
 		D8AFAD301CA58F370008ABFE /* PresetGeneratorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AFAD2E1CA58F370008ABFE /* PresetGeneratorViewController.swift */; };
 		D8AFAD311CA58F370008ABFE /* PresetGeneratorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8AFAD2F1CA58F370008ABFE /* PresetGeneratorViewController.xib */; };
 		D8B14D291B29C68300C971D8 /* Tone.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B14D281B29C68300C971D8 /* Tone.swift */; };
+		D8B204E81E97D09600686E16 /* SelectingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B204E71E97D09600686E16 /* SelectingTextField.swift */; };
 		D8B5E23F1B0386F200F20584 /* InitialUserDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = D8B5E23E1B0386F200F20584 /* InitialUserDefaults.plist */; };
 		D8B9020E1AD491E30015B5E2 /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B9020C1AD491E30015B5E2 /* PreferencesWindowController.swift */; };
 		D8B9020F1AD491E30015B5E2 /* PreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8B9020D1AD491E30015B5E2 /* PreferencesWindowController.xib */; };
@@ -171,6 +172,7 @@
 		D8AFAD2E1CA58F370008ABFE /* PresetGeneratorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresetGeneratorViewController.swift; sourceTree = "<group>"; };
 		D8AFAD2F1CA58F370008ABFE /* PresetGeneratorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PresetGeneratorViewController.xib; sourceTree = "<group>"; };
 		D8B14D281B29C68300C971D8 /* Tone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tone.swift; sourceTree = "<group>"; };
+		D8B204E71E97D09600686E16 /* SelectingTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectingTextField.swift; sourceTree = "<group>"; };
 		D8B5E23E1B0386F200F20584 /* InitialUserDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = InitialUserDefaults.plist; sourceTree = "<group>"; };
 		D8B9020C1AD491E30015B5E2 /* PreferencesWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
 		D8B9020D1AD491E30015B5E2 /* PreferencesWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreferencesWindowController.xib; sourceTree = "<group>"; };
@@ -382,6 +384,7 @@
 				D8832F8519A0C86B0095B26F /* WaveView.swift */,
 				D8C343C71AE109E200F5494A /* SpectrumView.swift */,
 				D83092C01AEBBC6F00B0E6A7 /* DisclosureView.swift */,
+				D8B204E71E97D09600686E16 /* SelectingTextField.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -593,6 +596,7 @@
 				D8944B3A1E7FD208001A71FE /* IrrationalInterval.swift in Sources */,
 				D8C343C81AE109E200F5494A /* SpectrumView.swift in Sources */,
 				D87356E71ADA0793006DAFEB /* ChordSelectorWindowController.swift in Sources */,
+				D8B204E81E97D09600686E16 /* SelectingTextField.swift in Sources */,
 				D87651B41ADFCB7D003C4BF2 /* ApplicationDelegate.swift in Sources */,
 				D85C0F671C8848F400FE36FA /* MainWindowController.swift in Sources */,
 				D88A62111AD02167004CD4C9 /* Scale.swift in Sources */,

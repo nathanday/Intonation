@@ -44,6 +44,12 @@ class StackedIntervalsIntervalsData : IntervalsData {
 	var		stackedIntervals = Set<StackedIntervalSet>();
 
 	func insertStackedInterval( _ a : StackedIntervalSet ) {
+        if let theIndex = stackedIntervals.index(of: a) {
+            let theExisting = stackedIntervals[theIndex];
+            a.steps = max(theExisting.steps, a.steps);
+            a.octaves = max(theExisting.octaves,a.octaves);
+            stackedIntervals.remove(theExisting);
+        }
 		stackedIntervals.insert(a);
 	}
 

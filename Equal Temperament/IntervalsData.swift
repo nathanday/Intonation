@@ -43,6 +43,20 @@ enum DocumentType {
 			return "adHoc";
 		}
 	}
+    func title() -> String {
+        switch self {
+        case .limits:
+            return "Limits";
+        case .stackedIntervals:
+            return "Stacked Intervals";
+        case .equalTemperament:
+            return "Equal Temperament";
+        case .preset:
+            return "Preset";
+        case .adHoc:
+            return "AdHoc";
+        }
+    }
 }
 
 
@@ -142,6 +156,10 @@ class IntervalsData: NSObject {
 		}
 		return nil;
 	}
+
+    var     documentTypeTitle : String {
+        return self.documentType.title();
+    }
 
 	var		documentType : DocumentType {
 		get { preconditionFailure("The property documentType is abstract and must be overriden"); }

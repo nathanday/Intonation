@@ -33,7 +33,6 @@ class ChordSelectorWindowController: NSWindowController {
 
 	func showAsSheet(parentWindow aWindow: NSWindow ) {
 		if let theWindow = self.window {
-			theWindow.parent = aWindow;
 			aWindow.beginSheet( theWindow, completionHandler: {
 				(aResponse: NSModalResponse) -> Void in
 			});

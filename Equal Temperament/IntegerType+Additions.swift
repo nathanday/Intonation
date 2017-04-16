@@ -44,7 +44,6 @@ extension UInt {
 		}
 		return theResult;
 	}
-
 	var largestPrimeLessThanOrEqualTo : UInt {
 		var		theResult = self;
 		while theResult > 3 && largestPrimeFactor < theResult {
@@ -52,7 +51,6 @@ extension UInt {
 		}
 		return theResult;
 	}
-
 	var superScriptString : String {
 		get {
 			var		theResult = "";
@@ -94,7 +92,8 @@ extension UInt {
 			var		theResult = "";
 			for theFact in self.everyPrimeFactor {
 				if theResult.startIndex != theResult.endIndex {
-					theResult.append(Character("∙"));
+//                    theResult.append(Character("⋅"));
+                    theResult.append(Character("⨯"));
 				}
 				theResult.append("\(theFact.factor)");
 				if theFact.power > 1 {
@@ -104,6 +103,14 @@ extension UInt {
 			return theResult;
 		}
 	}
+}
+
+func pow<T : UnsignedInteger>( a: T, b: T ) -> T {
+    var     theResult = a;
+    for _ in 1..<(b as! Int) {
+        theResult *= a;
+    }
+    return theResult;
 }
 
 func sqrt<T : UnsignedInteger>( _ n : T ) -> T {

@@ -46,7 +46,7 @@ class WaveView: ResultView {
 		let		theY1 = NSMaxY(theBounds)+0.25;
 		let		theX0 = NSMinX(theBounds)-0.25;
 		let		theX1 = NSMaxX(theBounds)+0.25;
-		let		theOutOffFocusAlpha : CGFloat = 0.25;
+		let		theOutOffFocusAlpha : CGFloat = 0.5;
 
 		func drawWave( _ aFreqs : [Double], lineWidth aLineWidth : CGFloat ) {
 			let		thePath = NSBezierPath();
@@ -92,10 +92,10 @@ class WaveView: ResultView {
 
 		switch displayMode {
 		case .combined:
-//			for (theIndex,theRatio) in selectedRatios.enumerate() {
-//				NSColor(calibratedHue: (CGFloat(theIndex+4)*1.0/5.1-2.0/15.0)%1.0, saturation: 0.5, brightness: 0.75, alpha: theOutOffFocusAlpha).setStroke();
-//				drawWave( [theRatio.toDouble], lineWidth:1.0 );
-//			}
+			for (theIndex,theRatio) in selectedRatios.enumerated() {
+				NSColor(calibratedHue: (CGFloat(theIndex+4).truncatingRemainder(dividingBy: 1.0)/5.1-2.0/15.0).truncatingRemainder(dividingBy: 1.0), saturation: 0.5, brightness: 0.75, alpha: theOutOffFocusAlpha).setStroke();
+				drawWave( [theRatio.toDouble], lineWidth:1.0 );
+			}
 			NSColor(calibratedWhite: 0.0, alpha: 1.0).setStroke();
 			drawWave( selectedRatios.map({$0.toDouble;}), lineWidth:2.0 );
 		case .overlayed:

@@ -79,7 +79,6 @@ class ExportWindowController: NSWindowController {
 
 	func showAsSheet(parentWindow aWindow: NSWindow ) {
 		referenceToSelf = self;
-		window!.parent = aWindow;
 		aWindow.beginSheet( window!, completionHandler: {
 			(aResponse: NSModalResponse) -> Void in
 			switch aResponse {
@@ -117,10 +116,10 @@ class ExportWindowController: NSWindowController {
 	}
 
 	@IBAction func nextAction( _ aSender: Any? ) {
-		window!.parent?.endSheet(window!, returnCode:NSModalResponseContinue);
+		window!.sheetParent?.endSheet(window!, returnCode:NSModalResponseContinue);
 	}
 
 	@IBAction func cancelAction( _ aSender: Any? ) {
-		window!.parent!.endSheet(window!);
+		window!.sheetParent!.endSheet(window!);
 	}
 }

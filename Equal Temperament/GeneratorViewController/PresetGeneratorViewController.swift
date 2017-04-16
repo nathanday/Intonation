@@ -55,9 +55,9 @@ class PresetGeneratorViewController: GeneratorViewController {
 
 extension PresetGeneratorViewController : NSWindowDelegate {
 	@IBAction func selectPresetAction( _ aSender: Any) {
-		view.window?.endSheet( choosePresetWindow!, returnCode: NSModalResponseContinue );
+		choosePresetWindow!.sheetParent?.endSheet( choosePresetWindow!, returnCode: NSModalResponseContinue );
 	}
 	@IBAction func cancelPresetSheetAction( _ aSender: Any) {
-		view.window?.endSheet( choosePresetWindow!, returnCode: NSModalResponseAbort );
+		choosePresetWindow!.sheetParent?.endSheet( choosePresetWindow!, returnCode: NSModalResponseAbort );
 	}
 }

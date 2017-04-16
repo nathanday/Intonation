@@ -19,18 +19,27 @@ class StackedIntervalsGeneratorViewController: GeneratorViewController {
 	}
 
 	override func viewDidLoad() {
+        if let theStackedIntervalSetBaseString = UserDefaults.standard.string(forKey: "stackedIntervalSetBaseString") {
+            stackedIntervalSetBaseString = theStackedIntervalSetBaseString;
+        } else {
+            stackedIntervalSetBaseString = "3:2";
+        }
 		stackedIntervalSetSteps = UInt(UserDefaults.standard.integer(forKey: "stackedIntervalSetSteps"));
 		if stackedIntervalSetSteps == 0 {
 			stackedIntervalSetSteps = 7;
 		}
 		stackedIntervalSetOctaves = UInt(UserDefaults.standard.integer(forKey: "stackedIntervalSetOctaves"));
-		if stackedIntervalSetOctaves == 0 {
-			stackedIntervalSetOctaves = 12;
-		}
+        if stackedIntervalSetOctaves == 0 {
+            stackedIntervalSetOctaves = 12;
+        }
 	}
 
-	@IBOutlet weak var stackedIntervalSetBaseTextField : NSTextField?;
 	@IBOutlet weak var stackedIntervalsTableView: NSTableView!
+    dynamic var	stackedIntervalSetBaseString : String = "3:2" {
+        didSet {
+            UserDefaults.standard.set(stackedIntervalSetBaseString, forKey:"stackedIntervalSetBaseString");
+        }
+    }
 	dynamic var	stackedIntervalSetSteps : UInt = 7 {
 		didSet {
 			UserDefaults.standard.set(Int(stackedIntervalSetSteps), forKey:"stackedIntervalSetSteps");
@@ -55,19 +64,17 @@ class StackedIntervalsGeneratorViewController: GeneratorViewController {
 	var stackedIntervalSet : StackedIntervalSet? {
 		get {
 			var		theResult : StackedIntervalSet?;
-			if let theIntervalString = stackedIntervalSetBaseTextField?.stringValue {
-				if var theInterval = Interval.from(string:theIntervalString) {
-					while theInterval < 1 {
-						theInterval *= 2;
-					}
-					theResult = StackedIntervalSet( interval: theInterval, steps: stackedIntervalSetSteps, octaves: stackedIntervalSetOctaves );
-				}
-			}
+            if var theInterval = Interval.from(string:stackedIntervalSetBaseString) {
+                while theInterval < 1 {
+                    theInterval *= 2;
+                }
+                theResult = StackedIntervalSet( interval: theInterval, steps: stackedIntervalSetSteps, octaves: stackedIntervalSetOctaves );
+            }
 			return theResult;
 		}
 		set {
 			if let theValue = newValue {
-				stackedIntervalSetBaseTextField?.stringValue = theValue.interval.toString;
+				stackedIntervalSetBaseString = theValue.interval.toString;
 				stackedIntervalSetSteps = theValue.steps;
 				stackedIntervalSetOctaves = theValue.octaves;
 			}

@@ -54,48 +54,52 @@ class IntervalEntry : NSObject, NSPasteboardReading, NSPasteboardWriting {
 	var error12ETCent : Double {
 		return (interval.toDouble/Double(closestIntervalNumber).ratioFromSemitone).toCents;
 	}
-	var oddLimit : UInt? {
+	dynamic var oddLimit : UInt {
 		switch interval {
 		case let x as RationalInterval:
 			return x.ratio.oddLimit;
 		default:
-			return nil;
+			return 0;
 		}
 	}
 
 	var oddLimitString : String {
-		if let theOddLimit = oddLimit {
-			return "\(theOddLimit)";
-		}
-		return "n/a";
+        switch interval {
+        case let x as RationalInterval:
+            return "\(x.ratio.oddLimit)";
+        default:
+            return "n/a";
+        }
 	}
 
-	var primeLimit : UInt? {
+	dynamic var primeLimit : UInt {
 		switch interval {
 		case let x as RationalInterval:
 			return x.ratio.primeLimit;
 		default:
-			return nil;
+			return 0;
 		}
 	}
 
 	var primeLimitString : String {
-		if let thePrimeLimit = primeLimit {
-			return "\(thePrimeLimit)";
-		}
-		return "n/a";
+        switch interval {
+        case let x as RationalInterval:
+            return "\(x.ratio.primeLimit)";
+        default:
+            return "n/a";
+        }
 	}
 
 	var factorsString : String {
 		return interval.factorsString;
 	}
 
-	var	additiveDissonance : UInt? {
-		return interval.additiveDissonance;
+	dynamic var	additiveDissonance : UInt {
+		return interval.additiveDissonance ?? 0;
 	}
 
 	var	additiveDissonanceString : String {
-		if let theAdditiveDissonance = additiveDissonance {
+		if let theAdditiveDissonance = interval.additiveDissonance {
 			return "\(theAdditiveDissonance)";
 		}
 		return "n/a";
@@ -114,10 +118,12 @@ class IntervalEntry : NSObject, NSPasteboardReading, NSPasteboardWriting {
 			let		noteForIntervalNumber = [ 1, 1, 2, 2, 3, 4, 4, 5, 5, 6, 6, 7 ];
 			let		theNoteNumber = Int(closestIntervalNumber)%noteForIntervalNumber.count;
 			let		theOctave = Int(closestIntervalNumber)/noteForIntervalNumber.count;
-			theResult = "\(noteForIntervalNumber[theNoteNumber]+theOctave*7)";
-			if theNoteNumber > 1 && noteForIntervalNumber[theNoteNumber] == noteForIntervalNumber[theNoteNumber-1] {
-				theResult = "\(theResult) maj";
-			}
+            let     theNotNumber = noteForIntervalNumber[theNoteNumber]+theOctave*7;
+            if theNoteNumber >= 1 && noteForIntervalNumber[theNoteNumber] == noteForIntervalNumber[theNoteNumber-1] {
+                theResult = "\(theNotNumber)♯/\(theNotNumber+1)♭";
+            } else {
+                theResult = "\(theNotNumber)";
+            }
 		}
 		return theResult;
 	}
