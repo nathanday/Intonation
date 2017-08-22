@@ -103,15 +103,11 @@ class Document : NSDocument, MIDIReceiverObserver {
 	}
 	var		allOvertonesAmount : Double {
 		get { return overtones.amount; }
-		set( aValue ) { overtones = HarmonicsDescription(amount: aValue, evenAmount: overtones.evenAmount, spectrumStretch: overtones.spectrumStretch ); }
+		set( aValue ) { overtones = HarmonicsDescription(amount: aValue, evenAmount: overtones.evenAmount ); }
 	}
 	var		evenOvertonesAmount : Double {
 		get { return overtones.evenAmount; }
-		set( aValue ) { overtones = HarmonicsDescription(amount: overtones.amount, evenAmount: aValue, spectrumStretch: overtones.spectrumStretch); }
-	}
-	var		spectrumStretch : Double {
-		get { return overtones.spectrumStretch; }
-		set( aValue ) { overtones = HarmonicsDescription(amount: overtones.amount, evenAmount: overtones.evenAmount, spectrumStretch: aValue ); }
+		set( aValue ) { overtones = HarmonicsDescription(amount: overtones.amount, evenAmount: aValue ); }
 	}
 
 

@@ -117,9 +117,8 @@ class IntervalsData: NSObject {
 				baseFrequency = theBaseFrequency;
 			}
 			if let theAllOvertonesAmount = theTone["allOvertonesAmount"] as? Double,
-				let theEvenOvertonesAmount = theTone["evenOvertonesAmount"] as? Double,
-				let theSpectrumStretch = theTone["spectrumStretch"] as? Double {
-				overtones = HarmonicsDescription(amount: theAllOvertonesAmount, evenAmount: theEvenOvertonesAmount, spectrumStretch: theSpectrumStretch );
+				let theEvenOvertonesAmount = theTone["evenOvertonesAmount"] as? Double {
+				overtones = HarmonicsDescription(amount: theAllOvertonesAmount, evenAmount: theEvenOvertonesAmount );
 			}
 		}
 	}

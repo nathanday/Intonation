@@ -97,7 +97,16 @@ extension Rational : ExpressibleByArrayLiteral, ExpressibleByIntegerLiteral, Exp
 	static func convertFromFloatLiteral( aValue: FloatLiteralType) -> Rational { return Rational( aValue, maxDenominator:UInt.max ); }
 }
 
-extension Rational : FloatingPoint, Equatable, SignedNumber {
+extension Rational : FloatingPoint, SignedNumber {
+
+	init?<T>(exactly aSource: T) where T : BinaryInteger {
+		self.init(Int(aSource),1);
+	}
+
+	var magnitude: Magnitude {
+		return numerator < 0 ? negated() : self;
+	}
+
 	public mutating func addProduct(_ l: Rational, _ r: Rational) {
 		numerator = numerator*l.denominator*r.denominator + denominator*l.numerator*r.numerator;
 		denominator = denominator*l.denominator*r.denominator;
@@ -172,7 +181,7 @@ extension Rational : FloatingPoint, Equatable, SignedNumber {
 
 	typealias Exponent = Int32;
 	typealias _BitsType = (Int,Int);
-	typealias Magnitude = UInt32;
+	typealias Magnitude = Rational;
 	static func _fromBitPattern( aBits: _BitsType) -> Rational { return Rational(aBits.0,aBits.1); }
 	func _toBitPattern() -> _BitsType { return (numerator,denominator); }
 

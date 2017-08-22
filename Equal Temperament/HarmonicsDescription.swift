@@ -12,12 +12,11 @@ struct HarmonicsDescription {
 	let		a = 2.0;
 	let		maximumHarmonic = 31;
 	init( ) {
-		self.init( amount: 0.5, evenAmount: 1.0, spectrumStretch: 1.0 );
+		self.init( amount: 0.5, evenAmount: 1.0 );
 	}
-	init( amount anAmount : Double, evenAmount anEvenAmount : Double, spectrumStretch aStretch : Double ) {
+	init( amount anAmount : Double, evenAmount anEvenAmount : Double ) {
 		amount = anAmount;
 		evenAmount = anEvenAmount;
-		spectrumStretch = aStretch;
 		amplitudes.append(0.0);
 		frequency.append(1.0);
 		for i in 1...maximumHarmonic {
@@ -33,12 +32,11 @@ struct HarmonicsDescription {
 				theValue = 1.0;
 			}
 			amplitudes.append(theValue);
-			frequency.append(2.0*Double.pi*pow(Double(i),spectrumStretch));
+			frequency.append(2.0*Double.pi*Double(i));
 		}
 	}
 	var		amount : Double;
 	var		evenAmount : Double;
-	var		spectrumStretch : Double;
 	var		amplitudes : [Float32] = [];
 	var		frequency : [Double] = [];
 }

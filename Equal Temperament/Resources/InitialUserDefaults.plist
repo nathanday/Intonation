@@ -26,6 +26,8 @@
 	<integer>1</integer>
 	<key>maximumError</key>
 	<integer>18</integer>
+	<key>plotBackgroundHue</key>
+	<real>0.555555555556</real>
 	<key>intervalNames</key>
 	<array>
 		<dict>

@@ -10,7 +10,7 @@ import Cocoa
 
 class ExportWindowController: NSWindowController {
 
-	var		completionBlock : ((Void)  -> Void)?;
+	var		completionBlock : (()  -> Void)?;
 	var		referenceToSelf : NSWindowController? = nil;
 
 

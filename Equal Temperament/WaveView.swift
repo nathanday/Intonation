@@ -37,15 +37,15 @@ class WaveView: ResultView {
 		return NSMakeSize(CGFloat(2*commonFactor)*CGFloat(xScale), NSViewNoIntrinsicMetric);
 	}
 
-	override func draw(_ dirtyRect: NSRect) {
+	override func draw(_ aDirtyRect: NSRect) {
 		var		theBounds = self.bounds;
 		let		theHeight =  NSHeight(theBounds);
 		let		theWidth =  NSWidth(theBounds);
 		let		theZeroAxis = floor(NSMinY(theBounds)+theHeight*0.55)+0.25;
-		let		theY0 = NSMinY(theBounds)-0.25;
-		let		theY1 = NSMaxY(theBounds)+0.25;
-		let		theX0 = NSMinX(theBounds)-0.25;
-		let		theX1 = NSMaxX(theBounds)+0.25;
+		let		theY0 = theBounds.minY-0.25;
+		let		theY1 = theBounds.maxY+0.25;
+		let		theX0 = theBounds.minX-0.25;
+		let		theX1 = theBounds.maxX+0.25;
 		let		theOutOffFocusAlpha : CGFloat = 0.5;
 
 		func drawWave( _ aFreqs : [Double], lineWidth aLineWidth : CGFloat ) {
@@ -53,7 +53,7 @@ class WaveView: ResultView {
 			let		theScalingFactor = pow(1.0/(Double(aFreqs.count)+1.0),0.8);
 			thePath.lineWidth = aLineWidth;
 			thePath.move(to: NSMakePoint(theX0, theZeroAxis));
-			for theX in Int(NSMinX(dirtyRect))...Int(NSMaxX(dirtyRect)) {
+			for theX in Int(NSMinX(aDirtyRect))...Int(NSMaxX(aDirtyRect)) {
 				let		thePhase = Double(theX)/Double(theWidth);
 				var		theValue = 0.0;
 				for theFreq in aFreqs {
@@ -78,7 +78,7 @@ class WaveView: ResultView {
 					thePath.line(to: NSMakePoint(theX,theY1));
 				}
 				else {
-					let		theLen : CGFloat = i%4 == 0 ? 5.0 : (i%2 == 0 ? 4.0 : 2.0);
+					let		theLen : CGFloat = i%4 == 0 ? 8.0 : (i%2 == 0 ? 4.0 : 2.0);
 					thePath.move(to: NSMakePoint(theX, theZeroAxis-theLen));
 					thePath.line(to: NSMakePoint(theX, theZeroAxis+theLen));
 				}
@@ -86,27 +86,28 @@ class WaveView: ResultView {
 					drawText(string: "\(i/8 + 1)", size: NSFont.systemFontSize(for: NSControlSize.regular)*1.25, point: NSMakePoint(theX-6.0,20.0), color:NSColor.darkGray, textAlignment:.center );
 				}
 			}
-			NSColor.darkGray.setStroke();
+			axisesColor.setStroke();
 			thePath.stroke();
 		}
-
-		switch displayMode {
-		case .combined:
-			for (theIndex,theRatio) in selectedRatios.enumerated() {
-				NSColor(calibratedHue: (CGFloat(theIndex+4).truncatingRemainder(dividingBy: 1.0)/5.1-2.0/15.0).truncatingRemainder(dividingBy: 1.0), saturation: 0.5, brightness: 0.75, alpha: theOutOffFocusAlpha).setStroke();
-				drawWave( [theRatio.toDouble], lineWidth:1.0 );
-			}
-			NSColor(calibratedWhite: 0.0, alpha: 1.0).setStroke();
-			drawWave( selectedRatios.map({$0.toDouble;}), lineWidth:2.0 );
-		case .overlayed:
-			NSColor(calibratedWhite: 0.5, alpha: theOutOffFocusAlpha).setStroke();
-			drawWave( selectedRatios.map({$0.toDouble;}), lineWidth:1.5 );
-			for (theIndex,theRatio) in selectedRatios.enumerated() {
-				let		theHue = hueForIndex(theIndex);
-				NSColor(calibratedHue: theHue, saturation: 1.0, brightness: 0.75, alpha: 1.0).setStroke();
-				drawWave( [theRatio.toDouble], lineWidth:2.0 );
-			}
-		}
+        if( selectedRatios.count > 0 ) {
+            switch displayMode {
+            case .combined:
+                for (theIndex,theRatio) in selectedRatios.enumerated() {
+                    NSColor(calibratedHue: (CGFloat(theIndex+4).truncatingRemainder(dividingBy: 1.0)/5.1-2.0/15.0).truncatingRemainder(dividingBy: 1.0), saturation: 0.5, brightness: 0.75, alpha: theOutOffFocusAlpha).setStroke();
+                    drawWave( [theRatio.toDouble], lineWidth:1.0 );
+                }
+                NSColor(calibratedWhite: 0.0, alpha: 1.0).setStroke();
+                drawWave( selectedRatios.map({$0.toDouble;}), lineWidth:2.0 );
+            case .overlayed:
+                NSColor(calibratedWhite: 0.5, alpha: theOutOffFocusAlpha).setStroke();
+                drawWave( selectedRatios.map({$0.toDouble;}), lineWidth:1.5 );
+                for (theIndex,theRatio) in selectedRatios.enumerated() {
+                    let		theHue = hueForIndex(theIndex);
+                    NSColor(calibratedHue: theHue, saturation: 1.0, brightness: 0.75, alpha: 1.0).setStroke();
+                    drawWave( [theRatio.toDouble], lineWidth:2.0 );
+                }
+            }
+        }
 		drawAxises();
     }
 

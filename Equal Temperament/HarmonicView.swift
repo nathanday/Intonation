@@ -132,7 +132,7 @@ class HarmonicView: ResultView {
 			thePath.line(to: NSMakePoint(theXOrigin+3.5, theY+theSize*0.75));
 			thePath.move(to: NSMakePoint(theXOrigin+3.5, theY-theSize*0.45));
 			thePath.line(to: NSMakePoint(theXOrigin+3.5, theY-theOctaveHeight/2.0+5.0));
-			NSColor.darkGray.setStroke();
+			axisesColor.setStroke();
 			thePath.lineCapStyle = NSLineCapStyle.roundLineCapStyle
 			thePath.stroke()
 		}
@@ -142,7 +142,7 @@ class HarmonicView: ResultView {
 			let		theY = yValueForHarmonic(aHarmonic, bounds: theBounds);
 			let		thePath = NSBezierPath();
 			if theSubInterval == 0 {
-				let		theColor = NSColor(deviceRed: 0.0, green: 0.0, blue: 0.75, alpha: 1.0);
+				let		theColor = majorAxisesColor;
 				thePath.lineWidth = 2.0;
 				thePath.move(to: NSMakePoint(theXOrigin, floor(theY*2.0)*0.5+0.25));
 				thePath.line(to: NSMakePoint(theXOrigin+28.0, floor(theY*2.0)*0.5+0.25));
@@ -156,15 +156,15 @@ class HarmonicView: ResultView {
 				thePath.lineWidth = 1.0;
 				if (aHarmonic)%4 == 0 {
 					thePath.line(to: NSMakePoint(theXOrigin+58.0, floor(theY*2.0)*0.5+0.25));
-					NSColor.darkGray.setStroke();
+					majorAxisesColor.setStroke();
 				}
 				else if (aHarmonic)%2 == 0 {
 					thePath.line(to: NSMakePoint(theXOrigin+54.0, floor(theY*2.0)*0.5+0.25));
-					NSColor.gray.setStroke();
+					axisesColor.setStroke();
 				}
 				else {
 					thePath.line(to: NSMakePoint(theXOrigin+50.0, floor(theY*2.0)*0.5+0.25));
-					NSColor.lightGray.setStroke();
+					minorAxisesColor.setStroke();
 				}
 			}
 			thePath.stroke()

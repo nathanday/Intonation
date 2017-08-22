@@ -186,6 +186,7 @@
 		D8ED76CF1C58E59E00BB2B8C /* FindIntervalsWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindIntervalsWindowController.swift; sourceTree = "<group>"; };
 		D8EDC4AD1DB11E3D009BF520 /* Intonation.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Intonation.entitlements; sourceTree = "<group>"; };
 		D8F2B1D51C93EFD800F88BF7 /* LimitsIntervalsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LimitsIntervalsData.swift; sourceTree = "<group>"; };
+		D8F5A9AA1F02D2D400DEBB6B /* WaveTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaveTable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -410,6 +411,7 @@
 				D831054D1B0A6115000EB805 /* HarmonicsDescription.swift */,
 				D8D912D11B197D5300BB479A /* TonePlayer.swift */,
 				D8B14D281B29C68300C971D8 /* Tone.swift */,
+				D8F5A9AA1F02D2D400DEBB6B /* WaveTable.swift */,
 				D85916C21C8C04D0001C5330 /* MIDIReceiver.swift */,
 				D80D8C191B80A167001E7746 /* Envelope.swift */,
 				D8646B271C3D23F500D8C429 /* ChordSelectorItem.swift */,

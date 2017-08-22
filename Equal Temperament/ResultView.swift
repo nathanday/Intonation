@@ -34,6 +34,30 @@ import Cocoa
 
 	func hueForIndex( _ aIndex : Int ) -> CGFloat { return (CGFloat(aIndex+4)*1.0/5.1-2.0/15.0).truncatingRemainder(dividingBy: 1.0); }
 
+    var axisesColor : NSColor {
+        var     theResult = NSColor.gray
+        if let theHue = UserDefaults.standard.object(forKey:"plotBackgroundHue") as? NSNumber {
+            theResult = NSColor(calibratedHue: CGFloat(theHue.floatValue), saturation: 0.2, brightness: 0.5, alpha: 1.0);
+        }
+        return theResult;
+    }
+    
+    var majorAxisesColor : NSColor {
+        var     theResult = NSColor.darkGray
+        if let theHue = UserDefaults.standard.object(forKey:"plotBackgroundHue") as? NSNumber {
+            theResult = NSColor(calibratedHue: CGFloat(theHue.floatValue), saturation: 0.4, brightness: 0.2, alpha: 1.0);
+        }
+        return theResult;
+    }
+    
+    var minorAxisesColor : NSColor {
+        var     theResult = NSColor.lightGray
+        if let theHue = UserDefaults.standard.object(forKey:"plotBackgroundHue") as? NSNumber {
+            theResult = NSColor(calibratedHue: CGFloat(theHue.floatValue), saturation: 0.1, brightness: 0.7, alpha: 1.0);
+        }
+        return theResult;
+    }
+    
 	func drawText(string aString: String, size aSize: CGFloat, point aPoint: CGPoint ) {
 		drawText(string: aString, size: aSize, point: aPoint, color:NSColor.black, textAlignment: .left );
 	}
