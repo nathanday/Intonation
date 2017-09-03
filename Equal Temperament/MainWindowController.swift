@@ -80,7 +80,7 @@ class MainWindowController : NSWindowController {
 	var		selectedJustIntonationIntervals : [Interval] {
 		return (document as! Document).selectedIntervalEntry.map { return $0.interval; };
 	}
-	dynamic var		midiNoteNotes : [String] = {
+	@objc dynamic var		midiNoteNotes : [String] = {
 		let		theNoteNames = ["C", "C♯", "D", "D♯", "E", "F", "F♯", "G", "G♯", "A", "A♯", "B"];
 		var		theResult = ["Select Note"];
 		for theNoteNumber in MainWindowController.midiSelectBounds {
@@ -99,19 +99,19 @@ class MainWindowController : NSWindowController {
 	/*
 	Disclosure views
 	*/
-	dynamic var		errorExpanded : Bool {
+	@objc dynamic var		errorExpanded : Bool {
 		set( aValue ) { UserDefaults.standard.set(aValue, forKey: "errorExpanded"); }
 		get { return UserDefaults.standard.bool(forKey: "errorExpanded"); }
 	}
-	dynamic var		midiExpanded : Bool {
+	@objc dynamic var		midiExpanded : Bool {
 		set( aValue ) { UserDefaults.standard.set(aValue, forKey: "midiExpanded"); }
 		get { return UserDefaults.standard.bool(forKey: "midiExpanded"); }
 	}
-	dynamic var		audioExpanded : Bool {
+	@objc dynamic var		audioExpanded : Bool {
 		set( aValue ) { UserDefaults.standard.set(aValue, forKey: "audioExpanded"); }
 		get { return UserDefaults.standard.bool(forKey: "audioExpanded"); }
 	}
-	dynamic var		savedExpanded : Bool {
+	@objc dynamic var		savedExpanded : Bool {
 		set( aValue ) { UserDefaults.standard.set(aValue, forKey: "savedExpanded"); }
 		get { return UserDefaults.standard.bool(forKey: "savedExpanded"); }
 	}
@@ -159,7 +159,7 @@ class MainWindowController : NSWindowController {
 		}
 	}
 
-	func playBackMethodChanged(notification aNotification: Notification) {
+	@objc func playBackMethodChanged(notification aNotification: Notification) {
 		if let theDocument = document as? Document {
 			if let thePlaySegmentedControl = playSegmentedControl {
 				if let theSelectedMethod = theDocument.currentlySelectedMethod {
@@ -187,14 +187,14 @@ class MainWindowController : NSWindowController {
 
 	@IBAction func copy( _ aSender: Any ) {
 		if let theEntries = arrayController!.selectedObjects as? [IntervalEntry] {
-			NSPasteboard.general().clearContents();
-			NSPasteboard.general().writeObjects( theEntries );
+			NSPasteboard.general.clearContents();
+			NSPasteboard.general.writeObjects( theEntries );
 		}
 	}
 
 	@IBAction func copyCentsAction( _ aSender: Any ) {
-		NSPasteboard.general().clearContents();
-		NSPasteboard.general().writeObjects( (arrayController!.selectedObjects as! [IntervalEntry]).map { return "\($0.toCents)" as NSString; } );
+		NSPasteboard.general.clearContents();
+		NSPasteboard.general.writeObjects( (arrayController!.selectedObjects as! [IntervalEntry]).map { return "\($0.toCents)" as NSString; } );
 	}
 
 	@IBAction func baseFrequencyDeltaChanged( _ aSender: NSSlider ) {
@@ -254,7 +254,7 @@ class MainWindowController : NSWindowController {
 
 	@IBAction func paste( _ aSender: Any ) {
 		if let theViewController = self.documentTypeViewController as? AdHokGeneratorViewController,
-			let theEntries = NSPasteboard.general().readObjects(forClasses: [IntervalEntry.self], options: nil) as? [IntervalEntry] {
+			let theEntries = NSPasteboard.general.readObjects(forClasses: [IntervalEntry.self], options: nil) as? [IntervalEntry] {
 			theViewController.addIntervals( theEntries.map { return $0.interval; } );
 		}
 	}
@@ -271,7 +271,7 @@ class MainWindowController : NSWindowController {
 		theExportWindowController.showAsSheet(parentWindow: self.window! );
 	}
 
-	override var windowNibName: String { return "MainWindowController"; }
+	override var windowNibName: NSNib.Name { return NSNib.Name(rawValue:"MainWindowController"); }
 
 	override func windowDidLoad() {
 		super.windowDidLoad();
@@ -305,7 +305,7 @@ class MainWindowController : NSWindowController {
 
 	func hideIntervalRelatedColumn( _ aHide : Bool ) {
 		for theTableColumn in tableView!.tableColumns {
-			if ["interval","percent","error"].contains(theTableColumn.identifier) {
+			if ["interval","percent","error"].contains(theTableColumn.identifier.rawValue) {
 				theTableColumn.isHidden = aHide;
 			}
 		}
@@ -336,7 +336,7 @@ extension MainWindowController : NSTableViewDelegate {
 
 	func tableViewColumnDidResize(_ aNotification: Notification) {
 		if let theTableColumn = (aNotification as NSNotification).userInfo?["NSTableColumn"] as? NSTableColumn {
-			if theTableColumn.identifier == "description" {
+			if theTableColumn.identifier.rawValue == "description" {
 				theTableColumn.isHidden = theTableColumn.width <= 20.0;
 			}
 		}

@@ -54,7 +54,7 @@ class LimitsIntervalsData : IntervalsData {
 
 	override var	documentType : DocumentType { return .limits; }
 
-	var		numeratorPrimeLimit : UInt {
+	@objc dynamic var		numeratorPrimeLimit : UInt {
 		get {
 			return PrimesSequence(end: 100)[numeratorPrimeLimitIndex];
 		}
@@ -64,7 +64,7 @@ class LimitsIntervalsData : IntervalsData {
 			didChangeValue(forKey: "numeratorPrimeLimitIndex");
 		}
 	}
-	var		numeratorPrimeLimitIndex : Int = 2 {
+	@objc dynamic var		numeratorPrimeLimitIndex : Int = 2 {
 		willSet {
 			willChangeValue(forKey: "numeratorPrimeLimit");
 		}
@@ -73,7 +73,7 @@ class LimitsIntervalsData : IntervalsData {
 			didChangeValue(forKey: "numeratorPrimeLimit");
 		}
 	}
-	var		denominatorPrimeLimit : UInt {
+	@objc dynamic var		denominatorPrimeLimit : UInt {
 		get {
 			return PrimesSequence(end:100)[denominatorPrimeLimitIndex];
 		}
@@ -83,7 +83,7 @@ class LimitsIntervalsData : IntervalsData {
 			didChangeValue(forKey: "denominatorPrimeLimitIndex");
 		}
 	}
-	var		denominatorPrimeLimitIndex : Int = 1 {
+	@objc dynamic var		denominatorPrimeLimitIndex : Int = 1 {
 		willSet {
 			willChangeValue(forKey: "denominatorPrimeLimit");
 		}
@@ -92,18 +92,18 @@ class LimitsIntervalsData : IntervalsData {
 			didChangeValue(forKey: "denominatorPrimeLimit");
 		}
 	}
-	var		separatePrimeLimit : Bool = false {
+	@objc dynamic var		separatePrimeLimit : Bool = false {
 		didSet {
 			UserDefaults.standard.set( separatePrimeLimit, forKey:"separatePrimeLimit");
 		}
 	}
-	var		oddLimit : UInt = 15 {
+	@objc dynamic var		oddLimit : UInt = 15 {
 		didSet {
 			if( oddLimit%2 == 0 ) { oddLimit += 1; }
 			UserDefaults.standard.set( Int(oddLimit), forKey:"oddLimit");
 		}
 	}
-	var		additiveDissonance : UInt = UInt.max {
+	@objc dynamic var		additiveDissonance : UInt = UInt.max {
 		didSet {
 			UserDefaults.standard.set( Int(additiveDissonance), forKey:"additiveDissonance");
 		}

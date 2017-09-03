@@ -47,7 +47,7 @@ class AdHokGeneratorViewController: GeneratorViewController {
 		}
 	}
 	@IBAction func paste( _ aSender: Any ) {
-		let		theEntries = NSPasteboard.general().readObjects(forClasses: [IntervalEntry.self], options: nil) as? [IntervalEntry];
+		let		theEntries = NSPasteboard.general.readObjects(forClasses: [IntervalEntry.self], options: nil) as? [IntervalEntry];
 		NSLog( "\(String(describing: theEntries))" );
 	}
 	func addInterval( _ anInterval : Interval ) {

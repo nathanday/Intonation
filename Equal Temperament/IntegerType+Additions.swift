@@ -131,9 +131,9 @@ func sqrt<T : UnsignedInteger>( _ n : T ) -> T {
 	}
 }
 
-func log2<T : Integer>( _ aValue : T ) -> T {
+func log2<T : BinaryInteger>( _ aValue : T ) -> T {
 	if aValue == 0 {
-		return 0;
+		return UInt(0) as! T;
 	} else {
 		return 1 + log2(aValue / 2);
 	}

@@ -18,7 +18,7 @@ class LimitsGeneratorViewController: GeneratorViewController {
 		fatalError("init(coder:) has not been implemented")
 	}
 
-	dynamic var		limitExpanded : Bool {
+	@objc dynamic var		limitExpanded : Bool {
 		set( aValue ) { UserDefaults.standard.set(aValue, forKey: "limitExpanded"); }
 		get { return UserDefaults.standard.bool(forKey: "limitExpanded"); }
 	}

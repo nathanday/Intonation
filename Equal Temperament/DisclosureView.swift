@@ -26,20 +26,20 @@ class DisclosureView : NSView {
 		didSet {
 			complimentaryView?.isHidden = !isHidden;
 			invalidateIntrinsicContentSize();
-			var		theOrientation = NSLayoutConstraintOrientation.vertical;
+			var		theOrientation = NSLayoutConstraint.Orientation.vertical;
 			var		thePriority = expandedContentHuggingPriority;
 			if( orientation  == .horizontal ) {
 				theOrientation = .horizontal;
 			}
 			if( isHidden ) {
-				thePriority = NSLayoutPriorityDefaultHigh;
+				thePriority = NSLayoutConstraint.Priority.defaultHigh.rawValue;
 			}
-			super.setContentHuggingPriority(thePriority, for: theOrientation);
+			super.setContentHuggingPriority(NSLayoutConstraint.Priority(rawValue: thePriority), for: theOrientation);
 		}
 	}
 
 	private(set) var		expandedSize : NSSize;
-	@IBInspectable	var		expandedContentHuggingPriority : Float = NSLayoutPriorityDefaultLow;
+	@IBInspectable	var		expandedContentHuggingPriority : Float = NSLayoutConstraint.Priority.defaultLow.rawValue;
 	var						colapsedSize : NSSize {
 		get {
 			switch( orientation ) {
@@ -54,9 +54,9 @@ class DisclosureView : NSView {
 		get {
 			switch( orientation ) {
 			case .vertical:
-				return NSMakeSize( NSViewNoIntrinsicMetric, colapsed ? colapsedSize.height : expandedSize.height);
+				return NSMakeSize( NSView.noIntrinsicMetric, colapsed ? colapsedSize.height : expandedSize.height);
 			case .horizontal:
-				return NSMakeSize(colapsed ? colapsedSize.width : expandedSize.width, NSViewNoIntrinsicMetric );
+				return NSMakeSize(colapsed ? colapsedSize.width : expandedSize.width, NSView.noIntrinsicMetric );
 			}
 		}
 	}
@@ -94,16 +94,16 @@ class DisclosureView : NSView {
 		}
 	}
 
-	override func setContentHuggingPriority(_ aPriority: NSLayoutPriority, for anOrientation: NSLayoutConstraintOrientation) {
+	override func setContentHuggingPriority(_ aPriority: NSLayoutConstraint.Priority, for anOrientation: NSLayoutConstraint.Orientation) {
 		if !colapsed {
 			switch( orientation ) {
 			case .vertical:
 				if( anOrientation == .vertical ) {
-					expandedContentHuggingPriority = contentHuggingPriority(for: .vertical);
+					expandedContentHuggingPriority = contentHuggingPriority(for: .vertical).rawValue;
 				}
 			case .horizontal:
 				if( anOrientation == .horizontal ) {
-					expandedContentHuggingPriority = contentHuggingPriority(for: .horizontal);
+					expandedContentHuggingPriority = contentHuggingPriority(for: .horizontal).rawValue;
 				}
 			}
 		}

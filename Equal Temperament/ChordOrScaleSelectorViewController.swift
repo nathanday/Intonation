@@ -18,9 +18,9 @@ class ChordOrScaleSelectorViewController: NSViewController {
 //	@IBOutlet var	chordSelectorWindowController : ChordSelectorWindowController?
 //	@IBOutlet var	delegate :
 
-	dynamic var	everyChordRoot = RootChordSelectorGroup();
+	@objc dynamic var	everyChordRoot = RootChordSelectorGroup();
 
-	dynamic var hasLeafSelected : Bool = false;
+	@objc dynamic var hasLeafSelected : Bool = false;
 	var selectedIntervalSet : IntervalSet? {
 		didSet {
 			hasLeafSelected = selectedIntervalSet != nil;

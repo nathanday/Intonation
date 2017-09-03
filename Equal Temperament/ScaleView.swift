@@ -68,7 +68,7 @@ class LinearScaleView : ScaleView {
 		thePath.close()
 		thePath.move(to: NSMakePoint(theX1, theY))
 		thePath.line(to: NSMakePoint(theX0-equalTempBarWidth, theY))
-		thePath.lineCapStyle = NSLineCapStyle.roundLineCapStyle
+		thePath.lineCapStyle = NSBezierPath.LineCapStyle.roundLineCapStyle
 		if aHilighted {
 			NSColor(calibratedHue: hueForIndex(anIndex), saturation: 1.0, brightness: 0.75, alpha: 1.0).setFill()
 			NSColor(calibratedHue: hueForIndex(anIndex), saturation: 1.0, brightness: 0.75, alpha: 1.0).setStroke();
@@ -80,7 +80,7 @@ class LinearScaleView : ScaleView {
 		}
 		thePath.stroke()
 		
-		let		theSize = (aHilighted ?  NSFont.systemFontSize(for: NSControlSize.regular) : NSFont.systemFontSize(for: NSControlSize.mini)) + 2.0;
+		let		theSize = (aHilighted ?  NSFont.systemFontSize(for: NSControl.ControlSize.regular) : NSFont.systemFontSize(for: NSControl.ControlSize.mini)) + 2.0;
 		let		theTextColor = aHilighted ? NSColor(calibratedHue: hueForIndex(anIndex), saturation: 1.0, brightness: 0.75, alpha: 1.0) : NSColor(white: 0.0, alpha: 0.25);
 		drawText(string: aRatio.ratioString, size:theSize, point: NSMakePoint(theX1+10.0, theY-theSize*0.5-3.0), color:theTextColor );
 		
@@ -96,7 +96,7 @@ class LinearScaleView : ScaleView {
 	override func drawNoEqualTemperament( ) {
 		let		theX = floor(NSMidX(drawingBounds)-equalTempBarWidth/2.0)-20.5;
 		NSColor(calibratedWhite: 0.875, alpha: 1.0).setFill();
-		NSRectFill(NSMakeRect(theX, NSMinX(drawingBounds), equalTempBarWidth, NSHeight(drawingBounds)));
+		NSMakeRect(theX, NSMinX(drawingBounds), equalTempBarWidth, NSHeight(drawingBounds)).fill();
 	}
 }
 
@@ -114,7 +114,7 @@ class PitchConstellationView : ScaleView {
 		let		thePath = NSBezierPath()
 		thePath.move(to: NSMakePoint(NSMidX(theBounds), NSMidY(theBounds)));
 		thePath.line(to: NSMakePoint(NSMidX(theBounds)+sin(theAngle)*theRadius, NSMidY(theBounds)+cos(theAngle)*theRadius));
-		thePath.lineCapStyle = NSLineCapStyle.roundLineCapStyle
+		thePath.lineCapStyle = NSBezierPath.LineCapStyle.roundLineCapStyle
 		if aHilighted {
 			NSColor(calibratedHue: hueForIndex(anIndex), saturation: 1.0, brightness: 0.75, alpha: 1.0).setStroke();
 			thePath.lineWidth = 3.0;
@@ -124,7 +124,7 @@ class PitchConstellationView : ScaleView {
 		}
 		thePath.stroke();
 
-		let		theSize = (aHilighted ?  NSFont.systemFontSize(for: NSControlSize.regular) : NSFont.systemFontSize(for: NSControlSize.mini)) + 2.0;
+		let		theSize = (aHilighted ?  NSFont.systemFontSize(for: NSControl.ControlSize.regular) : NSFont.systemFontSize(for: NSControl.ControlSize.mini)) + 2.0;
 		let		theTextColor = aHilighted ? NSColor(calibratedHue: hueForIndex(anIndex), saturation: 1.0, brightness: 0.75, alpha: 1.0) : NSColor(white: 0.0, alpha: 0.25);
 		let		theTextAlignment : NSTextAlignment = abs(sin(theAngle)) < 0.707 ? .center : sin(theAngle) < 0.0 ? .right :  .left;
 		drawText(string: aRatio.ratioString, size:theSize, point: NSMakePoint(NSMidX(theBounds)+sin(theAngle)*(theRadius+5.0), NSMidY(theBounds)+cos(theAngle)*(theRadius+11.0)-theSize*0.8), color:theTextColor, textAlignment: theTextAlignment );
@@ -142,7 +142,7 @@ class PitchConstellationView : ScaleView {
 		LinearScaleView.equalTempGradient!.draw(in: thePath, angle: (theStart+theEnd)*0.5+90.0);
 
 		let		theAngle = (360.0+88.0-theStart) * CGFloat(Double.pi/180.0);
-		let		theSize = NSFont.systemFontSize(for: NSControlSize.small);
+		let		theSize = NSFont.systemFontSize(for: NSControl.ControlSize.small);
 		drawText(string: "\(aRatioNumber+1)", size:theSize, point: NSMakePoint(NSMidX(theBounds)+sin(theAngle)*(axisesRadius-9.0), NSMidY(theBounds)+cos(theAngle)*(axisesRadius-11.0)-theSize*0.8), color:NSColor.white, textAlignment: .center );
 	}
 

@@ -12,7 +12,7 @@ class SpectrumViewController: NSViewController {
 
 	@IBOutlet var	spectrumView : SpectrumView?;
 
-	dynamic var		selectedSpectrumType : Int {
+	@objc dynamic var		selectedSpectrumType : Int {
 		set( aValue ) {
 			UserDefaults.standard.set( aValue, forKey: "selectedSpectrumType");
 			updateSelectedSpectrumType();

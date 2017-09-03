@@ -46,8 +46,8 @@ class ChordSelectorItem : NSObject {
 		return theResult;
 	}
 
-	dynamic let		name : String;
-	dynamic var		isLeaf : Bool { get { return false; } }
+	@objc dynamic let		name : String;
+	@objc dynamic var		isLeaf : Bool { get { return false; } }
 	weak var		parent : ChordSelectorGroup? = nil;
 
 	init( name aName: String ) { name = aName; }
@@ -86,8 +86,8 @@ class ChordSelectorScale : ChordSelectorLeaf {
 class ChordSelectorGroup : ChordSelectorItem, MutableCollection {
 	typealias SubSequence = ChordSelectorGroup
 	typealias Index = Int
-	dynamic var			everyChild : [ChordSelectorItem] = [ChordSelectorItem]();
-	dynamic var			count : Int { get { return everyChild.endIndex-everyChild.startIndex; } }
+	@objc dynamic var			everyChild : [ChordSelectorItem] = [ChordSelectorItem]();
+	@objc dynamic var			count : Int { get { return everyChild.endIndex-everyChild.startIndex; } }
 	override init( name aName: String ) {
 		super.init(name:aName);
 	}

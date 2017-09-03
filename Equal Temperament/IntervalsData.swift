@@ -164,20 +164,20 @@ class IntervalsData: NSObject {
 		get { preconditionFailure("The property documentType is abstract and must be overriden"); }
 	}
 
-	dynamic var		octavesCount : UInt = 1 {
+	@objc dynamic var		octavesCount : UInt = 1 {
 		didSet {
 			UserDefaults.standard.set(Int(octavesCount), forKey:"octavesCount");
 		}
 	}
-	var		autoAnchor : Bool = false {
+	@objc dynamic var		autoAnchor : Bool = false {
 		didSet { UserDefaults.standard.set( autoAnchor, forKey:"autoAnchor"); }
 	}
-	dynamic var		midiAnchor : Int = 60 {
+	@objc dynamic var		midiAnchor : Int = 60 {
 		didSet { UserDefaults.standard.set(midiAnchor, forKey: "midiAnchor"); }
 	}
 
-	dynamic var		baseFrequency : Double = 220.0;
+	@objc dynamic var		baseFrequency : Double = 220.0;
 
 	var		overtones : HarmonicsDescription = HarmonicsDescription( );
-	dynamic var		arpeggioInterval : Double = 0.5;
+	@objc dynamic var		arpeggioInterval : Double = 0.5;
 }

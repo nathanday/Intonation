@@ -31,9 +31,9 @@ class PresetGeneratorViewController: GeneratorViewController {
 	@IBAction func showPresetsSheetAction( _ aSender: Any) {
 		if let theSheet = choosePresetWindow {
 			view.window?.beginSheet(theSheet, completionHandler: {
-					(aResponse:NSModalResponse) -> Void in
+					(aResponse:NSApplication.ModalResponse) -> Void in
 					switch aResponse {
-					case NSModalResponseContinue:
+					case NSApplication.ModalResponse.continue:
 						if let theIntervalData = self.document?.intervalsData as? PresetIntervalsData {
 							theIntervalData.intervals = self.chordOrScaleSelectorViewController!.selectedIntervalSet;
 							self.document?.calculateAllIntervals();
@@ -55,9 +55,9 @@ class PresetGeneratorViewController: GeneratorViewController {
 
 extension PresetGeneratorViewController : NSWindowDelegate {
 	@IBAction func selectPresetAction( _ aSender: Any) {
-		choosePresetWindow!.sheetParent?.endSheet( choosePresetWindow!, returnCode: NSModalResponseContinue );
+		choosePresetWindow!.sheetParent?.endSheet( choosePresetWindow!, returnCode: NSApplication.ModalResponse.continue );
 	}
 	@IBAction func cancelPresetSheetAction( _ aSender: Any) {
-		choosePresetWindow!.sheetParent?.endSheet( choosePresetWindow!, returnCode: NSModalResponseAbort );
+		choosePresetWindow!.sheetParent?.endSheet( choosePresetWindow!, returnCode: NSApplication.ModalResponse.abort );
 	}
 }

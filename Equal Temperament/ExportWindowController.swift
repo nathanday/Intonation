@@ -15,11 +15,11 @@ class ExportWindowController: NSWindowController {
 
 
 	convenience init( document aDocument : Document ) {
-		self.init(windowNibName: "ExportWindowController");
+		self.init(windowNibName: NSNib.Name(rawValue: "ExportWindowController"));
 		document = aDocument;
 	}
 
-//	override var	windowNibName : String { get { return "ExportWindowController"; } }
+	//	override var	windowNibName : NSNib.Name { NSNib.Name(rawValue:"ExportWindowController"); }
 
 	var	selectedExportMethod : ExportMethod = .text {
 		willSet {
@@ -33,7 +33,7 @@ class ExportWindowController: NSWindowController {
 			self.didChangeValue(forKey: "selectedExportMethodIdentifier");
 		}
 	}
-	dynamic var selectedExportMethodIdentifier : String {
+	@objc dynamic var selectedExportMethodIdentifier : String {
 		set {
 			if newValue == "text" {
 				selectedExportMethod = .text;
@@ -50,7 +50,7 @@ class ExportWindowController: NSWindowController {
 			}
 		}
 	}
-	dynamic var textExportMethod : Bool {
+	@objc dynamic var textExportMethod : Bool {
 		set {
 			if newValue {
 				selectedExportMethod = .text;
@@ -62,7 +62,7 @@ class ExportWindowController: NSWindowController {
 			return selectedExportMethod == .text;
 		}
 	}
-	dynamic var binaryExportMethod : Bool {
+	@objc dynamic var binaryExportMethod : Bool {
 		set {
 			if newValue {
 				selectedExportMethod = .binary;
@@ -74,19 +74,19 @@ class ExportWindowController: NSWindowController {
 			return selectedExportMethod == .binary;
 		}
 	}
-	dynamic var outputSelectedInterval : Bool = false;
-	dynamic var textOutputDelimiter : String = "\\t";
+	@objc dynamic var outputSelectedInterval : Bool = false;
+	@objc dynamic var textOutputDelimiter : String = "\\t";
 
 	func showAsSheet(parentWindow aWindow: NSWindow ) {
 		referenceToSelf = self;
 		aWindow.beginSheet( window!, completionHandler: {
-			(aResponse: NSModalResponse) -> Void in
+			(aResponse: NSApplication.ModalResponse) -> Void in
 			switch aResponse {
-			case NSModalResponseStop:
+			case NSApplication.ModalResponse.stop:
 				break;
-			case NSModalResponseAbort:
+			case NSApplication.ModalResponse.abort:
 				break;
-			case NSModalResponseContinue:
+			case NSApplication.ModalResponse.continue:
 				break;
 			default:
 				break;
@@ -116,7 +116,7 @@ class ExportWindowController: NSWindowController {
 	}
 
 	@IBAction func nextAction( _ aSender: Any? ) {
-		window!.sheetParent?.endSheet(window!, returnCode:NSModalResponseContinue);
+		window!.sheetParent?.endSheet(window!, returnCode:NSApplication.ModalResponse.continue);
 	}
 
 	@IBAction func cancelAction( _ aSender: Any? ) {

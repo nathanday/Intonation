@@ -13,7 +13,7 @@ class ScaleViewController: NSViewController, ScaleDisplayViewController {
 	@IBOutlet var	linearScaleView : ScaleView?;
 	@IBOutlet var	pitchConstellationView : ScaleView?;
 
-	dynamic var		selectedScaleDisplayType : Int {
+	@objc dynamic var		selectedScaleDisplayType : Int {
 		set( aValue ) { UserDefaults.standard.set(aValue, forKey: "selectedScaleDisplayType"); }
 		get { return UserDefaults.standard.integer(forKey: "selectedScaleDisplayType"); }
 	}

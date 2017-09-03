@@ -30,10 +30,10 @@ struct Rational : CustomStringConvertible, CustomDebugStringConvertible, Hashabl
 	}
     init( _ aNumerator: Int, _ aDenominator: Int) {
 		let		theNumerator = aDenominator < 0 ? -aNumerator : aNumerator;
-		let		theDenominator = abs(aDenominator);
-        let		theCommonDivisor = greatestCommonDivisor(UInt(theNumerator), UInt(theDenominator));
+		let		theDenominator = aDenominator.magnitude;
+        let		theCommonDivisor = greatestCommonDivisor(UInt(theNumerator), theDenominator);
         numerator = theNumerator/Int(theCommonDivisor);
-        denominator = theDenominator/Int(theCommonDivisor);
+        denominator = Int(theDenominator)/Int(theCommonDivisor);
 		precondition(theDenominator != 0, "\(numerator)/\(denominator) is not a number");
     }
 	init( _ aNumerator: UInt, _ aDenominator: UInt) {
@@ -97,7 +97,7 @@ extension Rational : ExpressibleByArrayLiteral, ExpressibleByIntegerLiteral, Exp
 	static func convertFromFloatLiteral( aValue: FloatLiteralType) -> Rational { return Rational( aValue, maxDenominator:UInt.max ); }
 }
 
-extension Rational : FloatingPoint, SignedNumber {
+extension Rational : FloatingPoint, SignedNumeric, Comparable {
 
 	init?<T>(exactly aSource: T) where T : BinaryInteger {
 		self.init(Int(aSource),1);

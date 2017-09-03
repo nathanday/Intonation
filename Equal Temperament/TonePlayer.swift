@@ -81,7 +81,7 @@ class TonePlayer {
 		}
 	}
 
-	private dynamic func triggerNextNote() {
+	@objc private dynamic func triggerNextNote() {
 		if intervals.count > 0 {
 			let		theCount = playingTones.count,
 					theLastIndex = theCount-1;

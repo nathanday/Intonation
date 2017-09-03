@@ -35,17 +35,17 @@ class StackedIntervalsGeneratorViewController: GeneratorViewController {
 	}
 
 	@IBOutlet weak var stackedIntervalsTableView: NSTableView!
-    dynamic var	stackedIntervalSetBaseString : String = "3:2" {
+    @objc dynamic var	stackedIntervalSetBaseString : String = "3:2" {
         didSet {
             UserDefaults.standard.set(stackedIntervalSetBaseString, forKey:"stackedIntervalSetBaseString");
         }
     }
-	dynamic var	stackedIntervalSetSteps : UInt = 7 {
+	@objc dynamic var	stackedIntervalSetSteps : UInt = 7 {
 		didSet {
 			UserDefaults.standard.set(Int(stackedIntervalSetSteps), forKey:"stackedIntervalSetSteps");
 		}
 	}
-	dynamic var	stackedIntervalSetOctaves : UInt = 12 {
+	@objc dynamic var	stackedIntervalSetOctaves : UInt = 12 {
 		didSet {
 			UserDefaults.standard.set(Int(stackedIntervalSetSteps), forKey:"stackedIntervalSetOctaves");
 		}
@@ -103,7 +103,7 @@ class StackedIntervalsGeneratorViewController: GeneratorViewController {
 		}
 	}
 	
-	dynamic var		stackedIntervalsExpanded : Bool {
+	@objc dynamic var		stackedIntervalsExpanded : Bool {
 		set( aValue ) { UserDefaults.standard.set(aValue, forKey: "stackedIntervalsExpanded"); }
 		get { return UserDefaults.standard.bool(forKey: "stackedIntervalsExpanded"); }
 	}
@@ -139,13 +139,13 @@ extension StackedIntervalsGeneratorViewController : NSTableViewDataSource {
 	{
 		var		theResult : Any?
 		if let theSortedStackIntervalSet = sortedStackIntervalSets?[aRow] {
-			if aTableColumn?.identifier == "interval" {
+			if aTableColumn?.identifier == NSUserInterfaceItemIdentifier(rawValue:"interval") {
 				theResult = theSortedStackIntervalSet.interval.ratioString;
 			}
-			else if aTableColumn?.identifier == "steps" {
+			else if aTableColumn?.identifier == NSUserInterfaceItemIdentifier(rawValue:"steps") {
 				theResult = theSortedStackIntervalSet.steps;
 			}
-			else if aTableColumn?.identifier == "octaves" {
+			else if aTableColumn?.identifier == NSUserInterfaceItemIdentifier(rawValue:"octaves") {
 				theResult = theSortedStackIntervalSet.octaves;
 			}
 		}
@@ -154,12 +154,12 @@ extension StackedIntervalsGeneratorViewController : NSTableViewDataSource {
 
 	func tableView(_ aTable: NSTableView, setObjectValue anObject: Any?, for aTableColumn: NSTableColumn?, row aRow: Int) {
 		if let theSortedStackIntervalSet = sortedStackIntervalSets?[aRow] {
-			if aTableColumn?.identifier == "steps" {
+			if aTableColumn?.identifier == NSUserInterfaceItemIdentifier(rawValue:"steps") {
 				if let theIntegerValue = anObject as? UInt {
 					theSortedStackIntervalSet.steps = theIntegerValue;
 				}
 			}
-			else if aTableColumn?.identifier == "octaves" {
+			else if aTableColumn?.identifier == NSUserInterfaceItemIdentifier(rawValue:"octaves") {
 				if let theIntegerValue = anObject as? UInt {
 					theSortedStackIntervalSet.octaves =  theIntegerValue;
 				}
@@ -173,6 +173,6 @@ extension StackedIntervalsGeneratorViewController : NSTableViewDataSource {
 extension StackedIntervalsGeneratorViewController : NSTableViewDelegate {
 	func tableView( _ aTableView: NSTableView, shouldEdit aTableColumn: NSTableColumn?, row aRow: Int) -> Bool {
 		let		theColumns : Set<String> = ["steps","octaves"];
-		return aTableColumn != nil && theColumns.contains(aTableColumn!.identifier);
+		return aTableColumn != nil && theColumns.contains(aTableColumn!.identifier.rawValue);
 	}
 }

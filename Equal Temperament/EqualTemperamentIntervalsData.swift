@@ -53,7 +53,7 @@ class EqualTemperamentIntervalsData : IntervalsData {
 		return EqualTemperamentGeneratorViewController(windowController:aWindowController);
 	}
 
-	dynamic var		degrees : UInt {
+	@objc dynamic var		degrees : UInt {
 		didSet {
 			UserDefaults.standard.set(Int(degrees), forKey:"degrees");
 		}

@@ -18,14 +18,14 @@ class GeneratorViewController : NSViewController {
 
 	init?( nibName aNibName: String, windowController aWindowController: MainWindowController ) {
 		windowController = aWindowController;
-		super.init(nibName: aNibName, bundle: nil);
+		super.init(nibName: NSNib.Name(rawValue: aNibName), bundle: nil);
 	}
 	
 	required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
 
-	var document : Document? {
+	@objc dynamic var document : Document? {
 		return windowController!.document as? Document;
 	}
 

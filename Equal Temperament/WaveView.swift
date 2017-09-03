@@ -34,7 +34,7 @@ class WaveView: ResultView {
 	}
 
 	override var intrinsicContentSize: NSSize {
-		return NSMakeSize(CGFloat(2*commonFactor)*CGFloat(xScale), NSViewNoIntrinsicMetric);
+		return NSMakeSize(CGFloat(2*commonFactor)*CGFloat(xScale), NSView.noIntrinsicMetric);
 	}
 
 	override func draw(_ aDirtyRect: NSRect) {
@@ -83,7 +83,7 @@ class WaveView: ResultView {
 					thePath.line(to: NSMakePoint(theX, theZeroAxis+theLen));
 				}
 				if i%8 == 4 {
-					drawText(string: "\(i/8 + 1)", size: NSFont.systemFontSize(for: NSControlSize.regular)*1.25, point: NSMakePoint(theX-6.0,20.0), color:NSColor.darkGray, textAlignment:.center );
+					drawText(string: "\(i/8 + 1)", size: NSFont.systemFontSize(for: NSControl.ControlSize.regular)*1.25, point: NSMakePoint(theX-6.0,20.0), color:NSColor.darkGray, textAlignment:.center );
 				}
 			}
 			axisesColor.setStroke();

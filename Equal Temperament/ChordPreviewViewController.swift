@@ -12,7 +12,7 @@ class ChordPreviewViewController: NSViewController {
 	let		chordOrScale : ChordSelectorLeaf;
 	init( _ aChordOrScale : ChordSelectorLeaf ) {
 		chordOrScale = aChordOrScale;
-		super.init(nibName: "ChordPreviewViewController", bundle:nil)!;
+		super.init(nibName: NSNib.Name(rawValue: "ChordPreviewViewController"), bundle:nil);
 	}
 
 	required init?(coder: NSCoder) {
@@ -47,10 +47,10 @@ extension ChordPreviewViewController : NSTableViewDataSource {
 
 	func tableView( _ aTableView: NSTableView, objectValueFor aTableColumn: NSTableColumn?, row aRow: Int) -> Any? {
 		var		theResult = "";
-		if aTableColumn?.identifier == "name" {
+		if aTableColumn?.identifier == NSUserInterfaceItemIdentifier("name") {
 			theResult = chordOrScale.everyInterval[aRow].names?.first ?? "";
 		}
-		else if aTableColumn?.identifier == "interval"{
+		else if aTableColumn?.identifier == NSUserInterfaceItemIdentifier("interval") {
 			theResult = chordOrScale.everyInterval[aRow].toString;
 		}
 		return theResult;
@@ -61,7 +61,7 @@ extension ChordPreviewViewController : NSTableViewDataSource {
 		for theIndex in aRowIndexes {
 			theResult.append("\(chordOrScale.everyInterval[theIndex].names?.first ?? "")\t\(chordOrScale.everyInterval[theIndex].toString)\n");
 		}
-		aPboard.setString(theResult, forType: NSPasteboardTypeTabularText);
+		aPboard.setString(theResult, forType: NSPasteboard.PasteboardType.tabularText);
 		return true;
 	}
 

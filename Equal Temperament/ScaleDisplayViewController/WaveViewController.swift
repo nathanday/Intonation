@@ -19,7 +19,7 @@ class WaveViewController: NSViewController, ScaleDisplayViewController {
 	}
 
 
-	dynamic var		selectedWaveViewMode : Int {
+	@objc dynamic var		selectedWaveViewMode : Int {
 		set(aValue) {
 			UserDefaults.standard.set(aValue, forKey: "selectedWaveViewMode");
 			updateWaveViewDisplayMode();
@@ -27,7 +27,7 @@ class WaveViewController: NSViewController, ScaleDisplayViewController {
 		get { return UserDefaults.standard.integer(forKey: "selectedWaveViewMode"); }
 	}
 
-	dynamic var		selectedWaveViewScale : Int {
+	@objc dynamic var		selectedWaveViewScale : Int {
 		set( aValue ) {
 			UserDefaults.standard.set(aValue, forKey: "selectedWaveViewScale");
 			updateWaveViewScale();

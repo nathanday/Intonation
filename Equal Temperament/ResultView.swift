@@ -67,7 +67,7 @@ import Cocoa
 	func drawText(string aString: String, size aSize: CGFloat, point aPoint: CGPoint, color aColor: NSColor, textAlignment aTextAlignment: NSTextAlignment ) {
 		var		theTextRect = NSMakeRect(aPoint.x, aPoint.y-aSize*0.2, 480.0, aSize*1.6);
 		let		theTextTextContent = NSString(string: aString );
-		let		theTextStyle = NSMutableParagraphStyle.default().mutableCopy() as! NSMutableParagraphStyle;
+		let		theTextStyle = NSMutableParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle;
 		theTextStyle.alignment = aTextAlignment
 		if aTextAlignment == .center {
 			theTextRect.origin.x -= NSWidth(theTextRect)*0.5;
@@ -76,12 +76,12 @@ import Cocoa
 			theTextRect.origin.x -= NSWidth(theTextRect);
 		}
 
-		let		theTextFontAttributes = [NSFontAttributeName: NSFont.systemFont(ofSize: aSize), NSForegroundColorAttributeName: aColor, NSParagraphStyleAttributeName: theTextStyle]
+		let		theTextFontAttributes = [NSAttributedStringKey.font: NSFont.systemFont(ofSize: aSize), NSAttributedStringKey.foregroundColor: aColor, NSAttributedStringKey.paragraphStyle: theTextStyle]
 
-		let		theTextTextSize: CGSize = theTextTextContent.boundingRect(with: NSMakeSize(theTextRect.width, CGFloat.infinity), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: theTextFontAttributes).size
+		let		theTextTextSize: CGSize = theTextTextContent.boundingRect(with: NSMakeSize(theTextRect.width, CGFloat.infinity), options: NSString.DrawingOptions.usesLineFragmentOrigin, attributes: theTextFontAttributes).size
 		let		theTextTextRect: NSRect = NSMakeRect(theTextRect.minX, theTextRect.minY + theTextRect.height*0.25 - theTextTextSize.height*0.1, theTextRect.width, theTextTextSize.height);
 		NSGraphicsContext.saveGraphicsState()
-		NSRectClip(theTextRect)
+//		theTextRect.clip
 		theTextTextContent.draw(in: NSOffsetRect(theTextTextRect, 0.0, 1.0), withAttributes: theTextFontAttributes)
 		NSGraphicsContext.restoreGraphicsState()
 	}

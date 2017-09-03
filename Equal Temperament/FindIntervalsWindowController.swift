@@ -15,9 +15,9 @@ enum IntervalsFindMethod {
 
 class FindIntervalsViewController: NSViewController {
 	@IBOutlet weak var	searchField : NSSearchField? = nil;
-	dynamic var			hidden : Bool = true;
-	dynamic var			ratiosString : String = "";
-	dynamic var			centErrorsString : String = "";
+	@objc dynamic var			hidden : Bool = true;
+	@objc dynamic var			ratiosString : String = "";
+	@objc dynamic var			centErrorsString : String = "";
 
 	var	windowController : MainWindowController? {
 		return self.view.window?.windowController as? MainWindowController
@@ -109,13 +109,13 @@ class FindIntervalsViewController: NSViewController {
 
 		theSearchMenu.addItem(NSMenuItem.separator());
 
-		theSearchMenu.addItem(withTitle: "Recent Searches", action: nil, keyEquivalent: "").tag = Int(NSSearchFieldRecentsTitleMenuItemTag);
-		theSearchMenu.addItem(withTitle: "No recent searches", action: nil, keyEquivalent: "").tag = Int(NSSearchFieldNoRecentsMenuItemTag);
-		theSearchMenu.addItem(withTitle: "Recents", action: nil, keyEquivalent: "").tag = Int(NSSearchFieldRecentsMenuItemTag);
+		theSearchMenu.addItem(withTitle: "Recent Searches", action: nil, keyEquivalent: "").tag = Int(NSSearchField.recentsTitleMenuItemTag);
+		theSearchMenu.addItem(withTitle: "No recent searches", action: nil, keyEquivalent: "").tag = Int(NSSearchField.noRecentsMenuItemTag);
+		theSearchMenu.addItem(withTitle: "Recents", action: nil, keyEquivalent: "").tag = Int(NSSearchField.recentsMenuItemTag);
 		let		theRecentSeperator = NSMenuItem.separator();
 		theSearchMenu.addItem(theRecentSeperator);
-		theRecentSeperator.tag = Int(NSSearchFieldRecentsTitleMenuItemTag)
-		theSearchMenu.addItem(withTitle: "Clear", action: nil, keyEquivalent: "").tag = Int(NSSearchFieldClearRecentsMenuItemTag);
+		theRecentSeperator.tag = Int(NSSearchField.recentsTitleMenuItemTag)
+		theSearchMenu.addItem(withTitle: "Clear", action: nil, keyEquivalent: "").tag = Int(NSSearchField.clearRecentsMenuItemTag);
 
 		return theSearchMenu;
 	}
@@ -164,13 +164,13 @@ class FindIntervalsViewController: NSViewController {
 	dynamic override func validateMenuItem( _ aMenuItem: NSMenuItem) -> Bool {
 		switch aMenuItem.action {
 		case (#selector(FindIntervalsViewController.findMethodClosestAction(_:)))?:
-			aMenuItem.state = findMethod == .findMethodClosest ? NSOnState : NSOffState;
+			aMenuItem.state = findMethod == .findMethodClosest ? .on : .off;
 		case (#selector(FindIntervalsViewController.findMethodExactAction(_:)))?:
-			aMenuItem.state = findMethod == .findMethodExact ? NSOnState : NSOffState;
+			aMenuItem.state = findMethod == .findMethodExact ? .on : .off;
 		case (#selector(FindIntervalsViewController.searchValueHasRootChangedAction(_:)))?:
-			aMenuItem.state = searchValueHaseRoot ? NSOnState : NSOffState;
+			aMenuItem.state = searchValueHaseRoot ? .on : .off;
 		case (#selector(FindIntervalsViewController.searchTransposeToFitChangedAction(_:)))?:
-			aMenuItem.state = searchTransposeToFit ? NSOnState : NSOffState;
+			aMenuItem.state = searchTransposeToFit ? .on : .off;
 		default:
 			assertionFailure("Got selector \(String(describing: aMenuItem.action))");
 		}

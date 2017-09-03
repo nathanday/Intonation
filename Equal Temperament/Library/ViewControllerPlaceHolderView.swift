@@ -28,7 +28,7 @@ class ViewControllerPlaceHolderView : NSView {
 	{
 		if let theView = viewController?.view {
 			theView.frame = self.bounds;
-			theView.autoresizingMask = [ .viewWidthSizable, .viewHeightSizable ];
+			theView.autoresizingMask = [ NSView.AutoresizingMask.width, NSView.AutoresizingMask.height ];
 			addSubview(theView);
 		}
 	}

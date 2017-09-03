@@ -32,8 +32,10 @@ extension Rational {
 }
 
 class IntervalEntry : NSObject, NSPasteboardReading, NSPasteboardWriting {
+	static let		nativePasteboardType = NSPasteboard.PasteboardType(rawValue: "com.godofcocoa.intonation.interval");
+
 	var interval : Interval
-    dynamic var intervalToString : String {
+    @objc dynamic var intervalToString : String {
 		switch interval {
 		case let x as RationalInterval:
 			return x.toString;
@@ -41,20 +43,20 @@ class IntervalEntry : NSObject, NSPasteboardReading, NSPasteboardWriting {
 			return interval.toDouble.toString(decimalPlaces:5);
 		}
 	}
-    dynamic var intervalToDouble : Double { return interval.toDouble; }
-	var name : String { return interval.ratioString; }
+    @objc dynamic var intervalToDouble : Double { return interval.toDouble; }
+	@objc dynamic var name : String { return interval.ratioString; }
 	var closestEqualTemperamentIntervalNumber : UInt { return UInt(12.0*Double(log2(interval.toDouble))+0.5); }
 	var closestIntervalNumber : UInt { return UInt(Double(12)*Double(log2(interval.toDouble))+0.5); }
 	var equalTemperamentRatio : Double { return pow(2.0,Double(self.closestEqualTemperamentIntervalNumber)/Double(12)); }
 	var toRatio : Double { return interval.toDouble; }
-	var toCents : Double { return interval.toCents; }
+	@objc dynamic var toCents : Double { return interval.toCents; }
 	var toOctave : Double { return interval.toOctave; }
 	var justIntonationPercent : Double { return Double(12)*100.0 * log2(self.interval.toDouble); }
 	var error : Double { return equalTemperamentRatio-interval.toDouble; }
 	var error12ETCent : Double {
 		return (interval.toDouble/Double(closestIntervalNumber).ratioFromSemitone).toCents;
 	}
-	dynamic var oddLimit : UInt {
+	@objc dynamic var oddLimit : UInt {
 		switch interval {
 		case let x as RationalInterval:
 			return x.ratio.oddLimit;
@@ -63,7 +65,7 @@ class IntervalEntry : NSObject, NSPasteboardReading, NSPasteboardWriting {
 		}
 	}
 
-	var oddLimitString : String {
+	@objc dynamic var oddLimitString : String {
         switch interval {
         case let x as RationalInterval:
             return "\(x.ratio.oddLimit)";
@@ -72,7 +74,7 @@ class IntervalEntry : NSObject, NSPasteboardReading, NSPasteboardWriting {
         }
 	}
 
-	dynamic var primeLimit : UInt {
+	@objc dynamic var primeLimit : UInt {
 		switch interval {
 		case let x as RationalInterval:
 			return x.ratio.primeLimit;
@@ -90,15 +92,15 @@ class IntervalEntry : NSObject, NSPasteboardReading, NSPasteboardWriting {
         }
 	}
 
-	var factorsString : String {
+	@objc dynamic var factorsString : String {
 		return interval.factorsString;
 	}
 
-	dynamic var	additiveDissonance : UInt {
+	@objc dynamic var	additiveDissonance : UInt {
 		return interval.additiveDissonance ?? 0;
 	}
 
-	var	additiveDissonanceString : String {
+	@objc dynamic var	additiveDissonanceString : String {
 		if let theAdditiveDissonance = interval.additiveDissonance {
 			return "\(theAdditiveDissonance)";
 		}
@@ -111,8 +113,8 @@ class IntervalEntry : NSObject, NSPasteboardReading, NSPasteboardWriting {
 		return (interval.toDouble/Double(closestIntervalNumber).ratioFromSemitone).toCents;
 	}
 
-	var closestIntervalNumberDescription : String { return "\(closestIntervalNumber)"; }
-	var closestNoteDescription : String {
+	@objc dynamic var closestIntervalNumberDescription : String { return "\(closestIntervalNumber)"; }
+	@objc dynamic var closestNoteDescription : String {
 		var		theResult = "";
 		if true {
 			let		noteForIntervalNumber = [ 1, 1, 2, 2, 3, 4, 4, 5, 5, 6, 6, 7 ];
@@ -218,26 +220,26 @@ class IntervalEntry : NSObject, NSPasteboardReading, NSPasteboardWriting {
 		return a.interval == b.interval;
 	}
 
-	var everyIntervalName : [String] {
+	@objc dynamic var everyIntervalName : [String] {
 		return self.interval.names ?? [];
 	}
-	var intervalName : String {
+	@objc dynamic var intervalName : String {
 		return everyIntervalName.first ?? "";
 	}
 
 // NSPasteboardWriting
 
-	func writableTypes(for pasteboard: NSPasteboard) -> [String] {
-		return ["com.godofcocoa.intonation.interval",NSPasteboardTypeString,NSPasteboardTypeTabularText];
+	func writableTypes(for pasteboard: NSPasteboard) -> [NSPasteboard.PasteboardType] {
+		return [IntervalEntry.nativePasteboardType,NSPasteboard.PasteboardType.string,NSPasteboard.PasteboardType.tabularText];
 	}
 
-	func pasteboardPropertyList(forType aType: String) -> Any? {
+	func pasteboardPropertyList(forType aType: NSPasteboard.PasteboardType) -> Any? {
 		switch aType {
-		case NSPasteboardTypeString:
+		case NSPasteboard.PasteboardType.string:
 			return interval.ratioString;
-		case NSPasteboardTypeTabularText:
+		case NSPasteboard.PasteboardType.tabularText:
 			return "\(interval.ratioString)\t\(interval.toDouble)\t\(toCents)\t\(intervalName)";
-		case "com.godofcocoa.intonation.interval":
+		case IntervalEntry.nativePasteboardType:
 			return interval.propertyList;
 		default:
 			return nil
@@ -245,23 +247,23 @@ class IntervalEntry : NSObject, NSPasteboardReading, NSPasteboardWriting {
 	}
 
 // NSPasteboardReading
-	static func readableTypes(for pasteboard: NSPasteboard) -> [String] {
-		return ["com.godofcocoa.intonation.interval",NSPasteboardTypeString];
+	static func readableTypes(for pasteboard: NSPasteboard) -> [NSPasteboard.PasteboardType] {
+		return [IntervalEntry.nativePasteboardType,NSPasteboard.PasteboardType.string];
 	}
 
-	static func readingOptions(forType type: String, pasteboard: NSPasteboard) -> NSPasteboardReadingOptions {
-		return .asPropertyList;
+	static func readingOptions(forType type: NSPasteboard.PasteboardType, pasteboard: NSPasteboard) -> NSPasteboard.ReadingOptions {
+		return NSPasteboard.ReadingOptions.asPropertyList;
 	}
-	required init?(pasteboardPropertyList aPropertyList: Any, ofType aType: String) {
+	required init?(pasteboardPropertyList aPropertyList: Any, ofType aType: NSPasteboard.PasteboardType) {
 		switch aType {
-		case NSPasteboardTypeString:
+		case NSPasteboard.PasteboardType.string:
 			if let theString = aPropertyList as? String,
 				let theRatio = Interval.from(string:theString) {
 				self.interval = theRatio;
 			} else {
 				return nil;
 			}
-		case "com.godofcocoa.intonation.interval":
+		case IntervalEntry.nativePasteboardType:
 			if let theInterval = Interval.from(propertyList:aPropertyList) {
 				self.interval = theInterval;
 			} else {

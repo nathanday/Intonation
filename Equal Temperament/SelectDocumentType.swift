@@ -12,7 +12,7 @@ class SelectDocumentType : NSWindowController {
 	var		referenceToSelf : NSWindowController? = nil;
 	@IBOutlet var	tableView : NSTableView?;
 	@IBOutlet var	arrayController : NSArrayController?
-	dynamic var		hasSelection : Bool { return selectedDocumentTypeRow != nil; }
+	@objc dynamic var		hasSelection : Bool { return selectedDocumentTypeRow != nil; }
 	var				selectedDocumentTypeRow : Int? {
 		willSet { willChangeValue(forKey: "hasSelection"); }
 		didSet { didChangeValue(forKey: "hasSelection"); }
@@ -33,9 +33,9 @@ class SelectDocumentType : NSWindowController {
 		}
 		return theResult;
 	}
-	dynamic var		tableContents = [[String:String]]();
+	@objc dynamic var		tableContents = [[String:String]]();
 
-	override var	windowNibName : String { get { return "SelectDocumentType"; } }
+	override var	windowNibName : NSNib.Name { return NSNib.Name(rawValue:"SelectDocumentType"); }
 
     override func windowDidLoad() {
         super.windowDidLoad()
@@ -46,24 +46,24 @@ class SelectDocumentType : NSWindowController {
 
 	func showAsSheet(parentWindow aWindow: NSWindow ) {
 		self.referenceToSelf = self;
-		aWindow.beginSheet( window!, completionHandler: {
-			(aResponse: NSModalResponse) -> Void in
+		aWindow.beginSheet( window! ) {
+			(aResponse: NSApplication.ModalResponse) -> Void in
 			switch aResponse {
-			case NSModalResponseStop:
+			case NSApplication.ModalResponse.stop:
 				self.completionBlock?( nil );
-			case NSModalResponseAbort:
+			case NSApplication.ModalResponse.abort:
 				self.completionBlock?( nil );
-			case NSModalResponseContinue:
+			case NSApplication.ModalResponse.`continue`:
 				self.completionBlock?( self.selectedDocumentType );
 			default:
 				self.completionBlock?( nil );
 			}
 			self.referenceToSelf = nil;
-		});
+		}
 	}
 
 	@IBAction func selectAction( _ aSender: Any? ) {
-		window!.sheetParent?.endSheet(window!, returnCode:NSModalResponseContinue);
+		window!.sheetParent?.endSheet(window!, returnCode:.`continue`);
 	}
 
 	@IBAction func cancelAction( _ aSender: Any? ) {

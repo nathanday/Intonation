@@ -122,7 +122,7 @@ class HarmonicView: ResultView {
         super.draw(dirtyRect)
 
 		func drawOctave( _ anOctave: UInt ) {
-			let		theSize = NSFont.systemFontSize(for: NSControlSize.regular)*1.25;
+			let		theSize = NSFont.systemFontSize(for: NSControl.ControlSize.regular)*1.25;
 			let		theOctaveHeight = NSHeight(theBounds)/CGFloat(lengthForRange(octaveRange));
 			let		theY = floor((CGFloat(anOctave-octaveRange.first!)+0.5) * theOctaveHeight+NSMinY(theBounds));
 			drawText(string: "\(anOctave+1)", size:theSize, point: NSMakePoint(theXOrigin-2.5, theY-theSize*0.55), color: NSColor.darkGray);
@@ -133,7 +133,7 @@ class HarmonicView: ResultView {
 			thePath.move(to: NSMakePoint(theXOrigin+3.5, theY-theSize*0.45));
 			thePath.line(to: NSMakePoint(theXOrigin+3.5, theY-theOctaveHeight/2.0+5.0));
 			axisesColor.setStroke();
-			thePath.lineCapStyle = NSLineCapStyle.roundLineCapStyle
+			thePath.lineCapStyle = NSBezierPath.LineCapStyle.roundLineCapStyle
 			thePath.stroke()
 		}
 
@@ -149,7 +149,7 @@ class HarmonicView: ResultView {
 				thePath.move(to: NSMakePoint(theXOrigin+38.0+6.5*CGFloat(log10(aHarmonic)), floor(theY*2.0)*0.5+0.25));
 				thePath.line(to: NSMakePoint(theXOrigin+62.0, floor(theY*2.0)*0.5+0.25));
 				theColor.setStroke();
-				drawText(string: "\(aHarmonic)", size:NSFont.systemFontSize(for: NSControlSize.small), point: NSMakePoint(theXOrigin+29.5, floor(theY*2.0)*0.5-7.5), color:theColor );
+				drawText(string: "\(aHarmonic)", size:NSFont.systemFontSize(for: NSControl.ControlSize.small), point: NSMakePoint(theXOrigin+29.5, floor(theY*2.0)*0.5-7.5), color:theColor );
 			}
 			else {
 				thePath.move(to: NSMakePoint(theXOrigin+30.0, floor(theY*2.0)*0.5+0.25));
@@ -172,7 +172,7 @@ class HarmonicView: ResultView {
 
 		func drawRatio( _ aRatio: Interval, index anIndex: Int, of anOf: Int ) {
 			let		theYDenom = yValueForHarmonic( UInt(commonFactor), bounds: theBounds );
-			let		theSize = NSFont.systemFontSize(for: NSControlSize.small);
+			let		theSize = NSFont.systemFontSize(for: NSControl.ControlSize.small);
 			if aRatio == 1 {
 				let		thePath = NSBezierPath();
 				let		theX = theXOrigin+75.0+CGFloat(anOf)*theHarmonicSpacing;
@@ -203,7 +203,7 @@ class HarmonicView: ResultView {
 			}
 		}
 
-		for i in (1<<octaveRange.first!)...(1<<(octaveRange.last!)) { drawHarmonic(i); }
+		for i in (1<<octaveRange.first!)...(1<<(octaveRange.last!)) { drawHarmonic(UInt(i)); }
 		for i in octaveRange { drawOctave( i ); }
 		for (theIndex,theRatio) in selectedRatios.enumerated() {
 			drawRatio( theRatio, index:theIndex, of:selectedRatios.count );

@@ -17,7 +17,7 @@ class Document : NSDocument, MIDIReceiverObserver {
 	var		midiToHarmonicRatio = MIDIToHarmonicRatio();
 
 
-	dynamic var		intervalsData : IntervalsData? {
+	@objc dynamic var		intervalsData : IntervalsData? {
 		willSet {
 			removeIntervalsDataObservers();
 		}
@@ -88,7 +88,7 @@ class Document : NSDocument, MIDIReceiverObserver {
 		super.canClose(withDelegate: delegate, shouldClose: shouldCloseSelector, contextInfo: contextInfo);
 	}
 
-	dynamic var		baseFrequency : Double {
+	@objc dynamic var		baseFrequency : Double {
 		get {
 			return intervalsData?.baseFrequency ?? 220.0;
 		}
@@ -101,11 +101,11 @@ class Document : NSDocument, MIDIReceiverObserver {
 			midiToHarmonicRatio.baseFrequency = intervalsData?.baseFrequency ?? 220.0;
 		}
 	}
-	var		allOvertonesAmount : Double {
+	@objc dynamic var		allOvertonesAmount : Double {
 		get { return overtones.amount; }
 		set( aValue ) { overtones = HarmonicsDescription(amount: aValue, evenAmount: overtones.evenAmount ); }
 	}
-	var		evenOvertonesAmount : Double {
+	@objc dynamic var		evenOvertonesAmount : Double {
 		get { return overtones.evenAmount; }
 		set( aValue ) { overtones = HarmonicsDescription(amount: overtones.amount, evenAmount: aValue ); }
 	}
@@ -122,7 +122,7 @@ class Document : NSDocument, MIDIReceiverObserver {
 			return intervalsData?.overtones ?? HarmonicsDescription();
 		}
 	}
-	var		arpeggioBeatPerMinute : Double {
+	@objc dynamic var		arpeggioBeatPerMinute : Double {
 		set( aValue ) {
 			if let theIntervalsData = intervalsData {
 				theIntervalsData.arpeggioInterval = 60.0/aValue
@@ -144,13 +144,13 @@ class Document : NSDocument, MIDIReceiverObserver {
 
 	@IBAction func newDocumentFromSelection( _ aSender: Any? ) {
 		do {
-			if let theDocument = try NSDocumentController.shared().openUntitledDocumentAndDisplay(false) as?
+			if let theDocument = try NSDocumentController.shared.openUntitledDocumentAndDisplay(false) as?
 			Document {
 				theDocument.showWithIntervals(selectedJustIntonationIntervals);
 			}
 		}
 		catch {
-			self.print( "error" );
+			self.printDocument( "error" );
 		}
 	}
 
@@ -171,7 +171,7 @@ class Document : NSDocument, MIDIReceiverObserver {
 		}
 	}
 
-	override class func autosavesInPlace() -> Bool { return true; }
+	override class var autosavesInPlace: Bool { return true; }
 	override func data( ofType typeName: String) throws -> Data {
 		var anError: NSError = NSError(domain: "Migrator", code: 0, userInfo: nil)
 		let		theResult: Data?
@@ -208,15 +208,15 @@ class Document : NSDocument, MIDIReceiverObserver {
 		midiReceiver.observer = self;
 	}
 
-	dynamic var     everyInterval : [IntervalEntry] = [];
-	dynamic var		smallestError : Double { get { return !smallestErrorEntries.isEmpty ? smallestErrorEntries.first!.error : 0.0; } }
-	dynamic var     averageError : Double = 0.0
-	dynamic var		biggestError : Double { get { return !biggestErrorEntries.isEmpty ? biggestErrorEntries.first!.error : 0.0; } }
-	dynamic var		smallestErrorEntries : Set<IntervalEntry> = [] {
+	@objc dynamic var     everyInterval : [IntervalEntry] = [];
+	@objc dynamic var		smallestError : Double { get { return !smallestErrorEntries.isEmpty ? smallestErrorEntries.first!.error : 0.0; } }
+	@objc dynamic var     averageError : Double = 0.0
+	@objc dynamic var		biggestError : Double { get { return !biggestErrorEntries.isEmpty ? biggestErrorEntries.first!.error : 0.0; } }
+	@objc dynamic var		smallestErrorEntries : Set<IntervalEntry> = [] {
 		willSet { self.willChangeValue(forKey: "smallestError"); }
 		didSet { self.didChangeValue(forKey: "smallestError"); }
 	}
-	dynamic var		biggestErrorEntries : Set<IntervalEntry> = [] {
+	@objc dynamic var		biggestErrorEntries : Set<IntervalEntry> = [] {
 		willSet { self.willChangeValue(forKey: "biggestError"); }
 		didSet { self.didChangeValue(forKey: "biggestError"); }
 	}
@@ -234,7 +234,7 @@ class Document : NSDocument, MIDIReceiverObserver {
 		theIndicies.remove(anIndex);
 		selectedIndicies = theIndicies as IndexSet;
 	}
-	dynamic var		selectedIndicies = IndexSet() {
+	@objc dynamic var		selectedIndicies = IndexSet() {
 		didSet {
 			tonePlayer.intervals = selectedJustIntonationIntervals;
 		}

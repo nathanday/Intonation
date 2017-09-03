@@ -63,7 +63,7 @@ class SpectrumView: ResultView {
 			};
 			return NSMakeSize(spectrumType == .sine
 				? harmonicSpacing+20.0
-				: CGFloat(max(thePrimesProduct,8)+1)*harmonicSpacing, NSViewNoIntrinsicMetric);
+				: CGFloat(max(thePrimesProduct,8)+1)*harmonicSpacing, NSView.noIntrinsicMetric);
 		}
 	}
 
@@ -127,7 +127,7 @@ class SpectrumView: ResultView {
 			let		theMinHarm = harmonicForX( NSMinX(aDirtyRect)-theBaseWidthHalf, aBaseFreq: 1.0, aHarmonicSpacing: theHarmonicSpacing, aBoundMinX: NSMinX(theBounds));
 			let		theMaxHarm = spectrumType == .sine ? 1 : harmonicForX( NSMaxX(theBounds)+theBaseWidthHalf, aBaseFreq: 1.0, aHarmonicSpacing: theHarmonicSpacing, aBoundMinX: NSMinX(theBounds));
 //			let		theHarmStep = spectrumType == .square ? 2 : 1;
-			let		theFontSize = NSFont.systemFontSize(for: NSControlSize.small)*1.25;
+			let		theFontSize = NSFont.systemFontSize(for: NSControl.ControlSize.small)*1.25;
 			for i in max(theMinHarm, 1)...theMaxHarm {
 				let		theX = NSMinX(theBounds)+theBaseWidthHalf+theHarmonicSpacing*CGFloat(i)-theHarmonicSpacing;
 				theTicks.move( to: NSMakePoint(theX, theY0+10.0) );
@@ -144,17 +144,17 @@ class SpectrumView: ResultView {
 			}
 			NSColor(calibratedWhite: 0.25, alpha: 1.0).setStroke();
 			theTicks.lineWidth = 1.0;
-			theTicks.lineCapStyle = NSLineCapStyle.roundLineCapStyle
+			theTicks.lineCapStyle = NSBezierPath.LineCapStyle.roundLineCapStyle
 			theTicks.stroke();
 
 			NSColor(calibratedWhite: 0.0, alpha: 0.5).setStroke();
 			theOverPath.lineWidth = 0.25;
-			theOverPath.lineCapStyle = NSLineCapStyle.roundLineCapStyle
+			theOverPath.lineCapStyle = NSBezierPath.LineCapStyle.roundLineCapStyle
 			theOverPath.stroke();
 
 			NSColor(calibratedWhite: 0.25, alpha: 1.0).setStroke();
 			theMinorTicks.lineWidth = 0.5;
-			theMinorTicks.lineCapStyle = NSLineCapStyle.roundLineCapStyle
+			theMinorTicks.lineCapStyle = NSBezierPath.LineCapStyle.roundLineCapStyle
 			theMinorTicks.stroke();
 		}
 
