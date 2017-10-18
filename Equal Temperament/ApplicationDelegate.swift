@@ -15,7 +15,7 @@ class ApplicationDelegate: NSObject, NSApplicationDelegate {
 	lazy var		chordSelectorWindowController : ChordSelectorWindowController = ChordSelectorWindowController();
 	
 	static var		initialUserDefaultsLoaded = false;
-    func applicationWillFinishLaunching(_ notification: Notification) {
+    @objc func applicationWillFinishLaunching(_ notification: Notification) {
         if ApplicationDelegate.initialUserDefaultsLoaded == false {
             if let theURL = Bundle.main.url(forResource:"InitialUserDefaults", withExtension: "plist"),
                 let theInitialUserDefaults = NSDictionary(contentsOf:theURL) as? [String:Any] {

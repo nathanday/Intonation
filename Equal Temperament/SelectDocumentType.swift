@@ -72,7 +72,7 @@ class SelectDocumentType : NSWindowController {
 }
 
 extension SelectDocumentType : NSTableViewDelegate {
-	func tableViewSelectionDidChange(_ notification: Notification) {
+	@objc func tableViewSelectionDidChange(_ notification: Notification) {
 		let theSelection = tableView?.selectedRow;
 		selectedDocumentTypeRow = theSelection != -1 ? theSelection : nil;
 	}

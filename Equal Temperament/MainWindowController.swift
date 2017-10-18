@@ -303,22 +303,22 @@ class MainWindowController : NSWindowController {
 		}
 	}
 
-	func hideIntervalRelatedColumn( _ aHide : Bool ) {
+	@objc func hideIntervalRelatedColumn( _ aHide : Bool ) {
 		for theTableColumn in tableView!.tableColumns {
-			if ["interval","percent","error"].contains(theTableColumn.identifier.rawValue) {
+			if ["interval-number","percent","error"].contains(theTableColumn.identifier.rawValue) {
 				theTableColumn.isHidden = aHide;
 			}
 		}
 		scaleViewController!.hideIntervalRelatedColumn(!aHide);
 	}
 
-	func windowDidBecomeMain( _ aNotification: Notification) {
+	@objc func windowDidBecomeMain( _ aNotification: Notification) {
 		if let theDocument = document as? Document {
 			theDocument.playbackPaused = false;
 		}
 	}
 
-	func windowDidResignMain( _ aNotification: Notification) {
+	@objc func windowDidResignMain( _ aNotification: Notification) {
 		if let theDocument = document as? Document {
 			theDocument.playbackPaused = true;
 		}
@@ -327,16 +327,16 @@ class MainWindowController : NSWindowController {
 
 extension MainWindowController : NSTableViewDelegate {
 
-	func tableViewSelectionDidChange(_ notification: Notification) {
+	@objc func tableViewSelectionDidChange(_ notification: Notification) {
 		if let theSelectedEntries = arrayController!.selectedObjects as? [IntervalEntry],
 			let theDocument = document as? Document {
 			theDocument.selectedIntervalEntry = theSelectedEntries
 		}
 	}
 
-	func tableViewColumnDidResize(_ aNotification: Notification) {
+	@objc func tableViewColumnDidResize(_ aNotification: Notification) {
 		if let theTableColumn = (aNotification as NSNotification).userInfo?["NSTableColumn"] as? NSTableColumn {
-			if theTableColumn.identifier.rawValue == "description" {
+			if theTableColumn.identifier == NSUserInterfaceItemIdentifier("description") {
 				theTableColumn.isHidden = theTableColumn.width <= 20.0;
 			}
 		}

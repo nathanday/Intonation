@@ -19,7 +19,7 @@ class ChordPreviewViewController: NSViewController {
 	    fatalError("init(coder:) has not been implemented")
 	}
 
-	var		kindDescription : String {
+	@objc dynamic var		kindDescription : String {
 		var		theResult = "";
 		if( chordOrScale is ChordSelectorChord ) {
 			theResult = "Chord";

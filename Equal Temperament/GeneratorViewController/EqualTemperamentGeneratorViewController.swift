@@ -51,7 +51,7 @@ class EqualTemperamentGeneratorViewController: GeneratorViewController {
 		}
 	}
 
-	var intervalString : String {
+	@objc dynamic var intervalString : String {
 		get {
 			return (document!.intervalsData as! EqualTemperamentIntervalsData).interval.ratio.ratioString;
 		}
