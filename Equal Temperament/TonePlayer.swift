@@ -44,7 +44,7 @@ class TonePlayer {
 
 	func generateTones() {
 		var		theUnsedRatios = Set<Interval>(playingTones.keys);
-		for theInterval in self.intervals {
+		for theInterval in intervals {
 			theUnsedRatios.remove(theInterval);
 			if let theTone = playingTones[theInterval] {
 				theTone.baseFrequency = baseFrequency/(2.0*TonePlayer.nyquestFrequency);
@@ -63,7 +63,7 @@ class TonePlayer {
 	}
 	
 	func updateTones() {
-		for theInterval in self.intervals {
+		for theInterval in intervals {
 			if let theTone = playingTones[theInterval] {
 				theTone.baseFrequency = baseFrequency/(2.0*TonePlayer.nyquestFrequency);
 				theTone.harmonics = harmonics;
@@ -73,7 +73,7 @@ class TonePlayer {
 	
 	func stop() {
 		if playing {
-			for (_,theTone) in self.playingTones {
+			for (_,theTone) in playingTones {
 				theTone.stop();
 			}
 			playingTones.removeAll();
@@ -111,7 +111,7 @@ class TonePlayer {
 			generateTones();
 			switch playbackType {
 			case .unison:
-				for (_,theTone) in self.playingTones { theTone.play(); }
+				for (_,theTone) in playingTones { theTone.play(); }
 				break;
 			default:
 				break;

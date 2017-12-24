@@ -71,7 +71,7 @@ class DisclosureView : NSView {
 	required init?(coder aCoder: NSCoder) {
 		expandedSize = NSMakeSize(0.0, 0.0);
 		super.init(coder: aCoder);
-		expandedSize = self.frame.size;
+		expandedSize = frame.size;
 	}
 
 	override var frame : NSRect {
@@ -79,17 +79,17 @@ class DisclosureView : NSView {
 			if colapsed {
 				switch( orientation ) {
 				case .vertical:
-					if self.frame.size.width != expandedSize.width {
-						expandedSize = NSMakeSize(self.frame.size.width, expandedSize.height);
+					if frame.size.width != expandedSize.width {
+						expandedSize = NSMakeSize(frame.size.width, expandedSize.height);
 					}
 				case .horizontal:
-					if self.frame.size.height != expandedSize.height {
-						expandedSize = NSMakeSize(expandedSize.width,self.frame.size.height);
+					if frame.size.height != expandedSize.height {
+						expandedSize = NSMakeSize(expandedSize.width,frame.size.height);
 					}
 				}
 			}
 			else {
-				expandedSize = self.frame.size;
+				expandedSize = frame.size;
 			}
 		}
 	}

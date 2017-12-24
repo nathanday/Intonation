@@ -33,7 +33,7 @@ class SpectrumView: ResultView {
 		get {
 			var		theResult : CGFloat = 100.0;
 			if spectrumType == .sine {
-				if let theContentView = self.enclosingScrollView?.contentView {
+				if let theContentView = enclosingScrollView?.contentView {
 					theResult = NSWidth(theContentView.documentVisibleRect)-theContentView.contentInsets.top-theContentView.contentInsets.bottom - 20.0;
 				}
 			}
@@ -68,7 +68,7 @@ class SpectrumView: ResultView {
 	}
 
 	override func draw(_ aDirtyRect: NSRect) {
-		var		theBounds = NSInsetRect(self.bounds, 0.0, 30.0);
+		var		theBounds = NSInsetRect(bounds, 0.0, 30.0);
 		let		theBaseWidthHalf : CGFloat = 6.0;
 		let		theTopWidthHalf : CGFloat = 2.0;
 		theBounds.origin.y += 10.0;

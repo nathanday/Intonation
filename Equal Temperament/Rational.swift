@@ -121,7 +121,7 @@ extension Rational : FloatingPoint, SignedNumeric, Comparable {
 	public mutating func round(_ aRule: FloatingPointRoundingRule) {
 		switch aRule {
 		case .awayFromZero:
-			numerator > 0 ? self.round(.up) : self.round(.down);
+			numerator > 0 ? round(.up) : round(.down);
 		case .down:
 			numerator = numerator/denominator;
 			denominator = 1;
@@ -132,7 +132,7 @@ extension Rational : FloatingPoint, SignedNumeric, Comparable {
 			numerator = (numerator+denominator-1)/denominator;
 			denominator = 1;
 		case .towardZero:
-			numerator > 0 ? self.round(.down) : self.round(.up);
+			numerator > 0 ? round(.down) : round(.up);
 		case .up:
 			numerator = (numerator+denominator-1)/denominator;
 			denominator = 1;
@@ -140,7 +140,7 @@ extension Rational : FloatingPoint, SignedNumeric, Comparable {
 	}
 
 	public mutating func formSquareRoot() {
-		(numerator,denominator) = Rational.farey( self.toDouble, maxDenominator:UInt.max );
+		(numerator,denominator) = Rational.farey( toDouble, maxDenominator:UInt.max );
 	}
 
 	/// Replaces this value with the remainder of itself divided by the given
@@ -419,7 +419,7 @@ extension Rational : FloatingPoint, SignedNumeric, Comparable {
 	}
 
 	func isEqual(to other: Rational) -> Bool {
-		return self.numerator==other.numerator && self.denominator==other.denominator;
+		return numerator==other.numerator && denominator==other.denominator;
 	}
 
 	func isLess(than other: Rational) -> Bool {

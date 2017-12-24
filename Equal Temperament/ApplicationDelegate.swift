@@ -29,4 +29,9 @@ class ApplicationDelegate: NSObject, NSApplicationDelegate {
 	@IBAction func showChordSelectorAction( _ aSender: Any? ) {
 		chordSelectorWindowController.toggleWindow(aSender);
 	}
+
+	@IBAction func orderFrontStandardAboutPanel(_ sender: Any?) {
+		let		theAboutPanel = AboutPanelWindowController();
+		theAboutPanel.showWindow(nil);
+	}
 }

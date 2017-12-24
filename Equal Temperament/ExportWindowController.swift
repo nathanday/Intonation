@@ -10,108 +10,77 @@ import Cocoa
 
 class ExportWindowController: NSWindowController {
 
-	var		completionBlock : (()  -> Void)?;
+	var		completionBlock : ((Bool,ExportMethod,Bool)  -> Void)?;
 	var		referenceToSelf : NSWindowController? = nil;
 
-
-	convenience init( document aDocument : Document ) {
-		self.init(windowNibName: NSNib.Name(rawValue: "ExportWindowController"));
-		document = aDocument;
+	convenience init( completionBlock aCompletionBlock : @escaping ((Bool,ExportMethod,Bool) -> Void) ) {
+		self.init(windowNibName: NSNib.Name(rawValue: "ExportWindowController") );
+		completionBlock = aCompletionBlock;
 	}
 
-	//	override var	windowNibName : NSNib.Name { NSNib.Name(rawValue:"ExportWindowController"); }
-
+	var previousSelectedExportMethod : ExportMethod = .binary;
 	var	selectedExportMethod : ExportMethod = .text {
 		willSet {
-			self.willChangeValue(forKey: "textExportMethod");
-			self.willChangeValue(forKey: "binaryExportMethod");
-			self.willChangeValue(forKey: "selectedExportMethodIdentifier");
+			willChangeValue(forKey: "textExportMethod");
+			willChangeValue(forKey: "binaryExportMethod");
+			willChangeValue(forKey: "JSONExportMethod");
+			willChangeValue(forKey: "selectedExportMethodIdentifier");
+			previousSelectedExportMethod = selectedExportMethod;
 		}
 		didSet {
-			self.didChangeValue(forKey: "textExportMethod");
-			self.didChangeValue(forKey: "binaryExportMethod");
-			self.didChangeValue(forKey: "selectedExportMethodIdentifier");
+			didChangeValue(forKey: "textExportMethod");
+			didChangeValue(forKey: "binaryExportMethod");
+			didChangeValue(forKey: "JSONExportMethod");
+			didChangeValue(forKey: "selectedExportMethodIdentifier");
 		}
 	}
 	@objc dynamic var selectedExportMethodIdentifier : String {
 		set {
-			if newValue == "text" {
-				selectedExportMethod = .text;
-			} else if newValue == "binary" {
-				selectedExportMethod = .binary;
+			switch newValue {
+			case "text": selectedExportMethod = .text;
+			case "binary": selectedExportMethod = .binary;
+			case "JSON": selectedExportMethod = .JSON;
+			default: assertionFailure("Unexpect value \(newValue)");
 			}
 		}
 		get {
 			switch selectedExportMethod {
-			case .text:
-				return "text"
-			case .binary:
-				return "binary"
+			case .text: return "text"
+			case .binary: return "binary"
+			case .JSON: return "JSON"
 			}
 		}
 	}
 	@objc dynamic var textExportMethod : Bool {
-		set {
-			if newValue {
-				selectedExportMethod = .text;
-			} else {
-				selectedExportMethod = .binary;
-			}
-		}
-		get {
-			return selectedExportMethod == .text;
-		}
+		set { selectedExportMethod = newValue ? .text : previousSelectedExportMethod; }
+		get { return selectedExportMethod == .text; }
 	}
 	@objc dynamic var binaryExportMethod : Bool {
-		set {
-			if newValue {
-				selectedExportMethod = .binary;
-			} else {
-				selectedExportMethod = .text;
-			}
-		}
-		get {
-			return selectedExportMethod == .binary;
-		}
+		set { selectedExportMethod = newValue ? .binary : previousSelectedExportMethod; }
+		get { return selectedExportMethod == .binary; }
+	}
+	@objc dynamic var JSONExportMethod : Bool {
+		set { selectedExportMethod = newValue ? .JSON : previousSelectedExportMethod; }
+		get { return selectedExportMethod == .JSON; }
 	}
 	@objc dynamic var outputSelectedInterval : Bool = false;
 	@objc dynamic var textOutputDelimiter : String = "\\t";
 
 	func showAsSheet(parentWindow aWindow: NSWindow ) {
 		referenceToSelf = self;
-		aWindow.beginSheet( window!, completionHandler: {
-			(aResponse: NSApplication.ModalResponse) -> Void in
-			switch aResponse {
-			case NSApplication.ModalResponse.stop:
-				break;
-			case NSApplication.ModalResponse.abort:
-				break;
-			case NSApplication.ModalResponse.continue:
-				break;
-			default:
-				break;
-			}
-			self.referenceToSelf = nil;
-		});
+			aWindow.beginSheet( window!, completionHandler: {
+				(aResponse: NSApplication.ModalResponse) -> Void in
+				self.completionBlock!(aResponse == NSApplication.ModalResponse.continue,self.selectedExportMethod,self.outputSelectedInterval);
+				self.referenceToSelf = nil;
+			});
 	}
-    override func windowDidLoad() {
-        super.windowDidLoad()
-    }
 
 	@IBAction func selectPresetDelimiter( _ aSender: NSMenuItem? ) {
 		switch aSender!.tag {
-		case 9:
-			textOutputDelimiter = "\\t";
-			break;
-		case 10:
-			textOutputDelimiter = "\\n";
-			break;
-		case 44:
-			textOutputDelimiter = ",";
-			break;
-		default:
-			assertionFailure("Unexpect tag \(aSender!.tag)");
-			break;
+		case 9: textOutputDelimiter = "\\t";
+		case 10: textOutputDelimiter = "\\n";
+		case 44: textOutputDelimiter = ",";
+		default: assertionFailure("Unexpect tag \(aSender!.tag)");
 		}
 	}
 

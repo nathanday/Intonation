@@ -157,7 +157,7 @@ class IntervalsData: NSObject {
 	}
 
     var     documentTypeTitle : String {
-        return self.documentType.title();
+        return documentType.title();
     }
 
 	var		documentType : DocumentType {

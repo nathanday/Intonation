@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
+        <capability name="box content view" minToolsVersion="7.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="AboutPanelWindowController" customModule="Intonation" customModuleProvider="target">
+            <connections>
+                <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <window title="About" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" tabbingMode="disallowed" titlebarAppearsTransparent="YES" titleVisibility="hidden" id="F0z-JX-Cv5" customClass="NSPanel">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" fullSizeContentView="YES"/>
+            <windowPositionMask key="initialPositionMask" topStrut="YES"/>
+            <rect key="contentRect" x="196" y="669" width="530" height="242"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1028"/>
+            <value key="minSize" type="size" width="530" height="242"/>
+            <value key="maxSize" type="size" width="530" height="242"/>
+            <view key="contentView" wantsLayer="YES" id="se5-gp-TjO">
+                <rect key="frame" x="0.0" y="0.0" width="530" height="242"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <box autoresizesSubviews="NO" boxType="custom" borderType="none" borderWidth="0.0" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="xKI-Ju-ojh">
+                        <rect key="frame" x="0.0" y="0.0" width="530" height="242"/>
+                        <view key="contentView" id="czk-GU-yfW">
+                            <rect key="frame" x="0.0" y="0.0" width="530" height="242"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sUX-jk-JJp">
+                                    <rect key="frame" x="253" y="159" width="249" height="63"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="245" id="3Cm-Ee-adz"/>
+                                    </constraints>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Intonation" id="8tV-FK-r2T">
+                                        <font key="font" size="54" name="HelveticaNeue-UltraLight"/>
+                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HYe-Uy-YFd">
+                                    <rect key="frame" x="255" y="140" width="247" height="19"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="243" id="cBh-LP-FNW"/>
+                                    </constraints>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Version X.X.X (XX)" id="egZ-SF-Fdf">
+                                        <font key="font" size="12" name="HelveticaNeue-Light"/>
+                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                    <connections>
+                                        <binding destination="-2" name="displayPatternValue1" keyPath="self.versionString" id="P8A-pU-ZKk">
+                                            <dictionary key="options">
+                                                <string key="NSDisplayPattern">Version %{value1}@</string>
+                                            </dictionary>
+                                        </binding>
+                                    </connections>
+                                </textField>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1cH-x0-8y4">
+                                    <rect key="frame" x="257" y="40" width="245" height="32"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="32" id="Sa3-Rg-3qY"/>
+                                        <constraint firstAttribute="width" constant="241" id="lHI-KG-lLy"/>
+                                    </constraints>
+                                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Copyright © 2014 Nathan Day. All rights reserved." id="quC-RU-rLv">
+                                        <font key="font" metaFont="system" size="10"/>
+                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4CZ-oD-oFZ">
+                                    <rect key="frame" x="33" y="33" width="156" height="156"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="156" id="Fhc-Od-hoc"/>
+                                        <constraint firstAttribute="height" constant="156" id="Y9p-mr-2VE"/>
+                                    </constraints>
+                                    <imageCell key="cell" enabled="NO" alignment="left" imageScaling="proportionallyDown" image="NSApplicationIcon" id="tCf-6S-pFz"/>
+                                </imageView>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="sUX-jk-JJp" secondAttribute="trailing" constant="30" id="2lu-2E-r5n"/>
+                                <constraint firstAttribute="bottom" secondItem="1cH-x0-8y4" secondAttribute="bottom" constant="40" id="9Lp-6R-wzS"/>
+                                <constraint firstItem="4CZ-oD-oFZ" firstAttribute="leading" secondItem="czk-GU-yfW" secondAttribute="leading" constant="33" id="BeK-tT-Z11"/>
+                                <constraint firstItem="4CZ-oD-oFZ" firstAttribute="centerY" secondItem="czk-GU-yfW" secondAttribute="centerY" constant="10" id="D7R-Gp-hIH"/>
+                                <constraint firstItem="1cH-x0-8y4" firstAttribute="top" relation="greaterThanOrEqual" secondItem="HYe-Uy-YFd" secondAttribute="bottom" constant="23" id="IYq-aZ-BRJ"/>
+                                <constraint firstItem="HYe-Uy-YFd" firstAttribute="top" secondItem="sUX-jk-JJp" secondAttribute="bottom" id="ZHw-o3-L22"/>
+                                <constraint firstAttribute="trailing" secondItem="HYe-Uy-YFd" secondAttribute="trailing" constant="30" id="bN2-AB-KOM"/>
+                                <constraint firstItem="sUX-jk-JJp" firstAttribute="top" secondItem="czk-GU-yfW" secondAttribute="top" constant="20" id="f6M-Fl-njj"/>
+                                <constraint firstAttribute="trailing" secondItem="1cH-x0-8y4" secondAttribute="trailing" constant="30" id="lf9-Lo-SMe"/>
+                            </constraints>
+                        </view>
+                        <color key="fillColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </box>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="xKI-Ju-ojh" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="C4C-f7-kAy"/>
+                    <constraint firstAttribute="trailing" secondItem="xKI-Ju-ojh" secondAttribute="trailing" id="ZNa-Da-o9A"/>
+                    <constraint firstItem="xKI-Ju-ojh" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="kg0-9I-YWs"/>
+                    <constraint firstAttribute="bottom" secondItem="xKI-Ju-ojh" secondAttribute="bottom" id="rEN-pv-dCf"/>
+                </constraints>
+            </view>
+            <connections>
+                <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
+            </connections>
+            <point key="canvasLocation" x="93" y="111"/>
+        </window>
+    </objects>
+    <resources>
+        <image name="NSApplicationIcon" width="128" height="128"/>
+    </resources>
+</document>

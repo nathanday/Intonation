@@ -103,7 +103,7 @@ class HarmonicView: ResultView {
 		return log2(aHarmonic)-1;
 	}
 
-	final func yValueForHarmonic( _ aHarmonic: UInt ) -> CGFloat { return yValueForHarmonic( aHarmonic, bounds: self.bounds ); }
+	final func yValueForHarmonic( _ aHarmonic: UInt ) -> CGFloat { return yValueForHarmonic( aHarmonic, bounds: bounds ); }
 
 	final private func yValueForHarmonic( _ aHarmonic: UInt, bounds aBounds: NSRect ) -> CGFloat {
 		let		theOctave = HarmonicView.octaveForHarmonic(aHarmonic);
@@ -116,8 +116,8 @@ class HarmonicView: ResultView {
 	}
 	override func draw(_ dirtyRect: NSRect) {
 		let		theHarmonicSpacing : CGFloat = max(20.0,CGFloat(10-selectedRatios.count)*5.0);
-		var		theBounds = NSInsetRect(self.bounds, 20.0, 20.0);
-		let		theXOrigin = max(NSMidX(theBounds)-CGFloat(max(0,selectedRatios.count))*theHarmonicSpacing*0.55-8.0,NSMinX(self.bounds)+20.0);
+		var		theBounds = NSInsetRect(bounds, 20.0, 20.0);
+		let		theXOrigin = max(NSMidX(theBounds)-CGFloat(max(0,selectedRatios.count))*theHarmonicSpacing*0.55-8.0,NSMinX(bounds)+20.0);
 		theBounds.origin.y += 10.0;
         super.draw(dirtyRect)
 

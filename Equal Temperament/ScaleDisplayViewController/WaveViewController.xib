@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10116" systemVersion="15F18b" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10116"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="WaveViewController" customModule="Intonation" customModuleProvider="target">
@@ -23,7 +24,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="353" height="581"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view translatesAutoresizingMaskIntoConstraints="NO" id="9aE-QQ-Q54" customClass="WaveView" customModule="Intonation" customModuleProvider="target">
+                            <view horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="9aE-QQ-Q54" customClass="WaveView" customModule="Intonation" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="339" height="581"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="339" placeholder="YES" id="zBa-SZ-Jge"/>
@@ -46,7 +47,7 @@
                     </scroller>
                 </scrollView>
                 <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IA4-fM-ilc">
-                    <rect key="frame" x="123" y="6" width="146" height="20"/>
+                    <rect key="frame" x="123" y="6" width="146" height="21"/>
                     <segmentedCell key="cell" controlSize="small" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="ane-3D-Ka6">
                         <font key="font" metaFont="smallSystem"/>
                         <segments>
@@ -59,16 +60,16 @@
                     </connections>
                 </segmentedControl>
                 <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IOO-UJ-8bY">
-                    <rect key="frame" x="273" y="6" width="102" height="20"/>
+                    <rect key="frame" x="285" y="6" width="102" height="21"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="98" id="fMQ-8j-8NY"/>
                     </constraints>
                     <segmentedCell key="cell" controlSize="small" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="KC8-8U-MZM">
                         <font key="font" metaFont="smallSystem"/>
                         <segments>
-                            <segment label="1×" width="32" selected="YES"/>
-                            <segment label="2×" width="32" tag="1"/>
-                            <segment label="4×" tag="2"/>
+                            <segment label="1×" width="31" selected="YES"/>
+                            <segment label="2×" width="31" tag="1"/>
+                            <segment label="4×" width="32" tag="2"/>
                         </segments>
                     </segmentedCell>
                     <connections>
@@ -84,7 +85,7 @@
                 <constraint firstAttribute="centerX" secondItem="IA4-fM-ilc" secondAttribute="centerX" id="O0x-wb-fVK"/>
                 <constraint firstItem="IOO-UJ-8bY" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="IA4-fM-ilc" secondAttribute="trailing" constant="8" id="RlC-9V-LvD"/>
                 <constraint firstItem="gUL-tr-1fR" firstAttribute="top" secondItem="TdE-H4-t53" secondAttribute="top" constant="20" id="UGL-Fx-DLt"/>
-                <constraint firstAttribute="trailing" secondItem="IOO-UJ-8bY" secondAttribute="trailing" constant="20" id="mJU-41-tgc"/>
+                <constraint firstAttribute="trailing" secondItem="IOO-UJ-8bY" secondAttribute="trailing" constant="8" id="mJU-41-tgc"/>
                 <constraint firstAttribute="bottom" secondItem="IA4-fM-ilc" secondAttribute="bottom" constant="8" id="xRf-Xe-eyC"/>
             </constraints>
             <userDefinedRuntimeAttributes>

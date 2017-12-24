@@ -17,7 +17,7 @@ extension UInt {
 			if a*a > self {
 				return false;
 			}
-			if self.isFactorOf(a) {
+			if isFactorOf(a) {
 				return true;
 			}
 		}
@@ -25,7 +25,7 @@ extension UInt {
 	}
 
 	var isPrime : Bool {
-		return self > 1 && (self <= 3 || !self.isFactorOf(2...sqrt(self)));
+		return self > 1 && (self <= 3 || !isFactorOf(2...sqrt(self)));
 	}
 	var everyPrimeFactor : [(factor:UInt,power:UInt)] {
 		var		theResult = [(factor:UInt,power:UInt)]();
@@ -36,7 +36,7 @@ extension UInt {
 			theResult = [(factor:1,power:1)];
 		default:
 			for thePrime in PrimesSequence(end:self) {
-				let thePower = self.factorCount(thePrime);
+				let thePower = factorCount(thePrime);
 				if thePower > 0 {
 					theResult.append((factor:thePrime,power:thePower));
 				}
@@ -58,7 +58,7 @@ extension UInt {
 				let		digits = "⁰¹²³⁴⁵⁶⁷⁸⁹";
 				var		theValue = Int(self);
 				while theValue > 0 {
-					let		theIndex = digits.characters.index(digits.startIndex, offsetBy: (theValue%10));
+					let		theIndex = digits.index(digits.startIndex, offsetBy: (theValue%10));
 					theResult = "\(digits[theIndex])\(theResult)";
 					theValue /= 10;
 				}
@@ -82,7 +82,7 @@ extension UInt {
 	var largestPrimeFactor : UInt {
 		if self > 3 {
 			for factor in 2...sqrt(self) {
-				if self.isFactorOf(factor) { return (self/factor).largestPrimeFactor; }
+				if isFactorOf(factor) { return (self/factor).largestPrimeFactor; }
 			}
 		}
 		return self
@@ -90,7 +90,7 @@ extension UInt {
 	var factorsString : String {
 		get {
 			var		theResult = "";
-			for theFact in self.everyPrimeFactor {
+			for theFact in everyPrimeFactor {
 				if theResult.startIndex != theResult.endIndex {
 //                    theResult.append(Character("⋅"));
                     theResult.append(Character("⨯"));

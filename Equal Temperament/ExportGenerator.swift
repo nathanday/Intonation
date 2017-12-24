@@ -11,6 +11,28 @@ import Foundation
 enum ExportMethod {
 	case text
 	case binary
+	case JSON
+	func exportGenerator(everyInterval aIntervals : [Interval]) -> ExportGenerator {
+		switch self {
+		case .text: return TextExportGenerator(everyInterval: aIntervals);
+		case .binary: return BinaryExportGenerator(everyInterval: aIntervals);
+		case .JSON: return JSONExportGenerator(everyInterval: aIntervals);
+		}
+	}
+	var title : String {
+		switch self {
+		case .text: return "Text";
+		case .binary: return "Binary";
+		case .JSON: return "JSON";
+		}
+	}
+	var fileType : String? {
+		switch self {
+		case .text: return "txt";
+		case .binary: return nil;
+		case .JSON: return "json";
+		}
+	}
 }
 
 enum Endianness {
@@ -24,28 +46,24 @@ enum WordSize {
 }
 
 class ExportGenerator {
-	let		method : ExportMethod;
-	var		delimiter : String = "\n";
-	var		stringEncoding = String.Encoding.utf8;
-	var		wordSize : WordSize = .size32;
-	var		endianness : Endianness = .big;
 	var		everyInterval : [Interval];
 
-	init(method aMethod : ExportMethod, everyInterval aIntervals : [Interval] ) {
-		method = aMethod;
+	init(everyInterval aIntervals : [Interval] ) {
 		everyInterval = aIntervals;
 	}
-
-	func saveTo(url aURL : URL ) -> Bool {
-		switch method {
-		case .text:
-			return textSaveTo(url:aURL );
-		case .binary:
-			return binarySaveTo(url:aURL );
+	func saveTo(url aURL : URL ) throws {
+		if let theData = try data()  {
+			try theData.write(to: aURL)
 		}
 	}
 
-	func textSaveTo(url aURL : URL ) -> Bool {
+	func data() throws -> Data? { return nil; }
+}
+
+class TextExportGenerator : ExportGenerator {
+	var		delimiter : String = "\n";
+	var		stringEncoding = String.Encoding.utf8;
+	override func data() -> Data? {
 		var		theText = "";
 		for theInterval in everyInterval {
 			if !theText.isEmpty {
@@ -53,21 +71,37 @@ class ExportGenerator {
 			}
 			theText.append("\(theInterval.toDouble)");
 		}
-		return (try? theText.write( to: aURL, atomically: true, encoding: stringEncoding )) != nil;
+		return theText.data(using: stringEncoding, allowLossyConversion: true);
 	}
+}
 
-	func binarySaveTo(url aURL : URL ) -> Bool {
-		let		theData = NSMutableData();
-		for theInterval in everyInterval {
-			switch wordSize {
-			case .size32:
-				var		theValue = Float32(theInterval.toDouble);
-				theData.append(&theValue, length: MemoryLayout<Float32>.size)
-			case .size64:
-				var		theValue = Float64(theInterval.toDouble);
-				theData.append(&theValue, length: MemoryLayout<Float64>.size)
-			}
+class BinaryExportGenerator : ExportGenerator {
+	var		wordSize : WordSize = .size32;
+	var		endianness : Endianness = .big;
+	override func data() -> Data {
+		var		theArray : Array<Any>;
+		switch wordSize {
+		case .size32: theArray = everyInterval.map { return Float32($0.toDouble); }
+		case .size64: theArray = everyInterval.map { return Float64($0.toDouble); }
 		}
-		return theData.write(to: aURL, atomically: true );
+		return theArray.withUnsafeBytes  {  return Data($0); }
+	}
+}
+
+class JSONExportGenerator : ExportGenerator {
+	class JSONEntry : Encodable {
+		var		name : String;
+		var		value: Double;
+		init( name aName : String, value aValue : Double) {
+			name = aName;
+			value = aValue;
+		}
+
+	}
+	override func data() throws -> Data {
+		let	theArray = everyInterval.map {
+			return JSONEntry( name: $0.names!.first!, value:$0.toDouble );
+		}
+		return try JSONEncoder().encode(["intervals":theArray]);
 	}
 }

@@ -20,7 +20,7 @@ class FindIntervalsViewController: NSViewController {
 	@objc dynamic var			centErrorsString : String = "";
 
 	var	windowController : MainWindowController? {
-		return self.view.window?.windowController as? MainWindowController
+		return view.window?.windowController as? MainWindowController
 	}
 
 	var				findMethod = IntervalsFindMethod.findMethodClosest;
@@ -93,7 +93,7 @@ class FindIntervalsViewController: NSViewController {
 
 	func showView() {
 		hidden = false;
-		self.view.window?.makeFirstResponder(searchField);
+		view.window?.makeFirstResponder(searchField);
 	}
 
 	func createSearchMenu( ) -> NSMenu {
@@ -239,7 +239,7 @@ extension FindIntervalsViewController : NSTextFieldDelegate {
 		if let theSearchField = searchField {
 			var		theResult = "";
 			var		thePreviousWasColon = false;
-			for theChar in theSearchField.stringValue.characters {
+			for theChar in theSearchField.stringValue {
 				if theChar >= "0" && theChar <= "9" {
 					theResult.append(theChar);
 				}

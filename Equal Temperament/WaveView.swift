@@ -38,7 +38,7 @@ class WaveView: ResultView {
 	}
 
 	override func draw(_ aDirtyRect: NSRect) {
-		var		theBounds = self.bounds;
+		var		theBounds = bounds;
 		let		theHeight =  NSHeight(theBounds);
 		let		theWidth =  NSWidth(theBounds);
 		let		theZeroAxis = floor(NSMinY(theBounds)+theHeight*0.55)+0.25;

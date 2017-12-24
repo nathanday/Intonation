@@ -44,7 +44,7 @@ class LinearScaleView : ScaleView {
 	private var		offsetCount : UInt = 0;
 	private var		drawingBounds : NSRect {
 		get {
-			var		theResult = NSInsetRect(self.bounds, 0.0, 5.0);
+			var		theResult = NSInsetRect(bounds, 0.0, 5.0);
 			theResult.origin.x += 5.0;
 			return theResult;
 		}
@@ -102,13 +102,13 @@ class LinearScaleView : ScaleView {
 
 class PitchConstellationView : ScaleView {
 	private var		maximumRadius : CGFloat {
-		return min(NSWidth(self.bounds), NSHeight(self.bounds))*0.5;
+		return min(NSWidth(bounds), NSHeight(bounds))*0.5;
 	}
 	private var		axisesRadius : CGFloat {
 		return min(maximumRadius-80.0, 320.0);
 	}
 	override func drawJustIntonationRatio( ratio aRatio : Interval, hilighted aHilighted : Bool, index anIndex: Int ) {
-		let		theBounds = self.bounds;
+		let		theBounds = bounds;
 		let		theAngle = CGFloat(log2(aRatio.toDouble) * 2.0*Double.pi);
 		let		theRadius = aHilighted ? maximumRadius - 40.0 : axisesRadius;
 		let		thePath = NSBezierPath()
@@ -131,7 +131,7 @@ class PitchConstellationView : ScaleView {
 	}
 	
 	override func drawEqualTemperamentRatio( rationNumber aRatioNumber : UInt ) {
-		let		theBounds = self.bounds;
+		let		theBounds = bounds;
 		let		theArcLength = 360.0/CGFloat(numberOfIntervals);
 		let		theStart = CGFloat(90.0)-CGFloat(aRatioNumber+1)*theArcLength;
 		let		theEnd	= CGFloat(90.0)-CGFloat(aRatioNumber)*theArcLength;
@@ -148,7 +148,7 @@ class PitchConstellationView : ScaleView {
 
 	override func drawNoEqualTemperament( ) {
 		let		thePath = NSBezierPath();
-		thePath.appendOval(in: NSMakeRect( NSMidX(self.bounds)-axisesRadius+(equalTempBarWidth*0.5), NSMidY(self.bounds)-axisesRadius+(equalTempBarWidth*0.5), 2.0*axisesRadius-equalTempBarWidth, 2.0*axisesRadius-equalTempBarWidth ) );
+		thePath.appendOval(in: NSMakeRect( NSMidX(bounds)-axisesRadius+(equalTempBarWidth*0.5), NSMidY(bounds)-axisesRadius+(equalTempBarWidth*0.5), 2.0*axisesRadius-equalTempBarWidth, 2.0*axisesRadius-equalTempBarWidth ) );
 		thePath.lineWidth = equalTempBarWidth;
 		NSColor(calibratedWhite: 0.875, alpha: 1.0).setStroke();
 		thePath.stroke();

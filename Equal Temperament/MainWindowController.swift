@@ -17,6 +17,10 @@ class MainWindowController : NSWindowController {
 
 	static let		midiSelectBounds : CountableClosedRange<Int> = 12...108;
 
+	convenience init() {
+		self.init(windowNibName:NSNib.Name(rawValue:"MainWindowController"));
+	}
+
 	deinit {
 		NotificationCenter.default.removeObserver(self);
 		document?.removeObserver(self, forKeyPath: "everyInterval");
@@ -253,30 +257,50 @@ class MainWindowController : NSWindowController {
 	}
 
 	@IBAction func paste( _ aSender: Any ) {
-		if let theViewController = self.documentTypeViewController as? AdHokGeneratorViewController,
+		if let theViewController = documentTypeViewController as? AdHokGeneratorViewController,
 			let theEntries = NSPasteboard.general.readObjects(forClasses: [IntervalEntry.self], options: nil) as? [IntervalEntry] {
 			theViewController.addIntervals( theEntries.map { return $0.interval; } );
 		}
 	}
 	@IBAction func delete( _ aSender: Any) {
-		if let theViewController = self.documentTypeViewController as? AdHokGeneratorViewController,
+		if let theViewController = documentTypeViewController as? AdHokGeneratorViewController,
 			let theSelectedObjects = arrayController?.selectedObjects as? [IntervalEntry] {
 			theViewController.removeIntervals( theSelectedObjects.map { return $0.interval; } );
 		}
 	}
 	@IBAction func exportAction( _ aSender: Any? ) {
-		let		theExportWindowController = ExportWindowController(document:self.document as! Document);
-		theExportWindowController.completionBlock = {
+		if let theDocument = document as? Document {
+			let		theExportWindowController = ExportWindowController { ( aSucces: Bool, anExportMethod : ExportMethod, aSelectedIntervals : Bool) in
+				if aSucces {
+					let		theSavePanel = NSSavePanel();
+					theSavePanel.title = "Export as \(anExportMethod.title) to…";
+					theSavePanel.prompt = "Export";
+					if let theFileType = anExportMethod.fileType {
+						theSavePanel.allowedFileTypes = [theFileType];
+					}
+					theSavePanel.beginSheetModal(for: self.window!, completionHandler: { (aResponse: NSApplication.ModalResponse) in
+						if aResponse == .OK {
+							var theIntervalEntries : [IntervalEntry]?
+							if aSelectedIntervals {
+								theIntervalEntries = self.arrayController?.selectedObjects as? [IntervalEntry];
+							} else {
+								theIntervalEntries = theDocument.intervalsData?.intervalsDataGenerator().everyEntry;
+							}
+							if let theIntervals = theIntervalEntries?.map( { $0.interval; } ) {
+								try? anExportMethod.exportGenerator(everyInterval: theIntervals ).saveTo(url: theSavePanel.url!);
+							}
+						}
+					});
+				}
+			};
+			theExportWindowController.showAsSheet(parentWindow: window! );
 		}
-		theExportWindowController.showAsSheet(parentWindow: self.window! );
 	}
-
-	override var windowNibName: NSNib.Name { return NSNib.Name(rawValue:"MainWindowController"); }
 
 	override func windowDidLoad() {
 		super.windowDidLoad();
 		if let theDocument = document as? Document {
-			if let theWindow = self.window {
+			if let theWindow = window {
 				if theDocument.intervalsData == nil {
 					let		theWindowController = SelectDocumentType();
 					theWindowController.completionBlock = { (aType) in

@@ -90,7 +90,7 @@ import Cocoa
         super.draw(dirtyRect)
 
 		func drawCanvase() {
-			let		theBounds = NSInsetRect(self.bounds, 2.0, 2.0);
+			let		theBounds = NSInsetRect(bounds, 2.0, 2.0);
 			let		thePath = NSBezierPath()
 			thePath.appendArc(withCenter: NSMakePoint(theBounds.maxX-2.0, theBounds.maxY-2.0), radius: 4.0, startAngle: 90, endAngle: 0, clockwise: true)
 			thePath.appendArc(withCenter: NSMakePoint(theBounds.maxX-2.0, theBounds.minY+2.0), radius: 4.0, startAngle: 0, endAngle: 270, clockwise: true)
@@ -139,7 +139,7 @@ import Cocoa
 extension BackGround {
 	@IBInspectable var horizontal: Bool {
 		get { return orientation == .horizontal; }
-		set( aValue ) { self.orientation = aValue ? .horizontal : .vertical; }
+		set( aValue ) { orientation = aValue ? .horizontal : .vertical; }
 	}
 }
 

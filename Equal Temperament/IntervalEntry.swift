@@ -47,11 +47,11 @@ class IntervalEntry : NSObject, NSPasteboardReading, NSPasteboardWriting {
 	@objc dynamic var name : String { return interval.ratioString; }
 	var closestEqualTemperamentIntervalNumber : UInt { return UInt(12.0*Double(log2(interval.toDouble))+0.5); }
 	var closestIntervalNumber : UInt { return UInt(Double(12)*Double(log2(interval.toDouble))+0.5); }
-	var equalTemperamentRatio : Double { return pow(2.0,Double(self.closestEqualTemperamentIntervalNumber)/Double(12)); }
+	var equalTemperamentRatio : Double { return pow(2.0,Double(closestEqualTemperamentIntervalNumber)/Double(12)); }
 	var toRatio : Double { return interval.toDouble; }
 	@objc dynamic var toCents : Double { return interval.toCents; }
 	var toOctave : Double { return interval.toOctave; }
-	var justIntonationPercent : Double { return Double(12)*100.0 * log2(self.interval.toDouble); }
+	var justIntonationPercent : Double { return Double(12)*100.0 * log2(interval.toDouble); }
 	var error : Double { return equalTemperamentRatio-interval.toDouble; }
 	var error12ETCent : Double {
 		return (interval.toDouble/Double(closestIntervalNumber).ratioFromSemitone).toCents;
@@ -187,7 +187,7 @@ class IntervalEntry : NSObject, NSPasteboardReading, NSPasteboardWriting {
 	var absErrorNETCent : Double { return abs(errorNETCent); }
 
 	init( interval anInterval: Interval ) {
-		self.interval = anInterval;
+		interval = anInterval;
 		super.init();
 	}
 
@@ -203,7 +203,7 @@ class IntervalEntry : NSObject, NSPasteboardReading, NSPasteboardWriting {
 
 	init?( string aString: String ) {
 		if let theRatio = Interval.from(string:aString) {
-			self.interval = theRatio;
+			interval = theRatio;
 			super.init();
 		} else {
 			return nil;
@@ -221,7 +221,7 @@ class IntervalEntry : NSObject, NSPasteboardReading, NSPasteboardWriting {
 	}
 
 	@objc dynamic var everyIntervalName : [String] {
-		return self.interval.names ?? [];
+		return interval.names ?? [];
 	}
 	@objc dynamic var intervalName : String {
 		return everyIntervalName.first ?? "";
@@ -259,13 +259,13 @@ class IntervalEntry : NSObject, NSPasteboardReading, NSPasteboardWriting {
 		case NSPasteboard.PasteboardType.string:
 			if let theString = aPropertyList as? String,
 				let theRatio = Interval.from(string:theString) {
-				self.interval = theRatio;
+				interval = theRatio;
 			} else {
 				return nil;
 			}
 		case IntervalEntry.nativePasteboardType:
 			if let theInterval = Interval.from(propertyList:aPropertyList) {
-				self.interval = theInterval;
+				interval = theInterval;
 			} else {
 				return nil;
 			}

@@ -129,7 +129,7 @@ class Tone {
 
 	func stop() {
 		if playing  {
-			let		theError = AudioOutputUnitStop(self.toneUnit! );
+			let		theError = AudioOutputUnitStop(toneUnit! );
 			assert( theError == noErr, "Error starting unit: 0x\(UInt(theError).hexadecimalString)");
 			envelope.beginRelease = true;
 			playing = false;
@@ -138,7 +138,7 @@ class Tone {
 
 	func play( ) {
 		if !playing {
-			let		theError = AudioOutputUnitStart(self.toneUnit!);
+			let		theError = AudioOutputUnitStart(toneUnit!);
 			assert( theError == noErr, "Error starting unit: 0x\(UInt(theError).hexadecimalString)");
 			playing = theError == noErr;
 		}

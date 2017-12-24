@@ -19,7 +19,7 @@ class ChordSelectorWindowController: NSWindowController {
     }
 
 	@IBAction func toggleWindow( _ aSender: Any?) {
-		if let theWindow = self.window {
+		if let theWindow = window {
 			if theWindow.isVisible {
 				close();
 			}
@@ -30,7 +30,7 @@ class ChordSelectorWindowController: NSWindowController {
 	}
 
 	func showAsSheet(parentWindow aWindow: NSWindow ) {
-		if let theWindow = self.window {
+		if let theWindow = window {
 			aWindow.beginSheet( theWindow, completionHandler: {
 				(aResponse: NSApplication.ModalResponse) -> Void in
 			});

@@ -150,7 +150,7 @@ class Document : NSDocument, MIDIReceiverObserver {
 			}
 		}
 		catch {
-			self.printDocument( "error" );
+			printDocument( "error" );
 		}
 	}
 
@@ -203,7 +203,7 @@ class Document : NSDocument, MIDIReceiverObserver {
 
 	override func makeWindowControllers() {
 		let		theWindowController = MainWindowController();
-		self.addWindowController(theWindowController);
+		addWindowController(theWindowController);
 		setUpIntervalsDataObservers();
 		midiReceiver.observer = self;
 	}
@@ -213,12 +213,12 @@ class Document : NSDocument, MIDIReceiverObserver {
 	@objc dynamic var     averageError : Double = 0.0
 	@objc dynamic var		biggestError : Double { get { return !biggestErrorEntries.isEmpty ? biggestErrorEntries.first!.error : 0.0; } }
 	@objc dynamic var		smallestErrorEntries : Set<IntervalEntry> = [] {
-		willSet { self.willChangeValue(forKey: "smallestError"); }
-		didSet { self.didChangeValue(forKey: "smallestError"); }
+		willSet { willChangeValue(forKey: "smallestError"); }
+		didSet { didChangeValue(forKey: "smallestError"); }
 	}
 	@objc dynamic var		biggestErrorEntries : Set<IntervalEntry> = [] {
-		willSet { self.willChangeValue(forKey: "biggestError"); }
-		didSet { self.didChangeValue(forKey: "biggestError"); }
+		willSet { willChangeValue(forKey: "biggestError"); }
+		didSet { didChangeValue(forKey: "biggestError"); }
 	}
 
 	func	indexFor(equalTemperamentEntry anIntervalEntry: IntervalEntry) -> Int? {
