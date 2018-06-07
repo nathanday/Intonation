@@ -18,7 +18,7 @@ class MainWindowController : NSWindowController {
 	static let		midiSelectBounds : CountableClosedRange<Int> = 12...108;
 
 	convenience init() {
-		self.init(windowNibName:NSNib.Name(rawValue:"MainWindowController"));
+		self.init(windowNibName:NSNib.Name("MainWindowController"));
 	}
 
 	deinit {
@@ -126,7 +126,7 @@ class MainWindowController : NSWindowController {
 			if selectedJustIntonationIntervals.count > 1 {
 				var		theRatiosString : String = "";
 				var		theFactorsString : String = "";
-				var		theFactorsSum = UInt(0);
+				var		theFactorsSum = 0;
 				var		theCommonFactor = 1;
 				for theValue in selectedJustIntonationIntervals {
 					if let theRationalInterval = theValue as? RationalInterval {
@@ -145,7 +145,7 @@ class MainWindowController : NSWindowController {
 								theRatiosString.write( "∶\(theValue)" );
 								theFactorsString.write( " + \(theFactors)" );
 							}
-							theFactorsSum += UInt(theValue);
+							theFactorsSum += theValue;
 					}
 				}
 				theHarmonicTitleTextField.stringValue = theRatiosString;

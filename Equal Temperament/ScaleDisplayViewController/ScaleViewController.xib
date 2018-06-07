@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14269.12" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14269.12"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -19,18 +18,18 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="636"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <tabView drawsBackground="NO" controlSize="small" type="bottomTabsBezelBorder" translatesAutoresizingMaskIntoConstraints="NO" id="Zwp-Cg-O5L">
-                    <rect key="frame" x="13" y="3" width="367" height="629"/>
+                <tabView drawsBackground="NO" controlSize="small" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="Zwp-Cg-O5L">
+                    <rect key="frame" x="8" y="8" width="377" height="604"/>
                     <tabViewItems>
                         <tabViewItem label="Pitch Constellation" identifier="2" id="WaW-dz-K2N">
                             <view key="view" id="LZV-gq-Ycf" customClass="PitchConstellationView" customModule="Intonation" customModuleProvider="target">
-                                <rect key="frame" x="10" y="7" width="347" height="597"/>
+                                <rect key="frame" x="10" y="25" width="371" height="567"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </view>
                         </tabViewItem>
                         <tabViewItem label="Linear" identifier="1" id="93l-5i-Ccf">
                             <view key="view" id="fc7-kA-Xhq" customClass="LinearScaleView" customModule="Intonation" customModuleProvider="target">
-                                <rect key="frame" x="10" y="7" width="347" height="597"/>
+                                <rect key="frame" x="0.0" y="0.0" width="377" height="604"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </view>
                         </tabViewItem>
@@ -39,12 +38,28 @@
                         <binding destination="-2" name="selectedIndex" keyPath="self.selectedScaleDisplayType" id="wTb-Qk-1Fo"/>
                     </connections>
                 </tabView>
+                <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tNv-Dz-ETm">
+                    <rect key="frame" x="19" y="611" width="175" height="18"/>
+                    <segmentedCell key="cell" controlSize="small" borderStyle="border" alignment="left" style="roundRect" trackingMode="selectOne" id="XhX-LC-IeN">
+                        <font key="font" metaFont="smallSystem"/>
+                        <segments>
+                            <segment label="Pitch Constellation"/>
+                            <segment label="Linear" selected="YES" tag="1"/>
+                        </segments>
+                    </segmentedCell>
+                    <connections>
+                        <binding destination="-2" name="selectedTag" keyPath="self.selectedScaleDisplayType" id="ce1-aR-8cj"/>
+                    </connections>
+                </segmentedControl>
             </subviews>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="Zwp-Cg-O5L" secondAttribute="bottom" constant="8" id="RVV-nZ-2cH"/>
-                <constraint firstItem="Zwp-Cg-O5L" firstAttribute="leading" secondItem="Eit-b2-9RF" secondAttribute="leading" constant="20" id="UCo-p7-NzJ"/>
-                <constraint firstAttribute="trailing" secondItem="Zwp-Cg-O5L" secondAttribute="trailing" constant="20" id="huv-ry-Gb9"/>
-                <constraint firstItem="Zwp-Cg-O5L" firstAttribute="top" secondItem="Eit-b2-9RF" secondAttribute="top" constant="8" id="uhu-rG-g8L"/>
+                <constraint firstItem="Zwp-Cg-O5L" firstAttribute="leading" secondItem="Eit-b2-9RF" secondAttribute="leading" constant="8" id="UCo-p7-NzJ"/>
+                <constraint firstAttribute="bottom" secondItem="Zwp-Cg-O5L" secondAttribute="bottom" constant="8" id="dk3-ti-XHE"/>
+                <constraint firstItem="Zwp-Cg-O5L" firstAttribute="top" secondItem="tNv-Dz-ETm" secondAttribute="bottom" id="gcf-Ih-ppx"/>
+                <constraint firstAttribute="trailing" secondItem="Zwp-Cg-O5L" secondAttribute="trailing" constant="8" id="huv-ry-Gb9"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="tNv-Dz-ETm" secondAttribute="trailing" constant="8" id="jAu-cL-0RR"/>
+                <constraint firstItem="tNv-Dz-ETm" firstAttribute="leading" secondItem="Eit-b2-9RF" secondAttribute="leading" constant="20" id="qDw-ck-WMd"/>
+                <constraint firstItem="tNv-Dz-ETm" firstAttribute="top" secondItem="Eit-b2-9RF" secondAttribute="top" constant="8" id="rj6-un-v6B"/>
             </constraints>
             <point key="canvasLocation" x="211.5" y="-328"/>
         </view>

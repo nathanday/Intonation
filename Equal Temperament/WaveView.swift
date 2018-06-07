@@ -16,20 +16,20 @@ enum WaveDisplayMode {
 class WaveView: ResultView {
 
 	var		displayMode:	WaveDisplayMode = .overlayed {
-		didSet { setNeedsDisplay(); }
+		didSet { needsDisplay = true; }
 	}
 
 	override var		selectedRatios : [Interval] {
 		didSet {
 			invalidateIntrinsicContentSize();
-			setNeedsDisplay();
+			needsDisplay = true;
 		}
 	}
 	
 	var		xScale : Float = 200.0 {
 		didSet {
 			invalidateIntrinsicContentSize();
-			setNeedsDisplay();
+			needsDisplay = true;
 		}
 	}
 
@@ -46,7 +46,7 @@ class WaveView: ResultView {
 		let		theY1 = theBounds.maxY+0.25;
 		let		theX0 = theBounds.minX-0.25;
 		let		theX1 = theBounds.maxX+0.25;
-		let		theOutOffFocusAlpha : CGFloat = 0.5;
+		let		theOutOffFocusAlpha : CGFloat = 0.25;
 
 		func drawWave( _ aFreqs : [Double], lineWidth aLineWidth : CGFloat ) {
 			let		thePath = NSBezierPath();
@@ -83,7 +83,7 @@ class WaveView: ResultView {
 					thePath.line(to: NSMakePoint(theX, theZeroAxis+theLen));
 				}
 				if i%8 == 4 {
-					drawText(string: "\(i/8 + 1)", size: NSFont.systemFontSize(for: NSControl.ControlSize.regular)*1.25, point: NSMakePoint(theX-6.0,20.0), color:NSColor.darkGray, textAlignment:.center );
+					drawText(string: "\(i/8 + 1)", size: NSFont.systemFontSize(for: NSControl.ControlSize.regular)*1.25, point: NSMakePoint(theX-6.0,20.0), color:NSColor.textColor.withAlphaComponent(0.5), textAlignment:.center );
 				}
 			}
 			axisesColor.setStroke();
@@ -96,14 +96,13 @@ class WaveView: ResultView {
                     NSColor(calibratedHue: (CGFloat(theIndex+4).truncatingRemainder(dividingBy: 1.0)/5.1-2.0/15.0).truncatingRemainder(dividingBy: 1.0), saturation: 0.5, brightness: 0.75, alpha: theOutOffFocusAlpha).setStroke();
                     drawWave( [theRatio.toDouble], lineWidth:1.0 );
                 }
-                NSColor(calibratedWhite: 0.0, alpha: 1.0).setStroke();
+                NSColor.secondaryLabelColor.setStroke();
                 drawWave( selectedRatios.map({$0.toDouble;}), lineWidth:2.0 );
             case .overlayed:
                 NSColor(calibratedWhite: 0.5, alpha: theOutOffFocusAlpha).setStroke();
                 drawWave( selectedRatios.map({$0.toDouble;}), lineWidth:1.5 );
                 for (theIndex,theRatio) in selectedRatios.enumerated() {
-                    let		theHue = hueForIndex(theIndex);
-                    NSColor(calibratedHue: theHue, saturation: 1.0, brightness: 0.75, alpha: 1.0).setStroke();
+                    colorForIndex(theIndex).setStroke();
                     drawWave( [theRatio.toDouble], lineWidth:2.0 );
                 }
             }

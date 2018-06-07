@@ -18,14 +18,14 @@ class SpectrumView: ResultView {
 	var		spectrumType : SpectrumType = .saw {
 		didSet {
 			invalidateIntrinsicContentSize();
-			setNeedsDisplay();
+			needsDisplay = true;
 		}
 	}
 
 	override var selectedRatios : [Interval] {
 		didSet {
 			invalidateIntrinsicContentSize();
-			setNeedsDisplay();
+			needsDisplay = true;
 		}
 	}
 
@@ -107,8 +107,9 @@ class SpectrumView: ResultView {
 					controlPoint1: NSMakePoint(theX+theTopWidthHalf, theY0+theHeight*0.5),
 					controlPoint2: NSMakePoint(theX+(theBaseWidthHalf-theTopWidthHalf), theY0));
 			}
-			NSColor(calibratedHue: hueForIndex(aHarmonic), saturation: 1.0, brightness: 0.75, alpha: 1.0).setStroke();
-			NSColor(calibratedHue: hueForIndex(aHarmonic), saturation: 0.5, brightness: 0.875, alpha: 0.25).setFill();
+			let		theColor = colorForIndex(aHarmonic)
+			theColor.setStroke();
+			theColor .setFill();
 			thePath.fill();
 			thePath.stroke();
 			thePath.move(to: NSMakePoint( NSMinX(aDirtyRect), theY0));
@@ -144,17 +145,17 @@ class SpectrumView: ResultView {
 			}
 			NSColor(calibratedWhite: 0.25, alpha: 1.0).setStroke();
 			theTicks.lineWidth = 1.0;
-			theTicks.lineCapStyle = NSBezierPath.LineCapStyle.roundLineCapStyle
+			theTicks.lineCapStyle = NSBezierPath.LineCapStyle.round
 			theTicks.stroke();
 
 			NSColor(calibratedWhite: 0.0, alpha: 0.5).setStroke();
 			theOverPath.lineWidth = 0.25;
-			theOverPath.lineCapStyle = NSBezierPath.LineCapStyle.roundLineCapStyle
+			theOverPath.lineCapStyle = NSBezierPath.LineCapStyle.round
 			theOverPath.stroke();
 
 			NSColor(calibratedWhite: 0.25, alpha: 1.0).setStroke();
 			theMinorTicks.lineWidth = 0.5;
-			theMinorTicks.lineCapStyle = NSBezierPath.LineCapStyle.roundLineCapStyle
+			theMinorTicks.lineCapStyle = NSBezierPath.LineCapStyle.round
 			theMinorTicks.stroke();
 		}
 

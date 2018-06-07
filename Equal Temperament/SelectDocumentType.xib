@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11173.2" systemVersion="16A254g" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11173.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14109"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
         <capability name="system font weights other than Regular or Bold" minToolsVersion="7.0"/>
     </dependencies>
     <objects>
@@ -18,26 +19,28 @@
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="F0z-JX-Cv5" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="196" y="240" width="472" height="445"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="900"/>
+            <rect key="contentRect" x="196" y="240" width="472" height="514"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1028"/>
+            <value key="minSize" type="size" width="472" height="190"/>
+            <value key="maxSize" type="size" width="472" height="514"/>
             <view key="contentView" id="se5-gp-TjO">
-                <rect key="frame" x="0.0" y="0.0" width="472" height="445"/>
+                <rect key="frame" x="0.0" y="0.0" width="472" height="514"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <scrollView autohidesScrollers="YES" horizontalLineScroll="69" horizontalPageScroll="10" verticalLineScroll="69" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" verticalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="pOd-Mm-wr7">
-                        <rect key="frame" x="20" y="53" width="432" height="347"/>
+                        <rect key="frame" x="20" y="53" width="432" height="416"/>
                         <clipView key="contentView" drawsBackground="NO" id="CuF-Ki-0xW">
-                            <rect key="frame" x="1" y="1" width="430" height="345"/>
+                            <rect key="frame" x="1" y="1" width="430" height="414"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="67" rowSizeStyle="automatic" viewBased="YES" floatsGroupRows="NO" id="8ye-Gt-awg">
-                                    <rect key="frame" x="0.0" y="0.0" width="430" height="345"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="430" height="414"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <size key="intercellSpacing" width="3" height="2"/>
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                     <tableColumns>
-                                        <tableColumn width="427" minWidth="40" maxWidth="1000" id="xLz-bn-gde">
+                                        <tableColumn identifier="" width="427" minWidth="40" maxWidth="1000" id="xLz-bn-gde">
                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -111,10 +114,10 @@ Description&gt;</string>
                             <nil key="backgroundColor"/>
                         </clipView>
                         <constraints>
-                            <constraint firstAttribute="height" constant="347" placeholder="YES" id="CLB-W7-WxA"/>
+                            <constraint firstAttribute="height" constant="416" placeholder="YES" id="CLB-W7-WxA"/>
                             <constraint firstAttribute="width" constant="432" id="ZmE-gm-Qo6"/>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="70" id="has-Xh-XRu"/>
-                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="347" id="oi0-5w-JpV"/>
+                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="416" id="oi0-5w-JpV"/>
                         </constraints>
                         <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="EhP-ym-dyM">
                             <rect key="frame" x="-100" y="-100" width="430" height="16"/>
@@ -126,7 +129,7 @@ Description&gt;</string>
                         </scroller>
                     </scrollView>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Yoi-x3-Dji">
-                        <rect key="frame" x="18" y="408" width="163" height="17"/>
+                        <rect key="frame" x="18" y="477" width="163" height="17"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Choose a Document Type" id="pfe-tv-muL">
                             <font key="font" metaFont="systemMedium" size="13"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -177,7 +180,7 @@ Gw
             <connections>
                 <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
             </connections>
-            <point key="canvasLocation" x="282" y="315.5"/>
+            <point key="canvasLocation" x="79" y="156"/>
         </window>
         <arrayController id="jvd-CS-HQB">
             <connections>

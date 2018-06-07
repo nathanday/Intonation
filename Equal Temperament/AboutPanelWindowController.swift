@@ -11,7 +11,7 @@ import Cocoa
 class AboutPanelWindowController: NSWindowController {
 
 	convenience init() {
-		self.init(windowNibName: NSNib.Name(rawValue: "AboutPanelWindowController"));
+		self.init(windowNibName: NSNib.Name("AboutPanelWindowController"));
 	}
 
 	@objc dynamic var	versionString : String {

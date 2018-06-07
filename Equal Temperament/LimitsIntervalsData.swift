@@ -111,7 +111,7 @@ class LimitsIntervalsData : IntervalsData {
 }
 
 class LimitsBasedGenerator : IntervalsDataGenerator {
-	var octaves : UInt = 1;
+	var octaves : Int = 1;
 	var	_everyIntervalEntry : [IntervalEntry]?;
 	override var	everyEntry : [IntervalEntry] {
 		get {

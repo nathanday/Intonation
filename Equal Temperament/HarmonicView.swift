@@ -58,14 +58,14 @@ class HarmonicView: ResultView {
 	var		showFundamental = false {
 		didSet {
 			updateOctaveRange();
-			setNeedsDisplay();
+			needsDisplay = true;
 		}
 	}
 
 	override var	selectedRatios : [Interval] {
 		didSet(aValue) {
 			updateOctaveRange();
-			setNeedsDisplay();
+			needsDisplay = true;
 		}
 	}
 
@@ -133,7 +133,7 @@ class HarmonicView: ResultView {
 			thePath.move(to: NSMakePoint(theXOrigin+3.5, theY-theSize*0.45));
 			thePath.line(to: NSMakePoint(theXOrigin+3.5, theY-theOctaveHeight/2.0+5.0));
 			axisesColor.setStroke();
-			thePath.lineCapStyle = NSBezierPath.LineCapStyle.roundLineCapStyle
+			thePath.lineCapStyle = NSBezierPath.LineCapStyle.round
 			thePath.stroke()
 		}
 
@@ -178,10 +178,10 @@ class HarmonicView: ResultView {
 				let		theX = theXOrigin+75.0+CGFloat(anOf)*theHarmonicSpacing;
 				thePath.move(to: NSMakePoint(theXOrigin+65.0, theYDenom ));
 				thePath.line(to: NSMakePoint(theX+5.0, theYDenom));
-				NSColor(calibratedHue: hueForIndex(anIndex), saturation: 1.0, brightness: 0.75, alpha: 1.0).setStroke();
+				colorForIndex(anIndex).setStroke();
 				thePath.lineWidth = 4.0;
 				thePath.stroke()
-				drawText(string: aRatio.ratioString, size:theSize, point: NSMakePoint(theX+5.0, theYDenom-8.5), color:NSColor(calibratedHue: hueForIndex(anIndex), saturation: 1.0, brightness: 0.75, alpha: 1.0) );
+				drawText(string: aRatio.ratioString, size:theSize, point: NSMakePoint(theX+5.0, theYDenom-8.5), color:colorForIndex(anIndex) );
 			}
 			else if let theNum = aRatio.numeratorForDenominator(commonFactor)
 			{
@@ -196,10 +196,10 @@ class HarmonicView: ResultView {
 				thePath.move(to: NSMakePoint(theX, theYDenom+theYDelta/2.0-6.0));
 				thePath.curve( to: NSMakePoint(theX-10.0, theYDenom), controlPoint1: NSMakePoint(theX, theYDenom), controlPoint2: NSMakePoint(theX, theYDenom));
 				thePath.line(to: NSMakePoint(theXOrigin+65.0, theYDenom));
-				NSColor(calibratedHue: hueForIndex(anIndex), saturation: 1.0, brightness: 0.75, alpha: 1.0).setStroke();
+				colorForIndex(anIndex).setStroke();
 				thePath.lineWidth = 4.0;
 				thePath.stroke()
-				drawText(string: aRatio.ratioString, size:theSize, point: NSMakePoint(theX-7.0, theYDenom+theYDelta/2.0-8.5), color:NSColor(calibratedHue: hueForIndex(anIndex), saturation: 1.0, brightness: 0.75, alpha: 1.0) );
+				drawText(string: aRatio.ratioString, size:theSize, point: NSMakePoint(theX-7.0, theYDenom+theYDelta/2.0-8.5), color:colorForIndex(anIndex));
 			}
 		}
 

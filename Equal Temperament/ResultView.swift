@@ -10,6 +10,34 @@ import Cocoa
 
 @IBDesignable class ResultView: NSControl {
 
+	private var		_colorInterpolator: ColorInterpolator?;
+	var		colorInterpolator: ColorInterpolator {
+		if _colorInterpolator == nil {
+			switch effectiveAppearance.bestMatch(from: [.aqua,.darkAqua]) {
+			case NSAppearance.Name.aqua:
+				_colorInterpolator = ColorInterpolator(hsbaPoints: [
+					(x:0.0,hueComponent:0.0,saturationComponent:1.0,brightnessComponent:0.75),
+					(x:2.0,hueComponent:CGFloat(2.0/7.5),saturationComponent:1.0,brightnessComponent:0.625),
+					(x:3.0,hueComponent:CGFloat(3.5/7.5),saturationComponent:1.0,brightnessComponent:0.625),
+					(x:4.0,hueComponent:CGFloat(4.0/7.5),saturationComponent:1.0,brightnessComponent:0.625),
+					(x:7.25,hueComponent:1.0,saturationComponent:1.0,brightnessComponent:0.75)]);
+			case NSAppearance.Name.darkAqua:
+				_colorInterpolator = ColorInterpolator(hsbaPoints: [
+					(x:0.0,hueComponent:0.0,saturationComponent:1.0,brightnessComponent:1.0),
+					(x:1.0,hueComponent:CGFloat(1.0/7.5),saturationComponent:0.8125,brightnessComponent:1.0),
+					(x:4.0,hueComponent:CGFloat(4.0/7.5),saturationComponent:1.0,brightnessComponent:1.0),
+					(x:5.0,hueComponent:CGFloat(5.0/7.5),saturationComponent:0.75,brightnessComponent:1.0),
+					(x:7.25,hueComponent:1.0,saturationComponent:1.0,brightnessComponent:1.0)]);
+			default:
+				_colorInterpolator = ColorInterpolator(hsbaPoints: [
+					(x:0.0,hueComponent:0.0,saturationComponent:1.0,brightnessComponent:0.75),
+					(x:0.0,hueComponent:0.0,saturationComponent:1.0,brightnessComponent:0.75),
+					(x:7.25,hueComponent:1.0,saturationComponent:1.0,brightnessComponent:0.75)]);
+			}
+		}
+		return _colorInterpolator!;
+	}
+
 	var		commonFactor : Int {
 		get {
 			var		theResult = 1;
@@ -26,40 +54,35 @@ import Cocoa
 		}
 	}
 	var		selectedRatios : [Interval] = [] {
-		didSet { setNeedsDisplay(); }
+		didSet { needsDisplay = true; }
 	}
 	var		everyRatios : [Interval] = [] {
-		didSet { setNeedsDisplay(); }
+		didSet { needsDisplay = true; }
 	}
 
-	func hueForIndex( _ aIndex : Int ) -> CGFloat { return (CGFloat(aIndex+4)*1.0/5.1-2.0/15.0).truncatingRemainder(dividingBy: 1.0); }
+	override func viewDidChangeEffectiveAppearance() {
+		_colorInterpolator = nil;
+	}
+
+	func colorForIndex( _ aIndex : Int ) -> NSColor {
+		return colorInterpolator[CGFloat(aIndex)]!;
+	}
 
     var axisesColor : NSColor {
-        var     theResult = NSColor.gray
-        if let theHue = UserDefaults.standard.object(forKey:"plotBackgroundHue") as? NSNumber {
-            theResult = NSColor(calibratedHue: CGFloat(theHue.floatValue), saturation: 0.2, brightness: 0.5, alpha: 1.0);
-        }
-        return theResult;
+		return NSColor.controlAccent;
     }
     
     var majorAxisesColor : NSColor {
-        var     theResult = NSColor.darkGray
-        if let theHue = UserDefaults.standard.object(forKey:"plotBackgroundHue") as? NSNumber {
-            theResult = NSColor(calibratedHue: CGFloat(theHue.floatValue), saturation: 0.4, brightness: 0.2, alpha: 1.0);
-        }
-        return theResult;
+		return NSColor.secondarySelectedControlColor;
     }
     
     var minorAxisesColor : NSColor {
-        var     theResult = NSColor.lightGray
-        if let theHue = UserDefaults.standard.object(forKey:"plotBackgroundHue") as? NSNumber {
-            theResult = NSColor(calibratedHue: CGFloat(theHue.floatValue), saturation: 0.1, brightness: 0.7, alpha: 1.0);
-        }
-        return theResult;
+		return NSColor.controlAccent.withAlphaComponent(0.25);
+//		return NSColor(named: NSColor.Name("minorAxisesColor"))!;
     }
     
 	func drawText(string aString: String, size aSize: CGFloat, point aPoint: CGPoint ) {
-		drawText(string: aString, size: aSize, point: aPoint, color:NSColor.black, textAlignment: .left );
+		drawText(string: aString, size: aSize, point: aPoint, color:NSColor.textColor, textAlignment: .left );
 	}
 	func drawText(string aString: String, size aSize: CGFloat, point aPoint: CGPoint, color aColor: NSColor ) {
 		drawText(string: aString, size: aSize, point: aPoint, color:aColor, textAlignment: .left );
@@ -76,7 +99,7 @@ import Cocoa
 			theTextRect.origin.x -= NSWidth(theTextRect);
 		}
 
-		let		theTextFontAttributes = [NSAttributedStringKey.font: NSFont.systemFont(ofSize: aSize), NSAttributedStringKey.foregroundColor: aColor, NSAttributedStringKey.paragraphStyle: theTextStyle]
+		let		theTextFontAttributes = [NSAttributedString.Key.font: NSFont.systemFont(ofSize: aSize), NSAttributedString.Key.foregroundColor: aColor, NSAttributedString.Key.paragraphStyle: theTextStyle]
 
 		let		theTextTextSize: CGSize = theTextTextContent.boundingRect(with: NSMakeSize(theTextRect.width, CGFloat.infinity), options: NSString.DrawingOptions.usesLineFragmentOrigin, attributes: theTextFontAttributes).size
 		let		theTextTextRect: NSRect = NSMakeRect(theTextRect.minX, theTextRect.minY + theTextRect.height*0.25 - theTextTextSize.height*0.1, theTextRect.width, theTextTextSize.height);
@@ -97,7 +120,7 @@ import Cocoa
 			thePath.appendArc(withCenter: NSMakePoint(theBounds.minX+2.0, theBounds.minY+2.0), radius: 4.0, startAngle: 270, endAngle: 180, clockwise: true)
 			thePath.appendArc(withCenter: NSMakePoint(theBounds.minX+2.0, theBounds.maxY-2.0), radius: 4.0, startAngle: 180, endAngle: 90, clockwise: true)
 			thePath.close()
-			NSColor.white.setFill()
+			NSColor.windowBackgroundColor.setFill()
 			thePath.fill()
 		}
 
@@ -130,7 +153,7 @@ import Cocoa
 				thePath.move(to: NSMakePoint(NSMaxX(theFrame)+1.0,NSMinY(theFrame)));
 				thePath.line(to: NSMakePoint(NSMaxX(theFrame)+1.0,NSMaxY(theFrame)));
 			}
-			NSColor.darkGray.setStroke();
+			NSColor.gridColor.setStroke();
 			thePath.stroke();
 		}
 	}

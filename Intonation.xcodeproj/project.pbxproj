@@ -42,10 +42,14 @@
 		D87C278A1AF3A95900C2BF7B /* PresetChordsAndScales.plist in Resources */ = {isa = PBXBuildFile; fileRef = D87C27891AF3A95900C2BF7B /* PresetChordsAndScales.plist */; };
 		D8812AD01C9ECE3D0093786D /* IntervalSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8812ACF1C9ECE3D0093786D /* IntervalSet.swift */; };
 		D8832F8619A0C86B0095B26F /* WaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8832F8519A0C86B0095B26F /* WaveView.swift */; };
+		D8896A5A2019E24700664260 /* SeriesGeneratorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8896A582019E24600664260 /* SeriesGeneratorViewController.swift */; };
+		D8896A5B2019E24700664260 /* SeriesGeneratorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8896A592019E24700664260 /* SeriesGeneratorViewController.xib */; };
+		D8896A5D2019E2D100664260 /* SeriesIntervalsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8896A5C2019E2D100664260 /* SeriesIntervalsData.swift */; };
 		D88A62101ACF7F19004CD4C9 /* IntegerType+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88A620F1ACF7F19004CD4C9 /* IntegerType+Additions.swift */; };
 		D88A62111AD02167004CD4C9 /* Scale.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8901EBC1ABC226D00A4E071 /* Scale.swift */; };
 		D88EED2D1AEE5AF50084BDCB /* Float+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88EED2C1AEE5AF50084BDCB /* Float+Additions.swift */; };
 		D89074D81AD5486600FD8A1E /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89074D71AD5486600FD8A1E /* ResultView.swift */; };
+		D893174820C60C84006DECB7 /* colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D893174720C60C84006DECB7 /* colors.xcassets */; };
 		D893993E1CA3E57F00C9CAA6 /* GeneratorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D893993D1CA3E57F00C9CAA6 /* GeneratorViewController.swift */; };
 		D89399411CA3F31C00C9CAA6 /* StackedIntervalsGeneratorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D893993F1CA3F31C00C9CAA6 /* StackedIntervalsGeneratorViewController.swift */; };
 		D89399421CA3F31C00C9CAA6 /* StackedIntervalsGeneratorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D89399401CA3F31C00C9CAA6 /* StackedIntervalsGeneratorViewController.xib */; };
@@ -62,6 +66,9 @@
 		D895438B1996363700A091A4 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89543821996347F00A091A4 /* Document.swift */; };
 		D89768F01CABF7BC007D30BA /* PresetIntervalsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89768EF1CABF7BC007D30BA /* PresetIntervalsData.swift */; };
 		D89A673B1E9507B100EC693C /* Interval.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89A673A1E9507B100EC693C /* Interval.swift */; };
+		D89E97A520C78A1B00E6B32D /* ColorInterpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89E97A420C78A1B00E6B32D /* ColorInterpolator.swift */; };
+		D89E97A920C83C8300E6B32D /* ColorInterpolator_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89E97A820C83C8300E6B32D /* ColorInterpolator_Test.swift */; };
+		D89E97AA20C83D7500E6B32D /* ColorInterpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89E97A420C78A1B00E6B32D /* ColorInterpolator.swift */; };
 		D8AA4E311C131EAA00B66521 /* ViewControllerPlaceHolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AA4E301C131EAA00B66521 /* ViewControllerPlaceHolderView.swift */; };
 		D8AA4E3C1C132A8A00B66521 /* ScaleDisplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AA4E391C132A8A00B66521 /* ScaleDisplayViewController.swift */; };
 		D8AA4E3D1C132A8A00B66521 /* ScaleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AA4E3A1C132A8A00B66521 /* ScaleViewController.swift */; };
@@ -138,10 +145,14 @@
 		D8812ACF1C9ECE3D0093786D /* IntervalSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntervalSet.swift; sourceTree = "<group>"; };
 		D8832F8519A0C86B0095B26F /* WaveView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaveView.swift; sourceTree = "<group>"; };
 		D885A12F1CE60B7300A3B996 /* PrimesSequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimesSequence.swift; sourceTree = "<group>"; };
+		D8896A582019E24600664260 /* SeriesGeneratorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeriesGeneratorViewController.swift; sourceTree = "<group>"; };
+		D8896A592019E24700664260 /* SeriesGeneratorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SeriesGeneratorViewController.xib; sourceTree = "<group>"; };
+		D8896A5C2019E2D100664260 /* SeriesIntervalsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeriesIntervalsData.swift; sourceTree = "<group>"; };
 		D88A620F1ACF7F19004CD4C9 /* IntegerType+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IntegerType+Additions.swift"; sourceTree = "<group>"; };
 		D88EED2C1AEE5AF50084BDCB /* Float+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Float+Additions.swift"; sourceTree = "<group>"; };
 		D8901EBC1ABC226D00A4E071 /* Scale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scale.swift; sourceTree = "<group>"; };
 		D89074D71AD5486600FD8A1E /* ResultView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
+		D893174720C60C84006DECB7 /* colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = colors.xcassets; sourceTree = "<group>"; };
 		D893993D1CA3E57F00C9CAA6 /* GeneratorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratorViewController.swift; sourceTree = "<group>"; };
 		D893993F1CA3F31C00C9CAA6 /* StackedIntervalsGeneratorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackedIntervalsGeneratorViewController.swift; sourceTree = "<group>"; };
 		D89399401CA3F31C00C9CAA6 /* StackedIntervalsGeneratorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StackedIntervalsGeneratorViewController.xib; sourceTree = "<group>"; };
@@ -163,6 +174,8 @@
 		D89543891996354100A091A4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainWindowController.xib; sourceTree = "<group>"; };
 		D89768EF1CABF7BC007D30BA /* PresetIntervalsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresetIntervalsData.swift; sourceTree = "<group>"; };
 		D89A673A1E9507B100EC693C /* Interval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Interval.swift; sourceTree = "<group>"; };
+		D89E97A420C78A1B00E6B32D /* ColorInterpolator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorInterpolator.swift; sourceTree = "<group>"; };
+		D89E97A820C83C8300E6B32D /* ColorInterpolator_Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorInterpolator_Test.swift; sourceTree = "<group>"; };
 		D8AA4E301C131EAA00B66521 /* ViewControllerPlaceHolderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerPlaceHolderView.swift; sourceTree = "<group>"; };
 		D8AA4E391C132A8A00B66521 /* ScaleDisplayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScaleDisplayViewController.swift; sourceTree = "<group>"; };
 		D8AA4E3A1C132A8A00B66521 /* ScaleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScaleViewController.swift; sourceTree = "<group>"; };
@@ -232,6 +245,7 @@
 			isa = PBXGroup;
 			children = (
 				D8AA4E301C131EAA00B66521 /* ViewControllerPlaceHolderView.swift */,
+				D89E97A420C78A1B00E6B32D /* ColorInterpolator.swift */,
 				D87201051B8C7CAE006FDEDC /* NDMidiNoteFormatter.h */,
 				D87201041B8C7CAE006FDEDC /* NDMidiNoteFormatter.m */,
 			);
@@ -257,6 +271,8 @@
 				D89399401CA3F31C00C9CAA6 /* StackedIntervalsGeneratorViewController.xib */,
 				D8E10CB21CA66D130030D8E6 /* EqualTemperamentGeneratorViewController.swift */,
 				D8E10CB31CA66D130030D8E6 /* EqualTemperamentGeneratorViewController.xib */,
+				D8896A582019E24600664260 /* SeriesGeneratorViewController.swift */,
+				D8896A592019E24700664260 /* SeriesGeneratorViewController.xib */,
 				D89399431CA3F37000C9CAA6 /* AdHokGeneratorViewController.swift */,
 				D89399441CA3F37000C9CAA6 /* AdHokGeneratorViewController.xib */,
 				D8AFAD2E1CA58F370008ABFE /* PresetGeneratorViewController.swift */,
@@ -305,6 +321,7 @@
 				D87201021B8C7CA0006FDEDC /* Library */,
 				D87C27881AF3A93D00C2BF7B /* Resources */,
 				D89543691996345200A091A4 /* Images.xcassets */,
+				D893174720C60C84006DECB7 /* colors.xcassets */,
 				D89543601996345200A091A4 /* Supporting Files */,
 				D84F34081B088BC30095D1E8 /* Frameworks */,
 			);
@@ -324,6 +341,7 @@
 			isa = PBXGroup;
 			children = (
 				D89543781996345200A091A4 /* Equal_TemperamentTests.swift */,
+				D89E97A820C83C8300E6B32D /* ColorInterpolator_Test.swift */,
 				D89543761996345200A091A4 /* Supporting Files */,
 			);
 			path = "Equal TemperamentTests";
@@ -404,6 +422,7 @@
 				D8F2B1D51C93EFD800F88BF7 /* LimitsIntervalsData.swift */,
 				D8720B631C9E7D6B00ED9FBB /* StackedIntervalsIntervalsData.swift */,
 				D8E10CB61CA689310030D8E6 /* EqualTemperamentIntervalsData.swift */,
+				D8896A5C2019E2D100664260 /* SeriesIntervalsData.swift */,
 				D89768EF1CABF7BC007D30BA /* PresetIntervalsData.swift */,
 				D84CE1E11C95960E00E19505 /* AdHocIntervalsData.swift */,
 				D885A12F1CE60B7300A3B996 /* PrimesSequence.swift */,
@@ -472,7 +491,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Nathan Day";
 				TargetAttributes = {
 					D895435C1996345200A091A4 = {
@@ -524,6 +543,7 @@
 				D895436A1996345200A091A4 /* Images.xcassets in Resources */,
 				D895436D1996345200A091A4 /* MainMenu.xib in Resources */,
 				D8646B2E1C3D4C5A00D8C429 /* ChordPreviewViewController.xib in Resources */,
+				D893174820C60C84006DECB7 /* colors.xcassets in Resources */,
 				D8299E231FDE946400CB9DF7 /* ExportWindowController.xib in Resources */,
 				D89399461CA3F37000C9CAA6 /* AdHokGeneratorViewController.xib in Resources */,
 				D8AA4E421C132ADD00B66521 /* HarmonicViewController.xib in Resources */,
@@ -536,6 +556,7 @@
 				D8AFAD311CA58F370008ABFE /* PresetGeneratorViewController.xib in Resources */,
 				D895438A1996354100A091A4 /* MainWindowController.xib in Resources */,
 				D8AA4E3E1C132A8A00B66521 /* ScaleViewController.xib in Resources */,
+				D8896A5B2019E24700664260 /* SeriesGeneratorViewController.xib in Resources */,
 				D80A61D71C9040C000A2F885 /* SelectDocumentType.xib in Resources */,
 				D8571C811CA56D2B008A5A46 /* LimitsGeneratorViewController.xib in Resources */,
 				D8AA4E4A1C1337B500B66521 /* SpectrumViewController.xib in Resources */,
@@ -573,6 +594,7 @@
 				D8B9020E1AD491E30015B5E2 /* PreferencesWindowController.swift in Sources */,
 				D8E5E6241AD12F7A004DB02D /* HarmonicView.swift in Sources */,
 				D80A61D61C9040C000A2F885 /* SelectDocumentType.swift in Sources */,
+				D8896A5A2019E24700664260 /* SeriesGeneratorViewController.swift in Sources */,
 				D831054E1B0A6115000EB805 /* HarmonicsDescription.swift in Sources */,
 				D8720B641C9E7D6B00ED9FBB /* StackedIntervalsIntervalsData.swift in Sources */,
 				D8AA4E3C1C132A8A00B66521 /* ScaleDisplayViewController.swift in Sources */,
@@ -582,6 +604,7 @@
 				D8812AD01C9ECE3D0093786D /* IntervalSet.swift in Sources */,
 				D89A673B1E9507B100EC693C /* Interval.swift in Sources */,
 				D89543861996347F00A091A4 /* IntervalEntry.swift in Sources */,
+				D8896A5D2019E2D100664260 /* SeriesIntervalsData.swift in Sources */,
 				D85916C31C8C04D0001C5330 /* MIDIReceiver.swift in Sources */,
 				D83B54B11C8D96C500624A46 /* MIDIToHarmonicRatio.swift in Sources */,
 				D85ABE7F1C3FD06800F2DFAF /* ChordOrScaleSelectorViewController.swift in Sources */,
@@ -615,6 +638,7 @@
 				D8B14D291B29C68300C971D8 /* Tone.swift in Sources */,
 				D8720B681C9E8B2D00ED9FBB /* StackedIntervalSet.swift in Sources */,
 				D8AA4E311C131EAA00B66521 /* ViewControllerPlaceHolderView.swift in Sources */,
+				D89E97A520C78A1B00E6B32D /* ColorInterpolator.swift in Sources */,
 				D8AA4E411C132ADD00B66521 /* HarmonicViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -623,6 +647,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D89E97A920C83C8300E6B32D /* ColorInterpolator_Test.swift in Sources */,
+				D89E97AA20C83D7500E6B32D /* ColorInterpolator.swift in Sources */,
 				D89543791996345200A091A4 /* Equal_TemperamentTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -661,6 +687,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_GCD_PERFORMANCE = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -669,12 +696,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -701,7 +730,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -713,6 +742,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_GCD_PERFORMANCE = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -721,12 +751,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -747,7 +779,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 			};
@@ -765,7 +797,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.godofcocoa.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Intonation;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -781,7 +813,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.godofcocoa.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Intonation;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};

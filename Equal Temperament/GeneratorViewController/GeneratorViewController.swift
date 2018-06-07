@@ -16,9 +16,9 @@ class GeneratorViewController : NSViewController {
 		fatalError("init(windowController:) has not been implemented")
 	}
 
-	init?( nibName aNibName: String, windowController aWindowController: MainWindowController ) {
+	init?( nibName aNibName: NSNib.Name, windowController aWindowController: MainWindowController ) {
 		windowController = aWindowController;
-		super.init(nibName: NSNib.Name(rawValue: aNibName), bundle: nil);
+		super.init(nibName: aNibName, bundle: nil);
 	}
 	
 	required init?(coder: NSCoder) {

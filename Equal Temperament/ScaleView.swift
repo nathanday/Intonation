@@ -9,14 +9,14 @@
 import Cocoa
 
 class ScaleView : ResultView {
-	static let		equalTempGradient: NSGradient? = NSGradient(starting: NSColor.lightGray, ending: NSColor(calibratedWhite:0.9, alpha:1.0));
+	static let		equalTempGradient: NSGradient? = NSGradient(starting: NSColor(named: "intonationGradientStart")!, ending: NSColor(named: "intonationGradientEnd")!);
 	let		equalTempBarWidth : CGFloat = 20.0;
 	
 	var		numberOfIntervals : UInt = 12 {
-		didSet { setNeedsDisplay(); }
+		didSet { needsDisplay = true; }
 	}
 	var		useIntervals : Bool = true {
-		didSet { setNeedsDisplay(); }
+		didSet { needsDisplay = true; }
 	}
 	
 	func drawJustIntonationRatio( ratio aRatio : Interval, hilighted aHilighted : Bool, index anIndex: Int ) {
@@ -68,20 +68,21 @@ class LinearScaleView : ScaleView {
 		thePath.close()
 		thePath.move(to: NSMakePoint(theX1, theY))
 		thePath.line(to: NSMakePoint(theX0-equalTempBarWidth, theY))
-		thePath.lineCapStyle = NSBezierPath.LineCapStyle.roundLineCapStyle
+		thePath.lineCapStyle = NSBezierPath.LineCapStyle.round
 		if aHilighted {
-			NSColor(calibratedHue: hueForIndex(anIndex), saturation: 1.0, brightness: 0.75, alpha: 1.0).setFill()
-			NSColor(calibratedHue: hueForIndex(anIndex), saturation: 1.0, brightness: 0.75, alpha: 1.0).setStroke();
+			let		theColor = colorForIndex(anIndex);
+			theColor.setFill()
+			colorForIndex(anIndex).setStroke();
 			thePath.fill()
 			thePath.lineWidth = 3.0;
 		} else {
-			NSColor(white: 0.0, alpha:0.25).setStroke();
+			axisesColor.setStroke();
 			thePath.lineWidth = 0.5;
 		}
 		thePath.stroke()
 		
 		let		theSize = (aHilighted ?  NSFont.systemFontSize(for: NSControl.ControlSize.regular) : NSFont.systemFontSize(for: NSControl.ControlSize.mini)) + 2.0;
-		let		theTextColor = aHilighted ? NSColor(calibratedHue: hueForIndex(anIndex), saturation: 1.0, brightness: 0.75, alpha: 1.0) : NSColor(white: 0.0, alpha: 0.25);
+		let		theTextColor = aHilighted ? colorForIndex(anIndex) : NSColor.secondaryLabelColor;
 		drawText(string: aRatio.ratioString, size:theSize, point: NSMakePoint(theX1+10.0, theY-theSize*0.5-3.0), color:theTextColor );
 		
 		previousValue = theY;
@@ -95,7 +96,7 @@ class LinearScaleView : ScaleView {
 	}
 	override func drawNoEqualTemperament( ) {
 		let		theX = floor(NSMidX(drawingBounds)-equalTempBarWidth/2.0)-20.5;
-		NSColor(calibratedWhite: 0.875, alpha: 1.0).setFill();
+		NSColor.labelColor.setFill();
 		NSMakeRect(theX, NSMinX(drawingBounds), equalTempBarWidth, NSHeight(drawingBounds)).fill();
 	}
 }
@@ -114,18 +115,18 @@ class PitchConstellationView : ScaleView {
 		let		thePath = NSBezierPath()
 		thePath.move(to: NSMakePoint(NSMidX(theBounds), NSMidY(theBounds)));
 		thePath.line(to: NSMakePoint(NSMidX(theBounds)+sin(theAngle)*theRadius, NSMidY(theBounds)+cos(theAngle)*theRadius));
-		thePath.lineCapStyle = NSBezierPath.LineCapStyle.roundLineCapStyle
+		thePath.lineCapStyle = NSBezierPath.LineCapStyle.round
 		if aHilighted {
-			NSColor(calibratedHue: hueForIndex(anIndex), saturation: 1.0, brightness: 0.75, alpha: 1.0).setStroke();
+			colorForIndex(anIndex).setStroke();
 			thePath.lineWidth = 3.0;
 		} else {
-			NSColor(white: 0.0, alpha:0.5).setStroke();
+			axisesColor.setStroke();
 			thePath.lineWidth = 0.5;
 		}
 		thePath.stroke();
 
 		let		theSize = (aHilighted ?  NSFont.systemFontSize(for: NSControl.ControlSize.regular) : NSFont.systemFontSize(for: NSControl.ControlSize.mini)) + 2.0;
-		let		theTextColor = aHilighted ? NSColor(calibratedHue: hueForIndex(anIndex), saturation: 1.0, brightness: 0.75, alpha: 1.0) : NSColor(white: 0.0, alpha: 0.25);
+		let		theTextColor = aHilighted ? colorForIndex(anIndex) : NSColor.secondaryLabelColor;
 		let		theTextAlignment : NSTextAlignment = abs(sin(theAngle)) < 0.707 ? .center : sin(theAngle) < 0.0 ? .right :  .left;
 		drawText(string: aRatio.ratioString, size:theSize, point: NSMakePoint(NSMidX(theBounds)+sin(theAngle)*(theRadius+5.0), NSMidY(theBounds)+cos(theAngle)*(theRadius+11.0)-theSize*0.8), color:theTextColor, textAlignment: theTextAlignment );
 	}
@@ -143,7 +144,7 @@ class PitchConstellationView : ScaleView {
 
 		let		theAngle = (360.0+88.0-theStart) * CGFloat(Double.pi/180.0);
 		let		theSize = NSFont.systemFontSize(for: NSControl.ControlSize.small);
-		drawText(string: "\(aRatioNumber+1)", size:theSize, point: NSMakePoint(NSMidX(theBounds)+sin(theAngle)*(axisesRadius-9.0), NSMidY(theBounds)+cos(theAngle)*(axisesRadius-11.0)-theSize*0.8), color:NSColor.white, textAlignment: .center );
+		drawText(string: "\(aRatioNumber+1)", size:theSize, point: NSMakePoint(NSMidX(theBounds)+sin(theAngle)*(axisesRadius-9.0), NSMidY(theBounds)+cos(theAngle)*(axisesRadius-11.0)-theSize*0.8), color:NSColor.labelColor, textAlignment: .center );
 	}
 
 	override func drawNoEqualTemperament( ) {

@@ -98,6 +98,9 @@ extension Rational : ExpressibleByArrayLiteral, ExpressibleByIntegerLiteral, Exp
 }
 
 extension Rational : FloatingPoint, SignedNumeric, Comparable {
+	init<Source>(_ aSource: Source) where Source : BinaryInteger {
+		self.init(Int(aSource),1);
+	}
 
 	init?<T>(exactly aSource: T) where T : BinaryInteger {
 		self.init(Int(aSource),1);
@@ -380,11 +383,11 @@ extension Rational : FloatingPoint, SignedNumeric, Comparable {
 		}
 	}
 
-	static func minimum( x: Rational, _ y: Rational) -> Rational { return x <= y ? x : y; }
-	static func maximum( x: Rational, _ y: Rational) -> Rational { return x >= y ? x : y; }
+	static func minimum( _ x: Rational, _ y: Rational) -> Rational { return x <= y ? x : y; }
+	static func maximum( _ x: Rational, _ y: Rational) -> Rational { return x >= y ? x : y; }
 
-	static func minimumMagnitude( x: Rational, _ y: Rational) -> Rational { return abs(x) <= abs(y) ? x : y; }
-	static func maximumMagnitude( x: Rational, _ y: Rational) -> Rational { return abs(x) >= abs(y) ? x : y; }
+	static func minimumMagnitude( _ x: Rational, _ y: Rational) -> Rational { return abs(x) <= abs(y) ? x : y; }
+	static func maximumMagnitude( _ x: Rational, _ y: Rational) -> Rational { return abs(x) >= abs(y) ? x : y; }
 
 	var nextUp: Rational {
 		if numerator < 0 && denominator == 0 {

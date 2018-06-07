@@ -1,17 +1,19 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9531" systemVersion="15C48a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14269.12" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9531"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14269.12"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="HarmonicViewController" customModule="Equal_Temperament" customModuleProvider="target">
+        <customObject id="-2" userLabel="File's Owner" customClass="HarmonicViewController" customModule="Intonation" customModuleProvider="target">
             <connections>
+                <outlet property="harmonicView" destination="8wT-Hu-GFp" id="9r6-9g-Sii"/>
                 <outlet property="view" destination="8wT-Hu-GFp" id="s1N-Zk-Rmn"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <view id="8wT-Hu-GFp" customClass="HarmonicView" customModule="Equal_Temperament" customModuleProvider="target">
+        <view id="8wT-Hu-GFp" customClass="HarmonicView" customModule="Intonation" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="393" height="638"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
         </view>

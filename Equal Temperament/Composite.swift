@@ -9,25 +9,36 @@
 import Foundation
 
 struct Composite : CustomStringConvertible,  CustomDebugStringConvertible, Hashable {
-    let         factors : [(factor:UInt,power:UInt)];
-    let         value : Int64;
-    init( factors anElements: [(factor:UInt,power:UInt)]) {
-        factors = anElements;
-        var theResult : UInt = 1;
-        for (aFactor,aPower) in factors {
-            theResult *= pow(aFactor,aPower);
-        }
-        value = Int64(theResult);
+    let         factors : [(factor:UInt,power:Int)];
+	let			negative : Bool;
+	init( factors anElements: [(factor:UInt,power:Int)], negative aNegative : Bool = false ) {
+		factors = anElements.sorted { (a, b) -> Bool in a.power > b.power; }
+		negative = aNegative;
     }
-    init( factors anElements: (factor:UInt,power:UInt)...) {
+    init( factors anElements: (factor:UInt,power:Int)...) {
         self.init(factors:anElements);
     }
-    init(factor aPrime: UInt, power anExponent: UInt ) {
-        factors = [(factor:aPrime,power:anExponent)];
-        value = Int64(pow(aPrime,anExponent));
+    init(factor aPrime: Int, power anExponent: Int ) {
+        factors = [(factor:UInt(aPrime),power:anExponent)];
+		negative = aPrime < 0;
     }
 
-    public var description: String { return "\(value)"; }
+	var		toInt : Int { return toRational.toInt; }
+	var		toFloat : Float { return toRational.toFloat; }
+	var		toRational : Rational {
+		var		theResultNumerator = 1,
+		theResultDenominator = 1;
+		for theElement in factors.reversed() {
+			if theElement.power > 0 {
+				theResultNumerator *= pow(theElement.factor,theElement.power);
+			} else {
+				theResultDenominator *= pow(theElement.factor,theElement.power);
+			}
+		}
+		return Rational(theResultNumerator,theResultDenominator);
+	}
+
+    public var description: String { return toRational.description; }
 
     public var debugDescription: String {
         var     theResult : String? = nil;
@@ -44,32 +55,56 @@ struct Composite : CustomStringConvertible,  CustomDebugStringConvertible, Hasha
     public var hashValue: Int { return value.hashValue; }
 
     public var primeFactors : [UInt] {
-        var     r : [UInt] = [];
-        for (p,_) in factors {
-            r.append(p);
-        }
-        return r;
+		return factors.map { $0.factor; };
     }
 }
 
 extension Composite : ExpressibleByArrayLiteral {
     // MARK: ExpressibleByArrayLiteral
-    init( arrayLiteral anElements: (factor:UInt,power:UInt)...) {
+    init( arrayLiteral anElements: (factor:UInt,power:Int)...) {
         self.init(factors:anElements);
     }
     
 }
 
 extension Composite : SignedInteger  {
+	init?<T>(exactly source: T) where T : BinaryFloatingPoint {
+		<#code#>
+	}
+
+	init<T>(_ source: T) where T : BinaryFloatingPoint {
+		<#code#>
+	}
+
+	init<T>(_ source: T) where T : BinaryInteger {
+		<#code#>
+	}
+
+	var words: [UInt] {
+		<#code#>
+	}
+
+	var bitWidth: Int {
+		<#code#>
+	}
+
+	var trailingZeroBitCount: Int {
+		<#code#>
+	}
+
+	typealias Words = [UInt]
+
+	typealias Magnitude = UInt
+
     // MARK: ExpressibleByIntegerLiteral
-    init(integerLiteral aValue: UInt) {
+    init(integerLiteral aValue: Int) {
         self.init(factors:aValue.everyPrimeFactor );
     }
 
     // MARK: IntegerArithmetic
-    static func addWithOverflow(_ lhs: Composite, _ rhs: Composite) -> (Composite, overflow: Bool) {
-        let     r = UInt.addWithOverflow(UInt(lhs.value),UInt(rhs.value));
-        return (Composite(integerLiteral:r.0), overflow: r.overflow);
+    func addingReportingOverflow(_ rhs: Composite) -> (Composite, overflow: Bool) {
+        let     r = self.value.addingReportingOverflow(rhs.value);
+        return (Composite(integerLiteral:r.partialValue), overflow: r.overflow);
     }
 
     static func divideWithOverflow(_ lhs: Composite, _ rhs: Composite) -> (Composite, overflow: Bool) {
@@ -77,7 +112,7 @@ extension Composite : SignedInteger  {
     }
 
     static func multiplyWithOverflow(_ lhs: Composite, _ rhs: Composite) -> (Composite, overflow: Bool) {
-        var     theResukt = [(factor:UInt,power:UInt)]();
+        var     theResult = [(factor:UInt,power:Int)]();
         var     theLhsIndex = 0,
                 theRhsIndex = 0;
         while( theLhsIndex < lhs.factors.count || theRhsIndex < rhs.factors.count ) {
@@ -99,7 +134,23 @@ extension Composite : SignedInteger  {
     }
 
     static func *(lhs: Composite, rhs: Composite) -> Composite {
-        
+		var		theResult = [(factor:UInt,power:Int)]();
+		var		theLHSIndex = 0;
+		var		theRHSIndex = 0;
+		while theLHSIndex < lhs.factors.count || theRHSIndex < rhs.factors.count {
+			if lhs.factors[theLHSIndex].factor < rhs.factors[theRHSIndex].factor {
+				theResult.append(lhs.factors[theLHSIndex]);
+				theLHSIndex += 1;
+			} else if lhs.factors[theLHSIndex].factor > rhs.factors[theRHSIndex].factor {
+				theResult.append(rhs.factors[theRHSIndex]);
+				theRHSIndex += 1;
+			} else {
+				theResult.append( (factor:lhs.factors[theLHSIndex].factor, power:lhs.factors[theLHSIndex].power+rhs.factors[theRHSIndex].power) );
+				theLHSIndex += 1;
+				theRHSIndex += 1;
+			}
+		}
+		return Composite(factors:theResult);
     }
     
     static func +(lhs: Composite, rhs: Composite) -> Composite {
@@ -134,7 +185,32 @@ extension Composite : SignedInteger  {
         
     }
 
-    func toIntMax() -> IntMax {
+	func toIntMax() -> Int64 {
         
     }
+
+	static func /= (lhs: inout Composite, rhs: Composite) {
+		<#code#>
+	}
+
+	static func %= (lhs: inout Composite, rhs: Composite) {
+		<#code#>
+	}
+
+	static func *= (lhs: inout Composite, rhs: Composite) {
+		<#code#>
+	}
+
+	init?<T>(exactly source: T) where T : BinaryInteger {
+		<#code#>
+	}
+
+	var magnitude: UInt {
+		<#code#>
+	}
+
+	static func *= (lhs: inout Composite, rhs: Composite) {
+		<#code#>
+	}
+
 }

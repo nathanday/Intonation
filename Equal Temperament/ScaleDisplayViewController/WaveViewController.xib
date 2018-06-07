@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14269.12" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14269.12"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -19,13 +18,13 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" horizontalScrollElasticity="none" verticalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="gUL-tr-1fR">
-                    <rect key="frame" x="20" y="34" width="353" height="581"/>
+                    <rect key="frame" x="8" y="8" width="377" height="595"/>
                     <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="hSH-WE-P56">
-                        <rect key="frame" x="0.0" y="0.0" width="353" height="581"/>
+                        <rect key="frame" x="0.0" y="0.0" width="377" height="595"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="9aE-QQ-Q54" customClass="WaveView" customModule="Intonation" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="339" height="581"/>
+                                <rect key="frame" x="0.0" y="0.0" width="339" height="595"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="339" placeholder="YES" id="zBa-SZ-Jge"/>
                                 </constraints>
@@ -37,18 +36,18 @@
                             <constraint firstItem="9aE-QQ-Q54" firstAttribute="leading" secondItem="hSH-WE-P56" secondAttribute="leading" id="VFe-UW-UrM"/>
                         </constraints>
                     </clipView>
-                    <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" controlSize="mini" horizontal="YES" id="oKZ-dk-B6x">
+                    <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" controlSize="mini" horizontal="YES" id="oKZ-dk-B6x">
                         <rect key="frame" x="1" y="80" width="166" height="15"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
-                    <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" controlSize="mini" horizontal="NO" id="l1k-eq-kQs">
-                        <rect key="frame" x="339" y="0.0" width="14" height="581"/>
+                    <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" controlSize="mini" horizontal="NO" id="l1k-eq-kQs">
+                        <rect key="frame" x="363" y="0.0" width="14" height="595"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>
                 <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IA4-fM-ilc">
-                    <rect key="frame" x="123" y="6" width="146" height="21"/>
-                    <segmentedCell key="cell" controlSize="small" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="ane-3D-Ka6">
+                    <rect key="frame" x="19" y="610" width="144" height="18"/>
+                    <segmentedCell key="cell" controlSize="small" borderStyle="border" alignment="left" style="roundRect" trackingMode="selectOne" id="ane-3D-Ka6">
                         <font key="font" metaFont="smallSystem"/>
                         <segments>
                             <segment label="Overlayed" width="70" selected="YES"/>
@@ -60,11 +59,11 @@
                     </connections>
                 </segmentedControl>
                 <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IOO-UJ-8bY">
-                    <rect key="frame" x="285" y="6" width="102" height="21"/>
+                    <rect key="frame" x="169" y="610" width="100" height="18"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="98" id="fMQ-8j-8NY"/>
                     </constraints>
-                    <segmentedCell key="cell" controlSize="small" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="KC8-8U-MZM">
+                    <segmentedCell key="cell" controlSize="small" borderStyle="border" alignment="left" style="roundRect" trackingMode="selectOne" id="KC8-8U-MZM">
                         <font key="font" metaFont="smallSystem"/>
                         <segments>
                             <segment label="1×" width="31" selected="YES"/>
@@ -78,15 +77,15 @@
                 </segmentedControl>
             </subviews>
             <constraints>
-                <constraint firstItem="gUL-tr-1fR" firstAttribute="leading" secondItem="TdE-H4-t53" secondAttribute="leading" constant="20" id="7He-qQ-JhQ"/>
-                <constraint firstAttribute="trailing" secondItem="gUL-tr-1fR" secondAttribute="trailing" constant="20" id="J9h-tQ-YvS"/>
+                <constraint firstItem="gUL-tr-1fR" firstAttribute="leading" secondItem="TdE-H4-t53" secondAttribute="leading" constant="8" id="7He-qQ-JhQ"/>
+                <constraint firstAttribute="bottom" secondItem="gUL-tr-1fR" secondAttribute="bottom" constant="8" id="Ga1-5N-9WG"/>
+                <constraint firstAttribute="trailing" secondItem="gUL-tr-1fR" secondAttribute="trailing" constant="8" id="J9h-tQ-YvS"/>
                 <constraint firstItem="IOO-UJ-8bY" firstAttribute="baseline" secondItem="IA4-fM-ilc" secondAttribute="baseline" id="Jzb-lO-Gei"/>
-                <constraint firstItem="IA4-fM-ilc" firstAttribute="top" secondItem="gUL-tr-1fR" secondAttribute="bottom" constant="8" id="KRB-Gx-Ruw"/>
-                <constraint firstAttribute="centerX" secondItem="IA4-fM-ilc" secondAttribute="centerX" id="O0x-wb-fVK"/>
-                <constraint firstItem="IOO-UJ-8bY" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="IA4-fM-ilc" secondAttribute="trailing" constant="8" id="RlC-9V-LvD"/>
-                <constraint firstItem="gUL-tr-1fR" firstAttribute="top" secondItem="TdE-H4-t53" secondAttribute="top" constant="20" id="UGL-Fx-DLt"/>
-                <constraint firstAttribute="trailing" secondItem="IOO-UJ-8bY" secondAttribute="trailing" constant="8" id="mJU-41-tgc"/>
-                <constraint firstAttribute="bottom" secondItem="IA4-fM-ilc" secondAttribute="bottom" constant="8" id="xRf-Xe-eyC"/>
+                <constraint firstItem="IOO-UJ-8bY" firstAttribute="leading" secondItem="IA4-fM-ilc" secondAttribute="trailing" constant="8" id="RlC-9V-LvD"/>
+                <constraint firstItem="IA4-fM-ilc" firstAttribute="top" secondItem="TdE-H4-t53" secondAttribute="top" constant="8" id="S3I-ts-B29"/>
+                <constraint firstItem="IA4-fM-ilc" firstAttribute="leading" secondItem="TdE-H4-t53" secondAttribute="leading" constant="20" id="Yti-pM-kzJ"/>
+                <constraint firstItem="gUL-tr-1fR" firstAttribute="top" secondItem="IA4-fM-ilc" secondAttribute="bottom" constant="8" id="euv-cy-Nfi"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="IOO-UJ-8bY" secondAttribute="trailing" constant="20" id="mJU-41-tgc"/>
             </constraints>
             <userDefinedRuntimeAttributes>
                 <userDefinedRuntimeAttribute type="boolean" keyPath="horizontal" value="YES"/>

@@ -12,7 +12,7 @@ class ChordPreviewViewController: NSViewController {
 	let		chordOrScale : ChordSelectorLeaf;
 	init( _ aChordOrScale : ChordSelectorLeaf ) {
 		chordOrScale = aChordOrScale;
-		super.init(nibName: NSNib.Name(rawValue: "ChordPreviewViewController"), bundle:nil);
+		super.init(nibName: NSNib.Name("ChordPreviewViewController"), bundle:nil);
 	}
 
 	required init?(coder: NSCoder) {

@@ -9,12 +9,12 @@
 import Foundation
 
 extension UInt {
-	var hexadecimalString : String { get { return String(format: "%x", self ); } }
+	var hexadecimalString : String { return String(format: "%x", self ); }
 
 	func isFactorOf(_ factor: UInt) -> Bool { return self % factor == 0; }
 	func isFactorOf(_ factors: CountableClosedRange<UInt>) -> Bool {
 		for a in factors {
-			if a*a > self {
+			if a > sqrt(self) {
 				return false;
 			}
 			if isFactorOf(a) {
@@ -28,13 +28,14 @@ extension UInt {
 		return self > 1 && (self <= 3 || !isFactorOf(2...sqrt(self)));
 	}
 	var everyPrimeFactor : [(factor:UInt,power:UInt)] {
-		var		theResult = [(factor:UInt,power:UInt)]();
+		var		theResult : [(factor:UInt,power:UInt)];
 		switch self {
 		case 0:
-			theResult = [(factor:0,power:1)];
+			theResult = [];
 		case 1:
 			theResult = [(factor:1,power:1)];
 		default:
+			theResult = [];
 			for thePrime in PrimesSequence(end:self) {
 				let thePower = factorCount(thePrime);
 				if thePower > 0 {
@@ -105,30 +106,16 @@ extension UInt {
 	}
 }
 
-func pow<T : UnsignedInteger>( a: T, b: T ) -> T {
-    var     theResult = a;
-    for _ in 1..<(b as! Int) {
-        theResult *= a;
-    }
-    return theResult;
+func pow<T : BinaryInteger>( _ a: T, _ b: T ) -> T {
+	if b == 0  {
+		return 1
+	} else {
+		return (a&0b1 == 1 ? a : 1) * pow(a,b>>1);
+	}
 }
 
-func sqrt<T : UnsignedInteger>( _ n : T ) -> T {
-	switch n {
-	case let x as UInt:
-		return UInt(sqrt(Double(x))) as! T;
-	case let x as UInt8:
-		return UInt8(sqrt(Double(x))) as! T;
-	case let x as UInt16:
-		return UInt16(sqrt(Double(x))) as! T;
-	case let x as UInt32:
-		return UInt32(sqrt(Double(x))) as! T;
-	case let x as UInt64:
-		return UInt64(sqrt(Double(x))) as! T;
-	default:
-		precondition(false, "Unhandled type");
-		return 0;
-	}
+func sqrt<T : BinaryInteger>( _ n : T ) -> T {
+	return T(sqrt(Double(n)));
 }
 
 func log2<T : BinaryInteger>( _ aValue : T ) -> T {
@@ -139,15 +126,15 @@ func log2<T : BinaryInteger>( _ aValue : T ) -> T {
 	}
 }
 
-func greatestCommonDivisor(_ u: [UInt] ) -> UInt {
-	var		theResult : UInt = 1;
+func greatestCommonDivisor<T : BinaryInteger>(_ u: [T] ) -> T {
+	var		theResult : T = 1;
 	for theNumber in u {
 		theResult = greatestCommonDivisor(theResult, theNumber);
 	}
 	return theResult;
 }
 
-func greatestCommonDivisor<T : UnsignedInteger>(_ u: T, _ v: T) -> T {
+func greatestCommonDivisor<T : BinaryInteger>(_ u: T, _ v: T) -> T {
 	// simple cases (termination)
 	if u == v { return u; }
 	if u == 0 { return v; }
@@ -171,21 +158,11 @@ func greatestCommonDivisor<T : UnsignedInteger>(_ u: T, _ v: T) -> T {
 	return greatestCommonDivisor((v - u) / 2, u);
 }
 
-func bitCount( _ x : UInt) -> Int {
+func bitCount<T : BinaryInteger>( _ x : T) -> Int {
 	var		theX = x;
 	var		theCount = 0;
 	while theX > 0 {
-		if theX & UInt(0x1) == 1 { theCount += 1; }
-		theX >>= 1;
-	}
-	return theCount;
-}
-
-func bitCount( _ x : Int) -> Int {
-	var		theX = x;
-	var		theCount = 0;
-	while theX > 0 {
-		if theX & 0x1 == 1 { theCount += 1; }
+		if theX & T(0x1) == 1 { theCount += 1; }
 		theX >>= 1;
 	}
 	return theCount;

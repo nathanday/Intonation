@@ -10,7 +10,7 @@ import Cocoa
 
 class ChordSelectorWindowController: NSWindowController {
 
-	override var	windowNibName: NSNib.Name { return NSNib.Name(rawValue:"ChordSelectorWindowController"); }
+	override var	windowNibName: NSNib.Name { return NSNib.Name("ChordSelectorWindowController"); }
 
 	var		selectionBlock : ((IntervalSet?) -> ())?;
 

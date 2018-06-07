@@ -14,9 +14,15 @@ extension Rational {
 	var oddLimit : UInt {
 		let	theNum = UInt(numerator);
 		let theDen = UInt(denominator);
-		if theNum%2 == 1 && theDen%2 == 1 { return theNum > theDen ? theNum : theDen; }
-		else if theNum%2 == 1 { return theNum; }
-		else { return theDen; }
+		if theNum%2 == 1 && theDen%2 == 1 {
+			return theNum > theDen ? theNum : theDen;
+		}
+		else if theNum%2 == 1 {
+			return theNum;
+		}
+		else {
+			return theDen;
+		}
 	}
 	var primeLimit : UInt {
 		let		theResult : UInt = UInt.max;
@@ -28,7 +34,7 @@ extension Rational {
 		return theResult;
 	}
 
-	var additiveDissonance  : UInt { return UInt(numerator) + UInt(denominator); }
+	var additiveDissonance : UInt { return UInt(numerator) + UInt(denominator); }
 }
 
 class IntervalEntry : NSObject, NSPasteboardReading, NSPasteboardWriting {

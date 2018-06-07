@@ -76,16 +76,31 @@ class TextExportGenerator : ExportGenerator {
 }
 
 class BinaryExportGenerator : ExportGenerator {
+	/*
 	var		wordSize : WordSize = .size32;
 	var		endianness : Endianness = .big;
 	override func data() -> Data {
-		var		theArray : Array<Any>;
+		let		theData : Data;
+
+
 		switch wordSize {
-		case .size32: theArray = everyInterval.map { return Float32($0.toDouble); }
-		case .size64: theArray = everyInterval.map { return Float64($0.toDouble); }
+		case .size32:
+			let thePointer = UnsafeMutableRawPointer.allocate(bytes: everyInterval.count*MemoryLayout<Float32>.size, alignedTo: MemoryLayout<Float32>.alignment);
+			for theInterval in everyInterval {
+				let intPointer = Float32(theInterval.toDouble);
+				let theBytes = UnsafeBufferPointer
+			}
+			theData = Data<Float32>(buffer:thePointer)
+		case .size64:
+			let thePointer = UnsafeMutableRawPointer.allocate(bytes: everyInterval.count*MemoryLayout<Float64>.size, alignedTo: MemoryLayout<Float32>.alignment);
+			for theInterval in everyInterval {
+				let intPointer = Float64(theInterval.toDouble);
+			}
+			theData = Data<Float64>(buffer:thePointer)
 		}
-		return theArray.withUnsafeBytes  {  return Data($0); }
+		return Data(thePointer);
 	}
+	*/
 }
 
 class JSONExportGenerator : ExportGenerator {

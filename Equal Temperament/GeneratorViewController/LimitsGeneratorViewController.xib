@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14269.12" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14269.12"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -23,7 +22,7 @@
                         <constraint firstAttribute="height" constant="17" id="eJH-4L-dpv"/>
                         <constraint firstAttribute="width" constant="23" id="fCA-kS-Rfc"/>
                     </constraints>
-                    <buttonCell key="cell" type="disclosureTriangle" bezelStyle="disclosure" image="6EFA8085-384D-4DC5-82C9-15BBC2967764" imagePosition="above" alignment="left" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8fk-MV-khf">
+                    <buttonCell key="cell" type="disclosureTriangle" bezelStyle="disclosure" image="buttonCell:8fk-MV-khf:image" imagePosition="above" alignment="left" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8fk-MV-khf">
                         <behavior key="behavior" pushIn="YES" changeBackground="YES" changeGray="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -41,7 +40,7 @@
                         <action selector="performClick:" target="e2h-u9-0dK" id="MWc-0Y-p3g"/>
                     </connections>
                 </button>
-                <textField horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7LN-zV-as1">
+                <textField horizontalHuggingPriority="750" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7LN-zV-as1">
                     <rect key="frame" x="105" y="37" width="43" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Prime:" id="sMz-J9-waV">
                         <font key="font" metaFont="system"/>
@@ -49,7 +48,7 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MBK-OD-HkO">
+                <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MBK-OD-HkO">
                     <rect key="frame" x="150" y="34" width="60" height="22"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="22" id="YKo-Mz-rqT"/>
@@ -60,14 +59,14 @@
                             <real key="minimum" value="3"/>
                         </numberFormatter>
                         <font key="font" metaFont="system"/>
-                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" red="1" green="0.99997437" blue="0.99999129769999995" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
                         <binding destination="-2" name="value" keyPath="self.document.intervalsData.numeratorPrimeLimit" id="QM5-XX-a48"/>
                     </connections>
                 </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="g60-wD-CQr">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g60-wD-CQr">
                     <rect key="frame" x="357" y="37" width="110" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Add. Dissonance:" id="Cic-eO-n5O">
                         <font key="font" metaFont="system"/>
@@ -82,7 +81,7 @@
                         <binding destination="-2" name="value" keyPath="self.document.intervalsData.oddLimit" id="tTH-2N-Ilr"/>
                     </connections>
                 </stepper>
-                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2Uf-fq-L6N">
+                <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Uf-fq-L6N">
                     <rect key="frame" x="469" y="34" width="60" height="22"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="60" id="eRr-56-HM0"/>
@@ -93,7 +92,7 @@
                             <real key="minimum" value="3"/>
                         </numberFormatter>
                         <font key="font" metaFont="system"/>
-                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
@@ -107,7 +106,7 @@
                         <binding destination="-2" name="value" keyPath="self.document.intervalsData.numeratorPrimeLimitIndex" id="gh3-kU-3j0"/>
                     </connections>
                 </stepper>
-                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="My7-SP-3uf">
+                <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="My7-SP-3uf">
                     <rect key="frame" x="270" y="34" width="60" height="22"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="22" id="8hc-zp-bOy"/>
@@ -118,7 +117,7 @@
                             <real key="minimum" value="3"/>
                         </numberFormatter>
                         <font key="font" metaFont="system"/>
-                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
@@ -135,7 +134,7 @@
                 <customView hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FBw-0H-pDk" customClass="DisclosureView" customModule="Intonation" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="588" height="30"/>
                     <subviews>
-                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PNz-DN-cuw">
+                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PNz-DN-cuw">
                             <rect key="frame" x="27" y="9" width="121" height="17"/>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Denominator Prime" id="lGy-5d-Qg3">
                                 <font key="font" metaFont="system"/>
@@ -143,7 +142,7 @@
                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
                         </textField>
-                        <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1nc-cv-xXH">
+                        <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1nc-cv-xXH">
                             <rect key="frame" x="150" y="6" width="60" height="22"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="60" id="gBW-ss-BrH"/>
@@ -154,10 +153,11 @@
                                     <real key="minimum" value="3"/>
                                 </numberFormatter>
                                 <font key="font" metaFont="system"/>
-                                <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                <color key="backgroundColor" red="1" green="0.99997437" blue="0.99999129769999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
                             <connections>
+                                <binding destination="-2" name="enabled" keyPath="self.document.intervalsData.separatePrimeLimit" id="6xN-Jd-aCq"/>
                                 <binding destination="-2" name="value" keyPath="self.document.intervalsData.denominatorPrimeLimit" id="Ef3-iU-C0v"/>
                             </connections>
                         </textField>
@@ -199,7 +199,7 @@
                         </binding>
                     </connections>
                 </customView>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rwX-f3-Bfk">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rwX-f3-Bfk">
                     <rect key="frame" x="234" y="37" width="34" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Odd:" id="HAl-xs-H5J">
                         <font key="font" metaFont="system"/>
@@ -246,55 +246,56 @@
         <userDefaultsController representsSharedInstance="YES" id="15X-6Z-TvY"/>
     </objects>
     <resources>
-        <image name="6EFA8085-384D-4DC5-82C9-15BBC2967764" width="1" height="1">
+        <image name="buttonCell:8fk-MV-khf:image" width="1" height="1">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
 c1dOU0NvbG9ygAKADRIgwwAAgAOAC1Z7MSwgMX3SFQoWGFpOUy5vYmplY3RzoReABIAK0hUKGh2iGxyA
-BYAGgAkQANIgCiEiXxAUTlNUSUZGUmVwcmVzZW50YXRpb26AB4AITxEIrE1NACoAAAAKAAAADgEAAAMA
-AAABAAEAAAEBAAMAAAABAAEAAAECAAMAAAACAAgACAEDAAMAAAABAAEAAAEGAAMAAAABAAEAAAERAAQA
-AAABAAAACAESAAMAAAABAAEAAAEVAAMAAAABAAIAAAEWAAMAAAABAAEAAAEXAAQAAAABAAAAAgEcAAMA
-AAABAAEAAAFSAAMAAAABAAEAAAFTAAMAAAACAAEAAYdzAAcAAAf0AAAAuAAAAAAAAAf0YXBwbAIgAABt
-bnRyR1JBWVhZWiAH0AACAA4ADAAAAABhY3NwQVBQTAAAAABub25lAAAAAAAAAAAAAAAAAAAAAAAA9tYA
-AQAAAADTLWFwcGwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAVk
-ZXNjAAAAwAAAAG9kc2NtAAABMAAABmZjcHJ0AAAHmAAAADh3dHB0AAAH0AAAABRrVFJDAAAH5AAAAA5k
-ZXNjAAAAAAAAABVHZW5lcmljIEdyYXkgUHJvZmlsZQAAAAAAAAAAAAAAFUdlbmVyaWMgR3JheSBQcm9m
-aWxlAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAbWx1YwAAAAAA
-AAAfAAAADHNrU0sAAAAqAAABhGVuVVMAAAAoAAABrmNhRVMAAAAsAAAB1nZpVk4AAAAsAAACAnB0QlIA
-AAAqAAACLnVrVUEAAAAsAAACWGZyRlUAAAAqAAAChGh1SFUAAAAuAAACrnpoVFcAAAAQAAAC3G5iTk8A
-AAAsAAAC7GtvS1IAAAAYAAADGGNzQ1oAAAAkAAADMGhlSUwAAAAgAAADVHJvUk8AAAAkAAADdGRlREUA
-AAA6AAADmGl0SVQAAAAuAAAD0nN2U0UAAAAuAAAEAHpoQ04AAAAQAAAELmphSlAAAAAWAAAEPmVsR1IA
-AAAkAAAEVHB0UE8AAAA4AAAEeG5sTkwAAAAqAAAEsGVzRVMAAAAoAAAE2nRoVEgAAAAkAAAFAnRyVFIA
-AAAiAAAFJmZpRkkAAAAsAAAFSGhySFIAAAA6AAAFdHBsUEwAAAA2AAAFrnJ1UlUAAAAmAAAF5GFyRUcA
-AAAoAAAGCmRhREsAAAA0AAAGMgBWAWEAZQBvAGIAZQBjAG4A/QAgAHMAaQB2AP0AIABwAHIAbwBmAGkA
-bABHAGUAbgBlAHIAaQBjACAARwByAGEAeQAgAFAAcgBvAGYAaQBsAGUAUABlAHIAZgBpAGwAIABkAGUA
-IABnAHIAaQBzACAAZwBlAG4A6AByAGkAYwBDHqUAdQAgAGgA7ABuAGgAIABNAOAAdQAgAHgA4QBtACAA
-QwBoAHUAbgBnAFAAZQByAGYAaQBsACAAQwBpAG4AegBhACAARwBlAG4A6QByAGkAYwBvBBcEMAQzBDAE
-OwRMBD0EOAQ5ACAEPwRABD4ERAQwBDkEOwAgAEcAcgBhAHkAUAByAG8AZgBpAGwAIABnAOkAbgDpAHIA
-aQBxAHUAZQAgAGcAcgBpAHMAwQBsAHQAYQBsAOEAbgBvAHMAIABzAHoA/AByAGsAZQAgAHAAcgBvAGYA
-aQBskBp1KHBwlo6Ccl9pY8+P8ABHAGUAbgBlAHIAaQBzAGsAIABnAHIA5QB0AG8AbgBlAHAAcgBvAGYA
-aQBsx3y8GAAgAEcAcgBhAHkAINUEuFzTDMd8AE8AYgBlAGMAbgD9ACABYQBlAGQA/QAgAHAAcgBvAGYA
-aQBsBeQF6AXVBeQF2QXcACAARwByAGEAeQAgBdsF3AXcBdkAUAByAG8AZgBpAGwAIABnAHIAaQAgAGcA
-ZQBuAGUAcgBpAGMAQQBsAGwAZwBlAG0AZQBpAG4AZQBzACAARwByAGEAdQBzAHQAdQBmAGUAbgAtAFAA
-cgBvAGYAaQBsAFAAcgBvAGYAaQBsAG8AIABnAHIAaQBnAGkAbwAgAGcAZQBuAGUAcgBpAGMAbwBHAGUA
-bgBlAHIAaQBzAGsAIABnAHIA5QBzAGsAYQBsAGUAcAByAG8AZgBpAGxmbpAacHBepmPPj/Blh072TgCC
-LDCwMOwwpDDXMO0w1TChMKQw6wOTA7UDvQO5A7oDzAAgA8ADwQO/A8YDrwO7ACADswO6A8EDuQBQAGUA
-cgBmAGkAbAAgAGcAZQBuAOkAcgBpAGMAbwAgAGQAZQAgAGMAaQBuAHoAZQBuAHQAbwBzAEEAbABnAGUA
-bQBlAGUAbgAgAGcAcgBpAGoAcwBwAHIAbwBmAGkAZQBsAFAAZQByAGYAaQBsACAAZwByAGkAcwAgAGcA
-ZQBuAOkAcgBpAGMAbw5CDhsOIw5EDh8OJQ5MDioONQ5ADhcOMg4XDjEOSA4nDkQOGwBHAGUAbgBlAGwA
-IABHAHIAaQAgAFAAcgBvAGYAaQBsAGkAWQBsAGUAaQBuAGUAbgAgAGgAYQByAG0AYQBhAHAAcgBvAGYA
-aQBpAGwAaQBHAGUAbgBlAHIAaQENAGsAaQAgAHAAcgBvAGYAaQBsACAAcwBpAHYAaQBoACAAdABvAG4A
-bwB2AGEAVQBuAGkAdwBlAHIAcwBhAGwAbgB5ACAAcAByAG8AZgBpAGwAIABzAHoAYQByAG8BWwBjAGkE
-HgQxBEkEOAQ5ACAEQQQ1BEAESwQ5ACAEPwRABD4ERAQ4BDsETAZFBkQGQQAgBioGOQYxBkoGQQAgAEcA
-cgBhAHkAIAYnBkQGOQYnBkUARwBlAG4AZQByAGUAbAAgAGcAcgDlAHQAbwBuAGUAYgBlAHMAawByAGkA
-dgBlAGwAcwBlAAB0ZXh0AAAAAENvcHlyaWdodCAyMDA3IEFwcGxlIEluYy4sIGFsbCByaWdodHMgcmVz
-ZXJ2ZWQuAFhZWiAAAAAAAADzUQABAAAAARbMY3VydgAAAAAAAAABAc0AANIlJicoWiRjbGFzc25hbWVY
-JGNsYXNzZXNfEBBOU0JpdG1hcEltYWdlUmVwoycpKlpOU0ltYWdlUmVwWE5TT2JqZWN00iUmLC1XTlNB
-cnJheaIsKtIlJi8wXk5TTXV0YWJsZUFycmF5oy8sKtMyMwo0NTZXTlNXaGl0ZVxOU0NvbG9yU3BhY2VE
-MCAwABADgAzSJSY4OVdOU0NvbG9yojgq0iUmOzxXTlNJbWFnZaI7Kl8QD05TS2V5ZWRBcmNoaXZlctE/
-QFRyb290gAEACAARABoAIwAtADIANwBGAEwAVwBeAGUAcgB5AIEAgwCFAIoAjACOAJUAmgClAKcAqQCr
-ALAAswC1ALcAuQC7AMAA1wDZANsJiwmQCZsJpAm3CbsJxgnPCdQJ3AnfCeQJ8wn3Cf4KBgoTChgKGgoc
-CiEKKQosCjEKOQo8Ck4KUQpWAAAAAAAAAgEAAAAAAAAAQQAAAAAAAAAAAAAAAAAAClg
+BYAGgAkQANIgCiEiXxAUTlNUSUZGUmVwcmVzZW50YXRpb26AB4AITxEIxE1NACoAAAAKAAAAEAEAAAMA
+AAABAAEAAAEBAAMAAAABAAEAAAECAAMAAAACAAgACAEDAAMAAAABAAEAAAEGAAMAAAABAAEAAAEKAAMA
+AAABAAEAAAERAAQAAAABAAAACAESAAMAAAABAAEAAAEVAAMAAAABAAIAAAEWAAMAAAABAAEAAAEXAAQA
+AAABAAAAAgEcAAMAAAABAAEAAAEoAAMAAAABAAIAAAFSAAMAAAABAAEAAAFTAAMAAAACAAEAAYdzAAcA
+AAf0AAAA0AAAAAAAAAf0YXBwbAIgAABtbnRyR1JBWVhZWiAH0AACAA4ADAAAAABhY3NwQVBQTAAAAABu
+b25lAAAAAAAAAAAAAAAAAAAAAAAA9tYAAQAAAADTLWFwcGwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAVkZXNjAAAAwAAAAG9kc2NtAAABMAAABmZjcHJ0AAAHmAAAADh3
+dHB0AAAH0AAAABRrVFJDAAAH5AAAAA5kZXNjAAAAAAAAABVHZW5lcmljIEdyYXkgUHJvZmlsZQAAAAAA
+AAAAAAAAFUdlbmVyaWMgR3JheSBQcm9maWxlAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAbWx1YwAAAAAAAAAfAAAADHNrU0sAAAAqAAABhGVuVVMAAAAoAAABrmNhRVMA
+AAAsAAAB1nZpVk4AAAAsAAACAnB0QlIAAAAqAAACLnVrVUEAAAAsAAACWGZyRlUAAAAqAAAChGh1SFUA
+AAAuAAACrnpoVFcAAAAQAAAC3G5iTk8AAAAsAAAC7GtvS1IAAAAYAAADGGNzQ1oAAAAkAAADMGhlSUwA
+AAAgAAADVHJvUk8AAAAkAAADdGRlREUAAAA6AAADmGl0SVQAAAAuAAAD0nN2U0UAAAAuAAAEAHpoQ04A
+AAAQAAAELmphSlAAAAAWAAAEPmVsR1IAAAAkAAAEVHB0UE8AAAA4AAAEeG5sTkwAAAAqAAAEsGVzRVMA
+AAAoAAAE2nRoVEgAAAAkAAAFAnRyVFIAAAAiAAAFJmZpRkkAAAAsAAAFSGhySFIAAAA6AAAFdHBsUEwA
+AAA2AAAFrnJ1UlUAAAAmAAAF5GFyRUcAAAAoAAAGCmRhREsAAAA0AAAGMgBWAWEAZQBvAGIAZQBjAG4A
+/QAgAHMAaQB2AP0AIABwAHIAbwBmAGkAbABHAGUAbgBlAHIAaQBjACAARwByAGEAeQAgAFAAcgBvAGYA
+aQBsAGUAUABlAHIAZgBpAGwAIABkAGUAIABnAHIAaQBzACAAZwBlAG4A6AByAGkAYwBDHqUAdQAgAGgA
+7ABuAGgAIABNAOAAdQAgAHgA4QBtACAAQwBoAHUAbgBnAFAAZQByAGYAaQBsACAAQwBpAG4AegBhACAA
+RwBlAG4A6QByAGkAYwBvBBcEMAQzBDAEOwRMBD0EOAQ5ACAEPwRABD4ERAQwBDkEOwAgAEcAcgBhAHkA
+UAByAG8AZgBpAGwAIABnAOkAbgDpAHIAaQBxAHUAZQAgAGcAcgBpAHMAwQBsAHQAYQBsAOEAbgBvAHMA
+IABzAHoA/AByAGsAZQAgAHAAcgBvAGYAaQBskBp1KHBwlo6Ccl9pY8+P8ABHAGUAbgBlAHIAaQBzAGsA
+IABnAHIA5QB0AG8AbgBlAHAAcgBvAGYAaQBsx3y8GAAgAEcAcgBhAHkAINUEuFzTDMd8AE8AYgBlAGMA
+bgD9ACABYQBlAGQA/QAgAHAAcgBvAGYAaQBsBeQF6AXVBeQF2QXcACAARwByAGEAeQAgBdsF3AXcBdkA
+UAByAG8AZgBpAGwAIABnAHIAaQAgAGcAZQBuAGUAcgBpAGMAQQBsAGwAZwBlAG0AZQBpAG4AZQBzACAA
+RwByAGEAdQBzAHQAdQBmAGUAbgAtAFAAcgBvAGYAaQBsAFAAcgBvAGYAaQBsAG8AIABnAHIAaQBnAGkA
+bwAgAGcAZQBuAGUAcgBpAGMAbwBHAGUAbgBlAHIAaQBzAGsAIABnAHIA5QBzAGsAYQBsAGUAcAByAG8A
+ZgBpAGxmbpAacHBepmPPj/Blh072TgCCLDCwMOwwpDDXMO0w1TChMKQw6wOTA7UDvQO5A7oDzAAgA8AD
+wQO/A8YDrwO7ACADswO6A8EDuQBQAGUAcgBmAGkAbAAgAGcAZQBuAOkAcgBpAGMAbwAgAGQAZQAgAGMA
+aQBuAHoAZQBuAHQAbwBzAEEAbABnAGUAbQBlAGUAbgAgAGcAcgBpAGoAcwBwAHIAbwBmAGkAZQBsAFAA
+ZQByAGYAaQBsACAAZwByAGkAcwAgAGcAZQBuAOkAcgBpAGMAbw5CDhsOIw5EDh8OJQ5MDioONQ5ADhcO
+Mg4XDjEOSA4nDkQOGwBHAGUAbgBlAGwAIABHAHIAaQAgAFAAcgBvAGYAaQBsAGkAWQBsAGUAaQBuAGUA
+bgAgAGgAYQByAG0AYQBhAHAAcgBvAGYAaQBpAGwAaQBHAGUAbgBlAHIAaQENAGsAaQAgAHAAcgBvAGYA
+aQBsACAAcwBpAHYAaQBoACAAdABvAG4AbwB2AGEAVQBuAGkAdwBlAHIAcwBhAGwAbgB5ACAAcAByAG8A
+ZgBpAGwAIABzAHoAYQByAG8BWwBjAGkEHgQxBEkEOAQ5ACAEQQQ1BEAESwQ5ACAEPwRABD4ERAQ4BDsE
+TAZFBkQGQQAgBioGOQYxBkoGQQAgAEcAcgBhAHkAIAYnBkQGOQYnBkUARwBlAG4AZQByAGUAbAAgAGcA
+cgDlAHQAbwBuAGUAYgBlAHMAawByAGkAdgBlAGwAcwBlAAB0ZXh0AAAAAENvcHlyaWdodCAyMDA3IEFw
+cGxlIEluYy4sIGFsbCByaWdodHMgcmVzZXJ2ZWQuAFhZWiAAAAAAAADzUQABAAAAARbMY3VydgAAAAAA
+AAABAc0AANIlJicoWiRjbGFzc25hbWVYJGNsYXNzZXNfEBBOU0JpdG1hcEltYWdlUmVwoycpKlpOU0lt
+YWdlUmVwWE5TT2JqZWN00iUmLC1XTlNBcnJheaIsKtIlJi8wXk5TTXV0YWJsZUFycmF5oy8sKtMyMwo0
+NTZXTlNXaGl0ZVxOU0NvbG9yU3BhY2VEMCAwABADgAzSJSY4OVdOU0NvbG9yojgq0iUmOzxXTlNJbWFn
+ZaI7Kl8QD05TS2V5ZWRBcmNoaXZlctE/QFRyb290gAEACAARABoAIwAtADIANwBGAEwAVwBeAGUAcgB5
+AIEAgwCFAIoAjACOAJUAmgClAKcAqQCrALAAswC1ALcAuQC7AMAA1wDZANsJowmoCbMJvAnPCdMJ3gnn
+CewJ9An3CfwKCwoPChYKHgorCjAKMgo0CjkKQQpECkkKUQpUCmYKaQpuAAAAAAAAAgEAAAAAAAAAQQAA
+AAAAAAAAAAAAAAAACnA
 </mutableData>
         </image>
     </resources>

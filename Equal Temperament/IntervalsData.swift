@@ -12,6 +12,7 @@ enum DocumentType {
 	case limits;
 	case stackedIntervals;
 	case equalTemperament;
+	case series;
 	case preset;
 	case adHoc;
 	static func fromString( _ aStringValue : String? ) -> DocumentType? {
@@ -22,6 +23,8 @@ enum DocumentType {
 			theResult = .stackedIntervals;
 		} else if aStringValue == "equalTemperament" {
 			theResult = .equalTemperament;
+		} else if aStringValue == "series" {
+			theResult = .series;
 		} else if aStringValue == "preset" {
 			theResult = .preset;
 		} else if aStringValue == "adHoc" {
@@ -36,6 +39,8 @@ enum DocumentType {
 		case .stackedIntervals:
 			return "stackedIntervals";
 		case .equalTemperament:
+			return "series";
+		case .series:
 			return "equalTemperament";
 		case .preset:
 			return "preset";
@@ -49,8 +54,10 @@ enum DocumentType {
             return "Limits";
         case .stackedIntervals:
             return "Stacked Intervals";
-        case .equalTemperament:
-            return "Equal Temperament";
+		case .equalTemperament:
+			return "Equal Temperament";
+		case .series:
+			return "Series";
         case .preset:
             return "Preset";
         case .adHoc:
@@ -76,6 +83,9 @@ class IntervalsData: NSObject {
 				case .equalTemperament:
 					theResult = EqualTemperamentIntervalsData(propertyList:aPropertyList);
 					break;
+				case .series:
+					theResult = SeriesIntervalsData(propertyList:aPropertyList);
+					break;
 				case .preset:
 					theResult = PresetIntervalsData(propertyList:aPropertyList);
 					break;
@@ -93,19 +103,20 @@ class IntervalsData: NSObject {
 		case .limits: return LimitsIntervalsData();
 		case .stackedIntervals: return StackedIntervalsIntervalsData();
 		case .equalTemperament: return EqualTemperamentIntervalsData();
+		case .series: return SeriesIntervalsData();
 		case .preset: return PresetIntervalsData();
 		case .adHoc: return AdHocIntervalsData();
 		}
 	}
 
 	override init() {
-		octavesCount = min(max(UInt(UserDefaults.standard.integer(forKey: "octavesCount")),1),3);
+		octavesCount = min(max(UserDefaults.standard.integer(forKey: "octavesCount"),1),3);
 		autoAnchor = UserDefaults.standard.bool(forKey: "autoAnchor");
 		midiAnchor = Int(UserDefaults.standard.integer(forKey: "midiAnchor"));
 	}
 
 	init?(propertyList aPropertyList: [String:Any] ) {
-		if let theOctavesCount = aPropertyList["octavesCount"] as? UInt,
+		if let theOctavesCount = aPropertyList["octavesCount"] as? Int,
 			let theAutoAnchor = aPropertyList["autoAnchor"] as? Bool,
 			let theMidiAnchor = aPropertyList["midiAnchor"] as? Int,
 			let theTone = aPropertyList["tone"] as? [String:Any]
@@ -164,9 +175,9 @@ class IntervalsData: NSObject {
 		get { preconditionFailure("The property documentType is abstract and must be overriden"); }
 	}
 
-	@objc dynamic var		octavesCount : UInt = 1 {
+	@objc dynamic var		octavesCount : Int = 1 {
 		didSet {
-			UserDefaults.standard.set(Int(octavesCount), forKey:"octavesCount");
+			UserDefaults.standard.set(octavesCount, forKey:"octavesCount");
 		}
 	}
 	@objc dynamic var		autoAnchor : Bool = false {

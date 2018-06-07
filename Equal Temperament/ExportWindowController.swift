@@ -14,7 +14,7 @@ class ExportWindowController: NSWindowController {
 	var		referenceToSelf : NSWindowController? = nil;
 
 	convenience init( completionBlock aCompletionBlock : @escaping ((Bool,ExportMethod,Bool) -> Void) ) {
-		self.init(windowNibName: NSNib.Name(rawValue: "ExportWindowController") );
+		self.init(windowNibName: NSNib.Name("ExportWindowController") );
 		completionBlock = aCompletionBlock;
 	}
 

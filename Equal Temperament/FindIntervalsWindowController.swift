@@ -177,7 +177,7 @@ class FindIntervalsViewController: NSViewController {
 		return true;
 	}
 
-	func findExactEntries( _ anRationals : [Interval], searchIntervales aSearchIntervales: [IntervalEntry], octaves anOctaves: UInt ) -> [IntervalEntry] {
+	func findExactEntries( _ anRationals : [Interval], searchIntervales aSearchIntervales: [IntervalEntry], octaves anOctaves: Int ) -> [IntervalEntry] {
 		var		theResult = Array<IntervalEntry>();
 		for theRatio in anRationals {
 			var		theClosestEntry : IntervalEntry?
@@ -197,7 +197,7 @@ class FindIntervalsViewController: NSViewController {
 		return theResult;
 	}
 
-	func findClosestEntries( _ anIntervals : [Interval], searchIntervales aSearchIntervales: [IntervalEntry], octaves anOctaves: UInt ) -> ([IntervalEntry],[Double]) {
+	func findClosestEntries( _ anIntervals : [Interval], searchIntervales aSearchIntervales: [IntervalEntry], octaves anOctaves: Int ) -> ([IntervalEntry],[Double]) {
 		return findEntries( anIntervals, searchIntervales: aSearchIntervales, octaves: anOctaves) {
 			(intervalA:Interval,intervalB:Interval,inputRatio:Interval) -> Bool in
 			var		theInputRatio = inputRatio.toDouble;
@@ -208,7 +208,7 @@ class FindIntervalsViewController: NSViewController {
 		}
 	}
 
-	func findEntries( _ anIntervals : [Interval], searchIntervales aSearchIntervales: [IntervalEntry], octaves anOctaves: UInt, _ aMethod: (Interval,Interval,Interval) -> Bool ) -> ([IntervalEntry],[Double]) {
+	func findEntries( _ anIntervals : [Interval], searchIntervales aSearchIntervales: [IntervalEntry], octaves anOctaves: Int, _ aMethod: (Interval,Interval,Interval) -> Bool ) -> ([IntervalEntry],[Double]) {
 		var		theResult = [IntervalEntry]();
 		var		theResultErrors = [Double]();
 		for theInterval in anIntervals {

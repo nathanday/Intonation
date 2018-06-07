@@ -22,6 +22,7 @@ class SelectDocumentType : NSWindowController {
 		(title:"Limits", details:"Create musical intervals using prime and odd limits.", documentType:DocumentType.limits),
 		(title:"Stacked Intervals", details:"Create musical intervals by stacking a simpler musical interval.", documentType:DocumentType.stackedIntervals),
 		(title:"Equal Temperament", details:"Create musical intervals by dividing the octave, or other large interval, into equal size ratios.", documentType:DocumentType.equalTemperament),
+		(title:"Series", details:"Create musical intervals from a series of fixed step size.", documentType:DocumentType.series),
 		(title:"AdHoc", details:"Create musical intervals by manual entry.", documentType:DocumentType.adHoc),
 		(title:"Preset", details:"Use a predfined set of musical intervals.", documentType:DocumentType.preset),
 		];
@@ -35,7 +36,7 @@ class SelectDocumentType : NSWindowController {
 	}
 	@objc dynamic var		tableContents = [[String:String]]();
 
-	override var	windowNibName : NSNib.Name { return NSNib.Name(rawValue:"SelectDocumentType"); }
+	override var	windowNibName : NSNib.Name { return NSNib.Name("SelectDocumentType"); }
 
     override func windowDidLoad() {
         super.windowDidLoad()
