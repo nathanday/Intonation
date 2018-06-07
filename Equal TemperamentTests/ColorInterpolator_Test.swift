@@ -126,12 +126,4 @@ class ColorInterpolator_Test: XCTestCase {
 		XCTAssertEqual(theColour3.saturationComponent, 1.0, "Passed saturationComponent" );
 		XCTAssertEqual(theColour3.brightnessComponent, 1.0, "Passed brightnessComponent" );
 	}
-
-//    func testPerformanceExample() {
-//        // This is an example of a performance test case.
-//        self.measure {
-//            // Put the code you want to measure the time of here.
-//        }
-//    }
-
 }

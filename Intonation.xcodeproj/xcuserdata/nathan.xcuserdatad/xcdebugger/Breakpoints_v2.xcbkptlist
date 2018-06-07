@@ -35,13 +35,91 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Equal Temperament/Library/ColorInterpolator.swift"
-            timestampString = "550020948.783757"
+            filePath = "Equal TemperamentTests/MidiNoteFormatter_Test.swift"
+            timestampString = "550095370.215711"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
-            landmarkName = "values(at:alpha:)"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "testToString()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Intonation.MidiNoteFormatter_Test.testToString() -&gt; ()"
+                  moduleName = "Intonation"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/nathan/Developer/Projects/Applications/Equal%20Temperament/Equal%20TemperamentTests/MidiNoteFormatter_Test.swift"
+                  timestampString = "550094238.427097"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "30"
+                  endingLineNumber = "30"
+                  offsetFromSymbolStart = "3015">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "implicit closure #16 : @autoclosure () throws -&gt; Swift.String in Intonation.MidiNoteFormatter_Test.testToString() -&gt; ()"
+                  moduleName = "Intonation"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/nathan/Developer/Projects/Applications/Equal%20Temperament/Equal%20TemperamentTests/MidiNoteFormatter_Test.swift"
+                  timestampString = "550094238.429678"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "30"
+                  endingLineNumber = "30"
+                  offsetFromSymbolStart = "39">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "implicit closure #17 : @autoclosure () throws -&gt; Swift.String in Intonation.MidiNoteFormatter_Test.testToString() -&gt; ()"
+                  moduleName = "Intonation"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/nathan/Developer/Projects/Applications/Equal%20Temperament/Equal%20TemperamentTests/MidiNoteFormatter_Test.swift"
+                  timestampString = "550094238.43239"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "30"
+                  endingLineNumber = "30"
+                  offsetFromSymbolStart = "25">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "implicit closure #18 : @autoclosure () -&gt; Swift.String in Intonation.MidiNoteFormatter_Test.testToString() -&gt; ()"
+                  moduleName = "Intonation"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/nathan/Developer/Projects/Applications/Equal%20Temperament/Equal%20TemperamentTests/MidiNoteFormatter_Test.swift"
+                  timestampString = "550094238.4374681"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "30"
+                  endingLineNumber = "30"
+                  offsetFromSymbolStart = "21">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Equal Temperament/Library/MidiNoteFormatter.swift"
+            timestampString = "550094328.591218"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "121"
+            endingLineNumber = "121"
+            landmarkName = "getObjectValue(_:for:errorDescription:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
