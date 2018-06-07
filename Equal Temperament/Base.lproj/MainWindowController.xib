@@ -479,7 +479,7 @@
                                                                                 <binding destination="cy8-kx-1Au" name="value" keyPath="arrangedObjects.name" id="yTy-1k-NiI"/>
                                                                             </connections>
                                                                         </tableColumn>
-                                                                        <tableColumn identifier="interval" editable="NO" width="40" minWidth="40" maxWidth="40" id="ARg-HO-sCS">
+                                                                        <tableColumn identifier="interval" editable="NO" width="40" minWidth="40" maxWidth="40" hidden="YES" id="ARg-HO-sCS">
                                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center">
                                                                                 <font key="font" metaFont="smallSystem"/>
                                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -601,7 +601,7 @@
                                                                                 <binding destination="cy8-kx-1Au" name="value" keyPath="arrangedObjects.toCents" id="aBL-IN-aNH"/>
                                                                             </connections>
                                                                         </tableColumn>
-                                                                        <tableColumn identifier="description" editable="NO" width="129" minWidth="100" maxWidth="32000" id="B12-Jo-1gJ">
+                                                                        <tableColumn identifier="description" editable="NO" width="169" minWidth="100" maxWidth="32000" id="B12-Jo-1gJ">
                                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="Name">
                                                                                 <font key="font" metaFont="smallSystem"/>
                                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
