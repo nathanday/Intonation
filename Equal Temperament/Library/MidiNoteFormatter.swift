@@ -53,7 +53,7 @@ class MidiNoteFormatter: Formatter {
 		}
 		return theResult;
 	}
-	override func string(for anObj: Any?) -> String? {
+	open override func string(for anObj: Any?) -> String? {
 		guard let theObj = anObj as? NSNumber  else {
 			return nil;
 		}
@@ -66,7 +66,7 @@ class MidiNoteFormatter: Formatter {
 		let		theValidNoteCharacters = "cdefgabCDEFGAB";
 		if( theScanner.scanCharacters(from:CharacterSet(charactersIn:theValidNoteCharacters), into:&theNoteNameOut) ) {
 			guard let theNoteName = theNoteNameOut as String? else {
-				return (nil,"invalid string")
+				return (nil,"internal error")
 			}
 			let				theChar = theNoteName.first;
 			var				theNoteNumber = (theValidNoteCharacters.firstIndex(of: theChar!)?.encodedOffset)!%7*2;
@@ -80,7 +80,7 @@ class MidiNoteFormatter: Formatter {
 			}
 			if( theScanner.scanCharacters(from:CharacterSet(charactersIn:"#b♯♭♮"), into:&theArgOut) ) {
 				guard let theArg = theArgOut as String? else {
-					return (nil,"invalid string")
+					return (nil,"internal error")
 				}
 				switch theArg {
 				case "#", "♯":
@@ -117,7 +117,7 @@ class MidiNoteFormatter: Formatter {
 		}
 	}
 
-	override func getObjectValue(_ anObj: AutoreleasingUnsafeMutablePointer<AnyObject?>?, for aString: String, errorDescription anError: AutoreleasingUnsafeMutablePointer<NSString?>?) -> Bool {
+	open override func getObjectValue(_ anObj: AutoreleasingUnsafeMutablePointer<AnyObject?>?, for aString: String, errorDescription anError: AutoreleasingUnsafeMutablePointer<NSString?>?) -> Bool {
 		let theResult = midiNoteValue(for: aString );
 
 		if let theValue = theResult.value {

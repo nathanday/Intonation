@@ -34,6 +34,9 @@
 		D8646B2D1C3D4C5A00D8C429 /* ChordPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8646B2B1C3D4C5A00D8C429 /* ChordPreviewViewController.swift */; };
 		D8646B2E1C3D4C5A00D8C429 /* ChordPreviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8646B2C1C3D4C5A00D8C429 /* ChordPreviewViewController.xib */; };
 		D866A28820C8BDE30010C481 /* MidiNoteFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D866A28720C8BDE30010C481 /* MidiNoteFormatter.swift */; };
+		D867548120CA39DF00CE2D0F /* UInt+Additions_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = D867548020CA39DF00CE2D0F /* UInt+Additions_Test.swift */; };
+		D867548220CA3B9200CE2D0F /* IntegerType+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88A620F1ACF7F19004CD4C9 /* IntegerType+Additions.swift */; };
+		D867548320CA3BCC00CE2D0F /* PrimesSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = D885A12F1CE60B7300A3B996 /* PrimesSequence.swift */; };
 		D8681A531F97612D001CA24E /* AboutPanelWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8681A511F97612D001CA24E /* AboutPanelWindowController.swift */; };
 		D8681A541F97612D001CA24E /* AboutPanelWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8681A521F97612D001CA24E /* AboutPanelWindowController.xib */; };
 		D8720B641C9E7D6B00ED9FBB /* StackedIntervalsIntervalsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8720B631C9E7D6B00ED9FBB /* StackedIntervalsIntervalsData.swift */; };
@@ -72,7 +75,6 @@
 		D89E97A920C83C8300E6B32D /* ColorInterpolator_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89E97A820C83C8300E6B32D /* ColorInterpolator_Test.swift */; };
 		D89E97AA20C83D7500E6B32D /* ColorInterpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89E97A420C78A1B00E6B32D /* ColorInterpolator.swift */; };
 		D8AA4E311C131EAA00B66521 /* ViewControllerPlaceHolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AA4E301C131EAA00B66521 /* ViewControllerPlaceHolderView.swift */; };
-		D8AA4E3C1C132A8A00B66521 /* ScaleDisplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AA4E391C132A8A00B66521 /* ScaleDisplayViewController.swift */; };
 		D8AA4E3D1C132A8A00B66521 /* ScaleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AA4E3A1C132A8A00B66521 /* ScaleViewController.swift */; };
 		D8AA4E3E1C132A8A00B66521 /* ScaleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8AA4E3B1C132A8A00B66521 /* ScaleViewController.xib */; };
 		D8AA4E411C132ADD00B66521 /* HarmonicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AA4E3F1C132ADD00B66521 /* HarmonicViewController.swift */; };
@@ -89,6 +91,8 @@
 		D8B9020E1AD491E30015B5E2 /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B9020C1AD491E30015B5E2 /* PreferencesWindowController.swift */; };
 		D8B9020F1AD491E30015B5E2 /* PreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8B9020D1AD491E30015B5E2 /* PreferencesWindowController.xib */; };
 		D8C343C81AE109E200F5494A /* SpectrumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C343C71AE109E200F5494A /* SpectrumView.swift */; };
+		D8C9B68520D51FB600B6100F /* IntervalTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C9B68420D51FB600B6100F /* IntervalTextView.swift */; };
+		D8C9B68620D6741F00B6100F /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AA4E391C132A8A00B66521 /* ResultViewController.swift */; };
 		D8E10CB41CA66D130030D8E6 /* EqualTemperamentGeneratorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E10CB21CA66D130030D8E6 /* EqualTemperamentGeneratorViewController.swift */; };
 		D8E10CB51CA66D130030D8E6 /* EqualTemperamentGeneratorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8E10CB31CA66D130030D8E6 /* EqualTemperamentGeneratorViewController.xib */; };
 		D8E10CB71CA689310030D8E6 /* EqualTemperamentIntervalsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E10CB61CA689310030D8E6 /* EqualTemperamentIntervalsData.swift */; };
@@ -136,6 +140,7 @@
 		D8646B2B1C3D4C5A00D8C429 /* ChordPreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChordPreviewViewController.swift; sourceTree = "<group>"; };
 		D8646B2C1C3D4C5A00D8C429 /* ChordPreviewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChordPreviewViewController.xib; sourceTree = "<group>"; };
 		D866A28720C8BDE30010C481 /* MidiNoteFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MidiNoteFormatter.swift; sourceTree = "<group>"; };
+		D867548020CA39DF00CE2D0F /* UInt+Additions_Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UInt+Additions_Test.swift"; sourceTree = "<group>"; };
 		D8681A511F97612D001CA24E /* AboutPanelWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutPanelWindowController.swift; sourceTree = "<group>"; };
 		D8681A521F97612D001CA24E /* AboutPanelWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutPanelWindowController.xib; sourceTree = "<group>"; };
 		D8720B631C9E7D6B00ED9FBB /* StackedIntervalsIntervalsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackedIntervalsIntervalsData.swift; sourceTree = "<group>"; };
@@ -179,7 +184,7 @@
 		D89E97A420C78A1B00E6B32D /* ColorInterpolator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorInterpolator.swift; sourceTree = "<group>"; };
 		D89E97A820C83C8300E6B32D /* ColorInterpolator_Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorInterpolator_Test.swift; sourceTree = "<group>"; };
 		D8AA4E301C131EAA00B66521 /* ViewControllerPlaceHolderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerPlaceHolderView.swift; sourceTree = "<group>"; };
-		D8AA4E391C132A8A00B66521 /* ScaleDisplayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScaleDisplayViewController.swift; sourceTree = "<group>"; };
+		D8AA4E391C132A8A00B66521 /* ResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		D8AA4E3A1C132A8A00B66521 /* ScaleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScaleViewController.swift; sourceTree = "<group>"; };
 		D8AA4E3B1C132A8A00B66521 /* ScaleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScaleViewController.xib; sourceTree = "<group>"; };
 		D8AA4E3F1C132ADD00B66521 /* HarmonicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HarmonicViewController.swift; sourceTree = "<group>"; };
@@ -196,6 +201,7 @@
 		D8B9020C1AD491E30015B5E2 /* PreferencesWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
 		D8B9020D1AD491E30015B5E2 /* PreferencesWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreferencesWindowController.xib; sourceTree = "<group>"; };
 		D8C343C71AE109E200F5494A /* SpectrumView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpectrumView.swift; sourceTree = "<group>"; };
+		D8C9B68420D51FB600B6100F /* IntervalTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalTextView.swift; sourceTree = "<group>"; };
 		D8D912D11B197D5300BB479A /* TonePlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TonePlayer.swift; sourceTree = "<group>"; };
 		D8E10CB21CA66D130030D8E6 /* EqualTemperamentGeneratorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EqualTemperamentGeneratorViewController.swift; sourceTree = "<group>"; };
 		D8E10CB31CA66D130030D8E6 /* EqualTemperamentGeneratorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EqualTemperamentGeneratorViewController.xib; sourceTree = "<group>"; };
@@ -344,6 +350,7 @@
 				D89543781996345200A091A4 /* Equal_TemperamentTests.swift */,
 				D89E97A820C83C8300E6B32D /* ColorInterpolator_Test.swift */,
 				D81D19B320C8C56E002B77F6 /* MidiNoteFormatter_Test.swift */,
+				D867548020CA39DF00CE2D0F /* UInt+Additions_Test.swift */,
 				D89543761996345200A091A4 /* Supporting Files */,
 			);
 			path = "Equal TemperamentTests";
@@ -360,7 +367,7 @@
 		D8AA4E381C132A6200B66521 /* ScaleDisplayViewController */ = {
 			isa = PBXGroup;
 			children = (
-				D8AA4E391C132A8A00B66521 /* ScaleDisplayViewController.swift */,
+				D8AA4E391C132A8A00B66521 /* ResultViewController.swift */,
 				D8AA4E3A1C132A8A00B66521 /* ScaleViewController.swift */,
 				D8AA4E3B1C132A8A00B66521 /* ScaleViewController.xib */,
 				D8AA4E3F1C132ADD00B66521 /* HarmonicViewController.swift */,
@@ -412,6 +419,7 @@
 				D8C343C71AE109E200F5494A /* SpectrumView.swift */,
 				D83092C01AEBBC6F00B0E6A7 /* DisclosureView.swift */,
 				D8B204E71E97D09600686E16 /* SelectingTextField.swift */,
+				D8C9B68420D51FB600B6100F /* IntervalTextView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -599,7 +607,6 @@
 				D8896A5A2019E24700664260 /* SeriesGeneratorViewController.swift in Sources */,
 				D831054E1B0A6115000EB805 /* HarmonicsDescription.swift in Sources */,
 				D8720B641C9E7D6B00ED9FBB /* StackedIntervalsIntervalsData.swift in Sources */,
-				D8AA4E3C1C132A8A00B66521 /* ScaleDisplayViewController.swift in Sources */,
 				D8646B281C3D23F500D8C429 /* ChordSelectorItem.swift in Sources */,
 				D8ED76D11C58E59E00BB2B8C /* FindIntervalsWindowController.swift in Sources */,
 				D8AA4E491C1337B500B66521 /* SpectrumViewController.swift in Sources */,
@@ -628,8 +635,10 @@
 				D88A62101ACF7F19004CD4C9 /* IntegerType+Additions.swift in Sources */,
 				D89399411CA3F31C00C9CAA6 /* StackedIntervalsGeneratorViewController.swift in Sources */,
 				D8944B3A1E7FD208001A71FE /* IrrationalInterval.swift in Sources */,
+				D8C9B68620D6741F00B6100F /* ResultViewController.swift in Sources */,
 				D8C343C81AE109E200F5494A /* SpectrumView.swift in Sources */,
 				D87356E71ADA0793006DAFEB /* ChordSelectorWindowController.swift in Sources */,
+				D8C9B68520D51FB600B6100F /* IntervalTextView.swift in Sources */,
 				D8B204E81E97D09600686E16 /* SelectingTextField.swift in Sources */,
 				D87651B41ADFCB7D003C4BF2 /* ApplicationDelegate.swift in Sources */,
 				D85C0F671C8848F400FE36FA /* MainWindowController.swift in Sources */,
@@ -649,7 +658,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D867548320CA3BCC00CE2D0F /* PrimesSequence.swift in Sources */,
 				D89E97A920C83C8300E6B32D /* ColorInterpolator_Test.swift in Sources */,
+				D867548220CA3B9200CE2D0F /* IntegerType+Additions.swift in Sources */,
+				D867548120CA39DF00CE2D0F /* UInt+Additions_Test.swift in Sources */,
 				D89E97AA20C83D7500E6B32D /* ColorInterpolator.swift in Sources */,
 				D89543791996345200A091A4 /* Equal_TemperamentTests.swift in Sources */,
 				D81D19B520C8C705002B77F6 /* MidiNoteFormatter.swift in Sources */,

@@ -8,9 +8,14 @@
 
 import Cocoa
 
-class WaveViewController: NSViewController, ScaleDisplayViewController {
+class WaveViewController: ResultViewController {
 
-	@IBOutlet var	waveView : WaveView?;
+	@IBOutlet var		waveView : WaveView?;
+
+	override func awakeFromNib() {
+		super.awakeFromNib();
+		waveView?.dataSource = self;
+	}
 
 	override func viewWillAppear() {
 		super.viewWillAppear()
@@ -35,14 +40,14 @@ class WaveViewController: NSViewController, ScaleDisplayViewController {
 		get { return UserDefaults.standard.integer(forKey: "selectedWaveViewScale"); }
 	}
 
-	func setIntervals( intervals anIntervals : [IntervalEntry], degree anDegree : UInt, enabled anEnable : Bool ) {
+	func setIntervals( intervals anIntervals : [IntervalEntry], degree anDegree : Int, enabled anEnable : Bool ) {
 	}
 
-	func hideIntervalRelatedColumn( _ aHide : Bool ) {
+	override func hideIntervalRelatedColumn( _ aHide : Bool ) {
 	}
 
-	func setSelectionIntervals( _ aSelectionIntervals : [Interval]) {
-		waveView?.selectedRatios = aSelectionIntervals;
+	override func selectionChanged(notification aNotification: Notification ) {
+		waveView?.reloadData();
 	}
 
 	private func updateWaveViewDisplayMode() {

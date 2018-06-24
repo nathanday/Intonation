@@ -86,10 +86,10 @@ struct ColorInterpolator : Equatable {
 		guard let theComponets = values(at:anAt) else {
 			return nil;
 		}
-		return NSColor(calibratedHue: theComponets.hueComponent.truncatingRemainder(dividingBy: 1.0),
+		return NSColor(deviceHue: theComponets.hueComponent.truncatingRemainder(dividingBy: 1.0),
 					   saturation: theComponets.saturationComponent,
 					   brightness: theComponets.brightnessComponent,
-					   alpha: 1.0);
+					   alpha: anAlpha);
 	}
 
 	subscript(x:CGFloat) -> NSColor? {
@@ -101,7 +101,7 @@ struct ColorInterpolator : Equatable {
 			return nil;
 		}
 		let		theComponets = hsbaPoints[x];
-		return NSColor(calibratedHue: theComponets.hueComponent, saturation: theComponets.saturationComponent, brightness: theComponets.brightnessComponent, alpha: 1.0);
+		return NSColor(deviceHue: theComponets.hueComponent, saturation: theComponets.saturationComponent, brightness: theComponets.brightnessComponent, alpha: 1.0);
 	}
 
 	subscript(aBounds: Range<Int>) -> [NSColor] {
@@ -125,6 +125,9 @@ struct ColorInterpolator : Equatable {
 	}
 
 	public static func == (lhs: ColorInterpolator, rhs: ColorInterpolator) -> Bool {
+		if lhs.closedHue != rhs.closedHue {
+			return false;
+		}
 		if lhs.count != rhs.count {
 			return false;
 		}

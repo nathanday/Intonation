@@ -19,6 +19,7 @@
                 <outlet property="playSegmentedControl" destination="c0Q-eC-94Z" id="Z9M-gt-YM5"/>
                 <outlet property="plottingParentContainerView" destination="uia-Ns-BW4" id="jas-ND-6Ur"/>
                 <outlet property="scaleViewController" destination="fMJ-Pa-RsX" id="cqN-JH-ihV"/>
+                <outlet property="searchField" destination="lau-bI-K3T" id="XQK-oA-Bmx"/>
                 <outlet property="spectrumViewController" destination="prk-7f-QfJ" id="Tmj-Du-Sr8"/>
                 <outlet property="splitView" destination="5GS-AI-Vce" id="M9t-6Z-Xol"/>
                 <outlet property="tableParentContainerSplitView" destination="19W-DT-XzP" id="suK-we-an2"/>
@@ -847,10 +848,26 @@
             </connections>
         </arrayController>
         <userDefaultsController representsSharedInstance="YES" id="tZN-Kl-w5K"/>
-        <viewController id="fMJ-Pa-RsX" userLabel="Scale View Controller" customClass="ScaleViewController" customModule="Intonation" customModuleProvider="target"/>
-        <viewController id="gGE-WR-3bh" userLabel="Harmonic View Controller" customClass="HarmonicViewController" customModule="Intonation" customModuleProvider="target"/>
-        <viewController id="p1H-S2-RUu" userLabel="Wave View Controller" customClass="WaveViewController" customModule="Intonation" customModuleProvider="target"/>
-        <viewController id="prk-7f-QfJ" userLabel="Spectrum View Controller" customClass="SpectrumViewController" customModule="Intonation" customModuleProvider="target"/>
+        <viewController id="fMJ-Pa-RsX" userLabel="Scale View Controller" customClass="ScaleViewController" customModule="Intonation" customModuleProvider="target">
+            <connections>
+                <outlet property="mainWindowController" destination="-2" id="hvF-6I-7Gq"/>
+            </connections>
+        </viewController>
+        <viewController id="gGE-WR-3bh" userLabel="Harmonic View Controller" customClass="HarmonicViewController" customModule="Intonation" customModuleProvider="target">
+            <connections>
+                <outlet property="mainWindowController" destination="-2" id="hWA-kh-1z0"/>
+            </connections>
+        </viewController>
+        <viewController id="p1H-S2-RUu" userLabel="Wave View Controller" customClass="WaveViewController" customModule="Intonation" customModuleProvider="target">
+            <connections>
+                <outlet property="mainWindowController" destination="-2" id="DXM-rC-r3Y"/>
+            </connections>
+        </viewController>
+        <viewController id="prk-7f-QfJ" userLabel="Spectrum View Controller" customClass="SpectrumViewController" customModule="Intonation" customModuleProvider="target">
+            <connections>
+                <outlet property="mainWindowController" destination="-2" id="Hb5-LD-iTN"/>
+            </connections>
+        </viewController>
         <viewController id="Sar-za-ThR" customClass="FindIntervalsViewController" customModule="Intonation" customModuleProvider="target">
             <connections>
                 <outlet property="searchField" destination="lau-bI-K3T" id="x5H-DR-m90"/>

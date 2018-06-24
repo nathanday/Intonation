@@ -150,9 +150,11 @@ class Tone {
 }
 
 extension Tone : Hashable {
-	public var hashValue: Int {
-		get { return interval.hashValue; }
+
+	func hash(into aHasher: inout Hasher) {
+		aHasher.combine(interval)
 	}
+
 	public static func ==(aLhs: Tone, aRhs: Tone) -> Bool {
 		return aLhs.interval == aRhs.interval;
 	}

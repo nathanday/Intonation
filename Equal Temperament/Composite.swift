@@ -52,7 +52,9 @@ struct Composite : CustomStringConvertible,  CustomDebugStringConvertible, Hasha
         return theResult ?? "";
     }
 
-    public var hashValue: Int { return value.hashValue; }
+	func hash(into aHasher: inout Hasher) {
+		aHasher.combine(value)
+	}
 
     public var primeFactors : [UInt] {
 		return factors.map { $0.factor; };

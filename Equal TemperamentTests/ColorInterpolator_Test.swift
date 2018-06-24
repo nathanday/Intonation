@@ -126,4 +126,109 @@ class ColorInterpolator_Test: XCTestCase {
 		XCTAssertEqual(theColour3.saturationComponent, 1.0, "Passed saturationComponent" );
 		XCTAssertEqual(theColour3.brightnessComponent, 1.0, "Passed brightnessComponent" );
 	}
+
+	func testDefaultColors() {
+		let		theColorInterpolation = ColorInterpolator();
+		let		theColour1 = theColorInterpolation.values(at: 0.5)!;
+		XCTAssertEqual(theColour1.hueComponent, 0.5, "Passed hueComponent" );
+	}
+
+	func testColorsArray() {
+		let		theColorInterpolation = ColorInterpolator(colors: [NSColor(calibratedHue: 0.1, saturation: 0.5, brightness: 1.0, alpha: 1.0), NSColor(calibratedHue: 0.9, saturation: 1.0, brightness: 1.0, alpha: 1.0)]);
+		let		theColour1 = theColorInterpolation.values(at: 0.5)!;
+		XCTAssertEqual(theColour1.hueComponent, 0.5, "Passed hueComponent" );
+		XCTAssertEqual(theColour1.saturationComponent, 0.75, "Passed saturationComponent" );
+	}
+
+	func testColorsAtArray() {
+		let		theColorInterpolation = ColorInterpolator(points: [(x:0.1,color:NSColor(calibratedHue: 0.1, saturation: 0.5, brightness: 1.0, alpha: 1.0)), (x:0.9,color:NSColor(calibratedHue: 0.9, saturation: 1.0, brightness: 1.0, alpha: 1.0))]);
+		let		theColour1 = theColorInterpolation.values(at: 0.5)!;
+		XCTAssertEqual(theColour1.hueComponent, 0.5, "Passed hueComponent" );
+		XCTAssertEqual(theColour1.saturationComponent, 0.75, "Passed saturationComponent" );
+		XCTAssertEqual(theColorInterpolation.domainEnd!, CGFloat(0.9), "Passed domain end" );
+	}
+
+	func testNSColorValueResult() {
+		let		theColors = [
+			NSColor(deviceHue: 0.1, saturation: 1.0, brightness: 0.5, alpha: 1.0),
+			NSColor(deviceHue: 0.9, saturation: 0.5, brightness: 1.0, alpha: 1.0)];
+		let		theColorInterpolation = ColorInterpolator(colors: theColors);
+		let		theColorInterpolation2 = ColorInterpolator(colors: []);
+		let theColor = theColorInterpolation[0.5];
+		XCTAssertNotNil(theColor, "Passed" );
+		XCTAssertEqual(theColor!.hueComponent, CGFloat(0.5), "Passed" );
+		XCTAssertEqual(theColor!.saturationComponent, CGFloat(0.75), "Passed" );
+		XCTAssertEqual(theColor!.brightnessComponent, CGFloat(0.75), "Passed" );
+		XCTAssertEqual(theColorInterpolation[1],theColors[1], "Passed" );
+		XCTAssertNil(theColorInterpolation[3], "Passed" );
+		XCTAssertNil(theColorInterpolation2.color(at:0.5), "Passed" );
+		XCTAssertEqual(theColorInterpolation.color(at:0.5, alpha: 0.5)?.alphaComponent, 0.5, "Passed" );
+	}
+	func testRangeValueResult() {
+		let		theColors = [
+			NSColor(deviceHue: 0.0, saturation: 1.0, brightness: 1.0, alpha: 1.0),
+			NSColor(deviceHue: 0.1, saturation: 1.0, brightness: 1.0, alpha: 1.0),
+			NSColor(deviceHue: 0.2, saturation: 1.0, brightness: 1.0, alpha: 1.0),
+			NSColor(deviceHue: 0.3, saturation: 1.0, brightness: 1.0, alpha: 1.0),
+			NSColor(deviceHue: 0.4, saturation: 1.0, brightness: 1.0, alpha: 1.0),
+			NSColor(deviceHue: 0.5, saturation: 1.0, brightness: 1.0, alpha: 1.0),
+			NSColor(deviceHue: 0.6, saturation: 1.0, brightness: 1.0, alpha: 1.0),
+			NSColor(deviceHue: 0.7, saturation: 1.0, brightness: 1.0, alpha: 1.0),
+			NSColor(deviceHue: 0.8, saturation: 1.0, brightness: 1.0, alpha: 1.0),
+			NSColor(deviceHue: 0.9, saturation: 1.0, brightness: 1.0, alpha: 1.0),
+			NSColor(deviceHue: 1.0, saturation: 1.0, brightness: 1.0, alpha: 1.0)
+		];
+		let		theRange = 2...5;
+		let		theColorInterpolation = ColorInterpolator(colors: theColors);
+		XCTAssertEqual(theColorInterpolation[theRange], Array<NSColor>(theColors[theRange]), "Passed" );
+	}
+
+	func testEquality() {
+		let		theColors = [
+			NSColor(deviceHue: 0.0, saturation: 1.0, brightness: 1.0, alpha: 1.0),
+			NSColor(deviceHue: 0.1, saturation: 1.0, brightness: 1.0, alpha: 1.0),
+			NSColor(deviceHue: 0.2, saturation: 1.0, brightness: 1.0, alpha: 1.0),
+			NSColor(deviceHue: 0.3, saturation: 1.0, brightness: 1.0, alpha: 1.0),
+			NSColor(deviceHue: 0.4, saturation: 1.0, brightness: 1.0, alpha: 1.0),
+			NSColor(deviceHue: 0.5, saturation: 1.0, brightness: 1.0, alpha: 1.0),
+			NSColor(deviceHue: 0.6, saturation: 1.0, brightness: 1.0, alpha: 1.0),
+			NSColor(deviceHue: 0.7, saturation: 1.0, brightness: 1.0, alpha: 1.0),
+			NSColor(deviceHue: 0.8, saturation: 1.0, brightness: 1.0, alpha: 1.0),
+			NSColor(deviceHue: 0.9, saturation: 1.0, brightness: 1.0, alpha: 1.0),
+			NSColor(deviceHue: 1.0, saturation: 1.0, brightness: 1.0, alpha: 1.0)
+		];
+		let		theColorInterpolation = ColorInterpolator(colors: theColors);
+		let		theColorInterpolation2 = ColorInterpolator(colors: theColors);
+		let		theColorInterpolation3 = ColorInterpolator(colors: [
+			NSColor(deviceHue: 0.0, saturation: 1.0, brightness: 1.0, alpha: 1.0),
+			NSColor(deviceHue: 0.1, saturation: 1.0, brightness: 1.0, alpha: 1.0),
+			NSColor(deviceHue: 0.2, saturation: 1.0, brightness: 1.0, alpha: 1.0),
+			NSColor(deviceHue: 0.3, saturation: 1.0, brightness: 1.0, alpha: 1.0),
+			NSColor(deviceHue: 0.4, saturation: 1.0, brightness: 1.0, alpha: 1.0),
+			NSColor(deviceHue: 0.5, saturation: 1.0, brightness: 1.0, alpha: 1.0)]);
+		let		theColorInterpolation4 = ColorInterpolator(colors: [
+			NSColor(deviceHue: 0.5, saturation: 1.0, brightness: 1.0, alpha: 1.0),
+			NSColor(deviceHue: 0.6, saturation: 1.0, brightness: 1.0, alpha: 1.0),
+			NSColor(deviceHue: 0.7, saturation: 1.0, brightness: 1.0, alpha: 1.0),
+			NSColor(deviceHue: 0.8, saturation: 1.0, brightness: 1.0, alpha: 1.0),
+			NSColor(deviceHue: 0.9, saturation: 1.0, brightness: 1.0, alpha: 1.0),
+			NSColor(deviceHue: 1.0, saturation: 1.0, brightness: 1.0, alpha: 1.0)]);
+		XCTAssertEqual(theColorInterpolation, theColorInterpolation2, "passed" );
+		XCTAssertNotEqual(theColorInterpolation, theColorInterpolation3, "passed" );
+		XCTAssertNotEqual(theColorInterpolation3, theColorInterpolation4, "passed" );
+	}
+
+	func testDescription() {
+		let	theColorInterpolator = ColorInterpolator(hsbaPoints: [(0.0,1.0,1.0,1.0),(1.0,0.5,0.5,1.0)]);
+		print(theColorInterpolator.description);
+		XCTAssertEqual(theColorInterpolator.description, "[(x: 0.0, hueComponent: 1.0, saturationComponent: 1.0, brightnessComponent: 1.0), (x: 1.0, hueComponent: 0.5, saturationComponent: 0.5, brightnessComponent: 1.0)]", "passed" );
+		XCTAssertEqual(theColorInterpolator.debugDescription, "<ColorInterpolator> [(x: 0.0, hueComponent: 1.0, saturationComponent: 1.0, brightnessComponent: 1.0), (x: 1.0, hueComponent: 0.5, saturationComponent: 0.5, brightnessComponent: 1.0)]", "passed" );
+	}
+
+	func testWithClosedHue() {
+		let	theColorInterpolator = ColorInterpolator(hsbaPoints: [(0.0,1.0,1.0,1.0),(1.0,0.5,0.5,1.0)]);
+		let	theColorInterpolator2 = theColorInterpolator.withClosedHue(false);
+		XCTAssertNotEqual(theColorInterpolator, theColorInterpolator2, "passed" );
+		XCTAssertEqual(theColorInterpolator, theColorInterpolator2.withClosedHue(true), "passed" );
+	}
 }

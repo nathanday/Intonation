@@ -61,7 +61,10 @@ struct Rational : CustomStringConvertible, CustomDebugStringConvertible, Hashabl
 	}
 	var ratioString: String { return "\(numerator):\(denominator)"; }
 
-	var hashValue: Int { return numerator^denominator; }
+	func hash(into aHasher: inout Hasher) {
+		aHasher.combine(numerator)
+		aHasher.combine(denominator)
+	}
 	var description: String { return toString; }
 
 	var debugDescription: String {

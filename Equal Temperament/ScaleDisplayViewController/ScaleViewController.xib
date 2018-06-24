@@ -23,7 +23,7 @@
                     <tabViewItems>
                         <tabViewItem label="Pitch Constellation" identifier="2" id="WaW-dz-K2N">
                             <view key="view" id="LZV-gq-Ycf" customClass="PitchConstellationView" customModule="Intonation" customModuleProvider="target">
-                                <rect key="frame" x="10" y="25" width="371" height="567"/>
+                                <rect key="frame" x="0.0" y="0.0" width="377" height="604"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </view>
                         </tabViewItem>

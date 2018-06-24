@@ -8,7 +8,7 @@
 
 import Foundation
 
-func square( _ aValue : CGFloat ) -> CGFloat {
+func square<T : BinaryFloatingPoint>( _ aValue : T ) -> T {
 	return aValue * aValue;
 }
 
@@ -37,4 +37,12 @@ extension Double {
 	func toString(decimalPlaces aDecimalPlaces:UInt) -> String {
 		return NSString(format: "%.*f", aDecimalPlaces, self) as String;
 	}
+}
+
+func distance( from p: CGPoint, to l: (p1:CGPoint,p2:CGPoint)) -> CGFloat {
+	return abs((l.p2.y-l.p1.y)*p.x - (l.p2.x-l.p1.x)*p.y + l.p2.x*l.p1.y - l.p2.y*l.p1.x)/sqrt(square(l.p2.y-l.p1.y) + square(l.p2.x-l.p1.x));
+}
+
+func linearInterpolation<T : BinaryFloatingPoint>( x: T, x0: T, x1: T, y0: T, y1: T ) -> T {
+	return y0*(x-x1)/(x0-x1)+y1*(x-x0)/(x1-x0)
 }

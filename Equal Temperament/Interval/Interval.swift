@@ -81,8 +81,8 @@ class Interval : Hashable {
 	init( names aNames: [String]? ) {
 		names = aNames;
 	}
-	var hashValue: Int {
-		return toDouble.hashValue;
+	func hash(into aHasher: inout Hasher) {
+		aHasher.combine(toDouble)
 	}
 	static func == (a: Interval, b: Interval) -> Bool {
 		return a.toDouble == b.toDouble;

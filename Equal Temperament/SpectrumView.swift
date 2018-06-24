@@ -22,11 +22,9 @@ class SpectrumView: ResultView {
 		}
 	}
 
-	override var selectedRatios : [Interval] {
-		didSet {
-			invalidateIntrinsicContentSize();
-			needsDisplay = true;
-		}
+	override func reloadData() {
+		invalidateIntrinsicContentSize();
+		needsDisplay = true;
 	}
 
 	var		harmonicSpacing : CGFloat {
@@ -44,8 +42,8 @@ class SpectrumView: ResultView {
 
 	var numeratorPrimes : Set<UInt> {
 		var		theResult = Set<UInt>();
-		for theRatio in selectedRatios {
-			if let theRationalRatio = theRatio as? RationalInterval {
+		dataSource?.enumerateIntervals { (anIndex:Int, anInterval:Interval, aSelected: Bool) in
+			if let theRationalRatio = anInterval as? RationalInterval {
 				for p in UInt(theRationalRatio.numerator).everyPrimeFactor {
 					theResult.insert(p.factor);
 				}
@@ -108,8 +106,8 @@ class SpectrumView: ResultView {
 					controlPoint2: NSMakePoint(theX+(theBaseWidthHalf-theTopWidthHalf), theY0));
 			}
 			let		theColor = colorForIndex(aHarmonic)
-			theColor.setStroke();
-			theColor .setFill();
+			NSColor.controlAccent.setStroke();
+			theColor.setFill();
 			thePath.fill();
 			thePath.stroke();
 			thePath.move(to: NSMakePoint( NSMinX(aDirtyRect), theY0));
@@ -159,8 +157,9 @@ class SpectrumView: ResultView {
 			theMinorTicks.stroke();
 		}
 
-		for (theIndex,theRatio) in selectedRatios.enumerated() {
-			drawSpectrum( baseFreq: theRatio.toDouble, harmonic:theIndex );
+		dataSource?.enumerateSelectedIntervals {
+			(anIndex:Int,aSelectedIndex:Int,anInterval:Interval) in
+			drawSpectrum( baseFreq: anInterval.toDouble, harmonic:anIndex );
 		}
 		drawAxises();
 	}

@@ -89,8 +89,8 @@ class StackedIntervalSet : IntervalSet, Hashable {
 		}
 	}
 
-	var hashValue: Int {
-		return interval.hashValue;
+	func hash(into aHasher: inout Hasher) {
+		aHasher.combine(interval)
 	}
 
 	static func == (lhs: StackedIntervalSet, rhs: StackedIntervalSet) -> Bool {

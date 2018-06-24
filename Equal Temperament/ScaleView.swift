@@ -12,7 +12,7 @@ class ScaleView : ResultView {
 	static let		equalTempGradient: NSGradient? = NSGradient(starting: NSColor(named: "intonationGradientStart")!, ending: NSColor(named: "intonationGradientEnd")!);
 	let		equalTempBarWidth : CGFloat = 20.0;
 	
-	var		numberOfIntervals : UInt = 12 {
+	var		numberOfIntervals : Int = 12 {
 		didSet { needsDisplay = true; }
 	}
 	var		useIntervals : Bool = true {
@@ -22,7 +22,7 @@ class ScaleView : ResultView {
 	func drawJustIntonationRatio( ratio aRatio : Interval, hilighted aHilighted : Bool, index anIndex: Int ) {
 	}
 	
-	func drawEqualTemperamentRatio( rationNumber aRatioNumber : UInt ) {
+	func drawEqualTemperamentRatio( rationNumber aRatioNumber : Int ) {
 	}
 	func drawNoEqualTemperament( ) { }
 	
@@ -33,9 +33,32 @@ class ScaleView : ResultView {
 		else {
 			drawNoEqualTemperament();
 		}
-		for (theIndex,theRatio) in everyRatios.enumerated() {
-			drawJustIntonationRatio(ratio: theRatio, hilighted: selectedRatios.contains(theRatio), index:theIndex );
+		dataSource?.enumerateIntervals { (anIndex:Int, anInterval:Interval, aSelected: Bool) in
+			drawJustIntonationRatio(ratio: anInterval, hilighted: aSelected, index:anIndex );
 		}
+	}
+
+	func closestInterval(to aPoint: CGPoint ) -> (index:Int,interval:Interval,distance:CGFloat)? {
+		preconditionFailure("This method must be overridden")
+	}
+
+	override func mouseDown(with anEvent: NSEvent) {
+		let		theLocation = convert(anEvent.locationInWindow, from: nil );
+		if let theClosestInterval = closestInterval(to: theLocation) {
+			delegate?.resultView( self, willSelectIntervalAtIndex: theClosestInterval.index );
+		}
+	}
+	override func mouseUp(with anEvent: NSEvent) {
+		let		theLocation = convert(anEvent.locationInWindow, from: nil );
+		if let theClosestInterval = closestInterval(to: theLocation) {
+			delegate?.resultView( self, didSelectIntervalAtIndex: theClosestInterval.index );
+		}
+	}
+	override func mouseDragged(with anEvent: NSEvent) {
+		print( "################################# mouseDragged(with:) \(anEvent.description)" );
+	}
+	override func mouseMoved(with anEvent: NSEvent) {
+		print( "################################# mouseMoved(with:) \(anEvent.description)" );
 	}
 }
 
@@ -88,11 +111,11 @@ class LinearScaleView : ScaleView {
 		previousValue = theY;
 	}
 	
-	override func drawEqualTemperamentRatio( rationNumber aRatioNumber : UInt ) {
+	override func drawEqualTemperamentRatio( rationNumber aRatioNumber : Int ) {
 		let		theHeights = NSHeight(drawingBounds)/CGFloat(numberOfIntervals);
 		let		theX = floor(NSMidX(drawingBounds)-equalTempBarWidth/2.0)-20.5;
 		let		theY = CGFloat(aRatioNumber)*theHeights+NSMinX(drawingBounds);
-		LinearScaleView.equalTempGradient!.draw(in: NSBezierPath(rect: NSMakeRect(theX, theY, equalTempBarWidth, theHeights)), angle: -90)
+		LinearScaleView.equalTempGradient!.draw(in: NSBezierPath(rect: NSMakeRect(theX, theY, equalTempBarWidth, theHeights)), angle: -90);
 	}
 	override func drawNoEqualTemperament( ) {
 		let		theX = floor(NSMidX(drawingBounds)-equalTempBarWidth/2.0)-20.5;
@@ -108,13 +131,40 @@ class PitchConstellationView : ScaleView {
 	private var		axisesRadius : CGFloat {
 		return min(maximumRadius-80.0, 320.0);
 	}
+	private func endPoint(interval aRatio : Interval, radius aRadius : CGFloat) -> CGPoint {
+		let		theBounds = bounds;
+		let		theAngle = CGFloat(log2(aRatio.toDouble) * 2.0*Double.pi);
+		return NSMakePoint(NSMidX(theBounds)+sin(theAngle)*aRadius, NSMidY(theBounds)+cos(theAngle)*aRadius);
+	}
+
+
+	override func closestInterval(to aPoint: CGPoint ) -> (index:Int,interval:Interval,distance:CGFloat)? {
+		let		theBounds = bounds;
+		var		theResult : (index:Int,interval:Interval,distance:CGFloat)?
+		let		theOrigin = NSMakePoint(NSMidX(theBounds), NSMidY(theBounds));
+		dataSource?.enumerateIntervals { (anIndex:Int, anInterval:Interval, aSelected: Bool) in
+			let		theEndPoints = endPoint(interval: anInterval, radius: maximumRadius);
+			let		theDistance = distance(from: aPoint, to: (p1: theOrigin, p2: theEndPoints));
+			if let thePrevious = theResult {
+				if theDistance < thePrevious.distance {
+					theResult = (anIndex,anInterval,theDistance);
+				}
+			}  else {
+				theResult = (anIndex,anInterval,theDistance);
+			}
+		}
+		return theResult;
+	}
+
 	override func drawJustIntonationRatio( ratio aRatio : Interval, hilighted aHilighted : Bool, index anIndex: Int ) {
 		let		theBounds = bounds;
 		let		theAngle = CGFloat(log2(aRatio.toDouble) * 2.0*Double.pi);
 		let		theRadius = aHilighted ? maximumRadius - 40.0 : axisesRadius;
 		let		thePath = NSBezierPath()
-		thePath.move(to: NSMakePoint(NSMidX(theBounds), NSMidY(theBounds)));
-		thePath.line(to: NSMakePoint(NSMidX(theBounds)+sin(theAngle)*theRadius, NSMidY(theBounds)+cos(theAngle)*theRadius));
+		let		theOrigin = NSMakePoint(NSMidX(theBounds), NSMidY(theBounds));
+		let		theLineEndPoint = endPoint(interval: aRatio, radius:theRadius);
+		thePath.move(to: theOrigin);
+		thePath.line(to: theLineEndPoint);
 		thePath.lineCapStyle = NSBezierPath.LineCapStyle.round
 		if aHilighted {
 			colorForIndex(anIndex).setStroke();
@@ -131,7 +181,7 @@ class PitchConstellationView : ScaleView {
 		drawText(string: aRatio.ratioString, size:theSize, point: NSMakePoint(NSMidX(theBounds)+sin(theAngle)*(theRadius+5.0), NSMidY(theBounds)+cos(theAngle)*(theRadius+11.0)-theSize*0.8), color:theTextColor, textAlignment: theTextAlignment );
 	}
 	
-	override func drawEqualTemperamentRatio( rationNumber aRatioNumber : UInt ) {
+	override func drawEqualTemperamentRatio( rationNumber aRatioNumber : Int ) {
 		let		theBounds = bounds;
 		let		theArcLength = 360.0/CGFloat(numberOfIntervals);
 		let		theStart = CGFloat(90.0)-CGFloat(aRatioNumber+1)*theArcLength;
@@ -155,4 +205,3 @@ class PitchConstellationView : ScaleView {
 		thePath.stroke();
 	}
 }
-

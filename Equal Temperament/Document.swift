@@ -8,10 +8,12 @@
 
 import Cocoa
 
-public let PlayBackMethodChangedNotification = "PlayBackMethodChanged";
-public let PlayBackMethodUserInfoKey = "PlayBackMethod";
-
 class Document : NSDocument, MIDIReceiverObserver {
+	public static let playBackMethodChangedNotification = Notification.Name("PlayBackMethodChanged");
+	public static let playBackMethodUserInfoKey = "PlayBackMethod";
+	public static let selectionChangedNotification = Notification.Name("SelectionChanged");
+	public static let selectedIndiciesKey = "SelectedIndicies";
+
 	var		tonePlayer = TonePlayer();
 	var		midiReceiver = MIDIReceiver(clientName:"Intonation");
 	var		midiToHarmonicRatio = MIDIToHarmonicRatio();
@@ -158,7 +160,7 @@ class Document : NSDocument, MIDIReceiverObserver {
 		if aMethod == currentlySelectedMethod && tonePlayer.playing {
 			tonePlayer.stop();
 			currentlySelectedMethod = nil;
-			NotificationCenter.default.post(name: Notification.Name(rawValue: PlayBackMethodChangedNotification), object: self);
+			NotificationCenter.default.post(name: Document.playBackMethodChangedNotification, object: self);
 		}
 		else {
 			let			thePlaybackType = PlaybackType(rawValue:aMethod) ?? .unison;
@@ -167,7 +169,7 @@ class Document : NSDocument, MIDIReceiverObserver {
 			currentlySelectedMethod = aMethod;
 			tonePlayer.stop();
 			tonePlayer.playType(thePlaybackType);
-			NotificationCenter.default.post(name: Notification.Name(rawValue: PlayBackMethodChangedNotification), object: self, userInfo: [PlayBackMethodUserInfoKey: aMethod]);
+			NotificationCenter.default.post(name: Document.playBackMethodChangedNotification, object: self, userInfo: [Document.playBackMethodUserInfoKey: aMethod]);
 		}
 	}
 
@@ -208,9 +210,9 @@ class Document : NSDocument, MIDIReceiverObserver {
 		midiReceiver.observer = self;
 	}
 
-	@objc dynamic var     everyInterval : [IntervalEntry] = [];
+	@objc dynamic var		everyInterval : [IntervalEntry] = [];
 	@objc dynamic var		smallestError : Double { get { return !smallestErrorEntries.isEmpty ? smallestErrorEntries.first!.error : 0.0; } }
-	@objc dynamic var     averageError : Double = 0.0
+	@objc dynamic var		averageError : Double = 0.0
 	@objc dynamic var		biggestError : Double { get { return !biggestErrorEntries.isEmpty ? biggestErrorEntries.first!.error : 0.0; } }
 	@objc dynamic var		smallestErrorEntries : Set<IntervalEntry> = [] {
 		willSet { willChangeValue(forKey: "smallestError"); }
@@ -248,6 +250,7 @@ class Document : NSDocument, MIDIReceiverObserver {
 				}
 			}
 			selectedIndicies = theIndicies as IndexSet;
+			NotificationCenter.default.post(name: Document.selectionChangedNotification, object: self, userInfo: [Document.selectedIndiciesKey:selectedIndicies])
 		}
 		get {
 			var		theResult = [IntervalEntry]();

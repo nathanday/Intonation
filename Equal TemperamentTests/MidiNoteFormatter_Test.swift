@@ -87,19 +87,26 @@ class MidiNoteFormatter_Test: XCTestCase {
 		XCTAssertEqual( theMidiNoteFormatter.midiNoteValue(for:"C♮4").value!, 0+(4+1)*12, "got \(0+(4+1)*12) for “C♮4”" );
 		XCTAssertEqual( theMidiNoteFormatter.midiNoteValue(for:"C♯-1").value!, 1+(-1+1)*12, "got \(1+(-1+1)*12) for “C♯-1”" );
 		XCTAssertEqual( theMidiNoteFormatter.midiNoteValue(for:"B3").value!, 11+(3+1)*12, "got \(11+(3+1)*12) for “B3”" );
+
+		XCTAssertEqual( theMidiNoteFormatter.midiNoteValue(for:"60").value!, 60, "got \(60) for “60”" );
+
+		XCTAssertEqual( theMidiNoteFormatter.midiNoteValue(for:"129").error!, "out of bounds value 129", "got “out of bounds value” error for “129”" );
+
+		XCTAssertEqual( theMidiNoteFormatter.midiNoteValue(for:"B#3").value!, 12+(3+1)*12, "got \(12+(3+1)*12) for “B#3”" );
+		XCTAssertEqual( theMidiNoteFormatter.midiNoteValue(for:"Cb3").value!, -1+(3+1)*12, "got \(-1+(3+1)*12) for “B#3”" );
 	}
 
 	func testOverridenAPI() {
 		let		theMidiNoteFormatter = MidiNoteFormatter();
 		let		theString = theMidiNoteFormatter.string(for: NSNumber(integerLiteral: 60));
-		XCTAssert( theString != nil, "\(String(describing: theString)) is not nil" );
+		XCTAssertNotNil( theString, "\(String(describing: theString)) is not nil" );
 		XCTAssertEqual( theString!, "C4", "\(String(describing: theString)) == C4" );
 
 		var		theValue : AnyObject?
 		var		theError : NSString?
 		XCTAssertEqual( theMidiNoteFormatter.getObjectValue(&theValue, for: theString!, errorDescription: &theError), true,
 						   "\(String(describing:theString)) got value" );
-		XCTAssertNotEqual( theValue as? NSNumber, nil as NSNumber?, "\(String(describing: theString)) got value" );
+		XCTAssertNotNil( theValue, "\(String(describing: theString)) got value" );
 		XCTAssertEqual( (theValue as? NSNumber)?.intValue, 60, "\(String(describing: theString)) is equal to 60" );
 	}
 }

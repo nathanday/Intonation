@@ -62,10 +62,16 @@ class HarmonicView: ResultView {
 		}
 	}
 
-	override var	selectedRatios : [Interval] {
-		didSet(aValue) {
-			updateOctaveRange();
-			needsDisplay = true;
+	override func reloadData() {
+		updateOctaveRange();
+		needsDisplay = true;
+	}
+
+	private func firstInterval() -> Interval? {
+		if let theIndex = dataSource?.selectedIndecies.first {
+			return dataSource?.interval(for: theIndex);
+		} else {
+			return nil;
 		}
 	}
 
@@ -73,7 +79,7 @@ class HarmonicView: ResultView {
 		var		theOctaveStart : UInt = 0;
 		var		theOctaveEnd : UInt = 0;
 		let		theCommonFactor = commonFactor;
-		if let theFirst = selectedRatios.first {
+		if let theFirst = firstInterval() {
 			theOctaveStart = theCommonFactor > 1 ? HarmonicView.octaveForHarmonic(UInt(theCommonFactor)) : 0;
 			if let theNum = theFirst.numeratorForDenominator(theCommonFactor) {
 				theOctaveEnd = theNum > 0 ? HarmonicView.octaveForHarmonic(UInt(theNum)) : 0;
@@ -81,8 +87,9 @@ class HarmonicView: ResultView {
 			else {
 				theOctaveEnd = theOctaveStart;
 			}
-			for theRational in selectedRatios {
-				if let theNum = theRational.numeratorForDenominator(theCommonFactor) {
+			dataSource?.enumerateSelectedIntervals {
+				(anIndex,aSelectedIndex,anInterval) in
+				if let theNum = anInterval.numeratorForDenominator(theCommonFactor) {
 					let		theNumeratorOctave = theNum > 0 ? HarmonicView.octaveForHarmonic(UInt(theNum)) : 0;
 					if theNumeratorOctave > theOctaveEnd {
 						theOctaveEnd = theNumeratorOctave;
@@ -115,9 +122,10 @@ class HarmonicView: ResultView {
 		return theFractionPoint * NSHeight(aBounds)/CGFloat(lengthForRange(octaveRange)) + NSMinY(aBounds);
 	}
 	override func draw(_ dirtyRect: NSRect) {
-		let		theHarmonicSpacing : CGFloat = max(20.0,CGFloat(10-selectedRatios.count)*5.0);
+		let		theSelectedRationsCount = dataSource?.numberOfSelectedIntervals ?? 0;
+		let		theHarmonicSpacing : CGFloat = max(20.0,CGFloat(10-theSelectedRationsCount)*5.0);
 		var		theBounds = NSInsetRect(bounds, 20.0, 20.0);
-		let		theXOrigin = max(NSMidX(theBounds)-CGFloat(max(0,selectedRatios.count))*theHarmonicSpacing*0.55-8.0,NSMinX(bounds)+20.0);
+		let		theXOrigin = max(NSMidX(theBounds)-CGFloat(max(0,theSelectedRationsCount))*theHarmonicSpacing*0.55-8.0,NSMinX(bounds)+20.0);
 		theBounds.origin.y += 10.0;
         super.draw(dirtyRect)
 
@@ -203,10 +211,14 @@ class HarmonicView: ResultView {
 			}
 		}
 
-		for i in (1<<octaveRange.first!)...(1<<(octaveRange.last!)) { drawHarmonic(UInt(i)); }
-		for i in octaveRange { drawOctave( i ); }
-		for (theIndex,theRatio) in selectedRatios.enumerated() {
-			drawRatio( theRatio, index:theIndex, of:selectedRatios.count );
+		for i in (1<<octaveRange.first!)...(1<<(octaveRange.last!)) {
+			drawHarmonic(UInt(i));
+		}
+		for i in octaveRange {
+			drawOctave( i );
+		}
+		dataSource?.enumerateSelectedIntervals { (anIndex, aSelectedIndex, anInterval) in
+			drawRatio( anInterval, index:anIndex, of:theSelectedRationsCount );
 		}
     }
 }

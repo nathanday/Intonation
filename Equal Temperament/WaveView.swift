@@ -19,11 +19,9 @@ class WaveView: ResultView {
 		didSet { needsDisplay = true; }
 	}
 
-	override var		selectedRatios : [Interval] {
-		didSet {
-			invalidateIntrinsicContentSize();
-			needsDisplay = true;
-		}
+	override func reloadData() {
+		invalidateIntrinsicContentSize();
+		needsDisplay = true;
 	}
 	
 	var		xScale : Float = 200.0 {
@@ -89,21 +87,31 @@ class WaveView: ResultView {
 			axisesColor.setStroke();
 			thePath.stroke();
 		}
-        if( selectedRatios.count > 0 ) {
+        if ( dataSource?.numberOfSelectedIntervals ?? 0 ) > 0 {
+			var		theSelectedDoubles = [Double]();
             switch displayMode {
             case .combined:
-                for (theIndex,theRatio) in selectedRatios.enumerated() {
-                    NSColor(calibratedHue: (CGFloat(theIndex+4).truncatingRemainder(dividingBy: 1.0)/5.1-2.0/15.0).truncatingRemainder(dividingBy: 1.0), saturation: 0.5, brightness: 0.75, alpha: theOutOffFocusAlpha).setStroke();
-                    drawWave( [theRatio.toDouble], lineWidth:1.0 );
-                }
+				dataSource?.enumerateSelectedIntervals {
+					(anIndex:Int,aSelectedIndex:Int,anInterval:Interval) in
+					NSColor(calibratedHue: (CGFloat(anIndex+4).truncatingRemainder(dividingBy: 1.0)/5.1-2.0/15.0).truncatingRemainder(dividingBy: 1.0), saturation: 0.5, brightness: 0.75, alpha: theOutOffFocusAlpha).setStroke();
+                    drawWave( [anInterval.toDouble], lineWidth:1.0 );
+//					if aSelected {
+						theSelectedDoubles.append(anInterval.toDouble);
+//					}
+				}
                 NSColor.secondaryLabelColor.setStroke();
-                drawWave( selectedRatios.map({$0.toDouble;}), lineWidth:2.0 );
+                drawWave( theSelectedDoubles, lineWidth:2.0 );
             case .overlayed:
+				dataSource?.enumerateSelectedIntervals {
+					(anIndex:Int,aSelectedIndex:Int,anInterval:Interval) in
+					theSelectedDoubles.append(anInterval.toDouble);
+				}
                 NSColor(calibratedWhite: 0.5, alpha: theOutOffFocusAlpha).setStroke();
-                drawWave( selectedRatios.map({$0.toDouble;}), lineWidth:1.5 );
-                for (theIndex,theRatio) in selectedRatios.enumerated() {
-                    colorForIndex(theIndex).setStroke();
-                    drawWave( [theRatio.toDouble], lineWidth:2.0 );
+                drawWave( theSelectedDoubles, lineWidth:1.5 );
+				dataSource?.enumerateSelectedIntervals {
+					(anIndex:Int,aSelectedIndex:Int,anInterval:Interval) in
+                    colorForIndex(anIndex).setStroke();
+                    drawWave( [anInterval.toDouble], lineWidth:2.0 );
                 }
             }
         }

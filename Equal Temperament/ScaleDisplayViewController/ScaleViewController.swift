@@ -8,10 +8,16 @@
 
 import Cocoa
 
-class ScaleViewController: NSViewController, ScaleDisplayViewController {
+class ScaleViewController: ResultViewController {
 
-	@IBOutlet var	linearScaleView : ScaleView?;
-	@IBOutlet var	pitchConstellationView : ScaleView?;
+	@IBOutlet var		linearScaleView : ScaleView?;
+	@IBOutlet var		pitchConstellationView : ScaleView?;
+
+	override func awakeFromNib() {
+		super.awakeFromNib();
+		linearScaleView?.dataSource = self;
+		pitchConstellationView?.dataSource = self;
+	}
 
 	@objc dynamic var		selectedScaleDisplayType : Int {
 		set( aValue ) { UserDefaults.standard.set(aValue, forKey: "selectedScaleDisplayType"); }
@@ -19,27 +25,28 @@ class ScaleViewController: NSViewController, ScaleDisplayViewController {
 	}
 
 
-	func setIntervals( intervals anIntervals : [IntervalEntry], degree anIntervalCount : UInt, enabled anEnable : Bool ) {
+	func setIntervals( intervals anIntervals : [IntervalEntry], degree anIntervalCount : Int, enabled anEnable : Bool ) {
 		if let theLinearScaleView = linearScaleView {
 			theLinearScaleView.numberOfIntervals = anEnable ? anIntervalCount : 0;
-			theLinearScaleView.everyRatios = anIntervals.map { return $0.interval; };
+//			theLinearScaleView.everyRatios = anIntervals.map { return $0.interval; };
 			theLinearScaleView.useIntervals = anEnable;
 		}
 		if let thePitchConstellationView = pitchConstellationView {
 			thePitchConstellationView.numberOfIntervals = anEnable ? anIntervalCount : 0;
-			thePitchConstellationView.everyRatios = anIntervals.map { return $0.interval; };
+//			thePitchConstellationView.everyRatios = anIntervals.map { return $0.interval; };
 			thePitchConstellationView.useIntervals = anEnable;
 		}
 	}
 
-	func hideIntervalRelatedColumn( _ aHide : Bool ) {
+	override  func hideIntervalRelatedColumn( _ aHide : Bool ) {
 		linearScaleView?.useIntervals = !aHide;
 		pitchConstellationView?.useIntervals = !aHide;
 	}
 
-	func setSelectionIntervals( _ aSelectionIntervals : [Interval]) {
-		linearScaleView?.selectedRatios = aSelectionIntervals;
-		pitchConstellationView?.selectedRatios = aSelectionIntervals;
+	override func selectionChanged(notification aNotification: Notification ) {
+		linearScaleView?.reloadData();
+		pitchConstellationView?.reloadData();
 	}
 
 }
+

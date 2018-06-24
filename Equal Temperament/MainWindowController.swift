@@ -7,6 +7,7 @@
  */
 
 import Cocoa
+import os
 
 func frequencyForMIDINote( _ aMIDINote : Int ) -> Double {
 	let		theBase = 440.0/pow(2.0,(69.0/12.0));
@@ -48,9 +49,13 @@ class MainWindowController : NSWindowController {
 	@IBOutlet weak var	baseFrequencyDeltaSlider : NSSlider?;
 	@IBOutlet weak var	playSegmentedControl : NSSegmentedControl?;
 
+	@IBOutlet weak var	searchField : NSTextField?;
+
 	@IBOutlet weak var  octavesCountPopUpButton : NSPopUpButton?
 
 	var		documentTypeViewController : GeneratorViewController?
+
+//	lazy var	intervalTextView = IntervalTextView();
 
 	override func awakeFromNib() {
 		super.awakeFromNib();
@@ -65,17 +70,12 @@ class MainWindowController : NSWindowController {
 				if aKeyPath == "everyInterval" {
 					scaleViewController!.setIntervals(intervals: theDocument.everyInterval, degree: 12, enabled: true);
 				} else if aKeyPath == "selectedIndicies" {
-					let		theSelectedIntervals = theDocument.selectedJustIntonationIntervals;
 					arrayController!.setSelectedObjects(theDocument.selectedIntervalEntry);
 					updateChordRatioTitle();
-					assert(scaleViewController != nil, "Failed to get ScaleViewController")
-					scaleViewController!.setSelectionIntervals(theSelectedIntervals);
-					assert(harmonicViewController != nil, "Failed to get HarmonicViewController")
-					harmonicViewController!.setSelectionIntervals(theSelectedIntervals);
-					assert(waveViewController != nil, "Failed to get WaveViewController")
-					waveViewController!.setSelectionIntervals(theSelectedIntervals);
-					assert(spectrumViewController != nil, "Failed to get SpectrumViewController")
-					spectrumViewController!.setSelectionIntervals(theSelectedIntervals);
+//					scaleViewController!.setSelectionIntervals(theSelectedIntervals);
+//					harmonicViewController!.setSelectionIntervals(theSelectedIntervals);
+//					waveViewController!.setSelectionIntervals(theSelectedIntervals);
+//					spectrumViewController!.setSelectionIntervals(theSelectedIntervals);
 				}
 			}
 		}
@@ -180,7 +180,7 @@ class MainWindowController : NSWindowController {
 	override func windowWillLoad() {
 		super.windowWillLoad();
 		if let theDocument = document{
-			NotificationCenter.default.addObserver(self, selector: #selector(playBackMethodChanged(notification:)), name: NSNotification.Name(rawValue: PlayBackMethodChangedNotification), object: theDocument );
+			NotificationCenter.default.addObserver(self, selector: #selector(playBackMethodChanged(notification:)), name: Document.playBackMethodChangedNotification, object: theDocument );
 		}
 
 		if let theBaseFrequencyDeltaSlider = baseFrequencyDeltaSlider {
@@ -299,6 +299,7 @@ class MainWindowController : NSWindowController {
 
 	override func windowDidLoad() {
 		super.windowDidLoad();
+		self.window!.acceptsMouseMovedEvents = true;
 		if let theDocument = document as? Document {
 			if let theWindow = window {
 				if theDocument.intervalsData == nil {
@@ -347,6 +348,20 @@ class MainWindowController : NSWindowController {
 			theDocument.playbackPaused = true;
 		}
 	}
+}
+
+extension MainWindowController : NSWindowDelegate {
+//	func windowWillReturnFieldEditor(_ aSender: NSWindow, to aController: Any?) -> Any? {
+//		guard let theSearchField = aController as? NSSearchField else {
+//			return nil;
+//		}
+//
+//		if theSearchField == searchField {
+//			intervalTextView.isFieldEditor = true;
+//			return intervalTextView;
+//		}
+//		return nil;
+//	}
 }
 
 extension MainWindowController : NSTableViewDelegate {

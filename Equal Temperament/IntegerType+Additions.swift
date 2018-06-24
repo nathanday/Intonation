@@ -106,11 +106,11 @@ extension UInt {
 	}
 }
 
-func pow<T : BinaryInteger>( _ a: T, _ b: T ) -> T {
+func pow<T : BinaryInteger, U : UnsignedInteger>( _ a: T, _ b: U ) -> T {
 	if b == 0  {
 		return 1
 	} else {
-		return (a&0b1 == 1 ? a : 1) * pow(a,b>>1);
+		return (b&0b1 == 1 ? a : 1) * pow(a,b>>1) * pow(a,b>>1);
 	}
 }
 

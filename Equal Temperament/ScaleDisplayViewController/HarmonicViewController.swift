@@ -8,15 +8,20 @@
 
 import Cocoa
 
-class HarmonicViewController : NSViewController, ScaleDisplayViewController {
+class HarmonicViewController : ResultViewController {
 
-	@IBOutlet var	harmonicView : HarmonicView?;
+	@IBOutlet var		harmonicView : HarmonicView?;
 
-	func setIntervals( intervals anIntervals : [IntervalEntry], degree anIntervalCount : UInt, enabled anEnable : Bool ) { }
-	func hideIntervalRelatedColumn( _ aHide : Bool ) { }
+	override func awakeFromNib() {
+		super.awakeFromNib();
+		harmonicView?.dataSource = self;
+	}
 
-	func setSelectionIntervals( _ aSelectionIntervals : [Interval]) {
-		harmonicView?.selectedRatios = aSelectionIntervals;
+	func setIntervals( intervals anIntervals : [IntervalEntry], degree anIntervalCount : Int, enabled anEnable : Bool ) { }
+	override func hideIntervalRelatedColumn( _ aHide : Bool ) { }
+
+	override func selectionChanged(notification aNotification: Notification ) {
+		harmonicView?.reloadData();
 	}
 
 }

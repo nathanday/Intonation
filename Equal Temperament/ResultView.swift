@@ -17,9 +17,8 @@ import Cocoa
 			case NSAppearance.Name.aqua:
 				_colorInterpolator = ColorInterpolator(hsbaPoints: [
 					(x:0.0,hueComponent:0.0,saturationComponent:1.0,brightnessComponent:0.75),
-					(x:2.0,hueComponent:CGFloat(2.0/7.5),saturationComponent:1.0,brightnessComponent:0.625),
-					(x:3.0,hueComponent:CGFloat(3.5/7.5),saturationComponent:1.0,brightnessComponent:0.625),
-					(x:4.0,hueComponent:CGFloat(4.0/7.5),saturationComponent:1.0,brightnessComponent:0.625),
+					(x:1.0,hueComponent:CGFloat(1.25/7.5),saturationComponent:1.0,brightnessComponent:0.625),
+					(x:3.0,hueComponent:CGFloat(3.625/7.5),saturationComponent:1.0,brightnessComponent:0.625),
 					(x:7.25,hueComponent:1.0,saturationComponent:1.0,brightnessComponent:0.75)]);
 			case NSAppearance.Name.darkAqua:
 				_colorInterpolator = ColorInterpolator(hsbaPoints: [
@@ -38,26 +37,33 @@ import Cocoa
 		return _colorInterpolator!;
 	}
 
+	weak var	dataSource : ResultViewDataSource?;
+	weak var	delegate : ResultViewDelegate?;
+
 	var		commonFactor : Int {
 		get {
 			var		theResult = 1;
-			for theValue in selectedRatios {
-				var		theDen = 1;
-				if let theRationalValue = theValue as? RationalInterval {
-					theDen = theRationalValue.denominator;
-				} else {
-					(_,theDen) = Rational.farey( Double(theValue.toDouble), maxDenominator:32 );
+			let		theSelectedIndicies = dataSource?.selectedIndecies;
+			dataSource?.enumerateIntervals { (anIndex:Int, anInterval:Interval, aSelected: Bool) in
+				if theSelectedIndicies?.contains(anIndex) ?? false {
+					var		theDen = 1;
+					if let theRationalValue = anInterval as? RationalInterval {
+						theDen = theRationalValue.denominator;
+					} else {
+						(_,theDen) = Rational.farey( Double(anInterval.toDouble), maxDenominator:32 );
+					}
+					theResult *= theDen/Int(greatestCommonDivisor( UInt(theResult), UInt(theDen) ));
 				}
-				theResult *= theDen/Int(greatestCommonDivisor( UInt(theResult), UInt(theDen) ));
 			}
 			return theResult;
 		}
 	}
-	var		selectedRatios : [Interval] = [] {
-		didSet { needsDisplay = true; }
+
+	func reloadData() {
+		needsDisplay = true;
 	}
-	var		everyRatios : [Interval] = [] {
-		didSet { needsDisplay = true; }
+	func reloadData(forIntervalIndexes intervalIndexes: IndexSet ) {
+		reloadData();
 	}
 
 	override func viewDidChangeEffectiveAppearance() {
@@ -166,4 +172,18 @@ extension BackGround {
 	}
 }
 
+protocol ResultViewDataSource : class {
+	var numberOfIntervals : Int {get};
+	var numberOfSelectedIntervals : Int {get};
+	func interval(for anIndex: Int) -> Interval?;
+	var selectedIndecies : IndexSet {get};
+	func enumerateIntervals( _ aBlock: (Int,Interval,Bool) -> Void );
+	func enumerateSelectedIntervals( _ aBlock: (Int,Int,Interval) -> Void );
+}
 
+protocol ResultViewDelegate : class {
+	func resultView( _ resultView: ResultView, willSelectIntervalAtIndex index: Int );
+	func resultView( _ resultView: ResultView, didSelectIntervalAtIndex index: Int );
+	func resultView( _ resultView: ResultView, willDeselectIntervalAtIndex index: Int );
+	func resultView( _ resultView: ResultView, didDeselectIntervalAtIndex index: Int );
+}
