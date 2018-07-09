@@ -55,7 +55,7 @@ class StackedIntervalSet : IntervalSet, Hashable {
 	}
 
 	private func calculateIntervals() {
-		let		theOctaveValue = 1<<(octaves-1);
+		let		theOctaveValue = 1<<(Int(octaves)-1);
 		_everyInterval.removeAll();
 		switch interval {
 		case let x as RationalInterval:

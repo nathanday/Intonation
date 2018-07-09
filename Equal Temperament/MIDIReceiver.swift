@@ -71,7 +71,7 @@ class MIDIReceiver {
 	}
 
 	func setUp() {
-		var		theStatus = OSStatus(noErr);
+		var		theStatus = noErr;
 		var		theEndPointRef: [UInt32] = [0]
 		var		theEndPointName: [String] = [""]
 		var		theSourcePointRef: [UInt32] = [0];
@@ -131,9 +131,10 @@ class MIDIReceiver {
 //		}
 //
 		theStatus = MIDIClientCreateWithBlock(clientName as CFString, &midiClientRef, midiNotifyBlock);
-		precondition( theStatus == OSStatus(noErr), "Status \(theStatus)" );
+		precondition( theStatus == noErr, "Status \(theStatus)" );
+//		precondition( theStatus == noErr, "Status \(theStatus) \(GetMacOSStatusCommentString(theStatus)), \(GetMacOSStatusErrorString(theStatus))" );
 		theStatus = MIDIInputPortCreateWithBlock( midiClientRef, "\(clientName) port" as CFString, &inputPortRef, midiInputBlock );
-		precondition( theStatus == OSStatus(noErr), "Status \(theStatus)" );
+		precondition( theStatus == noErr, "Status \(theStatus)" );
 
 		for i in 0..<theMidiNumberOfSources {
 			theSourcePointRef.append(MIDIGetSource(i))
@@ -143,7 +144,7 @@ class MIDIReceiver {
 			}
 
 			theStatus = MIDIPortConnectSource(inputPortRef, theSourcePointRef[i], nil);
-			precondition( theStatus == OSStatus(noErr), "Status \(theStatus)" );
+			precondition( theStatus == noErr, "Status \(theStatus)" );
 		}
 	}
 }

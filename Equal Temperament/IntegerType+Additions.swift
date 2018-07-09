@@ -27,8 +27,8 @@ extension UInt {
 	var isPrime : Bool {
 		return self > 1 && (self <= 3 || !isFactorOf(2...sqrt(self)));
 	}
-	var everyPrimeFactor : [(factor:UInt,power:UInt)] {
-		var		theResult : [(factor:UInt,power:UInt)];
+	var everyPrimeFactor : [(factor:UInt,power:Int)] {
+		var		theResult : [(factor:UInt,power:Int)];
 		switch self {
 		case 0:
 			theResult = [];
@@ -37,7 +37,7 @@ extension UInt {
 		default:
 			theResult = [];
 			for thePrime in PrimesSequence(end:self) {
-				let thePower = factorCount(thePrime);
+				let thePower = Int(factorCount(thePrime));
 				if thePower > 0 {
 					theResult.append((factor:thePrime,power:thePower));
 				}
@@ -98,7 +98,7 @@ extension UInt {
 				}
 				theResult.append("\(theFact.factor)");
 				if theFact.power > 1 {
-					theResult.append("\(theFact.power.superScriptString)");
+					theResult.append("\(UInt(theFact.power).superScriptString)");
 				}
 			}
 			return theResult;

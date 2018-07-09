@@ -93,6 +93,12 @@
 		D8C343C81AE109E200F5494A /* SpectrumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C343C71AE109E200F5494A /* SpectrumView.swift */; };
 		D8C9B68520D51FB600B6100F /* IntervalTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C9B68420D51FB600B6100F /* IntervalTextView.swift */; };
 		D8C9B68620D6741F00B6100F /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AA4E391C132A8A00B66521 /* ResultViewController.swift */; };
+		D8D932A020ED0038009ED565 /* SortedArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D9329F20ED0038009ED565 /* SortedArray.swift */; };
+		D8D932A420EE29B7009ED565 /* Rational_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D932A320EE29B7009ED565 /* Rational_Test.swift */; };
+		D8D932A620EF8087009ED565 /* RationalNumeric.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D932A520EF8087009ED565 /* RationalNumeric.swift */; };
+		D8D932A820F0C4C9009ED565 /* Rational.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89543841996347F00A091A4 /* Rational.swift */; };
+		D8D932A920F0C4FB009ED565 /* RationalNumeric.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D932A520EF8087009ED565 /* RationalNumeric.swift */; };
+		D8D932AA20F0C58E009ED565 /* Float+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88EED2C1AEE5AF50084BDCB /* Float+Additions.swift */; };
 		D8E10CB41CA66D130030D8E6 /* EqualTemperamentGeneratorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E10CB21CA66D130030D8E6 /* EqualTemperamentGeneratorViewController.swift */; };
 		D8E10CB51CA66D130030D8E6 /* EqualTemperamentGeneratorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8E10CB31CA66D130030D8E6 /* EqualTemperamentGeneratorViewController.xib */; };
 		D8E10CB71CA689310030D8E6 /* EqualTemperamentIntervalsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E10CB61CA689310030D8E6 /* EqualTemperamentIntervalsData.swift */; };
@@ -101,6 +107,9 @@
 		D8E7C7D71B1CAB99000D745B /* TonePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D912D11B197D5300BB479A /* TonePlayer.swift */; };
 		D8ED76D11C58E59E00BB2B8C /* FindIntervalsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8ED76CF1C58E59E00BB2B8C /* FindIntervalsWindowController.swift */; };
 		D8F2B1D61C93EFD800F88BF7 /* LimitsIntervalsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F2B1D51C93EFD800F88BF7 /* LimitsIntervalsData.swift */; };
+		D8F2B6BB20E3A07D00DEB1C9 /* PrimeFactors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F2B6BA20E3A07D00DEB1C9 /* PrimeFactors.swift */; };
+		D8F2B6BD20E509B400DEB1C9 /* PrimeFactors_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F2B6BC20E509B400DEB1C9 /* PrimeFactors_Test.swift */; };
+		D8F2B6BE20E5141300DEB1C9 /* PrimeFactors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F2B6BA20E3A07D00DEB1C9 /* PrimeFactors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -125,7 +134,6 @@
 		D82FD0E31E9506DE009A6EF8 /* EqualTemperamentInterval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EqualTemperamentInterval.swift; sourceTree = "<group>"; };
 		D83092C01AEBBC6F00B0E6A7 /* DisclosureView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisclosureView.swift; sourceTree = "<group>"; };
 		D831054D1B0A6115000EB805 /* HarmonicsDescription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HarmonicsDescription.swift; sourceTree = "<group>"; };
-		D83252D81E7C0B9100D33A8D /* Composite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Composite.swift; sourceTree = "<group>"; };
 		D83B54B01C8D96C500624A46 /* MIDIToHarmonicRatio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MIDIToHarmonicRatio.swift; sourceTree = "<group>"; };
 		D83C4A2B1C8863A00090F939 /* IntervalsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntervalsData.swift; sourceTree = "<group>"; };
 		D849E7301ACADFD1006E0964 /* PrimeProducts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimeProducts.swift; sourceTree = "<group>"; };
@@ -203,6 +211,9 @@
 		D8C343C71AE109E200F5494A /* SpectrumView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpectrumView.swift; sourceTree = "<group>"; };
 		D8C9B68420D51FB600B6100F /* IntervalTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalTextView.swift; sourceTree = "<group>"; };
 		D8D912D11B197D5300BB479A /* TonePlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TonePlayer.swift; sourceTree = "<group>"; };
+		D8D9329F20ED0038009ED565 /* SortedArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortedArray.swift; sourceTree = "<group>"; };
+		D8D932A320EE29B7009ED565 /* Rational_Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rational_Test.swift; sourceTree = "<group>"; };
+		D8D932A520EF8087009ED565 /* RationalNumeric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RationalNumeric.swift; sourceTree = "<group>"; };
 		D8E10CB21CA66D130030D8E6 /* EqualTemperamentGeneratorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EqualTemperamentGeneratorViewController.swift; sourceTree = "<group>"; };
 		D8E10CB31CA66D130030D8E6 /* EqualTemperamentGeneratorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EqualTemperamentGeneratorViewController.xib; sourceTree = "<group>"; };
 		D8E10CB61CA689310030D8E6 /* EqualTemperamentIntervalsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EqualTemperamentIntervalsData.swift; sourceTree = "<group>"; };
@@ -211,6 +222,8 @@
 		D8ED76CF1C58E59E00BB2B8C /* FindIntervalsWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindIntervalsWindowController.swift; sourceTree = "<group>"; };
 		D8EDC4AD1DB11E3D009BF520 /* Intonation.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Intonation.entitlements; sourceTree = "<group>"; };
 		D8F2B1D51C93EFD800F88BF7 /* LimitsIntervalsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LimitsIntervalsData.swift; sourceTree = "<group>"; };
+		D8F2B6BA20E3A07D00DEB1C9 /* PrimeFactors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimeFactors.swift; sourceTree = "<group>"; };
+		D8F2B6BC20E509B400DEB1C9 /* PrimeFactors_Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimeFactors_Test.swift; sourceTree = "<group>"; };
 		D8F5A9AA1F02D2D400DEBB6B /* WaveTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaveTable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -252,6 +265,7 @@
 		D87201021B8C7CA0006FDEDC /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				D8D9329F20ED0038009ED565 /* SortedArray.swift */,
 				D8AA4E301C131EAA00B66521 /* ViewControllerPlaceHolderView.swift */,
 				D89E97A420C78A1B00E6B32D /* ColorInterpolator.swift */,
 				D866A28720C8BDE30010C481 /* MidiNoteFormatter.swift */,
@@ -351,6 +365,8 @@
 				D89E97A820C83C8300E6B32D /* ColorInterpolator_Test.swift */,
 				D81D19B320C8C56E002B77F6 /* MidiNoteFormatter_Test.swift */,
 				D867548020CA39DF00CE2D0F /* UInt+Additions_Test.swift */,
+				D8F2B6BC20E509B400DEB1C9 /* PrimeFactors_Test.swift */,
+				D8D932A320EE29B7009ED565 /* Rational_Test.swift */,
 				D89543761996345200A091A4 /* Supporting Files */,
 			);
 			path = "Equal TemperamentTests";
@@ -437,7 +453,8 @@
 				D84CE1E11C95960E00E19505 /* AdHocIntervalsData.swift */,
 				D885A12F1CE60B7300A3B996 /* PrimesSequence.swift */,
 				D849E7301ACADFD1006E0964 /* PrimeProducts.swift */,
-				D83252D81E7C0B9100D33A8D /* Composite.swift */,
+				D8F2B6BA20E3A07D00DEB1C9 /* PrimeFactors.swift */,
+				D8D932A520EF8087009ED565 /* RationalNumeric.swift */,
 				D89543841996347F00A091A4 /* Rational.swift */,
 				D8944B341E7FD1E7001A71FE /* Interval */,
 				D8812ACF1C9ECE3D0093786D /* IntervalSet.swift */,
@@ -520,7 +537,6 @@
 					D89543711996345200A091A4 = {
 						CreatedOnToolsVersion = 6.0;
 						LastSwiftMigration = 0900;
-						TestTargetID = D895435C1996345200A091A4;
 					};
 				};
 			};
@@ -602,6 +618,7 @@
 				D8257B241CE72F2B008198E7 /* PrimesSequence.swift in Sources */,
 				D8299E241FDE946400CB9DF7 /* ExportWindowController.swift in Sources */,
 				D8B9020E1AD491E30015B5E2 /* PreferencesWindowController.swift in Sources */,
+				D8D932A620EF8087009ED565 /* RationalNumeric.swift in Sources */,
 				D8E5E6241AD12F7A004DB02D /* HarmonicView.swift in Sources */,
 				D80A61D61C9040C000A2F885 /* SelectDocumentType.swift in Sources */,
 				D8896A5A2019E24700664260 /* SeriesGeneratorViewController.swift in Sources */,
@@ -642,6 +659,7 @@
 				D8B204E81E97D09600686E16 /* SelectingTextField.swift in Sources */,
 				D87651B41ADFCB7D003C4BF2 /* ApplicationDelegate.swift in Sources */,
 				D85C0F671C8848F400FE36FA /* MainWindowController.swift in Sources */,
+				D8D932A020ED0038009ED565 /* SortedArray.swift in Sources */,
 				D88A62111AD02167004CD4C9 /* Scale.swift in Sources */,
 				D8AA4E451C13318300B66521 /* WaveViewController.swift in Sources */,
 				D89399451CA3F37000C9CAA6 /* AdHokGeneratorViewController.swift in Sources */,
@@ -650,6 +668,7 @@
 				D8AA4E311C131EAA00B66521 /* ViewControllerPlaceHolderView.swift in Sources */,
 				D89E97A520C78A1B00E6B32D /* ColorInterpolator.swift in Sources */,
 				D8AA4E411C132ADD00B66521 /* HarmonicViewController.swift in Sources */,
+				D8F2B6BB20E3A07D00DEB1C9 /* PrimeFactors.swift in Sources */,
 				D866A28820C8BDE30010C481 /* MidiNoteFormatter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -658,14 +677,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8F2B6BE20E5141300DEB1C9 /* PrimeFactors.swift in Sources */,
 				D867548320CA3BCC00CE2D0F /* PrimesSequence.swift in Sources */,
 				D89E97A920C83C8300E6B32D /* ColorInterpolator_Test.swift in Sources */,
 				D867548220CA3B9200CE2D0F /* IntegerType+Additions.swift in Sources */,
+				D8D932AA20F0C58E009ED565 /* Float+Additions.swift in Sources */,
 				D867548120CA39DF00CE2D0F /* UInt+Additions_Test.swift in Sources */,
+				D8F2B6BD20E509B400DEB1C9 /* PrimeFactors_Test.swift in Sources */,
+				D8D932A920F0C4FB009ED565 /* RationalNumeric.swift in Sources */,
+				D8D932A420EE29B7009ED565 /* Rational_Test.swift in Sources */,
 				D89E97AA20C83D7500E6B32D /* ColorInterpolator.swift in Sources */,
 				D89543791996345200A091A4 /* Equal_TemperamentTests.swift in Sources */,
 				D81D19B520C8C705002B77F6 /* MidiNoteFormatter.swift in Sources */,
 				D81D19B420C8C56E002B77F6 /* MidiNoteFormatter_Test.swift in Sources */,
+				D8D932A820F0C4C9009ED565 /* Rational.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -836,7 +861,6 @@
 		D89543801996345200A091A4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
@@ -852,14 +876,12 @@
 				PRODUCT_NAME = Intonation;
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Intonation.app/Contents/MacOS/Intonation";
 			};
 			name = Debug;
 		};
 		D89543811996345200A091A4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
@@ -872,7 +894,6 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Intonation.app/Contents/MacOS/Intonation";
 			};
 			name = Release;
 		};

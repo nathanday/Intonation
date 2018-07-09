@@ -44,5 +44,7 @@ func distance( from p: CGPoint, to l: (p1:CGPoint,p2:CGPoint)) -> CGFloat {
 }
 
 func linearInterpolation<T : BinaryFloatingPoint>( x: T, x0: T, x1: T, y0: T, y1: T ) -> T {
-	return y0*(x-x1)/(x0-x1)+y1*(x-x0)/(x1-x0)
+	let t0 = y0*(x-x1)/(x0-x1)
+	let t1 = y1*(x-x0)/(x1-x0);
+	return t0+t1;
 }
