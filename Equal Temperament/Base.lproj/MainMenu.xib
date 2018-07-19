@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13196" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14295.6" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13196"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14295.6"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -358,6 +357,53 @@ CA
                                     </items>
                                 </menu>
                             </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
+                <menuItem title="View" id="xX6-zv-IGR">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="View" id="cg7-TI-t2x">
+                        <items>
+                            <menuItem title="Scale" state="on" tag="16" keyEquivalent="1" id="8p9-QS-yTG">
+                                <connections>
+                                    <action selector="selectTabAction:" target="-1" id="Yrr-i3-dEm"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Wave" tag="17" keyEquivalent="2" id="mfh-zn-0Mt">
+                                <connections>
+                                    <action selector="selectTabAction:" target="-1" id="cMq-HP-P7J"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Harmonics" tag="18" keyEquivalent="3" id="Fov-nb-vhS">
+                                <connections>
+                                    <action selector="selectTabAction:" target="-1" id="buq-Fo-yK2"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Spectrum" tag="19" keyEquivalent="4" id="sln-Y1-faJ">
+                                <connections>
+                                    <action selector="selectTabAction:" target="-1" id="zWi-BD-j4l"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="qt3-ea-1lT"/>
+                            <menuItem title="1 Octave" state="on" tag="33" keyEquivalent="1" id="8IO-Yx-mwH">
+                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                <connections>
+                                    <action selector="selectNumberOfListedOctaves:" target="-1" id="1ri-ag-hpX"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="2 Octaves" tag="34" keyEquivalent="2" id="iZ2-bc-LSd">
+                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                <connections>
+                                    <action selector="selectNumberOfListedOctaves:" target="-1" id="5g6-oY-cTl"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="3 Octaves" tag="35" keyEquivalent="3" id="Gbq-X4-jNw">
+                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                <connections>
+                                    <action selector="selectNumberOfListedOctaves:" target="-1" id="vmk-fW-zsx"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="kyl-py-Cfj"/>
                         </items>
                     </menu>
                 </menuItem>

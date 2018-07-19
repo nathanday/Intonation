@@ -33,6 +33,7 @@ class MainWindowController : NSWindowController {
 	@IBOutlet weak var	plottingParentContainerView : NSView?
 	@IBOutlet weak var	documentTypeViewControllerPlaceHolderView: ViewControllerPlaceHolderView?
 	@IBOutlet weak var	tableParentContainerSplitView : NSSplitView?;
+	@IBOutlet weak var	viewsTabView : NSTabView?;
 
 	@IBOutlet var	arrayController : NSArrayController?
 	@IBOutlet var	scaleViewController : ScaleViewController?
@@ -72,10 +73,6 @@ class MainWindowController : NSWindowController {
 				} else if aKeyPath == "selectedIndicies" {
 					arrayController!.setSelectedObjects(theDocument.selectedIntervalEntry);
 					updateChordRatioTitle();
-//					scaleViewController!.setSelectionIntervals(theSelectedIntervals);
-//					harmonicViewController!.setSelectionIntervals(theSelectedIntervals);
-//					waveViewController!.setSelectionIntervals(theSelectedIntervals);
-//					spectrumViewController!.setSelectionIntervals(theSelectedIntervals);
 				}
 			}
 		}
@@ -201,6 +198,17 @@ class MainWindowController : NSWindowController {
 		NSPasteboard.general.writeObjects( (arrayController!.selectedObjects as! [IntervalEntry]).map { return "\($0.toCents)" as NSString; } );
 	}
 
+	@IBAction func selectTabAction( _ aSender: NSMenuItem ) {
+		viewsTabView?.selectTabViewItem(at: aSender.tag&0xF);
+	}
+
+	@IBAction func selectNumberOfListedOctaves( _ aSender: NSMenuItem ) {
+		if let theDocument = document as? Document,
+			let theIntervalsData = theDocument.intervalsData {
+			theIntervalsData.octavesCount = aSender.tag&0xF;
+		}
+	}
+
 	@IBAction func baseFrequencyDeltaChanged( _ aSender: NSSlider ) {
 		let		theMinValue = aSender.minValue;
 		let		theMaxValue = aSender.maxValue;
@@ -297,6 +305,20 @@ class MainWindowController : NSWindowController {
 		}
 	}
 
+	override func validateMenuItem(_ aMenuItem: NSMenuItem) -> Bool {
+		if aMenuItem.action == #selector(selectTabAction(_:)) {
+			if let theTabView = viewsTabView,
+				let theSelectedTabItem = theTabView.selectedTabViewItem{
+				aMenuItem.state = (aMenuItem.tag&0xF) == theTabView.indexOfTabViewItem(theSelectedTabItem) ? .on : .off;
+			}
+		} else if aMenuItem.action == #selector(selectNumberOfListedOctaves(_:)) {
+			if let theDocument = document as? Document,
+				let theIntervalsData = theDocument.intervalsData {
+				aMenuItem.state = (aMenuItem.tag&0xF) == theIntervalsData.octavesCount ? .on : .off;
+			}
+		}
+		return true;
+	}
 	override func windowDidLoad() {
 		super.windowDidLoad();
 		self.window!.acceptsMouseMovedEvents = true;

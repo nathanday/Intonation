@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14269.12" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14295.6" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14269.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14295.6"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -25,6 +25,7 @@
                 <outlet property="tableParentContainerSplitView" destination="19W-DT-XzP" id="suK-we-an2"/>
                 <outlet property="tableParentContainerView" destination="lJF-yt-08k" id="aps-bS-vLm"/>
                 <outlet property="tableView" destination="P9I-zu-mcd" id="Hi9-Rs-qr8"/>
+                <outlet property="viewsTabView" destination="p1k-Mg-792" id="S1h-7o-1kC"/>
                 <outlet property="waveViewController" destination="p1H-S2-RUu" id="0yi-kq-N4J"/>
                 <outlet property="window" destination="xOd-HO-29H" id="JIz-fz-R2o"/>
             </connections>
@@ -405,14 +406,14 @@
                                                             <font key="font" metaFont="smallSystem"/>
                                                             <menu key="menu" id="9UG-5e-bPn">
                                                                 <items>
-                                                                    <menuItem title="1 Octave" state="on" tag="1" keyEquivalent="1" id="i6g-ve-TNy">
-                                                                        <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                                                    <menuItem title="1 Octave" state="on" tag="1" id="i6g-ve-TNy">
+                                                                        <modifierMask key="keyEquivalentModifierMask"/>
                                                                     </menuItem>
-                                                                    <menuItem title="2 Octaves" tag="2" keyEquivalent="2" id="o2M-Cr-1aY">
-                                                                        <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                                                    <menuItem title="2 Octaves" tag="2" id="o2M-Cr-1aY">
+                                                                        <modifierMask key="keyEquivalentModifierMask"/>
                                                                     </menuItem>
-                                                                    <menuItem title="3 Octaves" tag="3" keyEquivalent="3" id="La5-dg-Z1r">
-                                                                        <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                                                    <menuItem title="3 Octaves" tag="3" id="La5-dg-Z1r">
+                                                                        <modifierMask key="keyEquivalentModifierMask"/>
                                                                     </menuItem>
                                                                 </items>
                                                             </menu>
@@ -762,7 +763,7 @@
                                             </tabViewItem>
                                             <tabViewItem label="Harmonics" identifier="2" id="PGj-sa-iy4">
                                                 <view key="view" id="fc9-Uj-ik5" customClass="ViewControllerPlaceHolderView" customModule="Intonation" customModuleProvider="target">
-                                                    <rect key="frame" x="10" y="25" width="403" height="672"/>
+                                                    <rect key="frame" x="10" y="25" width="403" height="626"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <connections>
                                                         <outlet property="viewController" destination="gGE-WR-3bh" id="GGB-4e-JgG"/>
@@ -771,7 +772,7 @@
                                             </tabViewItem>
                                             <tabViewItem label="Waves" identifier="3" id="Vj8-AE-UOR">
                                                 <view key="view" id="e0X-ZG-vks" customClass="ViewControllerPlaceHolderView" customModule="Intonation" customModuleProvider="target">
-                                                    <rect key="frame" x="10" y="25" width="403" height="672"/>
+                                                    <rect key="frame" x="10" y="25" width="403" height="626"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <connections>
                                                         <outlet property="viewController" destination="p1H-S2-RUu" id="ASz-mR-uex"/>
@@ -780,7 +781,7 @@
                                             </tabViewItem>
                                             <tabViewItem label="Spectrum" identifier="" id="BqX-wx-T9U">
                                                 <view key="view" id="f11-Fj-u3P" customClass="ViewControllerPlaceHolderView" customModule="Intonation" customModuleProvider="target">
-                                                    <rect key="frame" x="10" y="25" width="403" height="672"/>
+                                                    <rect key="frame" x="10" y="25" width="403" height="626"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <connections>
                                                         <outlet property="viewController" destination="prk-7f-QfJ" id="1AK-Vg-eEE"/>

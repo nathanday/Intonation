@@ -128,17 +128,31 @@ class Rational_Test: XCTestCase {
 	}
 
 	func testConvert() {
-		XCTAssertEqual(Rational(2,1).toCents, 1200.000, accuracy: 0.001);
-		XCTAssertEqual(Rational(3,2).toCents, 701.955, accuracy: 0.001);
-		XCTAssertEqual(Rational(5,4).toCents, 386.31371386, accuracy: 0.001);
-		XCTAssertEqual(Rational(1.189207115002721, maxDenominator:65536).toCents, 300.000, accuracy: 0.001);
-
-		XCTAssertEqual(Rational(3,2).toDouble, 1.5, accuracy: 0.00001);
-		XCTAssertEqual(Rational(3,2).toFloat, 1.5, accuracy: 0.00001);
-		XCTAssertEqual(Rational(3,2).toInt, 1);
+		XCTAssertEqual(Double(Rational(3,2)), 1.5, accuracy: 0.00001);
+		XCTAssertEqual(Float(Rational(3,2)), 1.5, accuracy: 0.00001);
+		XCTAssertEqual(Int(Rational(3,2)), 1);
 
 		XCTAssertEqual(3 as Rational, Rational(3));
-		XCTAssertEqual((3.141592653589793 as Rational).toDouble, Rational.pi.toDouble, accuracy:0.00000000000001);
+		XCTAssertEqual(Double(3.141592653589793 as Rational), 3.141592653589793, accuracy:0.000000000000001 );
+
+		XCTAssertEqual(Double(Rational(0.2)), 0.2, accuracy: 0.001);
+
+		let		r1 : Rational = 2;
+		XCTAssertEqual(r1, Rational(2,1));
+
+		let		r2 : Rational = 3.1415;
+		XCTAssertEqual(r2, Rational(6283,2000));
+
+		XCTAssertEqual(Rational(exactly:UInt8(12)), Rational(12,1));
+		XCTAssertEqual(Rational(exactly:Int8(12)), Rational(12,1));
+		XCTAssertEqual(Rational(exactly:UInt16(12)), Rational(12,1));
+		XCTAssertEqual(Rational(exactly:Int16(12)), Rational(12,1));
+		XCTAssertEqual(Rational(exactly:UInt32(12)), Rational(12,1));
+		XCTAssertEqual(Rational(exactly:Int32(12)), Rational(12,1));
+		XCTAssertEqual(Rational(exactly:UInt64(12)), Rational(12,1));
+		XCTAssertEqual(Rational(exactly:Int64(12)), Rational(12,1));
+		XCTAssertEqual(Rational(exactly:UInt(12)), Rational(12,1));
+		XCTAssertEqual(Rational(exactly:Int(12)), Rational(12,1));
 	}
 
 	func testCompare() {
@@ -160,23 +174,32 @@ class Rational_Test: XCTestCase {
 		XCTAssertEqual(Rational(3,7) != Rational(9,20), true);
 		XCTAssertEqual(Rational(3,7) != Rational(9,21), false);
 
-		XCTAssertEqual(Rational(7,2)>3, true);
-		XCTAssertEqual(Rational(7,2)<3, false);
-		XCTAssertEqual(Rational(1,2)<3, true);
-		XCTAssertEqual(Rational(1,2)>3, false);
+		let		a = 3;
+		XCTAssertEqual(Rational(7,2)>a, true);
+		XCTAssertEqual(Rational(7,2)<a, false);
+		XCTAssertEqual(Rational(1,2)<a, true);
+		XCTAssertEqual(Rational(1,2)>a, false);
 
-		XCTAssertEqual(Rational(7,2)>=3, true);
-		XCTAssertEqual(Rational(7,2)<=3, false);
-		XCTAssertEqual(Rational(1,2)<=3, true);
-		XCTAssertEqual(Rational(1,2)>=3, false);
+		XCTAssertEqual(Rational(7,2)>=a, true);
+		XCTAssertEqual(Rational(7,2)<=a, false);
+		XCTAssertEqual(Rational(1,2)<=a, true);
+		XCTAssertEqual(Rational(1,2)>=a, false);
 
-		XCTAssertEqual(Rational(7,3)>=2, true);
-		XCTAssertEqual(Rational(3,7)<=3, true);
+		XCTAssertEqual(Rational(10,3)>=a, true);
+		XCTAssertEqual(Rational(3,7)<=a, true);
 
-		XCTAssertEqual(Rational(3,1)==3, true);
-		XCTAssertEqual(Rational(3,7)==3, false);
-		XCTAssertEqual(Rational(3,7) != 3, true);
-		XCTAssertEqual(Rational(3,1) != 3, false);
+		XCTAssertEqual(Rational(3,1)==a, true);
+		XCTAssertEqual(Rational(3,7)==a, false);
+		XCTAssertEqual(Rational(3,7) != a, true);
+		XCTAssertEqual(Rational(3,1) != a, false);
+	}
+
+	func testStride() {
+		let		a = Rational(4,5);
+		let		s = a.distance(to: Rational(1));
+		XCTAssertEqual(s,Rational(1,5));
+		XCTAssertEqual(a.advanced(by: s),Rational(1));
+		XCTAssertEqual(a.advanced(by: s).advanced(by: s),Rational(6,5));
 	}
 
 	func testString() {
@@ -187,16 +210,14 @@ class Rational_Test: XCTestCase {
 
 		XCTAssertEqual(Rational("a"), nil);
 
-		XCTAssertEqual(Rational(3,7).toString, "3/7");
-		XCTAssertEqual(Rational(3,1).toString, "3");
+		XCTAssertEqual(String(Rational(3,7)), "3/7");
+		XCTAssertEqual(String(Rational(3,1)), "3");
 		XCTAssertEqual(Rational(3,7).ratioString, "3:7");
 
-		XCTAssertEqual(Rational(3,7).description, Rational(3,7).toString);
-		XCTAssertEqual(Rational(3,1).description, Rational(3,1).toString);
+		XCTAssertEqual(Rational(3,7).description, String(Rational(3,7)));
+		XCTAssertEqual(Rational(3,1).description, String(Rational(3,1)));
 
 		XCTAssertEqual(Rational(3,7).debugDescription, "3∶7");
-
-		XCTAssertEqual(Rational(18,20).factorsString, "3²∶2⨯5");
 	}
 
 	func testHash() {
@@ -212,13 +233,13 @@ class Rational_Test: XCTestCase {
 	func testValues() {
 		XCTAssertEqual(Rational.zero, Rational(0,1));
 		XCTAssertEqual(Rational.one, Rational(1,1));
-		XCTAssertEqual(Rational.min.toInt, Int.min);
-		XCTAssertEqual(Rational.max.toInt, Int.max);
+		XCTAssertEqual(Rational.min, Rational(Int.min));
+		XCTAssertEqual(Rational.max, Rational(Int.max));
 		XCTAssertEqual(Rational.nan.numerator, 0);
 		XCTAssertEqual(Rational.nan.denominator, 0);
 		XCTAssertEqual(Rational.infinity.numerator, 1);
 		XCTAssertEqual(Rational.infinity.denominator, 0);
-		XCTAssertEqual(Rational.pi.toDouble, 3.141592653589793, accuracy:0.00000000000001);
+		XCTAssertEqual(Double(Rational.pi), 3.141592653589793, accuracy:0.00000000000001);
 	}
 
     func testPerformanceExample() {

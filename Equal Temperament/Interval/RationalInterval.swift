@@ -25,8 +25,8 @@ class RationalInterval : Interval {
 		return theResult;
 	}()
 	let		ratio: Rational;
-	override var toDouble : Double { return ratio.toDouble; }
-	override var toString : String { return ratio.toString; }
+	override var toDouble : Double { return Double(ratio); }
+	override var toString : String { return String(ratio); }
 	override var propertyList : [String:Any] {
 		var		theResult : [String:Any] = ["numerator":numerator, "denominator":denominator];
 		if names != nil && names!.count > 0 {
@@ -34,7 +34,7 @@ class RationalInterval : Interval {
 		}
 		return theResult;
 	}
-	var		justInternation : Double { return ratio.toDouble; }
+	var		justInternation : Double { return Double(ratio); }
 	var		numerator: Int { return ratio.numerator; }
 	var		denominator: Int { return ratio.denominator; }
 	init( ratio aRatio: Rational, names aNames: [String]? ) {

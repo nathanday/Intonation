@@ -169,7 +169,7 @@ class IntervalEntry : NSObject, NSPasteboardReading, NSPasteboardWriting {
 	var isOctave : Bool {
 		switch interval {
 		case let x as RationalInterval:
-			return bitCount(x.numerator) == 1 && x.denominator == 1;
+			return bitCount(UInt(x.numerator)) == 1 && x.denominator == 1;
 		case let x as IrrationalInterval:
 			let		theLog2 = log2(x.ratio);
 			return theLog2 > 0 && theLog2 == floor(theLog2);

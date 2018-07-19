@@ -139,19 +139,19 @@ class SpectrumView: ResultView {
 				theMinorTicks.line( to: NSMakePoint(theX+theHarmonicSpacing*0.75, theY0+7.5) );
 				theOverPath.move( to: NSMakePoint(theX, theY0));
 				theOverPath.line( to: NSMakePoint(theX, theY0+NSHeight(theBounds) ));
-				drawText(string: "\(i)", size: theFontSize, point: NSMakePoint( theX+0.5, theY0-theFontSize), color: NSColor(calibratedWhite: 0.5, alpha: 1.0), textAlignment: .center);
+				drawText(string: "\(i)", size: theFontSize, point: NSMakePoint( theX+0.5, theY0-theFontSize), color: majorAxisesTextColor, textAlignment: .center);
 			}
-			NSColor(calibratedWhite: 0.25, alpha: 1.0).setStroke();
-			theTicks.lineWidth = 1.0;
+			majorAxisesColor.setStroke();
+			theTicks.lineWidth = 2.0;
 			theTicks.lineCapStyle = NSBezierPath.LineCapStyle.round
 			theTicks.stroke();
 
-			NSColor(calibratedWhite: 0.0, alpha: 0.5).setStroke();
-			theOverPath.lineWidth = 0.25;
+			majorAxisesColor.setStroke();
+			theOverPath.lineWidth = 1.0;
 			theOverPath.lineCapStyle = NSBezierPath.LineCapStyle.round
 			theOverPath.stroke();
 
-			NSColor(calibratedWhite: 0.25, alpha: 1.0).setStroke();
+			minorAxisesColor.setStroke();
 			theMinorTicks.lineWidth = 0.5;
 			theMinorTicks.lineCapStyle = NSBezierPath.LineCapStyle.round
 			theMinorTicks.stroke();

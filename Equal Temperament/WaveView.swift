@@ -23,7 +23,7 @@ class WaveView: ResultView {
 		invalidateIntrinsicContentSize();
 		needsDisplay = true;
 	}
-	
+
 	var		xScale : Float = 200.0 {
 		didSet {
 			invalidateIntrinsicContentSize();
@@ -44,7 +44,7 @@ class WaveView: ResultView {
 		let		theY1 = theBounds.maxY+0.25;
 		let		theX0 = theBounds.minX-0.25;
 		let		theX1 = theBounds.maxX+0.25;
-		let		theOutOffFocusAlpha : CGFloat = 0.25;
+		let		theOutOffFocusAlpha : CGFloat = 0.3333;
 
 		func drawWave( _ aFreqs : [Double], lineWidth aLineWidth : CGFloat ) {
 			let		thePath = NSBezierPath();

@@ -33,7 +33,7 @@ extension UInt {
 		case 0:
 			theResult = [];
 		case 1:
-			theResult = [(factor:1,power:1)];
+			theResult = [];
 		default:
 			theResult = [];
 			for thePrime in PrimesSequence(end:self) {
@@ -42,13 +42,6 @@ extension UInt {
 					theResult.append((factor:thePrime,power:thePower));
 				}
 			}
-		}
-		return theResult;
-	}
-	var largestPrimeLessThanOrEqualTo : UInt {
-		var		theResult = self;
-		while theResult > 3 && largestPrimeFactor < theResult {
-			theResult = theResult - 1;
 		}
 		return theResult;
 	}
@@ -106,64 +99,44 @@ extension UInt {
 	}
 }
 
-func pow<T : BinaryInteger, U : UnsignedInteger>( _ a: T, _ b: U ) -> T {
-	if b == 0  {
-		return 1
-	} else {
-		return (b&0b1 == 1 ? a : 1) * pow(a,b>>1) * pow(a,b>>1);
+extension Rational {
+	var					toCents:		Double { return Double(self).toCents; }
+
+	public var factorsString : String {
+		return "\(UInt(numerator).factorsString)∶\(UInt(denominator).factorsString)";
 	}
+}
+
+func pow<T : BinaryInteger, U : UnsignedInteger>( _ a: T, _ b: U ) -> T {
+	return b == 0
+		? 1
+		: (b&0b1 == 1 ? a : 1) * pow(a,b>>1) * pow(a,b>>1);
 }
 
 func sqrt<T : BinaryInteger>( _ n : T ) -> T {
 	return T(sqrt(Double(n)));
 }
 
-func log2<T : BinaryInteger>( _ aValue : T ) -> T {
-	if aValue == 0 {
-		return UInt(0) as! T;
-	} else {
-		return 1 + log2(aValue / 2);
-	}
+func log2<T : UnsignedInteger>( _ n : T ) -> T {
+	return n < 2 ? T(0) : 1 + log2(n>>1);
 }
 
-func greatestCommonDivisor<T : BinaryInteger>(_ u: [T] ) -> T {
-	var		theResult : T = 1;
-	for theNumber in u {
-		theResult = greatestCommonDivisor(theResult, theNumber);
-	}
-	return theResult;
+func log10<T : UnsignedInteger>( _ n : T ) -> T {
+	return n < 10 ? T(0) : 1 + log10(n/10);
 }
 
-func greatestCommonDivisor<T : BinaryInteger>(_ u: T, _ v: T) -> T {
-	// simple cases (termination)
-	if u == v { return u; }
-	if u == 0 { return v; }
-	if v == 0 { return u; }
-
-	// look for factors of 2
-	if (~u & 0b1) != 0 {  // u is even
-		if (v & 0b1) != 0 {		// v is odd
-			return greatestCommonDivisor(u / 2, v);
-		}
-		else { // both u and v are even
-			return greatestCommonDivisor(u / 2, v / 2) * 2;
-		}
-	}
-
-	if (~v & 0b1) != 0 { return greatestCommonDivisor(u, v / 2); } // u is odd, v is even
-
-	// reduce larger argument
-	if u > v { return greatestCommonDivisor((u - v) / 2, v); }
-
-	return greatestCommonDivisor((v - u) / 2, u);
-}
-
-func bitCount<T : BinaryInteger>( _ x : T) -> Int {
-	var		theX = x;
-	var		theCount = 0;
-	while theX > 0 {
-		if theX & T(0x1) == 1 { theCount += 1; }
-		theX >>= 1;
-	}
-	return theCount;
+//func greatestCommonDivisor<T : UnsignedInteger>(_ u: [T] ) -> T? {
+//	var		theResult : T?;
+//	for theNumber in u {
+//		if let thePrevious = theResult {
+//			theResult = greatestCommonDivisor(thePrevious, theNumber);
+//		} else {
+//			theResult = theNumber;
+//		}
+//	}
+//	return theResult;
+//}
+//
+func bitCount<T : UnsignedInteger>( _ x : T) -> Int {
+	return x == 0 ? 0 : ((x&T(0x1)) == 1 ? 1 : 0) + bitCount(x>>1);
 }

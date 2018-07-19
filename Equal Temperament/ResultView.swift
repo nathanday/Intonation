@@ -25,7 +25,7 @@ import Cocoa
 					(x:0.0,hueComponent:0.0,saturationComponent:1.0,brightnessComponent:1.0),
 					(x:1.0,hueComponent:CGFloat(1.0/7.5),saturationComponent:0.8125,brightnessComponent:1.0),
 					(x:4.0,hueComponent:CGFloat(4.0/7.5),saturationComponent:1.0,brightnessComponent:1.0),
-					(x:5.0,hueComponent:CGFloat(5.0/7.5),saturationComponent:0.75,brightnessComponent:1.0),
+					(x:5.0,hueComponent:CGFloat(5.5/7.5),saturationComponent:0.75,brightnessComponent:1.0),
 					(x:7.25,hueComponent:1.0,saturationComponent:1.0,brightnessComponent:1.0)]);
 			default:
 				_colorInterpolator = ColorInterpolator(hsbaPoints: [
@@ -50,7 +50,7 @@ import Cocoa
 					if let theRationalValue = anInterval as? RationalInterval {
 						theDen = theRationalValue.denominator;
 					} else {
-						(_,theDen) = Rational.farey( Double(anInterval.toDouble), maxDenominator:32 );
+						theDen = Rational( anInterval.toDouble, maxDenominator:32 ).denominator;
 					}
 					theResult *= theDen/Int(greatestCommonDivisor( UInt(theResult), UInt(theDen) ));
 				}
@@ -78,12 +78,16 @@ import Cocoa
 		return NSColor.controlAccent;
     }
     
-    var majorAxisesColor : NSColor {
+	var majorAxisesColor : NSColor {
 		return NSColor.secondarySelectedControlColor;
-    }
-    
+	}
+
+	var majorAxisesTextColor : NSColor {
+		return NSColor.secondaryLabelColor;
+	}
+
     var minorAxisesColor : NSColor {
-		return NSColor.controlAccent.withAlphaComponent(0.25);
+		return NSColor.controlAccent.withAlphaComponent(0.33);
 //		return NSColor(named: NSColor.Name("minorAxisesColor"))!;
     }
     

@@ -176,7 +176,7 @@ class PitchConstellationView : ScaleView {
 		thePath.stroke();
 
 		let		theSize = (aHilighted ?  NSFont.systemFontSize(for: NSControl.ControlSize.regular) : NSFont.systemFontSize(for: NSControl.ControlSize.mini)) + 2.0;
-		let		theTextColor = aHilighted ? colorForIndex(anIndex) : NSColor.secondaryLabelColor;
+		let		theTextColor = aHilighted ? colorForIndex(anIndex) : majorAxisesTextColor;
 		let		theTextAlignment : NSTextAlignment = abs(sin(theAngle)) < 0.707 ? .center : sin(theAngle) < 0.0 ? .right :  .left;
 		drawText(string: aRatio.ratioString, size:theSize, point: NSMakePoint(NSMidX(theBounds)+sin(theAngle)*(theRadius+5.0), NSMidY(theBounds)+cos(theAngle)*(theRadius+11.0)-theSize*0.8), color:theTextColor, textAlignment: theTextAlignment );
 	}
