@@ -99,20 +99,20 @@ class HarmonicView: ResultView {
 
 		let		theFractionPoint = CGFloat(theOctave - octaveRange.first!) + CGFloat(theSubInterval)/CGFloat(theSubIntervalCount);
 
-		return theFractionPoint * NSHeight(aBounds)/CGFloat(lengthForRange(octaveRange)) + NSMinY(aBounds);
+		return theFractionPoint * NSHeight(aBounds)/CGFloat(lengthForRange(octaveRange)) + aBounds.minY;
 	}
 	override func draw(_ dirtyRect: NSRect) {
 		let		theSelectedRationsCount = dataSource?.numberOfSelectedIntervals ?? 0;
 		let		theHarmonicSpacing : CGFloat = max(20.0,CGFloat(10-theSelectedRationsCount)*5.0);
 		var		theBounds = NSInsetRect(bounds, 20.0, 20.0);
-		let		theXOrigin = max(NSMidX(theBounds)-CGFloat(max(0,theSelectedRationsCount))*theHarmonicSpacing*0.55-8.0,NSMinX(bounds)+20.0);
+		let		theXOrigin = max(theBounds.midX-CGFloat(max(0,theSelectedRationsCount))*theHarmonicSpacing*0.55-8.0,bounds.minX+20.0);
 		theBounds.origin.y += 10.0;
         super.draw(dirtyRect)
 
 		func drawOctave( _ anOctave: UInt ) {
 			let		theSize = NSFont.systemFontSize(for: NSControl.ControlSize.regular)*1.25;
 			let		theOctaveHeight = NSHeight(theBounds)/CGFloat(lengthForRange(octaveRange));
-			let		theY = floor((CGFloat(anOctave-octaveRange.first!)+0.5) * theOctaveHeight+NSMinY(theBounds));
+			let		theY = floor((CGFloat(anOctave-octaveRange.first!)+0.5) * theOctaveHeight+theBounds.minY);
 			drawText(string: "\(anOctave+1)", size:theSize, point: NSMakePoint(theXOrigin-2.5, theY-theSize*0.55), color: majorAxisesTextColor);
 			let		thePath = NSBezierPath();
 			thePath.lineWidth = 0.5;

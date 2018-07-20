@@ -39,26 +39,48 @@ class WaveView: ResultView {
 		var		theBounds = bounds;
 		let		theHeight =  NSHeight(theBounds);
 		let		theWidth =  NSWidth(theBounds);
-		let		theZeroAxis = floor(NSMinY(theBounds)+theHeight*0.55)+0.25;
+		let		theZeroAxis = floor(theBounds.minY+theHeight*0.55)+0.25;
 		let		theY0 = theBounds.minY-0.25;
 		let		theY1 = theBounds.maxY+0.25;
 		let		theX0 = theBounds.minX-0.25;
 		let		theX1 = theBounds.maxX+0.25;
 		let		theOutOffFocusAlpha : CGFloat = 0.3333;
 
+		func trigTerm(for t: CGFloat, freq f: Double) -> Double {
+			let		thePhase = Double(t)/Double(theWidth);
+			return f*thePhase*2*Double.pi*Double(commonFactor);
+		}
+
 		func drawWave( _ aFreqs : [Double], lineWidth aLineWidth : CGFloat ) {
 			let		thePath = NSBezierPath();
 			let		theScalingFactor = pow(1.0/(Double(aFreqs.count)+1.0),0.8);
 			thePath.lineWidth = aLineWidth;
 			thePath.move(to: NSMakePoint(theX0, theZeroAxis));
-			for theX in Int(NSMinX(aDirtyRect))...Int(NSMaxX(aDirtyRect)) {
-				let		thePhase = Double(theX)/Double(theWidth);
+			for theX in Int(aDirtyRect.minX)...Int(aDirtyRect.maxX) {
 				var		theValue = 0.0;
 				for theFreq in aFreqs {
-					theValue += sin(theFreq*thePhase*2*Double.pi*Double(commonFactor));
+					theValue += sin(trigTerm(for: CGFloat(theX), freq: theFreq));
 				}
 				thePath.line(to: NSMakePoint(theX0+CGFloat(theX), theZeroAxis+CGFloat(theValue*theScalingFactor)*theHeight*0.6));
 			}
+			thePath.stroke();
+		}
+
+		func drawSingleWave( _ aFreq : Double, lineWidth aLineWidth : CGFloat ) {
+			func point( x:CGFloat, trigTerm term:Double ) -> NSPoint {
+				let		theValue = sin(term);
+				return NSMakePoint(theX0+x, theZeroAxis+CGFloat(theValue)*theHeight*0.4);
+			}
+			let		thePath = NSBezierPath();
+			thePath.lineWidth = aLineWidth;
+			thePath.move(to: NSMakePoint(theX0, theZeroAxis));
+			var	theX = aDirtyRect.minX;
+			while theX <= aDirtyRect.maxX {
+				let		theTrigTerm = trigTerm(for:theX, freq:aFreq);
+				thePath.line(to: point(x:theX, trigTerm:theTrigTerm));
+				theX += CGFloat(abs(aFreq*cos(theTrigTerm))+1.0);
+			}
+			thePath.line(to: point(x:aDirtyRect.maxX, trigTerm:trigTerm(for:aDirtyRect.maxX, freq:aFreq)));
 			thePath.stroke();
 		}
 
@@ -94,10 +116,8 @@ class WaveView: ResultView {
 				dataSource?.enumerateSelectedIntervals {
 					(anIndex:Int,aSelectedIndex:Int,anInterval:Interval) in
 					NSColor(calibratedHue: (CGFloat(anIndex+4).truncatingRemainder(dividingBy: 1.0)/5.1-2.0/15.0).truncatingRemainder(dividingBy: 1.0), saturation: 0.5, brightness: 0.75, alpha: theOutOffFocusAlpha).setStroke();
-                    drawWave( [anInterval.toDouble], lineWidth:1.0 );
-//					if aSelected {
-						theSelectedDoubles.append(anInterval.toDouble);
-//					}
+                    drawSingleWave( anInterval.toDouble, lineWidth:1.0 );
+					theSelectedDoubles.append(anInterval.toDouble);
 				}
                 NSColor.secondaryLabelColor.setStroke();
                 drawWave( theSelectedDoubles, lineWidth:2.0 );
@@ -111,7 +131,7 @@ class WaveView: ResultView {
 				dataSource?.enumerateSelectedIntervals {
 					(anIndex:Int,aSelectedIndex:Int,anInterval:Interval) in
                     colorForIndex(anIndex).setStroke();
-                    drawWave( [anInterval.toDouble], lineWidth:2.0 );
+                    drawSingleWave( anInterval.toDouble, lineWidth:2.0 );
                 }
             }
         }

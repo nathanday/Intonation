@@ -79,16 +79,16 @@ class SpectrumView: ResultView {
 		func drawSpectrum( baseFreq aBaseFreq: Double, harmonic aHarmonic: Int ) {
 			let		theHarmonicSpacing = harmonicSpacing;
 			let		thePath = NSBezierPath();
-			let		theY0 = NSMinY(theBounds);
+			let		theY0 = theBounds.minY;
             let		theHarmStep = spectrumType == .square ? 2 : 1;
-			var		theMinHarm = harmonicForX( NSMinX(aDirtyRect)-theBaseWidthHalf, aBaseFreq: aBaseFreq, aHarmonicSpacing: theHarmonicSpacing, aBoundMinX: NSMinX(theBounds));
-			let		theMaxHarm = spectrumType == .sine ? 1 : harmonicForX( NSMaxX(theBounds)+theBaseWidthHalf, aBaseFreq: aBaseFreq, aHarmonicSpacing: theHarmonicSpacing, aBoundMinX: NSMinX(theBounds));
+			var		theMinHarm = harmonicForX( aDirtyRect.minX-theBaseWidthHalf, aBaseFreq: aBaseFreq, aHarmonicSpacing: theHarmonicSpacing, aBoundMinX: theBounds.minX);
+			let		theMaxHarm = spectrumType == .sine ? 1 : harmonicForX( theBounds.maxX+theBaseWidthHalf, aBaseFreq: aBaseFreq, aHarmonicSpacing: theHarmonicSpacing, aBoundMinX: theBounds.minX);
 			thePath.lineWidth = 1.0;
             if (theMinHarm-1)%theHarmStep != 0 {        // need to make sure we start on harmonic we are suppose to draw
                 theMinHarm -= 1;
             }
 			for i in stride(from: max(theMinHarm,1), through:theMaxHarm, by:theHarmStep) {
-				let		theX = NSMinX(theBounds)+theBaseWidthHalf+theHarmonicSpacing*CGFloat(aBaseFreq)*CGFloat(i)-theHarmonicSpacing;
+				let		theX = theBounds.minX+theBaseWidthHalf+theHarmonicSpacing*CGFloat(aBaseFreq)*CGFloat(i)-theHarmonicSpacing;
                 let		theHeight = NSHeight(theBounds)/CGFloat(sqrt(Double(i)));
 
 				thePath.move( to: NSMakePoint(theX-theBaseWidthHalf, theY0) );
@@ -110,8 +110,8 @@ class SpectrumView: ResultView {
 			theColor.setFill();
 			thePath.fill();
 			thePath.stroke();
-			thePath.move(to: NSMakePoint( NSMinX(aDirtyRect), theY0));
-			thePath.line(to: NSMakePoint( NSMaxX(aDirtyRect), theY0));
+			thePath.move(to: NSMakePoint( aDirtyRect.minX, theY0));
+			thePath.line(to: NSMakePoint( aDirtyRect.maxX, theY0));
 			NSColor(calibratedWhite: 0.25, alpha: 1.0).setStroke();
 			thePath.lineWidth = 1.0;
 			thePath.stroke();
@@ -122,13 +122,13 @@ class SpectrumView: ResultView {
 			let		theTicks = NSBezierPath();
 			let		theMinorTicks = NSBezierPath();
 			let		theOverPath = NSBezierPath();
-			let		theY0 = NSMinY(theBounds)-10.0;
-			let		theMinHarm = harmonicForX( NSMinX(aDirtyRect)-theBaseWidthHalf, aBaseFreq: 1.0, aHarmonicSpacing: theHarmonicSpacing, aBoundMinX: NSMinX(theBounds));
-			let		theMaxHarm = spectrumType == .sine ? 1 : harmonicForX( NSMaxX(theBounds)+theBaseWidthHalf, aBaseFreq: 1.0, aHarmonicSpacing: theHarmonicSpacing, aBoundMinX: NSMinX(theBounds));
+			let		theY0 = theBounds.minY-10.0;
+			let		theMinHarm = harmonicForX( aDirtyRect.minX-theBaseWidthHalf, aBaseFreq: 1.0, aHarmonicSpacing: theHarmonicSpacing, aBoundMinX: theBounds.minX);
+			let		theMaxHarm = spectrumType == .sine ? 1 : harmonicForX( theBounds.maxX+theBaseWidthHalf, aBaseFreq: 1.0, aHarmonicSpacing: theHarmonicSpacing, aBoundMinX: theBounds.minX);
 //			let		theHarmStep = spectrumType == .square ? 2 : 1;
 			let		theFontSize = NSFont.systemFontSize(for: NSControl.ControlSize.small)*1.25;
 			for i in max(theMinHarm, 1)...theMaxHarm {
-				let		theX = NSMinX(theBounds)+theBaseWidthHalf+theHarmonicSpacing*CGFloat(i)-theHarmonicSpacing;
+				let		theX = theBounds.minX+theBaseWidthHalf+theHarmonicSpacing*CGFloat(i)-theHarmonicSpacing;
 				theTicks.move( to: NSMakePoint(theX, theY0+10.0) );
 				theTicks.line( to: NSMakePoint(theX, theY0+5.0) );
 				theMinorTicks.move( to: NSMakePoint(theX+theHarmonicSpacing*0.25, theY0+10.0) );

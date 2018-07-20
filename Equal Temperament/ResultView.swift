@@ -153,15 +153,15 @@ import Cocoa
 			thePath.lineWidth = 1.0;
 			switch orientation {
 			case .vertical:
-				thePath.move(to: NSMakePoint(NSMinX(theFrame), NSMinY(theFrame)-1.0));
-				thePath.line(to: NSMakePoint(NSMaxX(theFrame), NSMinY(theFrame)-1.0));
-				thePath.move(to: NSMakePoint(NSMinX(theFrame), NSMaxY(theFrame)+1.0));
-				thePath.line(to: NSMakePoint(NSMaxX(theFrame), NSMaxY(theFrame)+1.0));
+				thePath.move(to: NSMakePoint(theFrame.minX, theFrame.minY-1.0));
+				thePath.line(to: NSMakePoint(theFrame.maxX, theFrame.minY-1.0));
+				thePath.move(to: NSMakePoint(theFrame.minX, theFrame.maxY+1.0));
+				thePath.line(to: NSMakePoint(theFrame.maxX, theFrame.maxY+1.0));
 			case .horizontal:
-				thePath.move(to: NSMakePoint(NSMinX(theFrame)-1.0,NSMinY(theFrame)));
-				thePath.line(to: NSMakePoint(NSMinX(theFrame)-1.0,NSMaxY(theFrame)));
-				thePath.move(to: NSMakePoint(NSMaxX(theFrame)+1.0,NSMinY(theFrame)));
-				thePath.line(to: NSMakePoint(NSMaxX(theFrame)+1.0,NSMaxY(theFrame)));
+				thePath.move(to: NSMakePoint(theFrame.minX-1.0,theFrame.minY));
+				thePath.line(to: NSMakePoint(theFrame.minX-1.0,theFrame.maxY));
+				thePath.move(to: NSMakePoint(theFrame.maxX+1.0,theFrame.minY));
+				thePath.line(to: NSMakePoint(theFrame.maxX+1.0,theFrame.maxY));
 			}
 			NSColor.gridColor.setStroke();
 			thePath.stroke();
