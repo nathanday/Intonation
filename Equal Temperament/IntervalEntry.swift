@@ -217,7 +217,7 @@ class IntervalEntry : NSObject, NSPasteboardReading, NSPasteboardWriting {
 	}
 
 	override var description: String { return "ratio:\(interval), closestIntervalNumber:\(closestIntervalNumber)"; }
-	public override var hashValue: Int { return interval.hashValue; }
+	public override var hash: Int { return interval.hashValue; }
 	override public func isEqual(_ anObject: Any?) -> Bool {
 		let	theObject = anObject as! IntervalEntry;
 		return interval == theObject.interval;

@@ -14,6 +14,7 @@
 		D80D8C1A1B80A167001E7746 /* Envelope.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80D8C191B80A167001E7746 /* Envelope.swift */; };
 		D81D19B420C8C56E002B77F6 /* MidiNoteFormatter_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81D19B320C8C56E002B77F6 /* MidiNoteFormatter_Test.swift */; };
 		D81D19B520C8C705002B77F6 /* MidiNoteFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D866A28720C8BDE30010C481 /* MidiNoteFormatter.swift */; };
+		D81EB27721204A21001B53C6 /* PianoKeyboardControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81EB27621204A20001B53C6 /* PianoKeyboardControl.swift */; };
 		D8257B241CE72F2B008198E7 /* PrimesSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = D885A12F1CE60B7300A3B996 /* PrimesSequence.swift */; };
 		D8299E231FDE946400CB9DF7 /* ExportWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8299E211FDE946400CB9DF7 /* ExportWindowController.xib */; };
 		D8299E241FDE946400CB9DF7 /* ExportWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8299E221FDE946400CB9DF7 /* ExportWindowController.swift */; };
@@ -106,6 +107,8 @@
 		D8E5E6241AD12F7A004DB02D /* HarmonicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E5E6231AD12F7A004DB02D /* HarmonicView.swift */; };
 		D8E5E6271AD130DE004DB02D /* ScaleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E5E6251AD130DE004DB02D /* ScaleView.swift */; };
 		D8E7C7D71B1CAB99000D745B /* TonePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D912D11B197D5300BB479A /* TonePlayer.swift */; };
+		D8EC9D9A2132ACD100574E5E /* PianoKeyboardPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EC9D992132ACD100574E5E /* PianoKeyboardPopoverViewController.swift */; };
+		D8EC9D9C2132B0A900574E5E /* PianoKeyboardPopoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8EC9D9B2132B0A900574E5E /* PianoKeyboardPopoverViewController.xib */; };
 		D8ED76D11C58E59E00BB2B8C /* FindIntervalsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8ED76CF1C58E59E00BB2B8C /* FindIntervalsWindowController.swift */; };
 		D8F2B1D61C93EFD800F88BF7 /* LimitsIntervalsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F2B1D51C93EFD800F88BF7 /* LimitsIntervalsData.swift */; };
 		D8F2B6BB20E3A07D00DEB1C9 /* PrimeFactors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F2B6BA20E3A07D00DEB1C9 /* PrimeFactors.swift */; };
@@ -130,6 +133,7 @@
 		D80A61D51C9040C000A2F885 /* SelectDocumentType.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectDocumentType.xib; sourceTree = "<group>"; };
 		D80D8C191B80A167001E7746 /* Envelope.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Envelope.swift; sourceTree = "<group>"; };
 		D81D19B320C8C56E002B77F6 /* MidiNoteFormatter_Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MidiNoteFormatter_Test.swift; sourceTree = "<group>"; };
+		D81EB27621204A20001B53C6 /* PianoKeyboardControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PianoKeyboardControl.swift; sourceTree = "<group>"; };
 		D8299E211FDE946400CB9DF7 /* ExportWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExportWindowController.xib; sourceTree = "<group>"; };
 		D8299E221FDE946400CB9DF7 /* ExportWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExportWindowController.swift; sourceTree = "<group>"; };
 		D82FD0E31E9506DE009A6EF8 /* EqualTemperamentInterval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EqualTemperamentInterval.swift; sourceTree = "<group>"; };
@@ -220,6 +224,8 @@
 		D8E10CB61CA689310030D8E6 /* EqualTemperamentIntervalsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EqualTemperamentIntervalsData.swift; sourceTree = "<group>"; };
 		D8E5E6231AD12F7A004DB02D /* HarmonicView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HarmonicView.swift; sourceTree = "<group>"; };
 		D8E5E6251AD130DE004DB02D /* ScaleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScaleView.swift; sourceTree = "<group>"; };
+		D8EC9D992132ACD100574E5E /* PianoKeyboardPopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoKeyboardPopoverViewController.swift; sourceTree = "<group>"; };
+		D8EC9D9B2132B0A900574E5E /* PianoKeyboardPopoverViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PianoKeyboardPopoverViewController.xib; sourceTree = "<group>"; };
 		D8ED76CF1C58E59E00BB2B8C /* FindIntervalsWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindIntervalsWindowController.swift; sourceTree = "<group>"; };
 		D8EDC4AD1DB11E3D009BF520 /* Intonation.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Intonation.entitlements; sourceTree = "<group>"; };
 		D8F2B1D51C93EFD800F88BF7 /* LimitsIntervalsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LimitsIntervalsData.swift; sourceTree = "<group>"; };
@@ -272,8 +278,82 @@
 				D8AA4E301C131EAA00B66521 /* ViewControllerPlaceHolderView.swift */,
 				D89E97A420C78A1B00E6B32D /* ColorInterpolator.swift */,
 				D866A28720C8BDE30010C481 /* MidiNoteFormatter.swift */,
+				D81EB27621204A20001B53C6 /* PianoKeyboardControl.swift */,
 			);
 			path = Library;
+			sourceTree = "<group>";
+		};
+		D875BD5821369D58005E0046 /* Generators */ = {
+			isa = PBXGroup;
+			children = (
+				D875BD5921369D68005E0046 /* LimitsGenerator */,
+				D875BD5C21369E00005E0046 /* SeriesGenerator */,
+				D875BD5B21369DF1005E0046 /* EqualTemperament */,
+				D875BD5A21369DCF005E0046 /* StackedIntervalsGenerator */,
+				D875BD5D21369E18005E0046 /* AdHokGenerator */,
+				D875BD5E21369E2B005E0046 /* PresetGenerator */,
+			);
+			path = Generators;
+			sourceTree = "<group>";
+		};
+		D875BD5921369D68005E0046 /* LimitsGenerator */ = {
+			isa = PBXGroup;
+			children = (
+				D8571C7E1CA56D2B008A5A46 /* LimitsGeneratorViewController.swift */,
+				D8571C7F1CA56D2B008A5A46 /* LimitsGeneratorViewController.xib */,
+				D8F2B1D51C93EFD800F88BF7 /* LimitsIntervalsData.swift */,
+			);
+			path = LimitsGenerator;
+			sourceTree = "<group>";
+		};
+		D875BD5A21369DCF005E0046 /* StackedIntervalsGenerator */ = {
+			isa = PBXGroup;
+			children = (
+				D893993F1CA3F31C00C9CAA6 /* StackedIntervalsGeneratorViewController.swift */,
+				D89399401CA3F31C00C9CAA6 /* StackedIntervalsGeneratorViewController.xib */,
+				D8720B631C9E7D6B00ED9FBB /* StackedIntervalsIntervalsData.swift */,
+			);
+			path = StackedIntervalsGenerator;
+			sourceTree = "<group>";
+		};
+		D875BD5B21369DF1005E0046 /* EqualTemperament */ = {
+			isa = PBXGroup;
+			children = (
+				D8E10CB21CA66D130030D8E6 /* EqualTemperamentGeneratorViewController.swift */,
+				D8E10CB31CA66D130030D8E6 /* EqualTemperamentGeneratorViewController.xib */,
+				D8E10CB61CA689310030D8E6 /* EqualTemperamentIntervalsData.swift */,
+			);
+			path = EqualTemperament;
+			sourceTree = "<group>";
+		};
+		D875BD5C21369E00005E0046 /* SeriesGenerator */ = {
+			isa = PBXGroup;
+			children = (
+				D8896A582019E24600664260 /* SeriesGeneratorViewController.swift */,
+				D8896A592019E24700664260 /* SeriesGeneratorViewController.xib */,
+				D8896A5C2019E2D100664260 /* SeriesIntervalsData.swift */,
+			);
+			path = SeriesGenerator;
+			sourceTree = "<group>";
+		};
+		D875BD5D21369E18005E0046 /* AdHokGenerator */ = {
+			isa = PBXGroup;
+			children = (
+				D89399431CA3F37000C9CAA6 /* AdHokGeneratorViewController.swift */,
+				D89399441CA3F37000C9CAA6 /* AdHokGeneratorViewController.xib */,
+				D84CE1E11C95960E00E19505 /* AdHocIntervalsData.swift */,
+			);
+			path = AdHokGenerator;
+			sourceTree = "<group>";
+		};
+		D875BD5E21369E2B005E0046 /* PresetGenerator */ = {
+			isa = PBXGroup;
+			children = (
+				D8AFAD2E1CA58F370008ABFE /* PresetGeneratorViewController.swift */,
+				D8AFAD2F1CA58F370008ABFE /* PresetGeneratorViewController.xib */,
+				D89768EF1CABF7BC007D30BA /* PresetIntervalsData.swift */,
+			);
+			path = PresetGenerator;
 			sourceTree = "<group>";
 		};
 		D87C27881AF3A93D00C2BF7B /* Resources */ = {
@@ -283,26 +363,6 @@
 				D8B5E23E1B0386F200F20584 /* InitialUserDefaults.plist */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		D893993C1CA3E54E00C9CAA6 /* GeneratorViewController */ = {
-			isa = PBXGroup;
-			children = (
-				D893993D1CA3E57F00C9CAA6 /* GeneratorViewController.swift */,
-				D8571C7E1CA56D2B008A5A46 /* LimitsGeneratorViewController.swift */,
-				D8571C7F1CA56D2B008A5A46 /* LimitsGeneratorViewController.xib */,
-				D893993F1CA3F31C00C9CAA6 /* StackedIntervalsGeneratorViewController.swift */,
-				D89399401CA3F31C00C9CAA6 /* StackedIntervalsGeneratorViewController.xib */,
-				D8E10CB21CA66D130030D8E6 /* EqualTemperamentGeneratorViewController.swift */,
-				D8E10CB31CA66D130030D8E6 /* EqualTemperamentGeneratorViewController.xib */,
-				D8896A582019E24600664260 /* SeriesGeneratorViewController.swift */,
-				D8896A592019E24700664260 /* SeriesGeneratorViewController.xib */,
-				D89399431CA3F37000C9CAA6 /* AdHokGeneratorViewController.swift */,
-				D89399441CA3F37000C9CAA6 /* AdHokGeneratorViewController.xib */,
-				D8AFAD2E1CA58F370008ABFE /* PresetGeneratorViewController.swift */,
-				D8AFAD2F1CA58F370008ABFE /* PresetGeneratorViewController.xib */,
-			);
-			path = GeneratorViewController;
 			sourceTree = "<group>";
 		};
 		D8944B341E7FD1E7001A71FE /* Interval */ = {
@@ -341,6 +401,7 @@
 				D8B902091AD48EBF0015B5E2 /* Controllers */,
 				D8B9020A1AD48ED70015B5E2 /* Views */,
 				D8B9020B1AD48EFD0015B5E2 /* Model */,
+				D875BD5821369D58005E0046 /* Generators */,
 				D80989601C85C33B00122857 /* Additions */,
 				D87201021B8C7CA0006FDEDC /* Library */,
 				D87C27881AF3A93D00C2BF7B /* Resources */,
@@ -422,7 +483,9 @@
 				D89543831996347F00A091A4 /* IntervalEntry.swift */,
 				D8681A511F97612D001CA24E /* AboutPanelWindowController.swift */,
 				D8681A521F97612D001CA24E /* AboutPanelWindowController.xib */,
-				D893993C1CA3E54E00C9CAA6 /* GeneratorViewController */,
+				D8EC9D992132ACD100574E5E /* PianoKeyboardPopoverViewController.swift */,
+				D8EC9D9B2132B0A900574E5E /* PianoKeyboardPopoverViewController.xib */,
+				D893993D1CA3E57F00C9CAA6 /* GeneratorViewController.swift */,
 				D8AA4E381C132A6200B66521 /* ScaleDisplayViewController */,
 			);
 			name = Controllers;
@@ -448,12 +511,6 @@
 			children = (
 				D83C4A2B1C8863A00090F939 /* IntervalsData.swift */,
 				D84CE1E31C95967700E19505 /* IntervalsDataGenerator.swift */,
-				D8F2B1D51C93EFD800F88BF7 /* LimitsIntervalsData.swift */,
-				D8720B631C9E7D6B00ED9FBB /* StackedIntervalsIntervalsData.swift */,
-				D8E10CB61CA689310030D8E6 /* EqualTemperamentIntervalsData.swift */,
-				D8896A5C2019E2D100664260 /* SeriesIntervalsData.swift */,
-				D89768EF1CABF7BC007D30BA /* PresetIntervalsData.swift */,
-				D84CE1E11C95960E00E19505 /* AdHocIntervalsData.swift */,
 				D885A12F1CE60B7300A3B996 /* PrimesSequence.swift */,
 				D849E7301ACADFD1006E0964 /* PrimeProducts.swift */,
 				D8F2B6BA20E3A07D00DEB1C9 /* PrimeFactors.swift */,
@@ -570,6 +627,7 @@
 				D895436A1996345200A091A4 /* Images.xcassets in Resources */,
 				D895436D1996345200A091A4 /* MainMenu.xib in Resources */,
 				D8646B2E1C3D4C5A00D8C429 /* ChordPreviewViewController.xib in Resources */,
+				D8EC9D9C2132B0A900574E5E /* PianoKeyboardPopoverViewController.xib in Resources */,
 				D893174820C60C84006DECB7 /* colors.xcassets in Resources */,
 				D8299E231FDE946400CB9DF7 /* ExportWindowController.xib in Resources */,
 				D89399461CA3F37000C9CAA6 /* AdHokGeneratorViewController.xib in Resources */,
@@ -613,6 +671,7 @@
 				D8646B2D1C3D4C5A00D8C429 /* ChordPreviewViewController.swift in Sources */,
 				D84CE1E21C95960E00E19505 /* AdHocIntervalsData.swift in Sources */,
 				D8832F8619A0C86B0095B26F /* WaveView.swift in Sources */,
+				D8EC9D9A2132ACD100574E5E /* PianoKeyboardPopoverViewController.swift in Sources */,
 				D83092C11AEBBC6F00B0E6A7 /* DisclosureView.swift in Sources */,
 				D84CE1E41C95967700E19505 /* IntervalsDataGenerator.swift in Sources */,
 				D8257B241CE72F2B008198E7 /* PrimesSequence.swift in Sources */,
@@ -650,6 +709,7 @@
 				D809C4D91CE8C7C9009F98D5 /* ExportGenerator.swift in Sources */,
 				D8571C801CA56D2B008A5A46 /* LimitsGeneratorViewController.swift in Sources */,
 				D88A62101ACF7F19004CD4C9 /* IntegerType+Additions.swift in Sources */,
+				D81EB27721204A21001B53C6 /* PianoKeyboardControl.swift in Sources */,
 				D89399411CA3F31C00C9CAA6 /* StackedIntervalsGeneratorViewController.swift in Sources */,
 				D8944B3A1E7FD208001A71FE /* IrrationalInterval.swift in Sources */,
 				D8C9B68620D6741F00B6100F /* ResultViewController.swift in Sources */,

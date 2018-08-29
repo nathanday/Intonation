@@ -83,6 +83,9 @@ extension UInt {
 	}
 	var factorsString : String {
 		get {
+			if self == 1 {
+				return "1";
+			}
 			var		theResult = "";
 			for theFact in everyPrimeFactor {
 				if theResult.startIndex != theResult.endIndex {

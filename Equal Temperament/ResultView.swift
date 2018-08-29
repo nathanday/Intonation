@@ -75,7 +75,7 @@ import Cocoa
 	}
 
     var axisesColor : NSColor {
-		return NSColor.controlAccent;
+		return NSColor.controlAccentColor;
     }
     
 	var majorAxisesColor : NSColor {
@@ -87,7 +87,7 @@ import Cocoa
 	}
 
     var minorAxisesColor : NSColor {
-		return NSColor.controlAccent.withAlphaComponent(0.33);
+		return NSColor.controlAccentColor.withAlphaComponent(0.33);
 //		return NSColor(named: NSColor.Name("minorAxisesColor"))!;
     }
     

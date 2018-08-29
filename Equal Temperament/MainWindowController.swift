@@ -14,7 +14,7 @@ func frequencyForMIDINote( _ aMIDINote : Int ) -> Double {
 	return pow(2.0,(Double(aMIDINote)/12.0))*theBase;
 }
 
-class MainWindowController : NSWindowController {
+class MainWindowController : NSWindowController, NSMenuItemValidation {
 
 	static let		midiSelectBounds : CountableClosedRange<Int> = 12...108;
 
@@ -264,6 +264,16 @@ class MainWindowController : NSWindowController {
 		}
 	}
 
+	@IBAction func selectMultiplyBaseFrequencyAction( _ aSender : NSPopUpButton? ) {
+		if let theDocument = document as? Document,
+			let theSelectedTag = aSender?.selectedItem?.tag {
+			let	theMultipliers = [ 1.0/2.0, 2.0,
+									  3.0/4.0, 4.0/3.0,
+									  2.0/3.0, 3.0/2.0];
+			theDocument.baseFrequency *= theMultipliers[theSelectedTag%theMultipliers.count];
+		}
+	}
+
 	@IBAction func paste( _ aSender: Any ) {
 		if let theViewController = documentTypeViewController as? AdHokGeneratorViewController,
 			let theEntries = NSPasteboard.general.readObjects(forClasses: [IntervalEntry.self], options: nil) as? [IntervalEntry] {
@@ -305,7 +315,7 @@ class MainWindowController : NSWindowController {
 		}
 	}
 
-	override func validateMenuItem(_ aMenuItem: NSMenuItem) -> Bool {
+	dynamic func validateMenuItem(_ aMenuItem: NSMenuItem) -> Bool {
 		if aMenuItem.action == #selector(selectTabAction(_:)) {
 			if let theTabView = viewsTabView,
 				let theSelectedTabItem = theTabView.selectedTabViewItem{
@@ -387,6 +397,10 @@ extension MainWindowController : NSWindowDelegate {
 }
 
 extension MainWindowController : NSTableViewDelegate {
+
+	@objc func tableView(_ aTableView: NSTableView, toolTipFor aCell: NSCell, rect aRect: NSRectPointer, tableColumn: NSTableColumn?, row aRow: Int, mouseLocation aMousePoint: NSPoint) -> String {
+		return (arrayController!.arrangedObjects as! [IntervalEntry])[aRow].everyIntervalName.joined(separator: ",\n");
+	}
 
 	@objc func tableViewSelectionDidChange(_ notification: Notification) {
 		if let theSelectedEntries = arrayController!.selectedObjects as? [IntervalEntry],

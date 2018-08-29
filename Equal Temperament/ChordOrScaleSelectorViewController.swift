@@ -71,9 +71,8 @@ extension ChordOrScaleSelectorViewController : NSBrowserDelegate {
 	}
 
 	func browser( _ aBrowser: NSBrowser, selectionIndexesForProposedSelection anIndexes: IndexSet, inColumn aColumn: Int) -> IndexSet {
-		let		theRow = anIndexes.first;
-		if theRow != NSNotFound {
-			if let theItem = aBrowser.item( atRow: theRow!, inColumn: aColumn) as? ChordSelectorLeaf {
+		if let theRow = anIndexes.first{
+			if let theItem = aBrowser.item( atRow: theRow, inColumn: aColumn) as? ChordSelectorLeaf {
 				selectedIntervalSet = theItem.everyInterval;
 			} else {
 				selectedIntervalSet = nil;

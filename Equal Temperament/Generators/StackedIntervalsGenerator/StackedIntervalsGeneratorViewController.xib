@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14269.12" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14269.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.13.2"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -89,11 +88,11 @@
                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="58" id="kfp-WV-mAW"/>
                                 <constraint firstAttribute="height" constant="58" placeholder="YES" id="psx-mU-ha6"/>
                             </constraints>
-                            <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="6k3-I5-zJN">
+                            <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="6k3-I5-zJN">
                                 <rect key="frame" x="1" y="118" width="331" height="16"/>
                                 <autoresizingMask key="autoresizingMask"/>
                             </scroller>
-                            <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="269-az-goX">
+                            <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="269-az-goX">
                                 <rect key="frame" x="224" y="17" width="15" height="102"/>
                                 <autoresizingMask key="autoresizingMask"/>
                             </scroller>
@@ -216,7 +215,7 @@ DQ
                     </textFieldCell>
                 </textField>
                 <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3aP-y7-c43">
-                    <rect key="frame" x="324" y="72" width="19" height="27"/>
+                    <rect key="frame" x="324" y="73" width="19" height="27"/>
                     <stepperCell key="cell" continuous="YES" alignment="left" minValue="1" maxValue="100" doubleValue="1" id="0h8-tB-37O"/>
                     <connections>
                         <binding destination="-2" name="value" keyPath="self.stackedIntervalSetSteps" id="gka-pl-5ED"/>
@@ -241,7 +240,7 @@ DQ
                     </connections>
                 </textField>
                 <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MSR-tL-BrG">
-                    <rect key="frame" x="467" y="72" width="19" height="27"/>
+                    <rect key="frame" x="467" y="73" width="19" height="27"/>
                     <stepperCell key="cell" continuous="YES" alignment="left" minValue="1" maxValue="100" doubleValue="1" id="GzO-Yh-P6o"/>
                     <connections>
                         <binding destination="-2" name="value" keyPath="self.stackedIntervalSetOctaves" id="MER-Nu-3wx"/>

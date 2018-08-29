@@ -13,7 +13,7 @@ enum IntervalsFindMethod {
 	case findMethodExact;
 }
 
-class FindIntervalsViewController: NSViewController {
+class FindIntervalsViewController: NSViewController, NSMenuItemValidation {
 	@IBOutlet weak var	searchField : NSSearchField? = nil;
 	@objc dynamic var			hidden : Bool = true;
 	@objc dynamic var			ratiosString : String = "";
@@ -161,7 +161,7 @@ class FindIntervalsViewController: NSViewController {
 		}
 	}
 
-	dynamic override func validateMenuItem( _ aMenuItem: NSMenuItem) -> Bool {
+	dynamic func validateMenuItem( _ aMenuItem: NSMenuItem) -> Bool {
 		switch aMenuItem.action {
 		case (#selector(FindIntervalsViewController.findMethodClosestAction(_:)))?:
 			aMenuItem.state = findMethod == .findMethodClosest ? .on : .off;

@@ -106,7 +106,7 @@ class SpectrumView: ResultView {
 					controlPoint2: NSMakePoint(theX+(theBaseWidthHalf-theTopWidthHalf), theY0));
 			}
 			let		theColor = colorForIndex(aHarmonic)
-			NSColor.controlAccent.setStroke();
+			NSColor.controlAccentColor.setStroke();
 			theColor.setFill();
 			thePath.fill();
 			thePath.stroke();
