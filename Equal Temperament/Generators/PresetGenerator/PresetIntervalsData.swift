@@ -57,7 +57,7 @@ class PresetGenerator: IntervalsDataGenerator {
 				}
 			}
 		}
-		super.init();
 		_everyIntervalEntry = theResult.sorted { return $0.toCents < $1.toCents; };
+		super.init(intervalsData:anIntervalsData);
 	}
 }

@@ -64,11 +64,11 @@ class StackedIntervalsDataGenerator: IntervalsDataGenerator {
 		return _everyIntervalEntry!;
 	}
 	init( intervalsData anIntervalsData : StackedIntervalsIntervalsData ) {
-		super.init();
+		super.init(intervalsData:anIntervalsData);
 		var		theResult = Set<IntervalEntry>();
         for theStackInterval in anIntervalsData.stackedIntervals {
             for theInterval in theStackInterval.everyInterval {
-                for theOctave in 0..<anIntervalsData.octavesCount {
+                for theOctave in 0..<octavesCount {
                     let		theOctaveValue = 1<<theOctave;
 					let		theEntry = IntervalEntry(interval: theInterval*theOctaveValue );
 					theResult.insert(theEntry);

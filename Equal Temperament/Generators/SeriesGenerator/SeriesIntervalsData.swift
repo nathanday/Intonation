@@ -9,8 +9,10 @@
 import Cocoa
 
 class SeriesIntervalsData : IntervalsData {
+	static let		octaveKey = "limits_octave";
+
 	override init() {
-		octave = UserDefaults.standard.integer(forKey: "octave");
+		octave = UserDefaults.standard.integer(forKey: SeriesIntervalsData.octaveKey);
 		if( octave == 0 ) {
 			octave = 12;
 		}
@@ -23,7 +25,7 @@ class SeriesIntervalsData : IntervalsData {
 		if let theDegreesString = theProperties["octave"] {
 			octave = Int(theDegreesString) ?? 12;
 		} else {
-			octave = UserDefaults.standard.integer(forKey: "octave");
+			octave = UserDefaults.standard.integer(forKey: SeriesIntervalsData.octaveKey);
 			if( octave == 0 ) {
 				octave = 4;
 			}
@@ -46,8 +48,12 @@ class SeriesIntervalsData : IntervalsData {
 	}
 
 	@objc dynamic var		octave : Int {
+		willSet {
+			willChangeValue(forKey: "octave");
+		}
 		didSet {
-			UserDefaults.standard.set(octave, forKey:"octave");
+			UserDefaults.standard.set(octave, forKey:SeriesIntervalsData.octaveKey);
+			didChangeValue(forKey: "octave");
 		}
 	}
 }
@@ -61,10 +67,10 @@ class SeriesGenerator: IntervalsDataGenerator {
 	}
 	init( intervalsData anIntervalsData : SeriesIntervalsData ) {
 		octave = anIntervalsData.octave;
-		super.init();
+		super.init(intervalsData:anIntervalsData);
 		var		theIntervals = [IntervalEntry]();
 		let		theMin = 1<<(octave-1);
-		let		theMax = 1<<octave;
+		let		theMax = 1<<(octave-1+octavesCount);
 		for theIndex in theMin...theMax {
 			theIntervals.append(IntervalEntry(interval: RationalInterval( theIndex, theMin )))
 		}

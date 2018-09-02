@@ -9,12 +9,15 @@
 import Cocoa
 
 class EqualTemperamentIntervalsData : IntervalsData {
+	static let		degreesKey = "limits_degrees";
+	static let		intervalKey = "limits_interval";
+
 	override init() {
-		degrees = UInt(UserDefaults.standard.integer(forKey: "degrees"));
+		degrees = UInt(UserDefaults.standard.integer(forKey: EqualTemperamentIntervalsData.degreesKey));
 		if( degrees == 0 ) {
 			degrees = 12;
 		}
-		interval = UserDefaults.standard.rationalIntervalForKey("interval") ?? RationalInterval(2);
+		interval = UserDefaults.standard.rationalIntervalForKey(EqualTemperamentIntervalsData.intervalKey) ?? RationalInterval(2);
 		super.init();
 	}
 	override init?(propertyList aPropertyList: [String:Any] ) {
@@ -24,7 +27,7 @@ class EqualTemperamentIntervalsData : IntervalsData {
 		if let theDegreesString = theProperties["degrees"] {
 			degrees = UInt(theDegreesString) ?? 12;
 		} else {
-			degrees = UInt(UserDefaults.standard.integer(forKey: "degrees"));
+			degrees = UInt(UserDefaults.standard.integer(forKey: EqualTemperamentIntervalsData.degreesKey));
 			if( degrees == 0 ) {
 				degrees = 12;
 			}
@@ -32,7 +35,7 @@ class EqualTemperamentIntervalsData : IntervalsData {
 		if let theIntervalString = theProperties["interval"] {
 			interval = RationalInterval.from(string:theIntervalString) ?? RationalInterval(2,1);
 		} else {
-			interval = UserDefaults.standard.rationalIntervalForKey("interval") ?? RationalInterval(2);
+			interval = UserDefaults.standard.rationalIntervalForKey(EqualTemperamentIntervalsData.intervalKey) ?? RationalInterval(2);
 		}
 		super.init(propertyList:aPropertyList);
 	}
@@ -54,13 +57,21 @@ class EqualTemperamentIntervalsData : IntervalsData {
 	}
 
 	@objc dynamic var		degrees : UInt {
+		willSet {
+			willChangeValue(forKey: "degrees");
+		}
 		didSet {
-			UserDefaults.standard.set(Int(degrees), forKey:"degrees");
+			UserDefaults.standard.set(Int(degrees), forKey:EqualTemperamentIntervalsData.degreesKey);
+			didChangeValue(forKey: "degrees");
 		}
 	}
 	var				interval : RationalInterval {
+		willSet {
+			willChangeValue(forKey: "interval");
+		}
 		didSet {
-			UserDefaults.standard.setInterval(interval, forKey:"interval");
+			UserDefaults.standard.setInterval(interval, forKey:EqualTemperamentIntervalsData.intervalKey);
+			didChangeValue(forKey: "interval");
 		}
 	}
 }
@@ -82,11 +93,11 @@ class EqualTemperamentGenerator: IntervalsDataGenerator {
 	init( intervalsData anIntervalsData : EqualTemperamentIntervalsData ) {
 		interval = anIntervalsData.interval;
 		degrees = anIntervalsData.degrees;
-		super.init();
+		super.init(intervalsData:anIntervalsData);
 		var		theResult = Set<IntervalEntry>();
 		var		theIndex : UInt = 0;
 		var		theRatio = ratioFor(note:theIndex);
-		let		theMaxRatio = pow(2.0,Double(anIntervalsData.octavesCount));
+		let		theMaxRatio = pow(2.0,Double(octavesCount));
 		while theRatio <= theMaxRatio {
 			let		theString = formulaStringFor(note:theIndex);
 			let		theInterval = EqualTemperamentInterval(degree: theIndex, steps: degrees, interval: interval, names: [theString])

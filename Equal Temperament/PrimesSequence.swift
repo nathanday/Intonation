@@ -58,4 +58,5 @@ class PrimesSequence : Sequence {
 		}
 		return PrimesSequence.primes[anIndex];
 	}
+	
 }

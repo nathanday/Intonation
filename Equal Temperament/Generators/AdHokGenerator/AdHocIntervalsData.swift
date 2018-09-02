@@ -71,8 +71,8 @@ class AdHocGenerator: IntervalsDataGenerator {
 	}
 	init( intervalsData anIntervalsData : AdHocIntervalsData ) {
 		var		theResult = Set<IntervalEntry>();
-		super.init();
-		for theOctave in 0..<anIntervalsData.octavesCount {
+		super.init(intervalsData:anIntervalsData);
+		for theOctave in 0..<octavesCount {
 			let		theOctaveValue = (1<<theOctave);
 			for theEntry in anIntervalsData.adHocEntries {
 				theResult.insert(IntervalEntry(interval: theEntry*theOctaveValue ));

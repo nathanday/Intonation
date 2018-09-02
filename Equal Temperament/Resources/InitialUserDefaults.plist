@@ -12,14 +12,16 @@
 	<integer>1</integer>
 	<key>selectedWaveViewScale</key>
 	<integer>1</integer>
-	<key>numeratorPrimeLimit</key>
+	<key>limits_denominatorPrimeLimit</key>
 	<integer>5</integer>
-	<key>denominatorPrimeLimit</key>
+	<key>limits_numeratorPrimeLimit</key>
 	<integer>5</integer>
-	<key>oddLimit</key>
+	<key>limits_oddLimit</key>
 	<integer>17</integer>
-	<key>additiveDissonance</key>
+	<key>limits_additiveDissonance</key>
 	<integer>31</integer>
+	<key>limits_octave</key>
+	<integer>64</integer>
 	<key>midiAnchor</key>
 	<integer>60</integer>
 	<key>findIntervalesHidded</key>

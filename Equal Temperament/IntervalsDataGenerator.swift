@@ -9,6 +9,11 @@
 import Foundation
 
 class IntervalsDataGenerator : CustomStringConvertible {
+
+	let		octavesCount : Int;
+	init( intervalsData anIntervalsData : IntervalsData ) {
+		octavesCount = anIntervalsData.octavesCount;
+	}
 	var averageError : Double {
 		var		theAverageError : Double = 0.0;
 		let		theCount = Double(everyEntry.count);
