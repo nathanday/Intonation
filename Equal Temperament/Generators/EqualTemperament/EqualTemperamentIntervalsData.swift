@@ -9,8 +9,8 @@
 import Cocoa
 
 class EqualTemperamentIntervalsData : IntervalsData {
-	static let		degreesKey = "limits_degrees";
-	static let		intervalKey = "limits_interval";
+	static let		degreesKey = "equalTemperament_degrees";
+	static let		intervalKey = "equalTemperament_interval";
 
 	override init() {
 		degrees = UInt(UserDefaults.standard.integer(forKey: EqualTemperamentIntervalsData.degreesKey));

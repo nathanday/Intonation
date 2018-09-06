@@ -1,5 +1,5 @@
 //
-//  SeriesGeneratorViewController.swift
+//  HarmonicSeriesGeneratorViewController.swift
 //  Intonation
 //
 //  Created by Nathan Day on 26/03/16.
@@ -8,10 +8,10 @@
 
 import Cocoa
 
-class SeriesGeneratorViewController: GeneratorViewController {
+class HarmonicSeriesGeneratorViewController: GeneratorViewController {
 
 	required init?( windowController aWindowController: MainWindowController ) {
-		super.init( nibName : "SeriesGeneratorViewController", windowController: aWindowController);
+		super.init( nibName : "HarmonicSeriesGeneratorViewController", windowController: aWindowController);
 	}
 
 	required init?(coder: NSCoder) {
@@ -20,10 +20,10 @@ class SeriesGeneratorViewController: GeneratorViewController {
 
 	@objc dynamic var octave : Int {
 		get {
-			return (document!.intervalsData as! SeriesIntervalsData).octave;
+			return (document!.intervalsData as! HarmonicSeriesIntervalsData).octave;
 		}
 		set {
-			(document!.intervalsData as! SeriesIntervalsData).octave = newValue;
+			(document!.intervalsData as! HarmonicSeriesIntervalsData).octave = newValue;
 			document?.calculateAllIntervals();
 		}
 	}

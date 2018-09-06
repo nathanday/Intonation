@@ -57,7 +57,7 @@ enum DocumentType {
 		case .equalTemperament:
 			return "Equal Temperament";
 		case .series:
-			return "Series";
+			return "Natural Harmonic Series";
         case .preset:
             return "Preset";
         case .adHoc:
@@ -84,7 +84,7 @@ class IntervalsData: NSObject {
 					theResult = EqualTemperamentIntervalsData(propertyList:aPropertyList);
 					break;
 				case .series:
-					theResult = SeriesIntervalsData(propertyList:aPropertyList);
+					theResult = HarmonicSeriesIntervalsData(propertyList:aPropertyList);
 					break;
 				case .preset:
 					theResult = PresetIntervalsData(propertyList:aPropertyList);
@@ -103,7 +103,7 @@ class IntervalsData: NSObject {
 		case .limits: return LimitsIntervalsData();
 		case .stackedIntervals: return StackedIntervalsIntervalsData();
 		case .equalTemperament: return EqualTemperamentIntervalsData();
-		case .series: return SeriesIntervalsData();
+		case .series: return HarmonicSeriesIntervalsData();
 		case .preset: return PresetIntervalsData();
 		case .adHoc: return AdHocIntervalsData();
 		}

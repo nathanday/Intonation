@@ -10,7 +10,6 @@ import Cocoa
 
 class PresetIntervalsData : IntervalsData {
 	override init() {
-//		XXXXX
 		super.init();
 	}
 	override init?(propertyList aPropertyList: [String:Any] ) {

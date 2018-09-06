@@ -48,9 +48,9 @@
 		D87C278A1AF3A95900C2BF7B /* PresetChordsAndScales.plist in Resources */ = {isa = PBXBuildFile; fileRef = D87C27891AF3A95900C2BF7B /* PresetChordsAndScales.plist */; };
 		D8812AD01C9ECE3D0093786D /* IntervalSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8812ACF1C9ECE3D0093786D /* IntervalSet.swift */; };
 		D8832F8619A0C86B0095B26F /* WaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8832F8519A0C86B0095B26F /* WaveView.swift */; };
-		D8896A5A2019E24700664260 /* SeriesGeneratorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8896A582019E24600664260 /* SeriesGeneratorViewController.swift */; };
-		D8896A5B2019E24700664260 /* SeriesGeneratorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8896A592019E24700664260 /* SeriesGeneratorViewController.xib */; };
-		D8896A5D2019E2D100664260 /* SeriesIntervalsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8896A5C2019E2D100664260 /* SeriesIntervalsData.swift */; };
+		D8896A5A2019E24700664260 /* HarmonicSeriesGeneratorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8896A582019E24600664260 /* HarmonicSeriesGeneratorViewController.swift */; };
+		D8896A5B2019E24700664260 /* HarmonicSeriesGeneratorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8896A592019E24700664260 /* HarmonicSeriesGeneratorViewController.xib */; };
+		D8896A5D2019E2D100664260 /* HarmonicSeriesIntervalsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8896A5C2019E2D100664260 /* HarmonicSeriesIntervalsData.swift */; };
 		D88A62101ACF7F19004CD4C9 /* IntegerType+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88A620F1ACF7F19004CD4C9 /* IntegerType+Additions.swift */; };
 		D88A62111AD02167004CD4C9 /* Scale.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8901EBC1ABC226D00A4E071 /* Scale.swift */; };
 		D88EED2D1AEE5AF50084BDCB /* Float+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88EED2C1AEE5AF50084BDCB /* Float+Additions.swift */; };
@@ -165,9 +165,9 @@
 		D8812ACF1C9ECE3D0093786D /* IntervalSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntervalSet.swift; sourceTree = "<group>"; };
 		D8832F8519A0C86B0095B26F /* WaveView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaveView.swift; sourceTree = "<group>"; };
 		D885A12F1CE60B7300A3B996 /* PrimesSequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimesSequence.swift; sourceTree = "<group>"; };
-		D8896A582019E24600664260 /* SeriesGeneratorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeriesGeneratorViewController.swift; sourceTree = "<group>"; };
-		D8896A592019E24700664260 /* SeriesGeneratorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SeriesGeneratorViewController.xib; sourceTree = "<group>"; };
-		D8896A5C2019E2D100664260 /* SeriesIntervalsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeriesIntervalsData.swift; sourceTree = "<group>"; };
+		D8896A582019E24600664260 /* HarmonicSeriesGeneratorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HarmonicSeriesGeneratorViewController.swift; sourceTree = "<group>"; };
+		D8896A592019E24700664260 /* HarmonicSeriesGeneratorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HarmonicSeriesGeneratorViewController.xib; sourceTree = "<group>"; };
+		D8896A5C2019E2D100664260 /* HarmonicSeriesIntervalsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HarmonicSeriesIntervalsData.swift; sourceTree = "<group>"; };
 		D88A620F1ACF7F19004CD4C9 /* IntegerType+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IntegerType+Additions.swift"; sourceTree = "<group>"; };
 		D88EED2C1AEE5AF50084BDCB /* Float+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Float+Additions.swift"; sourceTree = "<group>"; };
 		D8901EBC1ABC226D00A4E071 /* Scale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scale.swift; sourceTree = "<group>"; };
@@ -329,9 +329,9 @@
 		D875BD5C21369E00005E0046 /* SeriesGenerator */ = {
 			isa = PBXGroup;
 			children = (
-				D8896A582019E24600664260 /* SeriesGeneratorViewController.swift */,
-				D8896A592019E24700664260 /* SeriesGeneratorViewController.xib */,
-				D8896A5C2019E2D100664260 /* SeriesIntervalsData.swift */,
+				D8896A582019E24600664260 /* HarmonicSeriesGeneratorViewController.swift */,
+				D8896A592019E24700664260 /* HarmonicSeriesGeneratorViewController.xib */,
+				D8896A5C2019E2D100664260 /* HarmonicSeriesIntervalsData.swift */,
 			);
 			path = SeriesGenerator;
 			sourceTree = "<group>";
@@ -641,7 +641,7 @@
 				D8AFAD311CA58F370008ABFE /* PresetGeneratorViewController.xib in Resources */,
 				D895438A1996354100A091A4 /* MainWindowController.xib in Resources */,
 				D8AA4E3E1C132A8A00B66521 /* ScaleViewController.xib in Resources */,
-				D8896A5B2019E24700664260 /* SeriesGeneratorViewController.xib in Resources */,
+				D8896A5B2019E24700664260 /* HarmonicSeriesGeneratorViewController.xib in Resources */,
 				D80A61D71C9040C000A2F885 /* SelectDocumentType.xib in Resources */,
 				D8571C811CA56D2B008A5A46 /* LimitsGeneratorViewController.xib in Resources */,
 				D8AA4E4A1C1337B500B66521 /* SpectrumViewController.xib in Resources */,
@@ -679,7 +679,7 @@
 				D8B9020E1AD491E30015B5E2 /* PreferencesWindowController.swift in Sources */,
 				D8E5E6241AD12F7A004DB02D /* HarmonicView.swift in Sources */,
 				D80A61D61C9040C000A2F885 /* SelectDocumentType.swift in Sources */,
-				D8896A5A2019E24700664260 /* SeriesGeneratorViewController.swift in Sources */,
+				D8896A5A2019E24700664260 /* HarmonicSeriesGeneratorViewController.swift in Sources */,
 				D831054E1B0A6115000EB805 /* HarmonicsDescription.swift in Sources */,
 				D8720B641C9E7D6B00ED9FBB /* StackedIntervalsIntervalsData.swift in Sources */,
 				D8646B281C3D23F500D8C429 /* ChordSelectorItem.swift in Sources */,
@@ -688,7 +688,7 @@
 				D8812AD01C9ECE3D0093786D /* IntervalSet.swift in Sources */,
 				D89A673B1E9507B100EC693C /* Interval.swift in Sources */,
 				D89543861996347F00A091A4 /* IntervalEntry.swift in Sources */,
-				D8896A5D2019E2D100664260 /* SeriesIntervalsData.swift in Sources */,
+				D8896A5D2019E2D100664260 /* HarmonicSeriesIntervalsData.swift in Sources */,
 				D85916C31C8C04D0001C5330 /* MIDIReceiver.swift in Sources */,
 				D83B54B11C8D96C500624A46 /* MIDIToHarmonicRatio.swift in Sources */,
 				D85ABE7F1C3FD06800F2DFAF /* ChordOrScaleSelectorViewController.swift in Sources */,

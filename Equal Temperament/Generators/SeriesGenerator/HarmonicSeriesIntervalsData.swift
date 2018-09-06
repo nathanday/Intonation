@@ -1,5 +1,5 @@
 //
-//  SeriesGenerator.swift
+//  HarmonicSeriesGenerator.swift
 //  Intonation
 //
 //  Created by Nathan Day on 20/03/16.
@@ -8,13 +8,13 @@
 
 import Cocoa
 
-class SeriesIntervalsData : IntervalsData {
-	static let		octaveKey = "limits_octave";
+class HarmonicSeriesIntervalsData : IntervalsData {
+	static let		octaveKey = "harmonicSeries_octave";
 
 	override init() {
-		octave = UserDefaults.standard.integer(forKey: SeriesIntervalsData.octaveKey);
-		if( octave == 0 ) {
-			octave = 12;
+		octave = UserDefaults.standard.integer(forKey: HarmonicSeriesIntervalsData.octaveKey);
+		if( octave <= 0 ) {
+			octave = 4;
 		}
 		super.init();
 	}
@@ -25,7 +25,7 @@ class SeriesIntervalsData : IntervalsData {
 		if let theDegreesString = theProperties["octave"] {
 			octave = Int(theDegreesString) ?? 12;
 		} else {
-			octave = UserDefaults.standard.integer(forKey: SeriesIntervalsData.octaveKey);
+			octave = UserDefaults.standard.integer(forKey: HarmonicSeriesIntervalsData.octaveKey);
 			if( octave == 0 ) {
 				octave = 4;
 			}
@@ -41,10 +41,10 @@ class SeriesIntervalsData : IntervalsData {
 	override var	documentType : DocumentType { return .equalTemperament; }
 
 	override func intervalsDataGenerator() -> IntervalsDataGenerator {
-		return SeriesGenerator(intervalsData:self);
+		return HarmonicSeriesGenerator(intervalsData:self);
 	}
 	override func viewController( windowController aWindowController : MainWindowController ) -> GeneratorViewController? {
-		return SeriesGeneratorViewController(windowController:aWindowController);
+		return HarmonicSeriesGeneratorViewController(windowController:aWindowController);
 	}
 
 	@objc dynamic var		octave : Int {
@@ -52,20 +52,20 @@ class SeriesIntervalsData : IntervalsData {
 			willChangeValue(forKey: "octave");
 		}
 		didSet {
-			UserDefaults.standard.set(octave, forKey:SeriesIntervalsData.octaveKey);
+			UserDefaults.standard.set(octave, forKey:HarmonicSeriesIntervalsData.octaveKey);
 			didChangeValue(forKey: "octave");
 		}
 	}
 }
 
-class SeriesGenerator: IntervalsDataGenerator {
+class HarmonicSeriesGenerator: IntervalsDataGenerator {
 	let		octave : Int;
 
 	var	_everyIntervalEntry : [IntervalEntry]?;
 	override var	everyEntry : [IntervalEntry] {
 		return _everyIntervalEntry!;
 	}
-	init( intervalsData anIntervalsData : SeriesIntervalsData ) {
+	init( intervalsData anIntervalsData : HarmonicSeriesIntervalsData ) {
 		octave = anIntervalsData.octave;
 		super.init(intervalsData:anIntervalsData);
 		var		theIntervals = [IntervalEntry]();
