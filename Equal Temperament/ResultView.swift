@@ -41,22 +41,7 @@ import Cocoa
 	weak var	delegate : ResultViewDelegate?;
 
 	var		commonFactor : Int {
-		get {
-			var		theResult = 1;
-			let		theSelectedIndicies = dataSource?.selectedIndecies;
-			dataSource?.enumerateIntervals { (anIndex:Int, anInterval:Interval, aSelected: Bool) in
-				if theSelectedIndicies?.contains(anIndex) ?? false {
-					var		theDen = 1;
-					if let theRationalValue = anInterval as? RationalInterval {
-						theDen = theRationalValue.denominator;
-					} else {
-						theDen = Rational( anInterval.toDouble, maxDenominator:32 ).denominator;
-					}
-					theResult *= theDen/Int(greatestCommonDivisor( UInt(theResult), UInt(theDen) ));
-				}
-			}
-			return theResult;
-		}
+		return dataSource?.selectedCommonFactor ?? 1;
 	}
 
 	func reloadData() {
@@ -181,6 +166,7 @@ extension BackGround {
 protocol ResultViewDataSource : class {
 	var numberOfIntervals : Int {get};
 	var numberOfSelectedIntervals : Int {get};
+	var selectedCommonFactor : Int {get};
 	func interval(for anIndex: Int) -> Interval?;
 	var selectedIndecies : IndexSet {get};
 	var selectedInterval : [(index:Int,interval:Interval)] {get};

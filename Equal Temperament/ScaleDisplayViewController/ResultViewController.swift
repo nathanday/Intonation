@@ -39,6 +39,9 @@ extension ResultViewController : ResultViewDataSource {
 	var numberOfSelectedIntervals : Int {
 		return mainWindowController?.document?.selectedIndicies.count ?? 0;
 	}
+	var selectedCommonFactor : Int {
+		return mainWindowController?.document?.selectedCommonFactor ?? 1;
+	}
 	func interval(for anIndex: Int) -> Interval? {
 		if let theEveryInterval = mainWindowController?.document!.everyInterval {
 			return theEveryInterval[anIndex].interval;

@@ -239,6 +239,29 @@ class Document : NSDocument, MIDIReceiverObserver {
 	@objc dynamic var		selectedIndicies = IndexSet() {
 		didSet {
 			tonePlayer.intervals = selectedJustIntonationIntervals;
+			_selectedCommonFactor = nil;
+		}
+	}
+	private var		_selectedCommonFactor : Int?
+	@objc dynamic var		selectedCommonFactor : Int {
+		get {
+			if let theResult = _selectedCommonFactor {
+				return theResult;
+			}
+			else {
+				var		theResult = 1;
+				for theIntervalEntry in selectedIntervalEntry {
+					var		theDen = 1;
+					if let theRationalValue = theIntervalEntry.interval as? RationalInterval {
+						theDen = theRationalValue.denominator;
+					} else {
+						theDen = Rational( theIntervalEntry.interval.toDouble, maxDenominator:32 ).denominator;
+					}
+					theResult *= theDen/Int(greatestCommonDivisor( UInt(theResult), UInt(theDen) ));
+				}
+				_selectedCommonFactor = theResult;
+				return theResult;
+			}
 		}
 	}
 	var		selectedIntervalEntry : [IntervalEntry] {
