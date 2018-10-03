@@ -183,6 +183,7 @@ protocol ResultViewDataSource : class {
 	var numberOfSelectedIntervals : Int {get};
 	func interval(for anIndex: Int) -> Interval?;
 	var selectedIndecies : IndexSet {get};
+	var selectedInterval : [(index:Int,interval:Interval)] {get};
 	func enumerateIntervals( _ aBlock: (Int,Interval,Bool) -> Void );
 	func enumerateSelectedIntervals( _ aBlock: (Int,Int,Interval) -> Void );
 }

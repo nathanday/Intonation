@@ -53,9 +53,9 @@ class WaveViewController: ResultViewController {
 	private func updateWaveViewDisplayMode() {
 		switch selectedWaveViewMode {
 		case 1:
-			waveView?.displayMode = .combined;
+			waveView?.displayMode = .summed;
 		default:
-			waveView?.displayMode = .overlayed;
+			waveView?.displayMode = .stacked;
 		}
 	}
 

@@ -49,6 +49,20 @@ extension ResultViewController : ResultViewDataSource {
 	var selectedIndecies : IndexSet {
 		return mainWindowController?.document?.selectedIndicies ?? IndexSet();
 	}
+	var selectedInterval : [(index:Int,interval:Interval)] {
+		var		theResult = [(index:Int,interval:Interval)]();
+		guard let theIntervals = mainWindowController?.document?.everyInterval else {
+			return theResult;
+		}
+		guard let theSelectedIndices = mainWindowController?.document?.selectedIndicies else {
+			return theResult;
+		}
+		for theIndex in theSelectedIndices {
+			theResult.append((index:theIndex,interval:theIntervals[theIndex].interval))
+		}
+		return theResult;
+	}
+
 	func enumerateIntervals( _ aBlock: (Int,Interval,Bool) -> Void ) {
 		guard let theIntervals = mainWindowController?.document?.everyInterval else {
 			return;
