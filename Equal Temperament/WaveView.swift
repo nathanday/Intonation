@@ -62,7 +62,7 @@ class WaveView: ResultView {
 				}
 				thePath.line(to: NSMakePoint(theX0+CGFloat(theX), theZeroAxis+CGFloat(theValue*theScalingFactor)*theHeight*0.6));
 			}
-			NSColor.secondaryLabelColor.setStroke();
+			colorForIndex(0).setStroke();
 			thePath.lineWidth = 2.0;
 			thePath.stroke();
 		}
@@ -74,17 +74,17 @@ class WaveView: ResultView {
 			}
 			let		theSubHeight = theHeight/CGFloat(max(anIntervals.count,1));
 			var		theOffset = theX0+0.25;
-			for (anIndex,anInterval) in anIntervals {
+			for (anIndex,anInterval) in anIntervals.enumerated() {
 				let		thePath = NSBezierPath();
 				let		theSubZeroAxis = theOffset + theSubHeight*0.5;
 				thePath.move(to: NSMakePoint(theX0, theZeroAxis));
 				var	theX = aDirtyRect.minX;
 				while theX <= aDirtyRect.maxX {
-					let		theTrigTerm = trigTerm(for:theX, freq:anInterval.toDouble);
+					let		theTrigTerm = trigTerm(for:theX, freq:anInterval.interval.toDouble);
 					thePath.line(to: point(x:theX, trigTerm:theTrigTerm, zeroAxix: theSubZeroAxis, height: theSubHeight));
-					theX += CGFloat(abs(anInterval.toDouble*cos(theTrigTerm))+1.0);
+					theX += CGFloat(abs(anInterval.interval.toDouble*cos(theTrigTerm))+1.0);
 				}
-				thePath.line(to: point(x:aDirtyRect.maxX, trigTerm:trigTerm(for:aDirtyRect.maxX, freq:anInterval.toDouble), zeroAxix: theSubZeroAxis, height: theSubHeight));
+				thePath.line(to: point(x:aDirtyRect.maxX, trigTerm:trigTerm(for:aDirtyRect.maxX, freq:anInterval.interval.toDouble), zeroAxix: theSubZeroAxis, height: theSubHeight));
 				thePath.stroke();
 				colorForIndex(anIndex).setStroke();
 				thePath.lineWidth = 2.0;
