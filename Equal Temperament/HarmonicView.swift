@@ -147,11 +147,11 @@ class HarmonicView: ResultView {
 				}
 				else if (aHarmonic)%2 == 0 {
 					thePath.line(to: NSMakePoint(theXOrigin+54.0, floor(theY*2.0)*0.5+0.25));
-					axisesColor.setStroke();
+					minorAxisesColor.setStroke();
 				}
 				else {
 					thePath.line(to: NSMakePoint(theXOrigin+50.0, floor(theY*2.0)*0.5+0.25));
-					minorAxisesColor.setStroke();
+					secondaryMinorAxisesColor.setStroke();
 				}
 			}
 			thePath.stroke()

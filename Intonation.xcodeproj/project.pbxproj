@@ -287,9 +287,9 @@
 			isa = PBXGroup;
 			children = (
 				D875BD5921369D68005E0046 /* LimitsGenerator */,
-				D875BD5C21369E00005E0046 /* SeriesGenerator */,
-				D875BD5B21369DF1005E0046 /* EqualTemperament */,
 				D875BD5A21369DCF005E0046 /* StackedIntervalsGenerator */,
+				D875BD5B21369DF1005E0046 /* EqualTemperament */,
+				D875BD5C21369E00005E0046 /* HarmonicSeriesGenerator */,
 				D875BD5D21369E18005E0046 /* AdHokGenerator */,
 				D875BD5E21369E2B005E0046 /* PresetGenerator */,
 			);
@@ -326,14 +326,14 @@
 			path = EqualTemperament;
 			sourceTree = "<group>";
 		};
-		D875BD5C21369E00005E0046 /* SeriesGenerator */ = {
+		D875BD5C21369E00005E0046 /* HarmonicSeriesGenerator */ = {
 			isa = PBXGroup;
 			children = (
 				D8896A582019E24600664260 /* HarmonicSeriesGeneratorViewController.swift */,
 				D8896A592019E24700664260 /* HarmonicSeriesGeneratorViewController.xib */,
 				D8896A5C2019E2D100664260 /* HarmonicSeriesIntervalsData.swift */,
 			);
-			path = SeriesGenerator;
+			path = HarmonicSeriesGenerator;
 			sourceTree = "<group>";
 		};
 		D875BD5D21369E18005E0046 /* AdHokGenerator */ = {

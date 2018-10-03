@@ -79,18 +79,20 @@ import Cocoa
     }
     
 	var majorAxisesColor : NSColor {
-		return NSColor.secondarySelectedControlColor;
+		return NSColor.controlAccentColor;
 	}
 
 	var majorAxisesTextColor : NSColor {
 		return NSColor.secondaryLabelColor;
 	}
 
-    var minorAxisesColor : NSColor {
-		return NSColor.controlAccentColor.withAlphaComponent(0.33);
-//		return NSColor(named: NSColor.Name("minorAxisesColor"))!;
-    }
-    
+	var minorAxisesColor : NSColor {
+		return NSColor.controlAccentColor.withAlphaComponent(0.6666);
+	}
+	var secondaryMinorAxisesColor : NSColor {
+		return NSColor.controlAccentColor.withAlphaComponent(0.3333);
+	}
+
 	func drawText(string aString: String, size aSize: CGFloat, point aPoint: CGPoint ) {
 		drawText(string: aString, size: aSize, point: aPoint, color:NSColor.textColor, textAlignment: .left );
 	}

@@ -161,13 +161,16 @@ class MainWindowController : NSWindowController, NSMenuItemValidation {
 	}
 
 	@objc func playBackMethodChanged(notification aNotification: Notification) {
-		if let theDocument = document as? Document {
-			if let thePlaySegmentedControl = playSegmentedControl {
-				if let theSelectedMethod = theDocument.currentlySelectedMethod {
-					thePlaySegmentedControl.setSelected( true, forSegment: theSelectedMethod);
-				} else {
-					thePlaySegmentedControl.setSelected( false, forSegment: thePlaySegmentedControl.selectedSegment);
-				}
+		guard let theDocument = document as? Document else {
+			assertionFailure("No document");
+			return;
+		}
+
+		if let thePlaySegmentedControl = playSegmentedControl {
+			if let theSelectedMethod = theDocument.currentlySelectedMethod {
+				thePlaySegmentedControl.setSelected( true, forSegment: theSelectedMethod);
+			} else {
+				thePlaySegmentedControl.setSelected( false, forSegment: thePlaySegmentedControl.selectedSegment);
 			}
 		}
 	}
@@ -287,32 +290,38 @@ class MainWindowController : NSWindowController, NSMenuItemValidation {
 		}
 	}
 	@IBAction func exportAction( _ aSender: Any? ) {
-		if let theDocument = document as? Document {
-			let		theExportWindowController = ExportWindowController { ( aSucces: Bool, anExportMethod : ExportMethod, aSelectedIntervals : Bool) in
-				if aSucces {
-					let		theSavePanel = NSSavePanel();
-					theSavePanel.title = "Export as \(anExportMethod.title) to…";
-					theSavePanel.prompt = "Export";
-					if let theFileType = anExportMethod.fileType {
-						theSavePanel.allowedFileTypes = [theFileType];
-					}
-					theSavePanel.beginSheetModal(for: self.window!, completionHandler: { (aResponse: NSApplication.ModalResponse) in
-						if aResponse == .OK {
-							var theIntervalEntries : [IntervalEntry]?
-							if aSelectedIntervals {
-								theIntervalEntries = self.arrayController?.selectedObjects as? [IntervalEntry];
-							} else {
-								theIntervalEntries = theDocument.intervalsData?.intervalsDataGenerator().everyEntry;
-							}
-							if let theIntervals = theIntervalEntries?.map( { $0.interval; } ) {
-								try? anExportMethod.exportGenerator(everyInterval: theIntervals ).saveTo(url: theSavePanel.url!);
-							}
-						}
-					});
-				}
-			};
-			theExportWindowController.showAsSheet(parentWindow: window! );
+		guard let theDocument = document as? Document else {
+			assertionFailure("No document");
+			return;
 		}
+		guard let theParentWindow = window else {
+			assertionFailure("No window");
+			return;
+		}
+		let		theExportWindowController = ExportWindowController { ( aSucces: Bool, anExportMethod : ExportMethod, aSelectedIntervals : Bool) in
+			if aSucces {
+				let		theSavePanel = NSSavePanel();
+				theSavePanel.title = "Export as \(anExportMethod.title) to…";
+				theSavePanel.prompt = "Export";
+				if let theFileType = anExportMethod.fileType {
+					theSavePanel.allowedFileTypes = [theFileType];
+				}
+				theSavePanel.beginSheetModal(for: theParentWindow, completionHandler: { (aResponse: NSApplication.ModalResponse) in
+					if aResponse == .OK {
+						var theIntervalEntries : [IntervalEntry]?
+						if aSelectedIntervals {
+							theIntervalEntries = self.arrayController?.selectedObjects as? [IntervalEntry];
+						} else {
+							theIntervalEntries = theDocument.intervalsData?.intervalsDataGenerator().everyEntry;
+						}
+						if let theIntervals = theIntervalEntries?.map( { $0.interval; } ) {
+							try? anExportMethod.exportGenerator(everyInterval: theIntervals ).saveTo(url: theSavePanel.url!);
+						}
+					}
+				});
+			}
+		};
+		theExportWindowController.showAsSheet(parentWindow: theParentWindow );
 	}
 
 	dynamic func validateMenuItem(_ aMenuItem: NSMenuItem) -> Bool {
@@ -332,31 +341,34 @@ class MainWindowController : NSWindowController, NSMenuItemValidation {
 	override func windowDidLoad() {
 		super.windowDidLoad();
 		self.window!.acceptsMouseMovedEvents = true;
-		if let theDocument = document as? Document {
-			if let theWindow = window {
-				if theDocument.intervalsData == nil {
-					let		theWindowController = SelectDocumentType();
-					theWindowController.completionBlock = { (aType) in
-						if let theType = aType {
-							let		theIntervalData = IntervalsData.from(documentType: theType );
-							theDocument.intervalsData = theIntervalData;
-							if let theViewController = theDocument.intervalsData?.viewController(windowController: self) {
-								self.documentTypeViewController = theViewController;
-								self.documentTypeViewControllerPlaceHolderView!.loadViewController(theViewController);
-								theDocument.calculateAllIntervals();
-								self.octavesCountPopUpButton?.selectItem(withTag: Int(theIntervalData.octavesCount));
-							}
-						}
-						else {
-							self.close();
-						}
-					};
-					theWindowController.showAsSheet(parentWindow: theWindow );
+
+		guard let theDocument = document as? Document else {
+			assertionFailure("No document");
+			return;
+		}
+		guard let theWindow = window else {
+			theDocument.calculateAllIntervals();
+			return;
+		}
+
+		if theDocument.intervalsData == nil {
+			let		theWindowController = SelectDocumentType();
+			theWindowController.completionBlock = { (aType) in
+				if let theType = aType {
+					let		theIntervalData = IntervalsData.from(documentType: theType );
+					theDocument.intervalsData = theIntervalData;
+					if let theViewController = theDocument.intervalsData?.viewController(windowController: self) {
+						self.documentTypeViewController = theViewController;
+						self.documentTypeViewControllerPlaceHolderView!.loadViewController(theViewController);
+						theDocument.calculateAllIntervals();
+						self.octavesCountPopUpButton?.selectItem(withTag: Int(theIntervalData.octavesCount));
+					}
 				}
-			}
-			else {
-				theDocument.calculateAllIntervals();
-			}
+				else {
+					self.close();
+				}
+			};
+			theWindowController.showAsSheet(parentWindow: theWindow );
 		}
 	}
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.13.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -18,33 +18,45 @@
             <subviews>
                 <popUpButton horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Mgm-LW-Y4w">
                     <rect key="frame" x="268" y="2" width="68" height="25"/>
-                    <popUpButtonCell key="cell" type="push" title="8" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" tag="3" imageScaling="proportionallyDown" inset="2" arrowPosition="arrowAtCenter" selectedItem="K78-0d-EhZ" id="nFZ-yv-SXd">
+                    <popUpButtonCell key="cell" type="push" title="4" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" tag="2" imageScaling="proportionallyDown" inset="2" arrowPosition="arrowAtCenter" selectedItem="K78-0d-EhZ" id="nFZ-yv-SXd">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="menu"/>
                         <menu key="menu" id="v7M-m1-4pK">
                             <items>
-                                <menuItem title="8" state="on" tag="3" id="K78-0d-EhZ">
+                                <menuItem title="4" state="on" tag="2" id="K78-0d-EhZ">
+                                    <attributedString key="attributedTitle"/>
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                                <menuItem title="8" tag="3" id="D87-HU-ihW">
+                                    <attributedString key="attributedTitle"/>
                                     <modifierMask key="keyEquivalentModifierMask"/>
                                 </menuItem>
                                 <menuItem title="16" tag="4" id="bUK-LX-MPQ">
+                                    <attributedString key="attributedTitle"/>
                                     <modifierMask key="keyEquivalentModifierMask"/>
                                 </menuItem>
                                 <menuItem title="32" tag="5" id="ts0-ds-ouh">
+                                    <attributedString key="attributedTitle"/>
                                     <modifierMask key="keyEquivalentModifierMask"/>
                                 </menuItem>
                                 <menuItem title="64" tag="6" id="ToB-vd-USK">
+                                    <attributedString key="attributedTitle"/>
                                     <modifierMask key="keyEquivalentModifierMask"/>
                                 </menuItem>
                                 <menuItem title="128" tag="7" id="OFx-mT-MRd">
+                                    <attributedString key="attributedTitle"/>
                                     <modifierMask key="keyEquivalentModifierMask"/>
                                 </menuItem>
                                 <menuItem title="256" tag="8" id="cQm-Vk-45W">
+                                    <attributedString key="attributedTitle"/>
                                     <modifierMask key="keyEquivalentModifierMask"/>
                                 </menuItem>
                                 <menuItem title="512" tag="9" id="n6X-sE-ivQ">
+                                    <attributedString key="attributedTitle"/>
                                     <modifierMask key="keyEquivalentModifierMask"/>
                                 </menuItem>
                                 <menuItem title="1024" tag="10" id="dvn-94-jqX">
+                                    <attributedString key="attributedTitle"/>
                                     <modifierMask key="keyEquivalentModifierMask"/>
                                 </menuItem>
                             </items>
