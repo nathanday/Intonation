@@ -157,9 +157,10 @@ class SpectrumView: ResultView {
 			theMinorTicks.stroke();
 		}
 
-		dataSource?.enumerateSelectedIntervals {
-			(anIndex:Int,aSelectedIndex:Int,anInterval:Interval) in
-			drawSpectrum( baseFreq: anInterval.toDouble, harmonic:anIndex );
+		if let theSelectedInterval = dataSource?.selectedInterval {
+			for (anIndex,anInterval) in theSelectedInterval.reversed() {
+				drawSpectrum( baseFreq: anInterval.toDouble, harmonic:anIndex );
+			}
 		}
 		drawAxises();
 	}
