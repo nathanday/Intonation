@@ -11,26 +11,41 @@ import Cocoa
 class PianoKeyboardPopoverViewController: NSViewController, NSPopoverDelegate {
 
 	@IBOutlet var	pianoKeyboardControl: PianoKeyboardControl!;
-	var			frequency: Double?;
+	var				popover: NSPopover?
+	var				frequency: Double?;
+	private var		completionHandler: ((Double?) -> Void)?;
+
+	required init(  ) {
+		super.init( nibName : "PianoKeyboardPopoverViewController", bundle: nil);
+	}
+
+	required init?(coder: NSCoder) {
+		fatalError("init(coder:) has not been implemented")
+	}
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do view setup here.
+		if let theFreq = frequency {
+			pianoKeyboardControl.selection = [PianoKeyboardControl.midiNoteNumber(forFrequency:theFreq)];
+		}
     }
 
-	func show(withFrequency aFrequency: Double?, relativeTo aView: NSView) {
+	func show(withFrequency aFrequency: Double?, relativeTo aView: NSView, completionHandler aCompletion: @escaping (Double?) -> Void ) {
 		frequency = aFrequency;
 		let		thePopover = NSPopover();
 		thePopover.contentViewController = self;
 		thePopover.delegate = self;
+		thePopover.behavior = .transient;
 		thePopover.show(relativeTo: aView.bounds, of: aView, preferredEdge: .minX);
-		if let theFreq = frequency {
-			pianoKeyboardControl.selection = [PianoKeyboardControl.midiNoteNumber(forFrequency:theFreq)];
-		}
+		popover = thePopover;
+		completionHandler = aCompletion;
 	}
 
 	@IBAction func keySelectedAction( _ aSender: PianoKeyboardControl ) {
-
+		if let thePopover = popover {
+			frequency = aSender.selectedFrequency;
+			thePopover.performClose(aSender);
+		}
 	}
 
 	public func popoverShouldClose(_ popover: NSPopover) -> Bool {
@@ -53,6 +68,9 @@ class PianoKeyboardPopoverViewController: NSViewController, NSPopoverDelegate {
 	}
 
 	public func popoverDidClose(_ notification: Notification) {
+		if let theCompletion = completionHandler {
+			theCompletion(frequency);
+		}
 	}
 
 }

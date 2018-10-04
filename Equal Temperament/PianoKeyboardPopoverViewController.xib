@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.13.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="PianoKeyboardPopoverViewController" customModule="Intonation" customModuleProvider="target">
             <connections>
+                <outlet property="pianoKeyboardControl" destination="ZLH-a3-iBw" id="b05-Ek-9nt"/>
                 <outlet property="view" destination="c22-O7-iKe" id="EDg-sM-45Z"/>
             </connections>
         </customObject>
@@ -18,6 +19,10 @@
             <subviews>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="ZLH-a3-iBw" customClass="PianoKeyboardControl" customModule="Intonation" customModuleProvider="target">
                     <rect key="frame" x="4" y="4" width="731" height="64"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="64" id="D7P-Og-4Iy"/>
+                        <constraint firstAttribute="width" constant="731" id="Jy7-2d-dbc"/>
+                    </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="allowsMultipleSelection" value="NO"/>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="pushOnPushOff" value="NO"/>
@@ -25,6 +30,9 @@
                         <userDefinedRuntimeAttribute type="boolean" keyPath="emptySelectionAllowed" value="NO"/>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="showMiddleC" value="YES"/>
                     </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="keySelectedAction:" target="-2" id="O91-Sc-XyG"/>
+                    </connections>
                 </customView>
             </subviews>
             <constraints>

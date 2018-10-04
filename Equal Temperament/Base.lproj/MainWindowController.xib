@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.13.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -20,6 +20,7 @@
                 <outlet property="plottingParentContainerView" destination="uia-Ns-BW4" id="jas-ND-6Ur"/>
                 <outlet property="scaleViewController" destination="fMJ-Pa-RsX" id="cqN-JH-ihV"/>
                 <outlet property="searchField" destination="lau-bI-K3T" id="XQK-oA-Bmx"/>
+                <outlet property="selectionBaseNoteButton" destination="5yC-NE-Ddo" id="Zqm-f9-Xa0"/>
                 <outlet property="spectrumViewController" destination="prk-7f-QfJ" id="Tmj-Du-Sr8"/>
                 <outlet property="splitView" destination="5GS-AI-Vce" id="M9t-6Z-Xol"/>
                 <outlet property="tableParentContainerSplitView" destination="19W-DT-XzP" id="suK-we-an2"/>
@@ -431,27 +432,6 @@
                                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>
                                                     </textField>
-                                                    <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="F1d-wV-Fyf">
-                                                        <rect key="frame" x="452" y="572" width="105" height="22"/>
-                                                        <popUpButtonCell key="cell" type="push" title="Select Note" bezelStyle="rounded" alignment="left" controlSize="small" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" pullsDown="YES" id="Rn1-vq-XVT">
-                                                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                            <font key="font" metaFont="smallSystem"/>
-                                                            <menu key="menu" id="Z5K-g8-E2c">
-                                                                <items>
-                                                                    <menuItem title="Select Note" hidden="YES" id="aGV-wu-ay8">
-                                                                        <modifierMask key="keyEquivalentModifierMask"/>
-                                                                    </menuItem>
-                                                                    <menuItem title="A3" id="hl0-QS-Y1N">
-                                                                        <modifierMask key="keyEquivalentModifierMask"/>
-                                                                    </menuItem>
-                                                                </items>
-                                                            </menu>
-                                                        </popUpButtonCell>
-                                                        <connections>
-                                                            <action selector="selectMIDINoteForBaseFrequencyAction:" target="-2" id="J3q-3K-GPf"/>
-                                                            <binding destination="-2" name="content" keyPath="self.midiNoteNotes" id="0Dq-dk-oJP"/>
-                                                        </connections>
-                                                    </popUpButton>
                                                     <scrollView horizontalCompressionResistancePriority="250" autohidesScrollers="YES" horizontalLineScroll="16" horizontalPageScroll="10" verticalLineScroll="16" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O8p-Ed-WPz">
                                                         <rect key="frame" x="20" y="36" width="556" height="467"/>
                                                         <clipView key="contentView" horizontalCompressionResistancePriority="250" drawsBackground="NO" id="8IE-mL-yag">
@@ -648,6 +628,20 @@
                                                             <autoresizingMask key="autoresizingMask"/>
                                                         </tableHeaderView>
                                                     </scrollView>
+                                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5yC-NE-Ddo">
+                                                        <rect key="frame" x="455" y="577" width="15" height="16"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="15" id="21M-Ax-SRd"/>
+                                                            <constraint firstAttribute="height" constant="16" id="Aba-c1-AF5"/>
+                                                        </constraints>
+                                                        <buttonCell key="cell" type="bevel" title="Button" bezelStyle="rounded" image="SelectionBaseNoteIcon" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="mjH-pf-2G9">
+                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                            <font key="font" metaFont="system"/>
+                                                        </buttonCell>
+                                                        <connections>
+                                                            <action selector="showSelectMIDINoteForBaseFrequencyAction:" target="-2" id="bSU-Wx-4DL"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
                                                 <constraints>
                                                     <constraint firstItem="Px7-EH-ofu" firstAttribute="leading" secondItem="dsg-PB-qxW" secondAttribute="leading" constant="150" id="3y4-11-dFV"/>
@@ -659,15 +653,15 @@
                                                     <constraint firstItem="c0Q-eC-94Z" firstAttribute="baseline" secondItem="9aK-ea-8q7" secondAttribute="baseline" id="BNL-xH-QDB"/>
                                                     <constraint firstItem="vQW-IQ-ZJf" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="c0Q-eC-94Z" secondAttribute="trailing" constant="22" id="Csn-ds-6Ji"/>
                                                     <constraint firstItem="IR1-zq-8vq" firstAttribute="top" secondItem="dsg-PB-qxW" secondAttribute="top" constant="62" id="Cxa-42-k2Z"/>
-                                                    <constraint firstItem="F1d-wV-Fyf" firstAttribute="baseline" secondItem="O7m-mx-3Nr" secondAttribute="baseline" id="DPt-wA-fjP"/>
                                                     <constraint firstItem="5Df-pn-iHL" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="UfS-Ev-KHJ" secondAttribute="trailing" constant="20" id="Ej1-Qe-Fgu"/>
                                                     <constraint firstItem="IR1-zq-8vq" firstAttribute="leading" secondItem="dsg-PB-qxW" secondAttribute="leading" id="I9r-np-ocv"/>
                                                     <constraint firstItem="fIu-hW-1sY" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="9aK-ea-8q7" secondAttribute="trailing" constant="20" id="L9s-WZ-ZfB"/>
                                                     <constraint firstItem="c0Q-eC-94Z" firstAttribute="top" secondItem="Y9z-2C-pJA" secondAttribute="bottom" constant="6" id="LAB-UV-g2S"/>
                                                     <constraint firstItem="O8p-Ed-WPz" firstAttribute="top" secondItem="IR1-zq-8vq" secondAttribute="bottom" constant="3" id="O7M-vC-L15"/>
+                                                    <constraint firstItem="5yC-NE-Ddo" firstAttribute="centerY" secondItem="aCN-ld-zpq" secondAttribute="centerY" id="O8U-4M-uLq"/>
                                                     <constraint firstItem="Px7-EH-ofu" firstAttribute="leading" secondItem="5Df-pn-iHL" secondAttribute="trailing" constant="4" id="OcM-vq-6Ve"/>
+                                                    <constraint firstItem="5yC-NE-Ddo" firstAttribute="leading" secondItem="aCN-ld-zpq" secondAttribute="trailing" constant="12" id="P9b-n9-Yab"/>
                                                     <constraint firstItem="O8p-Ed-WPz" firstAttribute="leading" secondItem="dsg-PB-qxW" secondAttribute="leading" constant="20" id="Srp-cf-HXv"/>
-                                                    <constraint firstItem="F1d-wV-Fyf" firstAttribute="baseline" secondItem="O7m-mx-3Nr" secondAttribute="baseline" id="TRd-6A-I9k"/>
                                                     <constraint firstItem="O7m-mx-3Nr" firstAttribute="baseline" secondItem="c0Q-eC-94Z" secondAttribute="baseline" id="U8n-fe-jBO"/>
                                                     <constraint firstAttribute="trailing" secondItem="Y9z-2C-pJA" secondAttribute="trailing" constant="15" id="UT1-mM-le3"/>
                                                     <constraint firstAttribute="trailing" secondItem="fR2-Oh-Nea" secondAttribute="trailing" constant="12" id="Vfm-AM-qtR"/>
@@ -691,10 +685,8 @@
                                                     <constraint firstItem="Vp1-5M-F4D" firstAttribute="leading" secondItem="xIf-li-1nQ" secondAttribute="trailing" constant="8" id="qQe-VE-9Qc"/>
                                                     <constraint firstItem="FZ6-Jb-jU0" firstAttribute="leading" secondItem="dsg-PB-qxW" secondAttribute="leading" constant="15" id="tT2-lC-fIX"/>
                                                     <constraint firstItem="c0Q-eC-94Z" firstAttribute="leading" secondItem="fIu-hW-1sY" secondAttribute="trailing" constant="4" id="tjh-L0-sgr"/>
-                                                    <constraint firstAttribute="trailing" secondItem="F1d-wV-Fyf" secondAttribute="trailing" constant="34" id="ujC-5M-qPK"/>
                                                     <constraint firstItem="c0Q-eC-94Z" firstAttribute="leading" secondItem="dsg-PB-qxW" secondAttribute="leading" constant="150" id="vVh-4q-ZWt"/>
                                                     <constraint firstItem="aCN-ld-zpq" firstAttribute="leading" secondItem="O7m-mx-3Nr" secondAttribute="trailing" constant="1" id="yth-Ht-ktG"/>
-                                                    <constraint firstItem="F1d-wV-Fyf" firstAttribute="leading" secondItem="aCN-ld-zpq" secondAttribute="trailing" constant="12" id="z82-X0-Aim"/>
                                                 </constraints>
                                             </customView>
                                         </subviews>
@@ -876,4 +868,7 @@
             </connections>
         </viewController>
     </objects>
+    <resources>
+        <image name="SelectionBaseNoteIcon" width="29" height="32"/>
+    </resources>
 </document>

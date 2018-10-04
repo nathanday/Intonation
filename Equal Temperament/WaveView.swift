@@ -62,7 +62,7 @@ class WaveView: ResultView {
 				}
 				thePath.line(to: NSMakePoint(theX0+CGFloat(theX), theZeroAxis+CGFloat(theValue*theScalingFactor)*theHeight*0.6));
 			}
-			colorForIndex(0).setStroke();
+			NSColor.controlAccentColor.setStroke();
 			thePath.lineWidth = 2.0;
 			thePath.stroke();
 		}

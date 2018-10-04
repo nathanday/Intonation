@@ -10,8 +10,7 @@ import Cocoa
 
 @IBDesignable public class PianoKeyboardControl: NSControl {
 
-	public static let	A440Frequency = 440.0;
-	public static let	A440MidiNumber = 69;
+	public static let	C0Frequency = 8.175798915643707;
 	public enum NumberOfKeys : Int {
 	case keys12 = 12;
 	case keys13 = 13;
@@ -186,11 +185,11 @@ import Cocoa
 	}
 
 	public static func frequency( forMidiNoteNumber aMidiNotNumber: Int ) -> Double {
-		return A440Frequency*pow(2.0,(Double(aMidiNotNumber-A440MidiNumber))/12.0);
+		return C0Frequency*pow(2.0,(Double(aMidiNotNumber))/12.0);
 	}
 
 	public static func midiNoteNumber(forFrequency aFrequency: Double) -> Int {
-		return Int(12.0 * log(aFrequency/A440Frequency)/log(2)+0.5)+A440MidiNumber;
+		return Int(12.0 * log(aFrequency/C0Frequency)/log(2) + 0.5);
 	}
 
 	private var		trackingArea : NSTrackingArea?

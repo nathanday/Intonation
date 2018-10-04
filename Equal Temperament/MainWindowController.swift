@@ -53,6 +53,7 @@ class MainWindowController : NSWindowController, NSMenuItemValidation {
 	@IBOutlet weak var	searchField : NSTextField?;
 
 	@IBOutlet weak var  octavesCountPopUpButton : NSPopUpButton?
+	@IBOutlet weak var  selectionBaseNoteButton : NSButton?
 
 	var		documentTypeViewController : GeneratorViewController?
 
@@ -260,10 +261,16 @@ class MainWindowController : NSWindowController, NSMenuItemValidation {
 		findIntervalsViewController!.showView()
 	}
 
-	@IBAction func selectMIDINoteForBaseFrequencyAction( _ aSender : NSPopUpButton? ) {
+	@IBAction func showSelectMIDINoteForBaseFrequencyAction( _ aSender : Any? ) {
 		if let theDocument = document as? Document,
-			let theSelectedIndex = aSender?.indexOfSelectedItem {
-			theDocument.baseFrequency = frequencyForMIDINote(theSelectedIndex-1+MainWindowController.midiSelectBounds.lowerBound);
+			let theSelectionBaseNoteButton = selectionBaseNoteButton {
+			let		thePianoKeyboardPopoverViewController = PianoKeyboardPopoverViewController();
+			thePianoKeyboardPopoverViewController.show(withFrequency: theDocument.baseFrequency, relativeTo: theSelectionBaseNoteButton) {
+				(aFrequency:Double?) in
+				if let theFrequency = aFrequency {
+					theDocument.baseFrequency = theFrequency;
+				}
+			}
 		}
 	}
 
