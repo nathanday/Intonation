@@ -176,3 +176,9 @@ extension StackedIntervalsGeneratorViewController : NSTableViewDelegate {
 		return aTableColumn != nil && theColumns.contains(aTableColumn!.identifier.rawValue);
 	}
 }
+
+extension StackedIntervalsIntervalsData {
+	override func viewController( windowController aWindowController : MainWindowController ) -> GeneratorViewController? {
+		return StackedIntervalsGeneratorViewController(windowController:aWindowController);
+	}
+}

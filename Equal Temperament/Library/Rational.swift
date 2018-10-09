@@ -31,7 +31,7 @@ public struct Rational : CustomStringConvertible, CustomDebugStringConvertible, 
 		denominator = aDen;
 	}
 	public init() {
-		self.init(numerator:0,denominator:1);
+		self.init(numerator:1,denominator:1);
 	}
 	public init( _ aRational:Rational) {
 		self.init(numerator:aRational.numerator,denominator:aRational.denominator);
@@ -71,49 +71,9 @@ public struct Rational : CustomStringConvertible, CustomDebugStringConvertible, 
 	public var debugDescription: String {
 		return "\(numerator)∶\(denominator)";
 	}
-	private static func farey( _ aValue: Double, maxDenominator aMaxDenom: Int, maxError aMaxError: Double = 0.0 ) -> (numerator:Int,denominator:Int) {
-		func _farey( _ x: Double, _ M: Int, _ E:Double ) -> (numerator:Int,denominator:Int) {
-			var		a = (0,1);
-			var		b = (1,1);
-			while a.1 <= M && b.1 <= M {
-				let		theMediant = Double(a.0+b.0)/Double(a.1+b.1);
-				if x == theMediant {
-					if a.1 + b.1 <= Int(M) {
-						return (a.0+b.0, a.1+b.1)
-					}
-					else if b.1 > a.1 {
-						return b;
-					}
-					else {
-						return a;
-					}
-				}
-				else if x > theMediant {
-					a = (a.0+b.0,a.1+b.1);
-				}
-				else {
-					b = (a.0+b.0,a.1+b.1);
-				}
-			}
-
-			if( a.1 > M ) {
-				return b;
-			}
-			else {
-				return a;
-			}
-		}
-		let		theInt = Int(aValue);
-		var		theResult = _farey( fabs(aValue-Double(theInt)), aMaxDenom, aMaxError );
-		if( theInt < 0 ) {
-			theResult.numerator = -theResult.numerator;
-		}
-		theResult.numerator += theInt*theResult.denominator;
-		return theResult;
-	}
 
 	public init(_ aValue: Double, maxDenominator aMaxDenom: Int ) {
-		let		r = Rational.farey( aValue, maxDenominator:aMaxDenom )
+		let		r = rationalAproximation( aValue, maxDenominator:aMaxDenom )
 		self.init(numerator:r.numerator,denominator:r.denominator);
 	}
 
@@ -139,7 +99,11 @@ public struct Rational : CustomStringConvertible, CustomDebugStringConvertible, 
 		return numerator < 0 ? Rational(-numerator,denominator) : self;
 	}
 
-	public func signum() -> Int { return numerator.signum(); }
+	public func signum() -> Int {
+		return denominator.signum() > 0
+			? numerator.signum()
+			: -numerator.signum();
+	}
 
 	public static func * (a: Rational, b: Rational) -> Rational {
 		return Rational(a.numerator*b.numerator,a.denominator*b.denominator);
@@ -230,7 +194,8 @@ public struct Rational : CustomStringConvertible, CustomDebugStringConvertible, 
 			: Rational(-a.numerator*b.denominator,-a.denominator*b.numerator);
 	}
 
-	public var isSignMinus: Bool { return (numerator < 0) != (denominator < 0); }
+	public var isSignMinus: FloatingPointSign { return (numerator < 0) == (denominator < 0) ? .plus : .minus; }
+	public var isInteger: Bool { return denominator == 1; }
 
 	public static func + (a: Rational, b: Int) -> Rational { return Rational(a.numerator+b*a.denominator,a.denominator); }
 	public static func - (a: Rational, b: Int) -> Rational { return Rational(a.numerator-b*a.denominator,a.denominator); }

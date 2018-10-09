@@ -138,9 +138,6 @@ class IntervalsData: NSObject {
 		preconditionFailure("The method intervalsDataGenerator is abstract and must be overriden");
 	}
 
-	func viewController( windowController aWindowController : MainWindowController ) -> GeneratorViewController? {		preconditionFailure("The method viewController is abstract and must be overriden");
-	}
-
 	var propertyListValue : [String:Any] {
 		let		theResult : [String:Any] = [
 			"autoAnchor":autoAnchor,

@@ -31,9 +31,6 @@ class PresetIntervalsData : IntervalsData {
 	override func intervalsDataGenerator() -> IntervalsDataGenerator {
 		return PresetGenerator(intervalsData:self);
 	}
-	override func viewController( windowController aWindowController : MainWindowController ) -> GeneratorViewController? {
-		return PresetGeneratorViewController(windowController:aWindowController);
-	}
 
 	var		presetName : String?
 	var		intervals : IntervalSet?;

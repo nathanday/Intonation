@@ -23,3 +23,9 @@ class LimitsGeneratorViewController: GeneratorViewController {
 		get { return UserDefaults.standard.bool(forKey: "limitExpanded"); }
 	}
 }
+
+extension LimitsIntervalsData {
+	override func viewController( windowController aWindowController : MainWindowController ) -> GeneratorViewController? {
+		return LimitsGeneratorViewController(windowController:aWindowController);
+	}
+}

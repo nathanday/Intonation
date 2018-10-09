@@ -52,9 +52,6 @@ class EqualTemperamentIntervalsData : IntervalsData {
 	override func intervalsDataGenerator() -> IntervalsDataGenerator {
 		return EqualTemperamentGenerator(intervalsData:self);
 	}
-	override func viewController( windowController aWindowController : MainWindowController ) -> GeneratorViewController? {
-		return EqualTemperamentGeneratorViewController(windowController:aWindowController);
-	}
 
 	@objc dynamic var		degrees : UInt {
 		willSet {

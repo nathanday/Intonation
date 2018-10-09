@@ -75,3 +75,9 @@ class AdHokGeneratorViewController: GeneratorViewController {
 	}
 	
 }
+
+extension AdHocIntervalsData {
+	override func viewController( windowController aWindowController : MainWindowController ) -> GeneratorViewController? {
+		return AdHokGeneratorViewController(windowController:aWindowController);
+	}
+}

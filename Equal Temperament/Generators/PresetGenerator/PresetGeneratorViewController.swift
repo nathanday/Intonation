@@ -61,3 +61,9 @@ extension PresetGeneratorViewController : NSWindowDelegate {
 		choosePresetWindow!.sheetParent?.endSheet( choosePresetWindow!, returnCode: NSApplication.ModalResponse.abort );
 	}
 }
+
+extension PresetIntervalsData {
+	override func viewController( windowController aWindowController : MainWindowController ) -> GeneratorViewController? {
+		return PresetGeneratorViewController(windowController:aWindowController);
+	}
+}

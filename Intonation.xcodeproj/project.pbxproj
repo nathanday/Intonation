@@ -23,6 +23,25 @@
 		D831054E1B0A6115000EB805 /* HarmonicsDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = D831054D1B0A6115000EB805 /* HarmonicsDescription.swift */; };
 		D83B54B11C8D96C500624A46 /* MIDIToHarmonicRatio.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83B54B01C8D96C500624A46 /* MIDIToHarmonicRatio.swift */; };
 		D83C4A2C1C8863A00090F939 /* IntervalsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83C4A2B1C8863A00090F939 /* IntervalsData.swift */; };
+		D83C5912216C8F97008CF017 /* LimitsIntervalsData_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83C5911216C8F97008CF017 /* LimitsIntervalsData_Test.swift */; };
+		D83C5913216C8FA4008CF017 /* LimitsIntervalsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F2B1D51C93EFD800F88BF7 /* LimitsIntervalsData.swift */; };
+		D83C5914216C8FE6008CF017 /* IntervalsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83C4A2B1C8863A00090F939 /* IntervalsData.swift */; };
+		D83C5915216C90BF008CF017 /* IntervalsDataGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CE1E31C95967700E19505 /* IntervalsDataGenerator.swift */; };
+		D83C5916216C90CC008CF017 /* IntervalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89543831996347F00A091A4 /* IntervalEntry.swift */; };
+		D83C5918216C9133008CF017 /* PrimeProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D849E7301ACADFD1006E0964 /* PrimeProducts.swift */; };
+		D83C5919216C9150008CF017 /* RationalInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8944B361E7FD1E7001A71FE /* RationalInterval.swift */; };
+		D83C591A216C9157008CF017 /* Interval.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89A673A1E9507B100EC693C /* Interval.swift */; };
+		D83C591B216C9167008CF017 /* IntervalSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8812ACF1C9ECE3D0093786D /* IntervalSet.swift */; };
+		D83C591C216C917C008CF017 /* IrrationalInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8944B391E7FD208001A71FE /* IrrationalInterval.swift */; };
+		D83C591D216C9185008CF017 /* EqualTemperamentInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82FD0E31E9506DE009A6EF8 /* EqualTemperamentInterval.swift */; };
+		D83C591E216C91A3008CF017 /* Scale.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8901EBC1ABC226D00A4E071 /* Scale.swift */; };
+		D83C591F216C91C2008CF017 /* StackedIntervalsIntervalsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8720B631C9E7D6B00ED9FBB /* StackedIntervalsIntervalsData.swift */; };
+		D83C5920216C91D8008CF017 /* EqualTemperamentIntervalsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E10CB61CA689310030D8E6 /* EqualTemperamentIntervalsData.swift */; };
+		D83C5921216C91E0008CF017 /* HarmonicSeriesIntervalsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8896A5C2019E2D100664260 /* HarmonicSeriesIntervalsData.swift */; };
+		D83C5922216C91E5008CF017 /* AdHocIntervalsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CE1E11C95960E00E19505 /* AdHocIntervalsData.swift */; };
+		D83C5923216C91E9008CF017 /* PresetIntervalsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89768EF1CABF7BC007D30BA /* PresetIntervalsData.swift */; };
+		D83C5924216C9209008CF017 /* HarmonicsDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = D831054D1B0A6115000EB805 /* HarmonicsDescription.swift */; };
+		D83C5925216C9233008CF017 /* StackedIntervalSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8720B671C9E8B2D00ED9FBB /* StackedIntervalSet.swift */; };
 		D849E7311ACADFD1006E0964 /* PrimeProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D849E7301ACADFD1006E0964 /* PrimeProducts.swift */; };
 		D84CE1E21C95960E00E19505 /* AdHocIntervalsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CE1E11C95960E00E19505 /* AdHocIntervalsData.swift */; };
 		D84CE1E41C95967700E19505 /* IntervalsDataGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CE1E31C95967700E19505 /* IntervalsDataGenerator.swift */; };
@@ -141,6 +160,7 @@
 		D831054D1B0A6115000EB805 /* HarmonicsDescription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HarmonicsDescription.swift; sourceTree = "<group>"; };
 		D83B54B01C8D96C500624A46 /* MIDIToHarmonicRatio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MIDIToHarmonicRatio.swift; sourceTree = "<group>"; };
 		D83C4A2B1C8863A00090F939 /* IntervalsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntervalsData.swift; sourceTree = "<group>"; };
+		D83C5911216C8F97008CF017 /* LimitsIntervalsData_Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitsIntervalsData_Test.swift; sourceTree = "<group>"; };
 		D849E7301ACADFD1006E0964 /* PrimeProducts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimeProducts.swift; sourceTree = "<group>"; };
 		D84CE1E11C95960E00E19505 /* AdHocIntervalsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdHocIntervalsData.swift; sourceTree = "<group>"; };
 		D84CE1E31C95967700E19505 /* IntervalsDataGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntervalsDataGenerator.swift; sourceTree = "<group>"; };
@@ -260,6 +280,14 @@
 				D80989651C85C66B00122857 /* String+Additions.swift */,
 			);
 			name = Additions;
+			sourceTree = "<group>";
+		};
+		D83C5910216C8F6B008CF017 /* Generators */ = {
+			isa = PBXGroup;
+			children = (
+				D83C5911216C8F97008CF017 /* LimitsIntervalsData_Test.swift */,
+			);
+			path = Generators;
 			sourceTree = "<group>";
 		};
 		D84F34081B088BC30095D1E8 /* Frameworks */ = {
@@ -431,6 +459,7 @@
 				D867548020CA39DF00CE2D0F /* UInt+Additions_Test.swift */,
 				D8F2B6BC20E509B400DEB1C9 /* PrimeFactors_Test.swift */,
 				D8D932A320EE29B7009ED565 /* Rational_Test.swift */,
+				D83C5910216C8F6B008CF017 /* Generators */,
 				D89543761996345200A091A4 /* Supporting Files */,
 			);
 			path = "Equal TemperamentTests";
@@ -741,18 +770,37 @@
 				D8F2B6BE20E5141300DEB1C9 /* PrimeFactors.swift in Sources */,
 				D867548320CA3BCC00CE2D0F /* PrimesSequence.swift in Sources */,
 				D89E97A920C83C8300E6B32D /* ColorInterpolator_Test.swift in Sources */,
+				D83C5920216C91D8008CF017 /* EqualTemperamentIntervalsData.swift in Sources */,
 				D867548220CA3B9200CE2D0F /* IntegerType+Additions.swift in Sources */,
+				D83C591D216C9185008CF017 /* EqualTemperamentInterval.swift in Sources */,
+				D83C5924216C9209008CF017 /* HarmonicsDescription.swift in Sources */,
+				D83C5918216C9133008CF017 /* PrimeProducts.swift in Sources */,
 				D8D932AA20F0C58E009ED565 /* Float+Additions.swift in Sources */,
+				D83C591E216C91A3008CF017 /* Scale.swift in Sources */,
 				D8B0EA1720F5AC08007656A7 /* Rational.swift in Sources */,
+				D83C5921216C91E0008CF017 /* HarmonicSeriesIntervalsData.swift in Sources */,
 				D867548120CA39DF00CE2D0F /* UInt+Additions_Test.swift in Sources */,
+				D83C5925216C9233008CF017 /* StackedIntervalSet.swift in Sources */,
 				D8F2B6BD20E509B400DEB1C9 /* PrimeFactors_Test.swift in Sources */,
+				D83C5913216C8FA4008CF017 /* LimitsIntervalsData.swift in Sources */,
 				D8D932A420EE29B7009ED565 /* Rational_Test.swift in Sources */,
 				D89E97AA20C83D7500E6B32D /* ColorInterpolator.swift in Sources */,
 				D8D03A7E21009BCB00E753EE /* UnsignedInteger_Arithmetic.swift in Sources */,
+				D83C5914216C8FE6008CF017 /* IntervalsData.swift in Sources */,
 				D89543791996345200A091A4 /* Equal_TemperamentTests.swift in Sources */,
+				D83C5912216C8F97008CF017 /* LimitsIntervalsData_Test.swift in Sources */,
+				D83C5919216C9150008CF017 /* RationalInterval.swift in Sources */,
+				D83C5915216C90BF008CF017 /* IntervalsDataGenerator.swift in Sources */,
 				D8B0EA1820F5AC0A007656A7 /* RationalNumeric.swift in Sources */,
+				D83C5916216C90CC008CF017 /* IntervalEntry.swift in Sources */,
+				D83C5922216C91E5008CF017 /* AdHocIntervalsData.swift in Sources */,
+				D83C5923216C91E9008CF017 /* PresetIntervalsData.swift in Sources */,
 				D81D19B520C8C705002B77F6 /* MidiNoteFormatter.swift in Sources */,
+				D83C591F216C91C2008CF017 /* StackedIntervalsIntervalsData.swift in Sources */,
+				D83C591B216C9167008CF017 /* IntervalSet.swift in Sources */,
+				D83C591A216C9157008CF017 /* Interval.swift in Sources */,
 				D81D19B420C8C56E002B77F6 /* MidiNoteFormatter_Test.swift in Sources */,
+				D83C591C216C917C008CF017 /* IrrationalInterval.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

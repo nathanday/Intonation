@@ -23,18 +23,22 @@ class LimitsIntervalsData : IntervalsData {
 		super.init();
 	}
 	override init?(propertyList aPropertyList: [String:Any] ) {
-		if let theLimits = aPropertyList["limits"] as? [String:UInt] {
+		if let theLimits = aPropertyList["limits"] as? [String:Int] {
 			if let theNumeratorPrimeLimit = theLimits["numeratorPrime"] {
-				numeratorPrimeLimitIndex = IntervalsData.indexForLargestPrimeLessThanOrEuqalTo(theNumeratorPrimeLimit) ?? 2;
+				numeratorPrimeLimitIndex = IntervalsData.indexForLargestPrimeLessThanOrEuqalTo(UInt(theNumeratorPrimeLimit)) ?? 2;
 			}
 			if let theDenominatorPrimeLimit = theLimits["denominatorPrime"] {
-				denominatorPrimeLimitIndex = IntervalsData.indexForLargestPrimeLessThanOrEuqalTo(theDenominatorPrimeLimit) ?? 2;
+				denominatorPrimeLimitIndex = IntervalsData.indexForLargestPrimeLessThanOrEuqalTo(UInt(theDenominatorPrimeLimit)) ?? 2;
+				separatePrimeLimit = true;
+			} else {
+				denominatorPrimeLimitIndex = numeratorPrimeLimitIndex;
+				separatePrimeLimit = false;
 			}
 			if let theOddLimit = theLimits["oddLimit"] {
-				oddLimit = theOddLimit;
+				oddLimit = UInt(theOddLimit);
 			}
 			if let theAdditiveDissonance = theLimits["additiveDissonance"] {
-				additiveDissonance = theAdditiveDissonance;
+				additiveDissonance = UInt(theAdditiveDissonance);
 			}
 		}
 		super.init(propertyList:aPropertyList);
@@ -51,10 +55,6 @@ class LimitsIntervalsData : IntervalsData {
 
 	override func intervalsDataGenerator() -> IntervalsDataGenerator {
 		return LimitsBasedGenerator(intervalsData:self);
-	}
-
-	override func viewController( windowController aWindowController : MainWindowController ) -> GeneratorViewController? {
-		return LimitsGeneratorViewController(windowController:aWindowController);
 	}
 
 	override var	documentType : DocumentType { return .limits; }

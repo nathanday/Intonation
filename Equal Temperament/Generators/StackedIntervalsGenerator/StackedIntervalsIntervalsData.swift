@@ -37,9 +37,6 @@ class StackedIntervalsIntervalsData : IntervalsData {
 	override func intervalsDataGenerator() -> IntervalsDataGenerator {
 		return StackedIntervalsDataGenerator(intervalsData:self);
 	}
-	override func viewController( windowController aWindowController : MainWindowController ) -> GeneratorViewController? {
-		return StackedIntervalsGeneratorViewController(windowController:aWindowController);
-	}
 
 	var		stackedIntervals = Set<StackedIntervalSet>();
 

@@ -28,3 +28,9 @@ class HarmonicSeriesGeneratorViewController: GeneratorViewController {
 		}
 	}
 }
+
+extension HarmonicSeriesIntervalsData {
+	override func viewController( windowController aWindowController : MainWindowController ) -> GeneratorViewController? {
+		return HarmonicSeriesGeneratorViewController(windowController:aWindowController);
+	}
+}

@@ -67,3 +67,9 @@ class EqualTemperamentGeneratorViewController: GeneratorViewController {
 		(document!.intervalsData as! EqualTemperamentIntervalsData).degrees = UInt(aSender.selectedTag());
 	}
 }
+
+extension EqualTemperamentIntervalsData {
+	override func viewController( windowController aWindowController : MainWindowController ) -> GeneratorViewController? {
+		return EqualTemperamentGeneratorViewController(windowController:aWindowController);
+	}
+}

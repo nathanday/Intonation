@@ -30,3 +30,8 @@ class GeneratorViewController : NSViewController {
 	}
 
 }
+
+extension IntervalsData {
+	@objc func viewController( windowController aWindowController : MainWindowController ) -> GeneratorViewController? {		preconditionFailure("The method viewController is abstract and must be overriden");
+	}
+}

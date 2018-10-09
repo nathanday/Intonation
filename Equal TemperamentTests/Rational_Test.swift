@@ -19,9 +19,9 @@ class Rational_Test: XCTestCase {
     }
 
     func testCreation() {
-		let		theRationalZero = Rational();
-		XCTAssertEqual(theRationalZero.numerator, 0);
-		XCTAssertEqual(theRationalZero.denominator, 1);
+		let		theRationalOne = Rational();
+		XCTAssertEqual(theRationalOne.numerator, 1);
+		XCTAssertEqual(theRationalOne.denominator, 1);
 
 		let		theRational3_10 = Rational( 3, 10);
 		XCTAssertEqual(theRational3_10.numerator, 3);
@@ -107,14 +107,14 @@ class Rational_Test: XCTestCase {
 		XCTAssertEqual(+Rational(3,7), Rational(3,7));
 
 		XCTAssertEqual(Rational(3,7).signum(), 1);
-		XCTAssertEqual(Rational().signum(), 0);
+		XCTAssertEqual(Rational.zero.signum(), 0);
 		XCTAssertEqual(Rational(-3,7).signum(), -1);
 
 		XCTAssertEqual(Rational.abs(Rational(3,7)), Rational(3,7));
 		XCTAssertEqual(Rational.abs(Rational(-3,7)), Rational(3,7));
 
-		XCTAssert(Rational(-3,7).isSignMinus);
-		XCTAssertEqual(Rational(3,7).isSignMinus, false);
+		XCTAssertEqual(Rational(-3,7).isSignMinus, .minus);
+		XCTAssertEqual(Rational(3,7).isSignMinus, .plus);
 		XCTAssert(Rational.one.isFinite);
 		XCTAssert(Rational.infinity.isInfinite);
 		XCTAssert(Rational.nan.isNaN);

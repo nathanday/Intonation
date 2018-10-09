@@ -40,9 +40,6 @@ class AdHocIntervalsData : IntervalsData {
 	override func intervalsDataGenerator() -> IntervalsDataGenerator {
 		return AdHocGenerator(intervalsData:self);
 	}
-	override func viewController( windowController aWindowController : MainWindowController ) -> GeneratorViewController? {
-		return AdHokGeneratorViewController(windowController:aWindowController);
-	}
 	var		adHocEntries : Set<Interval>;
 
 	func addInterval( _ anInterval : Interval ) {

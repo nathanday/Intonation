@@ -19,19 +19,18 @@ import Cocoa
 					(x:0.0,hueComponent:0.0,saturationComponent:1.0,brightnessComponent:0.75),
 					(x:1.0,hueComponent:CGFloat(1.25/7.5),saturationComponent:1.0,brightnessComponent:0.625),
 					(x:3.0,hueComponent:CGFloat(3.625/7.5),saturationComponent:1.0,brightnessComponent:0.625),
-					(x:7.25,hueComponent:1.0,saturationComponent:1.0,brightnessComponent:0.75)]);
+					(x:7.0,hueComponent:1.0,saturationComponent:1.0,brightnessComponent:0.75)]);
 			case NSAppearance.Name.darkAqua:
 				_colorInterpolator = ColorInterpolator(hsbaPoints: [
 					(x:0.0,hueComponent:0.0,saturationComponent:1.0,brightnessComponent:1.0),
 					(x:1.0,hueComponent:CGFloat(1.0/7.5),saturationComponent:0.8125,brightnessComponent:1.0),
-					(x:4.0,hueComponent:CGFloat(4.0/7.5),saturationComponent:1.0,brightnessComponent:1.0),
-					(x:5.0,hueComponent:CGFloat(5.5/7.5),saturationComponent:0.75,brightnessComponent:1.0),
-					(x:7.25,hueComponent:1.0,saturationComponent:1.0,brightnessComponent:1.0)]);
+					(x:3.0,hueComponent:CGFloat(4.0/7.5),saturationComponent:1.0,brightnessComponent:1.0),
+					(x:5.0,hueComponent:CGFloat(5.7/7.5),saturationComponent:0.75,brightnessComponent:1.0),
+					(x:7.0,hueComponent:1.0,saturationComponent:1.0,brightnessComponent:1.0)]);
 			default:
 				_colorInterpolator = ColorInterpolator(hsbaPoints: [
 					(x:0.0,hueComponent:0.0,saturationComponent:1.0,brightnessComponent:0.75),
-					(x:0.0,hueComponent:0.0,saturationComponent:1.0,brightnessComponent:0.75),
-					(x:7.25,hueComponent:1.0,saturationComponent:1.0,brightnessComponent:0.75)]);
+					(x:7.0,hueComponent:1.0,saturationComponent:1.0,brightnessComponent:0.75)]);
 			}
 		}
 		return _colorInterpolator!;

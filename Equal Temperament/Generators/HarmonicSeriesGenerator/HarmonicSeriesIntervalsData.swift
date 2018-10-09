@@ -43,9 +43,6 @@ class HarmonicSeriesIntervalsData : IntervalsData {
 	override func intervalsDataGenerator() -> IntervalsDataGenerator {
 		return HarmonicSeriesGenerator(intervalsData:self);
 	}
-	override func viewController( windowController aWindowController : MainWindowController ) -> GeneratorViewController? {
-		return HarmonicSeriesGeneratorViewController(windowController:aWindowController);
-	}
 
 	@objc dynamic var		octave : Int {
 		willSet {
