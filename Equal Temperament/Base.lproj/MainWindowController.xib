@@ -278,7 +278,7 @@
                                                             </textField>
                                                             <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fij-32-Oaz">
                                                                 <rect key="frame" x="150" y="40" width="144" height="18"/>
-                                                                <sliderCell key="cell" controlSize="small" continuous="YES" state="on" alignment="left" maxValue="1.5" doubleValue="0.5" tickMarkPosition="above" numberOfTickMarks="9" sliderType="linear" id="3Vo-zH-EzS"/>
+                                                                <sliderCell key="cell" controlSize="small" continuous="YES" state="on" alignment="left" maxValue="1.5" doubleValue="0.5625" tickMarkPosition="above" numberOfTickMarks="9" allowsTickMarkValuesOnly="YES" sliderType="linear" id="3Vo-zH-EzS"/>
                                                                 <connections>
                                                                     <binding destination="-2" name="value" keyPath="self.document.allOvertonesAmount" id="udl-V0-wEb"/>
                                                                 </connections>
@@ -293,7 +293,7 @@
                                                             </textField>
                                                             <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="oQD-Fn-6WG">
                                                                 <rect key="frame" x="382" y="40" width="144" height="18"/>
-                                                                <sliderCell key="cell" controlSize="small" continuous="YES" state="on" alignment="left" maxValue="1" doubleValue="1" tickMarkPosition="above" numberOfTickMarks="9" sliderType="linear" id="Xl4-rU-hFQ"/>
+                                                                <sliderCell key="cell" controlSize="small" continuous="YES" state="on" alignment="left" maxValue="1" doubleValue="1" tickMarkPosition="above" numberOfTickMarks="9" allowsTickMarkValuesOnly="YES" sliderType="linear" id="Xl4-rU-hFQ"/>
                                                                 <connections>
                                                                     <binding destination="-2" name="value" keyPath="self.document.evenOvertonesAmount" id="IrE-14-yuL"/>
                                                                 </connections>

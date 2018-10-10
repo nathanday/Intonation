@@ -158,7 +158,7 @@ class IntervalsData: NSObject {
 			return nil;
 		}
 		for p in PrimesSequence(end: aValue ) {
-			if p > aValue { return i; }
+			if p >= aValue { return i; }
 			i += 1;
 		}
 		return nil;

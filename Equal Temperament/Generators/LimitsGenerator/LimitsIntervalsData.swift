@@ -121,18 +121,27 @@ class LimitsBasedGenerator : IntervalsDataGenerator {
 		get {
 			if _everyIntervalEntry == nil {
 				var		theResult = Set<IntervalEntry>();
-				for theDenom in PrimeProducts(maxPrime: limits.denominatorPrime, range: 1..<limits.odd) {
-					for theNum in PrimeProducts(maxPrime: limits.numeratorPrime, range: theDenom..<theDenom*2) {
-						if theNum+theDenom <= limits.additiveDissonance {
-							assert(theNum >= theDenom);
-							assert( theNum <= theDenom*2 );
-							for theOctaves in 0..<octavesCount {
-								let		theRational = RationalInterval(theNum*1<<theOctaves,theDenom);
-								let		theEntry = IntervalEntry(interval: theRational );
-								theResult.insert(theEntry);
-								if let theDegree = Scale.major.indexOf(theRational) {
-									theEntry.degreeName = Scale.degreeName(theDegree);
-								}
+				for theDenom in 1..<2*limits.odd {
+					for theNum in theDenom..<theDenom*2 {
+						if theNum+theDenom > limits.additiveDissonance {
+							continue;
+						}
+						if theDenom.largestPrimeFactor > limits.denominatorPrime
+							|| theNum.largestPrimeFactor > limits.numeratorPrime {
+							continue;
+						}
+						if (theDenom%2 == 1 && theDenom > limits.odd)
+							|| (theNum%2 == 1 && theNum > limits.odd) {
+							continue;
+						}
+						assert(theNum >= theDenom);
+						assert( theNum <= theDenom*2 );
+						for theOctaves in 0..<octavesCount {
+							let		theRational = RationalInterval(theNum*1<<theOctaves,theDenom);
+							let		theEntry = IntervalEntry(interval: theRational );
+							theResult.insert(theEntry);
+							if let theDegree = Scale.major.indexOf(theRational) {
+								theEntry.degreeName = Scale.degreeName(theDegree);
 							}
 						}
 					}

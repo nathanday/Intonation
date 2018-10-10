@@ -28,7 +28,6 @@
 		D83C5914216C8FE6008CF017 /* IntervalsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83C4A2B1C8863A00090F939 /* IntervalsData.swift */; };
 		D83C5915216C90BF008CF017 /* IntervalsDataGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CE1E31C95967700E19505 /* IntervalsDataGenerator.swift */; };
 		D83C5916216C90CC008CF017 /* IntervalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89543831996347F00A091A4 /* IntervalEntry.swift */; };
-		D83C5918216C9133008CF017 /* PrimeProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D849E7301ACADFD1006E0964 /* PrimeProducts.swift */; };
 		D83C5919216C9150008CF017 /* RationalInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8944B361E7FD1E7001A71FE /* RationalInterval.swift */; };
 		D83C591A216C9157008CF017 /* Interval.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89A673A1E9507B100EC693C /* Interval.swift */; };
 		D83C591B216C9167008CF017 /* IntervalSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8812ACF1C9ECE3D0093786D /* IntervalSet.swift */; };
@@ -42,7 +41,6 @@
 		D83C5923216C91E9008CF017 /* PresetIntervalsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89768EF1CABF7BC007D30BA /* PresetIntervalsData.swift */; };
 		D83C5924216C9209008CF017 /* HarmonicsDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = D831054D1B0A6115000EB805 /* HarmonicsDescription.swift */; };
 		D83C5925216C9233008CF017 /* StackedIntervalSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8720B671C9E8B2D00ED9FBB /* StackedIntervalSet.swift */; };
-		D849E7311ACADFD1006E0964 /* PrimeProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D849E7301ACADFD1006E0964 /* PrimeProducts.swift */; };
 		D84CE1E21C95960E00E19505 /* AdHocIntervalsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CE1E11C95960E00E19505 /* AdHocIntervalsData.swift */; };
 		D84CE1E41C95967700E19505 /* IntervalsDataGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CE1E31C95967700E19505 /* IntervalsDataGenerator.swift */; };
 		D8571C801CA56D2B008A5A46 /* LimitsGeneratorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8571C7E1CA56D2B008A5A46 /* LimitsGeneratorViewController.swift */; };
@@ -161,7 +159,6 @@
 		D83B54B01C8D96C500624A46 /* MIDIToHarmonicRatio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MIDIToHarmonicRatio.swift; sourceTree = "<group>"; };
 		D83C4A2B1C8863A00090F939 /* IntervalsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntervalsData.swift; sourceTree = "<group>"; };
 		D83C5911216C8F97008CF017 /* LimitsIntervalsData_Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitsIntervalsData_Test.swift; sourceTree = "<group>"; };
-		D849E7301ACADFD1006E0964 /* PrimeProducts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimeProducts.swift; sourceTree = "<group>"; };
 		D84CE1E11C95960E00E19505 /* AdHocIntervalsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdHocIntervalsData.swift; sourceTree = "<group>"; };
 		D84CE1E31C95967700E19505 /* IntervalsDataGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntervalsDataGenerator.swift; sourceTree = "<group>"; };
 		D8571C7E1CA56D2B008A5A46 /* LimitsGeneratorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LimitsGeneratorViewController.swift; sourceTree = "<group>"; };
@@ -541,7 +538,6 @@
 				D83C4A2B1C8863A00090F939 /* IntervalsData.swift */,
 				D84CE1E31C95967700E19505 /* IntervalsDataGenerator.swift */,
 				D885A12F1CE60B7300A3B996 /* PrimesSequence.swift */,
-				D849E7301ACADFD1006E0964 /* PrimeProducts.swift */,
 				D8F2B6BA20E3A07D00DEB1C9 /* PrimeFactors.swift */,
 				D8944B341E7FD1E7001A71FE /* Interval */,
 				D8812ACF1C9ECE3D0093786D /* IntervalSet.swift */,
@@ -696,7 +692,6 @@
 				D893993E1CA3E57F00C9CAA6 /* GeneratorViewController.swift in Sources */,
 				D8AFAD301CA58F370008ABFE /* PresetGeneratorViewController.swift in Sources */,
 				D82FD0E41E9506DE009A6EF8 /* EqualTemperamentInterval.swift in Sources */,
-				D849E7311ACADFD1006E0964 /* PrimeProducts.swift in Sources */,
 				D8646B2D1C3D4C5A00D8C429 /* ChordPreviewViewController.swift in Sources */,
 				D84CE1E21C95960E00E19505 /* AdHocIntervalsData.swift in Sources */,
 				D8832F8619A0C86B0095B26F /* WaveView.swift in Sources */,
@@ -774,7 +769,6 @@
 				D867548220CA3B9200CE2D0F /* IntegerType+Additions.swift in Sources */,
 				D83C591D216C9185008CF017 /* EqualTemperamentInterval.swift in Sources */,
 				D83C5924216C9209008CF017 /* HarmonicsDescription.swift in Sources */,
-				D83C5918216C9133008CF017 /* PrimeProducts.swift in Sources */,
 				D8D932AA20F0C58E009ED565 /* Float+Additions.swift in Sources */,
 				D83C591E216C91A3008CF017 /* Scale.swift in Sources */,
 				D8B0EA1720F5AC08007656A7 /* Rational.swift in Sources */,
