@@ -21,18 +21,18 @@ class EqualTemperamentIntervalsData : IntervalsData {
 		super.init();
 	}
 	override init?(propertyList aPropertyList: [String:Any] ) {
-		guard let theProperties = aPropertyList["equalTemperament"] as? [String:String] else {
+		guard let theProperties = aPropertyList["equalTemperament"] as? [String:Any] else {
 			return nil;
 		}
-		if let theDegreesString = theProperties["degrees"] {
-			degrees = UInt(theDegreesString) ?? 12;
+		if let theDegreesString = theProperties["degrees"] as? Int {
+			degrees = UInt(theDegreesString);
 		} else {
 			degrees = UInt(UserDefaults.standard.integer(forKey: EqualTemperamentIntervalsData.degreesKey));
 			if( degrees == 0 ) {
 				degrees = 12;
 			}
 		}
-		if let theIntervalString = theProperties["interval"] {
+		if let theIntervalString = theProperties["interval"] as? String {
 			interval = RationalInterval.from(string:theIntervalString) ?? RationalInterval(2,1);
 		} else {
 			interval = UserDefaults.standard.rationalIntervalForKey(EqualTemperamentIntervalsData.intervalKey) ?? RationalInterval(2);
@@ -41,7 +41,7 @@ class EqualTemperamentIntervalsData : IntervalsData {
 	}
 	override var propertyListValue : [String:Any] {
 		var		theResult = super.propertyListValue;
-		theResult["limits"] = [
+		theResult["equalTemperament"] = [
 			"degrees":"\(degrees)",
 			"interval":interval.toString];
 		return theResult;

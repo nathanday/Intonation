@@ -14,7 +14,7 @@ class StackedIntervalsIntervalsData : IntervalsData {
 	}
 	override init?(propertyList aPropertyList: [String:Any] ) {
 		super.init(propertyList:aPropertyList);
-		if let theEntries = aPropertyList["stackedIntervals"] as? [[String:String]] {
+		if let theEntries = aPropertyList["stackedIntervals"] as? [[String:Any]] {
 			for theEntry in theEntries{
 				if let theStackedInterval = StackedIntervalSet(propertyList: theEntry) {
 					stackedIntervals.insert(theStackedInterval);

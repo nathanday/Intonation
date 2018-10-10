@@ -15,10 +15,10 @@ class AdHocIntervalsData : IntervalsData {
 	}
 	override init?(propertyList aPropertyList: [String:Any] ) {
 		adHocEntries = Set<Interval>();
-		guard let theOddLimit = aPropertyList["adHoc"] as? [String] else {
+		guard let theEntityList = aPropertyList["adHoc"] as? [String] else {
 			return nil;
 		}
-		for theEntityString in theOddLimit {
+		for theEntityString in theEntityList {
 			if let theInterval = Interval.from(string:theEntityString) {
 				adHocEntries.insert(theInterval);
 			}

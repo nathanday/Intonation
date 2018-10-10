@@ -11,7 +11,10 @@ import Foundation
 class EqualTemperamentInterval : Interval {
 	private static let	intervalNames : [UInt:[String]] = {
 		var theResult = [UInt:[String]]()
-		for theEntry in UserDefaults.standard.array(forKey: "intervalNames")! as! [[String:Any]] {
+		guard let theIntervalNames = UserDefaults.standard.array(forKey: "intervalNames") else {
+			return theResult;
+		}
+		for theEntry in theIntervalNames as! [[String:Any]] {
 			if let theRatioString = theEntry["ratio"] as? String,
 				let theNames = theEntry["names"] as? [String] {
 				if theRatioString.contains(".") {

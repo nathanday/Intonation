@@ -27,14 +27,17 @@ class StackedIntervalSet : IntervalSet, Hashable {
 		super.init( name: anInterval.ratioString );
 		calculateIntervals();
 	}
-	convenience init?(propertyList aPropertyList : [String:String] ) {
-		if let theInterval = Interval.from(string:aPropertyList["interval"]) {
-			let theStepsString = aPropertyList["steps"] ?? "2";
-			let theOctavesString = aPropertyList["octaves"] ?? "2";
-			self.init(interval : theInterval, steps : UInt(theStepsString) ?? 2, octaves: UInt(theOctavesString) ?? 2);
-		} else {
+	convenience init?(propertyList aPropertyList : [String:Any] ) {
+		guard let theInterval = Interval.from(string:aPropertyList["interval"] as? String) else {
 			return nil;
 		}
+		guard let theSteps = aPropertyList["steps"] as? Int else {
+			return nil;
+		}
+		guard let theOctaves = aPropertyList["octaves"] as? Int else {
+			return nil;
+		}
+		self.init(interval : theInterval, steps : UInt(theSteps), octaves: UInt(theOctaves));
 	}
 
 	func contains( _ anInterval: Interval ) -> Bool {

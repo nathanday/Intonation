@@ -40,83 +40,32 @@ class LimitsIntervalsData_Test: XCTestCase {
 		let		theEveryInterval = theGenerator.everyEntry;
 		XCTAssertEqual( theEveryInterval.count,  26);
 
-		XCTAssertEqual( (theEveryInterval[0].interval as! RationalInterval).ratio.numerator,  1);
-		XCTAssertEqual( (theEveryInterval[0].interval as! RationalInterval).ratio.denominator, 1 );
-
-		XCTAssertEqual( (theEveryInterval[1].interval as! RationalInterval).ratio.numerator,  25);
-		XCTAssertEqual( (theEveryInterval[1].interval as! RationalInterval).ratio.denominator, 24 );
-
-		XCTAssertEqual( (theEveryInterval[2].interval as! RationalInterval).ratio.numerator,  16);
-		XCTAssertEqual( (theEveryInterval[2].interval as! RationalInterval).ratio.denominator, 15 );
-
-		XCTAssertEqual( (theEveryInterval[3].interval as! RationalInterval).ratio.numerator,  27);
-		XCTAssertEqual( (theEveryInterval[3].interval as! RationalInterval).ratio.denominator, 25 );
-
-		XCTAssertEqual( (theEveryInterval[4].interval as! RationalInterval).ratio.numerator,  10);
-		XCTAssertEqual( (theEveryInterval[4].interval as! RationalInterval).ratio.denominator, 9 );
-
-		XCTAssertEqual( (theEveryInterval[5].interval as! RationalInterval).ratio.numerator,  9);
-		XCTAssertEqual( (theEveryInterval[5].interval as! RationalInterval).ratio.denominator, 8 );
-
-		XCTAssertEqual( (theEveryInterval[6].interval as! RationalInterval).ratio.numerator,  32);
-		XCTAssertEqual( (theEveryInterval[6].interval as! RationalInterval).ratio.denominator, 27 );
-
-		XCTAssertEqual( (theEveryInterval[7].interval as! RationalInterval).ratio.numerator,  6);
-		XCTAssertEqual( (theEveryInterval[7].interval as! RationalInterval).ratio.denominator, 5 );
-
-		XCTAssertEqual( (theEveryInterval[8].interval as! RationalInterval).ratio.numerator,  5);
-		XCTAssertEqual( (theEveryInterval[8].interval as! RationalInterval).ratio.denominator, 4 );
-
-		XCTAssertEqual( (theEveryInterval[9].interval as! RationalInterval).ratio.numerator,  32);
-		XCTAssertEqual( (theEveryInterval[9].interval as! RationalInterval).ratio.denominator, 25 );
-
-		XCTAssertEqual( (theEveryInterval[10].interval as! RationalInterval).ratio.numerator,  4);
-		XCTAssertEqual( (theEveryInterval[10].interval as! RationalInterval).ratio.denominator, 3 );
-
-		XCTAssertEqual( (theEveryInterval[11].interval as! RationalInterval).ratio.numerator,  27);
-		XCTAssertEqual( (theEveryInterval[11].interval as! RationalInterval).ratio.denominator, 20 );
-
-		XCTAssertEqual( (theEveryInterval[12].interval as! RationalInterval).ratio.numerator,  25);
-		XCTAssertEqual( (theEveryInterval[12].interval as! RationalInterval).ratio.denominator, 18 );
-
-		XCTAssertEqual( (theEveryInterval[13].interval as! RationalInterval).ratio.numerator,  45);
-		XCTAssertEqual( (theEveryInterval[13].interval as! RationalInterval).ratio.denominator, 32 );
-
-		XCTAssertEqual( (theEveryInterval[14].interval as! RationalInterval).ratio.numerator,  36);
-		XCTAssertEqual( (theEveryInterval[14].interval as! RationalInterval).ratio.denominator, 25 );
-
-		XCTAssertEqual( (theEveryInterval[15].interval as! RationalInterval).ratio.numerator,  40);
-		XCTAssertEqual( (theEveryInterval[15].interval as! RationalInterval).ratio.denominator, 27 );
-
-		XCTAssertEqual( (theEveryInterval[16].interval as! RationalInterval).ratio.numerator,  3);
-		XCTAssertEqual( (theEveryInterval[16].interval as! RationalInterval).ratio.denominator, 2 );
-
-		XCTAssertEqual( (theEveryInterval[17].interval as! RationalInterval).ratio.numerator,  25);
-		XCTAssertEqual( (theEveryInterval[17].interval as! RationalInterval).ratio.denominator, 16 );
-
-		XCTAssertEqual( (theEveryInterval[18].interval as! RationalInterval).ratio.numerator,  8);
-		XCTAssertEqual( (theEveryInterval[18].interval as! RationalInterval).ratio.denominator, 5 );
-
-		XCTAssertEqual( (theEveryInterval[19].interval as! RationalInterval).ratio.numerator,  5);
-		XCTAssertEqual( (theEveryInterval[19].interval as! RationalInterval).ratio.denominator, 3 );
-
-		XCTAssertEqual( (theEveryInterval[20].interval as! RationalInterval).ratio.numerator,  27);
-		XCTAssertEqual( (theEveryInterval[20].interval as! RationalInterval).ratio.denominator, 16 );
-
-		XCTAssertEqual( (theEveryInterval[21].interval as! RationalInterval).ratio.numerator,  16);
-		XCTAssertEqual( (theEveryInterval[21].interval as! RationalInterval).ratio.denominator, 9 );
-
-		XCTAssertEqual( (theEveryInterval[22].interval as! RationalInterval).ratio.numerator,  9);
-		XCTAssertEqual( (theEveryInterval[22].interval as! RationalInterval).ratio.denominator, 5 );
-
-		XCTAssertEqual( (theEveryInterval[23].interval as! RationalInterval).ratio.numerator,  50);
-		XCTAssertEqual( (theEveryInterval[23].interval as! RationalInterval).ratio.denominator, 27 );
-
-		XCTAssertEqual( (theEveryInterval[24].interval as! RationalInterval).ratio.numerator,  15);
-		XCTAssertEqual( (theEveryInterval[24].interval as! RationalInterval).ratio.denominator, 8 );
-
-		XCTAssertEqual( (theEveryInterval[25].interval as! RationalInterval).ratio.numerator,  48);
-		XCTAssertEqual( (theEveryInterval[25].interval as! RationalInterval).ratio.denominator, 25 );
+		XCTAssertEqual( (theEveryInterval[0].interval as! RationalInterval).ratio, Rational(1) );
+		XCTAssertEqual( (theEveryInterval[1].interval as! RationalInterval).ratio, Rational(25,24) );
+		XCTAssertEqual( (theEveryInterval[2].interval as! RationalInterval).ratio, Rational(16,15) );
+		XCTAssertEqual( (theEveryInterval[3].interval as! RationalInterval).ratio, Rational(27, 25) );
+		XCTAssertEqual( (theEveryInterval[4].interval as! RationalInterval).ratio, Rational(10, 9) );
+		XCTAssertEqual( (theEveryInterval[5].interval as! RationalInterval).ratio, Rational(9, 8) );
+		XCTAssertEqual( (theEveryInterval[6].interval as! RationalInterval).ratio, Rational(32, 27) );
+		XCTAssertEqual( (theEveryInterval[7].interval as! RationalInterval).ratio, Rational(6, 5) );
+		XCTAssertEqual( (theEveryInterval[8].interval as! RationalInterval).ratio, Rational(5, 4) );
+		XCTAssertEqual( (theEveryInterval[9].interval as! RationalInterval).ratio, Rational(32, 25) );
+		XCTAssertEqual( (theEveryInterval[10].interval as! RationalInterval).ratio, Rational(4, 3) );
+		XCTAssertEqual( (theEveryInterval[11].interval as! RationalInterval).ratio, Rational(27, 20) );
+		XCTAssertEqual( (theEveryInterval[12].interval as! RationalInterval).ratio, Rational(25, 18) );
+		XCTAssertEqual( (theEveryInterval[13].interval as! RationalInterval).ratio, Rational(45, 32) );
+		XCTAssertEqual( (theEveryInterval[14].interval as! RationalInterval).ratio, Rational(36, 25) );
+		XCTAssertEqual( (theEveryInterval[15].interval as! RationalInterval).ratio, Rational(40, 27) );
+		XCTAssertEqual( (theEveryInterval[16].interval as! RationalInterval).ratio, Rational(3, 2) );
+		XCTAssertEqual( (theEveryInterval[17].interval as! RationalInterval).ratio, Rational(25, 16) );
+		XCTAssertEqual( (theEveryInterval[18].interval as! RationalInterval).ratio, Rational(8, 5) );
+		XCTAssertEqual( (theEveryInterval[19].interval as! RationalInterval).ratio, Rational(5, 3) );
+		XCTAssertEqual( (theEveryInterval[20].interval as! RationalInterval).ratio, Rational(27, 16) );
+		XCTAssertEqual( (theEveryInterval[21].interval as! RationalInterval).ratio, Rational(16, 9) );
+		XCTAssertEqual( (theEveryInterval[22].interval as! RationalInterval).ratio, Rational(9, 5) );
+		XCTAssertEqual( (theEveryInterval[23].interval as! RationalInterval).ratio, Rational(50, 27) );
+		XCTAssertEqual( (theEveryInterval[24].interval as! RationalInterval).ratio, Rational(15, 8) );
+		XCTAssertEqual( (theEveryInterval[25].interval as! RationalInterval).ratio, Rational(48, 25) );
     }
 
 	func testSevenLimt() {
@@ -141,71 +90,28 @@ class LimitsIntervalsData_Test: XCTestCase {
 		let		theEveryInterval = theGenerator.everyEntry;
 		XCTAssertEqual( theEveryInterval.count,  22);
 
-		XCTAssertEqual( (theEveryInterval[0].interval as! RationalInterval).ratio.numerator,  1);
-		XCTAssertEqual( (theEveryInterval[0].interval as! RationalInterval).ratio.denominator, 1 );
-
-		XCTAssertEqual( (theEveryInterval[1].interval as! RationalInterval).ratio.numerator,  16);
-		XCTAssertEqual( (theEveryInterval[1].interval as! RationalInterval).ratio.denominator, 15 );
-
-		XCTAssertEqual( (theEveryInterval[2].interval as! RationalInterval).ratio.numerator,  15);
-		XCTAssertEqual( (theEveryInterval[2].interval as! RationalInterval).ratio.denominator, 14 );
-
-		XCTAssertEqual( (theEveryInterval[3].interval as! RationalInterval).ratio.numerator,  10);
-		XCTAssertEqual( (theEveryInterval[3].interval as! RationalInterval).ratio.denominator, 9 );
-
-		XCTAssertEqual( (theEveryInterval[4].interval as! RationalInterval).ratio.numerator,  9);
-		XCTAssertEqual( (theEveryInterval[4].interval as! RationalInterval).ratio.denominator, 8 );
-
-		XCTAssertEqual( (theEveryInterval[5].interval as! RationalInterval).ratio.numerator,  8);
-		XCTAssertEqual( (theEveryInterval[5].interval as! RationalInterval).ratio.denominator, 7 );
-
-		XCTAssertEqual( (theEveryInterval[6].interval as! RationalInterval).ratio.numerator,  7);
-		XCTAssertEqual( (theEveryInterval[6].interval as! RationalInterval).ratio.denominator, 6 );
-
-		XCTAssertEqual( (theEveryInterval[7].interval as! RationalInterval).ratio.numerator,  6);
-		XCTAssertEqual( (theEveryInterval[7].interval as! RationalInterval).ratio.denominator, 5 );
-
-		XCTAssertEqual( (theEveryInterval[8].interval as! RationalInterval).ratio.numerator,  5);
-		XCTAssertEqual( (theEveryInterval[8].interval as! RationalInterval).ratio.denominator, 4 );
-
-		XCTAssertEqual( (theEveryInterval[9].interval as! RationalInterval).ratio.numerator,  9);
-		XCTAssertEqual( (theEveryInterval[9].interval as! RationalInterval).ratio.denominator, 7 );
-
-		XCTAssertEqual( (theEveryInterval[10].interval as! RationalInterval).ratio.numerator,  4);
-		XCTAssertEqual( (theEveryInterval[10].interval as! RationalInterval).ratio.denominator, 3 );
-
-		XCTAssertEqual( (theEveryInterval[11].interval as! RationalInterval).ratio.numerator,  7);
-		XCTAssertEqual( (theEveryInterval[11].interval as! RationalInterval).ratio.denominator, 5 );
-
-		XCTAssertEqual( (theEveryInterval[12].interval as! RationalInterval).ratio.numerator,  10);
-		XCTAssertEqual( (theEveryInterval[12].interval as! RationalInterval).ratio.denominator, 7 );
-
-		XCTAssertEqual( (theEveryInterval[13].interval as! RationalInterval).ratio.numerator,  3);
-		XCTAssertEqual( (theEveryInterval[13].interval as! RationalInterval).ratio.denominator, 2 );
-
-		XCTAssertEqual( (theEveryInterval[14].interval as! RationalInterval).ratio.numerator,  14);
-		XCTAssertEqual( (theEveryInterval[14].interval as! RationalInterval).ratio.denominator, 9 );
-
-		XCTAssertEqual( (theEveryInterval[15].interval as! RationalInterval).ratio.numerator,  8);
-		XCTAssertEqual( (theEveryInterval[15].interval as! RationalInterval).ratio.denominator, 5 );
-
-		XCTAssertEqual( (theEveryInterval[16].interval as! RationalInterval).ratio.numerator,  5);
-		XCTAssertEqual( (theEveryInterval[16].interval as! RationalInterval).ratio.denominator, 3 );
-
-		XCTAssertEqual( (theEveryInterval[17].interval as! RationalInterval).ratio.numerator,  12);
-		XCTAssertEqual( (theEveryInterval[17].interval as! RationalInterval).ratio.denominator, 7 );
-
-		XCTAssertEqual( (theEveryInterval[18].interval as! RationalInterval).ratio.numerator,  7);
-		XCTAssertEqual( (theEveryInterval[18].interval as! RationalInterval).ratio.denominator, 4 );
-
-		XCTAssertEqual( (theEveryInterval[19].interval as! RationalInterval).ratio.numerator,  16);
-		XCTAssertEqual( (theEveryInterval[19].interval as! RationalInterval).ratio.denominator, 9 );
-
-		XCTAssertEqual( (theEveryInterval[20].interval as! RationalInterval).ratio.numerator,  9);
-		XCTAssertEqual( (theEveryInterval[20].interval as! RationalInterval).ratio.denominator, 5 );
-
-		XCTAssertEqual( (theEveryInterval[21].interval as! RationalInterval).ratio.numerator,  15);
-		XCTAssertEqual( (theEveryInterval[21].interval as! RationalInterval).ratio.denominator, 8 );
+		XCTAssertEqual( (theEveryInterval[0].interval as! RationalInterval).ratio, Rational(1) );
+		XCTAssertEqual( (theEveryInterval[1].interval as! RationalInterval).ratio, Rational(16, 15) );
+		XCTAssertEqual( (theEveryInterval[2].interval as! RationalInterval).ratio, Rational(15, 14) );
+		XCTAssertEqual( (theEveryInterval[3].interval as! RationalInterval).ratio, Rational(10, 9) );
+		XCTAssertEqual( (theEveryInterval[4].interval as! RationalInterval).ratio, Rational(9, 8) );
+		XCTAssertEqual( (theEveryInterval[5].interval as! RationalInterval).ratio, Rational(8, 7) );
+		XCTAssertEqual( (theEveryInterval[6].interval as! RationalInterval).ratio, Rational(7, 6) );
+		XCTAssertEqual( (theEveryInterval[7].interval as! RationalInterval).ratio, Rational(6, 5) );
+		XCTAssertEqual( (theEveryInterval[8].interval as! RationalInterval).ratio, Rational(5, 4) );
+		XCTAssertEqual( (theEveryInterval[9].interval as! RationalInterval).ratio, Rational(9, 7) );
+		XCTAssertEqual( (theEveryInterval[10].interval as! RationalInterval).ratio, Rational(4, 3) );
+		XCTAssertEqual( (theEveryInterval[11].interval as! RationalInterval).ratio, Rational(7, 5) );
+		XCTAssertEqual( (theEveryInterval[12].interval as! RationalInterval).ratio, Rational(10, 7) );
+		XCTAssertEqual( (theEveryInterval[13].interval as! RationalInterval).ratio, Rational(3, 2) );
+		XCTAssertEqual( (theEveryInterval[14].interval as! RationalInterval).ratio, Rational(14, 9) );
+		XCTAssertEqual( (theEveryInterval[15].interval as! RationalInterval).ratio, Rational(8, 5) );
+		XCTAssertEqual( (theEveryInterval[16].interval as! RationalInterval).ratio, Rational(5, 3) );
+		XCTAssertEqual( (theEveryInterval[17].interval as! RationalInterval).ratio, Rational(12, 7) );
+		XCTAssertEqual( (theEveryInterval[18].interval as! RationalInterval).ratio, Rational(7, 4) );
+		XCTAssertEqual( (theEveryInterval[19].interval as! RationalInterval).ratio, Rational(16, 9) );
+		XCTAssertEqual( (theEveryInterval[20].interval as! RationalInterval).ratio, Rational(9, 5) );
+		XCTAssertEqual( (theEveryInterval[21].interval as! RationalInterval).ratio, Rational(15, 8) );
 	}
 
 	func testFiveThreeLimt() {
@@ -231,32 +137,15 @@ class LimitsIntervalsData_Test: XCTestCase {
 		let		theEveryInterval = theGenerator.everyEntry;
 		XCTAssertEqual( theEveryInterval.count,  9);
 
-		XCTAssertEqual( (theEveryInterval[0].interval as! RationalInterval).ratio.numerator,  1);
-		XCTAssertEqual( (theEveryInterval[0].interval as! RationalInterval).ratio.denominator, 1 );
-
-		XCTAssertEqual( (theEveryInterval[1].interval as! RationalInterval).ratio.numerator,  10);
-		XCTAssertEqual( (theEveryInterval[1].interval as! RationalInterval).ratio.denominator, 9 );
-
-		XCTAssertEqual( (theEveryInterval[2].interval as! RationalInterval).ratio.numerator,  9);
-		XCTAssertEqual( (theEveryInterval[2].interval as! RationalInterval).ratio.denominator, 8 );
-
-		XCTAssertEqual( (theEveryInterval[3].interval as! RationalInterval).ratio.numerator,  5);
-		XCTAssertEqual( (theEveryInterval[3].interval as! RationalInterval).ratio.denominator, 4 );
-
-		XCTAssertEqual( (theEveryInterval[4].interval as! RationalInterval).ratio.numerator,  4);
-		XCTAssertEqual( (theEveryInterval[4].interval as! RationalInterval).ratio.denominator, 3 );
-
-		XCTAssertEqual( (theEveryInterval[5].interval as! RationalInterval).ratio.numerator,  3);
-		XCTAssertEqual( (theEveryInterval[5].interval as! RationalInterval).ratio.denominator, 2 );
-
-		XCTAssertEqual( (theEveryInterval[6].interval as! RationalInterval).ratio.numerator,  5);
-		XCTAssertEqual( (theEveryInterval[6].interval as! RationalInterval).ratio.denominator, 3 );
-
-		XCTAssertEqual( (theEveryInterval[7].interval as! RationalInterval).ratio.numerator,  16);
-		XCTAssertEqual( (theEveryInterval[7].interval as! RationalInterval).ratio.denominator, 9 );
-
-		XCTAssertEqual( (theEveryInterval[8].interval as! RationalInterval).ratio.numerator,  15);
-		XCTAssertEqual( (theEveryInterval[8].interval as! RationalInterval).ratio.denominator, 8 );
+		XCTAssertEqual( (theEveryInterval[0].interval as! RationalInterval).ratio, Rational(1) );
+		XCTAssertEqual( (theEveryInterval[1].interval as! RationalInterval).ratio, Rational(10, 9) );
+		XCTAssertEqual( (theEveryInterval[2].interval as! RationalInterval).ratio, Rational(9, 8) );
+		XCTAssertEqual( (theEveryInterval[3].interval as! RationalInterval).ratio, Rational(5, 4) );
+		XCTAssertEqual( (theEveryInterval[4].interval as! RationalInterval).ratio, Rational(4, 3) );
+		XCTAssertEqual( (theEveryInterval[5].interval as! RationalInterval).ratio, Rational(3, 2) );
+		XCTAssertEqual( (theEveryInterval[6].interval as! RationalInterval).ratio, Rational(5, 3) );
+		XCTAssertEqual( (theEveryInterval[7].interval as! RationalInterval).ratio, Rational(16, 9) );
+		XCTAssertEqual( (theEveryInterval[8].interval as! RationalInterval).ratio, Rational(15, 8) );
 	}
 
    func testPerformanceExample() {

@@ -31,7 +31,7 @@ class EqualTemperamentGeneratorViewController: GeneratorViewController {
 	override func observeValue(forKeyPath aKeyPath: String?, of anObject: Any?, change aChange: [NSKeyValueChangeKey : Any]?, context aContext: UnsafeMutableRawPointer?) {
 		if anObject as? IntervalsData == document!.intervalsData {
 			if let theKey = aKeyPath {
-				if theKey == "degrees" {
+				if theKey == "interval" {
 					if aChange?[NSKeyValueChangeKey.notificationIsPriorKey] != nil {
 						willChangeValue(forKey: "intervalString");
 

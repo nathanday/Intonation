@@ -41,6 +41,10 @@
 		D83C5923216C91E9008CF017 /* PresetIntervalsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89768EF1CABF7BC007D30BA /* PresetIntervalsData.swift */; };
 		D83C5924216C9209008CF017 /* HarmonicsDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = D831054D1B0A6115000EB805 /* HarmonicsDescription.swift */; };
 		D83C5925216C9233008CF017 /* StackedIntervalSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8720B671C9E8B2D00ED9FBB /* StackedIntervalSet.swift */; };
+		D83C5929216DC8A5008CF017 /* StackedIntervalsIntervalsData_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83C5928216DC8A5008CF017 /* StackedIntervalsIntervalsData_Test.swift */; };
+		D83C592B216DE241008CF017 /* EqualTemperamentIntervalsData_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83C592A216DE241008CF017 /* EqualTemperamentIntervalsData_Test.swift */; };
+		D83C592D216E1BB5008CF017 /* HarmonicSeriesIntervalsData_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83C592C216E1BB5008CF017 /* HarmonicSeriesIntervalsData_Test.swift */; };
+		D83C592F216E210F008CF017 /* AdHocIntervalsData_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83C592E216E210F008CF017 /* AdHocIntervalsData_Test.swift */; };
 		D84CE1E21C95960E00E19505 /* AdHocIntervalsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CE1E11C95960E00E19505 /* AdHocIntervalsData.swift */; };
 		D84CE1E41C95967700E19505 /* IntervalsDataGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CE1E31C95967700E19505 /* IntervalsDataGenerator.swift */; };
 		D8571C801CA56D2B008A5A46 /* LimitsGeneratorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8571C7E1CA56D2B008A5A46 /* LimitsGeneratorViewController.swift */; };
@@ -159,6 +163,10 @@
 		D83B54B01C8D96C500624A46 /* MIDIToHarmonicRatio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MIDIToHarmonicRatio.swift; sourceTree = "<group>"; };
 		D83C4A2B1C8863A00090F939 /* IntervalsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntervalsData.swift; sourceTree = "<group>"; };
 		D83C5911216C8F97008CF017 /* LimitsIntervalsData_Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitsIntervalsData_Test.swift; sourceTree = "<group>"; };
+		D83C5928216DC8A5008CF017 /* StackedIntervalsIntervalsData_Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackedIntervalsIntervalsData_Test.swift; sourceTree = "<group>"; };
+		D83C592A216DE241008CF017 /* EqualTemperamentIntervalsData_Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EqualTemperamentIntervalsData_Test.swift; sourceTree = "<group>"; };
+		D83C592C216E1BB5008CF017 /* HarmonicSeriesIntervalsData_Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HarmonicSeriesIntervalsData_Test.swift; sourceTree = "<group>"; };
+		D83C592E216E210F008CF017 /* AdHocIntervalsData_Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdHocIntervalsData_Test.swift; sourceTree = "<group>"; };
 		D84CE1E11C95960E00E19505 /* AdHocIntervalsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdHocIntervalsData.swift; sourceTree = "<group>"; };
 		D84CE1E31C95967700E19505 /* IntervalsDataGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntervalsDataGenerator.swift; sourceTree = "<group>"; };
 		D8571C7E1CA56D2B008A5A46 /* LimitsGeneratorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LimitsGeneratorViewController.swift; sourceTree = "<group>"; };
@@ -283,6 +291,10 @@
 			isa = PBXGroup;
 			children = (
 				D83C5911216C8F97008CF017 /* LimitsIntervalsData_Test.swift */,
+				D83C5928216DC8A5008CF017 /* StackedIntervalsIntervalsData_Test.swift */,
+				D83C592A216DE241008CF017 /* EqualTemperamentIntervalsData_Test.swift */,
+				D83C592C216E1BB5008CF017 /* HarmonicSeriesIntervalsData_Test.swift */,
+				D83C592E216E210F008CF017 /* AdHocIntervalsData_Test.swift */,
 			);
 			path = Generators;
 			sourceTree = "<group>";
@@ -776,6 +788,7 @@
 				D867548120CA39DF00CE2D0F /* UInt+Additions_Test.swift in Sources */,
 				D83C5925216C9233008CF017 /* StackedIntervalSet.swift in Sources */,
 				D8F2B6BD20E509B400DEB1C9 /* PrimeFactors_Test.swift in Sources */,
+				D83C592D216E1BB5008CF017 /* HarmonicSeriesIntervalsData_Test.swift in Sources */,
 				D83C5913216C8FA4008CF017 /* LimitsIntervalsData.swift in Sources */,
 				D8D932A420EE29B7009ED565 /* Rational_Test.swift in Sources */,
 				D89E97AA20C83D7500E6B32D /* ColorInterpolator.swift in Sources */,
@@ -787,11 +800,14 @@
 				D83C5915216C90BF008CF017 /* IntervalsDataGenerator.swift in Sources */,
 				D8B0EA1820F5AC0A007656A7 /* RationalNumeric.swift in Sources */,
 				D83C5916216C90CC008CF017 /* IntervalEntry.swift in Sources */,
+				D83C5929216DC8A5008CF017 /* StackedIntervalsIntervalsData_Test.swift in Sources */,
 				D83C5922216C91E5008CF017 /* AdHocIntervalsData.swift in Sources */,
 				D83C5923216C91E9008CF017 /* PresetIntervalsData.swift in Sources */,
 				D81D19B520C8C705002B77F6 /* MidiNoteFormatter.swift in Sources */,
 				D83C591F216C91C2008CF017 /* StackedIntervalsIntervalsData.swift in Sources */,
 				D83C591B216C9167008CF017 /* IntervalSet.swift in Sources */,
+				D83C592F216E210F008CF017 /* AdHocIntervalsData_Test.swift in Sources */,
+				D83C592B216DE241008CF017 /* EqualTemperamentIntervalsData_Test.swift in Sources */,
 				D83C591A216C9157008CF017 /* Interval.swift in Sources */,
 				D81D19B420C8C56E002B77F6 /* MidiNoteFormatter_Test.swift in Sources */,
 				D83C591C216C917C008CF017 /* IrrationalInterval.swift in Sources */,

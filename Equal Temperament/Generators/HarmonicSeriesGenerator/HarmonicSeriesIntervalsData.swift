@@ -19,11 +19,11 @@ class HarmonicSeriesIntervalsData : IntervalsData {
 		super.init();
 	}
 	override init?(propertyList aPropertyList: [String:Any] ) {
-		guard let theProperties = aPropertyList["equalTemperament"] as? [String:String] else {
+		guard let theProperties = aPropertyList["harmonicSeries"] as? [String:Any] else {
 			return nil;
 		}
-		if let theDegreesString = theProperties["octave"] {
-			octave = Int(theDegreesString) ?? 12;
+		if let theOctave = theProperties["octave"] as? Int {
+			octave = theOctave;
 		} else {
 			octave = UserDefaults.standard.integer(forKey: HarmonicSeriesIntervalsData.octaveKey);
 			if( octave == 0 ) {
@@ -38,7 +38,7 @@ class HarmonicSeriesIntervalsData : IntervalsData {
 		return theResult;
 	}
 
-	override var	documentType : DocumentType { return .equalTemperament; }
+	override var	documentType : DocumentType { return .harmonicSeries; }
 
 	override func intervalsDataGenerator() -> IntervalsDataGenerator {
 		return HarmonicSeriesGenerator(intervalsData:self);

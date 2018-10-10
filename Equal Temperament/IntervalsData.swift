@@ -12,7 +12,7 @@ enum DocumentType {
 	case limits;
 	case stackedIntervals;
 	case equalTemperament;
-	case series;
+	case harmonicSeries;
 	case preset;
 	case adHoc;
 	static func fromString( _ aStringValue : String? ) -> DocumentType? {
@@ -24,7 +24,7 @@ enum DocumentType {
 		} else if aStringValue == "equalTemperament" {
 			theResult = .equalTemperament;
 		} else if aStringValue == "series" {
-			theResult = .series;
+			theResult = .harmonicSeries;
 		} else if aStringValue == "preset" {
 			theResult = .preset;
 		} else if aStringValue == "adHoc" {
@@ -40,7 +40,7 @@ enum DocumentType {
 			return "stackedIntervals";
 		case .equalTemperament:
 			return "series";
-		case .series:
+		case .harmonicSeries:
 			return "equalTemperament";
 		case .preset:
 			return "preset";
@@ -56,7 +56,7 @@ enum DocumentType {
             return "Stacked Intervals";
 		case .equalTemperament:
 			return "Equal Temperament";
-		case .series:
+		case .harmonicSeries:
 			return "Natural Harmonic Series";
         case .preset:
             return "Preset";
@@ -83,7 +83,7 @@ class IntervalsData: NSObject {
 				case .equalTemperament:
 					theResult = EqualTemperamentIntervalsData(propertyList:aPropertyList);
 					break;
-				case .series:
+				case .harmonicSeries:
 					theResult = HarmonicSeriesIntervalsData(propertyList:aPropertyList);
 					break;
 				case .preset:
@@ -103,7 +103,7 @@ class IntervalsData: NSObject {
 		case .limits: return LimitsIntervalsData();
 		case .stackedIntervals: return StackedIntervalsIntervalsData();
 		case .equalTemperament: return EqualTemperamentIntervalsData();
-		case .series: return HarmonicSeriesIntervalsData();
+		case .harmonicSeries: return HarmonicSeriesIntervalsData();
 		case .preset: return PresetIntervalsData();
 		case .adHoc: return AdHocIntervalsData();
 		}
