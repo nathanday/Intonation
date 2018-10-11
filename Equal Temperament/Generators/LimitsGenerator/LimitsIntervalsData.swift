@@ -117,6 +117,22 @@ class LimitsIntervalsData : IntervalsData {
 
 class LimitsBasedGenerator : IntervalsDataGenerator {
 	var	_everyIntervalEntry : [IntervalEntry]?;
+
+	private func degreeName( _ anIndex : Int ) -> String {
+		var thePrefix : String
+		switch anIndex % 10 {
+		case 0 where anIndex%100 < 10:
+			thePrefix = "st";
+		case 1 where anIndex%100 < 10:
+			thePrefix = "nd";
+		case 2 where anIndex%100 < 10:
+			thePrefix = "rd";
+		default:
+			thePrefix = "th";
+		}
+		return "\(anIndex+1)\(thePrefix)";
+	}
+
 	override var	everyEntry : [IntervalEntry] {
 		get {
 			if _everyIntervalEntry == nil {
@@ -141,7 +157,7 @@ class LimitsBasedGenerator : IntervalsDataGenerator {
 							let		theEntry = IntervalEntry(interval: theRational );
 							theResult.insert(theEntry);
 							if let theDegree = Scale.major.indexOf(theRational) {
-								theEntry.degreeName = Scale.degreeName(theDegree);
+								theEntry.degreeName = degreeName(theDegree);
 							}
 						}
 					}

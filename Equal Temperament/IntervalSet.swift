@@ -52,7 +52,7 @@ class IntervalSet : Sequence {
 		return nil;
 	}
 
-	func intervalClosestTo( _ aValue : Double ) -> Interval? {
+	func interval( closestTo aValue : Double ) -> Interval? {
 		var		theResult : Interval? = nil;
 		var		thePrevious : Interval? = nil;
 		for theInterval in everyInterval {
@@ -77,9 +77,9 @@ class IntervalSet : Sequence {
 		return theResult;
 	}
 
-	func sortedByDifferentsTo( _ aValue : Double ) -> [Interval] {
-		return everyInterval.sorted { (a:Interval, b:Interval) -> Bool in return abs(a.toDouble-aValue) < abs(b.toDouble-aValue); };
-	}
+//	func sortedByDifferentsTo( _ aValue : Double ) -> [Interval] {
+//		return everyInterval.sorted { (a:Interval, b:Interval) -> Bool in return abs(a.toDouble-aValue) < abs(b.toDouble-aValue); };
+//	}
 
 	var description: String {
 		var		theResult : String?;

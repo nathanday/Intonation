@@ -36,21 +36,6 @@ class Scale : IntervalSet {
 			return nil;
 		}
 	}
-
-	static func degreeName( _ anIndex : Int ) -> String {
-		var thePrefix : String
-		switch anIndex % 10 {
-		case 0 where anIndex%100 < 10:
-			thePrefix = "st";
-		case 1 where anIndex%100 < 10:
-			thePrefix = "nd";
-		case 2 where anIndex%100 < 10:
-			thePrefix = "rd";
-		default:
-			thePrefix = "th";
-		}
-		return "\(anIndex+1)\(thePrefix)";
-	}
 }
 
 class Chord  : Scale {

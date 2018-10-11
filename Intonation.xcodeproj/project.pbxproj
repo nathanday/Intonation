@@ -45,6 +45,7 @@
 		D83C592B216DE241008CF017 /* EqualTemperamentIntervalsData_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83C592A216DE241008CF017 /* EqualTemperamentIntervalsData_Test.swift */; };
 		D83C592D216E1BB5008CF017 /* HarmonicSeriesIntervalsData_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83C592C216E1BB5008CF017 /* HarmonicSeriesIntervalsData_Test.swift */; };
 		D83C592F216E210F008CF017 /* AdHocIntervalsData_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83C592E216E210F008CF017 /* AdHocIntervalsData_Test.swift */; };
+		D83C5931216F3942008CF017 /* IntervalSet_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83C5930216F3942008CF017 /* IntervalSet_Test.swift */; };
 		D84CE1E21C95960E00E19505 /* AdHocIntervalsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CE1E11C95960E00E19505 /* AdHocIntervalsData.swift */; };
 		D84CE1E41C95967700E19505 /* IntervalsDataGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CE1E31C95967700E19505 /* IntervalsDataGenerator.swift */; };
 		D8571C801CA56D2B008A5A46 /* LimitsGeneratorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8571C7E1CA56D2B008A5A46 /* LimitsGeneratorViewController.swift */; };
@@ -167,6 +168,7 @@
 		D83C592A216DE241008CF017 /* EqualTemperamentIntervalsData_Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EqualTemperamentIntervalsData_Test.swift; sourceTree = "<group>"; };
 		D83C592C216E1BB5008CF017 /* HarmonicSeriesIntervalsData_Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HarmonicSeriesIntervalsData_Test.swift; sourceTree = "<group>"; };
 		D83C592E216E210F008CF017 /* AdHocIntervalsData_Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdHocIntervalsData_Test.swift; sourceTree = "<group>"; };
+		D83C5930216F3942008CF017 /* IntervalSet_Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalSet_Test.swift; sourceTree = "<group>"; };
 		D84CE1E11C95960E00E19505 /* AdHocIntervalsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdHocIntervalsData.swift; sourceTree = "<group>"; };
 		D84CE1E31C95967700E19505 /* IntervalsDataGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntervalsDataGenerator.swift; sourceTree = "<group>"; };
 		D8571C7E1CA56D2B008A5A46 /* LimitsGeneratorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LimitsGeneratorViewController.swift; sourceTree = "<group>"; };
@@ -468,6 +470,7 @@
 				D867548020CA39DF00CE2D0F /* UInt+Additions_Test.swift */,
 				D8F2B6BC20E509B400DEB1C9 /* PrimeFactors_Test.swift */,
 				D8D932A320EE29B7009ED565 /* Rational_Test.swift */,
+				D83C5930216F3942008CF017 /* IntervalSet_Test.swift */,
 				D83C5910216C8F6B008CF017 /* Generators */,
 				D89543761996345200A091A4 /* Supporting Files */,
 			);
@@ -777,6 +780,7 @@
 				D8F2B6BE20E5141300DEB1C9 /* PrimeFactors.swift in Sources */,
 				D867548320CA3BCC00CE2D0F /* PrimesSequence.swift in Sources */,
 				D89E97A920C83C8300E6B32D /* ColorInterpolator_Test.swift in Sources */,
+				D83C5931216F3942008CF017 /* IntervalSet_Test.swift in Sources */,
 				D83C5920216C91D8008CF017 /* EqualTemperamentIntervalsData.swift in Sources */,
 				D867548220CA3B9200CE2D0F /* IntegerType+Additions.swift in Sources */,
 				D83C591D216C9185008CF017 /* EqualTemperamentInterval.swift in Sources */,

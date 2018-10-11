@@ -24,7 +24,7 @@ class StackedIntervalsIntervalsData : IntervalsData {
 	}
 	override var propertyListValue : [String:Any] {
 		var		theResult = super.propertyListValue;
-		var		theStackedIntervalsPropertyList = [[String:String]]();
+		var		theStackedIntervalsPropertyList = [[String:Any]]();
 		for theEntry in stackedIntervals {
 			theStackedIntervalsPropertyList.append(theEntry.propertyList);
 		}
