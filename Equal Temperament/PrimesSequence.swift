@@ -8,11 +8,10 @@
 
 class PrimesSequence : Sequence {
 	static var		primes : [UInt] = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67];
-	var endAt:UInt
+	var endAt: UInt
 
-	init(end:UInt){
-		endAt = end
-	}
+	init(end:UInt){ endAt = end }
+	convenience init(){ self.init(end:UInt.max); }
 
 	@discardableResult private func extendPrimes() -> UInt? {
 		var		theResult : UInt? = nil;
@@ -53,7 +52,7 @@ class PrimesSequence : Sequence {
 	}
 
 	subscript(anIndex: Int) -> UInt {
-		while PrimesSequence.primes.count < anIndex {
+		while PrimesSequence.primes.count <= anIndex {
 			extendPrimes();
 		}
 		return PrimesSequence.primes[anIndex];

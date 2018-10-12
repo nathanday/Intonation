@@ -46,6 +46,7 @@
 		D83C592D216E1BB5008CF017 /* HarmonicSeriesIntervalsData_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83C592C216E1BB5008CF017 /* HarmonicSeriesIntervalsData_Test.swift */; };
 		D83C592F216E210F008CF017 /* AdHocIntervalsData_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83C592E216E210F008CF017 /* AdHocIntervalsData_Test.swift */; };
 		D83C5931216F3942008CF017 /* IntervalSet_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83C5930216F3942008CF017 /* IntervalSet_Test.swift */; };
+		D83C5933216F709C008CF017 /* Interval_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83C5932216F709C008CF017 /* Interval_Test.swift */; };
 		D84CE1E21C95960E00E19505 /* AdHocIntervalsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CE1E11C95960E00E19505 /* AdHocIntervalsData.swift */; };
 		D84CE1E41C95967700E19505 /* IntervalsDataGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CE1E31C95967700E19505 /* IntervalsDataGenerator.swift */; };
 		D8571C801CA56D2B008A5A46 /* LimitsGeneratorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8571C7E1CA56D2B008A5A46 /* LimitsGeneratorViewController.swift */; };
@@ -134,8 +135,9 @@
 		D8ED76D11C58E59E00BB2B8C /* FindIntervalsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8ED76CF1C58E59E00BB2B8C /* FindIntervalsWindowController.swift */; };
 		D8F2B1D61C93EFD800F88BF7 /* LimitsIntervalsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F2B1D51C93EFD800F88BF7 /* LimitsIntervalsData.swift */; };
 		D8F2B6BB20E3A07D00DEB1C9 /* PrimeFactors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F2B6BA20E3A07D00DEB1C9 /* PrimeFactors.swift */; };
-		D8F2B6BD20E509B400DEB1C9 /* PrimeFactors_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F2B6BC20E509B400DEB1C9 /* PrimeFactors_Test.swift */; };
 		D8F2B6BE20E5141300DEB1C9 /* PrimeFactors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F2B6BA20E3A07D00DEB1C9 /* PrimeFactors.swift */; };
+		D8FBA41C2170BD3F007A215E /* PrimesSequence_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FBA41B2170BD3F007A215E /* PrimesSequence_Test.swift */; };
+		D8FBA41E2170C228007A215E /* PrimeFactors_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FBA41D2170C228007A215E /* PrimeFactors_Test.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -169,6 +171,7 @@
 		D83C592C216E1BB5008CF017 /* HarmonicSeriesIntervalsData_Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HarmonicSeriesIntervalsData_Test.swift; sourceTree = "<group>"; };
 		D83C592E216E210F008CF017 /* AdHocIntervalsData_Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdHocIntervalsData_Test.swift; sourceTree = "<group>"; };
 		D83C5930216F3942008CF017 /* IntervalSet_Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalSet_Test.swift; sourceTree = "<group>"; };
+		D83C5932216F709C008CF017 /* Interval_Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interval_Test.swift; sourceTree = "<group>"; };
 		D84CE1E11C95960E00E19505 /* AdHocIntervalsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdHocIntervalsData.swift; sourceTree = "<group>"; };
 		D84CE1E31C95967700E19505 /* IntervalsDataGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntervalsDataGenerator.swift; sourceTree = "<group>"; };
 		D8571C7E1CA56D2B008A5A46 /* LimitsGeneratorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LimitsGeneratorViewController.swift; sourceTree = "<group>"; };
@@ -257,8 +260,9 @@
 		D8EDC4AD1DB11E3D009BF520 /* Intonation.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Intonation.entitlements; sourceTree = "<group>"; };
 		D8F2B1D51C93EFD800F88BF7 /* LimitsIntervalsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LimitsIntervalsData.swift; sourceTree = "<group>"; };
 		D8F2B6BA20E3A07D00DEB1C9 /* PrimeFactors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimeFactors.swift; sourceTree = "<group>"; };
-		D8F2B6BC20E509B400DEB1C9 /* PrimeFactors_Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimeFactors_Test.swift; sourceTree = "<group>"; };
 		D8F5A9AA1F02D2D400DEBB6B /* WaveTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaveTable.swift; sourceTree = "<group>"; };
+		D8FBA41B2170BD3F007A215E /* PrimesSequence_Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimesSequence_Test.swift; sourceTree = "<group>"; };
+		D8FBA41D2170C228007A215E /* PrimeFactors_Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimeFactors_Test.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -468,9 +472,11 @@
 				D89E97A820C83C8300E6B32D /* ColorInterpolator_Test.swift */,
 				D81D19B320C8C56E002B77F6 /* MidiNoteFormatter_Test.swift */,
 				D867548020CA39DF00CE2D0F /* UInt+Additions_Test.swift */,
-				D8F2B6BC20E509B400DEB1C9 /* PrimeFactors_Test.swift */,
 				D8D932A320EE29B7009ED565 /* Rational_Test.swift */,
 				D83C5930216F3942008CF017 /* IntervalSet_Test.swift */,
+				D8FBA41D2170C228007A215E /* PrimeFactors_Test.swift */,
+				D83C5932216F709C008CF017 /* Interval_Test.swift */,
+				D8FBA41B2170BD3F007A215E /* PrimesSequence_Test.swift */,
 				D83C5910216C8F6B008CF017 /* Generators */,
 				D89543761996345200A091A4 /* Supporting Files */,
 			);
@@ -777,6 +783,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8FBA41E2170C228007A215E /* PrimeFactors_Test.swift in Sources */,
 				D8F2B6BE20E5141300DEB1C9 /* PrimeFactors.swift in Sources */,
 				D867548320CA3BCC00CE2D0F /* PrimesSequence.swift in Sources */,
 				D89E97A920C83C8300E6B32D /* ColorInterpolator_Test.swift in Sources */,
@@ -791,7 +798,6 @@
 				D83C5921216C91E0008CF017 /* HarmonicSeriesIntervalsData.swift in Sources */,
 				D867548120CA39DF00CE2D0F /* UInt+Additions_Test.swift in Sources */,
 				D83C5925216C9233008CF017 /* StackedIntervalSet.swift in Sources */,
-				D8F2B6BD20E509B400DEB1C9 /* PrimeFactors_Test.swift in Sources */,
 				D83C592D216E1BB5008CF017 /* HarmonicSeriesIntervalsData_Test.swift in Sources */,
 				D83C5913216C8FA4008CF017 /* LimitsIntervalsData.swift in Sources */,
 				D8D932A420EE29B7009ED565 /* Rational_Test.swift in Sources */,
@@ -805,6 +811,7 @@
 				D8B0EA1820F5AC0A007656A7 /* RationalNumeric.swift in Sources */,
 				D83C5916216C90CC008CF017 /* IntervalEntry.swift in Sources */,
 				D83C5929216DC8A5008CF017 /* StackedIntervalsIntervalsData_Test.swift in Sources */,
+				D8FBA41C2170BD3F007A215E /* PrimesSequence_Test.swift in Sources */,
 				D83C5922216C91E5008CF017 /* AdHocIntervalsData.swift in Sources */,
 				D83C5923216C91E9008CF017 /* PresetIntervalsData.swift in Sources */,
 				D81D19B520C8C705002B77F6 /* MidiNoteFormatter.swift in Sources */,
@@ -814,6 +821,7 @@
 				D83C592B216DE241008CF017 /* EqualTemperamentIntervalsData_Test.swift in Sources */,
 				D83C591A216C9157008CF017 /* Interval.swift in Sources */,
 				D81D19B420C8C56E002B77F6 /* MidiNoteFormatter_Test.swift in Sources */,
+				D83C5933216F709C008CF017 /* Interval_Test.swift in Sources */,
 				D83C591C216C917C008CF017 /* IrrationalInterval.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

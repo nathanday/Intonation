@@ -37,7 +37,7 @@ class RationalInterval : Interval {
 		}
 		return theResult;
 	}
-	var		justInternation : Double { return Double(ratio); }
+//	var		justInternation : Double { return Double(ratio); }
 	var		numerator: Int { return ratio.numerator; }
 	var		denominator: Int { return ratio.denominator; }
 	init( ratio aRatio: Rational, names aNames: [String]? ) {

@@ -61,7 +61,7 @@ class LimitsIntervalsData : IntervalsData {
 
 	@objc dynamic var		numeratorPrimeLimit : UInt {
 		get {
-			return PrimesSequence(end: 100)[numeratorPrimeLimitIndex];
+			return PrimesSequence()[numeratorPrimeLimitIndex];
 		}
 		set {
 			willChangeValue(forKey: "numeratorPrimeLimit");
@@ -80,7 +80,7 @@ class LimitsIntervalsData : IntervalsData {
 	}
 	@objc dynamic var		denominatorPrimeLimit : UInt {
 		get {
-			return PrimesSequence(end:100)[denominatorPrimeLimitIndex];
+			return PrimesSequence()[denominatorPrimeLimitIndex];
 		}
 		set {
 			willChangeValue(forKey: "denominatorPrimeLimit");
