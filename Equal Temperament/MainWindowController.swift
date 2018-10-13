@@ -362,7 +362,7 @@ class MainWindowController : NSWindowController, NSMenuItemValidation {
 			let		theWindowController = SelectDocumentType();
 			theWindowController.completionBlock = { (aType) in
 				if let theType = aType {
-					let		theIntervalData = IntervalsData.from(documentType: theType );
+					let		theIntervalData = theType.instance();
 					theDocument.intervalsData = theIntervalData;
 					if let theViewController = theDocument.intervalsData?.viewController(windowController: self) {
 						self.documentTypeViewController = theViewController;

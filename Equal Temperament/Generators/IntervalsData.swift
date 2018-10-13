@@ -15,91 +15,41 @@ enum DocumentType {
 	case harmonicSeries;
 	case preset;
 	case adHoc;
+
 	static func fromString( _ aStringValue : String? ) -> DocumentType? {
-		var		theResult : DocumentType? = nil;
-		if aStringValue == "limits" {
-			theResult = .limits;
-		} else if aStringValue == "stackedIntervals" {
-			theResult = .stackedIntervals;
-		} else if aStringValue == "equalTemperament" {
-			theResult = .equalTemperament;
-		} else if aStringValue == "series" {
-			theResult = .harmonicSeries;
-		} else if aStringValue == "preset" {
-			theResult = .preset;
-		} else if aStringValue == "adHoc" {
-			theResult = .adHoc;
+		switch aStringValue {
+		case "limits": return .limits;
+		case "stackedIntervals": return .stackedIntervals;
+		case "equalTemperament": return .equalTemperament;
+		case "harmonicSeries": return .harmonicSeries;
+		case "preset": return .preset;
+		case "adHoc": return .adHoc;
+		default: return nil;
 		}
-		return theResult;
 	}
 	func toString() -> String {
 		switch self {
-		case .limits:
-			return "limits";
-		case .stackedIntervals:
-			return "stackedIntervals";
-		case .equalTemperament:
-			return "series";
-		case .harmonicSeries:
-			return "equalTemperament";
-		case .preset:
-			return "preset";
-		case .adHoc:
-			return "adHoc";
+		case .limits: return "limits";
+		case .stackedIntervals: return "stackedIntervals";
+		case .equalTemperament: return "harmonicSeries";
+		case .harmonicSeries: return "equalTemperament";
+		case .preset: return "preset";
+		case .adHoc: return "adHoc";
 		}
 	}
-    func title() -> String {
+	var title: String {
         switch self {
-        case .limits:
-            return "Limits";
-        case .stackedIntervals:
-            return "Stacked Intervals";
-		case .equalTemperament:
-			return "Equal Temperament";
-		case .harmonicSeries:
-			return "Natural Harmonic Series";
-        case .preset:
-            return "Preset";
-        case .adHoc:
-            return "AdHoc";
+        case .limits: return NSLocalizedString("Limits",comment:"Document Type Title");
+        case .stackedIntervals: return NSLocalizedString("Stacked Intervals",comment:"Document Type Title");
+		case .equalTemperament: return NSLocalizedString("Equal Temperament",comment:"Document Type Title");
+		case .harmonicSeries: return NSLocalizedString("Natural Harmonic Series",comment:"Document Type Title");
+        case .preset: return NSLocalizedString("Preset",comment:"Document Type Title");
+        case .adHoc: return NSLocalizedString("AdHoc",comment:"Document Type Title");
         }
     }
-}
 
-
-class IntervalsData: NSObject {
-
-	class func from(propertyList aPropertyList: [String:Any] ) -> IntervalsData? {
-		var		theResult : IntervalsData?
-		if let theDocumentTypeString = aPropertyList["documentType"] as? String {
-			if let theDocumentType = DocumentType.fromString(theDocumentTypeString) {
-				switch theDocumentType {
-				case .limits:
-					theResult = LimitsIntervalsData(propertyList:aPropertyList);
-					break;
-				case .stackedIntervals:
-					theResult = StackedIntervalsIntervalsData(propertyList:aPropertyList);
-					break;
-				case .equalTemperament:
-					theResult = EqualTemperamentIntervalsData(propertyList:aPropertyList);
-					break;
-				case .harmonicSeries:
-					theResult = HarmonicSeriesIntervalsData(propertyList:aPropertyList);
-					break;
-				case .preset:
-					theResult = PresetIntervalsData(propertyList:aPropertyList);
-					break;
-				case .adHoc:
-					theResult = AdHocIntervalsData(propertyList:aPropertyList);
-					break;
-				}
-			}
-		}
-		return theResult;
-	}
-
-	class func from(documentType aDocumentType: DocumentType ) -> IntervalsData {
-		switch aDocumentType {
+	func instance() -> IntervalsData {
+		switch self {
 		case .limits: return LimitsIntervalsData();
 		case .stackedIntervals: return StackedIntervalsIntervalsData();
 		case .equalTemperament: return EqualTemperamentIntervalsData();
@@ -108,6 +58,24 @@ class IntervalsData: NSObject {
 		case .adHoc: return AdHocIntervalsData();
 		}
 	}
+	static func instance(fromPropertyList aPropertyList: [String:Any] ) -> IntervalsData? {
+		var		theResult : IntervalsData?
+		if let theDocumentTypeString = aPropertyList["documentType"] as? String {
+			switch DocumentType.fromString(theDocumentTypeString) {
+			case .limits?: theResult = LimitsIntervalsData(propertyList:aPropertyList);
+			case .stackedIntervals?: theResult = StackedIntervalsIntervalsData(propertyList:aPropertyList);
+			case .equalTemperament?: theResult = EqualTemperamentIntervalsData(propertyList:aPropertyList);
+			case .harmonicSeries?: theResult = HarmonicSeriesIntervalsData(propertyList:aPropertyList);
+			case .preset?: theResult = PresetIntervalsData(propertyList:aPropertyList);
+			case .adHoc?: theResult = AdHocIntervalsData(propertyList:aPropertyList);
+			case nil: theResult = nil;
+			}
+		}
+		return theResult;
+	}
+}
+
+class IntervalsData: NSObject {
 
 	override init() {
 		octavesCount = min(max(UserDefaults.standard.integer(forKey: "octavesCount"),1),3);
@@ -165,7 +133,7 @@ class IntervalsData: NSObject {
 	}
 
     var     documentTypeTitle : String {
-        return documentType.title();
+        return documentType.title;
     }
 
 	var		documentType : DocumentType {

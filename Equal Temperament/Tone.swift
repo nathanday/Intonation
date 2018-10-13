@@ -98,7 +98,7 @@ class Tone {
 				var		theTotal : Float32 = 0.0;
 				for i in 1...min(harmonics.maximumHarmonic,Int(0.5/thetaDelta)) {
 					if i%2 == 1 && harmonics.amplitudes[i] < theThreshold { break; }
-					let theFreq = harmonics.frequency[i];
+					let theFreq = 2.0*Double.pi*Double(i);
 					theTotal += harmonics.amplitudes[i]*Float32(sin(theta*theFreq));
 				}
 				aBuffer[j] = Float32(theTotal)*aGain*theEnvelope;
@@ -117,7 +117,7 @@ class Tone {
 				var		theTotal : Float32 = 0.0;
 				for i in 1...min(harmonics.maximumHarmonic,Int(0.5/thetaDelta)) {
 					if i%2 == 1 && harmonics.amplitudes[i] < theThreshold { break; }
-					let theFreq = harmonics.frequency[i];
+					let theFreq = 2.0*Double.pi*Double(i);
 					theTotal += harmonics.amplitudes[i]*Float32(sin(theta*theFreq));
 				}
 				aBuffer[j] = Float32(theTotal)*aGain*theEnvelope;

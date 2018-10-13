@@ -194,7 +194,7 @@ class Document : NSDocument, MIDIReceiverObserver {
 		do {
 			if let thePropertyList = try PropertyListSerialization.propertyList(from: aData, options:PropertyListSerialization.MutabilityOptions(), format:theFormat) as? [String:Any] {
 				willChangeValue(forKey: "intervalsData");
-				intervalsData = IntervalsData.from(propertyList:thePropertyList);
+				intervalsData = DocumentType.instance(fromPropertyList:thePropertyList);
 				didChangeValue(forKey: "intervalsData");
 			}
 		}

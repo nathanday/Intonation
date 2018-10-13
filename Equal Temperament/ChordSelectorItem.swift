@@ -122,11 +122,12 @@ class ChordSelectorGroup : ChordSelectorItem, MutableCollection {
 }
 
 class RootChordSelectorGroup : ChordSelectorGroup {
+	init( propertyList aPropertyList: [[String : Any]] ) {
+		super.init(name:"root");
+		everyChild = ChordSelectorItem.chordSelectorItemsForPropertyList( aPropertyList );
+	}
+
 	init() {
 		super.init(name:"root");
-		if let theURL = Bundle.main.url(forResource:"PresetChordsAndScales", withExtension: "plist"),
-			let theChordData = NSArray(contentsOf: theURL) {
-			everyChild = ChordSelectorItem.chordSelectorItemsForPropertyList( theChordData as! [[String : Any]] );
-		}
 	}
 }

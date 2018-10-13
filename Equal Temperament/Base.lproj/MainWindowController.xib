@@ -728,9 +728,9 @@
                                         </textFieldCell>
                                     </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kZf-9Z-7oE" customClass="SelectingTextField" customModule="Intonation" customModuleProvider="target">
-                                        <rect key="frame" x="182" y="663" width="45" height="22"/>
+                                        <rect key="frame" x="167" y="663" width="76" height="22"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="45" id="GT7-MD-tY2"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="76" id="GT7-MD-tY2"/>
                                         </constraints>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" alignment="center" bezelStyle="round" id="Ikx-vY-Olp">
                                             <font key="font" metaFont="system"/>

@@ -18,7 +18,6 @@ struct HarmonicsDescription {
 		amount = anAmount;
 		evenAmount = anEvenAmount;
 		amplitudes.append(0.0);
-		frequency.append(1.0);
 		for i in 1...maximumHarmonic {
 			var		theValue : Float32 = 0.0;
 			if amount > 0.0 && (i%2 == 1 || evenAmount > 0.0) {
@@ -32,12 +31,10 @@ struct HarmonicsDescription {
 				theValue = 1.0;
 			}
 			amplitudes.append(theValue);
-			frequency.append(2.0*Double.pi*Double(i));
 		}
 	}
 	var		amount : Double;
 	var		evenAmount : Double;
 	var		amplitudes : [Float32] = [];
-	var		frequency : [Double] = [];
 }
 

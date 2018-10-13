@@ -18,7 +18,18 @@ class ChordOrScaleSelectorViewController: NSViewController {
 //	@IBOutlet var	chordSelectorWindowController : ChordSelectorWindowController?
 //	@IBOutlet var	delegate :
 
-	@objc dynamic var	everyChordRoot = RootChordSelectorGroup();
+	required init?(coder aCoder: NSCoder) {
+		if let theURL = Bundle.main.url(forResource:"PresetChordsAndScales", withExtension: "plist"),
+			let theChordData = NSArray(contentsOf: theURL) as? [[String : Any]] {
+			everyChordRoot = RootChordSelectorGroup(propertyList: theChordData );
+		} else {
+			print( "failed to open PresetChordsAndScales" );
+			return nil;
+		}
+		super.init(coder: aCoder);
+	}
+
+	@objc dynamic var	everyChordRoot : RootChordSelectorGroup;
 
 	@objc dynamic var hasLeafSelected : Bool = false;
 	var selectedIntervalSet : IntervalSet? {

@@ -9,6 +9,27 @@
 import Cocoa
 
 class SelectDocumentType : NSWindowController {
+	static var		rowData = [
+		(title:DocumentType.limits.title,
+		 	details:NSLocalizedString("Create musical intervals using prime and odd limits.",comment:"document type details"),
+			documentType:DocumentType.limits),
+		(title:DocumentType.stackedIntervals.title,
+		 	details:NSLocalizedString("Create musical intervals by stacking a simpler musical interval.",comment:"document type details"),
+			 documentType:DocumentType.stackedIntervals),
+		(title:DocumentType.equalTemperament.title,
+		 	details:NSLocalizedString("Create musical intervals by dividing the octave, or other large interval, into equal size ratios.",comment:"document type details"),
+			 documentType:DocumentType.equalTemperament),
+		(title:DocumentType.harmonicSeries.title,
+		 	details:NSLocalizedString("Create musical intervals from the natural harmonic series.",comment:"document type details"),
+			 documentType:DocumentType.harmonicSeries),
+		(title:DocumentType.adHoc.title,
+		 	details:NSLocalizedString("Create musical intervals by manual entry.",comment:"document type details"),
+			 documentType:DocumentType.adHoc),
+		(title:DocumentType.preset.title,
+		 	details:NSLocalizedString("Use a predfined set of musical intervals.",comment:"document type details"),
+			 documentType:DocumentType.preset),
+	];
+
 	var		referenceToSelf : NSWindowController? = nil;
 	@IBOutlet var	tableView : NSTableView?;
 	@IBOutlet var	arrayController : NSArrayController?
@@ -18,14 +39,6 @@ class SelectDocumentType : NSWindowController {
 		didSet { didChangeValue(forKey: "hasSelection"); }
 	}
 	var				completionBlock : ((_:DocumentType?)  -> Void)?;
-	static var		rowData = [
-		(title:"Limits", details:"Create musical intervals using prime and odd limits.", documentType:DocumentType.limits),
-		(title:"Stacked Intervals", details:"Create musical intervals by stacking a simpler musical interval.", documentType:DocumentType.stackedIntervals),
-		(title:"Equal Temperament", details:"Create musical intervals by dividing the octave, or other large interval, into equal size ratios.", documentType:DocumentType.equalTemperament),
-		(title:"Natural Harmonic Series", details:"Create musical intervals from the natural harmonic series.", documentType:DocumentType.harmonicSeries),
-		(title:"AdHoc", details:"Create musical intervals by manual entry.", documentType:DocumentType.adHoc),
-		(title:"Preset", details:"Use a predfined set of musical intervals.", documentType:DocumentType.preset),
-		];
 
 	var				selectedDocumentType : DocumentType? {
 		var		theResult : DocumentType? = nil;

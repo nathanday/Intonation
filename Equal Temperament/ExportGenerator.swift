@@ -114,8 +114,9 @@ class JSONExportGenerator : ExportGenerator {
 
 	}
 	override func data() throws -> Data {
-		let	theArray = everyInterval.map {
-			return JSONEntry( name: $0.names!.first!, value:$0.toDouble );
+		let	theArray = everyInterval.map { (aInterval : Interval) -> JSONEntry in
+			let theName = aInterval.names?.first ?? aInterval.toString;
+			return JSONEntry( name: theName, value:aInterval.toDouble );
 		}
 		return try JSONEncoder().encode(["intervals":theArray]);
 	}
