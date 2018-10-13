@@ -18,7 +18,7 @@ class Interval_Test: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testRationalInterval() {
+	func testRationalInterval() {
 		let		theRationalInterval	= RationalInterval(9, 8);
 		XCTAssertEqual(theRationalInterval.toDouble, 1.125, accuracy: 0.0001);
 		XCTAssertEqual(theRationalInterval.toString, "9/8");
@@ -40,15 +40,51 @@ class Interval_Test: XCTestCase {
 		XCTAssertTrue(theRationalInterval > RationalInterval(11, 10));
 		XCTAssertTrue(theRationalInterval > 1);
 		XCTAssertTrue(theRationalInterval >= RationalInterval(9, 8));
-		XCTAssertEqual(theRationalInterval * RationalInterval(10, 8), RationalInterval(45, 32));
 		XCTAssertEqual(theRationalInterval * 2, RationalInterval(9, 4));
 		var		a = theRationalInterval;
-		a *= RationalInterval(10, 8);
-		XCTAssertEqual(a, RationalInterval(45, 32));
-		a = theRationalInterval
 		a *= 2
 		XCTAssertEqual(a, RationalInterval(9, 4));
-}
+	}
+
+	func testIrrationalInterval() {
+		let		theIrrationalInterval	= IrrationalInterval(3.1415);
+		XCTAssertEqual(theIrrationalInterval.toDouble, Double.pi, accuracy: 0.0001);
+		XCTAssertEqual(theIrrationalInterval.toString, "3.1415");
+		XCTAssertTrue(theIrrationalInterval == IrrationalInterval(3.1415));
+
+		XCTAssertTrue(theIrrationalInterval < IrrationalInterval(4.0));
+		XCTAssertTrue(theIrrationalInterval < 4);
+		XCTAssertTrue(theIrrationalInterval <= IrrationalInterval(3.1415));
+		XCTAssertTrue(theIrrationalInterval <= IrrationalInterval(4.0));
+
+		XCTAssertTrue(theIrrationalInterval > IrrationalInterval(2.0));
+		XCTAssertTrue(theIrrationalInterval > 2);
+		XCTAssertTrue(theIrrationalInterval >= IrrationalInterval(3.1415));
+		XCTAssertEqual(theIrrationalInterval * 2, IrrationalInterval(3.1415*2.0));
+		var		a = theIrrationalInterval;
+		a *= 2
+		XCTAssertEqual(a, IrrationalInterval(3.1415*2.0));
+	}
+
+	func testEqualTemperamentInterval() {
+		let		theEqualTemperamentInterval	= EqualTemperamentInterval( degree: 7, names: ["5th"] );
+		XCTAssertEqual(theEqualTemperamentInterval.toDouble, 1.498307076876682, accuracy: 0.000001);
+		XCTAssertEqual(theEqualTemperamentInterval.toString, "2^7/12");
+		XCTAssertTrue(theEqualTemperamentInterval == EqualTemperamentInterval( degree: 7, names: ["5th"] ));
+		XCTAssertEqual(theEqualTemperamentInterval.degree,7);
+		XCTAssertEqual(theEqualTemperamentInterval.steps,12);
+		XCTAssertEqual(theEqualTemperamentInterval.interval,RationalInterval(2));
+
+		XCTAssertTrue(theEqualTemperamentInterval < EqualTemperamentInterval( degree: 9, names: ["6th"] ));
+		XCTAssertTrue(theEqualTemperamentInterval < 2);
+		XCTAssertTrue(theEqualTemperamentInterval <= EqualTemperamentInterval( degree: 9, names: ["6th"] ));
+		XCTAssertTrue(theEqualTemperamentInterval <= EqualTemperamentInterval( degree: 7, names: ["5th"] ));
+
+		XCTAssertTrue(theEqualTemperamentInterval > EqualTemperamentInterval( degree: 6, names: ["4th"] ));
+		XCTAssertTrue(theEqualTemperamentInterval > 1);
+		XCTAssertTrue(theEqualTemperamentInterval >= EqualTemperamentInterval( degree: 6, names: ["4th"] ));
+	}
+
 
     func testPerformanceExample() {
         // This is an example of a performance test case.

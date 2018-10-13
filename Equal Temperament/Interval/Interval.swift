@@ -107,8 +107,6 @@ class Interval : Hashable {
 	static func >= (a: Interval, b: Interval) -> Bool { return a.toDouble >= b.toDouble; }
 	static func == (a: Interval, b: Int) -> Bool { return a.toDouble == Double(b); }
 	static func == (a: Interval, b: UInt) -> Bool { return a.toDouble == Double(b); }
-	static func * (a: Interval, b: Interval) -> Interval { return IrrationalInterval(a.toDouble * b.toDouble); }
-	static func *= (a: inout Interval, b: Interval) { a = IrrationalInterval(a.toDouble*b.toDouble); }
 	static func *= (a: inout Interval, b: Int) { a = IrrationalInterval(a.toDouble*Double(b)); }
 	static func > (a: Interval, b: Int) -> Bool { return a.toDouble > Double(b); }
 }

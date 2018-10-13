@@ -78,4 +78,5 @@ class IrrationalInterval : Interval {
 	static func <= (a: IrrationalInterval, b: IrrationalInterval) -> Bool { return a.ratio < b.ratio || equivelentRatios(a.ratio,b.ratio); }
 	static func > (a: IrrationalInterval, b: IrrationalInterval) -> Bool { return a.ratio > b.ratio; }
 	static func >= (a: IrrationalInterval, b: IrrationalInterval) -> Bool { return a.ratio > b.ratio || equivelentRatios(a.ratio,b.ratio); }
+	static func *= (a: inout IrrationalInterval, b: Int) { a = IrrationalInterval(a.ratio*Double(b)); }
 }

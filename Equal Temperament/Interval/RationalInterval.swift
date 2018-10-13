@@ -109,8 +109,5 @@ class RationalInterval : Interval {
 	static func > (a: RationalInterval, b: Int) -> Bool { return a.ratio > b; }
 	static func >= (a: RationalInterval, b: RationalInterval) -> Bool { return a.ratio >= b.ratio; }
 	static func == (a: RationalInterval, b: Int) -> Bool { return a.ratio==b; }
-	static func * (a: RationalInterval, b: RationalInterval) -> RationalInterval { return RationalInterval(a.ratio * b.ratio); }
-	static func * (a: RationalInterval, b: Int) -> RationalInterval { return RationalInterval(a.ratio * b); }
-	static func *= (a: inout RationalInterval, b: RationalInterval) { a = RationalInterval(a.ratio*b.ratio); }
 	static func *= (a: inout RationalInterval, b: Int) { a = RationalInterval(a.ratio*b); }
 }
