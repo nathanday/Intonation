@@ -295,6 +295,9 @@ class Document : NSDocument, MIDIReceiverObserver {
 			biggestErrorEntries = theGenerator.biggestError;
 			averageError = theGenerator.averageError;
 			everyInterval = theGenerator.everyEntry;
+			for (anIndex,anEntry) in everyInterval.enumerated() {
+				anEntry.intervalNumber = anIndex;
+			}
 			selectedIntervalEntry = theSelectedEntries;
 		}
 	}

@@ -492,7 +492,7 @@
                                                                             </textFieldCell>
                                                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                             <connections>
-                                                                                <binding destination="cy8-kx-1Au" name="value" keyPath="arrangedObjects.closestIntervalNumberDescription" id="qTp-R2-oFC"/>
+                                                                                <binding destination="cy8-kx-1Au" name="value" keyPath="arrangedObjects.intervalNumber" id="Y75-1j-RHt"/>
                                                                             </connections>
                                                                         </tableColumn>
                                                                         <tableColumn identifier="note" editable="NO" width="55" minWidth="55" maxWidth="55" id="Lpv-Ap-ujv">

@@ -52,7 +52,8 @@ class IntervalEntry : NSObject, NSPasteboardReading, NSPasteboardWriting {
     @objc dynamic var intervalToDouble : Double { return interval.toDouble; }
 	@objc dynamic var name : String { return interval.ratioString; }
 	var closestEqualTemperamentIntervalNumber : UInt { return UInt(12.0*Double(log2(interval.toDouble))+0.5); }
-	var closestIntervalNumber : UInt { return UInt(Double(12)*Double(log2(interval.toDouble))+0.5); }
+	var closest12EqualTemperamentIntervalNumber : UInt { return UInt(Double(12)*Double(log2(interval.toDouble))+0.5); }
+	@objc dynamic var intervalNumber : Int = 0;
 	var equalTemperamentRatio : Double { return pow(2.0,Double(closestEqualTemperamentIntervalNumber)/Double(12)); }
 	var toRatio : Double { return interval.toDouble; }
 	@objc dynamic var toCents : Double { return interval.toCents; }
@@ -60,7 +61,7 @@ class IntervalEntry : NSObject, NSPasteboardReading, NSPasteboardWriting {
 	var justIntonationPercent : Double { return Double(12)*100.0 * log2(interval.toDouble); }
 	var error : Double { return equalTemperamentRatio-interval.toDouble; }
 	var error12ETCent : Double {
-		return (interval.toDouble/Double(closestIntervalNumber).ratioFromSemitone).toCents;
+		return (interval.toDouble/Double(closest12EqualTemperamentIntervalNumber).ratioFromSemitone).toCents;
 	}
 	@objc dynamic var oddLimit : UInt {
 		switch interval {
@@ -116,16 +117,16 @@ class IntervalEntry : NSObject, NSPasteboardReading, NSPasteboardWriting {
 	var degreeName : String = "";
 
 	var errorNETCent : Double {
-		return (interval.toDouble/Double(closestIntervalNumber).ratioFromSemitone).toCents;
+		return (interval.toDouble/Double(closest12EqualTemperamentIntervalNumber).ratioFromSemitone).toCents;
 	}
 
-	@objc dynamic var closestIntervalNumberDescription : String { return "\(closestIntervalNumber)"; }
+	@objc dynamic var closestIntervalNumberDescription : String { return "\(closest12EqualTemperamentIntervalNumber)"; }
 	@objc dynamic var closestNoteDescription : String {
 		var		theResult = "";
 		if true {
 			let		noteForIntervalNumber = [ 1, 1, 2, 2, 3, 4, 4, 5, 5, 6, 6, 7 ];
-			let		theNoteNumber = Int(closestIntervalNumber)%noteForIntervalNumber.count;
-			let		theOctave = Int(closestIntervalNumber)/noteForIntervalNumber.count;
+			let		theNoteNumber = Int(closest12EqualTemperamentIntervalNumber)%noteForIntervalNumber.count;
+			let		theOctave = Int(closest12EqualTemperamentIntervalNumber)/noteForIntervalNumber.count;
             let     theNotNumber = noteForIntervalNumber[theNoteNumber]+theOctave*7;
             if theNoteNumber >= 1 && noteForIntervalNumber[theNoteNumber] == noteForIntervalNumber[theNoteNumber-1] {
                 theResult = "\(theNotNumber)♯/\(theNotNumber+1)♭";
@@ -216,7 +217,7 @@ class IntervalEntry : NSObject, NSPasteboardReading, NSPasteboardWriting {
 		}
 	}
 
-	override var description: String { return "ratio:\(interval), closestIntervalNumber:\(closestIntervalNumber)"; }
+	override var description: String { return "ratio:\(interval), closestIntervalNumber:\(closest12EqualTemperamentIntervalNumber)"; }
 	public override var hash: Int { return interval.hashValue; }
 	override public func isEqual(_ anObject: Any?) -> Bool {
 		let	theObject = anObject as! IntervalEntry;
