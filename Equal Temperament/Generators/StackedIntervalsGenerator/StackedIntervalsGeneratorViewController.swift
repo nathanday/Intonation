@@ -34,7 +34,7 @@ class StackedIntervalsGeneratorViewController: GeneratorViewController {
         }
 	}
 
-	@IBOutlet weak var stackedIntervalsTableView: NSTableView!
+	@IBOutlet var stackedIntervalsTableView: NSTableView!
     @objc dynamic var	stackedIntervalSetBaseString : String = "3:2" {
         didSet {
             UserDefaults.standard.set(stackedIntervalSetBaseString, forKey:"stackedIntervalSetBaseString");

@@ -35,7 +35,7 @@ class MainWindowController : NSWindowController, NSMenuItemValidation {
 	@IBOutlet var	tableParentContainerSplitView : NSSplitView?;
 	@IBOutlet var	viewsTabView : NSTabView?;
 
-	@IBOutlet var	arrayController : NSArrayController?
+	@IBOutlet var	arrayController : NSArrayController!
 	@IBOutlet var	scaleViewController : ScaleViewController?
 	@IBOutlet var	harmonicViewController : HarmonicViewController?
 	@IBOutlet var	waveViewController : WaveViewController?
@@ -72,7 +72,7 @@ class MainWindowController : NSWindowController, NSMenuItemValidation {
 				if aKeyPath == "everyInterval" {
 					scaleViewController?.setIntervals(intervals: theDocument.everyInterval, degree: 12, enabled: true);
 				} else if aKeyPath == "selectedIndicies" {
-					arrayController?.setSelectedObjects(theDocument.selectedIntervalEntry);
+					arrayController.setSelectedObjects(theDocument.selectedIntervalEntry);
 					updateChordRatioTitle();
 				}
 			}
@@ -191,7 +191,7 @@ class MainWindowController : NSWindowController, NSMenuItemValidation {
 	}
 
 	@IBAction func copy( _ aSender: Any ) {
-		if let theEntries = arrayController?.selectedObjects as? [IntervalEntry] {
+		if let theEntries = arrayController.selectedObjects as? [IntervalEntry] {
 			NSPasteboard.general.clearContents();
 			NSPasteboard.general.writeObjects( theEntries );
 		}
@@ -199,7 +199,7 @@ class MainWindowController : NSWindowController, NSMenuItemValidation {
 
 	@IBAction func copyCentsAction( _ aSender: Any ) {
 		NSPasteboard.general.clearContents();
-		NSPasteboard.general.writeObjects( (arrayController!.selectedObjects as! [IntervalEntry]).map { return "\($0.toCents)" as NSString; } );
+		NSPasteboard.general.writeObjects( (arrayController.selectedObjects as! [IntervalEntry]).map { return "\($0.toCents)" as NSString; } );
 	}
 
 	@IBAction func selectTabAction( _ aSender: NSMenuItem ) {
@@ -292,7 +292,7 @@ class MainWindowController : NSWindowController, NSMenuItemValidation {
 	}
 	@IBAction func delete( _ aSender: Any) {
 		if let theViewController = documentTypeViewController as? AdHokGeneratorViewController,
-			let theSelectedObjects = arrayController?.selectedObjects as? [IntervalEntry] {
+			let theSelectedObjects = arrayController.selectedObjects as? [IntervalEntry] {
 			theViewController.removeIntervals( theSelectedObjects.map { return $0.interval; } );
 		}
 	}
@@ -317,7 +317,7 @@ class MainWindowController : NSWindowController, NSMenuItemValidation {
 					if aResponse == .OK {
 						var theIntervalEntries : [IntervalEntry]?
 						if aSelectedIntervals {
-							theIntervalEntries = self.arrayController?.selectedObjects as? [IntervalEntry];
+							theIntervalEntries = self.arrayController.selectedObjects as? [IntervalEntry];
 						} else {
 							theIntervalEntries = theDocument.intervalsData?.intervalsDataGenerator().everyEntry;
 						}
@@ -420,11 +420,11 @@ extension MainWindowController : NSWindowDelegate {
 extension MainWindowController : NSTableViewDelegate {
 
 	@objc func tableView(_ aTableView: NSTableView, toolTipFor aCell: NSCell, rect aRect: NSRectPointer, tableColumn: NSTableColumn?, row aRow: Int, mouseLocation aMousePoint: NSPoint) -> String {
-		return (arrayController?.arrangedObjects as! [IntervalEntry])[aRow].everyIntervalName.joined(separator: ",\n");
+		return (arrayController.arrangedObjects as! [IntervalEntry])[aRow].everyIntervalName.joined(separator: ",\n");
 	}
 
 	@objc func tableViewSelectionDidChange(_ notification: Notification) {
-		if let theSelectedEntries = arrayController?.selectedObjects as? [IntervalEntry],
+		if let theSelectedEntries = arrayController.selectedObjects as? [IntervalEntry],
 			let theDocument = document as? Document {
 			theDocument.selectedIntervalEntry = theSelectedEntries
 		}
@@ -441,7 +441,10 @@ extension MainWindowController : NSTableViewDelegate {
 
 extension MainWindowController : NSTableViewDataSource {
 	func tableView(_ aTableView: NSTableView, pasteboardWriterForRow aRow: Int) -> NSPasteboardWriting? {
-		return (arrayController?.arrangedObjects as! [IntervalEntry])[aRow];
+		guard let theArrangedObjects = arrayController.arrangedObjects as? [IntervalEntry] else {
+			return nil;
+		}
+		return theArrangedObjects[aRow];
 	}
 }
 
