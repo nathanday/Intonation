@@ -13,9 +13,9 @@
 	<key>selectedWaveViewScale</key>
 	<integer>1</integer>
 	<key>limits_denominatorPrimeLimit</key>
-	<integer>5</integer>
+	<integer>2</integer>
 	<key>limits_numeratorPrimeLimit</key>
-	<integer>5</integer>
+	<integer>2</integer>
 	<key>limits_oddLimit</key>
 	<integer>17</integer>
 	<key>limits_additiveDissonance</key>

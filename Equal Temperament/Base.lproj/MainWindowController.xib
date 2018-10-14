@@ -746,7 +746,7 @@
                                         <tabViewItems>
                                             <tabViewItem label="Scale" identifier="1" id="Sit-66-kUI">
                                                 <view key="view" id="nho-FR-ofh" customClass="ViewControllerPlaceHolderView" customModule="Intonation" customModuleProvider="target">
-                                                    <rect key="frame" x="10" y="29" width="403" height="622"/>
+                                                    <rect key="frame" x="10" y="25" width="403" height="626"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <connections>
                                                         <outlet property="viewController" destination="fMJ-Pa-RsX" id="NzV-fA-Th2"/>

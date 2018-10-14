@@ -76,6 +76,11 @@ class LinearScaleView : ScaleView {
 		previousValue = 0.0;
 		super.draw(aDirtyRect);
 	}
+
+	override func closestInterval(to aPoint: CGPoint ) -> (index:Int,interval:Interval,distance:CGFloat)? {
+		preconditionFailure("To be implemented");
+	}
+
 	override func drawJustIntonationRatio( ratio aRatio : Interval, hilighted aHilighted : Bool, index anIndex: Int ) {
 		let		theX0 = floor(drawingBounds.midX+equalTempBarWidth/2.0)-20.5;
 		let		theY = CGFloat(log2(aRatio.toDouble)) * NSHeight(drawingBounds) + drawingBounds.minY;
@@ -128,15 +133,16 @@ class PitchConstellationView : ScaleView {
 	private var		maximumRadius : CGFloat {
 		return min(NSWidth(bounds), NSHeight(bounds))*0.5;
 	}
+
 	private var		axisesRadius : CGFloat {
 		return min(maximumRadius-80.0, 320.0);
 	}
+
 	private func endPoint(interval aRatio : Interval, radius aRadius : CGFloat) -> CGPoint {
 		let		theBounds = bounds;
 		let		theAngle = CGFloat(log2(aRatio.toDouble) * 2.0*Double.pi);
 		return NSMakePoint(theBounds.midX+sin(theAngle)*aRadius, theBounds.midY+cos(theAngle)*aRadius);
 	}
-
 
 	override func closestInterval(to aPoint: CGPoint ) -> (index:Int,interval:Interval,distance:CGFloat)? {
 		let		theBounds = bounds;
