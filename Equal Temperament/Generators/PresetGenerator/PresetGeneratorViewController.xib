@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
-        <capability name="system font weights other than Regular or Bold" minToolsVersion="7.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="PresetGeneratorViewController" customModule="Intonation" customModuleProvider="target">
             <connections>
-                <outlet property="browser" destination="JrB-PM-RZJ" id="hMj-ZT-AGN"/>
                 <outlet property="choosePresetWindow" destination="fWk-LV-Bfc" id="j9G-0R-Zow"/>
                 <outlet property="chordOrScaleSelectorViewController" destination="bWK-3A-s6J" id="UOE-J5-Jtj"/>
                 <outlet property="intervalNameTextView" destination="Unc-ae-9Sv" id="oJT-ea-rmP"/>
@@ -34,7 +31,7 @@
                         <font key="font" metaFont="systemBold"/>
                     </buttonCell>
                 </button>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FfB-0c-Odu">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FfB-0c-Odu">
                     <rect key="frame" x="108" y="9" width="44" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Name:" id="uCn-Ob-gL4">
                         <font key="font" metaFont="system"/>
@@ -52,7 +49,7 @@
                         <action selector="showPresetsSheetAction:" target="-2" id="sjx-R9-MeC"/>
                     </connections>
                 </button>
-                <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Unc-ae-9Sv">
+                <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Unc-ae-9Sv">
                     <rect key="frame" x="152" y="9" width="263" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="g2I-s6-RHo">
                         <font key="font" metaFont="systemMedium" size="13"/>
@@ -75,7 +72,7 @@
             </constraints>
             <point key="canvasLocation" x="194" y="43"/>
         </customView>
-        <window title="Select Preset" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="fWk-LV-Bfc" customClass="NSPanel">
+        <window title="Select Preset" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="fWk-LV-Bfc" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="131" y="158" width="660" height="429"/>
@@ -84,7 +81,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="660" height="429"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <searchField wantsLayer="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="USs-lk-C3k">
+                    <searchField wantsLayer="YES" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="USs-lk-C3k">
                         <rect key="frame" x="440" y="399" width="200" height="22"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="200" id="Zru-F4-Csc"/>

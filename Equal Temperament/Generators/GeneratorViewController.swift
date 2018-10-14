@@ -26,7 +26,7 @@ class GeneratorViewController : NSViewController {
 	}
 
 	@objc dynamic var document : Document? {
-		return windowController!.document as? Document;
+		return windowController?.document as? Document;
 	}
 
 }

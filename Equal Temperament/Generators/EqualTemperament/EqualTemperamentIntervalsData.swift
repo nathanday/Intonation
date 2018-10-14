@@ -85,7 +85,7 @@ class EqualTemperamentGenerator: IntervalsDataGenerator {
 	}
 	var	_everyIntervalEntry : [IntervalEntry]?;
 	override var	everyEntry : [IntervalEntry] {
-		return _everyIntervalEntry!;
+		return _everyIntervalEntry ?? [IntervalEntry]();
 	}
 	init( intervalsData anIntervalsData : EqualTemperamentIntervalsData ) {
 		interval = anIntervalsData.interval;

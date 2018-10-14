@@ -25,15 +25,15 @@ class MainWindowController : NSWindowController, NSMenuItemValidation {
 	deinit {
 		NotificationCenter.default.removeObserver(self);
 		document?.removeObserver(self, forKeyPath: "everyInterval");
-		splitView!.delegate = nil;
+		splitView?.delegate = nil;
 	}
 
-	@IBOutlet weak var	splitView : NSSplitView?;
-	@IBOutlet weak var	tableParentContainerView : NSView?
-	@IBOutlet weak var	plottingParentContainerView : NSView?
-	@IBOutlet weak var	documentTypeViewControllerPlaceHolderView: ViewControllerPlaceHolderView?
-	@IBOutlet weak var	tableParentContainerSplitView : NSSplitView?;
-	@IBOutlet weak var	viewsTabView : NSTabView?;
+	@IBOutlet var	splitView : NSSplitView?;
+	@IBOutlet var	tableParentContainerView : NSView?
+	@IBOutlet var	plottingParentContainerView : NSView?
+	@IBOutlet var	documentTypeViewControllerPlaceHolderView: ViewControllerPlaceHolderView?
+	@IBOutlet var	tableParentContainerSplitView : NSSplitView?;
+	@IBOutlet var	viewsTabView : NSTabView?;
 
 	@IBOutlet var	arrayController : NSArrayController?
 	@IBOutlet var	scaleViewController : ScaleViewController?
@@ -43,17 +43,17 @@ class MainWindowController : NSWindowController, NSMenuItemValidation {
 
 	@IBOutlet var	findIntervalsViewController : FindIntervalsViewController?
 
-	@IBOutlet weak var	tableView : NSTableView?;
-	@IBOutlet weak var	baseFrequencyTextField : NSTextField?;
-	@IBOutlet weak var	harmonicTitleTextField : NSTextField?;
-	@IBOutlet weak var	factorsSumTitleTextField : NSTextField?;
-	@IBOutlet weak var	baseFrequencyDeltaSlider : NSSlider?;
-	@IBOutlet weak var	playSegmentedControl : NSSegmentedControl?;
+	@IBOutlet var	tableView : NSTableView?;
+	@IBOutlet var	baseFrequencyTextField : NSTextField?;
+	@IBOutlet var	harmonicTitleTextField : NSTextField?;
+	@IBOutlet var	factorsSumTitleTextField : NSTextField?;
+	@IBOutlet var	baseFrequencyDeltaSlider : NSSlider?;
+	@IBOutlet var	playSegmentedControl : NSSegmentedControl?;
 
-	@IBOutlet weak var	searchField : NSTextField?;
+	@IBOutlet var	searchField : NSTextField?;
 
-	@IBOutlet weak var  octavesCountPopUpButton : NSPopUpButton?
-	@IBOutlet weak var  selectionBaseNoteButton : NSButton?
+	@IBOutlet var  octavesCountPopUpButton : NSPopUpButton?
+	@IBOutlet var  selectionBaseNoteButton : NSButton?
 
 	var		documentTypeViewController : GeneratorViewController?
 
@@ -70,9 +70,9 @@ class MainWindowController : NSWindowController, NSMenuItemValidation {
 		if let theDocument = document as? Document {
 			if anObject as? Document == theDocument {
 				if aKeyPath == "everyInterval" {
-					scaleViewController!.setIntervals(intervals: theDocument.everyInterval, degree: 12, enabled: true);
+					scaleViewController?.setIntervals(intervals: theDocument.everyInterval, degree: 12, enabled: true);
 				} else if aKeyPath == "selectedIndicies" {
-					arrayController!.setSelectedObjects(theDocument.selectedIntervalEntry);
+					arrayController?.setSelectedObjects(theDocument.selectedIntervalEntry);
 					updateChordRatioTitle();
 				}
 			}
@@ -191,7 +191,7 @@ class MainWindowController : NSWindowController, NSMenuItemValidation {
 	}
 
 	@IBAction func copy( _ aSender: Any ) {
-		if let theEntries = arrayController!.selectedObjects as? [IntervalEntry] {
+		if let theEntries = arrayController?.selectedObjects as? [IntervalEntry] {
 			NSPasteboard.general.clearContents();
 			NSPasteboard.general.writeObjects( theEntries );
 		}
@@ -258,7 +258,7 @@ class MainWindowController : NSWindowController, NSMenuItemValidation {
 	}
 
 	@IBAction func showFindClosestIntervlAction( _ aSender: Any? ) {
-		findIntervalsViewController!.showView()
+		findIntervalsViewController?.showView()
 	}
 
 	@IBAction func showSelectMIDINoteForBaseFrequencyAction( _ aSender : Any? ) {
@@ -322,7 +322,9 @@ class MainWindowController : NSWindowController, NSMenuItemValidation {
 							theIntervalEntries = theDocument.intervalsData?.intervalsDataGenerator().everyEntry;
 						}
 						if let theIntervals = theIntervalEntries?.map( { $0.interval; } ) {
-							try? anExportMethod.exportGenerator(everyInterval: theIntervals ).saveTo(url: theSavePanel.url!);
+							if let theURL = theSavePanel.url {
+								try? anExportMethod.exportGenerator(everyInterval: theIntervals ).saveTo(url: theURL);
+							}
 						}
 					}
 				});
@@ -347,7 +349,7 @@ class MainWindowController : NSWindowController, NSMenuItemValidation {
 	}
 	override func windowDidLoad() {
 		super.windowDidLoad();
-		self.window!.acceptsMouseMovedEvents = true;
+		self.window?.acceptsMouseMovedEvents = true;
 
 		guard let theDocument = document as? Document else {
 			assertionFailure("No document");
@@ -366,7 +368,7 @@ class MainWindowController : NSWindowController, NSMenuItemValidation {
 					theDocument.intervalsData = theIntervalData;
 					if let theViewController = theDocument.intervalsData?.viewController(windowController: self) {
 						self.documentTypeViewController = theViewController;
-						self.documentTypeViewControllerPlaceHolderView!.loadViewController(theViewController);
+						self.documentTypeViewControllerPlaceHolderView?.loadViewController(theViewController);
 						theDocument.calculateAllIntervals();
 						self.octavesCountPopUpButton?.selectItem(withTag: Int(theIntervalData.octavesCount));
 					}
@@ -380,12 +382,12 @@ class MainWindowController : NSWindowController, NSMenuItemValidation {
 	}
 
 	@objc func hideIntervalRelatedColumn( _ aHide : Bool ) {
-		for theTableColumn in tableView!.tableColumns {
+		tableView?.tableColumns.forEach { theTableColumn -> Void in
 			if ["interval-number","percent","error"].contains(theTableColumn.identifier.rawValue) {
 				theTableColumn.isHidden = aHide;
 			}
 		}
-		scaleViewController!.hideIntervalRelatedColumn(!aHide);
+		scaleViewController?.hideIntervalRelatedColumn(!aHide);
 	}
 
 	@objc func windowDidBecomeMain( _ aNotification: Notification) {
@@ -418,11 +420,11 @@ extension MainWindowController : NSWindowDelegate {
 extension MainWindowController : NSTableViewDelegate {
 
 	@objc func tableView(_ aTableView: NSTableView, toolTipFor aCell: NSCell, rect aRect: NSRectPointer, tableColumn: NSTableColumn?, row aRow: Int, mouseLocation aMousePoint: NSPoint) -> String {
-		return (arrayController!.arrangedObjects as! [IntervalEntry])[aRow].everyIntervalName.joined(separator: ",\n");
+		return (arrayController?.arrangedObjects as! [IntervalEntry])[aRow].everyIntervalName.joined(separator: ",\n");
 	}
 
 	@objc func tableViewSelectionDidChange(_ notification: Notification) {
-		if let theSelectedEntries = arrayController!.selectedObjects as? [IntervalEntry],
+		if let theSelectedEntries = arrayController?.selectedObjects as? [IntervalEntry],
 			let theDocument = document as? Document {
 			theDocument.selectedIntervalEntry = theSelectedEntries
 		}
@@ -439,7 +441,7 @@ extension MainWindowController : NSTableViewDelegate {
 
 extension MainWindowController : NSTableViewDataSource {
 	func tableView(_ aTableView: NSTableView, pasteboardWriterForRow aRow: Int) -> NSPasteboardWriting? {
-		return (arrayController!.arrangedObjects as! [IntervalEntry])[aRow];
+		return (arrayController?.arrangedObjects as! [IntervalEntry])[aRow];
 	}
 }
 

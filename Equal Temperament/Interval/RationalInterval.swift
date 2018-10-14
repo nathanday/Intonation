@@ -32,7 +32,7 @@ class RationalInterval : Interval {
 	override var toString : String { return String(ratio); }
 	override var propertyList : [String:Any] {
 		var		theResult : [String:Any] = ["numerator":numerator, "denominator":denominator];
-		if names != nil && names!.count > 0 {
+		if names?.count ?? 0 > 0 {
 			theResult["names"] = names;
 		}
 		return theResult;

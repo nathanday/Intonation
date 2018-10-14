@@ -54,8 +54,10 @@ class StackedIntervalsGeneratorViewController: GeneratorViewController {
 	var _sortedStackIntervalSets : [StackedIntervalSet]?
 	var sortedStackIntervalSets : [StackedIntervalSet]? {
 		if _sortedStackIntervalSets == nil {
-			_sortedStackIntervalSets = (document!.intervalsData as! StackedIntervalsIntervalsData).stackedIntervals.sorted { (a:StackedIntervalSet, b:StackedIntervalSet) -> Bool in
-				return a.interval < b.interval;
+			if let theData = document?.intervalsData as? StackedIntervalsIntervalsData {
+				_sortedStackIntervalSets = theData.stackedIntervals.sorted { (a:StackedIntervalSet, b:StackedIntervalSet) -> Bool in
+					return a.interval < b.interval;
+				}
 			}
 		}
 		return _sortedStackIntervalSets;
@@ -108,17 +110,17 @@ class StackedIntervalsGeneratorViewController: GeneratorViewController {
 		get { return UserDefaults.standard.bool(forKey: "stackedIntervalsExpanded"); }
 	}
 	func addStackedIntervalSet( _ aStackedInterval : StackedIntervalSet ) {
-		if let theDocument = document {
-			(document!.intervalsData as! StackedIntervalsIntervalsData).insertStackedInterval(aStackedInterval);
-			theDocument.calculateAllIntervals();
+		if let theData = document?.intervalsData as? StackedIntervalsIntervalsData {
+			theData.insertStackedInterval(aStackedInterval);
+			document?.calculateAllIntervals();
 			reloadStackedIntervalsTable();
 		}
 	}
 
 	func removeStackedIntervalSet( _ aStackedInterval : StackedIntervalSet ) {
-		if let theDocument = document {
-			(document!.intervalsData as! StackedIntervalsIntervalsData).removeStackedInterval(aStackedInterval);
-			theDocument.calculateAllIntervals();
+		if let theData = document?.intervalsData as? StackedIntervalsIntervalsData {
+			theData.removeStackedInterval(aStackedInterval);
+			document?.calculateAllIntervals();
 			reloadStackedIntervalsTable();
 		}
 	}
@@ -132,7 +134,10 @@ class StackedIntervalsGeneratorViewController: GeneratorViewController {
 extension StackedIntervalsGeneratorViewController : NSTableViewDataSource {
 
 	func numberOfRows(in tableView: NSTableView) -> Int {
-		return (document?.intervalsData as? StackedIntervalsIntervalsData)!.stackedIntervals.count;
+		guard let theData = document?.intervalsData as? StackedIntervalsIntervalsData else {
+			return 0;
+		}
+		return theData.stackedIntervals.count;
 	}
 
 	public func tableView(_ aTable: NSTableView, objectValueFor aTableColumn: NSTableColumn?, row aRow: Int) -> Any?
@@ -173,7 +178,10 @@ extension StackedIntervalsGeneratorViewController : NSTableViewDataSource {
 extension StackedIntervalsGeneratorViewController : NSTableViewDelegate {
 	func tableView( _ aTableView: NSTableView, shouldEdit aTableColumn: NSTableColumn?, row aRow: Int) -> Bool {
 		let		theColumns : Set<String> = ["steps","octaves"];
-		return aTableColumn != nil && theColumns.contains(aTableColumn!.identifier.rawValue);
+		guard let theTableColumn = aTableColumn else {
+			return false
+		}
+		return theColumns.contains(theTableColumn.identifier.rawValue);
 	}
 }
 

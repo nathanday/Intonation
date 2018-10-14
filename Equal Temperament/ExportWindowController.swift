@@ -85,10 +85,14 @@ class ExportWindowController: NSWindowController {
 	}
 
 	@IBAction func nextAction( _ aSender: Any? ) {
-		window!.sheetParent?.endSheet(window!, returnCode:NSApplication.ModalResponse.continue);
+		if let theWindow = window {
+			theWindow.sheetParent?.endSheet(theWindow, returnCode:NSApplication.ModalResponse.continue);
+		}
 	}
 
 	@IBAction func cancelAction( _ aSender: Any? ) {
-		window!.sheetParent!.endSheet(window!);
+		if let theWindow = window {
+			theWindow.sheetParent!.endSheet(theWindow);
+		}
 	}
 }

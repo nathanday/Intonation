@@ -220,8 +220,11 @@ class IntervalEntry : NSObject, NSPasteboardReading, NSPasteboardWriting {
 	override var description: String { return "ratio:\(interval), closestIntervalNumber:\(closest12EqualTemperamentIntervalNumber)"; }
 	public override var hash: Int { return interval.hashValue; }
 	override public func isEqual(_ anObject: Any?) -> Bool {
-		let	theObject = anObject as! IntervalEntry;
-		return interval == theObject.interval;
+		if let	theObject = anObject as? IntervalEntry {
+			return interval == theObject.interval;
+		} else {
+			return false;
+		}
 	}
 	public static func == (a: IntervalEntry, b: IntervalEntry) -> Bool {
 		return a.interval == b.interval;

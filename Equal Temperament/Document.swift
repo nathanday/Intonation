@@ -211,9 +211,13 @@ class Document : NSDocument, MIDIReceiverObserver {
 	}
 
 	@objc dynamic var		everyInterval : [IntervalEntry] = [];
-	@objc dynamic var		smallestError : Double { get { return !smallestErrorEntries.isEmpty ? smallestErrorEntries.first!.error : 0.0; } }
+	@objc dynamic var		smallestError : Double {
+		return smallestErrorEntries.first?.error ?? 0.0;
+	}
 	@objc dynamic var		averageError : Double = 0.0
-	@objc dynamic var		biggestError : Double { get { return !biggestErrorEntries.isEmpty ? biggestErrorEntries.first!.error : 0.0; } }
+	@objc dynamic var		biggestError : Double {
+		return biggestErrorEntries.first?.error ?? 0.0;
+	}
 	@objc dynamic var		smallestErrorEntries : Set<IntervalEntry> = [] {
 		willSet { willChangeValue(forKey: "smallestError"); }
 		didSet { didChangeValue(forKey: "smallestError"); }

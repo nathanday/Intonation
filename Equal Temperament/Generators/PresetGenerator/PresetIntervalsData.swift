@@ -39,7 +39,7 @@ class PresetIntervalsData : IntervalsData {
 class PresetGenerator: IntervalsDataGenerator {
 	var	_everyIntervalEntry : [IntervalEntry]?;
 	override var everyEntry : [IntervalEntry] {
-		return _everyIntervalEntry!;
+		return _everyIntervalEntry ?? [IntervalEntry]();
 	}
 	init( intervalsData anIntervalsData : PresetIntervalsData ) {
 		var		theResult = Set<IntervalEntry>();

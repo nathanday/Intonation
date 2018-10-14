@@ -64,7 +64,7 @@ class AdHocIntervalsData : IntervalsData {
 class AdHocGenerator: IntervalsDataGenerator {
 	var	_everyIntervalEntry : [IntervalEntry]?;
 	override var everyEntry : [IntervalEntry] {
-		return _everyIntervalEntry!;
+		return _everyIntervalEntry ?? [IntervalEntry]();
 	}
 	init( intervalsData anIntervalsData : AdHocIntervalsData ) {
 		var		theResult = Set<IntervalEntry>();

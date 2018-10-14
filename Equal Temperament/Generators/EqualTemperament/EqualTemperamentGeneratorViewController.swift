@@ -25,7 +25,9 @@ class EqualTemperamentGeneratorViewController: GeneratorViewController {
 	}
 
 	deinit {
-		(document!.intervalsData as! EqualTemperamentIntervalsData).removeObserver(self, forKeyPath:"interval");
+		if let theData = document?.intervalsData as? EqualTemperamentIntervalsData {
+			theData.removeObserver(self, forKeyPath:"interval");
+		}
 	}
 
 	override func observeValue(forKeyPath aKeyPath: String?, of anObject: Any?, change aChange: [NSKeyValueChangeKey : Any]?, context aContext: UnsafeMutableRawPointer?) {

@@ -16,7 +16,7 @@ class PrimesSequence : Sequence {
 	@discardableResult private func extendPrimes() -> UInt? {
 		var		theResult : UInt? = nil;
 		var		theTestValue = PrimesSequence.primes.last!;
-		testValueLoop: while theResult == nil || theResult! < 4294967293 {
+		testValueLoop: while theResult ?? 0 < 4294967293 {
 			theTestValue += 2;
 			for p in PrimesSequence.primes {
 				if( p*p > theTestValue ) {

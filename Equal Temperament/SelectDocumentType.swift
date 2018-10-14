@@ -77,11 +77,15 @@ class SelectDocumentType : NSWindowController {
 	}
 
 	@IBAction func selectAction( _ aSender: Any? ) {
-		window!.sheetParent?.endSheet(window!, returnCode:.`continue`);
+		if let theWindow = window {
+			theWindow.sheetParent?.endSheet(theWindow, returnCode:.`continue`);
+		}
 	}
 
 	@IBAction func cancelAction( _ aSender: Any? ) {
-		window!.sheetParent?.endSheet(window!);
+		if let theWindow = window {
+			theWindow.sheetParent?.endSheet(theWindow);
+		}
 	}
 }
 

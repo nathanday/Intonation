@@ -70,7 +70,7 @@ class IrrationalInterval : Interval {
 //	}
 	var	_factorsString : String? = nil;
 	override var factorsString : String {
-		return _factorsString != nil ? _factorsString! : "\(ratio)";
+		return _factorsString ?? "\(ratio)";
 	}
 	override var ratioString : String { return ratio.toString(decimalPlaces:5); }
 

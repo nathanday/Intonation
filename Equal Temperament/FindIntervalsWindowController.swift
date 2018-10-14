@@ -149,7 +149,7 @@ class FindIntervalsViewController: NSViewController, NSMenuItemValidation {
 	func performFindEntries() {
 		if let theDocument = windowController?.document as? Document {
 			let			theSearchIntervals = theDocument.everyInterval;
-			let			theNumberOfOctaves = theDocument.intervalsData!.octavesCount;
+			let			theNumberOfOctaves = theDocument.intervalsData?.octavesCount ?? 0;
 
 			switch findMethod {
 			case .findMethodClosest:

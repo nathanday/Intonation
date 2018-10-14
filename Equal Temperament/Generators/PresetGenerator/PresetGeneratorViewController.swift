@@ -11,9 +11,8 @@ import Cocoa
 class PresetGeneratorViewController: GeneratorViewController {
     static let       defaultIntervalString = "<Select a Present>";
 
-	@IBOutlet var	choosePresetWindow : NSPanel?
-	@IBOutlet var	browser : NSBrowser?;
-	@IBOutlet var	chordOrScaleSelectorViewController : ChordOrScaleSelectorViewController?
+	@IBOutlet var	choosePresetWindow : NSPanel!
+	@IBOutlet var	chordOrScaleSelectorViewController : ChordOrScaleSelectorViewController!
     @IBOutlet var   intervalNameTextView : NSTextField?
 
 	required init?( windowController aWindowController: MainWindowController ) {
@@ -29,36 +28,34 @@ class PresetGeneratorViewController: GeneratorViewController {
     }
 
 	@IBAction func showPresetsSheetAction( _ aSender: Any) {
-		if let theSheet = choosePresetWindow {
-			view.window?.beginSheet(theSheet, completionHandler: {
-					(aResponse:NSApplication.ModalResponse) -> Void in
-					switch aResponse {
-					case NSApplication.ModalResponse.continue:
-						if let theIntervalData = self.document?.intervalsData as? PresetIntervalsData {
-							theIntervalData.intervals = self.chordOrScaleSelectorViewController!.selectedIntervalSet;
-							self.document?.calculateAllIntervals();
-                            if let theName = theIntervalData.intervals?.name {
-                                self.intervalNameTextView?.stringValue = theName;
-                            } else {
-                                self.intervalNameTextView?.stringValue = PresetGeneratorViewController.defaultIntervalString;
-                            }
+		view.window?.beginSheet(choosePresetWindow, completionHandler: {
+				(aResponse:NSApplication.ModalResponse) -> Void in
+				switch aResponse {
+				case NSApplication.ModalResponse.continue:
+					if let theIntervalData = self.document?.intervalsData as? PresetIntervalsData {
+						theIntervalData.intervals = self.chordOrScaleSelectorViewController.selectedIntervalSet;
+						self.document?.calculateAllIntervals();
+						if let theName = theIntervalData.intervals?.name {
+							self.intervalNameTextView?.stringValue = theName;
+						} else {
+							self.intervalNameTextView?.stringValue = PresetGeneratorViewController.defaultIntervalString;
 						}
-						break;
-					default:
-						break;
 					}
+					break;
+				default:
+					break;
 				}
-			);
-		}
+			}
+		);
 	}
 }
 
 extension PresetGeneratorViewController : NSWindowDelegate {
 	@IBAction func selectPresetAction( _ aSender: Any) {
-		choosePresetWindow!.sheetParent?.endSheet( choosePresetWindow!, returnCode: NSApplication.ModalResponse.continue );
+		choosePresetWindow.sheetParent?.endSheet( choosePresetWindow, returnCode: NSApplication.ModalResponse.continue );
 	}
 	@IBAction func cancelPresetSheetAction( _ aSender: Any) {
-		choosePresetWindow!.sheetParent?.endSheet( choosePresetWindow!, returnCode: NSApplication.ModalResponse.abort );
+		choosePresetWindow.sheetParent?.endSheet( choosePresetWindow, returnCode: NSApplication.ModalResponse.abort );
 	}
 }
 
