@@ -78,7 +78,7 @@ class LinearScaleView : ScaleView {
 	}
 
 	override func closestInterval(to aPoint: CGPoint ) -> (index:Int,interval:Interval,distance:CGFloat)? {
-		preconditionFailure("To be implemented");
+		assert(false,"To be implemented");
 	}
 
 	override func drawJustIntonationRatio( ratio aRatio : Interval, hilighted aHilighted : Bool, index anIndex: Int ) {
