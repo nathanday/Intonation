@@ -434,8 +434,8 @@
 			children = (
 				D8EDC4AD1DB11E3D009BF520 /* Intonation.entitlements */,
 				D8EB94B321735A05009195E3 /* README.md */,
-				D895435F1996345200A091A4 /* Equal Temperament */,
-				D89543751996345200A091A4 /* Equal TemperamentTests */,
+				D895435F1996345200A091A4 /* Intonation */,
+				D89543751996345200A091A4 /* IntonationTests */,
 				D895435E1996345200A091A4 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -449,7 +449,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D895435F1996345200A091A4 /* Equal Temperament */ = {
+		D895435F1996345200A091A4 /* Intonation */ = {
 			isa = PBXGroup;
 			children = (
 				D8B902091AD48EBF0015B5E2 /* Controllers */,
@@ -464,7 +464,7 @@
 				D89543601996345200A091A4 /* Supporting Files */,
 				D84F34081B088BC30095D1E8 /* Frameworks */,
 			);
-			path = "Equal Temperament";
+			path = Intonation;
 			sourceTree = "<group>";
 		};
 		D89543601996345200A091A4 /* Supporting Files */ = {
@@ -476,7 +476,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		D89543751996345200A091A4 /* Equal TemperamentTests */ = {
+		D89543751996345200A091A4 /* IntonationTests */ = {
 			isa = PBXGroup;
 			children = (
 				D89543781996345200A091A4 /* Equal_TemperamentTests.swift */,
@@ -494,7 +494,7 @@
 				D8FBA4282171DB7D007A215E /* ExportGenerator_Test.swift */,
 				D89543761996345200A091A4 /* Supporting Files */,
 			);
-			path = "Equal TemperamentTests";
+			path = IntonationTests;
 			sourceTree = "<group>";
 		};
 		D89543761996345200A091A4 /* Supporting Files */ = {
@@ -637,7 +637,6 @@
 				TargetAttributes = {
 					D895435C1996345200A091A4 = {
 						CreatedOnToolsVersion = 6.0;
-						DevelopmentTeam = 48EHR59S73;
 						LastSwiftMigration = 0900;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.Mac = {
@@ -979,8 +978,8 @@
 				CODE_SIGN_ENTITLEMENTS = Intonation.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 48EHR59S73;
-				INFOPLIST_FILE = "Equal Temperament/Info.plist";
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = Intonation/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.godofcocoa.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Intonation;
@@ -996,8 +995,8 @@
 				CODE_SIGN_ENTITLEMENTS = Intonation.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 48EHR59S73;
-				INFOPLIST_FILE = "Equal Temperament/Info.plist";
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = Intonation/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.godofcocoa.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Intonation;
@@ -1018,7 +1017,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "Equal TemperamentTests/Info.plist";
+				INFOPLIST_FILE = IntonationTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.godofcocoa.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Intonation;
@@ -1034,7 +1033,7 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "Equal TemperamentTests/Info.plist";
+				INFOPLIST_FILE = IntonationTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.godofcocoa.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Intonation;
