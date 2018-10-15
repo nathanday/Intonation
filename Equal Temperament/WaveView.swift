@@ -77,8 +77,8 @@ class WaveView: ResultView {
 			for (anIndex,anInterval) in anIntervals.enumerated() {
 				let		thePath = NSBezierPath();
 				let		theSubZeroAxis = theOffset + theSubHeight*0.5;
-				thePath.move(to: NSMakePoint(theX0, theZeroAxis));
-				var	theX = aDirtyRect.minX;
+				var		theX = aDirtyRect.minX;
+				thePath.move(to: NSMakePoint(theX0, theSubZeroAxis));
 				while theX <= aDirtyRect.maxX {
 					let		theTrigTerm = trigTerm(for:theX, freq:anInterval.interval.toDouble);
 					thePath.line(to: point(x:theX, trigTerm:theTrigTerm, zeroAxix: theSubZeroAxis, height: theSubHeight));

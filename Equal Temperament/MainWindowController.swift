@@ -198,8 +198,10 @@ class MainWindowController : NSWindowController, NSMenuItemValidation {
 	}
 
 	@IBAction func copyCentsAction( _ aSender: Any ) {
-		NSPasteboard.general.clearContents();
-		NSPasteboard.general.writeObjects( (arrayController.selectedObjects as! [IntervalEntry]).map { return "\($0.toCents)" as NSString; } );
+		if let theIntervals = arrayController.selectedObjects as? [IntervalEntry] {
+			NSPasteboard.general.clearContents();
+			NSPasteboard.general.writeObjects( theIntervals.map { return "\($0.toCents)" as NSString; } );
+		}
 	}
 
 	@IBAction func selectTabAction( _ aSender: NSMenuItem ) {

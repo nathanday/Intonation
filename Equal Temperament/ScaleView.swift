@@ -9,7 +9,7 @@
 import Cocoa
 
 class ScaleView : ResultView {
-	static let		equalTempGradient: NSGradient? = NSGradient(starting: NSColor(named: "intonationGradientStart")!, ending: NSColor(named: "intonationGradientEnd")!);
+	static let		equalTempGradient: NSGradient = NSGradient(starting: NSColor(named: "intonationGradientStart")!, ending: NSColor(named: "intonationGradientEnd")!)!;
 	let		equalTempBarWidth : CGFloat = 20.0;
 	
 	var		numberOfIntervals : Int = 12 {
@@ -120,7 +120,7 @@ class LinearScaleView : ScaleView {
 		let		theHeights = NSHeight(drawingBounds)/CGFloat(numberOfIntervals);
 		let		theX = floor(drawingBounds.midX-equalTempBarWidth/2.0)-20.5;
 		let		theY = CGFloat(aRatioNumber)*theHeights+drawingBounds.minX;
-		LinearScaleView.equalTempGradient!.draw(in: NSBezierPath(rect: NSMakeRect(theX, theY, equalTempBarWidth, theHeights)), angle: -90);
+		LinearScaleView.equalTempGradient.draw(in: NSBezierPath(rect: NSMakeRect(theX, theY, equalTempBarWidth, theHeights)), angle: -90);
 	}
 	override func drawNoEqualTemperament( ) {
 		let		theX = floor(drawingBounds.midX-equalTempBarWidth/2.0)-20.5;
@@ -196,7 +196,7 @@ class PitchConstellationView : ScaleView {
 		thePath.appendArc(withCenter: NSMakePoint(theBounds.midX, theBounds.midY), radius:axisesRadius, startAngle: theStart, endAngle: theEnd);
 		thePath.appendArc(withCenter: NSMakePoint(theBounds.midX, theBounds.midY), radius:axisesRadius-equalTempBarWidth, startAngle: theEnd, endAngle: theStart, clockwise: true);
 		thePath.close();
-		LinearScaleView.equalTempGradient!.draw(in: thePath, angle: (theStart+theEnd)*0.5+90.0);
+		LinearScaleView.equalTempGradient.draw(in: thePath, angle: (theStart+theEnd)*0.5+90.0);
 
 		let		theAngle = (360.0+88.0-theStart) * CGFloat(Double.pi/180.0);
 		let		theSize = NSFont.systemFontSize(for: NSControl.ControlSize.small);

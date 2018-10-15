@@ -14,7 +14,7 @@ enum IntervalsFindMethod {
 }
 
 class FindIntervalsViewController: NSViewController, NSMenuItemValidation {
-	@IBOutlet weak var	searchField : NSSearchField? = nil;
+	@IBOutlet var				searchField : NSSearchField?;
 	@objc dynamic var			hidden : Bool = true;
 	@objc dynamic var			ratiosString : String = "";
 	@objc dynamic var			centErrorsString : String = "";

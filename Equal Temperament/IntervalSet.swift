@@ -17,14 +17,6 @@ class IntervalSet : Sequence {
 		name = aName;
 	}
 
-	convenience init?( propertyList aPropertyList: [String:Any] ) {
-		if let theName = aPropertyList["name"] as? String {
-			self.init( name: theName );
-		} else {
-			return nil;
-		}
-	}
-
 	subscript(anIndex:Int) -> Interval! {
 		get {
 			return anIndex >= 0 ? everyInterval[anIndex%numberOfDegrees]*(anIndex/numberOfDegrees+1) : nil;
@@ -76,10 +68,6 @@ class IntervalSet : Sequence {
 		}
 		return theResult;
 	}
-
-//	func sortedByDifferentsTo( _ aValue : Double ) -> [Interval] {
-//		return everyInterval.sorted { (a:Interval, b:Interval) -> Bool in return abs(a.toDouble-aValue) < abs(b.toDouble-aValue); };
-//	}
 
 	var description: String {
 		var		theResult : String?;

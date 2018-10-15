@@ -17,45 +17,45 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <popUpButton horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Mgm-LW-Y4w">
-                    <rect key="frame" x="268" y="2" width="68" height="25"/>
-                    <popUpButtonCell key="cell" type="push" title="4" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" tag="2" imageScaling="proportionallyDown" inset="2" arrowPosition="arrowAtCenter" selectedItem="K78-0d-EhZ" id="nFZ-yv-SXd">
+                    <rect key="frame" x="268" y="2" width="155" height="25"/>
+                    <popUpButtonCell key="cell" type="push" title="4 (3rd Octave)" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" tag="2" imageScaling="proportionallyDown" inset="2" arrowPosition="arrowAtCenter" selectedItem="K78-0d-EhZ" id="nFZ-yv-SXd">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="menu"/>
                         <menu key="menu" id="v7M-m1-4pK">
                             <items>
-                                <menuItem title="4" state="on" tag="2" id="K78-0d-EhZ">
+                                <menuItem title="4 (3rd Octave)" state="on" tag="2" id="K78-0d-EhZ">
                                     <attributedString key="attributedTitle"/>
                                     <modifierMask key="keyEquivalentModifierMask"/>
                                 </menuItem>
-                                <menuItem title="8" tag="3" id="D87-HU-ihW">
+                                <menuItem title="8 (4th Octave)" tag="3" id="D87-HU-ihW">
                                     <attributedString key="attributedTitle"/>
                                     <modifierMask key="keyEquivalentModifierMask"/>
                                 </menuItem>
-                                <menuItem title="16" tag="4" id="bUK-LX-MPQ">
+                                <menuItem title="16 (5th Octave)" tag="4" id="bUK-LX-MPQ">
                                     <attributedString key="attributedTitle"/>
                                     <modifierMask key="keyEquivalentModifierMask"/>
                                 </menuItem>
-                                <menuItem title="32" tag="5" id="ts0-ds-ouh">
+                                <menuItem title="32 (5th Octave)" tag="5" id="ts0-ds-ouh">
                                     <attributedString key="attributedTitle"/>
                                     <modifierMask key="keyEquivalentModifierMask"/>
                                 </menuItem>
-                                <menuItem title="64" tag="6" id="ToB-vd-USK">
+                                <menuItem title="64 (6th Octave)" tag="6" id="ToB-vd-USK">
                                     <attributedString key="attributedTitle"/>
                                     <modifierMask key="keyEquivalentModifierMask"/>
                                 </menuItem>
-                                <menuItem title="128" tag="7" id="OFx-mT-MRd">
+                                <menuItem title="128 (7th Octave)" tag="7" id="OFx-mT-MRd">
                                     <attributedString key="attributedTitle"/>
                                     <modifierMask key="keyEquivalentModifierMask"/>
                                 </menuItem>
-                                <menuItem title="256" tag="8" id="cQm-Vk-45W">
+                                <menuItem title="256 (8th Octave)" tag="8" id="cQm-Vk-45W">
                                     <attributedString key="attributedTitle"/>
                                     <modifierMask key="keyEquivalentModifierMask"/>
                                 </menuItem>
-                                <menuItem title="512" tag="9" id="n6X-sE-ivQ">
+                                <menuItem title="512 (9th Octave)" tag="9" id="n6X-sE-ivQ">
                                     <attributedString key="attributedTitle"/>
                                     <modifierMask key="keyEquivalentModifierMask"/>
                                 </menuItem>
-                                <menuItem title="1024" tag="10" id="dvn-94-jqX">
+                                <menuItem title="1024 (10th Octave)" tag="10" id="dvn-94-jqX">
                                     <attributedString key="attributedTitle"/>
                                     <modifierMask key="keyEquivalentModifierMask"/>
                                 </menuItem>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14269.12" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14269.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -46,12 +46,12 @@
                     </scroller>
                 </scrollView>
                 <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IA4-fM-ilc">
-                    <rect key="frame" x="19" y="610" width="144" height="18"/>
+                    <rect key="frame" x="19" y="610" width="117" height="18"/>
                     <segmentedCell key="cell" controlSize="small" borderStyle="border" alignment="left" style="roundRect" trackingMode="selectOne" id="ane-3D-Ka6">
                         <font key="font" metaFont="smallSystem"/>
                         <segments>
-                            <segment label="Overlayed" width="70" selected="YES"/>
-                            <segment label="Summed" width="69" tag="1"/>
+                            <segment label="Split" width="42" selected="YES"/>
+                            <segment label="Summed" width="70" tag="1"/>
                         </segments>
                     </segmentedCell>
                     <connections>
@@ -59,7 +59,7 @@
                     </connections>
                 </segmentedControl>
                 <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IOO-UJ-8bY">
-                    <rect key="frame" x="169" y="610" width="100" height="18"/>
+                    <rect key="frame" x="142" y="610" width="100" height="18"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="98" id="fMQ-8j-8NY"/>
                     </constraints>

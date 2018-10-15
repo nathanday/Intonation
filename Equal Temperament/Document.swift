@@ -176,17 +176,12 @@ class Document : NSDocument, MIDIReceiverObserver {
 	override class var autosavesInPlace: Bool { return true; }
 	override func data( ofType typeName: String) throws -> Data {
 		var anError: NSError = NSError(domain: "Migrator", code: 0, userInfo: nil)
-		let		theResult: Data?
 		do {
-			theResult = try PropertyListSerialization.data(fromPropertyList: intervalsData!.propertyListValue, format:.xml, options:0)
+			return try PropertyListSerialization.data(fromPropertyList: intervalsData!.propertyListValue, format:.xml, options:0)
 		} catch let error as NSError {
 			anError = error
-			theResult = nil
-		};
-		if theResult == nil {
 			throw anError;
 		}
-		return theResult!;
 	}
 
 	override func read( from aData: Data, ofType typeName: String) throws {

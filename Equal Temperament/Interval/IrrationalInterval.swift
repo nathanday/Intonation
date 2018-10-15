@@ -11,10 +11,10 @@ import Foundation
 class IrrationalInterval : Interval {
 	private static let	intervalNames : [UInt:[String]] = {
 		var theResult = [UInt:[String]]()
-		guard let theIntervalNames = UserDefaults.standard.array(forKey: "intervalNames") else {
+		guard let theIntervalNames = UserDefaults.standard.array(forKey: "intervalNames") as? [[String:Any]] else {
 			return theResult;
 		}
-		for theEntry in theIntervalNames as! [[String:Any]] {
+		for theEntry in theIntervalNames {
 			if let theRatioString = theEntry["ratio"] as? String,
 				let theNames = theEntry["names"] as? [String] {
 				if theRatioString.contains(".") {
@@ -36,7 +36,7 @@ class IrrationalInterval : Interval {
 	override var toString : String { return "\(ratio)"; }
 	override var propertyList : [String:Any] {
 		var		theResult : [String:Any] = ["value":ratio];
-		if (names?.count)! > 0 {
+		if (names?.count) ?? 0 > 0 {
 			theResult["names"] = names;
 		}
 		return theResult;

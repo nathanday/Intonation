@@ -258,6 +258,7 @@
 		D8E10CB61CA689310030D8E6 /* EqualTemperamentIntervalsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EqualTemperamentIntervalsData.swift; sourceTree = "<group>"; };
 		D8E5E6231AD12F7A004DB02D /* HarmonicView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HarmonicView.swift; sourceTree = "<group>"; };
 		D8E5E6251AD130DE004DB02D /* ScaleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScaleView.swift; sourceTree = "<group>"; };
+		D8EB94B321735A05009195E3 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D8EC9D992132ACD100574E5E /* PianoKeyboardPopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoKeyboardPopoverViewController.swift; sourceTree = "<group>"; };
 		D8EC9D9B2132B0A900574E5E /* PianoKeyboardPopoverViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PianoKeyboardPopoverViewController.xib; sourceTree = "<group>"; };
 		D8ED76CF1C58E59E00BB2B8C /* FindIntervalsWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindIntervalsWindowController.swift; sourceTree = "<group>"; };
@@ -432,6 +433,7 @@
 			isa = PBXGroup;
 			children = (
 				D8EDC4AD1DB11E3D009BF520 /* Intonation.entitlements */,
+				D8EB94B321735A05009195E3 /* README.md */,
 				D895435F1996345200A091A4 /* Equal Temperament */,
 				D89543751996345200A091A4 /* Equal TemperamentTests */,
 				D895435E1996345200A091A4 /* Products */,

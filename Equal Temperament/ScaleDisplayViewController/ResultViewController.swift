@@ -43,7 +43,7 @@ extension ResultViewController : ResultViewDataSource {
 		return mainWindowController?.document?.selectedCommonFactor ?? 1;
 	}
 	func interval(for anIndex: Int) -> Interval? {
-		if let theEveryInterval = mainWindowController?.document!.everyInterval {
+		if let theEveryInterval = mainWindowController?.document?.everyInterval {
 			return theEveryInterval[anIndex].interval;
 		} else {
 			return nil;

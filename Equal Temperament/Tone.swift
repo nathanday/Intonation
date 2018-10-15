@@ -107,26 +107,6 @@ class Tone {
 		}
 	}
 
-	/*
-	final func generate( buffer aBuffer : UnsafeMutableBufferPointer<Float32>, gain aGain: Float32, count aCount : Int ) {
-		var		theEnvelope : Float32 = 0.0;
-		let		theThreshold = powf(2.0,-7.0);
-		for j : Int in 0..<aCount {
-			(complete,theEnvelope) = envelope[Float32(theta)];
-			if !complete {
-				var		theTotal : Float32 = 0.0;
-				for i in 1...min(harmonics.maximumHarmonic,Int(0.5/thetaDelta)) {
-					if i%2 == 1 && harmonics.amplitudes[i] < theThreshold { break; }
-					let theFreq = 2.0*Double.pi*Double(i);
-					theTotal += harmonics.amplitudes[i]*Float32(sin(theta*theFreq));
-				}
-				aBuffer[j] = Float32(theTotal)*aGain*theEnvelope;
-				theta += thetaDelta;
-			}
-		}
-	}
-	*/
-
 	func stop() {
 		if playing  {
 			let		theError = AudioOutputUnitStop(toneUnit! );

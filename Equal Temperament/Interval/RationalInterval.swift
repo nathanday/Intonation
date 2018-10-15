@@ -11,10 +11,10 @@ import Foundation
 class RationalInterval : Interval {
 	private static let	intervalNames : [Rational:[String]] = {
 		var theResult = [Rational:[String]]()
-		guard let theIntervalNames = UserDefaults.standard.array(forKey: "intervalNames") else {
+		guard let theIntervalNames = UserDefaults.standard.array(forKey: "intervalNames") as? [[String:Any]] else {
 			return theResult;
 		}
-		for theEntry in theIntervalNames as! [[String:Any]] {
+		for theEntry in theIntervalNames {
 			if let theRatioString = theEntry["ratio"] as? String,
 				let theNames = theEntry["names"] as? [String] {
 				if !theRatioString.contains(".") {

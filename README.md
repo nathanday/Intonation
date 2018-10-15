@@ -61,7 +61,7 @@ All harmonic sounds, musical instruments etc, can understood as the sum of pure
 tones, sine waves, whose frequencies are integer multiples of the fundamental
 frequency, this is related it how our ear interpret sound and why we like
 harmony in music, so one way to choose notes to use all ratio from the Harmonic
-Harmonic series up to arbitrary point, at the 8 harmonic we have a
+Harmonic series up to arbitrary point, up to the 8 harmonic we have a
 [Dominant seventh chord](https://en.wikipedia.org/wiki/Dominant_seventh_chord#Harmonic_seventh).
 
 Reference [Harmonic series (music)](https://en.wikipedia.org/wiki/Harmonic_series_(music))
@@ -81,5 +81,5 @@ with, factorise, wave view.
 * No built in help.
 * "Use Selection for Find" doesn't work.
 * Needs to be more choices in presents and a way for user to add there own.
-* Equal temperament is not supported AS well, some of the information is based
+* Equal temperament is not supported as well, some of the information is based
 around just intonation.
