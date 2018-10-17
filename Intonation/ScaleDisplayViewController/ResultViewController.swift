@@ -10,10 +10,10 @@ import Cocoa
 
 class ResultViewController : NSViewController {
 
-	@IBOutlet weak var	mainWindowController : MainWindowController?;
+	@IBOutlet weak var	mainWindowController : MainWindowController!;
 
 	override func awakeFromNib() {
-		NotificationCenter.default.addObserver(forName: Document.selectionChangedNotification, object: mainWindowController?.document, queue: OperationQueue.main, using: selectionChanged(notification:));
+		NotificationCenter.default.addObserver(forName: Document.selectionChangedNotification, object: mainWindowController.document, queue: OperationQueue.main, using: selectionChanged(notification:));
 	}
 
 	deinit {
@@ -34,30 +34,30 @@ class ResultViewController : NSViewController {
 
 extension ResultViewController : ResultViewDataSource {
 	var numberOfIntervals : Int {
-		return mainWindowController?.document?.everyInterval.count ?? 0;
+		return mainWindowController.document?.everyInterval.count ?? 0;
 	}
 	var numberOfSelectedIntervals : Int {
-		return mainWindowController?.document?.selectedIndicies.count ?? 0;
+		return mainWindowController.document?.selectedIndicies.count ?? 0;
 	}
 	var selectedCommonFactor : Int {
-		return mainWindowController?.document?.selectedCommonFactor ?? 1;
+		return mainWindowController.document?.selectedCommonFactor ?? 1;
 	}
 	func interval(for anIndex: Int) -> Interval? {
-		if let theEveryInterval = mainWindowController?.document?.everyInterval {
+		if let theEveryInterval = mainWindowController.document?.everyInterval {
 			return theEveryInterval[anIndex].interval;
 		} else {
 			return nil;
 		}
 	}
 	var selectedIndecies : IndexSet {
-		return mainWindowController?.document?.selectedIndicies ?? IndexSet();
+		return mainWindowController.document?.selectedIndicies ?? IndexSet();
 	}
 	var selectedInterval : [(index:Int,interval:Interval)] {
 		var		theResult = [(index:Int,interval:Interval)]();
-		guard let theIntervals = mainWindowController?.document?.everyInterval else {
+		guard let theIntervals = mainWindowController.document?.everyInterval else {
 			return theResult;
 		}
-		guard let theSelectedIndices = mainWindowController?.document?.selectedIndicies else {
+		guard let theSelectedIndices = mainWindowController.document?.selectedIndicies else {
 			return theResult;
 		}
 		for theIndex in theSelectedIndices {
@@ -67,7 +67,7 @@ extension ResultViewController : ResultViewDataSource {
 	}
 
 	func enumerateIntervals( _ aBlock: (Int,Interval,Bool) -> Void ) {
-		guard let theIntervals = mainWindowController?.document?.everyInterval else {
+		guard let theIntervals = mainWindowController.document?.everyInterval else {
 			return;
 		}
 		let		theSelectedIndices = selectedIndecies;
@@ -76,7 +76,7 @@ extension ResultViewController : ResultViewDataSource {
 		}
 	}
 	func enumerateSelectedIntervals( _ aBlock: (Int,Int,Interval) -> Void ) {
-		guard let theIntervals = mainWindowController?.document?.everyInterval else {
+		guard let theIntervals = mainWindowController.document?.everyInterval else {
 			return;
 		}
 		for (anIndex,aSelectedIndex) in selectedIndecies.enumerated() {

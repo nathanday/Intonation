@@ -78,7 +78,23 @@ class LinearScaleView : ScaleView {
 	}
 
 	override func closestInterval(to aPoint: CGPoint ) -> (index:Int,interval:Interval,distance:CGFloat)? {
-		assert(false,"To be implemented");
+		var		theResult : (index:Int,interval:Interval,distance:CGFloat)?
+		let		theX0 = floor(drawingBounds.midX+equalTempBarWidth/2.0)-20.5;
+		let		theX1 = theX0 + 15.0 + 160.0;
+		if theX0 <= aPoint.x && aPoint.x <= theX1 {
+			dataSource?.enumerateIntervals { (anIndex:Int, anInterval:Interval, aSelected: Bool) in
+				let		theY = CGFloat(log2(anInterval.toDouble)) * NSHeight(drawingBounds) + drawingBounds.minY;
+				let		theDistance = abs(aPoint.y-theY);
+				if let thePrevious = theResult {
+					if theDistance < thePrevious.distance {
+						theResult = (anIndex,anInterval,theDistance);
+					}
+				}  else {
+					theResult = (anIndex,anInterval,theDistance);
+				}
+			}
+		}
+		return theResult;
 	}
 
 	override func drawJustIntonationRatio( ratio aRatio : Interval, hilighted aHilighted : Bool, index anIndex: Int ) {
