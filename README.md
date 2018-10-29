@@ -25,7 +25,7 @@ Intonation lets you experiment with some different tuning systems, you can then
 compare how the same intervals in these different systems sound, generate new
 intervals not available to us with our modern tuning. Even if you are not
 interested in alternative tuning systems you can use a just intonation tuning to
-understantn why the intervals we are trying to aproximate with our modern
+understand why the intervals we are trying to aproximate with our modern
 tuning sound the way they do, Intonation gives you
 different graphical representations to help you visualise what is going on,
 what the intervals look like as waves, where they lie in the natural harmonic
@@ -60,7 +60,7 @@ Reference [Equal temperament](https://en.wikipedia.org/wiki/Equal_temperament)
 All harmonic sounds, musical instruments etc, can be understood as the sum of pure
 tones, sine waves, whose frequencies are integer multiples of the fundamental
 frequency, this is related to how our ear interpret sound and why we like
-harmony in music, so one way to choose notes to use all ratio from the Harmonic
+harmony in music, so one way to choose notes to use all ratios from the Harmonic
 Harmonic series up to arbitrary point, up to the 8th harmonic and we have all the notes of a
 [Dominant seventh chord](https://en.wikipedia.org/wiki/Dominant_seventh_chord#Harmonic_seventh).
 
