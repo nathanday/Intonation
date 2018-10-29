@@ -79,12 +79,8 @@ class IntervalSet_Test: XCTestCase {
 		XCTAssertEqual(theStackedIntervalSet.name,"3:2");
 		XCTAssertEqual(theStackedIntervalSet.everyInterval, [RationalInterval(1,1), RationalInterval(3,2), RationalInterval(9,8), RationalInterval(27,16), RationalInterval(81,64)]);
 		XCTAssertTrue(theStackedIntervalSet.contains(RationalInterval(3,2)));
-		XCTAssertTrue(theStackedIntervalSet.contains(Rational(9,8)));
-		XCTAssertTrue(theStackedIntervalSet.contains(UInt(1)));
-		XCTAssertTrue(theStackedIntervalSet.contains(1.5));
 		XCTAssertFalse(theStackedIntervalSet.contains(IrrationalInterval(1.55)));
 		XCTAssertFalse(theStackedIntervalSet.contains(RationalInterval(5,4)));
-		XCTAssertFalse(theStackedIntervalSet.contains(Rational(4,3)));
 		//		XCTAssertEqual(theStackedIntervalSet.propertyList, ["interval":"3:2","steps":5,"octaves":12] as [String : Any] );
 	}
 
@@ -94,7 +90,6 @@ class IntervalSet_Test: XCTestCase {
 		XCTAssertEqual(theStackedIntervalSet.everyInterval, [IrrationalInterval(1.0), IrrationalInterval(1.49), IrrationalInterval(1.11005), IrrationalInterval(1.6539745), IrrationalInterval(1.2322110025)]);
 		XCTAssertTrue(theStackedIntervalSet.contains(IrrationalInterval(1.2322110025)));
 		XCTAssertTrue(theStackedIntervalSet.contains(IrrationalInterval(1.49)));
-		XCTAssertFalse(theStackedIntervalSet.contains(Rational(4,3)));
 		//		XCTAssertEqual(theStackedIntervalSet.propertyList, ["interval":"3:2","steps":5,"octaves":12] as [String : Any] );
 	}
 

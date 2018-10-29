@@ -21,95 +21,153 @@
 
 import Foundation
 
+/// A type that can represent rational value.
+///
+/// The `RationalNumeric` protocol extends the operations defined by the
+/// `SignedNumeric` protocol to include a numerator and a denominator.
 public protocol RationalNumeric : SignedNumeric, Strideable {
 
+	/// A Int representing the numerator of the rational number.
 	var	numerator:		Int { get }
+	/// A Int representing the denominator of the rational number.
 	var	denominator:	Int { get }
+	/// Creates a new instance with the same memory representation as the given
+	/// value.
+	///
+	/// - Parameter aRational: A value to use as the source of the new instance's binary
+	///   representation.
 	init( _ aRational:Self);
+	/// Creates an rational value from the given numerator and denominator, reducing it
+	/// to its simpliest form.
+	///
+	/// - Parameter aNumerator: An integer numerator.
+	/// - Parameter aDenominator: An integer denominator.
 	init( _ aNumerator: Int, _ aDenominator: Int);
 
+	/// The RationalNumeric representation of zero.
 	static var zero:		Self { get }
+	/// The RationalNumeric representation of one.
 	static var one:			Self { get }
+	/// The minimum representable RationalNumeric.
 	static var min:			Self { get }
+	/// The maximum representable RationalNumeric.
 	static var max:			Self { get }
+	/// A NaN ("not a number").
+	///
+	/// A NaN compares not equal, not greater than, and not less than every
+	/// value, including itself. Passing a NaN to an operation generally results
+	/// in NaN.
+	///
+	/// Because a NaN always compares not equal to itself, to test whether a
+	/// rational value is NaN, use its `isNaN` property instead of the
+	/// equal-to operator (`==`). In the following example, `y` is NaN.
 	static var nan:			Self { get }
+	/// Positive infinity.
+	///
+	/// Infinity compares greater than all finite rational numbers and equal to other
+	/// infinite values.
+	///
+	///     let x = RationalNumeric.max
+	///     let y = RationalNumeric.infinity
+	///     // y > x
 	static var infinity:	Self { get }
+	/// The mathematical constant pi.
+	///
+	/// This value is a Rational approxiamation of pi,
+	///
+	///     print(RationalNumeric.pi)
+	///     // Prints "3.141592653589793" on a 64 bit arch
 	static var pi:			Self { get }
 
-	static func abs(_ x: Self) -> Self;
+	/// The magnitude of this value.
+	///
+	/// For any value `x`, `x.magnitude` is the absolute value of `x`.
 	var magnitude: Magnitude { get }
-	func signum() -> Int;
-	var	isSignMinus:	FloatingPointSign { get }
-	var	isInteger:		Bool { get }
+	/// Returns `-1` if this value is negative and `1` if it's positive;
+	/// otherwise, `0`.
+	///
+	/// - Returns: The sign of this number, expressed as an Int type.
+	func signum() -> Self;
+	/// Is the value and integer.
+	///
+	/// Returns true is the denominator is equal to 1.
+	var	isInteger: Bool { get }
 
+	/// Returns the reciprocal of the specified value, for example
+	func reciprocal() -> Self;
 
-	static func == (a: Self, b: Int) -> Bool;
-	static func != (a: Self, b: Int) -> Bool;
-	static func < (a: Self, b: Int) -> Bool;
-	static func <= (a: Self, b: Int) -> Bool;
-	static func > (a: Self, b: Int) -> Bool;
-	static func >= (a: Self, b: Int) -> Bool;
-
+	/// Divides the first value by the second.
+	///
+	/// - Parameters:
+	///   - a: The value to divide.
+	///   - b: The value to divide `lhs` by. `rhs` must not be zero.
 	static func / (a: Self, b: Self) -> Self;
+	/// Returns the additive inverse of the specified value, for example
+	///
+	/// - Returns: The additive inverse of this value.
 	static prefix func - (a: Self) -> Self;
 
+	/// Divides the first value by the second and stores the quotient in the
+	/// left-hand-side variable.
+	///
+	/// - Parameters:
+	///   - a: The value to divide.
+	///   - b: The value to divide `a` by. `b` must not be zero.
 	static func /= ( a: inout Self, b: Self);
 
-	static func + (a: Self, b: Int) -> Self;
-	static func - (a: Self, b: Int) -> Self;
-	static func * (a: Self, b: Int) -> Self;
-
-	static func / (a: Self, b: Int) -> Self;
-
-	static func += ( a: inout Self, b: Int);
-	static func -= ( a: inout Self, b: Int);
-	static func *= ( a: inout Self, b: Int);
-
-	static func /= ( a: inout Self, b: Int);
-
+	/// Is the value finite.
+	///
+	/// Returns true is the denominator is not equal to 0.
 	var isFinite: Bool { get }
+	/// Is the value zero.
+	///
+	/// Returns true is the numerator is eual to 1 and denominator is not equal to 0.
 	var isZero: Bool { get }
+	/// Is the value zero.
+	///
+	/// Returns true is the denominator is equal to 0.
 	var isInfinite: Bool { get }
+	/// Is the value not a number.
+	///
+	/// Returns true is the numerator and denominator are noth equal to 0.
 	var isNaN: Bool { get }
 }
 
-func rationalAproximation( _ aValue: Double, maxDenominator aMaxDenom: Int, maxError aMaxError: Double = 0.0 ) -> (numerator:Int,denominator:Int) {
-	func _farey( _ x: Double, _ M: Int, _ E:Double ) -> (numerator:Int,denominator:Int) {
-		var		a = (0,1);
-		var		b = (1,1);
-		while a.1 <= M && b.1 <= M {
-			let		theMediant = Double(a.0+b.0)/Double(a.1+b.1);
-			if x == theMediant {
-				if a.1 + b.1 <= Int(M) {
-					return (a.0+b.0, a.1+b.1)
-				}
-				else if b.1 > a.1 {
-					return b;
-				}
-				else {
-					return a;
-				}
-			}
-				else if x > theMediant {
-				a = (a.0+b.0,a.1+b.1);
-			}
-			else {
-				b = (a.0+b.0,a.1+b.1);
-			}
-		}
+extension String {
+	/// Creates a String from the given Rational value.
+	///
+	/// - Parameter aRational: A rations value to convert to an Double.
+	public init<T>(_ aRational: T ) where T : RationalNumeric {
+		self.init(aRational.denominator != 1 ? "\(aRational.numerator)/\(aRational.denominator)" : "\(aRational.numerator)");
+	}
+}
 
-		if( a.1 > M ) {
-			return b;
-		}
-		else {
-			return a;
-		}
+extension Double {
+	/// Creates a Double from the given rational value.
+	///
+	/// - Parameter aRational: A rations value to convert to an Double.
+	public init<T>(_ aRational: T ) where T : RationalNumeric {
+		self.init(Double(aRational.numerator)/Double(aRational.denominator));
 	}
-	let		theInt = Int(aValue);
-	var		theResult = _farey( fabs(aValue-Double(theInt)), aMaxDenom, aMaxError );
-	if( theInt < 0 ) {
-		theResult.numerator = -theResult.numerator;
+}
+
+extension Float {
+	/// Creates a Float from the given rational value.
+	///
+	/// - Parameter aRational: A rations value to convert to an Double.
+	public init<T>(_ aRational: T ) where T : RationalNumeric {
+		self.init(Float(aRational.numerator)/Float(aRational.denominator));
 	}
-	theResult.numerator += theInt*theResult.denominator;
-	return theResult;
+}
+extension Int {
+	/// Creates an integer from the given rational value, rounding toward
+	/// zero.
+	///
+	/// Any fractional part of the value passed as `source` is removed, rounding
+	/// the value toward zero.
+	///
+	/// - Parameter aRational: A floating-point value to convert to an integer.
+	public init<T>(_ aRational: T ) where T : RationalNumeric {
+		self.init(aRational.numerator/aRational.denominator);
+	}
 }

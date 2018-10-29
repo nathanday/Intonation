@@ -21,6 +21,10 @@
 
 import Foundation
 
+/// Returns the greatest common divisor beteen two unsigned integer
+///
+/// - Parameter u: The first integer value.
+/// - Parameter v: The second integer value.
 func greatestCommonDivisor<T : UnsignedInteger>(_ u: T, _ v: T) -> T {
 	// simple cases (termination)
 	guard u != v else { return u; }

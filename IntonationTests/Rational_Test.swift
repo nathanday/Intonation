@@ -19,9 +19,9 @@ class Rational_Test: XCTestCase {
     }
 
     func testCreation() {
-		let		theRationalOne = Rational();
-		XCTAssertEqual(theRationalOne.numerator, 1);
-		XCTAssertEqual(theRationalOne.denominator, 1);
+		let		theRationalZero = Rational();
+		XCTAssertEqual(theRationalZero.numerator, 0);
+		XCTAssertEqual(theRationalZero.denominator, 1);
 
 		let		theRational3_10 = Rational( 3, 10);
 		XCTAssertEqual(theRational3_10.numerator, 3);
@@ -106,25 +106,33 @@ class Rational_Test: XCTestCase {
 		XCTAssertEqual(-Rational(3,7), Rational(-3,7));
 		XCTAssertEqual(+Rational(3,7), Rational(3,7));
 
-		XCTAssertEqual(Rational(3,7).signum(), 1);
-		XCTAssertEqual(Rational.zero.signum(), 0);
-		XCTAssertEqual(Rational(-3,7).signum(), -1);
+		XCTAssertEqual(Rational(3,7).signum(), Rational.one);
+		XCTAssertEqual(Rational.zero.signum(), Rational.zero);
 
-		XCTAssertEqual(Rational.abs(Rational(3,7)), Rational(3,7));
-		XCTAssertEqual(Rational.abs(Rational(-3,7)), Rational(3,7));
+		XCTAssertEqual(Rational(-3,7).signum(), Rational(-1));
+		XCTAssertEqual(Rational(-3,7).numerator, -3);
+		XCTAssertEqual(Rational(-3,7).denominator, 7);
 
-		XCTAssertEqual(Rational(-3,7).isSignMinus, .minus);
-		XCTAssertEqual(Rational(3,7).isSignMinus, .plus);
+		XCTAssertEqual(Rational(3,-7).signum(), Rational(-1));
+		XCTAssertEqual(Rational(3,-7).numerator, -3);
+		XCTAssertEqual(Rational(3,-7).denominator, 7);
+
+		XCTAssertEqual(Rational(-3,-7).signum(), Rational.one);
+		XCTAssertEqual(Rational(-3,-7).numerator, 3);
+		XCTAssertEqual(Rational(-3,-7).denominator, 7);
+
+		XCTAssertEqual(abs(Rational(3,7)), Rational(3,7));
+		XCTAssertEqual(abs(Rational(-3,7)), Rational(3,7));
+
+		XCTAssertEqual(-Rational.one, Rational(-1));
+		XCTAssertEqual(+Rational.one, Rational(1));
+
 		XCTAssert(Rational.one.isFinite);
 		XCTAssert(Rational.infinity.isInfinite);
 		XCTAssert(Rational.nan.isNaN);
 		XCTAssert(Rational.zero.isZero);
 
-		var		a3 = Rational(3,7);
-		a3.addProduct(Rational(2,3), Rational(5,2))
-		XCTAssertEqual(a3, Rational(44,21));
-
-		XCTAssertEqual(Rational.sum([Rational(3,2),Rational(4,3),Rational(5,4),Rational(6,5)] ), Rational(317,60));
+		XCTAssertEqual(Rational(5,3).reciprocal(), Rational(3,5));
 	}
 
 	func testConvert() {
@@ -140,8 +148,8 @@ class Rational_Test: XCTestCase {
 		let		r1 : Rational = 2;
 		XCTAssertEqual(r1, Rational(2,1));
 
-		let		r2 : Rational = 3.1415;
-		XCTAssertEqual(r2, Rational(6283,2000));
+		let		r2 : Rational = 3.25;
+		XCTAssertEqual(r2, Rational(13,4));
 
 		XCTAssertEqual(Rational(exactly:UInt8(12)), Rational(12,1));
 		XCTAssertEqual(Rational(exactly:Int8(12)), Rational(12,1));
@@ -173,25 +181,6 @@ class Rational_Test: XCTestCase {
 		XCTAssertEqual(Rational(3,7)==Rational(9,20), false);
 		XCTAssertEqual(Rational(3,7) != Rational(9,20), true);
 		XCTAssertEqual(Rational(3,7) != Rational(9,21), false);
-
-		let		a = 3;
-		XCTAssertEqual(Rational(7,2)>a, true);
-		XCTAssertEqual(Rational(7,2)<a, false);
-		XCTAssertEqual(Rational(1,2)<a, true);
-		XCTAssertEqual(Rational(1,2)>a, false);
-
-		XCTAssertEqual(Rational(7,2)>=a, true);
-		XCTAssertEqual(Rational(7,2)<=a, false);
-		XCTAssertEqual(Rational(1,2)<=a, true);
-		XCTAssertEqual(Rational(1,2)>=a, false);
-
-		XCTAssertEqual(Rational(10,3)>=a, true);
-		XCTAssertEqual(Rational(3,7)<=a, true);
-
-		XCTAssertEqual(Rational(3,1)==a, true);
-		XCTAssertEqual(Rational(3,7)==a, false);
-		XCTAssertEqual(Rational(3,7) != a, true);
-		XCTAssertEqual(Rational(3,1) != a, false);
 	}
 
 	func testStride() {
@@ -207,7 +196,16 @@ class Rational_Test: XCTestCase {
 		XCTAssertNotEqual(theRational3_2, nil);
 		XCTAssertEqual(theRational3_2!.numerator, 3);
 		XCTAssertEqual(theRational3_2!.denominator, 2);
+		let		theRational1_2 = Rational("1/2");
+		XCTAssertNotEqual(theRational1_2, nil);
+		XCTAssertEqual(theRational1_2!.numerator, 1);
+		XCTAssertEqual(theRational1_2!.denominator, 2);
+		let		theRational5 = Rational("5");
+		XCTAssertNotEqual(theRational5, nil);
+		XCTAssertEqual(theRational5!.numerator, 5);
+		XCTAssertEqual(theRational5!.denominator, 1);
 
+		XCTAssertEqual(Rational("5:3:2"), nil);
 		XCTAssertEqual(Rational("a"), nil);
 
 		XCTAssertEqual(String(Rational(3,7)), "3/7");
@@ -217,7 +215,7 @@ class Rational_Test: XCTestCase {
 		XCTAssertEqual(Rational(3,7).description, String(Rational(3,7)));
 		XCTAssertEqual(Rational(3,1).description, String(Rational(3,1)));
 
-		XCTAssertEqual(Rational(3,7).debugDescription, "3∶7");
+		XCTAssertEqual(Rational(3,7).debugDescription, "{numerator=3,denominator=7}");
 	}
 
 	func testHash() {
@@ -239,7 +237,51 @@ class Rational_Test: XCTestCase {
 		XCTAssertEqual(Rational.nan.denominator, 0);
 		XCTAssertEqual(Rational.infinity.numerator, 1);
 		XCTAssertEqual(Rational.infinity.denominator, 0);
-		XCTAssertEqual(Double(Rational.pi), 3.141592653589793, accuracy:0.00000000000001);
+#if arch(x86_64) || arch(arm64)
+		XCTAssertEqual(Double(Rational.pi), Double.pi, accuracy:0.00000000000001);
+#else
+		XCTAssertEqual(Float(Rational.pi), Float.pi, accuracy:0.00005);
+#endif
+	}
+
+	func testNaN() {
+		let		a = Rational.nan;
+		XCTAssertFalse(a == Rational.nan);
+		XCTAssertFalse(a == Rational(0,0));
+		XCTAssertFalse(a < Rational.one);
+		XCTAssertFalse(a > Rational.one);
+		XCTAssertTrue(a.isNaN);
+		XCTAssertFalse(a.isInfinite);
+		XCTAssertFalse(a.isInfinite);
+		XCTAssertFalse(a.isInteger);
+		XCTAssertFalse(a.isZero);
+		XCTAssertFalse(Rational(3,2).isNaN);
+	}
+
+	func testInfinity() {
+		let		a = Rational.infinity;
+		let		b = -a;
+		XCTAssertTrue( a == Rational.infinity );
+		XCTAssertFalse( a == -Rational.infinity );
+		XCTAssertFalse( a == Rational.one );
+		XCTAssertTrue( a == Rational(1,0) );
+		XCTAssertTrue( a == Rational(100,0) );
+		XCTAssertTrue( a.isInfinite );
+		XCTAssertFalse( a.isNaN );
+		XCTAssertFalse( a.isFinite );
+		XCTAssertFalse(a.isInteger);
+		XCTAssertFalse(a.isZero);
+
+		XCTAssertTrue( b == -Rational.infinity );
+		XCTAssertFalse( b == Rational.infinity );
+		XCTAssertFalse( b == -Rational.one );
+		XCTAssertTrue( b == Rational(-1,0) );
+		XCTAssertTrue( b == Rational(-100,0) );
+		XCTAssertTrue( b.isInfinite );
+		XCTAssertFalse( b.isNaN );
+		XCTAssertFalse( b.isFinite );
+		XCTAssertFalse( b.isInteger );
+		XCTAssertFalse( b.isZero );
 	}
 
     func testPerformanceExample() {

@@ -69,7 +69,10 @@ extension ChordOrScaleSelectorViewController : NSBrowserDelegate {
 	func rootItem(for aBrowser: NSBrowser) -> Any? { return everyChordRoot; }
 
 	func browser( _ browser: NSBrowser, previewViewControllerForLeafItem anItem: Any ) -> NSViewController? {
-		return (anItem as? ChordSelectorLeaf)?.previewViewControllerForLeafItem();
+		guard let theItem = anItem as? ChordSelectorLeaf else {
+			return nil;
+		}
+		return ChordPreviewViewController(theItem);
 	}
 
 	func browser( _ aBrowser : NSBrowser, selectRow aRow: Int , inColumn aColumn: Int) -> Bool {

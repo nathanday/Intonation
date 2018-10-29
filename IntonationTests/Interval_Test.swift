@@ -41,9 +41,6 @@ class Interval_Test: XCTestCase {
 		XCTAssertTrue(theRationalInterval > 1);
 		XCTAssertTrue(theRationalInterval >= RationalInterval(9, 8));
 		XCTAssertEqual(theRationalInterval * 2, RationalInterval(9, 4));
-		var		a = theRationalInterval;
-		a *= 2
-		XCTAssertEqual(a, RationalInterval(9, 4));
 	}
 
 	func testIrrationalInterval() {

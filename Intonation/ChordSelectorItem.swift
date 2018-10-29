@@ -63,8 +63,6 @@ class ChordSelectorLeaf : ChordSelectorItem {
 		super.init( name: aName );
 	}
 
-	func previewViewControllerForLeafItem() -> NSViewController? { return ChordPreviewViewController(self); }
-
 	override var description: String { return "name:\(name), everyInterval:\(everyInterval)"; }
 }
 

@@ -41,17 +41,8 @@ class StackedIntervalSet : IntervalSet, Hashable {
 	}
 
 	func contains( _ anInterval: Interval ) -> Bool {
-		for theInterval in everyInterval {
-			if theInterval == anInterval {
-				return true;
-			}
-		}
-		return false;
+		return everyInterval.contains(anInterval);
 	}
-
-	func contains( _ anInterval: UInt ) -> Bool { return contains( RationalInterval(anInterval) ); }
-	func contains( _ anInterval: Rational ) -> Bool { return contains( RationalInterval(anInterval) ); }
-	func contains( _ anInterval: Double ) -> Bool { return contains( IrrationalInterval(anInterval) ); }
 
 	var propertyList : [String:Any] {
 		return ["interval":interval.toString,"steps":steps,"octaves":octaves];
@@ -70,7 +61,7 @@ class StackedIntervalSet : IntervalSet, Hashable {
 				}
 				_everyInterval.append( RationalInterval( theNormalizedValue ) );
 				theValue *= x.ratio;
-				if theValue > theOctaveValue {
+				if theValue > Rational(theOctaveValue) {
 					break;
 				}
 			}
