@@ -9,7 +9,7 @@ employers, if you have any interest with it beyond that contact me.
 
 ## Motivation
 
-The notes we use in music represent harmonic rations, the interval we call the
+The notes we use in music represent harmonic ratios, the interval we call the
 fifth represents the ratio 3:2, which means even time one string vibrates twice
 the other string vibrates three times. The problem with using pure ratios,
 just intonation, like this is they have to be relative to one key, this creates
