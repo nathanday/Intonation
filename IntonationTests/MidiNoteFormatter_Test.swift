@@ -94,6 +94,10 @@ class MidiNoteFormatter_Test: XCTestCase {
 
 		XCTAssertEqual( theMidiNoteFormatter.midiNoteValue(for:"B#3").value!, 12+(3+1)*12, "got \(12+(3+1)*12) for “B#3”" );
 		XCTAssertEqual( theMidiNoteFormatter.midiNoteValue(for:"Cb3").value!, -1+(3+1)*12, "got \(-1+(3+1)*12) for “B#3”" );
+
+		XCTAssertEqual( theMidiNoteFormatter.midiNoteValue(for:"A4").value!, 69, "got \(69) for “A4”" );
+		XCTAssertEqual( theMidiNoteFormatter.midiNoteValue(for:" A4").value!, 69, "got \(69) for “A4”" );
+		XCTAssertEqual( theMidiNoteFormatter.midiNoteValue(for:"A4 ").value!, 69, "got \(69) for “A4”" );
 	}
 
 	func testOverridenAPI() {

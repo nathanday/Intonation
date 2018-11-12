@@ -11,6 +11,8 @@ import Cocoa
 class ViewControllerPlaceHolderView : NSView {
 
 	@IBOutlet weak var	viewController : NSViewController?
+	@IBOutlet weak var	initialView : NSView?
+	@IBOutlet weak var	initialLayoutConstraint : NSLayoutConstraint?
 
 	override func awakeFromNib() {
 		placeRepresentitiveView();
@@ -27,6 +29,11 @@ class ViewControllerPlaceHolderView : NSView {
 	private func placeRepresentitiveView()
 	{
 		if let theView = viewController?.view {
+			assert(initialView == nil || initialView?.superview == self );
+			initialView?.removeFromSuperview();
+			if let theLayoutConstraint = initialLayoutConstraint {
+				removeConstraint(theLayoutConstraint);
+			}
 			theView.frame = self.bounds;
 			theView.autoresizingMask = [ NSView.AutoresizingMask.width, NSView.AutoresizingMask.height ];
 			addSubview(theView);

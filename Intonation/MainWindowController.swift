@@ -29,9 +29,9 @@ class MainWindowController : NSWindowController, NSMenuItemValidation {
 	}
 
 	@IBOutlet var	splitView : NSSplitView?;
-	@IBOutlet var	tableParentContainerView : NSView?
+	@IBOutlet var	tableParentContainerView : NSView!
 	@IBOutlet var	plottingParentContainerView : NSView?
-	@IBOutlet var	documentTypeViewControllerPlaceHolderView: ViewControllerPlaceHolderView?
+	@IBOutlet var	documentTypeViewControllerPlaceHolderView: ViewControllerPlaceHolderView!
 	@IBOutlet var	tableParentContainerSplitView : NSSplitView?;
 	@IBOutlet var	viewsTabView : NSTabView?;
 
@@ -370,7 +370,7 @@ class MainWindowController : NSWindowController, NSMenuItemValidation {
 					theDocument.intervalsData = theIntervalData;
 					if let theViewController = theDocument.intervalsData?.viewController(windowController: self) {
 						self.documentTypeViewController = theViewController;
-						self.documentTypeViewControllerPlaceHolderView?.loadViewController(theViewController);
+						self.documentTypeViewControllerPlaceHolderView.loadViewController(theViewController);
 						theDocument.calculateAllIntervals();
 						self.octavesCountPopUpButton?.selectItem(withTag: Int(theIntervalData.octavesCount));
 					}
@@ -422,7 +422,7 @@ extension MainWindowController : NSWindowDelegate {
 extension MainWindowController : NSTableViewDelegate {
 
 	@objc func tableView(_ aTableView: NSTableView, toolTipFor aCell: NSCell, rect aRect: NSRectPointer, tableColumn: NSTableColumn?, row aRow: Int, mouseLocation aMousePoint: NSPoint) -> String {
-		return (arrayController.arrangedObjects as! [IntervalEntry])[aRow].everyIntervalName.joined(separator: ",\n");
+		return (arrayController.arrangedObjects as? [IntervalEntry])?[aRow].everyIntervalName.joined(separator: ",\n") ?? "";
 	}
 
 	@objc func tableViewSelectionDidChange(_ notification: Notification) {
@@ -462,11 +462,11 @@ extension MainWindowController : NSSplitViewDelegate {
 	func splitView( _ aSplitView: NSSplitView, additionalEffectiveRectOfDividerAt aDividerIndex: Int ) -> NSRect {
 		var		theResult = NSZeroRect;
 		if aSplitView == splitView {
-			let		theRect = tableParentContainerView!.frame;
+			let		theRect = tableParentContainerView.frame;
 			theResult = NSRect(x: theRect.maxX-12.0, y: theRect.minY, width: 12.0, height: theRect.height);
 		} else if aSplitView == tableParentContainerSplitView {
 			if documentTypeViewController is StackedIntervalsGeneratorViewController {
-				theResult = documentTypeViewControllerPlaceHolderView!.frame;
+				theResult = documentTypeViewControllerPlaceHolderView.frame;
 				theResult.origin.y = theResult.maxY - 10.0;
 				theResult.size.height = 10.0;
 			}

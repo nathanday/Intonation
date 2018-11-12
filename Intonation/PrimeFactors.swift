@@ -58,23 +58,23 @@ struct PrimeFactors<T : BinaryInteger> : Sequence, IteratorProtocol {
 				b = theDenominator.next();
 			}
 
-			if a != nil && b != nil {
-				if a!.factor < b!.factor {
-					theResult.append(a!);
+			if let theA = a, let theB = b {
+				if theA.factor < theB.factor {
+					theResult.append(theA);
 					a = nil;
-				} else if a!.factor > b!.factor {
-					theResult.append((factor:b!.factor,power:-b!.power));
+				} else if theA.factor > theB.factor {
+					theResult.append((factor:theB.factor,power:-theB.power));
 					b = nil;
 				} else {
-					theResult.append((factor:a!.factor,power:a!.power-b!.power));
+					theResult.append((factor:theA.factor,power:a!.power-theB.power));
 					a = nil;
 					b = nil;
 				}
-			} else if a != nil && b == nil {
-				theResult.append(a!);
+			} else if let theA = a, b == nil {
+				theResult.append(theA);
 				a = nil;
-			} else if a == nil && b != nil {
-				theResult.append((factor:b!.factor,power:-b!.power));
+			} else if let theB = b, a == nil {
+				theResult.append((factor:theB.factor,power:-theB.power));
 				b = nil;
 			} else {
 				theComplete = true;

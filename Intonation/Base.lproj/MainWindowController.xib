@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -119,10 +119,27 @@
                                             <view id="bMU-Fb-0ZT" customClass="ViewControllerPlaceHolderView" customModule="Intonation" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="588" height="34"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                <subviews>
+                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="G47-yg-ttM">
+                                                        <rect key="frame" x="205" y="9" width="178" height="17"/>
+                                                        <textFieldCell key="cell" lineBreakMode="clipping" title="No Document Type Selected" id="r3a-O5-GkE">
+                                                            <font key="font" usesAppearanceFont="YES"/>
+                                                            <color key="textColor" name="placeholderTextColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                        </textFieldCell>
+                                                    </textField>
+                                                </subviews>
                                                 <constraints>
+                                                    <constraint firstItem="G47-yg-ttM" firstAttribute="centerY" secondItem="bMU-Fb-0ZT" secondAttribute="centerY" id="8gP-xa-Gts"/>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="BD6-xE-LXb"/>
                                                     <constraint firstAttribute="height" priority="250" constant="30" id="F5z-qK-Uwv"/>
+                                                    <constraint firstItem="G47-yg-ttM" firstAttribute="centerX" secondItem="bMU-Fb-0ZT" secondAttribute="centerX" id="hRy-dp-eBY"/>
+                                                    <constraint firstAttribute="height" constant="34" id="wbH-Yl-FL7"/>
                                                 </constraints>
+                                                <connections>
+                                                    <outlet property="initialLayoutConstraint" destination="wbH-Yl-FL7" id="djs-js-LB6"/>
+                                                    <outlet property="initialView" destination="G47-yg-ttM" id="nVj-bD-1NE"/>
+                                                </connections>
                                             </view>
                                             <customView id="dsg-PB-qxW">
                                                 <rect key="frame" x="0.0" y="35" width="588" height="631"/>
@@ -821,7 +838,7 @@
             <connections>
                 <outlet property="delegate" destination="-2" id="0bl-1N-x8E"/>
             </connections>
-            <point key="canvasLocation" x="-2383" y="-1538"/>
+            <point key="canvasLocation" x="-2529" y="-1745.5"/>
         </window>
         <arrayController objectClassName="EqualTemperamentEntry" editable="NO" avoidsEmptySelection="NO" id="cy8-kx-1Au" userLabel="Intervals">
             <declaredKeys>

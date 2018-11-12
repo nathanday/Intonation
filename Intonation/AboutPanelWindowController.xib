@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
-        <capability name="box content view" minToolsVersion="7.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -14,11 +12,11 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <window title="About" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" tabbingMode="disallowed" titlebarAppearsTransparent="YES" titleVisibility="hidden" id="F0z-JX-Cv5" customClass="NSPanel">
+        <window title="About" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" tabbingMode="disallowed" titlebarAppearsTransparent="YES" titleVisibility="hidden" id="F0z-JX-Cv5" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" fullSizeContentView="YES"/>
             <windowPositionMask key="initialPositionMask" topStrut="YES"/>
             <rect key="contentRect" x="196" y="669" width="530" height="242"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1028"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
             <value key="minSize" type="size" width="530" height="242"/>
             <value key="maxSize" type="size" width="530" height="242"/>
             <view key="contentView" wantsLayer="YES" id="se5-gp-TjO">
@@ -66,7 +64,7 @@
                                         <constraint firstAttribute="height" constant="32" id="Sa3-Rg-3qY"/>
                                         <constraint firstAttribute="width" constant="241" id="lHI-KG-lLy"/>
                                     </constraints>
-                                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Copyright © 2014 Nathan Day. All rights reserved." id="quC-RU-rLv">
+                                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Copyright © 2018 Nathan Day. All rights reserved." id="quC-RU-rLv">
                                         <font key="font" metaFont="system" size="10"/>
                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -78,7 +76,7 @@
                                         <constraint firstAttribute="width" constant="156" id="Fhc-Od-hoc"/>
                                         <constraint firstAttribute="height" constant="156" id="Y9p-mr-2VE"/>
                                     </constraints>
-                                    <imageCell key="cell" enabled="NO" alignment="left" imageScaling="proportionallyDown" image="NSApplicationIcon" id="tCf-6S-pFz"/>
+                                    <imageCell key="cell" enabled="NO" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSApplicationIcon" id="tCf-6S-pFz"/>
                                 </imageView>
                             </subviews>
                             <constraints>
@@ -93,7 +91,7 @@
                                 <constraint firstAttribute="trailing" secondItem="1cH-x0-8y4" secondAttribute="trailing" constant="30" id="lf9-Lo-SMe"/>
                             </constraints>
                         </view>
-                        <color key="fillColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="fillColor" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </box>
                 </subviews>
                 <constraints>

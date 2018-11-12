@@ -108,7 +108,7 @@ class MIDIReceiver {
 			}
 		}
 
-//		let		theMidiNumberOfDevices = MIDIGetNumberOfDevices() // devices registered on the system
+//		let		theMidiNumberOfSources = MIDIGetNumberOfDevices() // devices registered on the system
 		let		theMidiNumberOfSources = MIDIGetNumberOfSources() // now online devices
 
 		for i in 0..<theMidiNumberOfSources {
@@ -119,7 +119,7 @@ class MIDIReceiver {
 			if theStatus == noErr {
 				theEndPointRef.append(thePointRef)
 				theEndPointName.append(convertCfTypeToString(theName)!)
-				theName!.release()
+				theName?.release()
 			}
 		}
 		if theEndPointRef.count > 0 {
@@ -131,10 +131,9 @@ class MIDIReceiver {
 //		}
 //
 		theStatus = MIDIClientCreateWithBlock(clientName as CFString, &midiClientRef, midiNotifyBlock);
-		precondition( theStatus == noErr, "Status \(theStatus)" );
-//		precondition( theStatus == noErr, "Status \(theStatus) \(GetMacOSStatusCommentString(theStatus)), \(GetMacOSStatusErrorString(theStatus))" );
+		assert( theStatus == noErr, "Status \(theStatus) \(String(describing:theStatus.error))" );
 		theStatus = MIDIInputPortCreateWithBlock( midiClientRef, "\(clientName) port" as CFString, &inputPortRef, midiInputBlock );
-		precondition( theStatus == noErr, "Status \(theStatus)" );
+		assert( theStatus == noErr, "Status \(theStatus) \(String(describing:theStatus.error))" );
 
 		for i in 0..<theMidiNumberOfSources {
 			theSourcePointRef.append(MIDIGetSource(i))
@@ -144,7 +143,7 @@ class MIDIReceiver {
 			}
 
 			theStatus = MIDIPortConnectSource(inputPortRef, theSourcePointRef[i], nil);
-			precondition( theStatus == noErr, "Status \(theStatus)" );
+			assert( theStatus == noErr, "Status \(theStatus) \(String(describing:theStatus.error))" );
 		}
 	}
 }

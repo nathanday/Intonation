@@ -8,8 +8,14 @@
 
 import Cocoa
 
+/// A formatter that converts between numeric values and their textual representations.
+///
+/// Instances of MidiNoteFormatter format the textual representation of NSNumber objects
+/// and convert textual representations of numeric values into NSNumber objects. The representation
+/// are midi note number from 0 to 127.
 class MidiNoteFormatter: Formatter {
 
+	/// The predefined midi note name accent styles used by the accentStyle property.
 	enum AccentStyle : CustomStringConvertible {
 		case flat;
 		case sharp;
@@ -23,6 +29,12 @@ class MidiNoteFormatter: Formatter {
 		}
 	}
 
+	/// The midi note formatter style used by the receiver.
+	///
+	/// Styles are a set of values for accent styles. Valid styles are .flat, .sharp, .natural.
+	/// Used when generating string,s whether accent notes should be named as sharp, flat or both, whether natural
+	///	notes should be explicitly label natural or not.
+	/// The default value is [.sharp].
 	public var		accentStyle : Set<AccentStyle> = [.sharp];
 
 	private func noteString( note aNote: Int, accentStyle aAccentStyle : AccentStyle? ) -> String {
@@ -32,6 +44,10 @@ class MidiNoteFormatter: Formatter {
 		return "\(noteNames[aNote])\(aAccentStyle?.description ?? "")";
 	}
 
+	/// Returns a string containing the formatted value of the provided midi note number.
+	///
+	/// - Parameter nMidiNote: An NSNumber object that is parsed to create the returned string object.
+	/// - Returns: A string containing the formatted value of number using the receiver’s current settings.
 	open func string(forMidiNote anMidiNote: Int) -> String {
 		var		theResult = "";
 		let		theNoteNumber = anMidiNote%12;
@@ -53,6 +69,8 @@ class MidiNoteFormatter: Formatter {
 		}
 		return theResult;
 	}
+
+	/// overrides the Formatter implementation to turn a NSNumber into a String
 	open override func string(for anObj: Any?) -> String? {
 		guard let theObj = anObj as? NSNumber  else {
 			return nil;
@@ -60,6 +78,14 @@ class MidiNoteFormatter: Formatter {
 		return string(forMidiNote:theObj.intValue);
 	}
 
+	/// Returns an (value:Int?,error:String?) tuple created by parsing a given string.
+	///
+	/// If a string is not a valid note name, parsing will fail. Any leading or trailing space separator
+	/// characters in a string are ignored. For example, the strings “ A4”, “A4 ”, and “A4” all produce
+	/// the number 69.
+	/// - Parameter aString: An NSString object that is parsed to generate the returned number object.
+	/// - Returns: An NSNumber object created by parsing string using the receiver’s format, or nil
+	/// if no single number could be parsed.
 	open func midiNoteValue(for aString: String ) -> (value:Int?,error:String?) {
 		let		theScanner = Scanner(string:aString);
 		var		theNoteNameOut : NSString?;
@@ -117,6 +143,7 @@ class MidiNoteFormatter: Formatter {
 		}
 	}
 
+	/// overrides the Formatter implementation to turn a String into a NSNumber
 	open override func getObjectValue(_ anObj: AutoreleasingUnsafeMutablePointer<AnyObject?>?, for aString: String, errorDescription anError: AutoreleasingUnsafeMutablePointer<NSString?>?) -> Bool {
 		let theResult = midiNoteValue(for: aString );
 

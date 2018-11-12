@@ -76,10 +76,11 @@ class ExportWindowController: NSWindowController {
 	}
 
 	@IBAction func selectPresetDelimiter( _ aSender: NSMenuItem? ) {
-		switch aSender!.tag {
-		case 9: textOutputDelimiter = "\\t";
-		case 10: textOutputDelimiter = "\\n";
-		case 44: textOutputDelimiter = ",";
+		switch aSender?.tag {
+		case 9?: textOutputDelimiter = "\\t";
+		case 10?: textOutputDelimiter = "\\n";
+		case 44?: textOutputDelimiter = ",";
+		case nil: assertionFailure("Unexpect no sender");
 		default: assertionFailure("Unexpect tag \(aSender!.tag)");
 		}
 	}
@@ -92,7 +93,7 @@ class ExportWindowController: NSWindowController {
 
 	@IBAction func cancelAction( _ aSender: Any? ) {
 		if let theWindow = window {
-			theWindow.sheetParent!.endSheet(theWindow);
+			theWindow.sheetParent?.endSheet(theWindow);
 		}
 	}
 }

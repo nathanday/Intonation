@@ -60,7 +60,7 @@ class SelectDocumentType : NSWindowController {
 
 	func showAsSheet(parentWindow aWindow: NSWindow ) {
 		referenceToSelf = self;
-		aWindow.beginSheet( window! ) {
+		aWindow.beginSheet( window! )  {
 			(aResponse: NSApplication.ModalResponse) -> Void in
 			switch aResponse {
 			case NSApplication.ModalResponse.stop:

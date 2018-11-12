@@ -63,11 +63,6 @@ class IrrationalInterval : Interval {
 			return nil;
 		}
 	}
-//	convenience init?( _ aString : String ) {
-//		if let theValue = Double(aString) {
-//			self.init( theValue );
-//		}
-//	}
 	var	_factorsString : String? = nil;
 	override var factorsString : String {
 		return _factorsString ?? "\(ratio)";

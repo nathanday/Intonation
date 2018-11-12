@@ -46,6 +46,7 @@
 		D83C592F216E210F008CF017 /* AdHocIntervalsData_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83C592E216E210F008CF017 /* AdHocIntervalsData_Test.swift */; };
 		D83C5931216F3942008CF017 /* IntervalSet_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83C5930216F3942008CF017 /* IntervalSet_Test.swift */; };
 		D83C5933216F709C008CF017 /* Interval_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83C5932216F709C008CF017 /* Interval_Test.swift */; };
+		D8496447219828F3002A744E /* OSStatus+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8496446219828F3002A744E /* OSStatus+Additions.swift */; };
 		D84CE1E21C95960E00E19505 /* AdHocIntervalsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CE1E11C95960E00E19505 /* AdHocIntervalsData.swift */; };
 		D8571C801CA56D2B008A5A46 /* LimitsGeneratorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8571C7E1CA56D2B008A5A46 /* LimitsGeneratorViewController.swift */; };
 		D8571C811CA56D2B008A5A46 /* LimitsGeneratorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8571C7F1CA56D2B008A5A46 /* LimitsGeneratorViewController.xib */; };
@@ -176,6 +177,7 @@
 		D83C592E216E210F008CF017 /* AdHocIntervalsData_Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdHocIntervalsData_Test.swift; sourceTree = "<group>"; };
 		D83C5930216F3942008CF017 /* IntervalSet_Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalSet_Test.swift; sourceTree = "<group>"; };
 		D83C5932216F709C008CF017 /* Interval_Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interval_Test.swift; sourceTree = "<group>"; };
+		D8496446219828F3002A744E /* OSStatus+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OSStatus+Additions.swift"; sourceTree = "<group>"; };
 		D84CE1E11C95960E00E19505 /* AdHocIntervalsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdHocIntervalsData.swift; sourceTree = "<group>"; };
 		D84CE1E31C95967700E19505 /* IntervalsDataGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntervalsDataGenerator.swift; sourceTree = "<group>"; };
 		D8571C7E1CA56D2B008A5A46 /* LimitsGeneratorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LimitsGeneratorViewController.swift; sourceTree = "<group>"; };
@@ -296,6 +298,7 @@
 				D88A620F1ACF7F19004CD4C9 /* IntegerType+Additions.swift */,
 				D88EED2C1AEE5AF50084BDCB /* Float+Additions.swift */,
 				D80989651C85C66B00122857 /* String+Additions.swift */,
+				D8496446219828F3002A744E /* OSStatus+Additions.swift */,
 			);
 			name = Additions;
 			sourceTree = "<group>";
@@ -777,6 +780,7 @@
 				D8AA4E451C13318300B66521 /* WaveViewController.swift in Sources */,
 				D8D03A7D21009BCB00E753EE /* UnsignedInteger_Arithmetic.swift in Sources */,
 				D89399451CA3F37000C9CAA6 /* AdHokGeneratorViewController.swift in Sources */,
+				D8496447219828F3002A744E /* OSStatus+Additions.swift in Sources */,
 				D8B0EA1520F5ABDA007656A7 /* Rational.swift in Sources */,
 				D8B14D291B29C68300C971D8 /* Tone.swift in Sources */,
 				D8720B681C9E8B2D00ED9FBB /* StackedIntervalSet.swift in Sources */,
