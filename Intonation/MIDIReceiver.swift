@@ -10,31 +10,21 @@ import Foundation
 import CoreMIDI
 
 protocol MIDIReceiverObserver {
-	func midiReceiverNoteOff( _ aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt, velocity aVelocity: UInt );
-	func midiReceiverNoteOn( _ aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt, velocity aVelocity: UInt );
-	func midiReceiverPolyphonicKeyPressure( _ aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt, pressure aPressure: UInt );
-	func midiReceiverControlChange( _ aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt, velocity aVelocity: UInt );
-	func midiReceiverProgramChange( _ aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt );
-	func midiReceiverChannelPressure( _ aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt );
-	func midiReceiverPitchBendChange( _ aReceiver: MIDIReceiver, channel aChannel: UInt, value aValue: UInt );
-}
-
-extension MIDIReceiverObserver {
-	func midiReceiverNoteOff( _ aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt, velocity aVelocity: UInt ) { }
-	func midiReceiverNoteOn( _ aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt, velocity aVelocity: UInt ) { }
-	func midiReceiverPolyphonicKeyPressure( _ aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt, pressure aPressure: UInt ) { }
-	func midiReceiverControlChange( _ aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt, velocity aVelocity: UInt ) { }
-	func midiReceiverProgramChange( _ aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt ) { }
-	func midiReceiverChannelPressure( _ aReceiver: MIDIReceiver, channel aChannel: UInt, note aNote: UInt ) { }
-	func midiReceiverPitchBendChange( _ aReceiver: MIDIReceiver, channel aChannel: UInt, value aValue: UInt ) { }
+	func midiReceiverNoteOff( _ aReceiver: MIDIReceiver, channel aChannel: UInt8, note aNote: UInt8, velocity aVelocity: UInt8 );
+	func midiReceiverNoteOn( _ aReceiver: MIDIReceiver, channel aChannel: UInt8, note aNote: UInt8, velocity aVelocity: UInt8 );
+	func midiReceiverPolyphonicKeyPressure( _ aReceiver: MIDIReceiver, channel aChannel: UInt8, note aNote: UInt8, pressure aPressure: UInt8 );
+	func midiReceiverControlChange( _ aReceiver: MIDIReceiver, channel aChannel: UInt8, note aNote: UInt8, velocity aVelocity: UInt8 );
+	func midiReceiverProgramChange( _ aReceiver: MIDIReceiver, channel aChannel: UInt8, note aNote: UInt8 );
+	func midiReceiverChannelPressure( _ aReceiver: MIDIReceiver, channel aChannel: UInt8, note aNote: UInt8 );
+	func midiReceiverPitchBendChange( _ aReceiver: MIDIReceiver, channel aChannel: UInt8, value aValue: UInt16 );
 }
 
 class MIDIReceiver {
-	final private func sevenBits( _ aByte : UInt ) -> UInt {
+	final private func sevenBits( _ aByte : UInt8 ) -> UInt8 {
 		return aByte&0x7F;
 	}
-	final private func fourteenBits( _ aByteL : UInt, _ aByteH : UInt ) -> UInt {
-		return sevenBits(aByteL) | (sevenBits(aByteH) << 7);
+	final private func fourteenBits( _ aByteL : UInt8, _ aByteH : UInt8 ) -> UInt16 {
+		return UInt16(sevenBits(aByteL)) | UInt16((sevenBits(aByteH)) << 7);
 	}
 
 	var			midiClientRef = MIDIClientRef();
@@ -47,9 +37,9 @@ class MIDIReceiver {
 		setUp();
 	}
 
-	func postEvent(bytes aBytes : [UInt] ) {
+	func postEvent(bytes aBytes : [UInt8] ) {
 		let		theEvent = (aBytes[0]>>4)&7;
-		let		theChannel = UInt(aBytes[0]&0xF);
+		let		theChannel = aBytes[0]&0xF;
 		switch theEvent {
 		case 0:
 			observer?.midiReceiverNoteOff( self, channel: theChannel, note: sevenBits(aBytes[1]), velocity: sevenBits(aBytes[2]) );
@@ -85,7 +75,7 @@ class MIDIReceiver {
 			let packets: MIDIPacketList = packetList.pointee
 			var packet: MIDIPacket = packets.packet
 			for _ in 0..<packets.numPackets {
-				let msgs = MIDIPacketDivider.messageFor(packet:packet);
+				let msgs = MIDIReceiver.messageFor(packet:packet);
 
 				//			...
 				if  msgs[0][0] == 0xF8 || msgs[0][0] == 0xFE { break }
@@ -149,57 +139,57 @@ class MIDIReceiver {
 }
 
 
-struct MIDIPacketDivider {
-	static func messageFor(packet aPacket: MIDIPacket) -> [[UInt]] {
+extension MIDIReceiver {
+	static func messageFor(packet aPacket: MIDIPacket) -> [[UInt8]] {
 		return mypacket2msgs(packet2mypacket(aPacket))
 	}
 
-	static func packet2mypacket(_ packet: MIDIPacket) -> [UInt] {
-		var mypacket = [UInt]()
+	static func packet2mypacket(_ packet: MIDIPacket) -> [UInt8] {
+		var mypacket = [UInt8]()
 		switch packet.length {
-		case 1: mypacket.append(UInt(packet.data.0)); fallthrough;
-		case 2: mypacket.append(UInt(packet.data.1)); fallthrough;
-		case 3: mypacket.append(UInt(packet.data.2)); fallthrough;
-		case 4: mypacket.append(UInt(packet.data.3)); fallthrough;
-		case 5: mypacket.append(UInt(packet.data.4)); fallthrough;
-		case 6: mypacket.append(UInt(packet.data.5)); fallthrough;
-		case 7: mypacket.append(UInt(packet.data.6)); fallthrough;
-		case 8: mypacket.append(UInt(packet.data.7)); fallthrough;
-		case 9: mypacket.append(UInt(packet.data.8)); fallthrough;
-		case 10: mypacket.append(UInt(packet.data.9)); fallthrough;
-		case 11: mypacket.append(UInt(packet.data.10)); fallthrough;
-		case 12: mypacket.append(UInt(packet.data.11)); fallthrough;
-		case 13: mypacket.append(UInt(packet.data.12)); fallthrough;
-		case 14: mypacket.append(UInt(packet.data.13)); fallthrough;
-		case 15: mypacket.append(UInt(packet.data.14)); fallthrough;
-		case 16: mypacket.append(UInt(packet.data.15)); fallthrough;
-		case 17: mypacket.append(UInt(packet.data.16)); fallthrough;
-		case 18: mypacket.append(UInt(packet.data.17)); fallthrough;
-		case 19: mypacket.append(UInt(packet.data.18)); fallthrough;
-		case 20: mypacket.append(UInt(packet.data.19)); fallthrough;
-		case 21: mypacket.append(UInt(packet.data.20)); fallthrough;
-		case 22: mypacket.append(UInt(packet.data.21)); fallthrough;
-		case 23: mypacket.append(UInt(packet.data.22)); fallthrough;
-		case 24: mypacket.append(UInt(packet.data.23)); fallthrough;
-		case 25: mypacket.append(UInt(packet.data.24)); fallthrough;
-		case 26: mypacket.append(UInt(packet.data.25)); fallthrough;
-		case 27: mypacket.append(UInt(packet.data.26)); fallthrough;
-		case 28: mypacket.append(UInt(packet.data.27)); fallthrough;
-		case 29: mypacket.append(UInt(packet.data.28)); fallthrough;
-		case 30: mypacket.append(UInt(packet.data.29)); fallthrough;
-		case 31: mypacket.append(UInt(packet.data.30)); fallthrough;
-		case 32: mypacket.append(UInt(packet.data.31)); fallthrough;
-		case 33: mypacket.append(UInt(packet.data.32)); fallthrough;
-		case 34: mypacket.append(UInt(packet.data.33)); fallthrough;
-		case 35: mypacket.append(UInt(packet.data.34)); fallthrough;
-		case 36: mypacket.append(UInt(packet.data.35));
+		case 36: mypacket.append(packet.data.35); fallthrough;
+		case 35: mypacket.append(packet.data.34); fallthrough;
+		case 34: mypacket.append(packet.data.33); fallthrough;
+		case 33: mypacket.append(packet.data.32); fallthrough;
+		case 32: mypacket.append(packet.data.31); fallthrough;
+		case 31: mypacket.append(packet.data.30); fallthrough;
+		case 30: mypacket.append(packet.data.29); fallthrough;
+		case 29: mypacket.append(packet.data.28); fallthrough;
+		case 28: mypacket.append(packet.data.27); fallthrough;
+		case 27: mypacket.append(packet.data.26); fallthrough;
+		case 26: mypacket.append(packet.data.25); fallthrough;
+		case 25: mypacket.append(packet.data.24); fallthrough;
+		case 24: mypacket.append(packet.data.23); fallthrough;
+		case 23: mypacket.append(packet.data.22); fallthrough;
+		case 22: mypacket.append(packet.data.21); fallthrough;
+		case 21: mypacket.append(packet.data.20); fallthrough;
+		case 20: mypacket.append(packet.data.19); fallthrough;
+		case 19: mypacket.append(packet.data.18); fallthrough;
+		case 18: mypacket.append(packet.data.17); fallthrough;
+		case 17: mypacket.append(packet.data.16); fallthrough;
+		case 16: mypacket.append(packet.data.15); fallthrough;
+		case 15: mypacket.append(packet.data.14); fallthrough;
+		case 14: mypacket.append(packet.data.13); fallthrough;
+		case 13: mypacket.append(packet.data.12); fallthrough;
+		case 12: mypacket.append(packet.data.11); fallthrough;
+		case 11: mypacket.append(packet.data.10); fallthrough;
+		case 10: mypacket.append(packet.data.9); fallthrough;
+		case 9: mypacket.append(packet.data.8); fallthrough;
+		case 8: mypacket.append(packet.data.7); fallthrough;
+		case 7: mypacket.append(packet.data.6); fallthrough;
+		case 6: mypacket.append(packet.data.5); fallthrough;
+		case 5: mypacket.append(packet.data.4); fallthrough;
+		case 4: mypacket.append(packet.data.3); fallthrough;
+		case 3: mypacket.append(packet.data.2); fallthrough;
+		case 2: mypacket.append(packet.data.1); fallthrough;
+		case 1: mypacket.append(packet.data.0);
 		default: break // do nothing
 		}
 
 		return mypacket
 	}
 
-	static func mypacket2msgs( _ aPacket: [UInt]) -> [[UInt]] {
+	static func mypacket2msgs( _ aPacket: [UInt8]) -> [[UInt8]] {
 
 		var		thePacket = aPacket
 		var		theIndex = 0;
@@ -208,18 +198,18 @@ struct MIDIPacketDivider {
 		thePacket.append(0xF4) // Sentinel
 		thePacket.append(0xF4) // Sentinel
 
-		var msgs : [[UInt]] = [[0]] // avoid appending to empty array.
+		var msgs : [[UInt8]] = [[0]] // avoid appending to empty array.
 
 		while theIndex < thePacket.count-3 {
-			if thePacket[theIndex+1] >> 7 == 1 {
+			if thePacket[theIndex+0] >> 7 == 1 {
 				msgs.append([thePacket[theIndex]])
 				theIndex += 1
-			} else if thePacket[theIndex+2] >> 7 == 1 {
-				msgs.append([thePacket[theIndex], thePacket[theIndex+1]])
+			} else if thePacket[theIndex+1] >> 7 == 1 {
+				msgs.append([thePacket[theIndex+1], thePacket[theIndex]])
 				theIndex += 2
 				continue
-			} else if thePacket[theIndex+3] >> 7 == 1 {
-				msgs.append([thePacket[theIndex], thePacket[theIndex+1], thePacket[theIndex+2]])
+			} else if thePacket[theIndex+2] >> 7 == 1 {
+				msgs.append([thePacket[theIndex+2], thePacket[theIndex+1], thePacket[theIndex]])
 				theIndex += 3
 				continue
 			} else {

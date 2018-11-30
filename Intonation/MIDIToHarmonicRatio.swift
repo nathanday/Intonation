@@ -34,7 +34,7 @@ class MIDIToHarmonicRatio {
 		anchorMIDINote = UInt(round(12.0*log2(pow(baseFrequency,69.0/12)/440.0)));
 	}
 
-	func pushRatioFor( midiNote aMIDINote: UInt, everyInterval aEveryInterval : [IntervalEntry] ) -> IntervalEntry {
+	func pushRatioFor( midiNote aMIDINote: UInt8, everyInterval aEveryInterval : [IntervalEntry] ) -> IntervalEntry {
 		var		theIndex = (Int(aMIDINote)-Int(anchorMIDINote));
 		while theIndex < 0 {
 			theIndex += aEveryInterval.count;
@@ -44,11 +44,11 @@ class MIDIToHarmonicRatio {
 		return theResult;
 	}
 
-	func peekRatioFor( midiNote aMIDINote: UInt ) -> IntervalEntry? {
+	func peekRatioFor( midiNote aMIDINote: UInt8 ) -> IntervalEntry? {
 		return playingRatioForNote[Int(aMIDINote)];
 	}
 
-	func popRatioFor( midiNote aMIDINote: UInt ) -> IntervalEntry? {
+	func popRatioFor( midiNote aMIDINote: UInt8 ) -> IntervalEntry? {
 		let		theResult = playingRatioForNote[Int(aMIDINote)];
 		if theResult != nil {
 			playingRatioForNote[Int(aMIDINote)] = nil;
