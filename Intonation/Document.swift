@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class Document : NSDocument, MIDIReceiverObserver {
+class Document : NSDocument {
 
 	public static let playBackMethodChangedNotification = Notification.Name("PlayBackMethodChanged");
 	public static let playBackMethodUserInfoKey = "PlayBackMethod";
@@ -203,7 +203,7 @@ class Document : NSDocument, MIDIReceiverObserver {
 		let		theWindowController = MainWindowController();
 		addWindowController(theWindowController);
 		setUpIntervalsDataObservers();
-		midiReceiver.observer = self;
+		midiReceiver.channelVoiceMessagesObserver = self;
 	}
 
 	@objc dynamic var		everyInterval : [IntervalEntry] = [];
@@ -301,25 +301,27 @@ class Document : NSDocument, MIDIReceiverObserver {
 			selectedIntervalEntry = theSelectedEntries;
 		}
 	}
+}
 
-	// MIDIReceiverObserver methods
-	func midiReceiverNoteOff( _ aReceiver: MIDIReceiver, channel aChannel: UInt8, note aNote: UInt8, velocity aVelocity: UInt8 ) {
+extension Document : MIDIChannelVoiceMessagesObserver {
+	// MIDIChannelMessagesObserver methods
+	func midiReceiver( _ aReceiver: MIDIReceiver, channel aChannel: UInt8, noteOff aNote: UInt8, velocity aVelocity: UInt8 ) {
 		if let theEntry = midiToHarmonicRatio.popRatioFor(midiNote: aNote) {
 			if let theIndex = indexFor(equalTemperamentEntry: theEntry) {
 				unselect(index: theIndex);
 			}
 		}
 	}
-	func midiReceiverNoteOn( _ aReceiver: MIDIReceiver, channel aChannel: UInt8, note aNote: UInt8, velocity aVelocity: UInt8 ) {
+	func midiReceiver( _ aReceiver: MIDIReceiver, channel aChannel: UInt8, noteOn aNote: UInt8, velocity aVelocity: UInt8 ) {
 		let		theEntry = midiToHarmonicRatio.pushRatioFor(midiNote: aNote, everyInterval: everyInterval );
 		if let theIndex = indexFor(equalTemperamentEntry: theEntry) {
 			select(index: theIndex);
 		}
 	}
 
-	func midiReceiverPolyphonicKeyPressure( _ aReceiver: MIDIReceiver, channel aChannel: UInt8, note aNote: UInt8, pressure aPressure: UInt8 ) { }
-	func midiReceiverControlChange( _ aReceiver: MIDIReceiver, channel aChannel: UInt8, note aNote: UInt8, velocity aVelocity: UInt8 ) { }
-	func midiReceiverProgramChange( _ aReceiver: MIDIReceiver, channel aChannel: UInt8, note aNote: UInt8 ) { }
-	func midiReceiverChannelPressure( _ aReceiver: MIDIReceiver, channel aChannel: UInt8, note aNote: UInt8 ) { }
-	func midiReceiverPitchBendChange( _ aReceiver: MIDIReceiver, channel aChannel: UInt8, value aValue: UInt16 ) { }
+	func midiReceiver( _ aReceiver: MIDIReceiver, channel aChannel: UInt8, note aNote: UInt8, polyphonicKeyPressure aPressure: UInt8 ) {}
+	func midiReceiver( _ aReceiver: MIDIReceiver, channel aChannel: UInt8, controllerNumber aControllerNumber: UInt8, controllerValue aValue: UInt8 ) {}
+	func midiReceiver( _ aReceiver: MIDIReceiver, channel aChannel: UInt8, progamChange aProgam: UInt8 ) {}
+	func midiReceiver( _ aReceiver: MIDIReceiver, channel aChannel: UInt8, pressure aPressure: UInt8 ) {}
+	func midiReceiver( _ aReceiver: MIDIReceiver, channel aChannel: UInt8, pitchBendChange aPitchBendChange: UInt16 ) {}
 }
