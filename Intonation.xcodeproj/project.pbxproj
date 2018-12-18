@@ -48,6 +48,9 @@
 		D83C5933216F709C008CF017 /* Interval_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83C5932216F709C008CF017 /* Interval_Test.swift */; };
 		D8496447219828F3002A744E /* OSStatus+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8496446219828F3002A744E /* OSStatus+Additions.swift */; };
 		D84CE1E21C95960E00E19505 /* AdHocIntervalsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CE1E11C95960E00E19505 /* AdHocIntervalsData.swift */; };
+		D85352C721C8B5AA00AD4CED /* Oscillator_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85352C621C8B5AA00AD4CED /* Oscillator_Test.swift */; };
+		D85352C821C8B6D800AD4CED /* Oscillator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85698E621BBBC2B00213D1C /* Oscillator.swift */; };
+		D85698E721BBBC2B00213D1C /* Oscillator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85698E621BBBC2B00213D1C /* Oscillator.swift */; };
 		D8571C801CA56D2B008A5A46 /* LimitsGeneratorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8571C7E1CA56D2B008A5A46 /* LimitsGeneratorViewController.swift */; };
 		D8571C811CA56D2B008A5A46 /* LimitsGeneratorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8571C7F1CA56D2B008A5A46 /* LimitsGeneratorViewController.xib */; };
 		D85916C31C8C04D0001C5330 /* MIDIReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85916C21C8C04D0001C5330 /* MIDIReceiver.swift */; };
@@ -180,6 +183,8 @@
 		D8496446219828F3002A744E /* OSStatus+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OSStatus+Additions.swift"; sourceTree = "<group>"; };
 		D84CE1E11C95960E00E19505 /* AdHocIntervalsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdHocIntervalsData.swift; sourceTree = "<group>"; };
 		D84CE1E31C95967700E19505 /* IntervalsDataGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntervalsDataGenerator.swift; sourceTree = "<group>"; };
+		D85352C621C8B5AA00AD4CED /* Oscillator_Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Oscillator_Test.swift; sourceTree = "<group>"; };
+		D85698E621BBBC2B00213D1C /* Oscillator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Oscillator.swift; sourceTree = "<group>"; };
 		D8571C7E1CA56D2B008A5A46 /* LimitsGeneratorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LimitsGeneratorViewController.swift; sourceTree = "<group>"; };
 		D8571C7F1CA56D2B008A5A46 /* LimitsGeneratorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LimitsGeneratorViewController.xib; sourceTree = "<group>"; };
 		D85916C21C8C04D0001C5330 /* MIDIReceiver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MIDIReceiver.swift; sourceTree = "<group>"; };
@@ -495,6 +500,7 @@
 				D8FBA41F2170C2E5007A215E /* HarmonicsDescription_Test.swift */,
 				D8FBA4242171C835007A215E /* DocumentType_Test.swift */,
 				D8FBA4282171DB7D007A215E /* ExportGenerator_Test.swift */,
+				D85352C621C8B5AA00AD4CED /* Oscillator_Test.swift */,
 				D89543761996345200A091A4 /* Supporting Files */,
 			);
 			path = IntonationTests;
@@ -581,6 +587,7 @@
 				D831054D1B0A6115000EB805 /* HarmonicsDescription.swift */,
 				D8D912D11B197D5300BB479A /* TonePlayer.swift */,
 				D8B14D281B29C68300C971D8 /* Tone.swift */,
+				D85698E621BBBC2B00213D1C /* Oscillator.swift */,
 				D80D8C191B80A167001E7746 /* Envelope.swift */,
 				D85916C21C8C04D0001C5330 /* MIDIReceiver.swift */,
 				D8646B271C3D23F500D8C429 /* ChordSelectorItem.swift */,
@@ -749,6 +756,7 @@
 				D85916C31C8C04D0001C5330 /* MIDIReceiver.swift in Sources */,
 				D83B54B11C8D96C500624A46 /* MIDIToHarmonicRatio.swift in Sources */,
 				D85ABE7F1C3FD06800F2DFAF /* ChordOrScaleSelectorViewController.swift in Sources */,
+				D85698E721BBBC2B00213D1C /* Oscillator.swift in Sources */,
 				D8B0EA1620F5ABDA007656A7 /* RationalNumeric.swift in Sources */,
 				D8E10CB71CA689310030D8E6 /* EqualTemperamentIntervalsData.swift in Sources */,
 				D89074D81AD5486600FD8A1E /* ResultView.swift in Sources */,
@@ -810,12 +818,14 @@
 				D83C591E216C91A3008CF017 /* Scale.swift in Sources */,
 				D8B0EA1720F5AC08007656A7 /* Rational.swift in Sources */,
 				D83C5921216C91E0008CF017 /* HarmonicSeriesIntervalsData.swift in Sources */,
+				D85352C721C8B5AA00AD4CED /* Oscillator_Test.swift in Sources */,
 				D867548120CA39DF00CE2D0F /* UInt+Additions_Test.swift in Sources */,
 				D83C5925216C9233008CF017 /* StackedIntervalSet.swift in Sources */,
 				D83C592D216E1BB5008CF017 /* HarmonicSeriesIntervalsData_Test.swift in Sources */,
 				D83C5913216C8FA4008CF017 /* LimitsIntervalsData.swift in Sources */,
 				D8D932A420EE29B7009ED565 /* Rational_Test.swift in Sources */,
 				D89E97AA20C83D7500E6B32D /* ColorInterpolator.swift in Sources */,
+				D85352C821C8B6D800AD4CED /* Oscillator.swift in Sources */,
 				D8D03A7E21009BCB00E753EE /* UnsignedInteger_Arithmetic.swift in Sources */,
 				D83C5914216C8FE6008CF017 /* IntervalsData.swift in Sources */,
 				D89543791996345200A091A4 /* Equal_TemperamentTests.swift in Sources */,

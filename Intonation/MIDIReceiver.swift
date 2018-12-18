@@ -97,7 +97,7 @@ class MIDIReceiver {
 			/* Coded by Vandad Nahavandipoor */
 			let value = Unmanaged.fromOpaque(
 				cfValue.toOpaque()).takeUnretainedValue() as CFString
-			if CFGetTypeID(value) == CFStringGetTypeID(){
+			if CFGetTypeID(value) == CFStringGetTypeID() {
 				return value as String
 			} else {
 				return nil
