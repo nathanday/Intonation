@@ -18,10 +18,25 @@ class HarmonicsDescription_Test: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
+	func testSine() {
+		let		theHarmonicsDescription = HarmonicsDescription(amount: 0.0, evenAmount: 1.0);
+		XCTAssertEqual(theHarmonicsDescription.amount, 0.0);
+		XCTAssertEqual(theHarmonicsDescription.evenAmount, 1.0);
+		XCTAssertEqual(theHarmonicsDescription.count, 1);
+		theHarmonicsDescription.enumerateHarmonics { (anHarmonic: Int, anAmplitude: Float32) in
+			if anHarmonic == 1 {
+				XCTAssertEqual( anAmplitude, Float32(1.0), accuracy: 0.00001 );
+			} else {
+				XCTAssertEqual( anAmplitude, 0.0, accuracy: 0.00001 );
+			}
+		}
+	}
+
 	func testSaw() {
 		let		theHarmonicsDescription = HarmonicsDescription(amount: 1.0, evenAmount: 1.0);
 		XCTAssertEqual(theHarmonicsDescription.amount, 1.0);
 		XCTAssertEqual(theHarmonicsDescription.evenAmount, 1.0);
+		XCTAssert(theHarmonicsDescription.count > 50 );
 		theHarmonicsDescription.enumerateHarmonics { (anHarmonic: Int, anAmplitude: Float32) in
 			XCTAssertEqual( anAmplitude, Float32(1.0)/Float32(anHarmonic), accuracy: 0.00001 );
 		}
@@ -31,6 +46,7 @@ class HarmonicsDescription_Test: XCTestCase {
 		let		theHarmonicsDescription = HarmonicsDescription(amount: 1.0, evenAmount: 0.0);
 //		XCTAssertEqual(theHarmonicsDescription.amount, 0.85);
 		XCTAssertEqual(theHarmonicsDescription.evenAmount, 0.0);
+		XCTAssert(theHarmonicsDescription.count > 50 );
 		theHarmonicsDescription.enumerateHarmonics { (anHarmonic: Int, anAmplitude: Float32) in
 			if anHarmonic%2 == 1 {
 				XCTAssertEqual( anAmplitude, Float32(1.0)/Float32(anHarmonic), accuracy: 0.00001 );

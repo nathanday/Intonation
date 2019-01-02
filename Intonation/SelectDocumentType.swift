@@ -8,29 +8,69 @@
 
 import Cocoa
 
-class SelectDocumentType : NSWindowController {
-	static var		rowData = [
-		(title:DocumentType.limits.title,
-		 	details:NSLocalizedString("Create musical intervals using prime and odd limits.",comment:"document type details"),
-			documentType:DocumentType.limits),
-		(title:DocumentType.stackedIntervals.title,
-		 	details:NSLocalizedString("Create musical intervals by stacking a simpler musical interval.",comment:"document type details"),
-			 documentType:DocumentType.stackedIntervals),
-		(title:DocumentType.equalTemperament.title,
-		 	details:NSLocalizedString("Create musical intervals by dividing the octave, or other large interval, into equal size ratios.",comment:"document type details"),
-			 documentType:DocumentType.equalTemperament),
-		(title:DocumentType.harmonicSeries.title,
-		 	details:NSLocalizedString("Create musical intervals from the natural harmonic series.",comment:"document type details"),
-			 documentType:DocumentType.harmonicSeries),
-		(title:DocumentType.adHoc.title,
-		 	details:NSLocalizedString("Create musical intervals by manual entry.",comment:"document type details"),
-			 documentType:DocumentType.adHoc),
-		(title:DocumentType.preset.title,
-		 	details:NSLocalizedString("Use a predfined set of musical intervals.",comment:"document type details"),
-			 documentType:DocumentType.preset),
-	];
+class SelectRow : NSObject, Decodable {
+	@objc dynamic let	title: String;
+	@objc dynamic let	details: String;
+	var					isGroupHeader: Bool { return false };
 
-	var		referenceToSelf : NSWindowController? = nil;
+	private enum CodingKeys: String, CodingKey {
+		case title
+		case details
+	}
+	required init(from aDecoder: Decoder) throws {
+		let		theValues = try aDecoder.container(keyedBy: CodingKeys.self);
+		title = try theValues.decode(String.self, forKey: .title);
+		details = (try? theValues.decode(String.self, forKey: .details)) ?? "";
+	}
+
+	init( title aTitle: String, details aDetails: String ) {
+		title = aTitle;
+		details = aDetails;
+	}
+}
+
+class SelectDocumentTypeGroup : SelectRow {
+	let					everyRow: [SelectDocumentTypeRow];
+	override var		isGroupHeader: Bool { return true; };
+
+	private enum CodingKeys: String, CodingKey {
+		case everyRow
+	}
+	required init(from aDecoder: Decoder) throws {
+		let		theValues = try aDecoder.container(keyedBy: CodingKeys.self);
+		everyRow = try theValues.decode([SelectDocumentTypeRow].self, forKey: .everyRow);
+		try super.init(from: aDecoder);
+	}
+
+	init( title aTitle: String, everyRow anEveryRow: [SelectDocumentTypeRow] ) {
+		everyRow = anEveryRow;
+		super.init(title:aTitle,details:"");
+	}
+}
+
+class SelectDocumentTypeRow : SelectRow {
+	let			documentType: DocumentType;
+
+	private enum CodingKeys: String, CodingKey {
+		case documentType
+	}
+	required init(from aDecoder: Decoder) throws {
+		let		theValues = try aDecoder.container(keyedBy: CodingKeys.self);
+		documentType = DocumentType.fromString(try theValues.decode(String.self, forKey: .documentType))!;
+		try super.init(from: aDecoder);
+	}
+
+	init( title aTitle: String, details aDetails: String, documentType aDocumentType: DocumentType ) {
+		documentType = aDocumentType;
+		super.init(title:aTitle,details:aDetails);
+	}
+}
+
+class SelectDocumentType : NSWindowController {
+	var						sourceRows = [SelectDocumentTypeGroup]();
+	var						colaspedGroups = IndexSet();
+	@objc dynamic var		tableContents = [SelectRow]();
+
 	@IBOutlet var	tableView : NSTableView?;
 	@IBOutlet var	arrayController : NSArrayController?
 	@objc dynamic var		hasSelection : Bool { return selectedDocumentTypeRow != nil; }
@@ -42,24 +82,56 @@ class SelectDocumentType : NSWindowController {
 
 	var				selectedDocumentType : DocumentType? {
 		var		theResult : DocumentType? = nil;
-		if let theIdex = selectedDocumentTypeRow {
-			theResult = theIdex < SelectDocumentType.rowData.count ? SelectDocumentType.rowData[theIdex].documentType : nil;
+		if let theIndex = selectedDocumentTypeRow,
+			theIndex < tableContents.count,
+			let theSelectDocumentTypeRow = tableContents[theIndex] as? SelectDocumentTypeRow {
+			theResult = theSelectDocumentTypeRow.documentType;
 		}
 		return theResult;
 	}
-	@objc dynamic var		tableContents = [[String:String]]();
 
 	override var	windowNibName : NSNib.Name { return NSNib.Name("SelectDocumentType"); }
 
     override func windowDidLoad() {
-        super.windowDidLoad()
-		for theValue in SelectDocumentType.rowData {
-			tableContents.append(["title":theValue.title,"details":theValue.details]);
+		do {
+			if let theURL = Bundle.main.url(forResource: "SelectDocumentType", withExtension: "plist") {
+				let	theData = try Data(contentsOf: theURL);
+				let theObject = try PropertyListDecoder().decode([SelectDocumentTypeGroup].self, from: theData);
+				sourceRows = theObject;
+				updateTableContents();
+			}
+		} catch let anError {
+			print( anError );
 		}
+		super.windowDidLoad()
     }
 
+	func updateTableContents() {
+		var		theTableContents = [SelectRow]();
+		for (theGroupIndex,theGroup) in sourceRows.enumerated() {
+			theTableContents.append(theGroup);
+			if !colaspedGroups.contains(theGroupIndex) {
+				theTableContents.append(contentsOf: theGroup.everyRow);
+			}
+		}
+		tableContents = theTableContents;
+	}
+
+	func groupIndex(forRow aRow: Int ) -> Int? {
+		var		theRowCount = 0;
+		for (theGroupIndex,theGroup) in sourceRows.enumerated() {
+			if theRowCount > aRow {
+				break;
+			}
+			else if aRow == theRowCount {
+				return theGroupIndex;
+			}
+			theRowCount += 1+theGroup.everyRow.count;
+		}
+		return nil;
+	}
+
 	func showAsSheet(parentWindow aWindow: NSWindow ) {
-		referenceToSelf = self;
 		aWindow.beginSheet( window! )  {
 			(aResponse: NSApplication.ModalResponse) -> Void in
 			switch aResponse {
@@ -72,12 +144,21 @@ class SelectDocumentType : NSWindowController {
 			default:
 				self.completionBlock?( nil );
 			}
-			self.referenceToSelf = nil;
 		}
 	}
 
+	func toggle(group anIndex: Int) {
+		if colaspedGroups.contains(anIndex) {
+			colaspedGroups.remove(anIndex);
+		} else {
+			colaspedGroups.insert(anIndex);
+		}
+		updateTableContents();
+	}
+
 	@IBAction func selectAction( _ aSender: Any? ) {
-		if let theWindow = window {
+		if let theWindow = window,
+			self.selectedDocumentType != nil {
 			theWindow.sheetParent?.endSheet(theWindow, returnCode:.`continue`);
 		}
 	}
@@ -91,8 +172,29 @@ class SelectDocumentType : NSWindowController {
 
 extension SelectDocumentType : NSTableViewDelegate {
 	@objc func tableViewSelectionDidChange(_ notification: Notification) {
-		let theSelection = tableView?.selectedRow;
-		selectedDocumentTypeRow = theSelection != -1 ? theSelection : nil;
+		if let theSelection = tableView?.selectedRow,
+			theSelection >= 0 {
+			if let thheGroupIndex = groupIndex(forRow:theSelection) {
+				toggle(group:thheGroupIndex);
+			} else {
+				selectedDocumentTypeRow = theSelection;
+			}
+		} else {
+			selectedDocumentTypeRow = nil;
+		}
+	}
+
+	@objc func tableView(_ aTableView: NSTableView,  isGroupRow aRow: Int) -> Bool {
+		return tableContents[aRow].isGroupHeader;
+	}
+
+	@objc func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row aRow: Int) -> NSView?
+	{
+		if tableContents[aRow].isGroupHeader {
+			return tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier("groupHeader"), owner:self) as! NSTableCellView
+		} else {
+			return tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier("rowCell"), owner: self) as! NSTableCellView
+		}
 	}
 }
 

@@ -175,7 +175,8 @@ class Document : NSDocument {
 	}
 
 	override class var autosavesInPlace: Bool { return true; }
-	override func data( ofType typeName: String) throws -> Data {
+
+	override func data( ofType aTypeName: String) throws -> Data {
 		var anError: NSError = NSError(domain: "Migrator", code: 0, userInfo: nil)
 		do {
 			return try PropertyListSerialization.data(fromPropertyList: intervalsData!.propertyListValue, format:.xml, options:0)
@@ -185,7 +186,7 @@ class Document : NSDocument {
 		}
 	}
 
-	override func read( from aData: Data, ofType typeName: String) throws {
+	override func read( from aData: Data, ofType aTypeName: String) throws {
 		let		theFormat : UnsafeMutablePointer<PropertyListSerialization.PropertyListFormat>? = nil;
 		do {
 			if let thePropertyList = try PropertyListSerialization.propertyList(from: aData, options:PropertyListSerialization.MutabilityOptions(), format:theFormat) as? [String:Any] {

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>title</key>
+		<string>Document Types</string>
+		<key>details</key>
+		<string>Empty document types.</string>
+		<key>everyRow</key>
+		<array>
+			<dict>
+				<key>title</key>
+				<string>Limits</string>
+				<key>details</key>
+				<string>Create musical intervals using prime and odd limits.</string>
+				<key>documentType</key>
+				<string>limits</string>
+			</dict>
+			<dict>
+				<key>title</key>
+				<string>Stacked Intervals</string>
+				<key>details</key>
+				<string>Create musical intervals by stacking a simpler musical interval.</string>
+				<key>documentType</key>
+				<string>stackedIntervals</string>
+			</dict>
+			<dict>
+				<key>title</key>
+				<string>Equal Temperament</string>
+				<key>details</key>
+				<string>Create musical intervals by dividing the octave, or other large interval, into equal size ratios.</string>
+				<key>documentType</key>
+				<string>equalTemperament</string>
+			</dict>
+			<dict>
+				<key>title</key>
+				<string>Natural Harmonic Series</string>
+				<key>details</key>
+				<string>Create musical intervals from the natural harmonic series.</string>
+				<key>documentType</key>
+				<string>harmonicSeries</string>
+			</dict>
+			<dict>
+				<key>title</key>
+				<string>AdHoc</string>
+				<key>details</key>
+				<string>Create musical intervals by manual entry.</string>
+				<key>documentType</key>
+				<string>adHoc</string>
+			</dict>
+			<dict>
+				<key>title</key>
+				<string>Preset</string>
+				<key>details</key>
+				<string>Use a predfined set of musical intervals.</string>
+				<key>documentType</key>
+				<string>preset</string>
+			</dict>
+		</array>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>Presets</string>
+		<key>details</key>
+		<string>Initialized document types.</string>
+		<key>everyRow</key>
+		<array>
+			<dict>
+				<key>title</key>
+				<string>5 Lime</string>
+				<key>details</key>
+				<string>Use a predfined set of musical intervals.</string>
+				<key>documentType</key>
+				<string>preset</string>
+				<key>preset</key>
+				<dict>
+					<key>name</key>
+					<string>5-limit Just Intonation</string>
+					<key>id</key>
+					<string>5-limit Just Intonation</string>
+				</dict>
+			</dict>
+			<dict>
+				<key>title</key>
+				<string>12 Tone Equal Temperament </string>
+				<key>details</key>
+				<string>Use a predfined set of musical intervals.</string>
+				<key>documentType</key>
+				<string>preset</string>
+				<key>preset</key>
+				<dict>
+					<key>name</key>
+					<string>12 Tone Equal Temperament</string>
+					<key>id</key>
+					<string>12 Tone Equal Temperament</string>
+				</dict>
+			</dict>
+		</array>
+	</dict>
+</array>
+</plist>

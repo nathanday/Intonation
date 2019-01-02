@@ -11,7 +11,6 @@ import Cocoa
 class ExportWindowController: NSWindowController {
 
 	var		completionBlock : ((Bool,ExportMethod,Bool)  -> Void)?;
-	var		referenceToSelf : NSWindowController? = nil;
 
 	convenience init( completionBlock aCompletionBlock : @escaping ((Bool,ExportMethod,Bool) -> Void) ) {
 		self.init(windowNibName: NSNib.Name("ExportWindowController") );
@@ -67,12 +66,10 @@ class ExportWindowController: NSWindowController {
 	@objc dynamic var textOutputDelimiter : String = "\\t";
 
 	func showAsSheet(parentWindow aWindow: NSWindow ) {
-		referenceToSelf = self;
-			aWindow.beginSheet( window!, completionHandler: {
-				(aResponse: NSApplication.ModalResponse) -> Void in
-				self.completionBlock!(aResponse == NSApplication.ModalResponse.continue,self.selectedExportMethod,self.outputSelectedInterval);
-				self.referenceToSelf = nil;
-			});
+		aWindow.beginSheet( window!, completionHandler: {
+			(aResponse: NSApplication.ModalResponse) -> Void in
+			self.completionBlock!(aResponse == NSApplication.ModalResponse.continue,self.selectedExportMethod,self.outputSelectedInterval);
+		});
 	}
 
 	@IBAction func selectPresetDelimiter( _ aSender: NSMenuItem? ) {

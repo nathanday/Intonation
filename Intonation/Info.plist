@@ -9,15 +9,15 @@
 		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
-				<string>eqtemp</string>
+				<string>inton</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string></string>
+			<string>DocuentIcon</string>
 			<key>CFBundleTypeName</key>
 			<string>Intonation Document</string>
 			<key>CFBundleTypeOSTypes</key>
 			<array>
-				<string>ETmp</string>
+				<string>Intn</string>
 			</array>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>

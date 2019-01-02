@@ -34,6 +34,7 @@ class PresetGeneratorViewController: GeneratorViewController {
 				case NSApplication.ModalResponse.continue:
 					if let theIntervalData = self.document?.intervalsData as? PresetIntervalsData {
 						theIntervalData.intervals = self.chordOrScaleSelectorViewController.selectedIntervalSet;
+						theIntervalData.presetName = self.chordOrScaleSelectorViewController.selectedIntervalSet?.name;
 						self.document?.calculateAllIntervals();
 						if let theName = theIntervalData.intervals?.name {
 							self.intervalNameTextView?.stringValue = theName;

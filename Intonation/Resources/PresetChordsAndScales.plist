@@ -15,6 +15,8 @@
 					<dict>
 						<key>name</key>
 						<string>major</string>
+						<key>id</key>
+						<string>major</string>
 						<key>kind</key>
 						<integer>0</integer>
 						<key>abbreviations</key>
@@ -63,6 +65,8 @@
 					</dict>
 					<dict>
 						<key>name</key>
+						<string>major seventh</string>
+						<key>id</key>
 						<string>major seventh</string>
 						<key>kind</key>
 						<integer>0</integer>
@@ -124,6 +128,8 @@
 					</dict>
 					<dict>
 						<key>name</key>
+						<string>major ninth</string>
+						<key>id</key>
 						<string>major ninth</string>
 						<key>kind</key>
 						<integer>0</integer>
@@ -191,6 +197,8 @@
 					</dict>
 					<dict>
 						<key>name</key>
+						<string>major eleventh</string>
+						<key>id</key>
 						<string>major eleventh</string>
 						<key>kind</key>
 						<integer>0</integer>
@@ -269,6 +277,8 @@
 					<dict>
 						<key>name</key>
 						<string>sixth</string>
+						<key>id</key>
+						<string>sixth</string>
 						<key>kind</key>
 						<integer>0</integer>
 						<key>abbreviations</key>
@@ -327,6 +337,8 @@
 					</dict>
 					<dict>
 						<key>name</key>
+						<string>sixth/ninth</string>
+						<key>id</key>
 						<string>sixth/ninth</string>
 						<key>kind</key>
 						<integer>0</integer>
@@ -396,6 +408,8 @@
 					<dict>
 						<key>name</key>
 						<string>lydian</string>
+						<key>id</key>
+						<string>lydian</string>
 						<key>kind</key>
 						<integer>0</integer>
 						<key>abbreviations</key>
@@ -420,6 +434,8 @@
 					</dict>
 					<dict>
 						<key>name</key>
+						<string>major seventh ♭6 or b13</string>
+						<key>id</key>
 						<string>major seventh ♭6 or b13</string>
 						<key>kind</key>
 						<integer>0</integer>
@@ -453,6 +469,8 @@
 				<array>
 					<dict>
 						<key>name</key>
+						<string>Normal</string>
+						<key>id</key>
 						<string>Normal</string>
 						<key>kind</key>
 						<integer>0</integer>
@@ -554,6 +572,8 @@
 					<dict>
 						<key>name</key>
 						<string>Altered</string>
+						<key>id</key>
+						<string>Altered</string>
 						<key>kind</key>
 						<integer>0</integer>
 						<key>everyChild</key>
@@ -631,6 +651,8 @@
 					</dict>
 					<dict>
 						<key>name</key>
+						<string>Suspended</string>
+						<key>id</key>
 						<string>Suspended</string>
 						<key>kind</key>
 						<integer>0</integer>
@@ -777,6 +799,8 @@
 				<array>
 					<dict>
 						<key>name</key>
+						<string>Normal</string>
+						<key>id</key>
 						<string>Normal</string>
 						<key>kind</key>
 						<integer>0</integer>
@@ -976,6 +1000,8 @@
 					<dict>
 						<key>name</key>
 						<string>Diminished</string>
+						<key>id</key>
+						<string>Diminished</string>
 						<key>kind</key>
 						<integer>0</integer>
 						<key>everyChild</key>
@@ -1060,6 +1086,8 @@
 					<dict>
 						<key>name</key>
 						<string>fifth</string>
+						<key>id</key>
+						<string>fifth</string>
 						<key>kind</key>
 						<integer>0</integer>
 						<key>abbreviations</key>
@@ -1079,6 +1107,8 @@
 					</dict>
 					<dict>
 						<key>name</key>
+						<string>augmented</string>
+						<key>id</key>
 						<string>augmented</string>
 						<key>kind</key>
 						<integer>0</integer>
@@ -1100,6 +1130,8 @@
 					</dict>
 					<dict>
 						<key>name</key>
+						<string>augmented seventh</string>
+						<key>id</key>
 						<string>augmented seventh</string>
 						<key>kind</key>
 						<integer>0</integer>
@@ -1136,6 +1168,8 @@
 				<array>
 					<dict>
 						<key>name</key>
+						<string>Natural Chromatic</string>
+						<key>id</key>
 						<string>Natural Chromatic</string>
 						<key>kind</key>
 						<integer>1</integer>
@@ -1265,6 +1299,8 @@
 					</dict>
 					<dict>
 						<key>name</key>
+						<string>5-limit Just Intonation</string>
+						<key>id</key>
 						<string>5-limit Just Intonation</string>
 						<key>kind</key>
 						<integer>1</integer>
@@ -1435,6 +1471,8 @@
 					<dict>
 						<key>name</key>
 						<string>Pythagorean Diatonic</string>
+						<key>id</key>
+						<string>Pythagorean Diatonic</string>
 						<key>kind</key>
 						<integer>1</integer>
 						<key>everyInterval</key>
@@ -1513,6 +1551,8 @@
 					</dict>
 					<dict>
 						<key>name</key>
+						<string>Pythagorean Dodecaphonic</string>
+						<key>id</key>
 						<string>Pythagorean Dodecaphonic</string>
 						<key>kind</key>
 						<integer>1</integer>
@@ -1659,6 +1699,8 @@
 				<array>
 					<dict>
 						<key>name</key>
+						<string>12 Tone Equal Temperament</string>
+						<key>id</key>
 						<string>12 Tone Equal Temperament</string>
 						<key>kind</key>
 						<integer>1</integer>

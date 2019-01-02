@@ -46,6 +46,7 @@
 		D83C592F216E210F008CF017 /* AdHocIntervalsData_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83C592E216E210F008CF017 /* AdHocIntervalsData_Test.swift */; };
 		D83C5931216F3942008CF017 /* IntervalSet_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83C5930216F3942008CF017 /* IntervalSet_Test.swift */; };
 		D83C5933216F709C008CF017 /* Interval_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83C5932216F709C008CF017 /* Interval_Test.swift */; };
+		D840ECF321DA2451003874BE /* ButterworthFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D840ECF221DA2451003874BE /* ButterworthFilter.swift */; };
 		D8496447219828F3002A744E /* OSStatus+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8496446219828F3002A744E /* OSStatus+Additions.swift */; };
 		D84CE1E21C95960E00E19505 /* AdHocIntervalsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CE1E11C95960E00E19505 /* AdHocIntervalsData.swift */; };
 		D85352C721C8B5AA00AD4CED /* Oscillator_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85352C621C8B5AA00AD4CED /* Oscillator_Test.swift */; };
@@ -122,6 +123,7 @@
 		D8C343C81AE109E200F5494A /* SpectrumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C343C71AE109E200F5494A /* SpectrumView.swift */; };
 		D8C9B68520D51FB600B6100F /* IntervalTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C9B68420D51FB600B6100F /* IntervalTextView.swift */; };
 		D8C9B68620D6741F00B6100F /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AA4E391C132A8A00B66521 /* ResultViewController.swift */; };
+		D8C9F98921DB7DE20040BB7A /* SelectDocumentType.plist in Resources */ = {isa = PBXBuildFile; fileRef = D8C9F98821DB7DE20040BB7A /* SelectDocumentType.plist */; };
 		D8D03A7D21009BCB00E753EE /* UnsignedInteger_Arithmetic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D03A7C21009BCB00E753EE /* UnsignedInteger_Arithmetic.swift */; };
 		D8D03A7E21009BCB00E753EE /* UnsignedInteger_Arithmetic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D03A7C21009BCB00E753EE /* UnsignedInteger_Arithmetic.swift */; };
 		D8D932A420EE29B7009ED565 /* Rational_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D932A320EE29B7009ED565 /* Rational_Test.swift */; };
@@ -180,6 +182,7 @@
 		D83C592E216E210F008CF017 /* AdHocIntervalsData_Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdHocIntervalsData_Test.swift; sourceTree = "<group>"; };
 		D83C5930216F3942008CF017 /* IntervalSet_Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalSet_Test.swift; sourceTree = "<group>"; };
 		D83C5932216F709C008CF017 /* Interval_Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interval_Test.swift; sourceTree = "<group>"; };
+		D840ECF221DA2451003874BE /* ButterworthFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButterworthFilter.swift; sourceTree = "<group>"; };
 		D8496446219828F3002A744E /* OSStatus+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OSStatus+Additions.swift"; sourceTree = "<group>"; };
 		D84CE1E11C95960E00E19505 /* AdHocIntervalsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdHocIntervalsData.swift; sourceTree = "<group>"; };
 		D84CE1E31C95967700E19505 /* IntervalsDataGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntervalsDataGenerator.swift; sourceTree = "<group>"; };
@@ -257,6 +260,7 @@
 		D8B9020D1AD491E30015B5E2 /* PreferencesWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreferencesWindowController.xib; sourceTree = "<group>"; };
 		D8C343C71AE109E200F5494A /* SpectrumView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpectrumView.swift; sourceTree = "<group>"; };
 		D8C9B68420D51FB600B6100F /* IntervalTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalTextView.swift; sourceTree = "<group>"; };
+		D8C9F98821DB7DE20040BB7A /* SelectDocumentType.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = SelectDocumentType.plist; sourceTree = "<group>"; };
 		D8D03A7C21009BCB00E753EE /* UnsignedInteger_Arithmetic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnsignedInteger_Arithmetic.swift; sourceTree = "<group>"; };
 		D8D912D11B197D5300BB479A /* TonePlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TonePlayer.swift; sourceTree = "<group>"; };
 		D8D932A320EE29B7009ED565 /* Rational_Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rational_Test.swift; sourceTree = "<group>"; };
@@ -548,6 +552,7 @@
 				D8ED76CF1C58E59E00BB2B8C /* FindIntervalsWindowController.swift */,
 				D80A61D41C9040C000A2F885 /* SelectDocumentType.swift */,
 				D80A61D51C9040C000A2F885 /* SelectDocumentType.xib */,
+				D8C9F98821DB7DE20040BB7A /* SelectDocumentType.plist */,
 				D8299E221FDE946400CB9DF7 /* ExportWindowController.swift */,
 				D8299E211FDE946400CB9DF7 /* ExportWindowController.xib */,
 				D89543831996347F00A091A4 /* IntervalEntry.swift */,
@@ -588,6 +593,7 @@
 				D8D912D11B197D5300BB479A /* TonePlayer.swift */,
 				D8B14D281B29C68300C971D8 /* Tone.swift */,
 				D85698E621BBBC2B00213D1C /* Oscillator.swift */,
+				D840ECF221DA2451003874BE /* ButterworthFilter.swift */,
 				D80D8C191B80A167001E7746 /* Envelope.swift */,
 				D85916C21C8C04D0001C5330 /* MIDIReceiver.swift */,
 				D8646B271C3D23F500D8C429 /* ChordSelectorItem.swift */,
@@ -698,6 +704,7 @@
 				D89399461CA3F37000C9CAA6 /* AdHokGeneratorViewController.xib in Resources */,
 				D8AA4E421C132ADD00B66521 /* HarmonicViewController.xib in Resources */,
 				D8B5E23F1B0386F200F20584 /* InitialUserDefaults.plist in Resources */,
+				D8C9F98921DB7DE20040BB7A /* SelectDocumentType.plist in Resources */,
 				D8E10CB51CA66D130030D8E6 /* EqualTemperamentGeneratorViewController.xib in Resources */,
 				D87C278A1AF3A95900C2BF7B /* PresetChordsAndScales.plist in Resources */,
 				D8681A541F97612D001CA24E /* AboutPanelWindowController.xib in Resources */,
@@ -784,6 +791,7 @@
 				D8B204E81E97D09600686E16 /* SelectingTextField.swift in Sources */,
 				D87651B41ADFCB7D003C4BF2 /* ApplicationDelegate.swift in Sources */,
 				D85C0F671C8848F400FE36FA /* MainWindowController.swift in Sources */,
+				D840ECF321DA2451003874BE /* ButterworthFilter.swift in Sources */,
 				D88A62111AD02167004CD4C9 /* Scale.swift in Sources */,
 				D8AA4E451C13318300B66521 /* WaveViewController.swift in Sources */,
 				D8D03A7D21009BCB00E753EE /* UnsignedInteger_Arithmetic.swift in Sources */,
