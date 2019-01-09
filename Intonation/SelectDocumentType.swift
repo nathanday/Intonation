@@ -32,6 +32,7 @@ class SelectRow : NSObject, Decodable {
 class SelectDocumentTypeGroup : SelectRow {
 	let					everyRow: [SelectDocumentTypeRow];
 	override var		isGroupHeader: Bool { return true; };
+	@objc dynamic var	colapsed = false;
 
 	private enum CodingKeys: String, CodingKey {
 		case everyRow
@@ -68,11 +69,11 @@ class SelectDocumentTypeRow : SelectRow {
 
 class SelectDocumentType : NSWindowController {
 	var						sourceRows = [SelectDocumentTypeGroup]();
-	var						colaspedGroups = IndexSet();
 	@objc dynamic var		tableContents = [SelectRow]();
 
-	@IBOutlet var	tableView : NSTableView?;
-	@IBOutlet var	arrayController : NSArrayController?
+	@IBOutlet var	tableView : NSTableView!;
+	@IBOutlet var	arrayController : NSArrayController!
+
 	@objc dynamic var		hasSelection : Bool { return selectedDocumentTypeRow != nil; }
 	var				selectedDocumentTypeRow : Int? {
 		willSet { willChangeValue(forKey: "hasSelection"); }
@@ -108,9 +109,9 @@ class SelectDocumentType : NSWindowController {
 
 	func updateTableContents() {
 		var		theTableContents = [SelectRow]();
-		for (theGroupIndex,theGroup) in sourceRows.enumerated() {
+		for theGroup in sourceRows {
 			theTableContents.append(theGroup);
-			if !colaspedGroups.contains(theGroupIndex) {
+			if !theGroup.colapsed {
 				theTableContents.append(contentsOf: theGroup.everyRow);
 			}
 		}
@@ -126,7 +127,10 @@ class SelectDocumentType : NSWindowController {
 			else if aRow == theRowCount {
 				return theGroupIndex;
 			}
-			theRowCount += 1+theGroup.everyRow.count;
+			if !theGroup.colapsed {
+				theRowCount += theGroup.everyRow.count;
+			}
+			theRowCount += 1;
 		}
 		return nil;
 	}
@@ -148,11 +152,7 @@ class SelectDocumentType : NSWindowController {
 	}
 
 	func toggle(group anIndex: Int) {
-		if colaspedGroups.contains(anIndex) {
-			colaspedGroups.remove(anIndex);
-		} else {
-			colaspedGroups.insert(anIndex);
-		}
+		sourceRows[anIndex].colapsed = !sourceRows[anIndex].colapsed
 		updateTableContents();
 	}
 

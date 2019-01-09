@@ -68,17 +68,20 @@
 		<array>
 			<dict>
 				<key>title</key>
-				<string>5 Lime</string>
+				<string>5 Limit</string>
 				<key>details</key>
 				<string>Use a predfined set of musical intervals.</string>
 				<key>documentType</key>
 				<string>preset</string>
-				<key>preset</key>
+				<key>document</key>
 				<dict>
-					<key>name</key>
-					<string>5-limit Just Intonation</string>
-					<key>id</key>
-					<string>5-limit Just Intonation</string>
+					<key>preset</key>
+					<dict>
+						<key>name</key>
+						<string>5-limit Just Intonation</string>
+						<key>id</key>
+						<string>5-limit Just Intonation</string>
+					</dict>
 				</dict>
 			</dict>
 			<dict>
@@ -88,12 +91,15 @@
 				<string>Use a predfined set of musical intervals.</string>
 				<key>documentType</key>
 				<string>preset</string>
-				<key>preset</key>
+				<key>document</key>
 				<dict>
-					<key>name</key>
-					<string>12 Tone Equal Temperament</string>
-					<key>id</key>
-					<string>12 Tone Equal Temperament</string>
+					<key>preset</key>
+					<dict>
+						<key>name</key>
+						<string>12 Tone Equal Temperament</string>
+						<key>id</key>
+						<string>12 Tone Equal Temperament</string>
+					</dict>
 				</dict>
 			</dict>
 		</array>

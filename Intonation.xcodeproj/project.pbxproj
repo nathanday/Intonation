@@ -124,6 +124,7 @@
 		D8C9B68520D51FB600B6100F /* IntervalTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C9B68420D51FB600B6100F /* IntervalTextView.swift */; };
 		D8C9B68620D6741F00B6100F /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AA4E391C132A8A00B66521 /* ResultViewController.swift */; };
 		D8C9F98921DB7DE20040BB7A /* SelectDocumentType.plist in Resources */ = {isa = PBXBuildFile; fileRef = D8C9F98821DB7DE20040BB7A /* SelectDocumentType.plist */; };
+		D8C9F98C21DDFF730040BB7A /* GroupHeaderTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C9F98B21DDFF730040BB7A /* GroupHeaderTableCellView.swift */; };
 		D8D03A7D21009BCB00E753EE /* UnsignedInteger_Arithmetic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D03A7C21009BCB00E753EE /* UnsignedInteger_Arithmetic.swift */; };
 		D8D03A7E21009BCB00E753EE /* UnsignedInteger_Arithmetic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D03A7C21009BCB00E753EE /* UnsignedInteger_Arithmetic.swift */; };
 		D8D932A420EE29B7009ED565 /* Rational_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D932A320EE29B7009ED565 /* Rational_Test.swift */; };
@@ -261,6 +262,7 @@
 		D8C343C71AE109E200F5494A /* SpectrumView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpectrumView.swift; sourceTree = "<group>"; };
 		D8C9B68420D51FB600B6100F /* IntervalTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalTextView.swift; sourceTree = "<group>"; };
 		D8C9F98821DB7DE20040BB7A /* SelectDocumentType.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = SelectDocumentType.plist; sourceTree = "<group>"; };
+		D8C9F98B21DDFF730040BB7A /* GroupHeaderTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupHeaderTableCellView.swift; sourceTree = "<group>"; };
 		D8D03A7C21009BCB00E753EE /* UnsignedInteger_Arithmetic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnsignedInteger_Arithmetic.swift; sourceTree = "<group>"; };
 		D8D912D11B197D5300BB479A /* TonePlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TonePlayer.swift; sourceTree = "<group>"; };
 		D8D932A320EE29B7009ED565 /* Rational_Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rational_Test.swift; sourceTree = "<group>"; };
@@ -576,6 +578,7 @@
 				D83092C01AEBBC6F00B0E6A7 /* DisclosureView.swift */,
 				D8B204E71E97D09600686E16 /* SelectingTextField.swift */,
 				D8C9B68420D51FB600B6100F /* IntervalTextView.swift */,
+				D8C9F98B21DDFF730040BB7A /* GroupHeaderTableCellView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -736,6 +739,7 @@
 			files = (
 				D8E10CB41CA66D130030D8E6 /* EqualTemperamentGeneratorViewController.swift in Sources */,
 				D89768F01CABF7BC007D30BA /* PresetIntervalsData.swift in Sources */,
+				D8C9F98C21DDFF730040BB7A /* GroupHeaderTableCellView.swift in Sources */,
 				D893993E1CA3E57F00C9CAA6 /* GeneratorViewController.swift in Sources */,
 				D8AFAD301CA58F370008ABFE /* PresetGeneratorViewController.swift in Sources */,
 				D82FD0E41E9506DE009A6EF8 /* EqualTemperamentInterval.swift in Sources */,
